@@ -1,0 +1,11 @@
+# modulos v2 aprobados tras revisar previews (un nombre por linea)
+casino
+carrera_kit
+viaducto_curvo
+casas_kit
+coches_kit
+edificios_civicos
+vegetacion_kit
+pit_kit
+montanas_fondo
+montana_coche

@@ -1,0 +1,36 @@
+# --- regenerable / demasiado grande para git (va a Releases) ---
+03_blender/renders/frames/
+03_blender/renders/test_video/
+03_blender/renders/logs/
+03_blender/renders/hojas/
+*.mp4
+*.zip
+*.kn5
+*.fbx
+*.blend1
+*.blend2
+04_export/kn5/
+04_export/kn5_refs/
+04_export/paquete/
+04_export/fbx/
+04_export/*.blend
+03_blender/porto_corsa.blend
+03_blender/porto_corsa_video.blend
+03_blender/porto_corsa_matstest.blend
+03_blender/porto_corsa_textest.blend
+
+# --- imagenes de referencia de la pelicula / wiki (copyright): no se publican ---
+01_referencias/drive/
+01_referencias/usuario/
+01_referencias/wiki/*.png
+01_referencias/wiki/*.jpg
+01_referencias/wiki/*.jpeg
+01_referencias/wiki/*.webp
+
+# --- basura ---
+__pycache__/
+*.pyc
+Thumbs.db
+desktop.ini
+01_referencias/wiki/logos/
+01_referencias/wiki/*.jpg

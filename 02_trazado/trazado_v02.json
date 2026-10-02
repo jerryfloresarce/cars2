@@ -1,0 +1,679 @@
+{
+  "version": "0.2",
+  "descripcion": "Trazado de Porto Corsa (Cars 2) digitalizado desde el mapa en alta resolucion (687x753 px). Numeracion corregida: meta entre curvas 50 y 01, sentido noroeste.",
+  "imagen_referencia": {
+    "ancho_px": 687,
+    "alto_px": 753
+  },
+  "largo_objetivo_m": 5200.0,
+  "largo_trazado_px": 3427.9,
+  "metros_por_px": 1.517,
+  "sentido": "desde meta hacia el noroeste (curvas 01, 02, 03...)",
+  "meta": {
+    "x": 275,
+    "y": 380
+  },
+  "secciones": {
+    "straight": "Recta rapida (rojo): diagonal de meta (50->03) y recta 30->31",
+    "tech": "Curvas tecnicas (azul): 03-10 arriba-izquierda y 31-41 abajo-derecha",
+    "dirt": "Seccion de tierra (amarillo): 14-26, subida en zigzag por la ladera",
+    "norm": "Asfalto normal (negro)"
+  },
+  "zonas_dudosas": [
+    "Curvas 12-16: etiquetas poco legibles en la zona de enlace con la tierra",
+    "Curva 23 y el tramo 22->24",
+    "Curvas 34 y 37 en el complejo inferior derecho"
+  ],
+  "puntos": [
+    {
+      "x": 275,
+      "y": 380,
+      "curva": null,
+      "seccion": "straight",
+      "nota": "META - bandera a cuadros, sentido hacia curva 01 (noroeste)"
+    },
+    {
+      "x": 240,
+      "y": 362,
+      "curva": null,
+      "seccion": "straight"
+    },
+    {
+      "x": 207,
+      "y": 341,
+      "curva": 1,
+      "seccion": "straight",
+      "nota": "kink en la diagonal de meta"
+    },
+    {
+      "x": 172,
+      "y": 295,
+      "curva": null,
+      "seccion": "straight"
+    },
+    {
+      "x": 150,
+      "y": 262,
+      "curva": null,
+      "seccion": "straight"
+    },
+    {
+      "x": 135,
+      "y": 240,
+      "curva": 2,
+      "seccion": "straight",
+      "nota": "kink: la diagonal pasa a rumbo oeste"
+    },
+    {
+      "x": 100,
+      "y": 234,
+      "curva": null,
+      "seccion": "straight"
+    },
+    {
+      "x": 55,
+      "y": 232,
+      "curva": null,
+      "seccion": "straight"
+    },
+    {
+      "x": 10,
+      "y": 232,
+      "curva": 3,
+      "seccion": "tech",
+      "nota": "horquilla del extremo izquierdo"
+    },
+    {
+      "x": 30,
+      "y": 196,
+      "curva": null,
+      "seccion": "tech"
+    },
+    {
+      "x": 52,
+      "y": 172,
+      "curva": null,
+      "seccion": "tech"
+    },
+    {
+      "x": 75,
+      "y": 156,
+      "curva": 4,
+      "seccion": "tech"
+    },
+    {
+      "x": 100,
+      "y": 168,
+      "curva": null,
+      "seccion": "tech"
+    },
+    {
+      "x": 122,
+      "y": 172,
+      "curva": 5,
+      "seccion": "tech"
+    },
+    {
+      "x": 124,
+      "y": 145,
+      "curva": null,
+      "seccion": "tech"
+    },
+    {
+      "x": 122,
+      "y": 118,
+      "curva": 6,
+      "seccion": "tech"
+    },
+    {
+      "x": 145,
+      "y": 112,
+      "curva": null,
+      "seccion": "tech"
+    },
+    {
+      "x": 172,
+      "y": 115,
+      "curva": 7,
+      "seccion": "tech"
+    },
+    {
+      "x": 198,
+      "y": 124,
+      "curva": null,
+      "seccion": "tech"
+    },
+    {
+      "x": 222,
+      "y": 140,
+      "curva": 8,
+      "seccion": "tech"
+    },
+    {
+      "x": 240,
+      "y": 185,
+      "curva": null,
+      "seccion": "tech"
+    },
+    {
+      "x": 262,
+      "y": 240,
+      "curva": 9,
+      "seccion": "tech"
+    },
+    {
+      "x": 285,
+      "y": 225,
+      "curva": null,
+      "seccion": "tech"
+    },
+    {
+      "x": 307,
+      "y": 212,
+      "curva": 10,
+      "seccion": "tech"
+    },
+    {
+      "x": 312,
+      "y": 240,
+      "curva": null,
+      "seccion": "tech"
+    },
+    {
+      "x": 312,
+      "y": 274,
+      "curva": 11,
+      "seccion": "norm"
+    },
+    {
+      "x": 330,
+      "y": 260,
+      "curva": 12,
+      "seccion": "norm",
+      "nota": "posicion aproximada (etiqueta poco legible)"
+    },
+    {
+      "x": 344,
+      "y": 250,
+      "curva": 13,
+      "seccion": "norm",
+      "nota": "posicion aproximada (etiqueta poco legible)"
+    },
+    {
+      "x": 352,
+      "y": 240,
+      "curva": 14,
+      "seccion": "dirt",
+      "nota": "entrada a la seccion de tierra"
+    },
+    {
+      "x": 380,
+      "y": 238,
+      "curva": null,
+      "seccion": "dirt"
+    },
+    {
+      "x": 406,
+      "y": 242,
+      "curva": 15,
+      "seccion": "dirt",
+      "nota": "zigzag de subida - posicion aproximada"
+    },
+    {
+      "x": 382,
+      "y": 225,
+      "curva": null,
+      "seccion": "dirt"
+    },
+    {
+      "x": 355,
+      "y": 214,
+      "curva": 16,
+      "seccion": "dirt"
+    },
+    {
+      "x": 348,
+      "y": 175,
+      "curva": null,
+      "seccion": "dirt"
+    },
+    {
+      "x": 352,
+      "y": 135,
+      "curva": 17,
+      "seccion": "dirt",
+      "nota": "subida por la ladera"
+    },
+    {
+      "x": 338,
+      "y": 105,
+      "curva": null,
+      "seccion": "dirt"
+    },
+    {
+      "x": 322,
+      "y": 82,
+      "curva": 18,
+      "seccion": "dirt",
+      "nota": "horquilla superior (punto mas alto)"
+    },
+    {
+      "x": 330,
+      "y": 62,
+      "curva": null,
+      "seccion": "dirt"
+    },
+    {
+      "x": 355,
+      "y": 55,
+      "curva": null,
+      "seccion": "dirt"
+    },
+    {
+      "x": 380,
+      "y": 62,
+      "curva": null,
+      "seccion": "dirt"
+    },
+    {
+      "x": 398,
+      "y": 85,
+      "curva": null,
+      "seccion": "dirt"
+    },
+    {
+      "x": 420,
+      "y": 118,
+      "curva": 19,
+      "seccion": "dirt"
+    },
+    {
+      "x": 420,
+      "y": 143,
+      "curva": 20,
+      "seccion": "dirt"
+    },
+    {
+      "x": 424,
+      "y": 167,
+      "curva": 21,
+      "seccion": "dirt"
+    },
+    {
+      "x": 424,
+      "y": 201,
+      "curva": 22,
+      "seccion": "dirt"
+    },
+    {
+      "x": 440,
+      "y": 222,
+      "curva": null,
+      "seccion": "dirt"
+    },
+    {
+      "x": 452,
+      "y": 243,
+      "curva": 23,
+      "seccion": "dirt",
+      "nota": "posicion aproximada"
+    },
+    {
+      "x": 432,
+      "y": 268,
+      "curva": null,
+      "seccion": "dirt"
+    },
+    {
+      "x": 415,
+      "y": 286,
+      "curva": 24,
+      "seccion": "dirt"
+    },
+    {
+      "x": 408,
+      "y": 305,
+      "curva": null,
+      "seccion": "dirt"
+    },
+    {
+      "x": 404,
+      "y": 322,
+      "curva": 25,
+      "seccion": "dirt"
+    },
+    {
+      "x": 372,
+      "y": 310,
+      "curva": null,
+      "seccion": "dirt"
+    },
+    {
+      "x": 342,
+      "y": 292,
+      "curva": 26,
+      "seccion": "dirt",
+      "nota": "salida de la seccion de tierra"
+    },
+    {
+      "x": 358,
+      "y": 325,
+      "curva": null,
+      "seccion": "norm"
+    },
+    {
+      "x": 375,
+      "y": 350,
+      "curva": null,
+      "seccion": "norm"
+    },
+    {
+      "x": 390,
+      "y": 368,
+      "curva": 27,
+      "seccion": "norm"
+    },
+    {
+      "x": 400,
+      "y": 396,
+      "curva": 28,
+      "seccion": "norm"
+    },
+    {
+      "x": 406,
+      "y": 425,
+      "curva": null,
+      "seccion": "norm"
+    },
+    {
+      "x": 408,
+      "y": 452,
+      "curva": 29,
+      "seccion": "norm",
+      "nota": "horquilla izquierda antes de la recta"
+    },
+    {
+      "x": 425,
+      "y": 432,
+      "curva": null,
+      "seccion": "norm"
+    },
+    {
+      "x": 445,
+      "y": 408,
+      "curva": 30,
+      "seccion": "straight",
+      "nota": "entrada a la recta rapida"
+    },
+    {
+      "x": 495,
+      "y": 468,
+      "curva": null,
+      "seccion": "straight"
+    },
+    {
+      "x": 545,
+      "y": 530,
+      "curva": null,
+      "seccion": "straight"
+    },
+    {
+      "x": 592,
+      "y": 592,
+      "curva": 31,
+      "seccion": "tech",
+      "nota": "final de recta - complejo tecnico inferior"
+    },
+    {
+      "x": 570,
+      "y": 615,
+      "curva": null,
+      "seccion": "tech"
+    },
+    {
+      "x": 552,
+      "y": 630,
+      "curva": 32,
+      "seccion": "tech"
+    },
+    {
+      "x": 568,
+      "y": 650,
+      "curva": null,
+      "seccion": "tech"
+    },
+    {
+      "x": 585,
+      "y": 662,
+      "curva": 33,
+      "seccion": "tech"
+    },
+    {
+      "x": 602,
+      "y": 650,
+      "curva": null,
+      "seccion": "tech"
+    },
+    {
+      "x": 608,
+      "y": 630,
+      "curva": 34,
+      "seccion": "tech",
+      "nota": "posicion aproximada (etiqueta poco legible)"
+    },
+    {
+      "x": 612,
+      "y": 608,
+      "curva": 35,
+      "seccion": "tech"
+    },
+    {
+      "x": 630,
+      "y": 612,
+      "curva": null,
+      "seccion": "tech"
+    },
+    {
+      "x": 645,
+      "y": 628,
+      "curva": 36,
+      "seccion": "tech"
+    },
+    {
+      "x": 658,
+      "y": 648,
+      "curva": null,
+      "seccion": "tech"
+    },
+    {
+      "x": 665,
+      "y": 672,
+      "curva": 37,
+      "seccion": "tech",
+      "nota": "posicion aproximada (etiqueta poco legible)"
+    },
+    {
+      "x": 675,
+      "y": 695,
+      "curva": null,
+      "seccion": "tech"
+    },
+    {
+      "x": 675,
+      "y": 718,
+      "curva": 38,
+      "seccion": "tech",
+      "nota": "esquina inferior derecha"
+    },
+    {
+      "x": 650,
+      "y": 700,
+      "curva": null,
+      "seccion": "tech"
+    },
+    {
+      "x": 630,
+      "y": 688,
+      "curva": null,
+      "seccion": "tech"
+    },
+    {
+      "x": 612,
+      "y": 678,
+      "curva": 39,
+      "seccion": "tech"
+    },
+    {
+      "x": 605,
+      "y": 698,
+      "curva": null,
+      "seccion": "tech"
+    },
+    {
+      "x": 612,
+      "y": 718,
+      "curva": 40,
+      "seccion": "tech"
+    },
+    {
+      "x": 585,
+      "y": 722,
+      "curva": null,
+      "seccion": "tech"
+    },
+    {
+      "x": 558,
+      "y": 718,
+      "curva": 41,
+      "seccion": "tech"
+    },
+    {
+      "x": 505,
+      "y": 680,
+      "curva": null,
+      "seccion": "norm"
+    },
+    {
+      "x": 460,
+      "y": 650,
+      "curva": 42,
+      "seccion": "norm"
+    },
+    {
+      "x": 430,
+      "y": 672,
+      "curva": null,
+      "seccion": "norm"
+    },
+    {
+      "x": 400,
+      "y": 710,
+      "curva": null,
+      "seccion": "norm"
+    },
+    {
+      "x": 372,
+      "y": 745,
+      "curva": 43,
+      "seccion": "norm",
+      "nota": "horquilla inferior"
+    },
+    {
+      "x": 390,
+      "y": 700,
+      "curva": null,
+      "seccion": "norm"
+    },
+    {
+      "x": 405,
+      "y": 648,
+      "curva": null,
+      "seccion": "norm"
+    },
+    {
+      "x": 415,
+      "y": 595,
+      "curva": 44,
+      "seccion": "norm"
+    },
+    {
+      "x": 418,
+      "y": 560,
+      "curva": null,
+      "seccion": "norm"
+    },
+    {
+      "x": 420,
+      "y": 524,
+      "curva": 45,
+      "seccion": "norm"
+    },
+    {
+      "x": 408,
+      "y": 498,
+      "curva": null,
+      "seccion": "norm"
+    },
+    {
+      "x": 395,
+      "y": 478,
+      "curva": 46,
+      "seccion": "norm"
+    },
+    {
+      "x": 372,
+      "y": 486,
+      "curva": null,
+      "seccion": "norm"
+    },
+    {
+      "x": 355,
+      "y": 498,
+      "curva": 47,
+      "seccion": "norm"
+    },
+    {
+      "x": 340,
+      "y": 482,
+      "curva": null,
+      "seccion": "norm"
+    },
+    {
+      "x": 338,
+      "y": 464,
+      "curva": 48,
+      "seccion": "norm"
+    },
+    {
+      "x": 362,
+      "y": 458,
+      "curva": null,
+      "seccion": "norm"
+    },
+    {
+      "x": 385,
+      "y": 455,
+      "curva": 49,
+      "seccion": "norm"
+    },
+    {
+      "x": 372,
+      "y": 420,
+      "curva": null,
+      "seccion": "norm"
+    },
+    {
+      "x": 357,
+      "y": 380,
+      "curva": 50,
+      "seccion": "straight",
+      "nota": "se incorpora a la diagonal de meta"
+    },
+    {
+      "x": 315,
+      "y": 381,
+      "curva": null,
+      "seccion": "straight"
+    }
+  ]
+}
