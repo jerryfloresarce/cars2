@@ -1,0 +1,621 @@
+{
+ "grupo": "integrador",
+ "hallazgos": [
+  {
+   "tramo": "C_tecnica_pueblo_bajo (s 600..1300). Verificado en dos escenas. (1) La escena del revisor (19:15): sus PNG y las medidas que tomo por rayos el verificador anterior en verif/medidas.json y verif/log_medir2.txt. Los 16 hallazgos eran reales en esa escena. (2) La escena congelada ACTUAL (escena_rev.blend 04/10 00:38, generada despues de los arreglos v1/v2 del REGISTRO): 76 vistas nuevas y medidas por rayos/BVH en verif/actual/ (medidas.json, medidas_b.json y los PNG de actual/, actual/c/ y actual/d/). La mayoria ya esta arreglada en el codigo y en la escena actual; se marcan 'refutado' SOLO para que no se vuelvan a arreglar (no eran falsos positivos). Siguen abiertos: C-10 (pasarelas/escaleras al aire), C-02 (hoy un tajo-cantera plano), C-12 (plaza enterrada), C-08 (hierba sobre travesias), C-15 y C-04 latente. Nuevos: N1 (cara gris lisa junto a la pista en s 1094-1145) y N2 (muros que cruzan plazoletas).",
+   "id": "C-04",
+   "veredicto": "parcial",
+   "severidad": "baja",
+   "descripcion": "Era real en la escena 19:15 (CALLE_plaza_fondo de 30.09 a 39.35, un tambor de 9.3 m con ITAL_fuente.007 dentro). En la escena actual NO hay tambores: las losas CALLE_plaza_fondo del tramo tienen 0.70-1.31 m de canto, y c3_drum_desde_pista actual muestra talud de hierba y roca junto al portal. El plan ya no pone el fondo de saco en ese talud, y asentar ajusta el fondo de las losas (v2 G2-09). Pero la causa sigue en el codigo y puede volver si cambia el plan.",
+   "fichero": "03_blender/urbanismo_escena.py (fondos_de_saco L434-445)",
+   "arreglo": "En fondos_de_saco, justo despues de zt = [...] (L441): si z0 - min(zt) > 1.2, 'continue' para probar un radio menor. Si no cabe ningun radio, recortar el extremo 6 m y cerrarlo con pretil de piedra (muro_variable) en vez de losa. Son 2 lineas y no cambian nada en la escena actual.",
+   "motivo": "Medido (medidas.json 'plazas_fuentes': grueso maximo 1.31 m) y visto. Hoy solo lo vigila revisar_urbanismo (losa_tambor); conviene cerrar la causa porque es barato y seguro.",
+   "causa": "grosor = max(0.3, z0 - min(zt) + 0.6) sin tope.",
+   "evidencia": [
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/C_tecnica_pueblo_bajo/verif/actual/c3_drum_desde_pista.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/C_tecnica_pueblo_bajo/png3/c3_drum_desde_pista.png (r1)"
+   ],
+   "objetos": [
+    "CALLE_plaza_fondo",
+    "CALLE_plaza_fondo.002",
+    "CALLE_plaza_fondo.003"
+   ],
+   "s": 658,
+   "x": -672.4,
+   "y": 401.4
+  },
+  {
+   "tramo": "C_tecnica_pueblo_bajo (s 600..1300). Verificado en dos escenas. (1) La escena del revisor (19:15): sus PNG y las medidas que tomo por rayos el verificador anterior en verif/medidas.json y verif/log_medir2.txt. Los 16 hallazgos eran reales en esa escena. (2) La escena congelada ACTUAL (escena_rev.blend 04/10 00:38, generada despues de los arreglos v1/v2 del REGISTRO): 76 vistas nuevas y medidas por rayos/BVH en verif/actual/ (medidas.json, medidas_b.json y los PNG de actual/, actual/c/ y actual/d/). La mayoria ya esta arreglada en el codigo y en la escena actual; se marcan 'refutado' SOLO para que no se vuelvan a arreglar (no eran falsos positivos). Siguen abiertos: C-10 (pasarelas/escaleras al aire), C-02 (hoy un tajo-cantera plano), C-12 (plaza enterrada), C-08 (hierba sobre travesias), C-15 y C-04 latente. Nuevos: N1 (cara gris lisa junto a la pista en s 1094-1145) y N2 (muros que cruzan plazoletas).",
+   "id": "N1",
+   "veredicto": "confirmado",
+   "severidad": "media",
+   "descripcion": "NUEVO, viene del arreglo de C-09. La calle adoquinada 'del barrio a la plaza del ayuntamiento' (CAMINO_adoquin.038, 69 m, 12 %) corre paralela a la pista en s 1094-1145, lado +1, a 6.5 m de eje, sobre un terraplen. CAMINO_terraplen.004 (MAT_CAMINO_terraplen) le pone hacia la pista una cara vertical gris y LISA, a 3.3-3.7 m del borde (rayo horizontal a 1 m en s 1102-1142). Desde el piloto se lee como un muro de hormigon gris de 55 m en plena tecnica (pil_1100, pil_1020, atr_1140, b03). Ademas, su primer punto es la boca de un enlace del plan, a 0.4 m del borde: la cinta de 4.5 m monta sobre el asfalto en s 1088 (+0.04..0.047 m a u = -0.6..-0.2).",
+   "fichero": "03_blender/integrar_escena.py (zona_caminos, acceso/calle al ayuntamiento L5511-5532)",
+   "arreglo": "(1) En L5514-5521, descartar como origen los extremos a menos de 4 m del asfalto (dp_e - w/2 < 4.0, es decir, las bocas de enlace) y empezar en el final de la calle de servicio. Si hace falta, primer tramo con _perp. (2) En L5530, llamar a _camino(..., terraplen=True, pretil_relleno=True) para que la cara de mas de 1 m sea mamposteria con sillares (_muros_relleno, v2 A-r2-06). Mejor aun: dar a cada vertice la cota del borde de la pista + 0.15 (_z_borde_s(s_)), para que la calle vaya a ras de la acera y no haya cara vertical; si queda relleno, terraplen de hierba 1:1.5. QA: ningun MAT_CAMINO_terraplen visible a menos de 8 m del asfalto.",
+   "motivo": "Medido (medidas_b.json 'terraplenes' y 'lado_p1_1086_1150'; medidas.json 'borde': CAMINO_adoquin.038 en s 1088) y visto en 4 vistas, 3 de ellas desde el piloto. 'Nada sin sentido': un muro liso de hormigon junto al asfalto no es italiano ni de Cars.",
+   "causa": "_camino con terraplen=True dibuja la cara lisa cuando la cota lineal (12 %) se separa del terreno; el origen elegido es la boca del enlace, junto al asfalto.",
+   "evidencia": [
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/C_tecnica_pueblo_bajo/verif/actual/b03_terraplen_ayto_pista.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/C_tecnica_pueblo_bajo/verif/actual/pil_1100.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/C_tecnica_pueblo_bajo/verif/actual/atr_1140.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/C_tecnica_pueblo_bajo/verif/actual/b04_calle_ayto_cenital.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/C_tecnica_pueblo_bajo/verif/actual/medidas_b.json"
+   ],
+   "objetos": [
+    "CAMINO_terraplen.004",
+    "CAMINO_adoquin.038",
+    "PISTA"
+   ],
+   "s": 1120,
+   "x": -311,
+   "y": 529
+  },
+  {
+   "tramo": "C_tecnica_pueblo_bajo (s 600..1300). Verificado en dos escenas. (1) La escena del revisor (19:15): sus PNG y las medidas que tomo por rayos el verificador anterior en verif/medidas.json y verif/log_medir2.txt. Los 16 hallazgos eran reales en esa escena. (2) La escena congelada ACTUAL (escena_rev.blend 04/10 00:38, generada despues de los arreglos v1/v2 del REGISTRO): 76 vistas nuevas y medidas por rayos/BVH en verif/actual/ (medidas.json, medidas_b.json y los PNG de actual/, actual/c/ y actual/d/). La mayoria ya esta arreglada en el codigo y en la escena actual; se marcan 'refutado' SOLO para que no se vuelvan a arreglar (no eran falsos positivos). Siguen abiertos: C-10 (pasarelas/escaleras al aire), C-02 (hoy un tajo-cantera plano), C-12 (plaza enterrada), C-08 (hierba sobre travesias), C-15 y C-04 latente. Nuevos: N1 (cara gris lisa junto a la pista en s 1094-1145) y N2 (muros que cruzan plazoletas).",
+   "id": "N2",
+   "veredicto": "confirmado",
+   "severidad": "baja",
+   "descripcion": "NUEVO. Hay muros de terraza del plan que entran en plazoletas de fondo de saco. CAMINO_muro.055 cruza CALLE_plaza_fondo.003 en (-552,595), con 47 pares de triangulos, y el extremo del muro se mete en mitad del disco. CAMINO_muro.039 y .041 cruzan CALLE_plaza_fondo.002 en (-427,521), con 30 y 19 pares. revisar_urbanismo tambien lo da (plaza_muro).",
+   "fichero": "03_blender/urbanismo_escena.py (fondos_de_saco L434-440)",
+   "arreglo": "En fondos_de_saco, construir al principio la lista de segmentos de muro de dat['sectores'][*]['muros'] y, en el bucle de radios, hacer 'continue' si algun segmento esta a menos de r + 0.4 del centro (_dist_seg ya existe). Si no cabe ningun radio, usar la union con otra calle o cerrar con pretil.",
+   "motivo": "Medido por BVH en la escena actual (medidas.json 'plaza_muro') y visto en b12_fondo003_muro.png. En b11 el muro va casi por el borde.",
+   "causa": "El disco solo se comprueba contra casas (info['huellas']) y contra la pista, no contra los muros del plan.",
+   "evidencia": [
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/C_tecnica_pueblo_bajo/verif/actual/b12_fondo003_muro.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/C_tecnica_pueblo_bajo/verif/actual/b11_fondo002_muro.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/C_tecnica_pueblo_bajo/verif/actual/medidas.json (plaza_muro)"
+   ],
+   "objetos": [
+    "CALLE_plaza_fondo.003",
+    "CAMINO_muro.055",
+    "CALLE_plaza_fondo.002",
+    "CAMINO_muro.039",
+    "CAMINO_muro.041"
+   ],
+   "x": -552,
+   "y": 595
+  },
+  {
+   "tramo": "H_viaducto_lazo (s 3700..4500 + U de la roca hasta s 4620). Verificado sobre la escena congelada ACTUAL (_rev/escena_rev.blend del 04/10 00:38, que ya trae los arreglos v1/v2 del REGISTRO), con 4 consultas sin guardar y 37 vistas propias. Todo esta en E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/H_viaducto_lazo/verif/actual/: consulta_v.py/.json, consulta_v2.py/.json, vistas_cerca.py + cerca.json, hueco_pix.py + hueco_pix.json, muestrear_roca.py + roca_H.npy + cuencos.py + roca_cuencos.png, perfil_terreno.py/.json, hill.py + terreno_canal.png, crest.py, y png/ con las vistas v1_* y v1c_*. Para el hallazgo de fisica tambien uso 04_export/_fisica (informe_despues.json, cierre_debug_*.json). Resultado: H1, H4, H5 y H6 ya estan arreglados (refutados); H2 y H3 siguen en parte (muralla norte del canal); H7 queda como estetico; hay 2 hallazgos nuevos de severidad baja.",
+   "id": "N1",
+   "veredicto": "confirmado",
+   "severidad": "baja",
+   "descripcion": "En la puerta de carretera de s 3970 (acceso_alto, paso alto con un 12 % de pendiente), la pilastra del lado de arriba esta hundida: su tope queda 0.30 m sobre el tablero, cuando las otras cinco quedan a 0.86-1.10 m. Ademas el pretil cortado sigue 0.5-1.2 m dentro del hueco (a 0.4 m de altura los rayos dan VIADUCTO_tramo_balaustrada_02 en s 3967.0-3968.0 y la pilastra esta en s 3966.8). Desde la pista se ve el extremo del pretil hueco, abierto en U, sin remate.",
+   "fichero": "03_blender/integrar_escena.py (_abrir_pretil_puertas, lineas 3604-3700)",
+   "arreglo": "(1) Una cota por pilastra: para sg en (-1, 1), z_base_sg = el minimo de los zs_b de los vertices borrados a menos de 0.8 m de su corte (|al_ - sg*an/2| < 0.8). Si no hay ninguno, z_b0 + (marco_interp(s_p + sg*(an/2 + 0.25))['z'] - q['z']). La caja va de z_base_sg - 0.05 a z_base_sg + 1.1. (2) Corte exacto: antes de borrar, partir la balaustrada con bmesh.ops.bisect_plane en los planos al = +-an/2 (normal = tangente tx_, ty_) y borrar solo las caras del lado de dentro. Asi no quedan caras largas cruzando el hueco y la pilastra tapa la seccion. Comprobar con verif/actual/consulta_v2.py ('pilastras': tope - tablero entre 0.85 y 1.15 m en las 6) y repetir v1c_pilastra_3970_b.",
+   "motivo": "Medido (consulta_v2.json 'pilastras': VIADUCTO_pilastra en s 3966.8, z 59.07-60.22 con el tablero a 59.92; .001 en s 3973.1 con el tablero a 59.12) y visto en el render. Es un defecto de un solo sitio, visible al pasar por la puerta.",
+   "causa": "_abrir_pretil_puertas pone las dos pilastras a la misma cota z_b0 = min(zs_b) (linea 3662, cajas en la linea 3668), que es el vertice mas bajo de las caras borradas. Con un 12 % en 6.9 m, la de arriba queda 0.8 m baja. Las caras se borran por su CENTRO (|al_| < an/2), asi que las caras largas del pretil que cruzan el corte se quedan.",
+   "evidencia": [
+    "verif/actual/consulta_v2.json pilastras",
+    "verif/actual/consulta_v.json puertas_rayos['3970']",
+    "verif/actual/png/v1c_pilastra_3970_b.png",
+    "verif/actual/png/v1c_pilastra_3970.png",
+    "verif/actual/png/v1_h6_p3970_pista.png"
+   ],
+   "objetos": [
+    "VIADUCTO_pilastra",
+    "VIADUCTO_pilastra.001",
+    "VIADUCTO_tramo_balaustrada_02.001"
+   ],
+   "s": 3967,
+   "x": 229.5,
+   "y": -532.6
+  },
+  {
+   "tramo": "G_casino_rotonda (s 3150..3750). AVISO: la escena congelada _rev/escena_rev.blend es del 04/10 00:38, posterior a la revision r1 (03/10 19:19-20:10) y a los arreglos v1+v2 del REGISTRO. Todos los veredictos se han medido sobre esa escena ACTUAL. Scripts en E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/G_casino_rotonda/verif/actual/ (vq.py, vq2.py ... vq5.py, salidas *.json) y 56 vistas en verif/actual/v/. De los 13 hallazgos de r1 ya estan arreglados G2, G3, G5, G6, G7, G8, G9, G12 y G13. Quedan parciales G1, G4, G10 y G11. Hay 3 fallos nuevos (N1-N3), todos alrededor del espolon y de la entrada del penon.",
+   "id": "G1",
+   "veredicto": "parcial",
+   "severidad": "media",
+   "descripcion": "El espolon (CAMINO_asfalto.041, 6 m de ancho, unos 94 m) YA NO va enterrado. Desde la entrada del penon (646.4,-584.2, z 118.7) hasta la boca (575.7,-530.9, z 121.4) la calzada queda entre 0.3 y 6.5 m por encima de TERRENO. Donde va en relleno, la sostienen los muros de mamposteria CAMINO_muro.102/.103. No hay ningun vertice de CAMINO_terraplen por encima de la calzada, y la carretera del penon tiene acceso. QUEDA un trozo medio enterrado: entre 13 y 35 m de la entrada (x 619-635, y -564..-579), la mitad S/SO de la calzada esta tapada por hierba en escalones de 4 m. Son 116 de 1831 puntos de la calzada, con hasta 0.76 m de hierba (t 20 m, u +1.5..+2.5). El bordillo blanco asoma entre la hierba. Ademas, el cartel CASINO (CAMINO_cartel.001) esta 5 m despues de la boca y su flecha apunta hacia delante por la pista, no hacia el ramal (menor).",
+   "causa": "_camino() talla el lecho con tallar_cinta(pts3, ancho/2 + 1.0 = 4 m, desmonte 1:1), que solo mueve NODOS de la rejilla de 4 m. Un nodo a 5.3 m del eje conserva zc + 1.3 m. El triangulo (diagonal a->a+nx+1) que va de ese nodo a un nodo ya bajado sube por encima del borde del asfalto. Medido: los nodos (623.1,-571.8), (627.1,-575.8) y (619.1,-567.8) bajaron de 123.4/123.5/122.6 a 120.59/120.97/120.21, pero la calzada esta a unos 119.3. Las calzadas con rasante propia no tienen pase de garantia sobre la triangulacion real. Solo lo tienen _tallar_sendero (a) y _garantia_losa.",
+   "fichero": "03_blender/integrar_escena.py (_camino, llamada a tallar_cinta, l. ~4395; tallar_cinta l. 866; _empalme para el cartel)",
+   "arreglo": "En _camino, despues de tallar_cinta (cuando hay z_ini/z_fin o muro), hacer un pase de GARANTIA como el (a) de _tallar_sendero: cada 1 m a lo largo de pts3 y con u en [-(ancho/2+0.3), +(ancho/2+0.3)] cada 0.5 m, calcular zt, nodos = _z_tri(x, y). Si zt > z_eje - 0.05, bajar los 3 nodos a z_eje - 0.07, solo hacia abajo, pasando por _proteger_pista y _poner_celda (roca si el corte pasa de 2 m). Dos iteraciones y despues ter.data.update(). Otra opcion es semiancho = ancho/2 + T['cell'] para calzadas con rasante. Comprobacion: vq4.py espolon_cubierto_n = 0. Cartel (baja): en _empalme ponerlo antes de la boca (t -6 m) o con la flecha hacia el lado del ramal.",
+   "motivo": "Perfil medido cada 3 m (vq.json G1_perfil): dz terreno - calzada entre -0.3 y -6.5 en todo el eje, asi que el entierro de 1-14 m de r1 ha desaparecido (v1 pueblo_terreno G1/G4 y v2 integrador A-r2-06/G2-07). Pero la rejilla de puntos sobre la calzada (vq4.py) y las vistas n_espolon_hierba y n_espolon_cenital muestran hierba encima de media calzada en unos 22 m. Sigue siendo un 'camino enterrado' en ese trozo.",
+   "evidencia": [
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/G_casino_rotonda/verif/actual/v/n_espolon_hierba.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/G_casino_rotonda/verif/actual/v/n_espolon_cenital.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/G_casino_rotonda/verif/actual/v/g1_espolon_aereo.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/G_casino_rotonda/verif/actual/v/g1_espolon_pista.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/G_casino_rotonda/verif/actual/vq.json (G1_perfil)",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/G_casino_rotonda/verif/actual/vq4.json (espolon_cubierto: 116 puntos, max 0.76 m, t 13-35)"
+   ],
+   "objetos": [
+    "CAMINO_asfalto.041",
+    "TERRENO",
+    "CAMINO_muro.102",
+    "CAMINO_muro.103",
+    "CAMINO_cartel.001"
+   ],
+   "s": 3520,
+   "x": 627,
+   "y": -572
+  },
+  {
+   "tramo": "G_casino_rotonda (s 3150..3750). AVISO: la escena congelada _rev/escena_rev.blend es del 04/10 00:38, posterior a la revision r1 (03/10 19:19-20:10) y a los arreglos v1+v2 del REGISTRO. Todos los veredictos se han medido sobre esa escena ACTUAL. Scripts en E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/G_casino_rotonda/verif/actual/ (vq.py, vq2.py ... vq5.py, salidas *.json) y 56 vistas en verif/actual/v/. De los 13 hallazgos de r1 ya estan arreglados G2, G3, G5, G6, G7, G8, G9, G12 y G13. Quedan parciales G1, G4, G10 y G11. Hay 3 fallos nuevos (N1-N3), todos alrededor del espolon y de la entrada del penon.",
+   "id": "N2",
+   "veredicto": "confirmado",
+   "severidad": "baja",
+   "descripcion": "Al pie de los dos muros de mamposteria del espolon (CAMINO_muro.102/.103) asoman faldones planos de color gris claro y borde dentado, entre 40 y 72 m de la entrada. Son 25 impactos desde arriba sobre CAMINO_terraplen, con normal z de -0.9 a -1.0 (cara trasera), por ejemplo t 66 m, u +3..+5, z 114.5. Se ven mucho desde el dron y el helicoptero (g1_espolon_aereo).",
+   "causa": "_terraplen(omitir=...) quita solo las caras de talud del lado donde hay muro. Los vertices de abajo siguen en xb = borde + (h*0.9 + 0.4) y se sigue emitiendo la cara 'fondo' (o+1, o+5, o+7, o+3) entre los dos vertices de abajo, a z_terreno(xb) - 0.8. Donde el terreno entre ellos es mas bajo (la vaguada que cruza el espolon), ese fondo sale por encima de la hierba, por fuera de los muros.",
+   "fichero": "03_blender/integrar_escena.py (_terraplen)",
+   "arreglo": "En _terraplen, para las muestras de un lado omitido (k en om_i/om_d), poner el vertice de abajo de ese lado debajo del muro: (xa, ya, z_terreno(xa, ya) - 0.8). Si los dos lados estan omitidos en k y k+1, no emitir el fondo de ese segmento (los muros ya cierran). Ademas, z de cada vertice de abajo = minimo de z_terreno muestreado cada 1 m entre xa y xb, menos 0.8. Comprobacion: vq5.py sin CAMINO_terraplen como primer impacto por fuera de los muros.",
+   "motivo": "vq5.json (objeto y normal del primer impacto al pie de los muros) y vistas n_terraplen_cenital, n_terraplen_pie_so y n_terraplen_pie_ne.",
+   "evidencia": [
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/G_casino_rotonda/verif/actual/v/n_terraplen_cenital.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/G_casino_rotonda/verif/actual/v/n_terraplen_pie_so.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/G_casino_rotonda/verif/actual/v/n_terraplen_pie_ne.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/G_casino_rotonda/verif/actual/vq5.json"
+   ],
+   "objetos": [
+    "CAMINO_terraplen",
+    "CAMINO_muro.102",
+    "CAMINO_muro.103",
+    "CAMINO_asfalto.041"
+   ],
+   "s": 3496,
+   "x": 605,
+   "y": -555
+  },
+  {
+   "tramo": "F_bajada_recta (verificado sobre la escena congelada actual _rev/escena_rev.blend del 04/10 00:38, generada despues de los arreglos v1/v2 del REGISTRO; el codigo de 03_blender no ha cambiado desde entonces. Scripts y datos en E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/F_bajada_recta/verif/: x_medir1.py/x_medir1.json, x_medir2.py/x_medir2.json, x_q2.py/x_q2.json; vistas en x_png/, x_png2/ y x_png3/)",
+   "id": "F-04",
+   "veredicto": "parcial",
+   "severidad": "baja",
+   "descripcion": "El palazzo ya tiene acceso desde el paseo. MIRADOR_pasarela (z 71.7-73.4) cruza el hueco de 6 m del pretil hasta la azotea, que tiene 10 MIRADOR_coche_azotea y una rampa interior dibujada. Queda: (1) todo depende del paseo, que no tiene entrada (ver F-03); (2) la plaza CALLE_plaza_palazzo (40 x 8 m, z 62.3, unos 10 m por debajo del paseo) delante de la fachada principal, del lado del mar, esta suelta en la hierba. El CAMINO mas cercano esta a 116 m y no hay escalera desde el paseo, asi que la fachada de los toldos y el cartel P de la planta baja no llevan a ninguna parte.",
+   "fichero": "03_blender/integrar_escena.py (zona_paseo_mirador, bloque del palazzo, lineas 3955-3983)",
+   "arreglo": "Primero F-03 (boca del paseo). Despues, una de dos: (a) escalera de piedra de 1.6 m de ida y vuelta pegada al muro de arcadas, desde un segundo hueco de 2 m en el pretil (s = s_k - 20) hasta CALLE_plaza_palazzo: unos 10 m de desnivel, 2 tramos de 5 m con descansillo, con pretil, como urbanismo_escena.escalera; o (b) quitar CALLE_plaza_palazzo y su explanada y dejar la planta baja del lado del mar como fachada sobre la ladera.",
+   "motivo": "Inventario y distancias desde la plaza y la planta baja a todo CAMINO_*, CALLE_plaza*, PPUEBLO*, PUERTO_* (x_medir1.json: inv); vistas f04_*. La pasarela (arreglo v1 F-04) y el giro del palazzo (v2 F2-06) estan bien hechos y verificados.",
+   "causa": "La plaza se crea para la fachada girada (v2 F2-06) sin conexion a la red de caminos; el acceso rodado del conjunto depende de una boca que nadie abrio.",
+   "evidencia": [
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/F_bajada_recta/verif/x_png/f04_palazzo_dron.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/F_bajada_recta/verif/x_png/f04_palazzo_mar.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/F_bajada_recta/verif/x_png/f04_pasarela.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/F_bajada_recta/verif/x_medir2.json (mirador)"
+   ],
+   "objetos": [
+    "MIRADOR_parking.001",
+    "MIRADOR_pasarela",
+    "MIRADOR_coche_azotea*",
+    "CALLE_plaza_palazzo"
+   ],
+   "s": 3082,
+   "x": 338.1,
+   "y": -344.8
+  },
+  {
+   "tramo": "F_bajada_recta (verificado sobre la escena congelada actual _rev/escena_rev.blend del 04/10 00:38, generada despues de los arreglos v1/v2 del REGISTRO; el codigo de 03_blender no ha cambiado desde entonces. Scripts y datos en E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/F_bajada_recta/verif/: x_medir1.py/x_medir1.json, x_medir2.py/x_medir2.json, x_q2.py/x_q2.json; vistas en x_png/, x_png2/ y x_png3/)",
+   "id": "F-11",
+   "veredicto": "parcial",
+   "severidad": "baja",
+   "descripcion": "El muro de arcadas ahora tiene 26 piezas de 6 m. El escalon entre coronaciones bajo de unos 1.6 m a 0.76-0.89 m, y el pie esta despejado: el terreno queda unos 4 m por encima de la base enterrada de cada pieza y no tapa los arcos. Bajo el faldon inclinado del pretil se sigue leyendo una escalera de arcos de 0.8 m. Es cosmetico.",
+   "fichero": "03_blender/integrar_escena.py (zona_paseo_mirador, muro de arcadas, lineas 3867-3898)",
+   "arreglo": "Opcional. Clonar cada pieza con una matriz de cizalla vertical (z += pendiente(s_c) * x_local) en vez de colocarla horizontal: los pilares siguen verticales y la cornisa sigue la rasante. O bajar L_P a 3 m con la pieza de un arco reescalada en X (escalon de 0.4 m).",
+   "motivo": "Bounding boxes de las 26 piezas y terreno al pie (x_medir2.json: arcadas) y 2 vistas. Es el arreglo v1 F-11 aplicado; lo que queda no estorba.",
+   "evidencia": [
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/F_bajada_recta/verif/x_png/f11_arcadas.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/F_bajada_recta/verif/x_png/f11_arcadas_rasante.png"
+   ],
+   "objetos": [
+    "MIRADOR_muro_arcadas.001..026"
+   ],
+   "s": 3040,
+   "x": 337.8,
+   "y": -294.7
+  },
+  {
+   "tramo": "E_tierra s 1650..2480. Verificado sobre la escena congelada ACTUAL (_rev/escena_rev.blend de las 00:38 del 04/10, generada en la vuelta 3 con los arreglos v1+v2 del REGISTRO). La escena de las 19:15 que vio el revisor ya no existe: el verificador anterior (verif/medidas.json, 20:14) confirmo alli E1-E3 con las mismas cifras. Scripts y datos nuevos en E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/E_tierra/verif/actual/: medir_v.py -> medidas_v.json, q2.py, q4.py -> q4.json (pliegues, sendero, bancales), q5.py -> q5.json (calzada limpia), senderos_perfil.json, y 38 vistas en png/ (render_vistas.py y render_seguro.py). Resumen: E1, E3 y E9 ya estan arreglados. E2, E4, E6 y E8 estan arreglados en parte. E5 y E7 siguen igual. Hay 1 hallazgo nuevo (N1, baja). Nada invade la calzada (q5: 0 impactos con |lat| < w/2 - 0.1) y no hay arboles ni props a menos de 4 m del borde.",
+   "id": "E4",
+   "veredicto": "parcial",
+   "severidad": "alta",
+   "descripcion": "La pendiente esta ARREGLADA. El sendero CIMA (CAMINO_tierra.001) es ahora una serpentina de 738 m que sube de z 75 a 158.4, con una pendiente maxima del 15.1 % en tramos de 10 m. Lo que NO esta arreglado es que flota. En la horquilla del sendero en (-12..-5, 481-488), z 104.6-106.1, a 18-25 m del borde izquierdo de la pista en s 1754-1762, el eje queda de 1.3 a 3.4 m sobre el terreno y el borde de abajo de 4.3 a 5.8 m: se ve como una losa en el aire con un faldon oscuro, y el piloto la ve desde la subida. Ademas, 125 de 294 secciones tienen el eje a mas de 0.5 m sobre el terreno y 19 tienen un borde a mas de 1 m, asi que el canto de 1 m se lee como un dique de tierra continuo.",
+   "fichero": "03_blender/integrar_escena.py (_tallar_sendero lineas 970-1104, _construir_sendero linea 4967, _planificar_sendero R_h)",
+   "causa": "El ramal bajo del sendero (L 201-216, z 99.5-100.8) pasa a solo 8.6-11 m del ramal alto (L 242-254, z 104.2-106.1): son 5 m de desnivel en 9 m (55 %), y eso no cabe en celdas de 4 m. En _tallar_sendero, fuera de la zona llana, z = clamp(z, max lo_k, min hi_k) sobre todos los ramales, y el cono del ramal bajo rebaja los nodos bajo el borde del alto. El pase de garantia los sube en las iteraciones 0-1, pero el ultimo pase 'bajar', que trabaja para la pisada del ramal bajo, vuelve a bajar los nodos compartidos. El planificador permite horquillas de R_h = 6.5 m con mis_h = 4 m.",
+   "arreglo": "(1) En _construir_sendero, crear la cinta con _camino(None, ancho=ANCHO, tipo='tierra', despejar=True, pts3=pts3, canto=1.0, terraplen=True, pretil_relleno=True). Asi _muros_relleno levanta un muro de mamposteria (build_muro_contencion) donde el sendero va mas de 1 m sobre su apoyo, igual que en la subida al hotel: una mulattiera con muro a secco encaja con el ambiente italiano. (2) En _planificar_sendero, subir R_h de 6.5 a 9-10 m para que los ramales de cada horquilla queden a 18-20 m. Al terminar la ruta, si algun par de puntos con mas de 25 m de camino entre ellos queda a menos de 12 m en planta con |dz| > 0.35*d, probar el siguiente mirador o la siguiente salida. Comprobar con q4.py y senderos_perfil.json que el aire en el eje y en los bordes es <= 0.4 m salvo donde haya un CAMINO_muro debajo.",
+   "motivo": "El perfil se reconstruyo con los 294 cortes de 11 vertices de la malla. La segunda pieza de la malla son piedras sueltas y no cuenta. Las vistas lo confirman desde la pista y desde un lado. La pendiente del revisor queda refutada, pero lo que flota es real y peor que antes (5.8 m frente a 2.2 m) en un punto que se ve desde la pista. El usuario pidio 'nada flotando'.",
+   "evidencia": [
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/E_tierra/verif/actual/png/e4_aire_desde_pista.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/E_tierra/verif/actual/png/e4_aire_lado.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/E_tierra/verif/actual/png/e4_aire_cerca.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/E_tierra/verif/actual/png/e4_sendero_cenital.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/E_tierra/verif/actual/senderos_perfil.json",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/E_tierra/verif/actual/q4.json (senderos)"
+   ],
+   "objetos": [
+    "CAMINO_tierra.001",
+    "TERRENO"
+   ],
+   "s": 1756,
+   "x": -7.9,
+   "y": 482
+  },
+  {
+   "tramo": "E_tierra s 1650..2480. Verificado sobre la escena congelada ACTUAL (_rev/escena_rev.blend de las 00:38 del 04/10, generada en la vuelta 3 con los arreglos v1+v2 del REGISTRO). La escena de las 19:15 que vio el revisor ya no existe: el verificador anterior (verif/medidas.json, 20:14) confirmo alli E1-E3 con las mismas cifras. Scripts y datos nuevos en E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/E_tierra/verif/actual/: medir_v.py -> medidas_v.json, q2.py, q4.py -> q4.json (pliegues, sendero, bancales), q5.py -> q5.json (calzada limpia), senderos_perfil.json, y 38 vistas en png/ (render_vistas.py y render_seguro.py). Resumen: E1, E3 y E9 ya estan arreglados. E2, E4, E6 y E8 estan arreglados en parte. E5 y E7 siguen igual. Hay 1 hallazgo nuevo (N1, baja). Nada invade la calzada (q5: 0 impactos con |lat| < w/2 - 0.1) y no hay arboles ni props a menos de 4 m del borde.",
+   "id": "E6",
+   "veredicto": "parcial",
+   "severidad": "media",
+   "descripcion": "Esta casi todo arreglado. Ahora hay 7 filas continuas de CARRERA_paca_tierra (221 pacas, que en AC son 1WALL_) mas las pacas de las curvas: de 201 muestras de borde con caida, 190 tienen pacas o MUROC. Sigue sin barrera s 1706-1734 por la IZQUIERDA (+1), donde el terreno final esta a -2.4..-3.0 m a 10 m del borde, a -3.6..-4.8 m a 15 m, a -4.9..-10.7 m a 25 m y a -12..-16 m a 40 m. Debajo, a 17-20 m, pasa el sendero CIMA. Un coche que se salga ahi rueda ladera abajo hasta el sendero. En s 2450-2478 (+1) solo hay una vaguada de 2-3 m que vuelve a subir: no es peligrosa.",
+   "fichero": "03_blender/integrar_escena.py (zona_tierra lineas 1613-1640; orden de safe(): zona_tierra va antes que zona_caminos)",
+   "causa": "zona_tierra decide las filas de pacas con el terreno de ANTES de los senderos y solo mira la cota a 10 m (< z_borde - 2.5). En el terreno de preparar (geometria_rev.json) la caida a 10 m en s 1706-1734 era de -0.2 a -1.5 m, asi que no saltaba la regla. Despues, la banqueta del sendero CIMA (_tallar_sendero, alcance 25 m, que toma el minimo de los conos de varios ramales) rebajo esa ladera hasta el suelo de _proteger_pista (z_eje - 2.8 a 10 m), justo el valor que se mide ahora.",
+   "arreglo": "Sacar el bloque 'caida' + _fila_pacas de zona_tierra a una funcion nueva (p. ej. pacas_tierra) llamada con safe() despues de zona_edicolas y antes de zona_camaras. Que salte si z(10) < z_borde - 2.5, si z(15) < z_borde - 3.5 o si z(25) < z_borde - 6.0, midiendo con _z_tri (la malla real). Mantener filas >= 12 m, el alargue de +-6 m y la boca libre de 8 m para las calles del plan. Comprobar con medidas_v.json 'E6_bordes' que no queda ninguna caida sin barrera en s 1650-2480.",
+   "motivo": "Se midio con rayos en la malla actual y se reprodujo la regla sobre el terreno de antes de integrar: solo salta despues. Las vistas no muestran pacas entre la pista y el sendero en s 1710-1730.",
+   "evidencia": [
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/E_tierra/verif/actual/png/e6_1718_desde_abajo.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/E_tierra/verif/actual/png/e6_piloto_1700.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/E_tierra/verif/actual/png/e6_1950_lado.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/E_tierra/verif/actual/medidas_v.json (E6_bordes)"
+   ],
+   "objetos": [
+    "TERRENO",
+    "CARRERA_paca_tierra.221..223",
+    "CAMINO_tierra.001"
+   ],
+   "s": 1718,
+   "x": 5,
+   "y": 440
+  },
+  {
+   "tramo": "E_tierra s 1650..2480. Verificado sobre la escena congelada ACTUAL (_rev/escena_rev.blend de las 00:38 del 04/10, generada en la vuelta 3 con los arreglos v1+v2 del REGISTRO). La escena de las 19:15 que vio el revisor ya no existe: el verificador anterior (verif/medidas.json, 20:14) confirmo alli E1-E3 con las mismas cifras. Scripts y datos nuevos en E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/E_tierra/verif/actual/: medir_v.py -> medidas_v.json, q2.py, q4.py -> q4.json (pliegues, sendero, bancales), q5.py -> q5.json (calzada limpia), senderos_perfil.json, y 38 vistas en png/ (render_vistas.py y render_seguro.py). Resumen: E1, E3 y E9 ya estan arreglados. E2, E4, E6 y E8 estan arreglados en parte. E5 y E7 siguen igual. Hay 1 hallazgo nuevo (N1, baja). Nada invade la calzada (q5: 0 impactos con |lat| < w/2 - 0.1) y no hay arboles ni props a menos de 4 m del borde.",
+   "id": "E2",
+   "veredicto": "parcial",
+   "severidad": "baja",
+   "descripcion": "Los trampolines de 30x7 m estan ARREGLADOS. En el tramo quedan 2 bancales de 14x3.5 m puestos por la curva de nivel: ITAL_bancal.001 en (-39.2, 479.4) e ITAL_bancal.003 en (92.5, 676.6). El pie apoya (terreno - base de +0.03 a +0.51 delante) y los olivos van sobre la corona (-0.14). Lo que queda: la parte de atras del relleno sobresale de la ladera, con terreno - corona en el borde de atras de -0.62 a -1.47 m en .001 (y aun -0.33..-0.93 m 1.5 m mas atras) y de -0.21 a -0.65 m en .003. El bancal parece una jardinera puesta encima de la ladera, con una cara de tierra de 0.6-1.5 m detras. asentar_rev.json marca .001 como mal asentado (fondo_der -1.36) y la auditoria da 'bancal_mal_asentado': 1.",
+   "fichero": "03_blender/integrar_escena.py (_adornos_sendero, bancales, lineas 5005-5043)",
+   "causa": "z_pie = min(cara) - 0.3 y alto = max(fondo) - z_pie + 0.1, asi que la corona queda en el punto MAS ALTO de las 5 muestras de atras + 0.1. Solo se exige que la linea de la cara sea llana (max - min <= 0.8), la de atras no, y el muestreo usa z_terreno (bilineal) y no la triangulacion real (_z_tri).",
+   "arreglo": "Muestrear cara y fondo con _z_tri. Exigir tambien max(fondo) - min(fondo) <= 0.4 (si no, probar otro sitio o no poner bancal) y usar alto = mediana(fondo) - z_pie + 0.05. Despues de clonar, rellenar la ladera detras: subir solo hacia arriba los nodos del TERRENO en lx dentro de +-(L/2 + 1) y ly de -F a -F-4 hasta corona - 0.05 - 0.5*(distancia pasado -F), sin tocar los nodos a menos de 3 m de la pisada del sendero (_poner_celda con roca=False). Comprobar con q4.py 'bancales' que |terreno - corona| <= 0.3 en la fila de atras.",
+   "motivo": "Las mediciones por filas (q4.json) y la vista desde atras (e2_b001_detras) muestran la caja. No flota ni esta enterrado, pero no se lee como una terraza tallada.",
+   "evidencia": [
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/E_tierra/verif/actual/png/e2_b001_detras.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/E_tierra/verif/actual/png/e2_b001_extremo.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/E_tierra/verif/actual/png/e2_b001_frente.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/E_tierra/verif/actual/q4.json (bancales)"
+   ],
+   "objetos": [
+    "ITAL_bancal.001",
+    "ITAL_bancal.003",
+    "ITAL_olivo.002",
+    "ITAL_olivo.003"
+   ],
+   "s": 1750,
+   "x": -39.2,
+   "y": 479.4
+  },
+  {
+   "tramo": "E_tierra s 1650..2480. Verificado sobre la escena congelada ACTUAL (_rev/escena_rev.blend de las 00:38 del 04/10, generada en la vuelta 3 con los arreglos v1+v2 del REGISTRO). La escena de las 19:15 que vio el revisor ya no existe: el verificador anterior (verif/medidas.json, 20:14) confirmo alli E1-E3 con las mismas cifras. Scripts y datos nuevos en E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/E_tierra/verif/actual/: medir_v.py -> medidas_v.json, q2.py, q4.py -> q4.json (pliegues, sendero, bancales), q5.py -> q5.json (calzada limpia), senderos_perfil.json, y 38 vistas en png/ (render_vistas.py y render_seguro.py). Resumen: E1, E3 y E9 ya estan arreglados. E2, E4, E6 y E8 estan arreglados en parte. E5 y E7 siguen igual. Hay 1 hallazgo nuevo (N1, baja). Nada invade la calzada (q5: 0 impactos con |lat| < w/2 - 0.1) y no hay arboles ni props a menos de 4 m del borde.",
+   "id": "N1",
+   "veredicto": "confirmado",
+   "severidad": "baja",
+   "descripcion": "Es el mismo problema de sentido que E9, ahora 22 m despues del tramo (tramo F). La grua CAMARA_tierra.001 (un camion con cara de Cars) esta en s 2502, a 28.5 m del borde izquierdo, sobre CAMARA_peana.001 en medio del prado, sin camino de acceso (ramal '', eje_ramal -1). No se entiende como llego hasta alli, y se ve desde la pista en s 2420-2490.",
+   "fichero": "03_blender/integrar_escena.py (zona_camaras, eleccion de pieza cuando no cabe el ramal)",
+   "causa": "Cuando no cabe el ramal de tierra, zona_camaras pone una 'grua', que tambien es un vehiculo, en lugar de una pieza fija.",
+   "arreglo": "Si no hay ramal, usar 'torre' (CAMARA_torre, estructura fija sobre su peana). O construir el ramal con _empalme(s, lado, con_valla=True) + _camino(tipo='tierra', ancho=3.5) cuando la peana este a mas de 8 m del borde.",
+   "motivo": "Se ve en la vista desde la pista y en el JSON de la camara (props ramal vacio). No flota (la peana apoya en el TERRENO).",
+   "evidencia": [
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/E_tierra/verif/actual/png/e9_grua2502.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/E_tierra/verif/actual/png/n_p2420.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/E_tierra/verif/actual/medidas_v.json (E9_camaras)"
+   ],
+   "objetos": [
+    "CAMARA_tierra.001",
+    "CAMARA_peana.001"
+   ],
+   "s": 2502,
+   "x": 62.1,
+   "y": 98.8
+  },
+  {
+   "tramo": "A_meta_puerto",
+   "id": "A-12",
+   "veredicto": "confirmado",
+   "severidad": "media",
+   "descripcion": "En todo el frente de los 20 garajes sigue la zanja de cesped entre el pit lane y el suelo de los boxes. Se midio con rayos por debajo del voladizo del edificio: en s 5124-5199 y 0-28 el TERRENO esta a -0.60 m del pit lane entre lat -17.0 y -18.5/-19 (1.5-2 m de ancho), y el suelo de los garajes a -0.24..-0.46. Solo en s 5112-5120 la tapa el hombro ARCEN_PIT_entrada. Se ve en la vista a ras del pit lane (franja verde hundida) y en las capturas. En AC la tapa 1PIT_boxes_rampa, pero ese parche solo existe en el kn5.",
+   "fichero": "03_blender/integrar_escena.py (zona_pit, l.451-475) + 04_export/exportar_ac.py (rampa de garajes, l.313-360)",
+   "arreglo": "Pasar la rampa garaje -> pit lane que hoy hace exportar_ac (S cubica de 4.4-6.5 m, pendiente maxima 11 %, ya validada por el equipo de fisica) a zona_pit como objeto de escena 'PIT_boxes_rampa'. Debe ir desde el borde exterior del pit lane (cota de la muestra - 0.01) hasta el suelo de cada garaje (2.74), cubriendo toda la franja de 120 m, con material de hormigon y faldon hasta el terreno. Subir el terreno de esa franja a la cota de la rampa - 0.05 (_poner_celda). En exportar_ac, solo renombrar PIT_boxes_rampa a 1PIT_boxes_rampa en vez de crearla. Validar: los rayos desde pit+2.2 m en lat -17..-19.5 deben dar PIT_LANE, rampa o suelo de garaje y nunca TERRENO.",
+   "motivo": "Medido en la escena actual: el fallo sigue. Causa real: construir_pista solo genera ARCEN_PIT_* fuera del edificio de boxes, el corredor del pit de terreno_montana esta a -0.6, y zona_pit pone el edificio a z = max(min terreno, q.z - 0.3) = 2.72, con la fachada a 1.6 m del pit lane y sin acera.",
+   "evidencia": [
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/A_meta_puerto/verif/act/v2/a12_franja_baja.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/A_meta_puerto/verif/act/v1/a12_pit_raso.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/A_meta_puerto/verif/act/vf_medidas2.json (zanja)"
+   ],
+   "s": 5150,
+   "x": -123.1,
+   "y": 107,
+   "z": 2.98,
+   "objetos": [
+    "PIT_LANE",
+    "TERRENO",
+    "PIT_boxes_edificio.001"
+   ]
+  },
+  {
+   "tramo": "A_meta_puerto",
+   "id": "N1",
+   "veredicto": "confirmado",
+   "severidad": "media",
+   "descripcion": "Entrada del pit (s 5050-5063): el pretil de piedra del paseo de la tribuna interior (CAMINO_muro.108, que es 1WALL_ en exportar_ac l.126) esta construido ENCIMA del pit lane. Ocupa lat -14.75..-16.25, mientras PIT_LANE llega a -15.0..-17.0, asi que quedan hasta 1.25 m de asfalto del pit por fuera del muro, y sobresale 0.72-0.88 m sobre el carril. Reduce el carril de 6.5-7 m a unos 5.3 m, con la arista del muro de cara a la marcha. En la vista cenital se ve una cuna de asfalto del pit encerrada entre el muro y el paseo. Seis rayos verticales sobre G['pit_lane'] dan CAMINO_muro.108 a +0.70..+0.77 m. En el extremo E, el bordillo del mismo paseo queda 0.10-0.11 m por encima del pit lane en 7 celdas.",
+   "fichero": "03_blender/integrar_escena.py (zona_caminos, paseo de la tribuna interior, l.5235-5275)",
+   "arreglo": "(1) Puntos de control del paseo cada 2 m en s 5000-5090, con d = max(d interpolado de ctl, _pit_exterior(s) + 3.6). (2) Calcular el pretil desde el borde EXTERIOR del pit lane y no desde el eje del paseo: muestra a muestra de G['pit_lane'], cara del lado pista a >= borde exterior + 0.3. Descartar los puntos del pretil que caigan a menos de 0.3 m de PIT_LANE y cortar el muro en ese tramo. (3) Validar con rayos verticales cada 0.25 m sobre G['pit_lane'] (u en +-(w/2-0.2)): 0 impactos de CAMINO_* por encima del pit lane (hoy 6), y ningun bordillo de CAMINO_adoquin por encima de PIT_LANE en el empalme E.",
+   "motivo": "Fallo nuevo, introducido por el paseo de v2 (I-R2-04/A-r2-09). Causa real: el eje del paseo solo se aparta del pit en 6 puntos de control (d = max(d, pit_ext + 3.05) en s 5000, 5004, 5020, 5046, 5066 y 5090). Entre 5046 y 5066 el pit lane se abre y _densificar suaviza, asi que el eje queda ~1 m mas cerca (lat -18.75 medida en s 5056). Ademas el pretil va a 1.5 + 0.8 + 0.3 = 2.6 m del eje hacia la pista: incluso en los puntos de control su cara queda a solo 0.15 m del borde del pit.",
+   "evidencia": [
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/A_meta_puerto/verif/act/v2/n1_pretil_cenital.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/A_meta_puerto/verif/act/v2/n1_pit_entrada.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/A_meta_puerto/verif/act/v2/n1_pit_entrada2.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/A_meta_puerto/verif/act/vf_medidas.json (obst_pit)",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/A_meta_puerto/verif/act/vf_medidas2.json (pretil_pit, pad0)"
+   ],
+   "s": 5056,
+   "x": -36.3,
+   "y": 58.4,
+   "z": 4.09,
+   "objetos": [
+    "CAMINO_muro.108",
+    "PIT_LANE",
+    "CAMINO_adoquin.034"
+   ]
+  },
+  {
+   "tramo": "A_meta_puerto",
+   "id": "N2",
+   "veredicto": "confirmado",
+   "severidad": "media",
+   "descripcion": "El paseo adoquinado de 3 m de la tribuna interior al paddock (CAMINO_adoquin.034), que es el UNICO acceso a la tribuna, esta medio enterrado en s 5012-5044. En el lado alto el terreno queda por encima de los adoquines: +0.3..+0.8 m en s 5020 (lat -18..-20), +1.5 m en s 5024, +1.2 m en s 5036. Cunas de hierba atraviesan el paseo y cortan el muro de contencion CAMINO_muro.106. De los vertices de la cara de arriba muestreados, 5 de 52 quedan bajo la hierba, el peor 1.37 m en (-15.4, 24.2). No se puede recorrer y se ve roto desde la tribuna y desde la entrada del pit.",
+   "fichero": "03_blender/integrar_escena.py (_camino l.4397-4401 / tallar_cinta l.866-917)",
+   "arreglo": "En _camino, cuando la calzada lleva muro o su ancho es menor que 2 * T['cell'], tallar con semiancho = ancho/2 + T['cell'] (los dos nodos que flanquean la cinta a la rasante). Despues, hacer un pase de garantia sobre la triangulacion real, como el de _tallar_sendero o _garantia_losa: puntos cada 0.5 m a lo largo y a lo ancho de la cinta (+-ancho/2 + 0.3) con _z_tri; si un triangulo queda por encima de la rasante - 0.05, bajar sus 3 nodos (con _proteger_pista). Solo baja terreno, asi que es seguro para la subida al hotel y el resto de caminos con rasante. Validar: ningun vertice de la cara de arriba de CAMINO_adoquin o CAMINO_asfalto con TERRENO a mas de 0.05 por encima (hoy 5 de 52, peor 1.37 m).",
+   "motivo": "Fallo nuevo: el paseo es de v2. Causa real: _camino talla el lecho con tallar_cinta(semiancho = 1.5 + 0.3 = 1.8, desmonte = 3.0) sobre los NODOS de la rejilla de 4 m. Los nodos a 1.8-4 m del eje se quedan hasta (d - 1.8) * 3 = 6.6 m mas altos, y los triangulos de la malla (diagonal a -> a+nx+1) que cruzan la cinta asoman por encima de la rasante.",
+   "evidencia": [
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/A_meta_puerto/verif/act/v2/n2_paseo_raso.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/A_meta_puerto/verif/act/v2/n2_paseo_desde_trib.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/A_meta_puerto/verif/act/v2/n2_paseo_cenital.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/A_meta_puerto/verif/act/vf_medidas.json (sec 5004-5044)",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/A_meta_puerto/verif/act/vf_medidas2.json (enterrados)"
+   ],
+   "s": 5024,
+   "x": -16.3,
+   "y": 24.8,
+   "z": 4.05,
+   "objetos": [
+    "CAMINO_adoquin.034",
+    "CAMINO_muro.106",
+    "TERRENO"
+   ]
+  },
+  {
+   "tramo": "A_meta_puerto",
+   "id": "N3",
+   "veredicto": "confirmado",
+   "severidad": "media",
+   "descripcion": "Boca PORTO (lado +1 = exterior de la frenada de la curva 1). El muro+valla queda abierto entre s 136.8 (CARRERA_muro_valla.049) y s 147.65 (.051), y la valla CERRADO (CAMINO_valla.047) solo cubre s 136.98-142.97. Quedan 4.7 m sin ninguna barrera (s 143-147.6) junto al cartel PORTO: los rayos perpendiculares a 0.5 m en s 142-146 no tocan nada en 20 m, y detras esta el terraplen de la carretera del puerto. Ademas una pata de la valla queda 0.67 m al aire. En AC puede que lo tape el cierre invisible de cierre_ac (no comprobado), pero en la escena y las capturas el hueco se ve, y contradice 'vallas donde los caminos tocan la pista'.",
+   "fichero": "03_blender/integrar_escena.py (_despejar_camino l.4111-4139 + carretera del puerto l.5432-5469)",
+   "arreglo": "Quitar 'CARRERA_muro' de los prefijos de _despejar_camino. Asi el bloque A-r2-08 recorta TODOS los muro+valla a menos de 15 m de la boca: ya conserva el tramo mas largo con _d_boca >= lim_b y borra los de menos de 1 m. Otra opcion: despues de ese bloque, cerrar con un tramo de lib['muro'] escalado en x el hueco entre el extremo de la valla de cierre y el siguiente muro (pos_side(s, 1, 2.2), 0.2 m de solape). Asentar las patas de la valla en el terreno. Validar con rayos perpendiculares a 0.5 m desde w/2+0.4, en s 130-160: todos deben chocar con muro, valla o tramo nuevo a menos de 4 m.",
+   "motivo": "Fallo nuevo (el revisor no lo vio). Causa real: _despejar_camino BORRA entero el CARRERA_muro_valla de 10 m (.050) si su centro esta a menos de ancho/2 + 2.6 m de la polilinea del camino. El recorte A-r2-08 solo acorta los muros que quedan, y nadie rellena el trozo entre la valla de cierre (que solo mide lo que la calzada) y el muro siguiente.",
+   "evidencia": [
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/A_meta_puerto/verif/act/v2/a11_boca_porto.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/A_meta_puerto/verif/act/v2/a11_boca_cenital.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/A_meta_puerto/verif/act/vf_medidas2.json (boca)",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/A_meta_puerto/verif/act/vf_medidas.json (barreras s 136-148, apoyo CAMINO_valla.047)"
+   ],
+   "s": 145,
+   "x": -311,
+   "y": 164.7,
+   "z": 5.23,
+   "objetos": [
+    "CAMINO_valla.047",
+    "CARRERA_muro_valla.049",
+    "CARRERA_muro_valla.051",
+    "CAMINO_cartel.007"
+   ]
+  },
+  {
+   "tramo": "A_meta_puerto",
+   "id": "N4",
+   "veredicto": "confirmado",
+   "severidad": "baja",
+   "descripcion": "Las dos torres de control (PIT_torre.001 y .002) tienen como zocalo una caja cuadrada de piedra SIN TAPA que sobresale 0.6 m sobre su base. Alrededor de cada torre redonda se ve un 'corral' de piedra con hierba dentro y, en el lado bajo, una cuna triangular donde el terreno corta el muro. No tiene sentido constructivo y se ve desde el paddock y desde la subida al hotel.",
+   "fichero": "03_blender/integrar_escena.py (zona_pit l.626-629, _zocalo_global l.106-141)",
+   "arreglo": "Para las torres, no usar _zocalo_global. Usar un pedestal con tapa a la medida de la base: _pedestal(t, 0, 0, r, r, zt_t - 0.3, z_top=0.02, nombre='PIT_torre_zocalo'), con r = radio del anillo de piedra de la base de la torre (bbox de su malla inferior). O bien llamar a explanar(t, margen=1.5) para que la torre apoye en llano. Validar en una vista a ras que no se ve hierba por encima del zocalo ni bordes abiertos.",
+   "motivo": "Fallo nuevo, visto en a16_torre1, a16_torre2 y a06_salida_paddock. Causa real: zona_pit llama a _zocalo_global(t, zt_t - 1.0), pensado para casas. Esa funcion crea una caja con la bbox de toda la jerarquia (incluida la marquesina de la puerta), con las caras laterales hasta z local 0.6 y sin cara superior. En una casa queda escondida dentro del edificio; en una torre redonda queda a la vista.",
+   "evidencia": [
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/A_meta_puerto/verif/act/v1/a16_torre1.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/A_meta_puerto/verif/act/v1/a16_torre2.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/A_meta_puerto/verif/act/v1/a06_salida_paddock.png"
+   ],
+   "s": 5120,
+   "x": -84.3,
+   "y": 119,
+   "z": 3.32,
+   "objetos": [
+    "PIT_torre.001",
+    "PIT_torre.002",
+    "CASAS_zocalo (hijos de las torres)"
+   ]
+  },
+  {
+   "tramo": "B_tunel_mclaren (s 150-680). Lo he verificado sobre la escena congelada ACTUAL _rev/escena_rev.blend, del 04/10 00:38. Esta escena es posterior a la revision r1 (03/10 19:40-20:07) y ya incluye los arreglos v1/v2 del REGISTRO. Mediciones propias (scripts y datos en E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/B_tunel_mclaren/verif/): k_medir.py (k_medir.json y k_terreno.npy, que es TERRENO volcado de la malla real), k_medir2.py (k_medir2.json), k_medir3.py (k_medir3.json), k_medir5.py (k_medir5.json), k_terreno.py (k_terreno.json) y k_zt.py. Renders en verif/png_k/: 37 vistas k_*, 12 k2_* y 3 k3_*. Resumen: de 16 hallazgos, 7 estan ya arreglados (B1, B2, B3, B7, B8, B9, B14), 6 lo estan en parte (B4, B6, B10, B13, B15, B16) y siguen B5 (hierba en el tunel), B11 (frontal ilegible) y B12 (costa en escalera). Hay 2 nuevos: N1, escaleras del plan colgando, y N2, ladrillo del tunel en la cara de la rueda.",
+   "id": "N1",
+   "veredicto": "confirmado",
+   "severidad": "media",
+   "descripcion": "Escaleras del plan colgando en el aire. En este tramo: CAMINO_escalera.003, que sube de la calle de servicio a la terraza 1 en la primera manzana de pueblo_subida_ladera (s ~664-672, lado -1; x -662.7..-656.0, y 418.4..430.9, z 34-38). Cada peldano es una caja de solo 1.07 m de canto, y el terreno de debajo esta a 34.3-34.6. Los peldanos altos tienen hasta 2.2 m de hueco: el de 37.86 tiene el fondo a 36.79 y el terreno a 34.57. En k3_escalera003_b se ve un tramo blanco suspendido delante del muro, con su sombra en la hierba. En el resto del pueblo (tramos C y D) es peor: CAMINO_escalera.004 tiene 2.9-5.8 m de hueco, escalera.002 2.4 m, escalera 2.8 m y escalera.001 2.4 m.",
+   "fichero": "03_blender/urbanismo_escena.py (escalera, l. 283-307)",
+   "causa": "Cada peldano se construye con _caja(vs, fs, p0, p1, an, z_t, z_t - 0.9 - abs(dz)/n_): fondo fijo de 0.9 m mas la contrahuella. El fondo no baja al terreno, y la escalera del plan va a su cota de proyecto, por encima de la rampa del muro y de la terraza baja.",
+   "arreglo": "En escalera(), bajar el fondo de cada caja a min(z_t - 0.9 - abs(dz)/n_, min(z_terreno en las 4 esquinas del peldano) - 0.3): escalera de fabrica maciza hasta el suelo. Hacer lo mismo con descansillo y pasarela. Si el hueco pasa de 2.5 m, poner un murete de sillares en el lado abierto, como muro_rampa_sillares. Comprobacion: lanzando un rayo hacia abajo desde cada peldano, el fondo propio queda a <= 0.3 m del TERRENO.",
+   "motivo": "Medido en k_medir3.json 'solidez' y visto en render. El usuario pidio expresamente que nada flote.",
+   "evidencia": [
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/B_tunel_mclaren/verif/k_medir3.json (clave 'solidez')",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/B_tunel_mclaren/verif/k_medir2.json (clave 'caminos': CAMINO_escalera* con f_aire 0.92-1.0)",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/B_tunel_mclaren/verif/png_k/k3_escalera003_b.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/B_tunel_mclaren/verif/png_k/k_b7_plaza_arriba.png"
+   ],
+   "s": 668,
+   "x": -659.5,
+   "y": 424.5,
+   "z": 36,
+   "objetos": [
+    "CAMINO_escalera.003",
+    "CAMINO_escalera.004",
+    "CAMINO_escalera.002",
+    "CAMINO_escalera",
+    "CAMINO_escalera.001"
+   ]
+  },
+  {
+   "tramo": "B_tunel_mclaren (s 150-680). Lo he verificado sobre la escena congelada ACTUAL _rev/escena_rev.blend, del 04/10 00:38. Esta escena es posterior a la revision r1 (03/10 19:40-20:07) y ya incluye los arreglos v1/v2 del REGISTRO. Mediciones propias (scripts y datos en E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/B_tunel_mclaren/verif/): k_medir.py (k_medir.json y k_terreno.npy, que es TERRENO volcado de la malla real), k_medir2.py (k_medir2.json), k_medir3.py (k_medir3.json), k_medir5.py (k_medir5.json), k_terreno.py (k_terreno.json) y k_zt.py. Renders en verif/png_k/: 37 vistas k_*, 12 k2_* y 3 k3_*. Resumen: de 16 hallazgos, 7 estan ya arreglados (B1, B2, B3, B7, B8, B9, B14), 6 lo estan en parte (B4, B6, B10, B13, B15, B16) y siguen B5 (hierba en el tunel), B11 (frontal ilegible) y B12 (costa en escalera). Hay 2 nuevos: N1, escaleras del plan colgando, y N2, ladrillo del tunel en la cara de la rueda.",
+   "id": "N2",
+   "veredicto": "confirmado",
+   "severidad": "baja",
+   "descripcion": "La textura de ladrillo de la pared del tunel (MAT_piedra) invade la cara exterior de la rueda del McLaren en las dos bocas. Las partes bajas de los aros de la llanta y del neumatico, hasta unos 11 m sobre la calzada, se ven con despiece de ladrillo en vez de caliza. Desde el piloto, en s 300-380, se lee como una banda de obra pegada a la rueda (k2_portal_ent_arriba, k2_portal_sal_frente, k_b8_piloto_350, k2_piloto_300). De las 967 caras de TUNEL_acantilado con MAT_piedra, 275 miran a lo largo de la pista (|n.t| > 0.6): son las de la cara de la rueda. Otras 119 miran hacia fuera del eje. Solo 573 son pared real del taladro.",
+   "fichero": "03_blender/integrar_escena.py (zona_tunel l. 3005 y _paredes_de_roca l. 2611-2636)",
+   "causa": "_paredes_de_roca(roca, i0t, i1t) asigna el material a toda cara con centro a lat < 12.5 m, lon < 2.5 m y z entre z_pista-2.5 y z_pista+11, sin mirar la normal. Esa caja es mas grande que el taladro (10.5 m de semiancho y 8 m de alto) y en la boca coge la cara de la rueda. Como el McLaren no tiene ningun material con 'roca' en el nombre, se usa MAT_piedra, el ladrillo de portales y galerias.",
+   "arreglo": "Llamar a _paredes_de_roca despues de calcular las bocas, con el rango (i_in + 1, i_out - 1). Exigir lat < 11.0, z < z_pista + 8.5 y |normal . tangente| < 0.5 (paredes paralelas a la pista), y que la normal mire hacia el eje. Si se quiere que el interior sea roca y no obra, usar un material de caliza oscura en vez de MAT_piedra. Comprobacion: ninguna cara de TUNEL_acantilado con MAT_piedra y |n.t| > 0.5.",
+   "motivo": "El conteo de caras por orientacion (k_medir5.json) y tres renders de las bocas lo confirman. Es cosmetico, por eso es baja.",
+   "evidencia": [
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/B_tunel_mclaren/verif/k_medir5.json (claves 'por_tipo', 'ej')",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/B_tunel_mclaren/verif/k_medir4.json (clave 'cuenta')",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/B_tunel_mclaren/verif/png_k/k2_portal_ent_arriba.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/B_tunel_mclaren/verif/png_k/k2_portal_sal_frente.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/B_tunel_mclaren/verif/png_k/k_b8_piloto_350.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/B_tunel_mclaren/verif/png_k/k_b1_ent_34.png"
+   ],
+   "s": 405,
+   "x": -514.8,
+   "y": 326.4,
+   "z": 24,
+   "objetos": [
+    "TUNEL_acantilado",
+    "MAT_piedra"
+   ]
+  },
+  {
+   "tramo": "D_pueblo_alto (s 1250..1700). Verificado sobre la escena congelada ACTUAL: _rev/escena_rev.blend del 04/10 00:38, que ya lleva los arreglos v1/v2 del REGISTRO (el revisor midio la del 03/10 19:19). Rehice las 83 vistas del revisor; en verif/b/comp/ cada imagen tiene r1 a la izquierda y la escena actual a la derecha. Anadi 30 vistas nuevas (verif/b/nuevas/) y 4 consultas por rayos y vertices (vb_medir*.json, vb_analisis3.json). Resultado: 6 hallazgos del revisor ya estan corregidos (D1, D3, D4, D5, D9, D14). D8 y D10 siguen igual. D2, D6, D7, D11, D12 y D13 estan corregidos solo en parte. Fallos nuevos: N1 (senderos levantados como losas) y N2 (muros del lado mar con zanja detras), mas N3, N4 y N5.",
+   "id": "D11",
+   "veredicto": "parcial",
+   "severidad": "baja",
+   "descripcion": "Aceras que empiezan y acaban en el prado. Corregido: ACERA_1284_1_1 cubre s 1286-1510 y ACERA_1284_-1_1 s 1300-1428, de enlace a enlace y con rampa en los extremos. Quedan sueltas en el prado, sin acera, CALLE_farola.012 (s 1270, -1, base a 1.3 m) y CALLE_maceta.009 (s 1284, +1, a 0.8 m).",
+   "fichero": "03_blender/integrar_escena.py (zona_calle, TRAMOS (1270, 1550))",
+   "arreglo": "El mismo de D6: los TRAMOS de zona_calle se derivan del rango real de las aceras o enlaces del plan (1286-1510 / 1300-1428), con 4 m de margen.",
+   "motivo": "Medido en vb_medir.json (D11_aceras, D6_props) y visto en comp/c16, c17, p1250 y c27. El arreglo de 'v1 pista F-13/D11' acorto las aceras, pero zona_calle sigue sembrando props desde s 1270.",
+   "evidencia": [
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/D_pueblo_alto/verif/b/comp/c16_acera_inicio_aerea.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/D_pueblo_alto/verif/b/comp/p1250.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/D_pueblo_alto/verif/b/comp/c27_farola012.png"
+   ],
+   "objetos": [
+    "CALLE_farola.012",
+    "CALLE_maceta.009"
+   ],
+   "s": 1270,
+   "x": -213.86,
+   "y": 408.07,
+   "z": 56.94,
+   "causa": "Los TRAMOS de props de zona_calle no siguen a las aceras."
+  },
+  {
+   "tramo": "D_pueblo_alto (s 1250..1700). Verificado sobre la escena congelada ACTUAL: _rev/escena_rev.blend del 04/10 00:38, que ya lleva los arreglos v1/v2 del REGISTRO (el revisor midio la del 03/10 19:19). Rehice las 83 vistas del revisor; en verif/b/comp/ cada imagen tiene r1 a la izquierda y la escena actual a la derecha. Anadi 30 vistas nuevas (verif/b/nuevas/) y 4 consultas por rayos y vertices (vb_medir*.json, vb_analisis3.json). Resultado: 6 hallazgos del revisor ya estan corregidos (D1, D3, D4, D5, D9, D14). D8 y D10 siguen igual. D2, D6, D7, D11, D12 y D13 estan corregidos solo en parte. Fallos nuevos: N1 (senderos levantados como losas) y N2 (muros del lado mar con zanja detras), mas N3, N4 y N5.",
+   "id": "N3",
+   "veredicto": "confirmado",
+   "severidad": "media",
+   "descripcion": "Un pedrusco suelto de unos 5 m (VEG_roca.047) en mitad de la plaza del pueblo alto (CALLE_plaza.001, pueblo_alto_ladera_plaza), junto a la fuente ITAL_fuente.003. Tiene la base 0.3 m bajo la losa. No tiene sentido en una plaza (nuevas/vb33, vb28). Es la unica vegetacion o roca de la caja apoyada en una losa del plan (vb_medir4.json).",
+   "fichero": "03_blender/integrar_escena.py (despeje_final, linea ~6128: es_arbol = ... and not nm.startswith(('VEG_penon', 'VEG_roca')))",
+   "arreglo": "En despeje_final, tratar VEG_roca como obstaculo: si en_plaza(x, y), o d_eje(x, y)[0] < 1.0 + r_p*0.7, o en_edificio(x, y, 0.5) no es None, quitarla (seguir excluyendo VEG_penon). Si se prefiere, en zona_rocas/enriquecer_vegetacion no sembrar VEG_roca dentro de PUEBLO_INFO['plazas_poly'] + 2 m. Comprobacion: 0 VEG_/OLI_ (salvo VEG_plazoleta) con el pie sobre CALLE_plaza*, CALLE_plazoleta* o CAMINO_*.",
+   "motivo": "Rayos en vb_medir4.json (vegetacion_sobre_losas: VEG_roca.047 sobre CALLE_plaza.001 a 75.18). En el codigo, despeje_final excluye a proposito VEG_roca de la limpieza de plazas que se hace a los arboles.",
+   "evidencia": [
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/D_pueblo_alto/verif/b/nuevas/vb33_roca_plaza_ladera.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/D_pueblo_alto/verif/b/nuevas/vb28_salida_sendero_pueblo.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/D_pueblo_alto/verif/b/vb_medir4.json"
+   ],
+   "objetos": [
+    "VEG_roca.047",
+    "CALLE_plaza.001",
+    "ITAL_fuente.003"
+   ],
+   "s": 1345,
+   "x": -104.2,
+   "y": 425.2,
+   "z": 74.88,
+   "causa": "VEG_roca esta excluida del despeje de plazas, calles y edificios."
+  },
+  {
+   "tramo": "D_pueblo_alto (s 1250..1700). Verificado sobre la escena congelada ACTUAL: _rev/escena_rev.blend del 04/10 00:38, que ya lleva los arreglos v1/v2 del REGISTRO (el revisor midio la del 03/10 19:19). Rehice las 83 vistas del revisor; en verif/b/comp/ cada imagen tiene r1 a la izquierda y la escena actual a la derecha. Anadi 30 vistas nuevas (verif/b/nuevas/) y 4 consultas por rayos y vertices (vb_medir*.json, vb_analisis3.json). Resultado: 6 hallazgos del revisor ya estan corregidos (D1, D3, D4, D5, D9, D14). D8 y D10 siguen igual. D2, D6, D7, D11, D12 y D13 estan corregidos solo en parte. Fallos nuevos: N1 (senderos levantados como losas) y N2 (muros del lado mar con zanja detras), mas N3, N4 y N5.",
+   "id": "N4",
+   "veredicto": "confirmado",
+   "severidad": "baja",
+   "descripcion": "El arranque del sendero CIMA se solapa con la losa blanca del fondo de saco (CALLE_plaza_fondo) en (-90, 424). La cinta de tierra queda a 75.0-75.19 y la losa a 75.10, unas veces encima y otras debajo: z-fighting, con una cuna de tierra dentada sobre la losa (nuevas/vb28).",
+   "fichero": "03_blender/integrar_escena.py (_construir_sendero / _camino del sendero)",
+   "arreglo": "Recortar la cinta del sendero donde entra en PUEBLO_INFO['plazas_poly'] (con 0.3 m de margen), para que empiece en el borde de la losa. O ponerla 0.06 m por debajo de la losa dentro de la plaza.",
+   "motivo": "Rayos en vb_medir4.json (salida_sendero: CALLE_plaza_fondo 75.10 y CAMINO_tierra.001 75.00-75.19 en el mismo punto).",
+   "evidencia": [
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/D_pueblo_alto/verif/b/nuevas/vb28_salida_sendero_pueblo.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/r1/D_pueblo_alto/verif/b/vb_medir4.json (salida_sendero)"
+   ],
+   "objetos": [
+    "CAMINO_tierra.001",
+    "CALLE_plaza_fondo"
+   ],
+   "s": 1345,
+   "x": -90,
+   "y": 424,
+   "z": 75.1,
+   "causa": "El sendero arranca en la salida del plan sin recortarse contra la losa del fondo de saco."
+  }
+ ],
+ "positivos": [
+  "E_tierra (s 16: Calzada limpia en s 1650-2480: 0 puntos de terreno por encima del asfalto (5 rayos por muestra, cada 2 m), 0 objetos encima de la calzada y 0 muestras sin PISTA (consulta.json asoma, encima y sinpista vacios).",
+  "E_tierra (s 16: Perfil de montana real y suave: PISTA = geometria +-0.15 m, sin quiebros verticales > 0.12 m, pendiente maxima 16.5 % en s 1786-1796 y cima a z 120.6 en s 1866; desde s 1950 baja la sierra hacia el mar.",
+  "E_tierra (s 16: Arboles: 0 de 978 VEG_/OLI_/ITAL_cipres flotando > 0.25 m (5 rayos), 0 a < 9 m del borde de cualquier tramo (E2-05 se mantiene) y 0 con un edificio encima o pegado (salvo VEG_pino.297, fuera del tramo). La queja de arboles flotando en la tierra esta resuelta; no romper el asentado de asentar_objetos.",
+  "E_tierra (s 16: Pista tallada en la ladera: desmontes de roca estratificada en la subida (s 1690-1800, lado -1) y trinchera de la cima, sin roca que invada la calzada.",
+  "E_tierra (s 16: Pacas: filas continuas CARRERA_paca_tierra (1WALL_) en los terraplenes de la cresta (s 2000-2230, a los dos lados, y s 2290-2440) y 13 pacas en el exterior de la curva 26; buena lectura de circuito de tierra (p2050-p2210, lat2100_izq).",
+  "E_tierra (s 16: Cima: ermita apoyada (+-0.3 m en las 4 esquinas), plaza del mirador con fuente, avenida de cipreses sueltos y cartel; el sendero CIMA tiene origen (salida del pueblo alto con plaza, fuente y capitella) y destino, con rasante maxima del 15 % (cima_ermita_n, cima_ermita_se). Muy italiano.",
+  "E_tierra (s 16: Helicoptero CAMARA_heli.003 a 36 m sobre la cima (s 1894): ambiente de retransmision.",
+  "E_tierra (s 16: Bajada s 2040-2440 con el puerto, los yates y el penon al fondo (d2080, d2180, d2280, p2370): postal muy Cars, sin objetos raros.",
+  "E_tierra (s 16: Transicion tierra -> asfalto en s 2460 limpia, con MUROC_pretil_bajada_2440 a 3.7 m en el lado -1 (p2450, a2470).",
+  "E_tierra (s 16: Los duplicados de CAMINO_tierra/asfalto de la coleccion LIB tienen hide_render=True: no se renderizan (consulta2 lib).",
+  "H_viaducto_laz: Nada sobre el asfalto en s 3640-4600 (5 rayos verticales cada 4 m, 0 impactos que no sean pista, piano, marca o arcen). La malla bajo el eje es PISTA a 0.0 m en todas las muestras: no asoma hierba.",
+  "H_viaducto_laz: Barrera continua a los dos lados en todo el tramo (pretil a 0.12 m del borde en los rayos a 0.4 m), salvo los 3 huecos de puertas. Perfil sin saltos: el mayor cambio de pendiente es 1.9 % en 20 m (s 3680).",
+  "H_viaducto_laz: Calzada PEGADA a la roca en la U, como pidio el usuario: cara de roca a 3.85-3.91 m del borde interior a 2.5 m de altura en s 3932-4540 (berma de cuneta), 0 voladizos sobre el tablero (rayos hacia arriba desde los dos bordes sin impactos) y roca bajo el tablero hasta el mar (contacto 100 % en los checks de roca_lazo). Mantenerlo al tocar H3-3.",
+  "H_viaducto_laz: Viaducto de arcos muy logrado: doble arcada en s 3700-3900 y arcada alta en la U, pilas con zocalo y tajamar en el agua (zocalo a +0.85..1.23 m y pila hasta el fondo a -4), no flotan (lib_arcos_mar, lib_bajo_u, ext_este, lat_mar_*).",
+  "H_viaducto_laz: 17 casas del lazo (5 en la terraza alta, 4 en la baja, 4 en la plaza, 4 en la cala) apoyadas a 0.0 m sobre roca o plaza en las 4 esquinas, con la fachada libre 8 m a 1.5 y 4.5 m de altura (sin muros delante de ventanas) y sin roca dentro.",
+  "H_viaducto_laz: Cumbre con plaza empedrada, campanile, fuente y casas con parapeto, y un cerrete rocoso al lado (lib_plaza, lib_campanile, cumbre_cerrete). Muy italiano.",
+  "H_viaducto_laz: Cala de pescadores con muelle, 4 casas con fachada al mar, pantalan, barcas, lancha estilo Riva (con su coche, como en el mundo Cars) y escalera hasta la terraza (lib_cala_mar, lib_cala_alto).",
+  "H_viaducto_laz: Carreteras acceso_alto (6.8 %, R >= 87 m) y acceso_cala (4.0 %, litoranea con pretil) con destino (piazzola en la terraza alta y en el muelle), sin roca encima (primer impacto vertical = PENON_carretera_lazo en todas las sondas) y valla de cierre con senal de prohibido; la escalera de s 4550 tiene verja y rellano.",
+  "H_viaducto_laz: Roca completa y sin huecos (rejilla de 1.5 m: 0 huecos), cerrada por el N con la cala y el espolon.",
+  "H_viaducto_laz: Auditoria automatica: 0 fallos de urbanismo_informe_rev dentro del tramo (x -120..600, y -800..-330). El de LOEWS_rotonda.001 es del tramo G.",
+  "F_bajada_recta: Asfalto limpio en s 2450-3200, con rayos cada 2 m a lo largo y cada 1 m a lo ancho: ningun objeto sobre la calzada y ningun punto de hierba asomando.",
+  "F_bajada_recta: Barreras donde hacen falta: el pretil de piedra MUROC_pretil_bajada_2440 va continuo a 3.70 m del borde en s 2450-2610 (lado -1, donde la ladera cae al paddock), y GUARDARRAIL_DER_mirador va a 0.15-0.20 m en s 2986-3154. Donde no hay barrera, la caida a 16 m es de 6 m o menos, en pendiente suave.",
+  "F_bajada_recta: Las 17 casas de bajada_ladera estan bien asentadas: |terreno - z_suelo| <= 0.38 m en las 4 esquinas del plan. Ninguna tiene calles, muros ni plazas bajo su huella, y los muros quedan a 9-14 m delante de las fachadas. CASAS_casa.156, que la medida por esquinas daba como enterrada 1-1.7 m, es un falso positivo: su zocalo baja por debajo de la base y el terreno alrededor esta entre 27.9 y 28.7 m, con la base a 28.32.",
+  "F_bajada_recta: Ambiente italiano y Cars bien logrado en el sector: travesia con escalera de ida y vuelta y pasarela, capillita con cipreses al final de la travesia, toldos, farolas, macetas y guirnaldas tricolor; calle de servicio con bordillos y franja verde delante de las fachadas.",
+  "F_bajada_recta: La pista se lee tallada en la ladera: desmontes de caliza con estratos en el lado +1 (s 2640-2860). La recta 30-31 sube al casino al 12-14.7 % con una rasante suave (desde s 2650 la pendiente cambia menos de un 3 % cada 10 m).",
+  "F_bajada_recta: El paseo-mirador tiene palmeras, coches con cara estilo Cars, muro de arcadas escalonado y palazzo con parking en la azotea y pasarela. Hay carteles ALLINOL y MONDIALE GP y el zigzag amarillo de frenada antes de la curva 31, como en la pelicula.",
+  "F_bajada_recta: Vegetacion del tramo: 415 arboles, ninguno dentro de un edificio y ninguno flotando mas de 0.1 m (estan hundidos 0.04-0.63 m a proposito).",
+  "F_bajada_recta: Las camaras de TV (torre WGP con coche y grua) estan sobre peana, sobre el terreno, en el interior de las curvas y a 13 m o mas del borde.",
+  "F_bajada_recta: Entrada al pit: el morro y las pilas de neumaticos estan dentro de la isleta, sin invadir la pista ni el pit lane (comprobado vertice a vertice).",
+  "F_bajada_recta: El muro de extension muro0_2 (s 2736-2762), que desde arriba parece suelto, si sostiene un escalon real de 2.3 a 1.0 m: tiene sentido y no hay que tocarlo.",
+  "D_pueblo_alto : Nada sobre el asfalto en s 1250-1700 (sobre_asfalto = 0) y ningun punto de terreno dentro de la calzada. Lo que asoma sobre ARCEN queda tapado por la acera alta, salvo D3-12.",
+  "D_pueblo_alto : Perfil de la pista suave: malla = geometria (+-0.005 m), 2a diferencia <= 0.01, y la tierra SUBE seguida del 5 % al 15.8 % hasta 98 m en s 1700, como pidio el usuario.",
+  "D_pueblo_alto : Bordes seguros: ninguna caida de mas de 1.5 m a menos de 6 m del borde sin barrera en todo el tramo. En el pueblo hay acera alta o casas a 6-7 m, y en la tierra pacas 1WALL en los terraplenes.",
+  "D_pueblo_alto : Las 59 casas de la zona estan bien: ninguna enterrada, ninguna pisa calles ni muros, ninguna dentro de roca (solo CASAS_casa.125 tiene una esquina a 0.60 m del suelo). Ningun arbol dentro de casas, muros o calles, salvo los VEG_plazoleta, que van a proposito.",
+  "D_pueblo_alto : Las 4 bocas tienen valla CERRADO (CAMINO_valla.017/.019/.021/.023) a 2.9 m del borde y en su sitio.",
+  "D_pueblo_alto : El sendero CIMA arranca bien en la salida del pueblo_alto_ladera: plazuela, capitella, cartel CIMA (CAMINO_cartel.011) y fuente. Nunca toca la pista: lo mas cerca que pasa es a 7.1 m, en s 1834.",
+  "D_pueblo_alto : Buen ambiente italiano y de Cars: calles adoquinadas en terrazas con muros de sillares, guirnaldas tricolores con postes, farolas, toldos, macetas, fuente en la plaza, capitellas con cipreses en los fondos de saco y campanile y ayuntamiento al fondo. La aerea f12 y la lateral l1500_d se leen como un pueblo de ladera real.",
+  "D_pueblo_alto : Las rampas no atraviesan casas (pisa_cam = 0) y las travesias conectan las tres terrazas de la ladera; las calles, en planta, sin pliegues.",
+  "I_retorno (s 4: Pretil del viaducto continuo a los dos lados de s 4440 a 4936, a 0.04-0.12 m del borde del asfalto (rayos a 0.4 m en las 270 muestras). Solo se abre en las dos puertas de roca_lazo y las dos quedan cerradas: verja PENON_puente_vallas a 0.54-0.78 m en s 4549.5-4552 y barrera roja y blanca CAMINO_valla_cuerpo.045 a 5.6-6.9 m en la boca de la carretera de la cala.",
+  "I_retorno (s 4: Nada sobre el asfalto, nada por encima de la calzada y nada delante a 0.8 m de altura en todo el tramo: primer impacto PISTA/MARCA/PIANOS en todos los rayos dentro de la calzada.",
+  "I_retorno (s 4: Rasante suave: pendiente entre -0.1 % y -3.4 %, el mayor cambio de pendiente en 10 m es 0.58 % (s 4850), sin saltos de cota; ancho de 12 a 13 m progresivo en s 4920-4980; peralte de 0.02 como mucho.",
+  "I_retorno (s 4: Transicion viaducto-tierra en s 4936 bien resuelta: el pretil acaba en el estribo, el cierre transversal blanco (CARRERA_muro_valla.071/.072) lo une con el muro+valla a 2 m, con zocalo enterrado 0.3-0.6 m (no flota), y la barrera se abre hacia fuera en el sentido de la marcha (sin esquina donde engancharse).",
+  "I_retorno (s 4: Puerta acceso_bajo (s 4550): verja de hierro, rellano 8 cm por debajo de la pista y escalera con pretiles que sube a las terrazas de la roca del lazo, con destino.",
+  "I_retorno (s 4: Puerta acceso_cala (s 4592): calzada adoquinada entre muretes, barrera, senal de prohibido y 3 conos; la carretera PENON_carretera_lazo baja a la cala (z 1.4) con casas, muelle y barca, y sube al acceso alto.",
+  "I_retorno (s 4: Chicane 46-49 clara y legible: pianos en todos los vertices, zigzag amarillo de frenada antes de la 46 (intencionado, ZONAS_ZZ de construir_pista.py), pretil bajo de 0.82 m que no tapa la vista.",
+  "I_retorno (s 4: Roca del lazo vista desde el retorno: completa, terrazas con casas, campanile en la cumbre, matas y espolon que baja al mar sin cortes; pista pegada a la roca entre s 4440 y 4596 (cara a 3.3-4.6 m a 1 m de altura).",
+  "I_retorno (s 4: Yates fondeados en agua profunda (terreno bajo el casco <= -3.2 m), separados ~70 m, con coches-espectador mirando a la carrera, sombrillas y bandera italiana: muy Cars.",
+  "I_retorno (s 4: Ningun arbol ni prop flotando en el tramo: VEG_olivo.228 y VEG_arbusto.017 estan hundidos 0.05-0.78 m en ladera, no volados (los 'AGUA' del primer barrido eran rayos que salian por debajo del terreno). CASAS_casa.149/.150 asientan entre -0.33 y +0.34 m.",
+  "I_retorno (s 4: Tribuna interior (s 4951-4997) encajada en la ladera y playa en el lungomare: buena lectura de llegada a la meta desde p4890/p4930.",
+  "J_global: Una sola montana legible: el circuito sube de 3 m en la meta a 120.6 m en la cima de tierra (s 1866), al pie de la cumbre de 212 m (-37,760), y vuelve a bajar al mar. Desde la cima de tierra (png3/p_1900.png) se ven casino, viaducto y lazo: una postal de Cars. En a_S, a_SO y l_1300_der la isla se lee como un macizo con el circuito trepando por el.",
+  "J_global: La pista va tallada en la ladera: en 35 de 78 muestras (cada 50 m, sin viaducto) el terreno a 30 m del borde esta por encima de +6 m a un lado y por debajo de +2 m al otro. Los desmontes tienen estratos (z_desmonte_0380, p_1750, z_desmonte_1180).",
+  "J_global: Bordes del mapa limpios: AGUA y AGUA_fondo cubren +-10 km y el horizonte es continuo en las 6 vistas a ras del mar. Los 4 bordes de la rejilla del terreno son mar (0 celdas de tierra), y hay 0 objetos visibles bajo el agua, fuera de la rejilla o en el origen (consulta1.json). Las bandas oscuras en los bordes de las cenitales son del render (Eevee en el borde de pantalla), no de la escena.",
+  "J_global: Costa continua y sin escalera (rejilla de 4 m) en todas las aereas, con playas de arena (z_costa_E, z_costa_N, z_costa_O).",
+  "J_global: Lejos de la pista (> 40 m) la pendiente natural tiene mediana 0.49 y p90 0.87; solo el 4.6 % pasa del 100 %, casi todo en acantilados y desmontes (mapa_pendiente.png).",
+  "J_global: Bajada del penon del casino visible en espiral, con pretil y farolas (z_espigon_alto, d_3400). La rotonda Loews con su palmera se ve intacta (p_3560, d_3400).",
+  "J_global: La roca del lazo queda pegada a la balustrada del viaducto (p_4250, l_4300_der) y el viaducto de arcos sobre la garganta es continuo y muy Riviera (l_3800_izq, d_3800).",
+  "J_global: El pueblo en terrazas, con calles, rampas y muros, se lee bien desde el aire (d_1000, l_1300_der, d_1400). Ambiente italiano: campanile, ayuntamiento con bandera, toldos, guirnaldas y cipreses.",
+  "J_global: La salida tiene buena imagen: pasarela WORLD GRAND PRIX con el McLaren al fondo y la pista entrando por la rueda (p_0100); la galeria del tunel es limpia (p_0380).",
+  "J_global: Perfil de cota sin saltos peligrosos. El mayor cambio de pendiente es 10.6 % en 10 m en la cima de tierra (s 1858, radio vertical ~108 m en curva lenta de radio 22-38 m); en la cresta del casino es 8.6 % en 10 m (s 3434, radio vertical ~130 m en la curva 37, radio 67-73 m).",
+  "B_tunel_mclare: El McLaren se reconoce como un deportivo desde la pista en s 150-400 (p150, p230, p270, p310, p350): flanco con ventanilla, retrovisor, llanta de 10 radios y el tunel entrando por la parte baja de la rueda delantera. Desde el puerto y el mar (mc_desde_puerto_mar, mc_desde_mar_so, mc_perfil_este_lejos) se ven el aleron, la toma lateral y la rueda trasera medio enterrada en el penon."
+ ]
+}

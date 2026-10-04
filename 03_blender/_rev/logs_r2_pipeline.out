@@ -1,0 +1,27 @@
+preparar_geometria ok
+[urbanismo] QA: {"casas_total": 194, "solares_total": 208, "separacion_min_solares": 1.02, "peor_huella": {"travesia": 0.599, "rampa": 0.411, "plazoleta": 0.551, "plaza": 0.385, "calle_borde": [-0.791, 0.228], "solar": [-0.5, 0.883], "solar_rango": 0.996, "rampa_murete": 0.622}, "terrazas_vacias": [], "huecos": [["pueblo_subida_ladera", 0, 694.505, 761.365, 59.82], ["pueblo_subida_ladera", 0, 810.
+[urbanismo] TOTAL casas 194 (objetivo >= 190) | huecos > 12 m entre solares de una fila: 506 m (objetivo < 300) | terrazas vacias: 0
+construir_pista exit 0 (6 s)
+integrar_escena exit 0 (60 s)
+ERRORES: ninguno
+revisar_flotantes exit 0 (4 s)
+revisar_invasores exit 0 (6 s)
+eliminar_sumergidos exit 0 (3 s)
+revisar_coches exit 0 (3 s)
+revisar_tunel exit 0 (2 s)
+asentar_objetos exit 0 (4 s)
+revisar_urbanismo exit 0
+mejorar_materiales exit 0
+aplicar_texturas exit 0
+plot exit 0
+congelada: _rev/escena_rev.blend
+AUDITORIA {"arbol_calle": 2, "arbol_camino": 1, "prop_camino": 1, "camino_sin_destino": 7, "casa_flotante": 1, "objeto_salto_grande": 4, "losa_volada": 5, "losa_tambor": 2}
+[integrar] urbanismo: 194 casas (127 variantes), 14 plazoletas, 2 plazas, 73 calles/tramos, 62 muros, 12 escaleras, 7 rampas, 22 vallas, 10 salidas
+[integrar] casino: roca_casino base z=120 -> meseta z=132 (radio 60), bajada 1350 m (pend. max 10.0%, 2 horquillas), 0 objetos retirados
+[integrar] tunel: entrada en s=404, salida en s=540 (136 m de galeria)
+[integrar] roca del lazo (roca_lazo): checks ok=True, cumbre z=108, 16 casas, 0 objetos retirados de debajo
+[integrar] edicolas: 9 plazuelas con capillita al final de calles/salidas sin destino
+[integrar] OK zona_edicolas
+[integrar] despeje final: 108 ejes de calle/camino, 203 edificios; quitados 138 arboles y 39 props, 1 carteles apartados
+ERRORES: ninguno
+PIPELINE_RC=0

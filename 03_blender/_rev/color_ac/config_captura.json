@@ -1,0 +1,59 @@
+{
+ "ambiente": 4.4,
+ "brillo": 0.5,
+ "distancia_bruma": 400.0,
+ "saturacion": 1.0,
+ "bruma": [
+  9.3314,
+  9.9064,
+  10.4245
+ ],
+ "coste": 1.452,
+ "exposicion": 0.1,
+ "captura": {
+  "lum_media": 182.884,
+  "saturacion_media": 0.084,
+  "asfalto": [
+   155.7,
+   154.0,
+   156.9
+  ],
+  "cielo": [
+   215.5,
+   220.9,
+   225.1
+  ],
+  "contraste_lum_std": 34.283
+ },
+ "modelo_antes": {
+  "lum_media": 176.953,
+  "saturacion_media": 0.072,
+  "asfalto": [
+   156.4,
+   155.1,
+   158.6
+  ],
+  "cielo": [
+   209.4,
+   216.6,
+   216.8
+  ],
+  "contraste_lum_std": 30.268
+ },
+ "modelo_antes_brillo_1": {
+  "lum_media": 236.457,
+  "saturacion_media": 0.031,
+  "asfalto": [
+   229.9,
+   229.2,
+   231.2
+  ],
+  "cielo": [
+   249.9,
+   251.6,
+   251.3
+  ],
+  "contraste_lum_std": 15.582
+ },
+ "nota": "Estimacion: 4 parametros (ambiente, brillo, distancia de bruma, saturacion; el color de la bruma sale del cielo) ajustados a las cifras de UNA captura (version del 02/10). No es un dato de la configuracion real del amigo; sirve para ver como quedaria el DESPUES con algo parecido."
+}

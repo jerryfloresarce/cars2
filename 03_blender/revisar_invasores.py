@@ -2,13 +2,14 @@
 # linea central a RESOLUCION COMPLETA, sin muestreo) y asienta la vegetacion
 # que quede visiblemente flotando en laderas. Guarda el blend.
 import json
+import os
 import math
 
 import bpy
 from mathutils import Vector
 
 BASE = r'E:\Escritorio\claude-pc\arnau-aseto-corsa'
-G = json.load(open(BASE + r'\03_blender\geometria_3d.json', encoding='utf-8'))
+G = json.load(open(os.environ.get('GEOM', BASE + r'\03_blender\geometria_3d.json'), encoding='utf-8'))
 bpy.ops.wm.open_mainfile(filepath=BASE + r'\03_blender\porto_corsa.blend')
 
 S = G['muestras']
@@ -16,6 +17,12 @@ N = G['n']
 PIT = G.get('pit_lane') or []
 
 T = G['terreno']
+_ter_m = bpy.data.objects.get('TERRENO')   # ronda 15: cota real = malla (explanadas del integrador)
+if _ter_m is not None and _ter_m.type == 'MESH' and len(_ter_m.data.vertices) == T['nx'] * T['ny']:
+    _co = [0.0] * (3 * len(_ter_m.data.vertices))
+    _ter_m.data.vertices.foreach_get('co', _co)
+    T = dict(T)
+    T['z'] = _co[2::3]
 def z_terreno(x, y):
     fx = (x - T['x0']) / T['cell']
     fy = (y - T['y0']) / T['cell']
@@ -25,8 +32,13 @@ def z_terreno(x, y):
     ty = min(max(fy - j0, 0), 1)
     def zz(i, j):
         return T['z'][j * T['nx'] + i]
-    return ((zz(i0, j0) * (1 - tx) + zz(i0 + 1, j0) * tx) * (1 - ty)
-            + (zz(i0, j0 + 1) * (1 - tx) + zz(i0 + 1, j0 + 1) * tx) * ty)
+    # (v1 inspectores: la cota que SE VE. El render y el exportador -loop_triangles- parten cada
+    # quad (a, a+1, a+nx+1, a+nx) del TERRENO por la diagonal a -> a+nx+1; la bilineal se
+    # separaba de esa superficie en los quads no planos de las laderas)
+    z00, z10, z01, z11 = zz(i0, j0), zz(i0 + 1, j0), zz(i0, j0 + 1), zz(i0 + 1, j0 + 1)
+    if tx >= ty:
+        return z00 + (z10 - z00) * tx + (z11 - z10) * ty
+    return z00 + (z01 - z00) * ty + (z11 - z01) * tx
 
 # celdas espaciales para consultar distancia a la pista rapido
 CELDA = 40.0
@@ -61,6 +73,29 @@ REGLAS = [('VEG_', 2.0), ('OLI_', 2.0), ('CASAS_', 2.5), ('COCHE_', 1.5), ('CAMA
           ('PENON', 4.0), ('MONTANA', 4.0), ('ACUEDUCTO', -3.0)]
 # (ACUEDUCTO margen negativo: puede acercarse, sus arcos salvan la via)
 
+def huella_puntos(ob, paso=2.0):
+    """Puntos (x, y) de la HUELLA real: contorno inferior de la caja de cada malla
+    (en su orientacion) muestreado cada `paso` m, mas el centro."""
+    pts = []
+    for hijo in [ob] + ob.children_recursive:
+        if hijo.type != 'MESH':
+            continue
+        bb = [hijo.matrix_world @ Vector(c) for c in hijo.bound_box]
+        esq = [bb[0], bb[3], bb[7], bb[4]]          # cara z minima (orden de bound_box)
+        for k in range(4):
+            a, b = esq[k], esq[(k + 1) % 4]
+            l_ = math.hypot(b.x - a.x, b.y - a.y)
+            n_ = max(1, int(l_ / paso))
+            for j in range(n_):
+                f = j / float(n_)
+                pts.append((a.x + (b.x - a.x) * f, a.y + (b.y - a.y) * f))
+        pts.append((sum(p.x for p in esq) / 4.0, sum(p.y for p in esq) / 4.0))
+    return pts
+
+# RONDA 15: las rocas construidas en coordenadas de mundo (raiz en el origen) y que por
+# diseno TOCAN la pista (roca del lazo, penon del casino) traen sus propias comprobaciones
+EXCLUIR = ('VEG_penon', 'PENON_puente', 'PENON_cara')
+
 borrados = []
 asentados = 0
 for ob in list(bpy.context.scene.collection.objects):
@@ -71,9 +106,21 @@ for ob in list(bpy.context.scene.collection.objects):
         continue
     nombre = ob.name
     regla = next((m for pref, m in REGLAS if nombre.startswith(pref)), None)
-    if regla is None or nombre.startswith('VEG_penon'):   # (los arboles de las rocas-pueblo van en sus repisas)
+    if regla is None or nombre.startswith(EXCLUIR):   # (los arboles de las rocas-pueblo van en sus repisas)
         continue
     if any(c.name == 'LIB' for c in ob.users_collection):
+        continue
+    if nombre.startswith('CASAS_'):
+        # RONDA 15: casas del plan urbano con la fachada a 7 m del asfalto: se mide la
+        # HUELLA (no el pivote + radio, que borraba toda la primera terraza)
+        pts_h = huella_puntos(ob)
+        d_h = min((dist_a_pista(px, py)[0] - dist_a_pista(px, py)[1] / 2.0) for (px, py) in pts_h) if pts_h else 1e9
+        d_p = min(dist_a_pit(px, py) for (px, py) in pts_h[::3]) if (pts_h and PIT) else 1e9
+        if d_h < regla or d_p < 5.5:
+            for ch in list(ob.children_recursive):
+                bpy.data.objects.remove(ch, do_unlink=True)
+            bpy.data.objects.remove(ob, do_unlink=True)
+            borrados.append('%s (huella a %.1f m del asfalto, %.1f del pit)' % (nombre, d_h, d_p))
         continue
     x, y = ob.location.x, ob.location.y
     d, w_cerca = dist_a_pista(x, y)
@@ -111,7 +158,7 @@ for ob in list(bpy.context.scene.collection.objects):
             asentados += 1
 
 print('INVASORES BORRADOS: %d | vegetacion asentada: %d' % (len(borrados), asentados))
-for b in borrados[:25]:
+for b in borrados:
     print(' -', b)
 bpy.ops.wm.save_as_mainfile(filepath=BASE + r'\03_blender\porto_corsa.blend')
 print('blend guardado')

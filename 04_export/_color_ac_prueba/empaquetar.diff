@@ -1,0 +1,17 @@
+--- a/04_export/empaquetar.py
++++ b/04_export/empaquetar.py
+@@ -286,6 +286,14 @@
+         if fn.endswith('.png') and not fn.startswith('mosaico'):
+             shutil.copy2(os.path.join(texdir, fn), dst)
+ 
++# ---------- extension/ext_config.ini (Custom Shaders Patch) ----------
++# se copia TAL CUAL 04_export/extension/ext_config.ini (se puede editar a mano; color_ac solo lo genera si no
++# existe) a content/tracks/porto_corsa/extension/, donde lo busca CSP (sin CSP la carpeta se ignora)
++import sys  # noqa: E402
++sys.path.insert(0, os.path.join(BASE, '04_export'))
++import color_ac  # noqa: E402
++print('ext_config.ini (CSP) ->', color_ac.copiar_ext_config(TRACK))
++
+ # instrucciones al zip
+ ins = BASE + r'\04_export\INSTRUCCIONES.md'
+ if os.path.exists(ins):

@@ -20,11 +20,15 @@ import bpy
 from mathutils import Vector
 
 BASE = r'E:\Escritorio\claude-pc\arnau-aseto-corsa'
-G = json.load(open(BASE + r'\03_blender\geometria_3d.json', encoding='utf-8'))
+# fisica: env BLEND = escena integrada a abrir, SALIDA = .blend de export a guardar, GEOM = geometria de esa
+# escena (pruebas sobre copias en 04_export/_fisica sin tocar porto_corsa.blend)
+BLEND_IN = os.environ.get('BLEND') or BASE + r'\03_blender\porto_corsa.blend'
+BLEND_OUT = os.environ.get('SALIDA') or BASE + r'\04_export\porto_corsa_export.blend'
+G = json.load(open(os.environ.get('GEOM') or BASE + r'\03_blender\geometria_3d.json', encoding='utf-8'))
 OUT_FBX = BASE + r'\04_export\fbx\porto_corsa.fbx'
 os.makedirs(os.path.dirname(OUT_FBX), exist_ok=True)
 
-bpy.ops.wm.open_mainfile(filepath=BASE + r'\03_blender\porto_corsa.blend')
+bpy.ops.wm.open_mainfile(filepath=BLEND_IN)
 sc = bpy.context.scene
 S = G['muestras']
 N = G['n']
@@ -84,20 +88,157 @@ for ob in list(bpy.data.objects):
         ob.name = '1WALL_' + ob.name.lower()
     elif ob.name.startswith('MIRADOR_paseo'):
         ob.name = '1WALL_mirador_paseo'        # el paseo y su pretil son solidos
+    elif ob.name.startswith(('MIRADOR_pasarela', 'MIRADOR_parking_cubierta')):
+        ob.name = '1ROAD_' + ob.name.lower()   # v1 integrador (F-04): pasarela del paseo a la azotea-parking
     elif ob.name.startswith('GUARDARRAIL'):
         ob.name = '1WALL_' + ob.name.lower()   # el guardarrail de acero es colisionable
+    # v2 integrador (H2-2/H2-4): el pretil (balaustrada) del viaducto era decorado: el coche lo atravesaba y
+    # caia al mar. Solo el pretil (no VIADUCTO_tramo_cuerpo: losa plana bajo el 1ROAD y ~150k tris de arcos)
+    # y las pilastras que cierran los huecos de las puertas de la roca del lazo
+    elif ob.name.startswith(('VIADUCTO_tramo_balaustrada', 'VIADUCTO_pilastra')):
+        ob.name = '1WALL_' + ob.name.lower()
+    # v2 integrador (B-N1): el suelo de piedra del tunel no tenia fisica (el coche rodaba sobre hierba
+    # 0.4-0.6 m por debajo de lo que se ve); sigue en SUELO por el prefijo 1ROAD
+    elif ob.name.startswith('TUNEL_suelo'):
+        ob.name = '1ROAD_' + ob.name.lower()
+    # v2 integrador (A-r2-03): el dique-tapacubos del puerto (paseo, morros y paredes) es solido y transitable
+    # al final de la escollera (antes el coche caia al agua al pasar de CAMINO_muelle al dique)
+    elif ob.name.startswith('PUERTO_dique_malla') and ob.type == 'MESH':
+        ob.name = '1ROAD_' + ob.name.lower()
+    # ronda 15 (v1 integrador, N2): el muro+valla blanco de la recta y del resto del circuito es la
+    # unica barrera del lado del mar: antes salia como decorado y el coche lo atravesaba. El portico
+    # de meta, la pasarela y las torres de control (ya fuera del pit lane y de la pista) tambien
+    elif ob.name.startswith(('CARRERA_muro', 'CARRERA_portico_estructura', 'PIT_pasarela_cuerpo', 'PIT_torre_cuerpo',
+                             'CARRERA_paca_tierra', 'CARRERA_tribuna_estructura', 'PIT_amortiguador',
+                             # fisica: barreras que se veian pero eran decorado (revisar_fisica_ac.py, 1b): vallas
+                             # publicitarias (y sus rotulos), TODAS las pacas, zocalo del portico, patas de las
+                             # pantallas, muro de arcadas del mirador, isleta de la rotonda Loews, balaustrada de la
+                             # escalinata del casino y muros de los bancales
+                             'CARRERA_valla', 'CARRERA_paca', 'CARRERA_portico_zocalo', 'CARRERA_pantalla_estructura',
+                             'MIRADOR_muro', 'LOEWS_tambor', 'LOEWS_rotonda', 'CASINO_escalinata_balaustrada',
+                             'ITAL_bancal_muro')):
+        # (CARRERA_paca_tierra: pacas de las curvas de tierra y filas continuas sobre los terraplenes)
+        # v2 integrador (A-r2-02): la estructura de las tribunas es solida (el coche atravesaba la grada interior);
+        # PIT_amortiguador: neumaticos delante del morro del muro de boxes (N1)
+        ob.name = '1WALL_' + ob.name.lower()
     # ronda 13: red de caminos ("mini ciudad funcional"): calzadas transitables, vallas y
     # muros solidos; los carteles no colisionan
     elif ob.name.startswith(('CAMINO_valla', 'CAMINO_muro', 'CAMINO_puente', 'CAMINO_terraplen')):
         ob.name = '1WALL_' + ob.name.lower()
     elif ob.name.startswith('CAMINO_tierra'):
         ob.name = '1DIRT_' + ob.name.lower()
-    elif ob.name.startswith(('CAMINO_asfalto', 'CAMINO_adoquin', 'CAMINO_muelle', 'CAMINO_marcas')):
+    # ronda 15 (v1 integrador, D4/N1): las calles del PLAN URBANO (urbanismo_escena.camino3d las llama
+    # CAMINO_calle/enlace/travesia/rampa/union) tambien son calzada: sin esto la mini ciudad no se
+    # podia recorrer en AC (el coche rodaba sobre 1GRASS_terreno bajo la calle visual)
+    elif ob.name.startswith(('CAMINO_asfalto', 'CAMINO_adoquin', 'CAMINO_muelle', 'CAMINO_marcas',
+                             'CAMINO_calle', 'CAMINO_enlace', 'CAMINO_travesia', 'CAMINO_rampa', 'CAMINO_union')):
         ob.name = '1ROAD_' + ob.name.lower()
+    elif ob.name.startswith('ACERA_'):
+        ob.name = '1ROAD_' + ob.name.lower()   # acera transitable (en las terrazas, +0.5 sobre la pista)
+    elif ob.name.startswith('BORDILLO_') and ob.type == 'MESH':
+        # el bordillo ALTO de las terrazas es una faja vertical de 0.55 m (muro); el bajo, un bordillo
+        _ver = sum(1 for f in ob.data.polygons if abs(f.normal.z) < 0.5)
+        ob.name = ('1WALL_' if _ver > 0.5 * max(1, len(ob.data.polygons)) else '1KERB_') + ob.name.lower()
     elif ob.name.startswith('PPUEBLO_carretera') or ob.name.startswith('PPUEBLO_plaza'):
         ob.name = '1ROAD_' + ob.name.lower()   # carreteras en espiral de las rocas-pueblo
     elif ob.name.startswith(('PPUEBLO_roca', 'PPUEBLO_muro', 'PPUEBLO_escaleras')):
         ob.name = '1WALL_' + ob.name.lower()
+    # ronda 15: rocas naturales (roca_lazo / roca_casino), su carretera de bajada, escaleras,
+    # plazas y rampas del plan urbano, McLaren de piedra (el tunel va taladrado en el)
+    elif ob.name.startswith(('PENON_carretera', 'PENON_plazas', 'CALLE_plaza')):
+        ob.name = '1ROAD_' + ob.name.lower()
+    elif ob.name.startswith(('TUNEL_acantilado', 'TUNEL_portal')):
+        ob.name = '1WALL_' + ob.name.lower()   # la montana-coche con el tunel taladrado: el coche no la atraviesa
+    elif ob.name.startswith(('PENON_puente_roca', 'PENON_puente_muros', 'PENON_puente_escaleras', 'PENON_puente_plaza',
+                             'PENON_puente_muelle', 'PENON_puente_vallas', 'PENON_roca', 'PENON_parapeto', 'PENON_escaleras',
+                             'PENON_balaustrada', 'CAMINO_escalera', 'CAMINO_muro_rampa')):
+        ob.name = '1WALL_' + ob.name.lower()
+    # fisica (revisar_fisica_ac.py, 'visibles ante el cierre'): mobiliario solido en aceras y escapatorias, entre el
+    # borde y el muro de cierre invisible: farolas, postes de guirnaldas, maceteros, zocalos de las casas y postes de
+    # los carteles de los caminos. Siendo decorado el coche los atravesaba y se paraba contra un muro que no se ve
+    elif ob.name.startswith(('CALLE_farola', 'CALLE_poste_guirnalda', 'CALLE_maceta', 'CASAS_zocalo',
+                             'CAMINO_cartel_cuerpo')) and ob.type == 'MESH':
+        ob.name = '1WALL_' + ob.name.lower()
+
+# --- ronda 15 (v1 integrador): ninguna superficie fisica SECUNDARIA dentro del asfalto. Las bocas de
+# los caminos y los enlaces del plan llegan al borde de la pista (y alguna tapa o 'cuna' entraba hasta
+# 2.4 m en la calzada, G2/F-02): ahora que son 1ROAD_/1WALL_ serian escalones y muros reales sobre la
+# pista. Se borran sus caras con algun vertice > 0.15 m dentro del asfalto y a menos de 1.2 m de la cota
+# de la calzada (los puentes y caminos a otra cota no se tocan). ---
+from mathutils import kdtree as _kdt
+_kd = _kdt.KDTree(N)
+for _i, _q in enumerate(S):
+    _kd.insert((_q['x'], _q['y'], 0.0), _i)
+_kd.balance()
+_lib0 = bpy.data.collections.get('LIB')
+_en_lib0 = set(o.name for o in _lib0.all_objects) if _lib0 else set()
+
+def _dentro_asfalto(w):
+    _co, _i, _d = _kd.find((w.x, w.y, 0.0))
+    q = S[_i]
+    dx, dy = w.x - q['x'], w.y - q['y']
+    u = dx * q['nx'] + dy * q['ny']
+    if abs(dx * q['ny'] - dy * q['nx']) > 1.6 or abs(u) > q['w'] / 2 - 0.15:
+        return False
+    return abs(w.z - (q['z'] - q['lat'] * u)) < 1.2
+
+_n_rec = 0
+for ob in [o for o in bpy.data.objects if o.type == 'MESH' and o.name not in _en_lib0
+           and o.name.startswith(('1ROAD_camino_', '1ROAD_calle_', '1WALL_camino_', '1DIRT_camino_'))]:
+    mw = ob.matrix_world
+    malas = [f.index for f in ob.data.polygons if any(_dentro_asfalto(mw @ ob.data.vertices[v].co) for v in f.vertices)]
+    if not malas:
+        continue
+    if ob.data.users > 1:
+        ob.data = ob.data.copy()
+    bm = bmesh.new()
+    bm.from_mesh(ob.data)
+    bm.faces.ensure_lookup_table()
+    bmesh.ops.delete(bm, geom=[bm.faces[i] for i in malas], context='FACES')
+    bm.to_mesh(ob.data)
+    bm.free()
+    _n_rec += len(malas)
+print('recorte: %d caras de caminos/calles/muros secundarios dentro del asfalto borradas' % _n_rec)
+
+# --- ronda 15 (v1 integrador, D4): las casas no se podian atravesar en el juego solo si su malla era
+# fisica. En vez de convertir la malla visual (5000 tris por casa) se crea una CAJA 1WALL_ por edificio,
+# metida 0.45-0.6 m dentro de los muros (no se ve: el vidrio va rehundido 6 cm y es opaco), de la base
+# a +4 m. Casas: pivote en el centro de la fachada (y=0, cuerpo hacia -Y); civicos: cuerpo centrado. ---
+_m_col = bpy.data.materials.get('MAT_zocalo_piedra') or bpy.data.materials.new('MAT_colision')
+_cajas_vs, _cajas_fs = [], []
+
+def _caja_colision(mw, x0, x1, y0, y1, z0, z1):
+    if x1 - x0 < 1.0 or y1 - y0 < 1.0:
+        return
+    o = len(_cajas_vs)
+    for (a, b) in ((x0, y0), (x1, y0), (x1, y1), (x0, y1)):
+        _cajas_vs.append(tuple(mw @ Vector((a, b, z0))))
+    for (a, b) in ((x0, y0), (x1, y0), (x1, y1), (x0, y1)):
+        _cajas_vs.append(tuple(mw @ Vector((a, b, z1))))
+    _cajas_fs.extend([(o, o + 3, o + 2, o + 1), (o + 4, o + 5, o + 6, o + 7)] +
+                     [(o + k, o + (k + 1) % 4, o + 4 + (k + 1) % 4, o + 4 + k) for k in range(4)])
+
+for ob in bpy.data.objects:
+    if ob.name in _en_lib0:
+        continue
+    if ob.type == 'MESH' and ob.name.startswith(('CASAS_casa', 'CASAS_lazo')):
+        xs = [c[0] for c in ob.bound_box]
+        ys = [c[1] for c in ob.bound_box]
+        if max(ys) > 2.0 or min(ys) > -3.0:
+            continue                      # no sigue la convencion de casa (fachada en y=0)
+        esc = ob.scale.z or 1.0
+        _caja_colision(ob.matrix_world, min(xs) + 0.6, max(xs) - 0.6, min(ys) + 0.6, -0.45, -1.0 / esc, 4.0 / esc)
+    elif ob.type == 'EMPTY' and ob.parent is None and ob.name.startswith(('AYTO_root', 'CAMPANILE_root', 'HOTEL_root')):
+        # medidas del cuerpo macizo en edificios_civicos_v2 (22x13 / fuste 4.2 / 42x22 + pabellones 11x24)
+        hx, hy = {'AYTO': (10.7, 6.2), 'CAMP': (1.9, 1.9), 'HOTE': (29.5, 10.5)}[ob.name[:4]]
+        _caja_colision(ob.matrix_world, -hx, hx, -hy, hy, -1.0, 4.0)
+if _cajas_fs:
+    _me_c = bpy.data.meshes.new('1WALL_casas_colision')
+    _me_c.from_pydata(_cajas_vs, [], _cajas_fs)
+    _me_c.materials.append(_m_col)
+    _me_c.update()
+    sc.collection.objects.link(bpy.data.objects.new('1WALL_casas_colision', _me_c))
+print('colision de edificios: %d cajas 1WALL_' % (len(_cajas_fs) // 6))
 
 # --- garajes: los coches arrancan DENTRO (AC_PIT_*), asi que el suelo y el edificio tienen que ser
 # FISICOS. El suelo de los boxes (material MAT_PIT_suelo_box, 1 cara a z=2,74) pasa a 1PIT_boxes_suelo
@@ -255,6 +396,17 @@ puerta_tiempo('AC_TIME_2', 3540.0)   # sector casino
 p = frame(L - 35)
 mini_mesh('AC_HOTLAP_START_0', (p['x'], p['y'], p['z'] + ALTURA_AC), rot_ac(heading(L - 35)))
 
+# --- fisica (cierre_ac.py), con todo ya renombrado: muros de cierre INVISIBLES a los dos lados de la pista (no se
+# puede salir del circuito), barreras 1WALL_ visibles por las dos caras (o giradas si estaban al reves), terreno que
+# no asoma sobre el asfalto, cuna pista-pit lane sin escalones y rampa de garajes en S ---
+import sys as _sys
+_sys.path.insert(0, os.path.join(BASE, '04_export'))
+import cierre_ac  # noqa: E402
+if os.environ.get('CIERRE', '1') != '0':      # CIERRE=0: export de referencia SIN cierre_ac (informe 'antes')
+    cierre_ac.construir(G, print)
+else:
+    print('fisica: CIERRE=0 -> cierre_ac.construir NO se ejecuta (export de referencia)')
+
 # --- normales hacia ARRIBA en todo lo que es suelo (AC descarta las caras de espaldas):
 # las cintas de marcas, aceras y bordillos se generan con el orden izquierda->derecha
 # y salian mirando hacia abajo: invisibles dentro del juego ---
@@ -291,7 +443,7 @@ for ob in list(bpy.data.objects):
 # version de la escena de export: 2 = orientaciones y alturas AC definitivas, garajes fisicos, 1PIT_.
 # kn5_writer.py lee esta marca y solo aplica su antiguo giro de 180 grados a escenas v1.
 sc['porto_corsa_export_v'] = 2
-bpy.ops.wm.save_as_mainfile(filepath=BASE + r'\04_export\porto_corsa_export.blend')
+bpy.ops.wm.save_as_mainfile(filepath=BLEND_OUT)
 n_obj = sum(1 for o in bpy.data.objects if o.type == 'MESH')
 print('OK blend de export v2 guardado; mallas:', n_obj)
 

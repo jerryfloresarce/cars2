@@ -1,0 +1,106 @@
+{
+  "_doc": [
+    "PALETA UNICA de la fase visual de Porto Corsa (FASE_VISUAL_PLAN.md decision 0.5 y bloque 0 punto 7; plan A B0.4).",
+    "Cada color lleva: rgb = RGB LINEAL 0..1 (lo que se pone en diffuse_color / Base Color de Blender),",
+    "srgb_hex = el mismo color en sRGB 8 bits (para texturas PIL y para hablar con el usuario),",
+    "familia_ac = familia de 04_export/color_ac.py FAMILIAS (ks* y techo de textura en AC), uso = donde se aplica.",
+    "REGLA DEL PLAN: diffuse_color o Base Color SIN ENLAZAR = la media lineal que se quiere ver; es lo unico que lee",
+    "04_export/kn5_writer_opt.py (analizar_material l.215-258). Lo procedural (rampas, mix, atributos) es solo preview.",
+    "Se consume con 03_blender/paleta.py: cargar(), rgb(nombre), rgba(nombre), srgb(nombre), srgb_hex(nombre), familia_ac(nombre).",
+    "Pendiente de validar por el usuario con renders/qa/carta_color.png (pregunta 15 del plan). Version 1: valores de partida",
+    "del plan A, con tres ajustes propios: terracota mas tierra y menos salmon, tierra algo mas oscura, mar_profundo mas oscuro."
+  ],
+  "version": 1,
+  "fecha": "2026-10-04",
+  "espacio": "rgb lineal (Blender) / srgb_hex 8 bits",
+  "colores": {
+    "oliva_oscuro": {
+      "rgb": [0.16, 0.20, 0.08],
+      "srgb_hex": "#6F7C50",
+      "familia_ac": "vegetacion",
+      "uso": "matorral y pinar: copas de pino, encina y arbustos (vegetacion_kit_v3), canal R (matorral) de la mascara del terreno, tile matorral_d.png"
+    },
+    "salvia": {
+      "rgb": [0.30, 0.36, 0.22],
+      "srgb_hex": "#95A281",
+      "familia_ac": "vegetacion",
+      "uso": "olivos, matorral claro, variacion de las copas (+-15 % de luminancia), reverso del tile matorral_d.png"
+    },
+    "hierba_seca": {
+      "rgb": [0.55, 0.45, 0.20],
+      "srgb_hex": "#C4B37C",
+      "familia_ac": "terreno",
+      "uso": "hierba dorada de verano: diffuse_color de MAT_terreno (zona dominante junto a la pista), MAT_arcen, canal G de la mascara, tile hierba_seca_d.png"
+    },
+    "caliza_ocre": {
+      "rgb": [0.46, 0.37, 0.24],
+      "srgb_hex": "#B5A486",
+      "familia_ac": "roca",
+      "uso": "caliza calida al sol: roca del terreno (ROCA_rampa), kits roca_lazo / roca_casino / penon_cara / montana_mclaren / montanas_fondo_v2, canal A (roca) de la mascara, tile piedra_d.png"
+    },
+    "caliza_gris_calido": {
+      "rgb": [0.34, 0.31, 0.26],
+      "srgb_hex": "#9E978B",
+      "familia_ac": "roca",
+      "uso": "caliza en semisombra y estratos: mixr.inputs[7] del terreno, muros de contencion, acera y bordillo de piedra, escolleras"
+    },
+    "caliza_sombra": {
+      "rgb": [0.25, 0.20, 0.14],
+      "srgb_hex": "#897C69",
+      "familia_ac": "roca",
+      "uso": "juntas, grietas, huecos del McLaren y pie de los acantilados (AO pintada en el diffuse de las rocas)"
+    },
+    "terracota": {
+      "rgb": [0.45, 0.145, 0.072],
+      "srgb_hex": "#B36A4C",
+      "familia_ac": "edificio",
+      "uso": "tejas (COL_TEJA de casas_kit_v2 y tile teja_d.png), macetas, adoquin rojizo del pueblo"
+    },
+    "cesped_jardin": {
+      "rgb": [0.22, 0.42, 0.12],
+      "srgb_hex": "#81AD61",
+      "familia_ac": "terreno",
+      "uso": "SOLO jardines, parterres y rotondas (MAT_cesped: horquilla Loews, casino, plazoletas): el unico material que lista GrassFX"
+    },
+    "tierra": {
+      "rgb": [0.52, 0.37, 0.20],
+      "srgb_hex": "#BFA47C",
+      "familia_ac": "terreno",
+      "uso": "tramo de tierra (MAT_tierra, 1DIRT_), desmontes y pie de taludes, canal B (tierra) de la mascara, tile tierra_d.png"
+    },
+    "arena": {
+      "rgb": [0.78, 0.72, 0.55],
+      "srgb_hex": "#E5DDC4",
+      "familia_ac": "terreno",
+      "uso": "playa y cala del penon, fondo marino somero (AGUA_fondo cerca de la orilla), escapatorias de grava"
+    },
+    "mar_orilla": {
+      "rgb": [0.25, 0.75, 0.72],
+      "srgb_hex": "#89E1DD",
+      "familia_ac": "agua",
+      "uso": "mar turquesa de la orilla (gradiente de batimetria, bloque 6): color del agua a < 15 m de profundidad"
+    },
+    "mar_profundo": {
+      "rgb": [0.006, 0.11, 0.30],
+      "srgb_hex": "#125D95",
+      "familia_ac": "agua",
+      "uso": "mar adentro y fondo del gradiente de batimetria; horizonte marino del anillo de fondo"
+    }
+  },
+  "fachadas_actual": {
+    "_doc": "Lo que pinta HOY casas_kit_v2.PALETA_FACHADA (l.87): sRGB de entrada y lineal real (gamma 2.2 de _srgb). Solo para la carta de color; no se consume.",
+    "ocre":     {"srgb_in": [0.85, 0.56, 0.18], "rgb": [0.6994, 0.2793, 0.0230], "srgb_hex": "#DA902A"},
+    "salmon":   {"srgb_in": [0.91, 0.48, 0.35], "rgb": [0.8126, 0.1989, 0.0993], "srgb_hex": "#E97B59"},
+    "amarillo": {"srgb_in": [0.95, 0.76, 0.22], "rgb": [0.8933, 0.5468, 0.0358], "srgb_hex": "#F3C335"},
+    "crema":    {"srgb_in": [0.94, 0.83, 0.55], "rgb": [0.8727, 0.6637, 0.2684], "srgb_hex": "#F0D58D"},
+    "rosa":     {"srgb_in": [0.90, 0.49, 0.46], "rgb": [0.7931, 0.2082, 0.1812], "srgb_hex": "#E67E76"}
+  },
+  "fachadas_propuesta": {
+    "_doc": "Propuesta Riviera (Portofino / Cars 2) para casas_kit_v2.PALETA_FACHADA en el bloque 3: menos saturacion y menos naranja que la actual, estuco envejecido. rgb lineal exacto (sRGB -> lineal). Pendiente de validar en la carta.",
+    "ocre_portofino":   {"rgb": [0.6739, 0.2957, 0.0509], "srgb_hex": "#D69440", "familia_ac": "edificio", "uso": "fachada ocre dorado, la mas frecuente"},
+    "rosa_antico":      {"rgb": [0.7106, 0.2633, 0.1873], "srgb_hex": "#DB8C78", "familia_ac": "edificio", "uso": "fachada rosa antiguo (sustituye a salmon y rosa)"},
+    "amarillo_napoles": {"rgb": [0.8900, 0.6038, 0.1473], "srgb_hex": "#F2CC6B", "familia_ac": "edificio", "uso": "fachada amarillo napoles (sustituye a amarillo)"},
+    "rojo_pompeya":     {"rgb": [0.4770, 0.0890, 0.0470], "srgb_hex": "#B8543D", "familia_ac": "edificio", "uso": "fachada roja oscura, una de cada ocho casas; campanile"},
+    "blanco_roto":      {"rgb": [0.8481, 0.7678, 0.6038], "srgb_hex": "#EDE3CC", "familia_ac": "edificio", "uso": "fachada blanco roto (sustituye a crema), recercados y edificios civicos"}
+  }
+}

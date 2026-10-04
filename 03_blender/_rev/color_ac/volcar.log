@@ -1,0 +1,5 @@
+00:00.922  blend            | Read blend: "E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\escena_color.blend"
+OK materiales: 458 luz: {"motor": "BLENDER_EEVEE", "vista": "Standard", "look": "None", "exposicion": 0.11999999731779099, "gamma": 1.0, "soles": [{"nombre": "SOL", "tipo": "SUN", "energia": 4.599999904632568, "color": [1.0, 0.9599999785423279, 0.8799999952316284], "angulo": 0.05235987901687622, "rot": [0.593411922454834, 0.0, -2.4434609413146973], "dir": [0.35944226384162903, -0.42836660146713257, -0.829037606716156], "sombras": true}], "mundo": {"color": [0.05000000074505806, 0.05000000074505806, 0.05000000074505806], "fuerza": 1.0, "color_enlazado": true}, "eevee": {"use_shadows": true, "use_raytracing": true, "fast_gi_method": "GLOBAL_ILLUMINATION"}}
+Blender 5.1.2 (hash ec6e62d40fa9 built 2026-05-19 01:37:34)
+
+Blender quit

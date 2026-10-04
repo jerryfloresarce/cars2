@@ -1,0 +1,12 @@
+{
+ "fecha": "2026-10-04 15:18",
+ "origen": "pipeline_escena.sh",
+ "md5": "a6fb4195c32f20c41299b4b68cff46db",
+ "blend": "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/escena_candidata.blend",
+ "geometria": "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/geometria_candidata.json",
+ "urbanismo": "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/urbanismo_candidata.json",
+ "urbanismo_informe": "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/urbanismo_informe_candidata.json",
+ "asentar": "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/asentar_candidata.json",
+ "nada_en_pista": "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/nada_en_pista_candidata.json",
+ "logs": "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/logs_final"
+}

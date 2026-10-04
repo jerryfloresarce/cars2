@@ -1,0 +1,76 @@
+asfalto 0.6 {'ac': 14.5, 'lcs': 7.98, 'lcsy': 6.73, 'captura': 6.91, 'coste': 9.37}
+asfalto 0.7 {'ac': 14.5, 'lcs': 7.88, 'lcsy': 6.74, 'captura': 8.02, 'coste': 9.68}
+asfalto 0.75 {'ac': 14.55, 'lcs': 7.89, 'lcsy': 6.72, 'captura': 8.79, 'coste': 9.92}
+asfalto 0.8 {'ac': 14.58, 'lcs': 7.96, 'lcsy': 6.7, 'captura': 9.59, 'coste': 10.18}
+asfalto 0.9 {'ac': 14.63, 'lcs': 8.24, 'lcsy': 6.89, 'captura': 11.2, 'coste': 10.78}
+asfalto 1.0 {'ac': 14.72, 'lcs': 8.46, 'lcsy': 7.13, 'captura': 12.84, 'coste': 11.39}
+pintura_vial 0.6 {'ac': 12.85, 'lcs': 10.66, 'lcsy': 14.57, 'captura': 12.62, 'coste': 12.69}
+pintura_vial 0.7 {'ac': 11.89, 'lcs': 9.99, 'lcsy': 13.64, 'captura': 12.21, 'coste': 11.96}
+pintura_vial 0.75 {'ac': 11.48, 'lcs': 9.83, 'lcsy': 13.22, 'captura': 12.14, 'coste': 11.7}
+pintura_vial 0.8 {'ac': 11.24, 'lcs': 9.83, 'lcsy': 12.89, 'captura': 12.17, 'coste': 11.57}
+pintura_vial 0.9 {'ac': 10.75, 'lcs': 10.05, 'lcsy': 12.39, 'captura': 12.23, 'coste': 11.38}
+pintura_vial 1.0 {'ac': 10.86, 'lcs': 10.51, 'lcsy': 12.26, 'captura': 12.51, 'coste': 11.56}
+terreno 0.6 {'ac': 11.46, 'lcs': 14.41, 'lcsy': 17.92, 'captura': 24.53, 'coste': 17.26}
+terreno 0.7 {'ac': 11.07, 'lcs': 14.21, 'lcsy': 18.36, 'captura': 25.06, 'coste': 17.35}
+terreno 0.75 {'ac': 10.88, 'lcs': 14.18, 'lcsy': 18.6, 'captura': 25.34, 'coste': 17.42}
+terreno 0.8 {'ac': 10.69, 'lcs': 14.19, 'lcsy': 18.84, 'captura': 25.61, 'coste': 17.5}
+terreno 0.9 {'ac': 10.33, 'lcs': 14.3, 'lcsy': 19.32, 'captura': 26.11, 'coste': 17.66}
+terreno 1.0 {'ac': 10.0, 'lcs': 14.5, 'lcsy': 19.78, 'captura': 26.57, 'coste': 17.83}
+agua 0.6 {'ac': 7.49, 'lcs': 7.43, 'lcsy': 19.43, 'captura': 8.47, 'coste': 10.16}
+agua 0.7 {'ac': 7.53, 'lcs': 7.52, 'lcsy': 19.62, 'captura': 8.6, 'coste': 10.27}
+agua 0.75 {'ac': 7.57, 'lcs': 7.57, 'lcsy': 19.74, 'captura': 8.79, 'coste': 10.37}
+agua 0.8 {'ac': 7.61, 'lcs': 7.63, 'lcsy': 19.87, 'captura': 9.04, 'coste': 10.49}
+agua 0.9 {'ac': 7.68, 'lcs': 7.75, 'lcsy': 20.16, 'captura': 9.65, 'coste': 10.78}
+agua 1.0 {'ac': 7.73, 'lcs': 7.89, 'lcsy': 20.51, 'captura': 10.32, 'coste': 11.1}
+roca 0.6 {'ac': 19.24, 'lcs': 14.62, 'lcsy': 14.75, 'captura': 21.92, 'coste': 18.22}
+roca 0.7 {'ac': 16.98, 'lcs': 11.93, 'lcsy': 12.08, 'captura': 23.66, 'coste': 16.99}
+roca 0.75 {'ac': 15.43, 'lcs': 12.23, 'lcsy': 11.3, 'captura': 24.77, 'coste': 16.77}
+roca 0.8 {'ac': 14.12, 'lcs': 13.1, 'lcsy': 11.02, 'captura': 25.69, 'coste': 16.77}
+roca 0.9 {'ac': 13.58, 'lcs': 13.42, 'lcsy': 11.24, 'captura': 26.09, 'coste': 16.83}
+roca 1.0 {'ac': 13.46, 'lcs': 13.75, 'lcsy': 11.63, 'captura': 26.29, 'coste': 17.0}
+edificio 0.6 {'ac': 13.96, 'lcs': 15.07, 'lcsy': 19.8, 'captura': 15.9, 'coste': 15.93}
+edificio 0.7 {'ac': 12.6, 'lcs': 14.36, 'lcsy': 19.4, 'captura': 17.81, 'coste': 15.87}
+edificio 0.75 {'ac': 12.22, 'lcs': 14.23, 'lcsy': 19.6, 'captura': 18.3, 'coste': 15.92}
+edificio 0.8 {'ac': 11.76, 'lcs': 14.14, 'lcsy': 19.6, 'captura': 18.99, 'coste': 15.97}
+edificio 0.9 {'ac': 11.47, 'lcs': 14.19, 'lcsy': 19.97, 'captura': 19.73, 'coste': 16.19}
+edificio 1.0 {'ac': 11.58, 'lcs': 14.8, 'lcsy': 20.83, 'captura': 19.95, 'coste': 16.59}
+pintado 0.6 {'ac': 25.42, 'lcs': 17.11, 'lcsy': 18.76, 'captura': 17.6, 'coste': 20.08}
+pintado 0.7 {'ac': 21.89, 'lcs': 15.37, 'lcsy': 16.58, 'captura': 20.39, 'coste': 19.07}
+pintado 0.75 {'ac': 20.62, 'lcs': 14.99, 'lcsy': 15.88, 'captura': 21.15, 'coste': 18.7}
+pintado 0.8 {'ac': 19.27, 'lcs': 15.01, 'lcsy': 15.44, 'captura': 22.33, 'coste': 18.57}
+pintado 0.9 {'ac': 18.51, 'lcs': 15.92, 'lcsy': 15.59, 'captura': 22.75, 'coste': 18.68}
+pintado 1.0 {'ac': 17.5, 'lcs': 16.6, 'lcsy': 15.51, 'captura': 23.99, 'coste': 18.87}
+metal 0.6 {'ac': 21.62, 'lcs': 17.43, 'lcsy': 15.67, 'captura': 20.41, 'coste': 19.23}
+metal 0.7 {'ac': 19.76, 'lcs': 17.1, 'lcsy': 14.39, 'captura': 22.6, 'coste': 19.01}
+metal 0.75 {'ac': 19.31, 'lcs': 17.08, 'lcsy': 14.17, 'captura': 23.21, 'coste': 19.01}
+metal 0.8 {'ac': 18.89, 'lcs': 17.2, 'lcsy': 14.01, 'captura': 23.86, 'coste': 19.07}
+metal 0.9 {'ac': 17.54, 'lcs': 18.58, 'lcsy': 14.2, 'captura': 25.89, 'coste': 19.58}
+metal 1.0 {'ac': 18.44, 'lcs': 17.01, 'lcsy': 13.91, 'captura': 25.23, 'coste': 19.29}
+cristal 0.6 {'ac': 20.72, 'lcs': 20.11, 'lcsy': 18.91, 'captura': 21.15, 'coste': 20.36}
+cristal 0.7 {'ac': 19.51, 'lcs': 18.75, 'lcsy': 17.73, 'captura': 22.82, 'coste': 20.0}
+cristal 0.75 {'ac': 19.36, 'lcs': 18.88, 'lcsy': 17.82, 'captura': 23.16, 'coste': 20.1}
+cristal 0.8 {'ac': 18.87, 'lcs': 18.62, 'lcsy': 17.5, 'captura': 23.73, 'coste': 20.0}
+cristal 0.9 {'ac': 19.19, 'lcs': 19.0, 'lcsy': 18.03, 'captura': 23.82, 'coste': 20.31}
+cristal 1.0 {'ac': 19.14, 'lcs': 19.33, 'lcsy': 18.31, 'captura': 24.13, 'coste': 20.51}
+vegetacion 0.6 {'ac': 17.87, 'lcs': 20.28, 'lcsy': 18.86, 'captura': 26.42, 'coste': 21.12}
+vegetacion 0.7 {'ac': 16.29, 'lcs': 18.74, 'lcsy': 18.0, 'captura': 27.82, 'coste': 20.58}
+vegetacion 0.75 {'ac': 15.69, 'lcs': 18.31, 'lcsy': 17.78, 'captura': 28.35, 'coste': 20.43}
+vegetacion 0.8 {'ac': 15.26, 'lcs': 17.82, 'lcsy': 17.46, 'captura': 28.89, 'coste': 20.3}
+vegetacion 0.9 {'ac': 14.6, 'lcs': 17.64, 'lcsy': 17.88, 'captura': 29.46, 'coste': 20.32}
+vegetacion 1.0 {'ac': 14.17, 'lcs': 17.74, 'lcsy': 18.25, 'captura': 29.89, 'coste': 20.42}
+# ksAmbient/ksDiffuse por familia (ksDiffuse fijo, ksAmbient = ksDiffuse x cociente)
+
+deltaE Lab medio frente a Blender en los pixeles de cada familia (7 vistas de ajuste); coste = {'ac': 0.3, 'lcs': 0.2, 'lcsy': 0.2, 'captura': 0.3}. Generado por rejilla_familias.py.
+
+| familia | pixeles | ksA/ksD 0.60 (gamma/ACES/Yebis/amigo -> coste) | ksA/ksD 0.70 (gamma/ACES/Yebis/amigo -> coste) | ksA/ksD 0.75 (gamma/ACES/Yebis/amigo -> coste) | ksA/ksD 0.80 (gamma/ACES/Yebis/amigo -> coste) | ksA/ksD 0.90 (gamma/ACES/Yebis/amigo -> coste) | ksA/ksD 1.00 (gamma/ACES/Yebis/amigo -> coste) | mejor |
+|---|---|---|---|---|---|---|---|---|
+| asfalto | 211856 | 14.5/8.0/6.7/6.9 -> 9.37 | 14.5/7.9/6.7/8.0 -> 9.68 | 14.6/7.9/6.7/8.8 -> 9.92 | 14.6/8.0/6.7/9.6 -> 10.18 | 14.6/8.2/6.9/11.2 -> 10.78 | 14.7/8.5/7.1/12.8 -> 11.39 | 0.60 |
+| pintura_vial | 4122 | 12.8/10.7/14.6/12.6 -> 12.69 | 11.9/10.0/13.6/12.2 -> 11.96 | 11.5/9.8/13.2/12.1 -> 11.70 | 11.2/9.8/12.9/12.2 -> 11.57 | 10.8/10.1/12.4/12.2 -> 11.38 | 10.9/10.5/12.3/12.5 -> 11.56 | 0.90 |
+| terreno | 200255 | 11.5/14.4/17.9/24.5 -> 17.26 | 11.1/14.2/18.4/25.1 -> 17.35 | 10.9/14.2/18.6/25.3 -> 17.42 | 10.7/14.2/18.8/25.6 -> 17.50 | 10.3/14.3/19.3/26.1 -> 17.66 | 10.0/14.5/19.8/26.6 -> 17.83 | 0.60 |
+| agua | 4325 | 7.5/7.4/19.4/8.5 -> 10.16 | 7.5/7.5/19.6/8.6 -> 10.27 | 7.6/7.6/19.7/8.8 -> 10.37 | 7.6/7.6/19.9/9.0 -> 10.49 | 7.7/7.8/20.2/9.7 -> 10.78 | 7.7/7.9/20.5/10.3 -> 11.10 | 0.60 |
+| roca | 70729 | 19.2/14.6/14.8/21.9 -> 18.22 | 17.0/11.9/12.1/23.7 -> 16.99 | 15.4/12.2/11.3/24.8 -> 16.77 | 14.1/13.1/11.0/25.7 -> 16.77 | 13.6/13.4/11.2/26.1 -> 16.83 | 13.5/13.8/11.6/26.3 -> 17.00 | 0.75 |
+| edificio | 79894 | 14.0/15.1/19.8/15.9 -> 15.93 | 12.6/14.4/19.4/17.8 -> 15.87 | 12.2/14.2/19.6/18.3 -> 15.92 | 11.8/14.1/19.6/19.0 -> 15.97 | 11.5/14.2/20.0/19.7 -> 16.19 | 11.6/14.8/20.8/19.9 -> 16.59 | 0.70 |
+| pintado | 106033 | 25.4/17.1/18.8/17.6 -> 20.08 | 21.9/15.4/16.6/20.4 -> 19.07 | 20.6/15.0/15.9/21.1 -> 18.70 | 19.3/15.0/15.4/22.3 -> 18.57 | 18.5/15.9/15.6/22.8 -> 18.68 | 17.5/16.6/15.5/24.0 -> 18.87 | 0.80 |
+| metal | 23447 | 21.6/17.4/15.7/20.4 -> 19.23 | 19.8/17.1/14.4/22.6 -> 19.01 | 19.3/17.1/14.2/23.2 -> 19.01 | 18.9/17.2/14.0/23.9 -> 19.07 | 17.5/18.6/14.2/25.9 -> 19.58 | 18.4/17.0/13.9/25.2 -> 19.29 | 0.70 |
+| cristal | 11846 | 20.7/20.1/18.9/21.1 -> 20.36 | 19.5/18.8/17.7/22.8 -> 20.00 | 19.4/18.9/17.8/23.2 -> 20.10 | 18.9/18.6/17.5/23.7 -> 20.00 | 19.2/19.0/18.0/23.8 -> 20.31 | 19.1/19.3/18.3/24.1 -> 20.51 | 0.70 |
+| vegetacion | 9528 | 17.9/20.3/18.9/26.4 -> 21.12 | 16.3/18.7/18.0/27.8 -> 20.58 | 15.7/18.3/17.8/28.4 -> 20.43 | 15.3/17.8/17.5/28.9 -> 20.30 | 14.6/17.6/17.9/29.5 -> 20.32 | 14.2/17.7/18.2/29.9 -> 20.42 | 0.80 |

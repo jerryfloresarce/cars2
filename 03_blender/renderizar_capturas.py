@@ -8,7 +8,7 @@ import bpy
 from mathutils import Vector
 
 BASE = r'E:\Escritorio\claude-pc\arnau-aseto-corsa'
-G = json.load(open(BASE + r'\03_blender\geometria_3d.json', encoding='utf-8'))
+G = json.load(open(os.environ.get('GEOM', BASE + r'\03_blender\geometria_3d.json'), encoding='utf-8'))
 bpy.ops.wm.open_mainfile(filepath=BASE + r'\03_blender\porto_corsa.blend')
 sc = bpy.context.scene
 OUT = BASE + r'\03_blender\renders\capturas'
@@ -69,7 +69,9 @@ tomas = [
     ('13_puente_alto', *tras(s_curva(41), atras=80, alto=24)),
     ('14_puente_mar', (fr(4000)['x'] + fr(4000)['nx'] * 220, fr(4000)['y'] + fr(4000)['ny'] * 220, 60),
      (fr(3700)['x'], fr(3700)['y'], fr(3700)['z'] + 5), 30),
-    ('15_final_puente_roca', *tras(s_curva(43), atras=80, alto=22)),
+    # ronda 15: desde el mar, por fuera de la U (antes la roca del lazo tapaba la vista)
+    ('15_final_puente_roca', (fr(s_curva(43))['x'] - fr(s_curva(43))['nx'] * 190, fr(s_curva(43))['y'] - fr(s_curva(43))['ny'] * 190,
+                              fr(s_curva(43))['z'] + 70), (fr(s_curva(43))['x'], fr(s_curva(43))['y'], fr(s_curva(43))['z'] + 8), 30),
     ('16_retorno_chicane', *tras(s_curva(48), atras=90, alto=16)),
 ]
 q = fr(s_out + 80)
@@ -178,7 +180,7 @@ elif _es_rueda:
     tomas.append(('33_montana_rueda_desde_pista', (_qi['x'], _qi['y'], _qi['z'] + 5), (_tr.location.x + _fx * 30, _tr.location.y + _fy * 30, _cz - 14), 24))
 for _nom, _tag, _s_ref in (('PENON_puente', '34_roca_lazo', s_curva(43)), ('PENON_cara', '36_roca_casino', s_curva(37))):
     _r = bpy.data.objects.get(_nom)
-    if _r is None or not any(o.name.startswith('PPUEBLO') for o in _r.children_recursive):
+    if _r is None or not any(o.name.startswith(('PPUEBLO', 'PENON_puente_roca', 'PENON_roca')) for o in _r.children_recursive):
         continue
     _bb = _bbox_centro(_r)
     _qr = fr(_s_ref)
@@ -186,7 +188,15 @@ for _nom, _tag, _s_ref in (('PENON_puente', '34_roca_lazo', s_curva(43)), ('PENO
     _dl = math.hypot(_dx, _dy) or 1.0
     tomas.append((_tag + '_general', (_bb[0] - _dx / _dl * 330 - _dy / _dl * 120, _bb[1] - _dy / _dl * 330 + _dx / _dl * 120, _bb[3] + 60),
                   (_bb[0], _bb[1], (_bb[2] + _bb[3]) / 2), 30))
-    tomas.append((_tag + '_desde_pista', (_qr['x'], _qr['y'], _qr['z'] + 6), (_bb[0], _bb[1], _bb[2] + (_bb[3] - _bb[2]) * 0.45), 26))
+    if _nom == 'PENON_puente':
+        # ronda 15: la roca del lazo es un macizo que llena el encuadre si se mira a su centro:
+        # vista de piloto a lo largo de la calzada pegada a la pared (algo girada hacia la roca)
+        _qa, _qb = fr(_s_ref - 60), fr(_s_ref + 20)
+        _ld = 1.0 if ((_bb[0] - _qb['x']) * _qb['nx'] + (_bb[1] - _qb['y']) * _qb['ny']) > 0 else -1.0
+        tomas.append((_tag + '_desde_pista', (_qa['x'], _qa['y'], _qa['z'] + 2.2),
+                      (_qb['x'] + _qb['nx'] * _ld * 9.0, _qb['y'] + _qb['ny'] * _ld * 9.0, _qb['z'] + 6.0), 24))
+    else:
+        tomas.append((_tag + '_desde_pista', (_qr['x'], _qr['y'], _qr['z'] + 6), (_bb[0], _bb[1], _bb[2] + (_bb[3] - _bb[2]) * 0.45), 26))
 # ronda 13: caminos
 _qp = fr(870)
 tomas.append(('39_pueblo_calles_aerea', (_qp['x'] - _qp['nx'] * 40 - _qp['ny'] * 120, _qp['y'] - _qp['ny'] * 40 + _qp['nx'] * 120, _qp['z'] + 120),
@@ -195,7 +205,7 @@ tomas.append(('40_pueblo_travesia', (_qp['x'] + _qp['nx'] * 3, _qp['y'] + _qp['n
               (_qp['x'] - _qp['nx'] * 30, _qp['y'] - _qp['ny'] * 30, _qp['z'] + 3), 30))
 _qc = fr(s_curva(38))
 _rc = bpy.data.objects.get('PENON_cara')
-if _rc is not None and any(o.name.startswith('PPUEBLO') for o in _rc.children_recursive):
+if _rc is not None and any(o.name.startswith(('PPUEBLO', 'PENON_roca')) for o in _rc.children_recursive):
     _bc = _bbox_centro(_rc)
     _dxc, _dyc = _bc[0] - _qc['x'], _bc[1] - _qc['y']
     _dlc = math.hypot(_dxc, _dyc) or 1.0
@@ -208,14 +218,27 @@ if _pbx is not None:
     tomas.append(('42_paddock_hotel', (_pbx.location.x + _qb2['nx'] * 60 - _qb2['ny'] * 160, _pbx.location.y + _qb2['ny'] * 60 + _qb2['nx'] * 160, _pbx.location.z + 90),
                   (_pbx.location.x - _qb2['nx'] * 50, _pbx.location.y - _qb2['ny'] * 50, _pbx.location.z + 20), 30))
 # la bajada recta vista desde la camara-grua amarilla de la rotonda (peticion: desde ahi no se ve lo que hay tras la cresta)
+# v2 integrador (G2-08): la grua de la rotonda la pone zona_camaras en la cresta (s 3440) o sobre la bajada
+# (s 3500), a unos 170 m del centro de la Loews: se busca a < 220 m (antes < 90 m y la toma se saltaba sin
+# avisar). Si no hay ninguna, AVISO y la toma se hace igual desde el punto medido de la cresta.
 _cams_r = [o for o in bpy.data.objects if o.name.startswith('CAMARA_tierra') and o.parent is None
            and not any(c.name.startswith('LIB') for c in o.users_collection)
-           and math.hypot(o.location.x - fr(s_loews)['x'], o.location.y - fr(s_loews)['y']) < 90]
+           and math.hypot(o.location.x - fr(s_loews)['x'], o.location.y - fr(s_loews)['y']) < 220]
 _q38 = fr(s_curva(38))
 if _cams_r:
     _cg = min(_cams_r, key=lambda o: math.hypot(o.location.x - fr(s_loews)['x'], o.location.y - fr(s_loews)['y']))
-    tomas.append(('43_bajada_desde_grua', (_cg.location.x, _cg.location.y, _cg.location.z + 4.0),
-                  (_q38['x'], _q38['y'], _q38['z'] + 1.0), 40))
+    # desde la cresta se mira bajar hacia la Loews; desde la rotonda, hacia la cresta
+    _d38 = math.hypot(_cg.location.x - _q38['x'], _cg.location.y - _q38['y'])
+    _dlw = math.hypot(_cg.location.x - fr(s_loews)['x'], _cg.location.y - fr(s_loews)['y'])
+    _obj43 = (fr(s_loews)['x'], fr(s_loews)['y'], fr(s_loews)['z'] + 1.0) if _d38 < _dlw else (_q38['x'], _q38['y'], _q38['z'] + 1.0)
+    tomas.append(('43_bajada_desde_grua', (_cg.location.x, _cg.location.y, _cg.location.z + 4.0), _obj43, 40))
+else:
+    _qg = fr(3440.0)
+    _lg = -(_qg['w'] / 2.0 + 10.0)
+    print('AVISO capturas: no hay ninguna CAMARA_tierra (grua) a < 220 m de la rotonda Loews; la toma '
+          '43_bajada_desde_grua se hace desde la cresta (s 3440, lado -1, 10 m) sin grua')
+    tomas.append(('43_bajada_desde_grua', (_qg['x'] + _qg['nx'] * _lg, _qg['y'] + _qg['ny'] * _lg, _qg['z'] + 8.0),
+                  (fr(s_loews)['x'], fr(s_loews)['y'], fr(s_loews)['z'] + 1.0), 40))
 _qm = fr(s_loews - 70)
 tomas.append(('44_bajada_recta_lateral', (_qm['x'] + _qm['nx'] * 45, _qm['y'] + _qm['ny'] * 45, _qm['z'] + 12),
               (_qm['x'] - _qm['nx'] * 5, _qm['y'] - _qm['ny'] * 5, _qm['z'] + 2), 32))
@@ -224,8 +247,15 @@ _qv = fr(4336)
 tomas.append(('45_roca_lazo_puente', (_qv['x'] + _qv['ny'] * 40 + _qv['nx'] * 25, _qv['y'] - _qv['nx'] * 40 + _qv['ny'] * 25, _qv['z'] + 14),
               (_qv['x'] - _qv['nx'] * 12, _qv['y'] - _qv['ny'] * 12, _qv['z'] - 2), 30))
 _pl = next((o for o in bpy.data.objects if o.name.startswith('PUERTO_pantalan_roca')), None)
+if _pl is None:
+    _pl = next((o for o in bpy.data.objects if o.name.startswith('PENON_puente_muelle') and o.type == 'MESH'), None)
+if _pl is not None and _pl.name.startswith('PENON_puente_muelle'):
+    # la malla del muelle de la cala va en coordenadas de mundo: se usa un vacio en su centro
+    _bbm = [_pl.matrix_world @ Vector(c) for c in _pl.bound_box]
+    _pl = type('P', (), {})()
+    _pl.location = Vector((sum(v.x for v in _bbm) / 8, sum(v.y for v in _bbm) / 8, 0.0))
 _rl = bpy.data.objects.get('PENON_puente')
-if _pl is not None and _rl is not None and any(o.name.startswith('PPUEBLO') for o in _rl.children_recursive):
+if _pl is not None and _rl is not None and any(o.name.startswith(('PPUEBLO', 'PENON_puente_roca')) for o in _rl.children_recursive):
     _bl = _bbox_centro(_rl)
     _dxl, _dyl = _pl.location.x - _bl[0], _pl.location.y - _bl[1]
     _dll = math.hypot(_dxl, _dyl) or 1.0
@@ -249,10 +279,63 @@ if _er is not None:
 _q2 = fr(s_loews + 40)
 tomas.append(('38_rotonda_lateral', (_q2['x'] + _q2['nx'] * 14, _q2['y'] + _q2['ny'] * 14, _q2['z'] + 6),
               (fr(s_loews)['x'], fr(s_loews)['y'], fr(s_loews)['z'] + 1), 30))
+# RONDA 15: VISTA DEL PILOTO (1.4 m sobre el asfalto, mirando 80 m adelante) en 6 puntos:
+# es lo que vera el amigo en el juego, montana a un lado y caida al otro
+for _k, _sp in enumerate((300, 800, 1700, 2900, 3400, 4150)):
+    _pa, _pb = fr(_sp), fr(_sp + 80)
+    tomas.append(('%02d_piloto_s%d' % (49 + _k, _sp), (_pa['x'], _pa['y'], _pa['z'] + 1.4),
+                  (_pb['x'], _pb['y'], _pb['z'] + 1.2), 24))
+# ronda 15: la 15 se mira desde FUERA de la U, en el lado contrario al centro de la roca del lazo
+_rl15 = bpy.data.objects.get('PENON_puente')
+if _rl15 is not None:
+    _pts15 = [o.matrix_world @ Vector(c) for o in _rl15.children_recursive if o.type == 'MESH' for c in o.bound_box]
+    if _pts15:
+        _cx15 = sum(p.x for p in _pts15) / len(_pts15)
+        _cy15 = sum(p.y for p in _pts15) / len(_pts15)
+        _q15 = fr(s_curva(43))
+        _ux, _uy = _q15['x'] - _cx15, _q15['y'] - _cy15
+        _ul = math.hypot(_ux, _uy) or 1.0
+        tomas = [((n_, (_q15['x'] + _ux / _ul * 200, _q15['y'] + _uy / _ul * 200, _q15['z'] + 75),
+                   (_q15['x'] - _ux / _ul * 30, _q15['y'] - _uy / _ul * 30, _q15['z'] + 10), 30) if n_ == '15_final_puente_roca' else (n_, l_, t_, k_))
+                 for (n_, l_, t_, k_) in tomas]
+# ronda 15: 40, 43 y 47b desde la propia pista (no hay nada encima de ella): antes salian un muro,
+# la panza de un puente y el interior de una tribuna
+_rehechas = {}
+_a40, _b40 = fr(840), fr(930)
+_o40 = -(_b40['w'] / 2.0 + 18.0)
+_rehechas['40_pueblo_travesia'] = ((_a40['x'], _a40['y'], _a40['z'] + 3.0),
+                                   (_b40['x'] + _b40['nx'] * _o40, _b40['y'] + _b40['ny'] * _o40, _b40['z'] + 6.0), 26)
+_a43 = fr(3440.0)
+_rehechas['43_bajada_desde_grua'] = ((_a43['x'], _a43['y'], _a43['z'] + 5.0),
+                                     (fr(s_loews)['x'], fr(s_loews)['y'], fr(s_loews)['z'] + 1.0), 32)
+if _ys:
+    # el punto de la recta (lo mas cerca posible de L-70) desde el que la linea al yate no corta nada
+    # (la tribuna de meta tapaba la vista desde L-70)
+    _dg47 = bpy.context.evaluated_depsgraph_get()
+    _t47 = Vector((_yc.location.x, _yc.location.y, 4.0))
+    _a47 = fr(L - 70)
+    _o47 = Vector((_a47['x'], _a47['y'], _a47['z'] + 3.0))
+    for _s47 in sorted(range(int(L - 300), int(L - 5), 10), key=lambda s_: abs(s_ - (L - 70))):
+        _a = fr(_s47)
+        _o = Vector((_a['x'], _a['y'], _a['z'] + 3.0))
+        _d = _t47 - _o
+        _ok, _hl, _hn, _hi, _hob, _hm = sc.ray_cast(_dg47, _o, _d.normalized(), distance=_d.length)
+        _raiz = _hob
+        while _raiz is not None and _raiz.parent is not None:
+            _raiz = _raiz.parent
+        if not _ok or (_raiz is not None and _raiz.name.startswith('YATE_')) or (_hl - _o).length > 0.92 * _d.length:
+            _o47 = _o
+            break
+    _rehechas['47b_yates_desde_pista'] = (tuple(_o47), tuple(_t47), 30)
+tomas = [((n_,) + _rehechas[n_]) if n_ in _rehechas else (n_, l_, t_, k_) for (n_, l_, t_, k_) in tomas]
+import sys as _sys
+_sys.path.insert(0, BASE + r'\03_blender\_rev')
+import camara_segura as _cam_seg
 _solo = os.environ.get('CAPTURAS_SOLO', '')
 for nombre, loc, tgt, lens in tomas:
     if _solo and not nombre.startswith(tuple(_solo.split(','))):
         continue
+    loc, tgt = _cam_seg.asegurar(nombre, loc, tgt)      # ronda 15: nunca dentro del terreno/roca ni tapada
     c = cam('CAP_' + nombre, loc, tgt, lens)
     sc.camera = c
     sc.render.filepath = os.path.join(OUT, nombre + '.png')

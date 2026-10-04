@@ -1,0 +1,13 @@
+0.45 0.405 A coste 20.10 (control 22.19) | ac 14.43/14.27 lcs 13.22/12.00 lcsy 15.18/17.43 captura 20.20/21.60 [5s]
+0.45 0.405 B coste 23.17 (control 25.40) | ac 15.87/15.73 lcs 13.38/12.87 lcsy 17.22/19.17 captura 21.45/22.60 [10s]
+0.45 0.450 A coste 20.10 (control 22.50) | ac 13.80/13.83 lcs 13.00/12.07 lcsy 15.25/17.60 captura 21.40/22.57 [15s]
+0.45 0.450 B coste 23.61 (control 25.82) | ac 15.52/15.47 lcs 13.60/13.17 lcsy 17.62/19.37 captura 22.67/23.40 [20s]
+0.45 0.562 A coste 20.61 (control 23.38) | ac 12.82/13.23 lcs 13.55/12.40 lcsy 16.05/18.00 captura 23.40/24.23 [25s]
+0.45 0.562 B coste 24.56 (control 26.61) | ac 15.38/15.30 lcs 14.43/13.70 lcsy 18.42/19.80 captura 24.60/24.93 [30s]
+0.50 0.450 A coste 19.27 (control 21.69) | ac 13.90/13.90 lcs 12.85/11.93 lcsy 14.95/17.27 captura 20.60/21.80 [34s]
+0.50 0.450 B coste 22.40 (control 24.80) | ac 15.27/15.37 lcs 13.30/12.87 lcsy 17.10/19.00 captura 21.78/22.67 [39s]
+0.50 0.500 A coste 19.51 (control 22.11) | ac 13.37/13.57 lcs 12.98/12.23 lcsy 15.23/17.53 captura 21.67/22.67 [43s]
+0.50 0.500 B coste 23.06 (control 25.36) | ac 15.25/15.27 lcs 13.60/13.13 lcsy 17.53/19.27 captura 22.77/23.43 [48s]
+0.50 0.625 A coste 20.33 (control 23.08) | ac 12.75/13.20 lcs 13.78/12.67 lcsy 16.18/18.03 captura 23.58/24.43 [53s]
+0.50 0.625 B coste 24.25 (control 26.82) | ac 15.18/15.37 lcs 14.55/13.77 lcsy 18.53/19.83 captura 24.80/24.93 [57s]
+mejor: {'ksDiffuse': 0.5, 'ksAmbient': 0.45, 'cociente': 0.9, 'pesos_ajuste': 'A'} 19.27

@@ -1,0 +1,63 @@
+--- a/04_export/kn5_writer_opt.py
++++ b/04_export/kn5_writer_opt.py
+@@ -46,6 +46,7 @@
+ import math
+ import os
+ import struct
++import sys
+ import time
+ import zlib
+ 
+@@ -54,6 +55,11 @@
+ from mathutils import Matrix, Vector
+ 
+ BASE = r'E:\Escritorio\claude-pc\arnau-aseto-corsa'
++# color_ac.py: recalibra color y props de shader para AC (antes el circuito salia casi blanco en el juego);
++# env COLOR_AC=0 lo desactiva (colores y SHADER_PROPS de siempre, para comparar)
++sys.path.insert(0, os.path.join(BASE, '04_export'))
++import color_ac  # noqa: E402
++USAR_COLOR_AC = os.environ.get('COLOR_AC', '1') != '0'
+ # fisica: env BLEND (escena de export), KN5 (kn5 de salida) y KN5_JSON (resumen) para pruebas sobre copias
+ BLEND = os.environ.get('BLEND') or BASE + r'\04_export\porto_corsa_export.blend'
+ OUT_KN5 = os.environ.get('KN5') or BASE + r'\04_export\kn5\porto_corsa_opt.kn5'
+@@ -295,6 +301,8 @@
+     infos = [analizar_material(m) for m in orden]
+     infos.append({'name': DEFAULT_MAT, 'color': (0.5, 0.5, 0.5), 'alpha': 1.0, 'img': None,
+                   'gain': 1.0, 'factor': 1.0, 'scale': 1.0, 'proj': 'FLAT'})
++    if USAR_COLOR_AC:       # color para AC (aspecto medido en Blender + modelos de luz de AC) y props por familia
++        infos = color_ac.calibrar_todos(infos)
+     return infos
+ 
+ 
+@@ -325,8 +333,9 @@
+         w.u8(1 if info['transparent'] else 0)     # alphaBlendMode: 0 opaco, 1 alpha blend
+         w.u8(0)                                   # alphaTested
+         w.i32(0)                                  # depthMode: DepthNormal
+-        w.i32(len(SHADER_PROPS))
+-        for pname, val in SHADER_PROPS:
++        props = info.get('props_ac', SHADER_PROPS)   # por familia de material (color_ac.FAMILIAS)
++        w.i32(len(props))
++        for pname, val in props:
+             w.string(pname)
+             w.f32(val)                            # A
+             w.floats((0.0, 0.0))                  # B
+@@ -739,6 +748,10 @@
+     print('escena de export v%d: giro de 180 grados de AC_* %s' % (
+         export_v, 'APLICADO (escena antigua)' if any(AC_GIRAR_180.values()) else 'NO necesario'))
+     os.makedirs(os.path.dirname(OUT_KN5), exist_ok=True)
++    # color_ac: las caras de roca de MAT_terreno (mismo criterio que el nodo de Blender) pasan a MAT_terreno_roca,
++    # solo en memoria (el .blend no se guarda)
++    roca_ac = color_ac.separar_roca_terreno() if USAR_COLOR_AC else {}
++    print('color_ac: %d caras de roca -> %s %s' % (sum(roca_ac.values()), color_ac.ROCA_MAT, roca_ac))
+     objs = objetos_exportables()
+     infos = recopilar_materiales(objs)
+     por_nombre = {i['name']: i for i in infos}
+@@ -850,6 +863,8 @@
+             'texturas_reducidas_a_%d' % TEX_MAX: _tex_stats['reducidas'],
+             'n_nodos_total': s['n_dummies'] + s['n_mallas'], 'orden_espacial_celda_m': MORTON_CELL},
+         'segundos': round(time.time() - t0, 1),
++        'color_ac': color_ac.informe(infos) if USAR_COLOR_AC else 'desactivado (COLOR_AC=0)',
++        'color_ac_roca_terreno': roca_ac,
+     }
+     json.dump(resumen, open(OUT_JSON, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
+     r2 = dict(resumen)

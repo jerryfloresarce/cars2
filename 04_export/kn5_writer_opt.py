@@ -18,6 +18,9 @@ Optimizaciones (sin cambiar el formato):
      - mallas fisicas 1ROAD_/1KERB_/1GRASS_/2GRASS_/1WALL_/1DIRT_ -> coordenadas MUNDO, mallas
        '<prefijo>fusion_<material>_pN' bajo un dummy identidad '<prefijo>fusion' (AC decide la
        fisica por el prefijo del nombre de la malla, que se conserva al principio);
+     - fisica SOLO de colision (nombre con 'cierre' o '_invisible': muros de cierre de cierre_ac.py, tira de la
+       cuna del pit) -> grupo aparte '<prefijo>invisible' (mallas '<prefijo>invisible_<material>_pN') con
+       isRenderable=0 y castShadows=0: nunca se fusiona con mallas visibles;
      - AC_START_/AC_PIT_/AC_TIME_/AC_HOTLAP_START_ (y demas AC_LOGICAL): dummy con la MISMA matriz
        que escribe kn5_writer.py (AC lee de ahi posicion y orientacion) + mini-malla hija en locales
        con isRenderable=0 y castShadows=0 (estructura ksEditor/AcTools; no se ven cubitos);
@@ -36,12 +39,14 @@ Ejecutar:
   "C:/Program Files/Blender Foundation/Blender 5.1/blender.exe" --background --factory-startup
       --python E:/Escritorio/claude-pc/arnau-aseto-corsa/04_export/kn5_writer_opt.py
 Salida: 04_export/kn5/porto_corsa_opt.kn5 y 04_export/kn5/resumen_writer_opt.json
+  (env BLEND / KN5 / KN5_JSON cambian la escena de entrada y las salidas: pruebas en 04_export/_fisica)
 """
 import hashlib
 import json
 import math
 import os
 import struct
+import sys
 import time
 import zlib
 
@@ -50,9 +55,16 @@ import numpy as np
 from mathutils import Matrix, Vector
 
 BASE = r'E:\Escritorio\claude-pc\arnau-aseto-corsa'
-BLEND = BASE + r'\04_export\porto_corsa_export.blend'
-OUT_KN5 = BASE + r'\04_export\kn5\porto_corsa_opt.kn5'
-OUT_JSON = BASE + r'\04_export\kn5\resumen_writer_opt.json'
+# color_ac.py: recalibra color y props de shader para AC (antes el circuito salia casi blanco en el juego);
+# env COLOR_AC=0 lo desactiva (colores y SHADER_PROPS de siempre, para comparar)
+sys.path.insert(0, os.path.join(BASE, '04_export'))
+import color_ac  # noqa: E402
+USAR_COLOR_AC = os.environ.get('COLOR_AC', '1') != '0'
+# fisica: env BLEND (escena de export), KN5 (kn5 de salida) y KN5_JSON (resumen) para pruebas sobre copias
+BLEND = os.environ.get('BLEND') or BASE + r'\04_export\porto_corsa_export.blend'
+OUT_KN5 = os.environ.get('KN5') or BASE + r'\04_export\kn5\porto_corsa_opt.kn5'
+OUT_JSON = (os.environ.get('KN5_JSON') or (os.path.splitext(OUT_KN5)[0] + '_resumen.json' if os.environ.get('KN5')
+                                           else BASE + r'\04_export\kn5\resumen_writer_opt.json'))
 ROOT_NAME = 'porto_corsa'
 TEX_SIZE = 512            # lado de las texturas tintadas embebidas (las fuentes son de 1024)
 TEX_MAX = 1024            # ninguna textura embebida supera este lado
@@ -289,6 +301,8 @@ def recopilar_materiales(objs):
     infos = [analizar_material(m) for m in orden]
     infos.append({'name': DEFAULT_MAT, 'color': (0.5, 0.5, 0.5), 'alpha': 1.0, 'img': None,
                   'gain': 1.0, 'factor': 1.0, 'scale': 1.0, 'proj': 'FLAT'})
+    if USAR_COLOR_AC:       # color para AC (aspecto medido en Blender + modelos de luz de AC) y props por familia
+        infos = color_ac.calibrar_todos(infos)
     return infos
 
 
@@ -319,8 +333,9 @@ def escribir_texturas_y_materiales(w, infos):
         w.u8(1 if info['transparent'] else 0)     # alphaBlendMode: 0 opaco, 1 alpha blend
         w.u8(0)                                   # alphaTested
         w.i32(0)                                  # depthMode: DepthNormal
-        w.i32(len(SHADER_PROPS))
-        for pname, val in SHADER_PROPS:
+        props = info.get('props_ac', SHADER_PROPS)   # por familia de material (color_ac.FAMILIAS)
+        w.i32(len(props))
+        for pname, val in props:
             w.string(pname)
             w.f32(val)                            # A
             w.floats((0.0, 0.0))                  # B
@@ -590,11 +605,22 @@ def obtener_malla(ob, depsgraph):
     return ob.data, None
 
 
+def es_invisible(name):
+    """Mallas SOLO de colision (cierre_ac.py: muros de cierre, tira de la cuna del pit): nombre con 'cierre' o
+    '_invisible'. Se escriben con isRenderable=0 y castShadows=0 y nunca se fusionan con mallas visibles."""
+    n = name.lower()
+    return 'cierre' in n or '_invisible' in n
+
+
 def categoria(name):
-    """'ac' (dummy logico sin hijos), 'fisica' (fusion por prefijo), 'suelto' (dummy por objeto,
-    como antes) o 'deco' (fusion por material bajo DECO)."""
+    """'ac' (dummy logico sin hijos), 'invisible' (fisica solo de colision, fusion aparte), 'fisica' (fusion
+    por prefijo), 'suelto' (dummy por objeto, como antes) o 'deco' (fusion por material bajo DECO). Solo una malla
+    FISICA puede ser invisible: un decorado con 'cierre' o '_invisible' en el nombre se escribe normal (visible) y
+    main() avisa (antes se omitia sin decir nada)."""
     if name.startswith(AC_LOGICAL):
         return 'ac'
+    if es_invisible(name) and name.startswith(FIS_PREFIXES):
+        return 'invisible'
     if name.startswith(FIS_PREFIXES):
         return 'fisica'
     if name.startswith(KEEP_PREFIXES):
@@ -623,6 +649,7 @@ class Estado:
 
     def __init__(self):
         self.s = {'n_dummies': 1, 'n_mallas': 0, 'n_verts': 0, 'n_tris': 0, 'n_ac': 0,
+                  'mallas_invisible': 0, 'grupos_invisible': 0,
                   'objetos_sin_geometria': 0, 'objetos_partidos': 0, 'objetos_espejo': 0,
                   'mallas_sueltas': 0, 'mallas_fisica': 0, 'mallas_deco': 0, 'mallas_ac': 0,
                   'grupos_fisica': 0, 'grupos_deco': 0, 'grupos_partidos': 0}
@@ -684,8 +711,9 @@ def acumular_fusion(obs, cast_fn, depsgraph, por_nombre, default_info, E, t0, et
     return grupos
 
 
-def escribir_dummy_fusion(w, nombre_dummy, grupos, nombre_fn, clase, E, t0):
-    """Dummy identidad con una malla por (material, trozo): '<nombre_fn(material)>_pN'."""
+def escribir_dummy_fusion(w, nombre_dummy, grupos, nombre_fn, clase, E, t0, renderable=1):
+    """Dummy identidad con una malla por (material, trozo): '<nombre_fn(material)>_pN'. Con renderable=0
+    (mallas solo de colision) se escriben con isRenderable=0 y castShadows=0."""
     claves = sorted(grupos)                                   # (cast, material)
     dobles = {m for c, m in claves if (1 - c, m) in grupos}   # mismo material con y sin sombra
     trozos = []
@@ -701,7 +729,7 @@ def escribir_dummy_fusion(w, nombre_dummy, grupos, nombre_fn, clase, E, t0):
     escribir_dummy(w, nombre_dummy, len(trozos), Matrix.Identity(4))
     E.s['n_dummies'] += 1
     for name, verts, idx, info, cast in trozos:
-        escribir_malla(w, name, verts, idx, info, cast)
+        escribir_malla(w, name, verts, idx, info, cast if renderable else 0, renderable)
         E.malla(verts, idx, 'mallas_' + clase)
         E.bbox(verts[:, :3])
     print('  %s: %d grupos -> %d mallas, %d verts [%.0fs]' % (
@@ -720,15 +748,24 @@ def main():
     print('escena de export v%d: giro de 180 grados de AC_* %s' % (
         export_v, 'APLICADO (escena antigua)' if any(AC_GIRAR_180.values()) else 'NO necesario'))
     os.makedirs(os.path.dirname(OUT_KN5), exist_ok=True)
+    # color_ac: las caras de roca de MAT_terreno (mismo criterio que el nodo de Blender) pasan a MAT_terreno_roca,
+    # solo en memoria (el .blend no se guarda)
+    roca_ac = color_ac.separar_roca_terreno() if USAR_COLOR_AC else {}
+    print('color_ac: %d caras de roca -> %s %s' % (sum(roca_ac.values()), color_ac.ROCA_MAT, roca_ac))
     objs = objetos_exportables()
     infos = recopilar_materiales(objs)
     por_nombre = {i['name']: i for i in infos}
     default_info = por_nombre[DEFAULT_MAT]
     depsgraph = bpy.context.evaluated_depsgraph_get()
-    cats = {'ac': [], 'fisica': [], 'suelto': [], 'deco': []}
+    cats = {'ac': [], 'fisica': [], 'suelto': [], 'deco': [], 'invisible': [], 'omitir': []}
     for ob in objs:
         cats[categoria(ob.name)].append(ob)
+    marcados_visibles = sorted(o.name for o in objs if es_invisible(o.name) and categoria(o.name) != 'invisible')
+    if marcados_visibles:
+        print('AVISO: %d objetos NO fisicos con "cierre"/"_invisible" en el nombre se escriben VISIBLES (solo una '
+              'malla fisica puede ser invisible): %s' % (len(marcados_visibles), marcados_visibles[:20]))
     fis_prefijos = [p for p in FIS_PREFIXES if any(o.name.startswith(p) for o in cats['fisica'])]
+    inv_prefijos = [p for p in FIS_PREFIXES if any(o.name.startswith(p) for o in cats['invisible'])]
     E = Estado()
     with open(OUT_KN5, 'wb', buffering=1 << 22) as f:
         w = Writer(f)
@@ -741,7 +778,8 @@ def main():
                   len(infos), len(objs), len(cats['ac']), len(cats['suelto']), len(cats['fisica']),
                   len(cats['deco']), time.time() - t0))
         # raiz: dummy identidad > [AC_* | sueltos | <prefijo>fusion... | DECO]
-        n_raiz = len(cats['ac']) + len(cats['suelto']) + len(fis_prefijos) + (1 if cats['deco'] else 0)
+        n_raiz = (len(cats['ac']) + len(cats['suelto']) + len(fis_prefijos) + len(inv_prefijos)
+                  + (1 if cats['deco'] else 0))
         escribir_dummy(w, ROOT_NAME, n_raiz, Matrix.Identity(4))
         # 1) objetos logicos AC_*: dummy con su matriz (AC lee de ahi posicion y orientacion; identica
         #    a la de kn5_writer.py) + mini-malla hija en locales con isRenderable=0 y castShadows=0
@@ -774,6 +812,13 @@ def main():
             grupos = acumular_fusion(obs, lambda n, c=cast: c, depsgraph, por_nombre, default_info, E, t0, pref)
             escribir_dummy_fusion(w, pref + 'fusion', grupos,
                                   lambda m, p=pref: '%sfusion_%s' % (p, m), 'fisica', E, t0)
+        # 3b) fisica SOLO de colision (cierre_ac.py): dummy '<prefijo>invisible', mallas
+        #     '<prefijo>invisible_<material>_pN' con isRenderable=0 y castShadows=0, nunca junto a mallas visibles
+        for pref in inv_prefijos:
+            obs = [o for o in cats['invisible'] if o.name.startswith(pref)]
+            grupos = acumular_fusion(obs, lambda n: 0, depsgraph, por_nombre, default_info, E, t0, pref + 'invisible')
+            escribir_dummy_fusion(w, pref + 'invisible', grupos,
+                                  lambda m, p=pref: '%sinvisible_%s' % (p, m), 'invisible', E, t0, renderable=0)
         # 4) decoracion estatica: un unico dummy identidad DECO, mallas 'DECO_<material>_pN'
         if cats['deco']:
             grupos = acumular_fusion(cats['deco'], lambda n: 0 if n.startswith(DECO_SIN_SOMBRA) else 1,
@@ -803,7 +848,11 @@ def main():
                          'soldadura': {'pos': ROUND_POS, 'normal': ROUND_NRM, 'uv': ROUND_UV}},
         'optimizacion': {
             'objetos': {'AC': len(cats['ac']), 'sueltos': len(cats['suelto']),
-                        'fisica': len(cats['fisica']), 'deco': len(cats['deco'])},
+                        'fisica': len(cats['fisica']), 'deco': len(cats['deco']),
+                        'invisible': len(cats['invisible']), 'omitidos': len(cats['omitir'])},
+            'mallas_invisibles_solo_colision': s['mallas_invisible'],
+            'objetos_invisibles': sorted(o.name for o in cats['invisible']),
+            'no_fisicos_con_marca_invisible_escritos_visibles': marcados_visibles,
             'prefijos_fisica': fis_prefijos, 'deco_sin_sombra': list(DECO_SIN_SOMBRA),
             'deco_mat_sin_sombra': list(DECO_MAT_SIN_SOMBRA),
             'mallas_ac_no_renderables': s['mallas_ac'],
@@ -814,6 +863,8 @@ def main():
             'texturas_reducidas_a_%d' % TEX_MAX: _tex_stats['reducidas'],
             'n_nodos_total': s['n_dummies'] + s['n_mallas'], 'orden_espacial_celda_m': MORTON_CELL},
         'segundos': round(time.time() - t0, 1),
+        'color_ac': color_ac.informe(infos) if USAR_COLOR_AC else 'desactivado (COLOR_AC=0)',
+        'color_ac_roca_terreno': roca_ac,
     }
     json.dump(resumen, open(OUT_JSON, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
     r2 = dict(resumen)

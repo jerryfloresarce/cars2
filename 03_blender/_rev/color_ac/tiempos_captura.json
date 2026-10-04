@@ -1,0 +1,240 @@
+{
+ "captura": {
+  "lum_media": 182.884,
+  "saturacion_media": 0.084,
+  "asfalto": [
+   155.7,
+   154.0,
+   156.9
+  ],
+  "cielo": [
+   215.5,
+   220.9,
+   225.1
+  ],
+  "contraste_lum_std": 34.283
+ },
+ "tiempos": {
+  "3_clear": {
+   "por_defecto": {
+    "lum_media": 139.75,
+    "saturacion_media": 0.16,
+    "asfalto": [
+     170.5,
+     163.4,
+     154.6
+    ],
+    "cielo": [
+     181.7,
+     189.6,
+     180.7
+    ],
+    "contraste_lum_std": 48.275,
+    "coste": 75.0
+   },
+   "mejor": {
+    "lum_media": 139.863,
+    "saturacion_media": 0.089,
+    "asfalto": [
+     167.7,
+     163.9,
+     159.3
+    ],
+    "cielo": [
+     183.0,
+     188.8,
+     185.7
+    ],
+    "contraste_lum_std": 48.403,
+    "coste": 58.4,
+    "brillo": 1.0,
+    "saturacion": 0.5
+   }
+  },
+  "5_light_clouds": {
+   "por_defecto": {
+    "lum_media": 134.224,
+    "saturacion_media": 0.148,
+    "asfalto": [
+     109.9,
+     112.7,
+     118.0
+    ],
+    "cielo": [
+     183.8,
+     196.6,
+     187.9
+    ],
+    "contraste_lum_std": 35.249,
+    "coste": 223.7
+   },
+   "mejor": {
+    "lum_media": 172.379,
+    "saturacion_media": 0.091,
+    "asfalto": [
+     151.1,
+     153.3,
+     157.7
+    ],
+    "cielo": [
+     198.6,
+     209.4,
+     203.5
+    ],
+    "contraste_lum_std": 33.664,
+    "coste": 3.8,
+    "brillo": 1.4,
+    "saturacion": 0.7
+   }
+  },
+  "2_light_fog": {
+   "por_defecto": {
+    "lum_media": 113.178,
+    "saturacion_media": 0.126,
+    "asfalto": [
+     104.0,
+     101.4,
+     103.0
+    ],
+    "cielo": [
+     180.7,
+     189.4,
+     182.6
+    ],
+    "contraste_lum_std": 32.154,
+    "coste": 370.9
+   },
+   "mejor": {
+    "lum_media": 150.822,
+    "saturacion_media": 0.083,
+    "asfalto": [
+     143.1,
+     140.8,
+     142.2
+    ],
+    "cielo": [
+     194.4,
+     202.4,
+     197.3
+    ],
+    "contraste_lum_std": 32.37,
+    "coste": 43.8,
+    "brillo": 1.4,
+    "saturacion": 0.7
+   }
+  },
+  "1_heavy_fog": {
+   "por_defecto": {
+    "lum_media": 95.568,
+    "saturacion_media": 0.164,
+    "asfalto": [
+     51.8,
+     54.8,
+     58.5
+    ],
+    "cielo": [
+     181.7,
+     191.5,
+     185.5
+    ],
+    "contraste_lum_std": 43.73,
+    "coste": 1069.2
+   },
+   "mejor": {
+    "lum_media": 201.519,
+    "saturacion_media": 0.085,
+    "asfalto": [
+     159.1,
+     165.1,
+     171.8
+    ],
+    "cielo": [
+     219.9,
+     227.4,
+     224.9
+    ],
+    "contraste_lum_std": 36.986,
+    "coste": 19.5,
+    "brillo": 2.8,
+    "saturacion": 0.95
+   }
+  },
+  "6_mid_clouds": {
+   "por_defecto": {
+    "lum_media": 95.007,
+    "saturacion_media": 0.139,
+    "asfalto": [
+     57.2,
+     56.3,
+     58.1
+    ],
+    "cielo": [
+     175.9,
+     185.6,
+     176.3
+    ],
+    "contraste_lum_std": 43.122,
+    "coste": 1027.0
+   },
+   "mejor": {
+    "lum_media": 201.647,
+    "saturacion_media": 0.07,
+    "asfalto": [
+     169.6,
+     168.0,
+     171.2
+    ],
+    "cielo": [
+     214.7,
+     224.4,
+     215.6
+    ],
+    "contraste_lum_std": 35.792,
+    "coste": 26.8,
+    "brillo": 2.8,
+    "saturacion": 0.95
+   }
+  },
+  "7_heavy_clouds": {
+   "por_defecto": {
+    "lum_media": 95.006,
+    "saturacion_media": 0.138,
+    "asfalto": [
+     57.3,
+     56.3,
+     58.0
+    ],
+    "cielo": [
+     176.0,
+     185.6,
+     176.2
+    ],
+    "contraste_lum_std": 43.121,
+    "coste": 1027.2
+   },
+   "mejor": {
+    "lum_media": 201.647,
+    "saturacion_media": 0.07,
+    "asfalto": [
+     169.8,
+     168.0,
+     171.0
+    ],
+    "cielo": [
+     214.8,
+     224.3,
+     215.4
+    ],
+    "contraste_lum_std": 35.79,
+    "coste": 26.8,
+    "brillo": 2.8,
+    "saturacion": 0.95
+   }
+  }
+ },
+ "config_estimada": {
+  "coste": 1.525,
+  "parametros": 4,
+  "brillo": 0.5
+ }
+}

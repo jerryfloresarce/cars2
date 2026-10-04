@@ -1,0 +1,365 @@
+00:00.922  blend            | Read blend: "E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\escena_color.blend"
+E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\medir_albedo.py:62: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  sc.world.use_nodes = True
+00:02.672  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:02.922  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:03.172  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:03.469  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:03.782  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:04.079  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:04.391  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:04.672  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:04.985  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:05.297  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:05.688  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:05.938  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:06.219  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:06.469  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:06.704  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:06.938  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:07.172  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:07.422  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:07.657  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:07.907  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:08.141  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:08.375  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:08.610  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:08.860  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:09.094  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:09.344  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:09.594  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:09.829  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:10.063  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:10.297  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:10.547  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:10.782  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:11.016  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:11.250  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:11.485  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:11.735  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:11.969  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:12.204  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:12.454  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:12.688  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:12.922  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:13.172  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:13.407  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:13.641  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:13.891  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:14.125  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:14.407  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:14.641  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:14.891  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:15.125  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:15.360  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:15.594  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:15.844  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:16.079  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:16.313  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:16.547  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:16.797  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:17.047  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:17.297  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:17.547  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:17.813  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:18.079  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:18.313  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:18.547  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:18.782  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:19.016  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:19.266  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:19.500  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:19.719  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:19.969  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:20.219  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:20.454  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:20.688  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:20.907  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+ALBEDO MAT_ACUEDUCTO_piedra               diffuse (0.6, 0.38, 0.155) -> medido {'20': (0.494, 0.29, 0.104)}
+ALBEDO MAT_ACUEDUCTO_piedra_clara         diffuse (0.86, 0.645, 0.33) -> medido {'20': (0.708, 0.493, 0.222)}
+ALBEDO MAT_AYTO_fachada                   diffuse (0.768, 0.155, 0.043) -> medido {'20': (0.747, 0.15, 0.042)}
+ALBEDO MAT_AYTO_reloj                     diffuse (0.944, 0.89, 0.692) -> medido {'20': (0.92, 0.865, 0.671)}
+ALBEDO MAT_CAMARA_peana_piedra            diffuse (0.8, 0.8, 0.8) -> medido {'20': (0.28, 0.252, 0.209)}
+ALBEDO MAT_CAMINO_adoquin                 diffuse (0.4, 0.33, 0.32) -> medido {'20': (0.41, 0.336, 0.324)}
+ALBEDO MAT_CAMINO_asfalto                 diffuse (0.11, 0.11, 0.12) -> medido {'20': (0.1, 0.1, 0.11)}
+ALBEDO MAT_CAMINO_asfalto_calle           diffuse (0.239, 0.228, 0.224) -> medido {'20': (0.22, 0.21, 0.207)}
+ALBEDO MAT_CAMINO_muelle_agua             diffuse (0.19, 0.22, 0.18) -> medido {'20': (0.15, 0.18, 0.15)}
+ALBEDO MAT_CAMINO_piedra_a                diffuse (0.5, 0.42, 0.3) -> medido {'20': (0.412, 0.321, 0.202)}
+ALBEDO MAT_CAMINO_piedra_b                diffuse (0.38, 0.32, 0.23) -> medido {'20': (0.313, 0.245, 0.155)}
+ALBEDO MAT_CAMINO_piedra_c                diffuse (0.6, 0.52, 0.38) -> medido {'20': (0.494, 0.397, 0.256)}
+ALBEDO MAT_CAMINO_piedra_muelle           diffuse (0.36, 0.33, 0.27) -> medido {'20': (0.217, 0.18, 0.128)}
+ALBEDO MAT_CAMINO_piedra_puente           diffuse (0.52, 0.46, 0.35) -> medido {'20': (0.379, 0.309, 0.205)}
+ALBEDO MAT_CAMINO_tierra                  diffuse (0.46, 0.3, 0.13) -> medido {'20': (0.4, 0.255, 0.11)}
+ALBEDO MAT_CAMINO_tierra_borde            diffuse (0.17, 0.17, 0.06) -> medido {'20': (0.145, 0.185, 0.06)}
+ALBEDO MAT_CAMPANILE_cobre                diffuse (0.02, 0.233, 0.14) -> medido {'20': (0.019, 0.227, 0.136)}
+ALBEDO MAT_CAMPANILE_piedra               diffuse (0.787, 0.448, 0.133) -> medido {'20': (0.635, 0.335, 0.087)}
+ALBEDO MAT_CARRERA_piedra_clara           diffuse (0.58, 0.52, 0.4) -> medido {'20': (0.478, 0.397, 0.269)}
+ALBEDO MAT_CASAS_carpinteria              diffuse (0.852, 0.793, 0.612) -> medido {'20': (0.799, 0.742, 0.572)}
+ALBEDO MAT_CASAS_cromo                    diffuse (0.699, 0.736, 0.793) -> medido {'20': (0.655, 0.688, 0.739)}
+ALBEDO MAT_CASAS_fachada_amarillo         diffuse (0.893, 0.547, 0.036) -> medido {'20': (0.83, 0.507, 0.033)}
+ALBEDO MAT_CASAS_fachada_crema            diffuse (0.873, 0.664, 0.268) -> medido {'20': (0.806, 0.611, 0.246)}
+ALBEDO MAT_CASAS_fachada_ocre             diffuse (0.699, 0.279, 0.023) -> medido {'20': (0.648, 0.258, 0.021)}
+ALBEDO MAT_CASAS_fachada_rosa             diffuse (0.793, 0.208, 0.181) -> medido {'20': (0.741, 0.194, 0.169)}
+ALBEDO MAT_CASAS_fachada_salmon           diffuse (0.813, 0.199, 0.099) -> medido {'20': (0.759, 0.185, 0.092)}
+ALBEDO MAT_CASAS_forja                    diffuse (0.02, 0.02, 0.025) -> medido {'20': (0.019, 0.019, 0.023)}
+ALBEDO MAT_CASAS_madera                   diffuse (0.148, 0.043, 0.008) -> medido {'20': (0.137, 0.04, 0.007)}
+ALBEDO MAT_CASAS_metal                    diffuse (0.237, 0.247, 0.268) -> medido {'20': (0.222, 0.231, 0.25)}
+ALBEDO MAT_CASAS_piedra                   diffuse (0.813, 0.699, 0.485) -> medido {'20': (0.645, 0.513, 0.313)}
+ALBEDO MAT_CASAS_teja                     diffuse (0.414, 0.056, 0.013) -> medido {'20': (0.438, 0.022, 0.004)}
+ALBEDO MAT_CASAS_terraza                  diffuse (0.401, 0.218, 0.133) -> medido {'20': (0.372, 0.201, 0.123)}
+ALBEDO MAT_CASAS_toldo_azul               diffuse (0.018, 0.082, 0.349) -> medido {'20': (0.017, 0.076, 0.323)}
+ALBEDO MAT_CASAS_toldo_blanco             diffuse (0.893, 0.852, 0.755) -> medido {'20': (0.836, 0.796, 0.703)}
+ALBEDO MAT_CASAS_toldo_rojo               diffuse (0.612, 0.018, 0.009) -> medido {'20': (0.57, 0.016, 0.009)}
+ALBEDO MAT_CASAS_toldo_verde              diffuse (0.018, 0.199, 0.036) -> medido {'20': (0.017, 0.185, 0.033)}
+ALBEDO MAT_CASINO_cupula                  diffuse (0.175, 0.5, 0.415) -> medido {'20': (0.163, 0.466, 0.385)}
+ALBEDO MAT_CASINO_dorado                  diffuse (0.91, 0.575, 0.1) -> medido {'20': (0.846, 0.533, 0.092)}
+ALBEDO MAT_CASINO_fachada                 diffuse (0.78, 0.5, 0.215) -> medido {'20': (0.728, 0.466, 0.2)}
+ALBEDO MAT_CASINO_farola                  diffuse (0.055, 0.065, 0.06) -> medido {'20': (0.051, 0.06, 0.055)}
+ALBEDO MAT_CASINO_molduras                diffuse (0.86, 0.72, 0.5) -> medido {'20': (0.794, 0.663, 0.459)}
+ALBEDO MAT_CASINO_piedra                  diffuse (0.47, 0.405, 0.31) -> medido {'20': (0.372, 0.297, 0.199)}
+ALBEDO MAT_CASINO_reloj                   diffuse (0.95, 0.93, 0.84) -> medido {'20': (0.883, 0.862, 0.776)}
+ALBEDO MAT_CASINO_rojo                    diffuse (0.63, 0.05, 0.075) -> medido {'20': (0.59, 0.047, 0.07)}
+ALBEDO MAT_CASINO_tejado                  diffuse (0.78, 0.235, 0.05) -> medido {'20': (0.825, 0.091, 0.014)}
+ALBEDO MAT_CIVICO_acero                   diffuse (0.274, 0.301, 0.336) -> medido {'20': (0.262, 0.288, 0.322)}
+ALBEDO MAT_CIVICO_bandera_r               diffuse (0.656, 0.009, 0.012) -> medido {'20': (0.627, 0.008, 0.011)}
+ALBEDO MAT_CIVICO_bandera_v               diffuse (0.0, 0.253, 0.051) -> medido {'20': (0.0, 0.242, 0.049)}
+ALBEDO MAT_CIVICO_blanco                  diffuse (0.901, 0.869, 0.748) -> medido {'20': (0.861, 0.831, 0.716)}
+ALBEDO MAT_CIVICO_campanile_lazo          diffuse (0.86, 0.66, 0.5) -> medido {'20': (0.823, 0.631, 0.478)}
+ALBEDO MAT_CIVICO_campanile_lazo_piedra   diffuse (0.7, 0.64, 0.52) -> medido {'20': (0.576, 0.489, 0.35)}
+ALBEDO MAT_CIVICO_campanile_lazo_teja     diffuse (0.62, 0.3, 0.18) -> medido {'20': (0.672, 0.12, 0.052)}
+ALBEDO MAT_CIVICO_crema                   diffuse (0.848, 0.711, 0.42) -> medido {'20': (0.811, 0.68, 0.402)}
+ALBEDO MAT_CIVICO_gris                    diffuse (0.026, 0.029, 0.035) -> medido {'20': (0.025, 0.027, 0.033)}
+ALBEDO MAT_CIVICO_ocre                    diffuse (0.748, 0.274, 0.036) -> medido {'20': (0.716, 0.262, 0.035)}
+ALBEDO MAT_CIVICO_oro                     diffuse (0.848, 0.393, 0.022) -> medido {'20': (0.811, 0.376, 0.021)}
+ALBEDO MAT_CIVICO_piedra                  diffuse (0.538, 0.42, 0.243) -> medido {'20': (0.443, 0.321, 0.163)}
+ALBEDO MAT_CIVICO_teja                    diffuse (0.393, 0.051, 0.012) -> medido {'20': (0.427, 0.02, 0.003)}
+ALBEDO MAT_CIVICO_ventana                 diffuse (0.012, 0.02, 0.027) -> medido {'20': (0.011, 0.019, 0.026)}
+ALBEDO MAT_CIVICO_verde_gp                diffuse (0.009, 0.342, 0.043) -> medido {'20': (0.008, 0.327, 0.041)}
+ALBEDO MAT_CIVICO_verde_osc               diffuse (0.006, 0.059, 0.017) -> medido {'20': (0.006, 0.057, 0.017)}
+ALBEDO MAT_HOTEL_fachada                  diffuse (0.922, 0.729, 0.342) -> medido {'20': (0.852, 0.672, 0.314)}
+ALBEDO MAT_HOTEL_mansarda                 diffuse (0.04, 0.068, 0.119) -> medido {'20': (0.037, 0.064, 0.111)}
+ALBEDO MAT_HOTEL_toldo                    diffuse (0.674, 0.01, 0.006) -> medido {'20': (0.63, 0.009, 0.006)}
+ALBEDO MAT_ITAL_hierba_seca               diffuse (0.72, 0.62, 0.24) -> medido {'20': (0.64, 0.57, 0.21)}
+ALBEDO MAT_ITAL_piedra_crema              diffuse (0.82, 0.7, 0.48) -> medido {'20': (0.626, 0.485, 0.283)}
+ALBEDO MAT_ITAL_piedra_seca               diffuse (0.62, 0.52, 0.35) -> medido {'20': (0.352, 0.264, 0.15)}
+ALBEDO MAT_ITAL_suelo_terraza             diffuse (0.66, 0.36, 0.22) -> medido {'20': (0.508, 0.255, 0.148)}
+ALBEDO MAT_ITAL_teja                      diffuse (0.74, 0.3, 0.14) -> medido {'20': (0.727, 0.104, 0.035)}
+ALBEDO MAT_ITAL_teja_clara                diffuse (0.86, 0.42, 0.22) -> medido {'20': (0.933, 0.168, 0.064)}
+ALBEDO MAT_ITAL_tierra                    diffuse (0.5, 0.32, 0.14) -> medido {'20': (0.44, 0.275, 0.12)}
+ALBEDO MAT_LOEWS_piedra                   diffuse (0.82, 0.74, 0.56) -> medido {'20': (0.675, 0.565, 0.377)}
+ALBEDO MAT_LOEWS_seto                     diffuse (0.065, 0.36, 0.085) -> medido {'20': (0.064, 0.345, 0.062)}
+ALBEDO MAT_LOEWS_seto_claro               diffuse (0.11, 0.46, 0.12) -> medido {'20': (0.108, 0.441, 0.088)}
+00:21.157  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:21.407  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:21.641  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:21.891  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:22.125  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:22.360  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:22.610  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:22.844  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:23.079  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:23.329  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:23.563  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:23.782  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:24.032  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:24.266  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:24.500  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:24.735  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:24.985  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:25.219  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:25.454  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:25.688  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:25.922  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:26.157  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:26.391  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:26.625  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:26.875  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:27.110  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:27.344  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:27.579  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:27.813  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:28.063  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:28.297  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:28.532  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:28.766  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:29.000  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:29.250  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:29.485  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:29.719  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:29.954  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:30.204  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:30.469  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:30.704  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:30.938  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:31.172  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:31.407  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:31.657  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:31.891  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:32.125  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:32.391  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:32.625  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:32.860  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:33.110  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:33.360  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:33.594  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:33.829  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:34.079  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:34.313  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:34.547  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:34.782  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:35.032  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:35.266  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:35.500  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:35.735  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:35.985  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:36.219  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:36.454  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:36.688  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:36.969  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:37.297  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:37.547  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:37.797  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:38.063  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:38.313  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:38.579  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:38.844  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:39.141  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+ALBEDO MAT_MCOCHE_caliza                  diffuse (0.6, 0.49, 0.33) -> medido {'20': (0.66, 0.559, 0.399)}
+ALBEDO MAT_MCOCHE_caliza_clara            diffuse (0.74, 0.66, 0.5) -> medido {'20': (0.783, 0.707, 0.547)}
+ALBEDO MAT_MCOCHE_caliza_grieta           diffuse (0.522, 0.426, 0.287) -> medido {'20': (0.574, 0.486, 0.347)}
+ALBEDO MAT_MCOCHE_caliza_monte            diffuse (0.34, 0.28, 0.19) -> medido {'20': (0.391, 0.325, 0.224)}
+ALBEDO MAT_MCOCHE_caliza_oscura           diffuse (0.4, 0.31, 0.2) -> medido {'20': (0.439, 0.349, 0.234)}
+ALBEDO MAT_MCOCHE_hueso                   diffuse (0.8, 0.75, 0.62) -> medido {'20': (0.83, 0.784, 0.654)}
+ALBEDO MAT_MIRADOR_pavimento_piedra       diffuse (0.8, 0.8, 0.8) -> medido {'20': (0.329, 0.267, 0.188)}
+ALBEDO MAT_MIRADOR_piedra_blanca          diffuse (0.86, 0.84, 0.79) -> medido {'20': (0.708, 0.642, 0.532)}
+ALBEDO MAT_MIRADOR_piedra_clara           diffuse (0.8, 0.715, 0.54) -> medido {'20': (0.659, 0.546, 0.363)}
+ALBEDO MAT_MIRADOR_piedra_muro            diffuse (0.64, 0.46, 0.235) -> medido {'20': (0.527, 0.351, 0.158)}
+ALBEDO MAT_MIRADOR_piedra_palazzo         diffuse (0.6, 0.365, 0.36) -> medido {'20': (0.494, 0.279, 0.242)}
+ALBEDO MAT_MIRADOR_piedra_palazzo_base    diffuse (0.455, 0.3, 0.295) -> medido {'20': (0.375, 0.229, 0.198)}
+ALBEDO MAT_MIRADOR_piedra_palazzo_clara   diffuse (0.8, 0.63, 0.57) -> medido {'20': (0.659, 0.481, 0.384)}
+ALBEDO MAT_MIRADOR_piedra_palazzo_llaga   diffuse (0.27, 0.17, 0.17) -> medido {'20': (0.222, 0.13, 0.114)}
+ALBEDO MAT_MIRADOR_piedra_paseo           diffuse (0.8, 0.8, 0.8) -> medido {'20': (0.494, 0.413, 0.289)}
+ALBEDO MAT_MIRADOR_piedra_sombra          diffuse (0.33, 0.215, 0.11) -> medido {'20': (0.272, 0.164, 0.074)}
+ALBEDO MAT_MIRADOR_piedra_zocalo          diffuse (0.42, 0.37, 0.3) -> medido {'20': (0.346, 0.283, 0.202)}
+ALBEDO MAT_OLI_hoja_plata                 diffuse (0.38, 0.46, 0.27) -> medido {'20': (0.374, 0.441, 0.198)}
+ALBEDO MAT_OLI_hoja_salvia                diffuse (0.22, 0.34, 0.14) -> medido {'20': (0.217, 0.326, 0.103)}
+ALBEDO MAT_OLI_matorral                   diffuse (0.06, 0.215, 0.075) -> medido {'20': (0.059, 0.206, 0.055)}
+ALBEDO MAT_OLI_matorral_claro             diffuse (0.13, 0.32, 0.12) -> medido {'20': (0.128, 0.307, 0.088)}
+ALBEDO MAT_OLI_tronco_olivo               diffuse (0.27, 0.19, 0.1) -> medido {'20': (0.266, 0.182, 0.073)}
+ALBEDO MAT_PIT_piedra_clara               diffuse (0.6, 0.54, 0.42) -> medido {'20': (0.494, 0.413, 0.283)}
+ALBEDO MAT_PPUEBLO_piedra_calzada         diffuse (0.36, 0.34, 0.31) -> medido {'20': (0.296, 0.26, 0.209)}
+ALBEDO MAT_PPUEBLO_piedra_escalera        diffuse (0.74, 0.68, 0.56) -> medido {'20': (0.609, 0.52, 0.377)}
+ALBEDO MAT_PPUEBLO_piedra_muelle          diffuse (0.6, 0.56, 0.48) -> medido {'20': (0.494, 0.428, 0.323)}
+ALBEDO MAT_PPUEBLO_piedra_muro            diffuse (0.68, 0.62, 0.5) -> medido {'20': (0.56, 0.474, 0.336)}
+ALBEDO MAT_PPUEBLO_piedra_plaza           diffuse (0.62, 0.57, 0.47) -> medido {'20': (0.51, 0.436, 0.316)}
+ALBEDO MAT_PPUEBLO_piedra_plaza_b         diffuse (0.54, 0.49, 0.4) -> medido {'20': (0.445, 0.374, 0.269)}
+ALBEDO MAT_PPUEBLO_repisa                 diffuse (0.49, 0.43, 0.33) -> medido {'20': (0.409, 0.353, 0.26)}
+ALBEDO MAT_PPUEBLO_roca                   diffuse (0.55, 0.47, 0.36) -> medido {'20': (0.459, 0.385, 0.284)}
+ALBEDO MAT_PPUEBLO_roca_clara             diffuse (0.63, 0.56, 0.44) -> medido {'20': (0.526, 0.459, 0.347)}
+ALBEDO MAT_PPUEBLO_roca_oscura            diffuse (0.46, 0.39, 0.3) -> medido {'20': (0.384, 0.32, 0.237)}
+ALBEDO MAT_PUENTES_VIADUCTO_balaustre     diffuse (0.68, 0.55, 0.33) -> medido {'20': (0.616, 0.485, 0.28)}
+ALBEDO MAT_PUENTES_VIADUCTO_clave         diffuse (0.785, 0.645, 0.4) -> medido {'20': (0.716, 0.573, 0.342)}
+ALBEDO MAT_PUENTES_VIADUCTO_dovela_a      diffuse (0.745, 0.6, 0.36) -> medido {'20': (0.678, 0.532, 0.307)}
+ALBEDO MAT_PUENTES_VIADUCTO_dovela_b      diffuse (0.675, 0.535, 0.31) -> medido {'20': (0.614, 0.474, 0.264)}
+ALBEDO MAT_PUENTES_VIADUCTO_intrados      diffuse (0.335, 0.25, 0.14) -> medido {'20': (0.307, 0.223, 0.12)}
+ALBEDO MAT_PUENTES_VIADUCTO_piedra        diffuse (0.62, 0.48, 0.27) -> medido {'20': (0.563, 0.424, 0.229)}
+ALBEDO MAT_PUENTES_VIADUCTO_piedra_b      diffuse (0.575, 0.44, 0.245) -> medido {'20': (0.517, 0.385, 0.206)}
+ALBEDO MAT_PUENTES_VIADUCTO_sillar        diffuse (0.765, 0.625, 0.385) -> medido {'20': (0.696, 0.554, 0.328)}
+ALBEDO MAT_PUENTES_VIADUCTO_zocalo        diffuse (0.34, 0.255, 0.145) -> medido {'20': (0.309, 0.226, 0.123)}
+ALBEDO MAT_PUERTO_piedra                  diffuse (0.55, 0.47, 0.36) -> medido {'20': (0.453, 0.359, 0.242)}
+ALBEDO MAT_VEG_adelfa_hoja                diffuse (0.1, 0.32, 0.1) -> medido {'20': (0.098, 0.307, 0.073)}
+ALBEDO MAT_VEG_cipres                     diffuse (0.043, 0.2, 0.065) -> medido {'20': (0.042, 0.192, 0.048)}
+ALBEDO MAT_VEG_cipres_b                   diffuse (0.06, 0.22, 0.11) -> medido {'20': (0.059, 0.211, 0.081)}
+ALBEDO MAT_VEG_cipres_b_luz               diffuse (0.1, 0.3, 0.14) -> medido {'20': (0.098, 0.288, 0.103)}
+ALBEDO MAT_VEG_cipres_luz                 diffuse (0.075, 0.27, 0.09) -> medido {'20': (0.074, 0.259, 0.066)}
+ALBEDO MAT_VEG_datil                      diffuse (0.78, 0.4, 0.1) -> medido {'20': (0.768, 0.384, 0.073)}
+ALBEDO MAT_VEG_encina_b                   diffuse (0.09, 0.26, 0.1) -> medido {'20': (0.089, 0.249, 0.073)}
+ALBEDO MAT_VEG_encina_b_luz               diffuse (0.14, 0.34, 0.13) -> medido {'20': (0.138, 0.326, 0.096)}
+ALBEDO MAT_VEG_flor_amarilla              diffuse (0.96, 0.8, 0.08) -> medido {'20': (0.845, 0.768, 0.059)}
+ALBEDO MAT_VEG_flor_lavanda               diffuse (0.45, 0.25, 0.72) -> medido {'20': (0.443, 0.24, 0.529)}
+ALBEDO MAT_VEG_flor_roja                  diffuse (0.8, 0.06, 0.08) -> medido {'20': (0.788, 0.058, 0.059)}
+ALBEDO MAT_VEG_flor_roja_clara            diffuse (0.92, 0.22, 0.2) -> medido {'20': (0.831, 0.211, 0.147)}
+ALBEDO MAT_VEG_flor_romero                diffuse (0.6, 0.7, 0.92) -> medido {'20': (0.591, 0.672, 0.676)}
+ALBEDO MAT_VEG_flor_rosa                  diffuse (0.92, 0.28, 0.5) -> medido {'20': (0.831, 0.269, 0.367)}
+ALBEDO MAT_VEG_flor_rosa_clara            diffuse (0.97, 0.55, 0.68) -> medido {'20': (0.849, 0.528, 0.5)}
+ALBEDO MAT_VEG_lavanda                    diffuse (0.38, 0.48, 0.35) -> medido {'20': (0.374, 0.461, 0.257)}
+ALBEDO MAT_VEG_lavanda_luz                diffuse (0.48, 0.58, 0.44) -> medido {'20': (0.473, 0.556, 0.323)}
+ALBEDO MAT_VEG_olivo_plata                diffuse (0.29, 0.42, 0.25) -> medido {'20': (0.285, 0.403, 0.184)}
+ALBEDO MAT_VEG_olivo_salvia               diffuse (0.19, 0.33, 0.15) -> medido {'20': (0.187, 0.317, 0.11)}
+ALBEDO MAT_VEG_palma                      diffuse (0.07, 0.42, 0.1) -> medido {'20': (0.069, 0.403, 0.073)}
+ALBEDO MAT_VEG_palma_abanico              diffuse (0.1, 0.4, 0.17) -> medido {'20': (0.098, 0.384, 0.125)}
+ALBEDO MAT_VEG_palma_abanico_clara        diffuse (0.19, 0.52, 0.21) -> medido {'20': (0.187, 0.499, 0.154)}
+ALBEDO MAT_VEG_palma_clara                diffuse (0.15, 0.55, 0.15) -> medido {'20': (0.148, 0.528, 0.11)}
+ALBEDO MAT_VEG_palma_seca                 diffuse (0.5, 0.38, 0.18) -> medido {'20': (0.492, 0.365, 0.132)}
+ALBEDO MAT_VEG_palma_wash                 diffuse (0.12, 0.46, 0.14) -> medido {'20': (0.118, 0.441, 0.103)}
+ALBEDO MAT_VEG_palma_wash_clara           diffuse (0.2, 0.56, 0.18) -> medido {'20': (0.197, 0.537, 0.132)}
+ALBEDO MAT_VEG_piedra                     diffuse (0.63, 0.53, 0.35) -> medido {'20': (0.511, 0.389, 0.173)}
+ALBEDO MAT_VEG_pino_a                     diffuse (0.1, 0.35, 0.09) -> medido {'20': (0.098, 0.336, 0.066)}
+ALBEDO MAT_VEG_pino_a_luz                 diffuse (0.17, 0.45, 0.13) -> medido {'20': (0.167, 0.432, 0.096)}
+ALBEDO MAT_VEG_pino_c                     diffuse (0.14, 0.36, 0.06) -> medido {'20': (0.138, 0.345, 0.044)}
+ALBEDO MAT_VEG_pino_c_luz                 diffuse (0.22, 0.47, 0.09) -> medido {'20': (0.217, 0.451, 0.066)}
+ALBEDO MAT_VEG_pino_joven                 diffuse (0.18, 0.48, 0.12) -> medido {'20': (0.177, 0.461, 0.088)}00:39.407  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:39.719  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:39.969  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:40.219  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:40.469  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:40.735  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:41.000  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:41.250  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:41.516  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:41.797  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:42.063  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:42.344  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:42.594  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:42.875  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:43.141  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:43.422  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:43.750  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:44.079  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:44.438  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:44.735  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:45.079  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:45.391  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:45.641  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:45.907  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:46.157  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:46.454  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:46.719  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:47.000  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:47.344  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:47.625  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:47.907  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+00:48.188  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_tmp_albedo.exr'
+
+ALBEDO MAT_VEG_pino_joven_luz             diffuse (0.27, 0.58, 0.16) -> medido {'20': (0.266, 0.556, 0.118)}
+ALBEDO MAT_VEG_platano                    diffuse (0.28, 0.55, 0.16) -> medido {'20': (0.276, 0.528, 0.118)}
+ALBEDO MAT_VEG_platano_b                  diffuse (0.24, 0.5, 0.2) -> medido {'20': (0.236, 0.48, 0.147)}
+ALBEDO MAT_VEG_platano_b_luz              diffuse (0.36, 0.62, 0.26) -> medido {'20': (0.354, 0.595, 0.191)}
+ALBEDO MAT_VEG_platano_luz                diffuse (0.4, 0.66, 0.22) -> medido {'20': (0.394, 0.633, 0.162)}
+ALBEDO MAT_VEG_retama                     diffuse (0.3, 0.48, 0.16) -> medido {'20': (0.295, 0.461, 0.118)}
+ALBEDO MAT_VEG_retama_luz                 diffuse (0.4, 0.58, 0.2) -> medido {'20': (0.394, 0.556, 0.147)}
+ALBEDO MAT_VEG_roca                       diffuse (0.48, 0.39, 0.24) -> medido {'20': (0.473, 0.374, 0.176)}
+ALBEDO MAT_VEG_romero                     diffuse (0.19, 0.31, 0.19) -> medido {'20': (0.187, 0.297, 0.14)}
+ALBEDO MAT_VEG_romero_luz                 diffuse (0.27, 0.4, 0.26) -> medido {'20': (0.266, 0.384, 0.191)}
+ALBEDO MAT_VEG_tronco                     diffuse (0.3, 0.17, 0.08) -> medido {'20': (0.295, 0.163, 0.059)}
+ALBEDO MAT_VEG_tronco_abanico             diffuse (0.32, 0.21, 0.11) -> medido {'20': (0.315, 0.202, 0.081)}
+ALBEDO MAT_VEG_tronco_encina              diffuse (0.22, 0.15, 0.09) -> medido {'20': (0.217, 0.144, 0.066)}
+ALBEDO MAT_VEG_tronco_olivo               diffuse (0.36, 0.28, 0.18) -> medido {'20': (0.354, 0.269, 0.132)}
+ALBEDO MAT_VEG_tronco_palmera             diffuse (0.38, 0.24, 0.11) -> medido {'20': (0.374, 0.23, 0.081)}
+ALBEDO MAT_VEG_tronco_platano             diffuse (0.36, 0.33, 0.25) -> medido {'20': (0.354, 0.317, 0.184)}
+ALBEDO MAT_VEG_tronco_platano_claro       diffuse (0.56, 0.54, 0.42) -> medido {'20': (0.551, 0.518, 0.309)}
+ALBEDO MAT_VEG_tronco_wash                diffuse (0.44, 0.34, 0.22) -> medido {'20': (0.433, 0.326, 0.162)}
+ALBEDO MAT_YATE_cubierta                  diffuse (0.64, 0.42, 0.19) -> medido {'20': (0.58, 0.375, 0.165)}
+ALBEDO MAT_acera_piedra                   diffuse (0.34, 0.31, 0.27) -> medido {'20': (0.28, 0.237, 0.182)}
+ALBEDO MAT_agua                           diffuse (0.05, 0.42, 0.55) -> medido {'20': (0.028, 0.361, 0.491)}
+ALBEDO MAT_asfalto                        diffuse (0.105, 0.102, 0.108) -> medido {'20': (0.034, 0.034, 0.037)}
+ALBEDO MAT_bordillo_piedra                diffuse (0.4, 0.37, 0.33) -> medido {'20': (0.329, 0.283, 0.222)}
+ALBEDO MAT_muro_contencion_piedra         diffuse (0.63, 0.58, 0.47) -> medido {'20': (0.519, 0.443, 0.316)}
+ALBEDO MAT_piedra                         diffuse (0.78, 0.72, 0.6) -> medido {'20': (0.628, 0.537, 0.393)}
+ALBEDO MAT_terreno                        diffuse (0.32, 0.45, 0.2) -> medido {'2': (0.227, 0.403, 0.105), '8': (0.067, 0.278, 0.019), '20': (0.066, 0.271, 0.019), '45': (0.064, 0.255, 0.019), '90': (0.064, 0.232, 0.019)}
+ALBEDO MAT_tierra                         diffuse (0.6, 0.43, 0.24) -> medido {'20': (0.471, 0.257, 0.103)}
+ALBEDO MAT_zocalo_piedra                  diffuse (0.8, 0.8, 0.8) -> medido {'20': (0.453, 0.382, 0.269)}
+OK albedo medido de 177 materiales procedurales (+ 04_export/color_ac_albedo.json)
+Blender 5.1.2 (hash ec6e62d40fa9 built 2026-05-19 01:37:34)
+
+Blender quit

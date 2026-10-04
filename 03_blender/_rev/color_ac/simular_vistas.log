@@ -1,0 +1,156 @@
+meta_tunel {"blender": [null, 14.4, 39.4], "ac_antes": [23.9, 10.5, 49.4], "ac_despues": [17.4, 9.8, 34.7], "lcs_antes": [16.8, 18.4, 46.4], "lcs_despues": [10.7, 17.7, 44.5], "lcsy_antes": [12.4, 13.6, 36.0], "lcsy_despues": [10.9, 12.9, 35.8], "captura_antes": [22.2, 9.9, 33.0], "captura_despues": [16.5, 8.4, 41.4], "captura1_antes": [43.1, 6.0, 20.4], "captura1_despues": [39.4, 4.7, 23.4], "nubes_antes": [10.8, 12.8, 36.2], "nubes_despues": [13.8, 11.2, 43.1], "nubes2_antes": [20.5, 9.9, 37.5], "nubes2_despues": [15.5, 8.5, 45.1]}
+captura {"blender": [null, 12.9, 34.0], "ac_antes": [25.1, 9.1, 44.1], "ac_despues": [15.6, 10.7, 31.0], "lcs_antes": [16.8, 14.3, 37.8], "lcs_despues": [11.5, 17.0, 38.6], "lcsy_antes": [11.5, 11.0, 30.2], "lcsy_despues": [6.4, 12.8, 32.5], "captura_antes": [24.8, 5.7, 28.1], "captura_despues": [15.2, 7.0, 40.0], "captura1_antes": [46.6, 2.8, 14.3], "captura1_despues": [39.8, 4.1, 23.0], "nubes_antes": [11.1, 8.9, 30.8], "nubes_despues": [12.7, 9.8, 39.3], "nubes2_antes": [23.0, 6.4, 30.9], "nubes2_despues": [12.8, 7.8, 41.6]}
+pueblo {"blender": [null, 30.2, 41.3], "ac_antes": [23.4, 20.8, 58.6], "ac_despues": [12.6, 28.5, 50.4], "lcs_antes": [21.7, 21.0, 54.0], "lcs_despues": [14.1, 31.6, 48.9], "lcsy_antes": [25.2, 16.2, 40.4], "lcsy_despues": [19.0, 22.9, 37.2], "captura_antes": [29.8, 12.8, 32.8], "captura_despues": [24.2, 15.1, 29.7], "captura1_antes": [46.1, 6.1, 17.8], "captura1_despues": [43.9, 6.3, 15.2], "nubes_antes": [19.8, 18.7, 39.5], "nubes_despues": [13.0, 25.4, 36.3], "nubes2_antes": [27.9, 12.6, 39.6], "nubes2_despues": [17.9, 19.0, 36.8]}
+tierra {"blender": [null, 47.8, 17.1], "ac_antes": [36.3, 22.6, 35.2], "ac_despues": [11.0, 50.7, 28.4], "lcs_antes": [26.2, 25.4, 27.0], "lcs_despues": [14.4, 56.4, 21.2], "lcsy_antes": [33.8, 18.2, 19.2], "lcsy_despues": [20.3, 39.6, 15.3], "captura_antes": [43.9, 12.3, 10.9], "captura_despues": [24.5, 29.5, 13.6], "captura1_antes": [59.2, 3.0, 3.8], "captura1_despues": [48.8, 14.0, 6.2], "nubes_antes": [29.7, 21.9, 16.5], "nubes_despues": [12.0, 45.1, 11.4], "nubes2_antes": [43.3, 12.7, 15.1], "nubes2_despues": [18.2, 35.2, 12.1]}
+casino {"blender": [null, 32.2, 41.4], "ac_antes": [23.2, 23.2, 53.8], "ac_despues": [12.1, 30.0, 47.0], "lcs_antes": [22.3, 23.8, 53.2], "lcs_despues": [15.9, 32.7, 49.2], "lcsy_antes": [27.0, 17.9, 39.3], "lcsy_despues": [22.5, 23.5, 37.1], "captura_antes": [27.0, 15.8, 32.2], "captura_despues": [18.9, 20.3, 30.1], "captura1_antes": [44.9, 7.2, 14.7], "captura1_despues": [41.0, 8.7, 14.0], "nubes_antes": [19.1, 20.9, 41.8], "nubes_despues": [12.9, 26.8, 38.8], "nubes2_antes": [26.6, 14.3, 40.6], "nubes2_despues": [17.5, 19.6, 38.5]}
+piloto_s300 {"blender": [null, 10.0, 31.5], "ac_antes": [24.0, 10.7, 45.9], "ac_despues": [14.9, 9.8, 31.8], "lcs_antes": [15.2, 11.7, 36.7], "lcs_despues": [9.5, 13.0, 38.4], "lcsy_antes": [12.4, 9.1, 30.0], "lcsy_despues": [8.4, 9.8, 30.7], "captura_antes": [22.4, 6.7, 24.8], "captura_despues": [13.4, 6.3, 39.3], "captura1_antes": [43.6, 2.4, 10.5], "captura1_despues": [36.9, 3.6, 23.8], "nubes_antes": [10.3, 8.5, 27.8], "nubes_despues": [12.1, 6.9, 37.9], "nubes2_antes": [21.0, 5.7, 27.6], "nubes2_despues": [12.7, 5.4, 40.8]}
+meta_puerto {"blender": [null, 18.2, 45.2], "ac_antes": [23.4, 13.5, 57.8], "ac_despues": [15.9, 14.2, 50.1], "lcs_antes": [17.8, 18.4, 51.4], "lcs_despues": [13.0, 20.8, 49.9], "lcsy_antes": [18.9, 14.0, 40.5], "lcsy_despues": [16.2, 15.8, 39.5], "captura_antes": [26.3, 9.1, 31.7], "captura_despues": [22.0, 9.7, 33.0], "captura1_antes": [41.9, 4.0, 18.2], "captura1_despues": [40.2, 4.4, 17.2], "nubes_antes": [16.3, 14.5, 38.3], "nubes_despues": [13.8, 14.9, 40.1], "nubes2_antes": [23.3, 10.1, 39.6], "nubes2_despues": [17.6, 11.0, 41.6]}
+bajada {"blender": [null, 36.0, 39.7], "ac_antes": [24.4, 28.1, 45.5], "ac_despues": [11.0, 33.4, 38.0], "lcs_antes": [23.8, 28.8, 48.9], "lcs_despues": [16.0, 35.7, 45.2], "lcsy_antes": [29.1, 21.4, 35.6], "lcsy_despues": [24.0, 26.0, 33.5], "captura_antes": [28.3, 18.4, 34.6], "captura_despues": [22.4, 19.4, 32.7], "captura1_antes": [44.8, 9.6, 18.2], "captura1_despues": [42.3, 7.9, 17.9], "nubes_antes": [21.0, 24.9, 40.1], "nubes_despues": [14.6, 29.4, 37.0], "nubes2_antes": [27.6, 16.8, 39.3], "nubes2_despues": [18.6, 21.5, 36.5]}
+puente {"blender": [null, 12.7, 41.4], "ac_antes": [19.1, 16.8, 51.3], "ac_despues": [15.3, 12.5, 55.7], "lcs_antes": [16.0, 19.3, 39.9], "lcs_despues": [12.6, 15.9, 49.3], "lcsy_antes": [17.3, 14.5, 31.3], "lcsy_despues": [17.3, 14.4, 38.6], "captura_antes": [27.0, 6.0, 14.3], "captura_despues": [24.4, 4.5, 22.2], "captura1_antes": [41.5, 1.7, 4.2], "captura1_despues": [40.6, 1.2, 8.6], "nubes_antes": [15.4, 15.6, 19.4], "nubes_despues": [12.6, 13.9, 28.3], "nubes2_antes": [21.9, 11.3, 18.5], "nubes2_despues": [15.7, 9.4, 28.9]}
+piloto_s2900 {"blender": [null, 19.4, 32.5], "ac_antes": [29.7, 10.4, 36.0], "ac_despues": [14.9, 16.9, 32.9], "lcs_antes": [13.5, 14.6, 40.4], "lcs_despues": [8.4, 21.6, 39.0], "lcsy_antes": [13.0, 10.9, 32.0], "lcsy_despues": [11.6, 15.6, 30.5], "captura_antes": [27.4, 6.0, 28.2], "captura_despues": [12.8, 10.3, 36.5], "captura1_antes": [50.9, 2.2, 10.3], "captura1_despues": [40.2, 5.4, 21.4], "nubes_antes": [13.2, 9.2, 32.1], "nubes_despues": [12.1, 14.1, 32.3], "nubes2_antes": [26.9, 6.0, 29.7], "nubes2_despues": [11.7, 10.8, 35.0]}
+{
+ "ajuste": {
+  "ac_antes": {
+   "deltaE": 25.61,
+   "croma/blender": 0.73,
+   "std/blender": 1.44
+  },
+  "ac_despues": {
+   "deltaE": 14.21,
+   "croma/blender": 0.89,
+   "std/blender": 1.13
+  },
+  "lcs_antes": {
+   "deltaE": 19.54,
+   "croma/blender": 0.93,
+   "std/blender": 1.25
+  },
+  "lcs_despues": {
+   "deltaE": 12.73,
+   "croma/blender": 1.18,
+   "std/blender": 1.17
+  },
+  "lcsy_antes": {
+   "deltaE": 20.17,
+   "croma/blender": 0.71,
+   "std/blender": 0.96
+  },
+  "lcsy_despues": {
+   "deltaE": 14.81,
+   "croma/blender": 0.86,
+   "std/blender": 0.91
+  },
+  "captura_antes": {
+   "deltaE": 28.06,
+   "croma/blender": 0.5,
+   "std/blender": 0.77
+  },
+  "captura_despues": {
+   "deltaE": 19.24,
+   "croma/blender": 0.58,
+   "std/blender": 0.92
+  },
+  "captura1_antes": {
+   "deltaE": 46.49,
+   "croma/blender": 0.23,
+   "std/blender": 0.38
+  },
+  "captura1_despues": {
+   "deltaE": 41.43,
+   "croma/blender": 0.29,
+   "std/blender": 0.5
+  },
+  "nubes_antes": {
+   "deltaE": 16.73,
+   "croma/blender": 0.71,
+   "std/blender": 0.93
+  },
+  "nubes_despues": {
+   "deltaE": 12.9,
+   "croma/blender": 0.81,
+   "std/blender": 0.97
+  },
+  "nubes2_antes": {
+   "deltaE": 26.51,
+   "croma/blender": 0.49,
+   "std/blender": 0.92
+  },
+  "nubes2_despues": {
+   "deltaE": 16.03,
+   "croma/blender": 0.62,
+   "std/blender": 1.02
+  }
+ },
+ "control": {
+  "ac_antes": {
+   "deltaE": 24.4,
+   "croma/blender": 0.88,
+   "std/blender": 1.16
+  },
+  "ac_despues": {
+   "deltaE": 13.73,
+   "croma/blender": 0.93,
+   "std/blender": 1.1
+  },
+  "lcs_antes": {
+   "deltaE": 17.77,
+   "croma/blender": 1.02,
+   "std/blender": 1.15
+  },
+  "lcs_despues": {
+   "deltaE": 12.33,
+   "croma/blender": 1.12,
+   "std/blender": 1.18
+  },
+  "lcsy_antes": {
+   "deltaE": 19.8,
+   "croma/blender": 0.77,
+   "std/blender": 0.88
+  },
+  "lcsy_despues": {
+   "deltaE": 17.63,
+   "croma/blender": 0.89,
+   "std/blender": 0.9
+  },
+  "captura_antes": {
+   "deltaE": 27.57,
+   "croma/blender": 0.43,
+   "std/blender": 0.69
+  },
+  "captura_despues": {
+   "deltaE": 19.87,
+   "croma/blender": 0.47,
+   "std/blender": 0.83
+  },
+  "captura1_antes": {
+   "deltaE": 45.73,
+   "croma/blender": 0.17,
+   "std/blender": 0.29
+  },
+  "captura1_despues": {
+   "deltaE": 41.03,
+   "croma/blender": 0.2,
+   "std/blender": 0.44
+  },
+  "nubes_antes": {
+   "deltaE": 16.53,
+   "croma/blender": 0.8,
+   "std/blender": 0.82
+  },
+  "nubes_despues": {
+   "deltaE": 13.1,
+   "croma/blender": 0.88,
+   "std/blender": 0.87
+  },
+  "nubes2_antes": {
+   "deltaE": 25.47,
+   "croma/blender": 0.56,
+   "std/blender": 0.78
+  },
+  "nubes2_despues": {
+   "deltaE": 15.33,
+   "croma/blender": 0.63,
+   "std/blender": 0.9
+  }
+ }
+}

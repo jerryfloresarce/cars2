@@ -1,0 +1,309 @@
+{
+ "ok": true,
+ "fecha": "2026-10-04 15:18",
+ "candidata": {
+  "blend": "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/escena_candidata.blend",
+  "md5": "a6fb4195c32f20c41299b4b68cff46db",
+  "mtime": "2026-10-04 15:18"
+ },
+ "base": {
+  "ruta": "E:\\Escritorio\\claude-pc\\arnau-aseto-corsa\\03_blender\\_rev\\linea_base.json",
+  "fecha": "2026-10-04 15:12",
+  "blend_md5": "a6fb4195c32f20c41299b4b68cff46db"
+ },
+ "fuentes": {
+  "urbanismo_informe": "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/urbanismo_informe_candidata.json",
+  "asentar": "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/asentar_candidata.json",
+  "nada_en_pista": "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/nada_en_pista_candidata.json",
+  "preparar_geometria.log": "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/logs_final\\preparar_geometria.log",
+  "urbanismo.log": "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/logs_final\\urbanismo.log",
+  "integrar_escena.log": "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/logs_final\\integrar_escena.log",
+  "blend": "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/escena_candidata.blend"
+ },
+ "motivos": [],
+ "avisos": [
+  "terreno: costuras max 2.03 m (objetivo del plan < 0.6; hoy la base ya lo supera, se exige \"no peor\")"
+ ],
+ "diff": {
+  "urbanismo_plan_fallos": {
+   "base": 0,
+   "candidata": 0,
+   "regla": "== 0"
+  },
+  "urbanismo_plan_casas": {
+   "base": 193,
+   "candidata": 193,
+   "regla": ">= 190"
+  },
+  "revisar_urbanismo_fallos": {
+   "base": 23,
+   "candidata": 23,
+   "regla": "<= base"
+  },
+  "revisar_urbanismo_por_tipo": {
+   "base": {
+    "casa_muro": 1,
+    "arbol_calle": 1,
+    "prop_pista": 1,
+    "prop_pitlane": 1,
+    "prop_camino": 1,
+    "casa_flotante": 3,
+    "objeto_salto_grande": 8,
+    "bancal_mal_asentado": 1,
+    "losa_hierba": 2,
+    "plaza_muro": 1,
+    "sendero_volado": 2,
+    "sendero_enterrado": 1
+   },
+   "candidata": {
+    "casa_muro": 1,
+    "arbol_calle": 1,
+    "prop_pista": 1,
+    "prop_pitlane": 1,
+    "prop_camino": 1,
+    "casa_flotante": 3,
+    "objeto_salto_grande": 8,
+    "bancal_mal_asentado": 1,
+    "losa_hierba": 2,
+    "plaza_muro": 1,
+    "sendero_volado": 2,
+    "sendero_enterrado": 1
+   },
+   "regla": "casa_pista/casa_muro/losa* <= base"
+  },
+  "nada_en_pista": {
+   "base": 11,
+   "candidata": 11,
+   "regla": "<= base"
+  },
+  "nada_en_pista_tierra": {
+   "base": 0,
+   "candidata": 0,
+   "regla": "== 0"
+  },
+  "asentar.arboles_quitados": {
+   "base": 3,
+   "candidata": 3,
+   "regla": "<= base"
+  },
+  "asentar.flotaban_mas_0_6": {
+   "base": 28,
+   "candidata": 28,
+   "regla": "<= base"
+  },
+  "asentar.enterrados_mas_0_6": {
+   "base": 57,
+   "candidata": 57,
+   "regla": "<= base"
+  },
+  "asentar.saltos": {
+   "base": 0,
+   "candidata": 0,
+   "regla": "<= base"
+  },
+  "asentar.bajo_mar": {
+   "base": 0,
+   "candidata": 0,
+   "regla": "<= base"
+  },
+  "asentar.sin_impacto": {
+   "base": 0,
+   "candidata": 0,
+   "regla": "<= base"
+  },
+  "asentar.fuera_del_terreno": {
+   "base": 0,
+   "candidata": 0,
+   "regla": "<= base"
+  },
+  "asentar.edificios_flotantes": {
+   "base": 3,
+   "candidata": 3,
+   "regla": "<= base"
+  },
+  "asentar.edificios_enterrados": {
+   "base": 0,
+   "candidata": 0,
+   "regla": "<= base"
+  },
+  "asentar.edificios_sin_suelo": {
+   "base": 0,
+   "candidata": 0,
+   "regla": "<= base"
+  },
+  "asentar.losas_con_aire": {
+   "base": 0,
+   "candidata": 0,
+   "regla": "<= base"
+  },
+  "asentar.bancales_mal": {
+   "base": 1,
+   "candidata": 1,
+   "regla": "<= base"
+  },
+  "asentar.coches_quitados": {
+   "base": 0,
+   "candidata": 0,
+   "regla": "<= base"
+  },
+  "asentar.dentro_de_muro_quitados": {
+   "base": 0,
+   "candidata": 0,
+   "regla": "<= base"
+  },
+  "terreno_celdas_invaden_pista": {
+   "base": 0,
+   "candidata": 0,
+   "regla": "== 0"
+  },
+  "terreno_hierba_asfalto": {
+   "base": 0,
+   "candidata": 0,
+   "regla": "== 0"
+  },
+  "terreno_fosos_gt_1p5": {
+   "base": 0,
+   "candidata": 0,
+   "regla": "== 0"
+  },
+  "terreno_costuras_max_m": {
+   "base": 2.03,
+   "candidata": 2.03,
+   "regla": "<= base + 0.05"
+  },
+  "terreno_costuras_celdas_gt_0p6": {
+   "base": 127,
+   "candidata": 127,
+   "regla": "<= base"
+  },
+  "terreno_loews_ref_dz_max": {
+   "base": 0.0,
+   "candidata": 0.0,
+   "regla": "== 0.000"
+  },
+  "integrar_errores": {
+   "base": "ninguno",
+   "candidata": "ninguno",
+   "regla": "== ninguno"
+  },
+  "integrar_casas": {
+   "base": 193,
+   "candidata": 193,
+   "regla": ">= 190"
+  }
+ },
+ "valores": {
+  "urbanismo_plan_fallos": 0,
+  "urbanismo_plan_fallos_por_tipo": {},
+  "urbanismo_plan_casas": 193,
+  "urbanismo_plan_huecos_m": 515.0,
+  "urbanismo_plan_terrazas_vacias": 0,
+  "urbanismo_plan_casas_total_linea": 193,
+  "revisar_urbanismo_fallos": 23,
+  "revisar_urbanismo_por_tipo": {
+   "casa_muro": 1,
+   "arbol_calle": 1,
+   "prop_pista": 1,
+   "prop_pitlane": 1,
+   "prop_camino": 1,
+   "casa_flotante": 3,
+   "objeto_salto_grande": 8,
+   "bancal_mal_asentado": 1,
+   "losa_hierba": 2,
+   "plaza_muro": 1,
+   "sendero_volado": 2,
+   "sendero_enterrado": 1
+  },
+  "revisar_urbanismo_avisos": 10,
+  "revisar_urbanismo_n_casas_huella": 209,
+  "nada_en_pista": 11,
+  "nada_en_pista_tierra": 0,
+  "nada_en_pista_objetos": [
+   "CALLE_farola.001",
+   "CALLE_farola.002",
+   "CALLE_farola.004",
+   "CALLE_farola.007",
+   "CALLE_farola.011",
+   "CALLE_farola.015",
+   "CALLE_farola.016",
+   "CALLE_farola.017",
+   "CALLE_farola.018",
+   "CALLE_farola.020",
+   "CALLE_farola.024"
+  ],
+  "asentar": {
+   "arboles_quitados": 3,
+   "flotaban_mas_0_6": 28,
+   "enterrados_mas_0_6": 57,
+   "saltos": 0,
+   "bajo_mar": 0,
+   "sin_impacto": 0,
+   "fuera_del_terreno": 0,
+   "edificios_flotantes": 3,
+   "edificios_enterrados": 0,
+   "edificios_sin_suelo": 0,
+   "losas_con_aire": 0,
+   "bancales_mal": 1,
+   "coches_quitados": 0,
+   "dentro_de_muro_quitados": 0
+  },
+  "asentar_movidos": 3036,
+  "asentar_candidatos": 3096,
+  "terreno_celdas_invaden_pista": 0,
+  "terreno_celdas_invaden_viaducto": 0,
+  "terreno_hierba_asfalto_antes": 253,
+  "terreno_hierba_asfalto": 0,
+  "terreno_hierba_asfalto_max_m": -0.05,
+  "terreno_fosos_gt_1p5_por_sector": {
+   "pueblo_subida_ladera": 0,
+   "pueblo_subida_mar": 0,
+   "pueblo_alto_ladera": 0,
+   "pueblo_alto_mar": 0,
+   "bajada_ladera": 0,
+   "casino_ladera": 0,
+   "casino_mar": 0
+  },
+  "terreno_fosos_gt_1p5": 0,
+  "terreno_costuras_max_m": 2.03,
+  "terreno_costuras_celdas_gt_0p3": 380,
+  "terreno_costuras_celdas_gt_0p6": 127,
+  "terreno_costuras_por_sector": {
+   "pueblo_subida_ladera": [
+    1.49,
+    74
+   ],
+   "pueblo_subida_mar": [
+    0.51,
+    0
+   ],
+   "pueblo_alto_ladera": [
+    0.64,
+    4
+   ],
+   "pueblo_alto_mar": [
+    2.03,
+    19
+   ],
+   "bajada_ladera": [
+    0.74,
+    4
+   ],
+   "casino_ladera": [
+    1.48,
+    10
+   ],
+   "casino_mar": [
+    2.01,
+    16
+   ]
+  },
+  "terreno_loews_ref_dz_max": 0.0,
+  "pista_pendiente_max_pct": 16.5,
+  "pista_z_max": 122.7,
+  "preparar_geometria_ok": true,
+  "integrar_errores": "ninguno",
+  "integrar_casas": 193,
+  "integrar_despeje_arboles_quitados": 139,
+  "integrar_despeje_props_quitados": 29
+ }
+}

@@ -53,8 +53,23 @@ Para una IA fina (10 minutos):
   limitador de velocidad de AC (es la superficie PIT); se quita solo al pisar la pista.
 - **Los coches salen mirando al revés en parrilla o en boxes** → avísanos y
   lo corregimos en origen (es un dato del modelo; en esta versión ya está orientado).
-- **Se atraviesan las vallas finas** → tienen colisión los muros, guardarraíles,
-  barreras de los caminos y rocas; las vallas publicitarias son decorativas.
+- **¿Se atraviesan las vallas?** → no: barreras, muros, guardarraíles, vallas
+  (también las publicitarias), farolas, maceteros y rocas son sólidos. Además hay
+  muros invisibles al final de la escapatoria, junto a los boxes y por dentro de
+  las horquillas de tierra (y de las curvas más cerradas), para que no se pueda
+  salir del circuito ni atajar por la hierba de un tramo a otro. Si chocas contra "nada" en la hierba, es uno
+  de esos muros: vuelve a la pista.
+- **Se ve todo muy blanco / lavado** → en esta versión (1.1) los colores y el
+  brillo de todos los materiales están recalibrados para Assetto Corsa (antes el
+  circuito salía casi blanco). Pruébalo primero con los ajustes de gráficos y de
+  tiempo POR DEFECTO (sin tocar brillo, saturación ni filtros): si bajaste cosas
+  para la versión anterior, vuelve a dejarlas como estaban. Si con CSP aún se ve
+  plano, abre `content/tracks/porto_corsa/extension/ext_config.ini` con el bloc
+  de notas y cambia `ACTIVE = 0` por `ACTIVE = 1` en `[MATERIAL_ADJUSTMENT_0]`
+  (baja un poco el brillo de todo el circuito; solo funciona con CSP).
+  Nos ayuda mucho: dos capturas en el mismo sitio (por ejemplo la recta de meta),
+  una con tus ajustes de ahora y otra con los de por defecto, y decirnos qué
+  tiempo (weather) y qué filtro (PP filter / Pure / Sol) usas.
 - **Rendimiento** → es un circuito grande; con CSP activado va mejor.
 
 ## Créditos

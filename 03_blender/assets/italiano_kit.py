@@ -959,13 +959,21 @@ def build_bancal(parent_collection, largo=30.0, alto=1.6, seed=0, fondo=7.0, sin
     de tierra detras hasta y=-fondo con hierba amarilla en z=alto y olivos
     cada ~7 m (salvo en los tramos locales [(x0, x1), ...] de `sin_olivos`,
     p. ej. donde se apoya una ermita o cruza un camino). Apilable: el
-    siguiente bancal en (y=-fondo+0.4, z=alto)."""
+    siguiente bancal en (y=-fondo+0.4, z=alto).
+    Extremos (E2-09): en x = +-L/2 el muro DA LA VUELTA hasta el fondo
+    (grueso GV = 0.75 m hacia dentro, corona a z=alto con albardilla y pie
+    a -0.3), asi que en ladera la cuna de relleno que asoma sobre el terreno
+    en los extremos es piedra y no tierra. El relleno y la hierba acaban
+    dentro de las vueltas (|x| <= L/2 - GV)."""
     rng = random.Random(7919 * seed + 83)
     root = _empty("%s_bancal" % PREFIX, parent_collection, size=2.0)
     L, A, F = float(largo), float(alto), max(2.0, float(fondo))
     root["largo"] = L
     root["alto"] = A
     root["fondo"] = F
+    GV = 0.75                      # grueso de los muros de vuelta de los extremos
+    root["muro_vuelta"] = GV
+    xi = L / 2.0 - GV              # cara interior de las vueltas (fin del relleno)
     talud = 0.08 * A
     mw = _MB()
     mw.add(*_extruir([(-0.75, 0.0), (0.0, 0.0), (-talud, A), (-0.75, A)], -L / 2.0, L / 2.0, eje="x"),
@@ -989,17 +997,58 @@ def build_bancal(parent_collection, largo=30.0, alto=1.6, seed=0, fondo=7.0, sin
         mw.add(*_box(w, 0.30, h, off=(x, yf - 0.09, z),
                      rot=(math.radians(rng.uniform(-4.0, 4.0)), math.radians(rng.uniform(-5.0, 5.0)), 0.0)),
                _mat("piedra_seca"))
+    # muros de VUELTA en los extremos (E2-09): caja de piedra seca de GV hacia
+    # dentro, de y = -0.75 (espalda del muro frontal: se tocan sin caras
+    # coplanarias vistas) hasta el fondo y de z = -0.3 a la corona. En ladera
+    # el terreno tapa la parte baja y del fondo; lo que asoma (la antigua cuna
+    # de relleno, hasta 1.9 m en la esquina delantera) es ya muro.
+    # (generador propio: la secuencia de `rng` sigue igual y las matas y los
+    # olivos salen donde salian)
+    rv = random.Random(7919 * seed + 4021)
+    pv = 0.95
+    m_alb = max(1, int(round(F / pv)))
+    pyv = F / m_alb
+    for sx in (-1.0, 1.0):
+        xc = sx * (L / 2.0 - GV / 2.0)
+        mw.add(*_box(GV, F - 0.75, A + 0.3, off=(xc, -(F + 0.75) / 2.0, -0.3), base=True), _mat("piedra_seca"))
+        # albardilla de la vuelta: losas 2 cm mas altas que las del frente (en
+        # la esquina se solapan sin caras coplanarias) e inclinadas 2.5 grados
+        # hacia fuera para que escurra el agua; tapan el canto de la hierba
+        for k in range(m_alb):
+            ll = min(0.84, 0.9 * pyv) * rv.uniform(0.94, 1.04)
+            mw.add(*_box(0.84, ll, 0.18, off=(xc + sx * 0.02, -(k + 0.5) * pyv, A + 0.08),
+                         rot=(0.0, sx * math.radians(2.5), math.radians(rv.uniform(-3.0, 3.0)))),
+                   _mat("albardilla"))
+        # piedras en relieve en la cara exterior, solo en la franja que suele
+        # quedar a la vista en ladera (por encima de la diagonal pie delantero
+        # -> corona del fondo) y sin salirse del talud del muro frontal
+        n_p = max(2, int(F * A * 0.5))
+        puestas = 0
+        for _ in range(6 * n_p):
+            if puestas >= n_p:
+                break
+            w, h = rv.uniform(0.45, 0.85), rv.uniform(0.20, 0.32)
+            y = rv.uniform(-F + 0.45, -0.5)
+            z_lo = 0.18 + (A - 0.5) * (-y / F)
+            if A - 0.32 - z_lo < 0.1:
+                continue
+            z = rv.uniform(z_lo, A - 0.32)
+            y = min(y, -talud * min(A, z + h / 2.0) / A - 0.03 - w / 2.0)
+            mw.add(*_box(0.30, w, h, off=(sx * (L / 2.0 - 0.09), y, z),
+                         rot=(math.radians(rv.uniform(-5.0, 5.0)), math.radians(rv.uniform(-4.0, 4.0)), 0.0)),
+                   _mat("piedra_seca"))
+            puestas += 1
     mw.build("%s_bancal_muro" % PREFIX, parent_collection, parent=root)
 
     mt = _MB()
-    mt.add(*_extruir([(-F, 0.0), (-0.6, 0.0), (-0.6, A), (-F, A)], -L / 2.0, L / 2.0, eje="x"),
+    mt.add(*_extruir([(-F, 0.0), (-0.6, 0.0), (-0.6, A), (-F, A)], -xi, xi, eje="x"),
            _mat("tierra"))
     zt = A + 0.012
-    # quad CCW visto desde arriba (normal +Z)
-    mt.add([(-L / 2.0, -0.62, zt), (L / 2.0, -0.62, zt), (L / 2.0, -F + 0.02, zt), (-L / 2.0, -F + 0.02, zt)],
+    # quad CCW visto desde arriba (normal +Z); acaba bajo la albardilla de las vueltas
+    mt.add([(-xi, -0.62, zt), (xi, -0.62, zt), (xi, -F + 0.02, zt), (-xi, -F + 0.02, zt)],
            [(0, 3, 2, 1)], _mat("hierba_seca"))
     for _ in range(int(L * 1.0)):
-        x = rng.uniform(-L / 2.0 + 0.3, L / 2.0 - 0.3)
+        x = rng.uniform(-xi + 0.3, xi - 0.3)
         y = rng.uniform(-F + 0.4, -0.95)
         r = rng.uniform(0.22, 0.34)
         mt.add(*_sphere(r, seg=5, rings=2, scale=(1.8, 1.4, 0.55), off=(x, y, A + r * 0.12),

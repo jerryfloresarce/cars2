@@ -1,0 +1,13 @@
+elegido (v3) 18.37 ac 14.20/13.73 lcs 12.76/12.33 lcsy 14.81/17.67 captura 19.24/19.87 nubes 12.90/13.13
+EXPO_LCS_AJUSTE 0.59/0.92 (la v2) 18.6 ac 14.59/14.17 lcs 12.76/11.97 lcsy 14.59/17.23 captura 19.76/20.47 nubes 12.20/12.30
+EXPO_LCS_AJUSTE 0.66/0.66 (autoexposicion real) 18.81 ac 14.93/14.40 lcs 12.71/11.87 lcsy 14.50/17.00 captura 20.03/20.80 nubes 11.81/11.87
+EXPO_LCS_AJUSTE 0.91/1.33 (punto fijo de nivel) 18.47 ac 13.74/13.23 lcs 13.13/13.30 lcsy 15.43/18.50 captura 18.57/19.00 nubes 14.41/14.83
+sin guarda de regresion 18.45 ac 13.79/13.13 lcs 13.14/13.00 lcsy 15.16/17.93 captura 18.96/19.30 nubes 13.64/13.83
+guarda 40 / margen 0 18.42 ac 14.41/13.93 lcs 12.76/12.13 lcsy 14.81/17.60 captura 19.27/20.00 nubes 12.70/12.93
+suelo de croma 0.85 18.48 ac 15.69/14.80 lcs 13.87/13.23 lcsy 14.73/17.67 captura 18.96/19.53 nubes 12.57/13.07
+asfalto sin pesos ni margen propios 18.76 ac 14.59/14.23 lcs 12.63/11.90 lcsy 14.70/17.47 captura 19.63/20.33 nubes 12.47/12.63
+asfalto con margen 3.0 18.37 ac 14.11/13.63 lcs 12.79/12.43 lcsy 14.89/17.70 captura 19.16/19.73 nubes 13.03/13.23
+agua sin croma_lineal propio 18.38 ac 14.21/13.87 lcs 12.74/12.33 lcsy 14.80/17.50 captura 19.26/19.90 nubes 12.87/12.90
+agua con pesos 0.7/0.15/0.15 18.36 ac 14.19/13.70 lcs 12.76/12.37 lcsy 14.83/17.77 captura 19.24/19.83 nubes 12.90/13.23
+agua con pesos 0.8/0.1/0.1 y croma_lineal 1.6 18.36 ac 14.19/13.67 lcs 12.77/12.43 lcsy 14.83/17.87 captura 19.23/19.83 nubes 12.91/13.37
+FIN

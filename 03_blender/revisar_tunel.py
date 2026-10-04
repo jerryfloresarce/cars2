@@ -4,10 +4,11 @@
 # Ejecutar SIEMPRE tras integrar_escena.py:
 #   blender --background --factory-startup --python revisar_tunel.py
 import json
+import os
 import bpy
 from mathutils import Vector
 BASE = 'E:/Escritorio/claude-pc/arnau-aseto-corsa'
-G = json.load(open(BASE + '/03_blender/geometria_3d.json', encoding='utf-8'))
+G = json.load(open(os.environ.get('GEOM', BASE + '/03_blender/geometria_3d.json'), encoding='utf-8'))
 bpy.ops.wm.open_mainfile(filepath=BASE + '/03_blender/porto_corsa.blend')
 S = G['muestras']; N = G['n']; paso = G['paso_m']
 ob = bpy.data.objects['TUNEL_acantilado']

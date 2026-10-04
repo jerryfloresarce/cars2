@@ -1,0 +1,1994 @@
+[
+ {
+  "prueba": "elegido (v3)",
+  "ajuste": {
+   "ac": {
+    "deltaE": 14.2,
+    "croma": 0.888,
+    "contraste": 1.133,
+    "vistas": {
+     "meta_tunel": 17.4,
+     "captura": 15.6,
+     "pueblo": 12.6,
+     "tierra": 11.0,
+     "casino": 12.1,
+     "piloto_s300": 14.8,
+     "meta_puerto": 15.9
+    },
+    "peor_que_antes": 0
+   },
+   "lcs": {
+    "deltaE": 12.76,
+    "croma": 1.177,
+    "contraste": 1.173,
+    "vistas": {
+     "meta_tunel": 10.8,
+     "captura": 11.6,
+     "pueblo": 14.1,
+     "tierra": 14.4,
+     "casino": 15.9,
+     "piloto_s300": 9.5,
+     "meta_puerto": 13.0
+    },
+    "peor_que_antes": 0
+   },
+   "lcsy": {
+    "deltaE": 14.81,
+    "croma": 0.866,
+    "contraste": 0.915,
+    "vistas": {
+     "meta_tunel": 10.9,
+     "captura": 6.4,
+     "pueblo": 19.0,
+     "tierra": 20.3,
+     "casino": 22.5,
+     "piloto_s300": 8.4,
+     "meta_puerto": 16.2
+    },
+    "peor_que_antes": 0
+   },
+   "captura": {
+    "deltaE": 19.24,
+    "croma": 0.576,
+    "contraste": 0.921,
+    "vistas": {
+     "meta_tunel": 16.5,
+     "captura": 15.2,
+     "pueblo": 24.2,
+     "tierra": 24.5,
+     "casino": 18.9,
+     "piloto_s300": 13.4,
+     "meta_puerto": 22.0
+    },
+    "peor_que_antes": 0
+   },
+   "nubes": {
+    "deltaE": 12.9,
+    "croma": 0.81,
+    "contraste": 0.974,
+    "vistas": {
+     "meta_tunel": 13.8,
+     "captura": 12.7,
+     "pueblo": 13.0,
+     "tierra": 12.0,
+     "casino": 13.0,
+     "piloto_s300": 12.0,
+     "meta_puerto": 13.8
+    },
+    "peor_que_antes": 3
+   },
+   "coste": 18.37
+  },
+  "control": {
+   "ac": {
+    "deltaE": 13.73,
+    "croma": 0.926,
+    "contraste": 1.106,
+    "vistas": {
+     "bajada": 11.0,
+     "puente": 15.3,
+     "piloto_s2900": 14.9
+    },
+    "peor_que_antes": 0
+   },
+   "lcs": {
+    "deltaE": 12.33,
+    "croma": 1.114,
+    "contraste": 1.177,
+    "vistas": {
+     "bajada": 16.0,
+     "puente": 12.6,
+     "piloto_s2900": 8.4
+    },
+    "peor_que_antes": 0
+   },
+   "lcsy": {
+    "deltaE": 17.67,
+    "croma": 0.883,
+    "contraste": 0.905,
+    "vistas": {
+     "bajada": 24.0,
+     "puente": 17.3,
+     "piloto_s2900": 11.7
+    },
+    "peor_que_antes": 0
+   },
+   "captura": {
+    "deltaE": 19.87,
+    "croma": 0.475,
+    "contraste": 0.827,
+    "vistas": {
+     "bajada": 22.4,
+     "puente": 24.4,
+     "piloto_s2900": 12.8
+    },
+    "peor_que_antes": 0
+   },
+   "nubes": {
+    "deltaE": 13.13,
+    "croma": 0.877,
+    "contraste": 0.87,
+    "vistas": {
+     "bajada": 14.6,
+     "puente": 12.6,
+     "piloto_s2900": 12.2
+    },
+    "peor_que_antes": 0
+   },
+   "coste": 19.9
+  },
+  "textura_agua": [
+   89,
+   146,
+   230
+  ],
+  "lastre": {
+   "ac": [
+    3,
+    0.14
+   ],
+   "lcs": [
+    12,
+    0.32
+   ],
+   "lcsy": [
+    4,
+    0.69
+   ],
+   "captura": [
+    10,
+    0.33
+   ],
+   "nubes": [
+    10,
+    2.18
+   ]
+  }
+ },
+ {
+  "prueba": "EXPO_LCS_AJUSTE 0.59/0.92 (la v2)",
+  "ajuste": {
+   "ac": {
+    "deltaE": 14.59,
+    "croma": 0.893,
+    "contraste": 1.146,
+    "vistas": {
+     "meta_tunel": 17.8,
+     "captura": 16.2,
+     "pueblo": 12.7,
+     "tierra": 11.8,
+     "casino": 12.5,
+     "piloto_s300": 15.2,
+     "meta_puerto": 15.9
+    },
+    "peor_que_antes": 0
+   },
+   "lcs": {
+    "deltaE": 12.76,
+    "croma": 1.187,
+    "contraste": 1.155,
+    "vistas": {
+     "meta_tunel": 10.8,
+     "captura": 11.8,
+     "pueblo": 14.2,
+     "tierra": 14.4,
+     "casino": 15.7,
+     "piloto_s300": 9.5,
+     "meta_puerto": 12.9
+    },
+    "peor_que_antes": 0
+   },
+   "lcsy": {
+    "deltaE": 14.59,
+    "croma": 0.874,
+    "contraste": 0.901,
+    "vistas": {
+     "meta_tunel": 10.6,
+     "captura": 6.4,
+     "pueblo": 18.8,
+     "tierra": 19.9,
+     "casino": 22.1,
+     "piloto_s300": 8.2,
+     "meta_puerto": 16.1
+    },
+    "peor_que_antes": 0
+   },
+   "captura": {
+    "deltaE": 19.76,
+    "croma": 0.583,
+    "contraste": 0.889,
+    "vistas": {
+     "meta_tunel": 17.1,
+     "captura": 16.1,
+     "pueblo": 24.7,
+     "tierra": 24.7,
+     "casino": 19.4,
+     "piloto_s300": 13.9,
+     "meta_puerto": 22.4
+    },
+    "peor_que_antes": 0
+   },
+   "nubes": {
+    "deltaE": 12.2,
+    "croma": 0.823,
+    "contraste": 0.959,
+    "vistas": {
+     "meta_tunel": 13.0,
+     "captura": 11.8,
+     "pueblo": 12.6,
+     "tierra": 11.1,
+     "casino": 12.3,
+     "piloto_s300": 11.1,
+     "meta_puerto": 13.5
+    },
+    "peor_que_antes": 3
+   },
+   "coste": 18.6
+  },
+  "control": {
+   "ac": {
+    "deltaE": 14.17,
+    "croma": 0.925,
+    "contraste": 1.1,
+    "vistas": {
+     "bajada": 11.3,
+     "puente": 15.2,
+     "piloto_s2900": 16.0
+    },
+    "peor_que_antes": 0
+   },
+   "lcs": {
+    "deltaE": 11.97,
+    "croma": 1.118,
+    "contraste": 1.163,
+    "vistas": {
+     "bajada": 15.9,
+     "puente": 12.3,
+     "piloto_s2900": 7.7
+    },
+    "peor_que_antes": 0
+   },
+   "lcsy": {
+    "deltaE": 17.23,
+    "croma": 0.883,
+    "contraste": 0.897,
+    "vistas": {
+     "bajada": 23.7,
+     "puente": 17.0,
+     "piloto_s2900": 11.0
+    },
+    "peor_que_antes": 0
+   },
+   "captura": {
+    "deltaE": 20.47,
+    "croma": 0.475,
+    "contraste": 0.803,
+    "vistas": {
+     "bajada": 22.7,
+     "puente": 24.8,
+     "piloto_s2900": 13.9
+    },
+    "peor_que_antes": 0
+   },
+   "nubes": {
+    "deltaE": 12.3,
+    "croma": 0.881,
+    "contraste": 0.861,
+    "vistas": {
+     "bajada": 13.9,
+     "puente": 12.2,
+     "piloto_s2900": 10.8
+    },
+    "peor_que_antes": 0
+   },
+   "coste": 20.25
+  },
+  "textura_agua": [
+   91,
+   150,
+   230
+  ],
+  "lastre": {
+   "ac": [
+    1,
+    0.11
+   ],
+   "lcs": [
+    9,
+    0.27
+   ],
+   "lcsy": [
+    3,
+    0.46
+   ],
+   "captura": [
+    13,
+    0.36
+   ],
+   "nubes": [
+    10,
+    1.68
+   ]
+  }
+ },
+ {
+  "prueba": "EXPO_LCS_AJUSTE 0.66/0.66 (autoexposicion real)",
+  "ajuste": {
+   "ac": {
+    "deltaE": 14.93,
+    "croma": 0.894,
+    "contraste": 1.158,
+    "vistas": {
+     "meta_tunel": 17.9,
+     "captura": 16.3,
+     "pueblo": 13.2,
+     "tierra": 13.0,
+     "casino": 13.0,
+     "piloto_s300": 15.2,
+     "meta_puerto": 15.9
+    },
+    "peor_que_antes": 0
+   },
+   "lcs": {
+    "deltaE": 12.71,
+    "croma": 1.184,
+    "contraste": 1.168,
+    "vistas": {
+     "meta_tunel": 10.8,
+     "captura": 11.7,
+     "pueblo": 14.1,
+     "tierra": 14.5,
+     "casino": 15.3,
+     "piloto_s300": 9.6,
+     "meta_puerto": 13.0
+    },
+    "peor_que_antes": 0
+   },
+   "lcsy": {
+    "deltaE": 14.5,
+    "croma": 0.873,
+    "contraste": 0.912,
+    "vistas": {
+     "meta_tunel": 10.8,
+     "captura": 6.6,
+     "pueblo": 18.5,
+     "tierra": 19.4,
+     "casino": 21.7,
+     "piloto_s300": 8.5,
+     "meta_puerto": 16.0
+    },
+    "peor_que_antes": 0
+   },
+   "captura": {
+    "deltaE": 20.03,
+    "croma": 0.575,
+    "contraste": 0.888,
+    "vistas": {
+     "meta_tunel": 17.1,
+     "captura": 16.2,
+     "pueblo": 25.1,
+     "tierra": 25.1,
+     "casino": 19.9,
+     "piloto_s300": 14.3,
+     "meta_puerto": 22.5
+    },
+    "peor_que_antes": 0
+   },
+   "nubes": {
+    "deltaE": 11.81,
+    "croma": 0.821,
+    "contraste": 0.964,
+    "vistas": {
+     "meta_tunel": 13.1,
+     "captura": 11.7,
+     "pueblo": 12.0,
+     "tierra": 9.9,
+     "casino": 11.8,
+     "piloto_s300": 11.0,
+     "meta_puerto": 13.2
+    },
+    "peor_que_antes": 3
+   },
+   "coste": 18.81
+  },
+  "control": {
+   "ac": {
+    "deltaE": 14.4,
+    "croma": 0.925,
+    "contraste": 1.112,
+    "vistas": {
+     "bajada": 12.0,
+     "puente": 14.9,
+     "piloto_s2900": 16.3
+    },
+    "peor_que_antes": 0
+   },
+   "lcs": {
+    "deltaE": 11.87,
+    "croma": 1.11,
+    "contraste": 1.175,
+    "vistas": {
+     "bajada": 15.6,
+     "puente": 12.0,
+     "piloto_s2900": 8.0
+    },
+    "peor_que_antes": 0
+   },
+   "lcsy": {
+    "deltaE": 17.0,
+    "croma": 0.875,
+    "contraste": 0.904,
+    "vistas": {
+     "bajada": 23.4,
+     "puente": 16.6,
+     "piloto_s2900": 11.0
+    },
+    "peor_que_antes": 0
+   },
+   "captura": {
+    "deltaE": 20.8,
+    "croma": 0.467,
+    "contraste": 0.806,
+    "vistas": {
+     "bajada": 23.2,
+     "puente": 25.2,
+     "piloto_s2900": 14.0
+    },
+    "peor_que_antes": 0
+   },
+   "nubes": {
+    "deltaE": 11.87,
+    "croma": 0.872,
+    "contraste": 0.869,
+    "vistas": {
+     "bajada": 13.2,
+     "puente": 11.9,
+     "piloto_s2900": 10.5
+    },
+    "peor_que_antes": 0
+   },
+   "coste": 20.41
+  },
+  "textura_agua": [
+   92,
+   153,
+   230
+  ],
+  "lastre": {
+   "ac": [
+    1,
+    0.11
+   ],
+   "lcs": [
+    10,
+    0.26
+   ],
+   "lcsy": [
+    3,
+    0.53
+   ],
+   "captura": [
+    14,
+    0.4
+   ],
+   "nubes": [
+    8,
+    1.67
+   ]
+  }
+ },
+ {
+  "prueba": "EXPO_LCS_AJUSTE 0.91/1.33 (punto fijo de nivel)",
+  "ajuste": {
+   "ac": {
+    "deltaE": 13.74,
+    "croma": 0.877,
+    "contraste": 1.12,
+    "vistas": {
+     "meta_tunel": 17.0,
+     "captura": 15.0,
+     "pueblo": 12.3,
+     "tierra": 9.5,
+     "casino": 11.6,
+     "piloto_s300": 14.7,
+     "meta_puerto": 16.1
+    },
+    "peor_que_antes": 0
+   },
+   "lcs": {
+    "deltaE": 13.13,
+    "croma": 1.16,
+    "contraste": 1.221,
+    "vistas": {
+     "meta_tunel": 11.6,
+     "captura": 11.2,
+     "pueblo": 14.5,
+     "tierra": 14.5,
+     "casino": 16.8,
+     "piloto_s300": 9.8,
+     "meta_puerto": 13.5
+    },
+    "peor_que_antes": 0
+   },
+   "lcsy": {
+    "deltaE": 15.43,
+    "croma": 0.856,
+    "contraste": 0.954,
+    "vistas": {
+     "meta_tunel": 11.7,
+     "captura": 6.8,
+     "pueblo": 19.4,
+     "tierra": 21.2,
+     "casino": 23.4,
+     "piloto_s300": 8.8,
+     "meta_puerto": 16.7
+    },
+    "peor_que_antes": 0
+   },
+   "captura": {
+    "deltaE": 18.57,
+    "croma": 0.564,
+    "contraste": 0.989,
+    "vistas": {
+     "meta_tunel": 15.8,
+     "captura": 14.0,
+     "pueblo": 23.7,
+     "tierra": 24.0,
+     "casino": 18.2,
+     "piloto_s300": 12.9,
+     "meta_puerto": 21.4
+    },
+    "peor_que_antes": 0
+   },
+   "nubes": {
+    "deltaE": 14.41,
+    "croma": 0.787,
+    "contraste": 1.017,
+    "vistas": {
+     "meta_tunel": 15.1,
+     "captura": 14.4,
+     "pueblo": 14.3,
+     "tierra": 14.1,
+     "casino": 14.6,
+     "piloto_s300": 13.7,
+     "meta_puerto": 14.7
+    },
+    "peor_que_antes": 3
+   },
+   "coste": 18.47
+  },
+  "control": {
+   "ac": {
+    "deltaE": 13.23,
+    "croma": 0.93,
+    "contraste": 1.13,
+    "vistas": {
+     "bajada": 10.5,
+     "puente": 15.9,
+     "piloto_s2900": 13.3
+    },
+    "peor_que_antes": 0
+   },
+   "lcs": {
+    "deltaE": 13.3,
+    "croma": 1.11,
+    "contraste": 1.223,
+    "vistas": {
+     "bajada": 16.7,
+     "puente": 13.3,
+     "piloto_s2900": 9.9
+    },
+    "peor_que_antes": 0
+   },
+   "lcsy": {
+    "deltaE": 18.5,
+    "croma": 0.888,
+    "contraste": 0.942,
+    "vistas": {
+     "bajada": 24.5,
+     "puente": 18.1,
+     "piloto_s2900": 12.9
+    },
+    "peor_que_antes": 1
+   },
+   "captura": {
+    "deltaE": 19.0,
+    "croma": 0.468,
+    "contraste": 0.88,
+    "vistas": {
+     "bajada": 21.9,
+     "puente": 23.6,
+     "piloto_s2900": 11.5
+    },
+    "peor_que_antes": 0
+   },
+   "nubes": {
+    "deltaE": 14.83,
+    "croma": 0.872,
+    "contraste": 0.902,
+    "vistas": {
+     "bajada": 16.1,
+     "puente": 13.6,
+     "piloto_s2900": 14.8
+    },
+    "peor_que_antes": 1
+   },
+   "coste": 19.59
+  },
+  "textura_agua": [
+   85,
+   140,
+   229
+  ],
+  "lastre": {
+   "ac": [
+    4,
+    0.23
+   ],
+   "lcs": [
+    14,
+    0.51
+   ],
+   "lcsy": [
+    8,
+    1.18
+   ],
+   "captura": [
+    7,
+    0.31
+   ],
+   "nubes": [
+    10,
+    3.11
+   ]
+  }
+ },
+ {
+  "prueba": "sin guarda de regresion",
+  "ajuste": {
+   "ac": {
+    "deltaE": 13.79,
+    "croma": 0.879,
+    "contraste": 1.125,
+    "vistas": {
+     "meta_tunel": 16.6,
+     "captura": 14.5,
+     "pueblo": 12.5,
+     "tierra": 11.0,
+     "casino": 12.0,
+     "piloto_s300": 14.3,
+     "meta_puerto": 15.6
+    },
+    "peor_que_antes": 0
+   },
+   "lcs": {
+    "deltaE": 13.14,
+    "croma": 1.181,
+    "contraste": 1.222,
+    "vistas": {
+     "meta_tunel": 12.0,
+     "captura": 11.6,
+     "pueblo": 14.3,
+     "tierra": 14.4,
+     "casino": 16.1,
+     "piloto_s300": 10.3,
+     "meta_puerto": 13.3
+    },
+    "peor_que_antes": 0
+   },
+   "lcsy": {
+    "deltaE": 15.16,
+    "croma": 0.872,
+    "contraste": 0.954,
+    "vistas": {
+     "meta_tunel": 11.8,
+     "captura": 7.1,
+     "pueblo": 19.0,
+     "tierra": 20.3,
+     "casino": 22.6,
+     "piloto_s300": 9.0,
+     "meta_puerto": 16.3
+    },
+    "peor_que_antes": 0
+   },
+   "captura": {
+    "deltaE": 18.96,
+    "croma": 0.58,
+    "contraste": 0.978,
+    "vistas": {
+     "meta_tunel": 16.0,
+     "captura": 14.2,
+     "pueblo": 24.2,
+     "tierra": 24.5,
+     "casino": 18.9,
+     "piloto_s300": 13.1,
+     "meta_puerto": 21.8
+    },
+    "peor_que_antes": 0
+   },
+   "nubes": {
+    "deltaE": 13.64,
+    "croma": 0.811,
+    "contraste": 1.021,
+    "vistas": {
+     "meta_tunel": 15.2,
+     "captura": 14.3,
+     "pueblo": 13.2,
+     "tierra": 12.0,
+     "casino": 13.3,
+     "piloto_s300": 13.2,
+     "meta_puerto": 14.3
+    },
+    "peor_que_antes": 3
+   },
+   "coste": 18.45
+  },
+  "control": {
+   "ac": {
+    "deltaE": 13.13,
+    "croma": 0.917,
+    "contraste": 1.137,
+    "vistas": {
+     "bajada": 10.9,
+     "puente": 15.2,
+     "piloto_s2900": 13.3
+    },
+    "peor_que_antes": 0
+   },
+   "lcs": {
+    "deltaE": 13.0,
+    "croma": 1.116,
+    "contraste": 1.232,
+    "vistas": {
+     "bajada": 16.0,
+     "puente": 12.7,
+     "piloto_s2900": 10.3
+    },
+    "peor_que_antes": 0
+   },
+   "lcsy": {
+    "deltaE": 17.93,
+    "croma": 0.888,
+    "contraste": 0.947,
+    "vistas": {
+     "bajada": 24.0,
+     "puente": 17.3,
+     "piloto_s2900": 12.5
+    },
+    "peor_que_antes": 0
+   },
+   "captura": {
+    "deltaE": 19.3,
+    "croma": 0.478,
+    "contraste": 0.881,
+    "vistas": {
+     "bajada": 22.3,
+     "puente": 24.2,
+     "piloto_s2900": 11.4
+    },
+    "peor_que_antes": 0
+   },
+   "nubes": {
+    "deltaE": 13.83,
+    "croma": 0.877,
+    "contraste": 0.915,
+    "vistas": {
+     "bajada": 14.7,
+     "puente": 12.8,
+     "piloto_s2900": 14.0
+    },
+    "peor_que_antes": 1
+   },
+   "coste": 19.44
+  },
+  "textura_agua": [
+   89,
+   146,
+   230
+  ],
+  "lastre": {
+   "ac": [
+    2,
+    0.14
+   ],
+   "lcs": [
+    14,
+    0.44
+   ],
+   "lcsy": [
+    5,
+    1.2
+   ],
+   "captura": [
+    15,
+    0.42
+   ],
+   "nubes": [
+    14,
+    2.95
+   ]
+  }
+ },
+ {
+  "prueba": "guarda 40 / margen 0",
+  "ajuste": {
+   "ac": {
+    "deltaE": 14.41,
+    "croma": 0.888,
+    "contraste": 1.144,
+    "vistas": {
+     "meta_tunel": 17.9,
+     "captura": 16.0,
+     "pueblo": 12.6,
+     "tierra": 11.1,
+     "casino": 12.2,
+     "piloto_s300": 15.1,
+     "meta_puerto": 16.0
+    },
+    "peor_que_antes": 0
+   },
+   "lcs": {
+    "deltaE": 12.76,
+    "croma": 1.177,
+    "contraste": 1.17,
+    "vistas": {
+     "meta_tunel": 10.9,
+     "captura": 11.7,
+     "pueblo": 14.0,
+     "tierra": 14.4,
+     "casino": 15.8,
+     "piloto_s300": 9.5,
+     "meta_puerto": 13.0
+    },
+    "peor_que_antes": 0
+   },
+   "lcsy": {
+    "deltaE": 14.81,
+    "croma": 0.865,
+    "contraste": 0.912,
+    "vistas": {
+     "meta_tunel": 10.8,
+     "captura": 6.4,
+     "pueblo": 19.0,
+     "tierra": 20.3,
+     "casino": 22.5,
+     "piloto_s300": 8.4,
+     "meta_puerto": 16.3
+    },
+    "peor_que_antes": 0
+   },
+   "captura": {
+    "deltaE": 19.27,
+    "croma": 0.58,
+    "contraste": 0.91,
+    "vistas": {
+     "meta_tunel": 16.1,
+     "captura": 15.5,
+     "pueblo": 24.3,
+     "tierra": 24.5,
+     "casino": 19.0,
+     "piloto_s300": 13.5,
+     "meta_puerto": 22.0
+    },
+    "peor_que_antes": 0
+   },
+   "nubes": {
+    "deltaE": 12.7,
+    "croma": 0.814,
+    "contraste": 0.966,
+    "vistas": {
+     "meta_tunel": 13.1,
+     "captura": 12.4,
+     "pueblo": 13.0,
+     "tierra": 12.0,
+     "casino": 12.9,
+     "piloto_s300": 11.8,
+     "meta_puerto": 13.7
+    },
+    "peor_que_antes": 3
+   },
+   "coste": 18.42
+  },
+  "control": {
+   "ac": {
+    "deltaE": 13.93,
+    "croma": 0.928,
+    "contraste": 1.101,
+    "vistas": {
+     "bajada": 11.0,
+     "puente": 15.4,
+     "piloto_s2900": 15.4
+    },
+    "peor_que_antes": 0
+   },
+   "lcs": {
+    "deltaE": 12.13,
+    "croma": 1.114,
+    "contraste": 1.164,
+    "vistas": {
+     "bajada": 15.9,
+     "puente": 12.5,
+     "piloto_s2900": 8.0
+    },
+    "peor_que_antes": 0
+   },
+   "lcsy": {
+    "deltaE": 17.6,
+    "croma": 0.881,
+    "contraste": 0.895,
+    "vistas": {
+     "bajada": 24.0,
+     "puente": 17.3,
+     "piloto_s2900": 11.5
+    },
+    "peor_que_antes": 0
+   },
+   "captura": {
+    "deltaE": 20.0,
+    "croma": 0.475,
+    "contraste": 0.814,
+    "vistas": {
+     "bajada": 22.4,
+     "puente": 24.4,
+     "piloto_s2900": 13.2
+    },
+    "peor_que_antes": 0
+   },
+   "nubes": {
+    "deltaE": 12.93,
+    "croma": 0.877,
+    "contraste": 0.857,
+    "vistas": {
+     "bajada": 14.5,
+     "puente": 12.5,
+     "piloto_s2900": 11.8
+    },
+    "peor_que_antes": 0
+   },
+   "coste": 20.08
+  },
+  "textura_agua": [
+   89,
+   146,
+   230
+  ],
+  "lastre": {
+   "ac": [
+    2,
+    0.16
+   ],
+   "lcs": [
+    10,
+    0.32
+   ],
+   "lcsy": [
+    3,
+    0.54
+   ],
+   "captura": [
+    6,
+    0.23
+   ],
+   "nubes": [
+    7,
+    1.96
+   ]
+  }
+ },
+ {
+  "prueba": "suelo de croma 0.85",
+  "ajuste": {
+   "ac": {
+    "deltaE": 15.69,
+    "croma": 0.943,
+    "contraste": 1.186,
+    "vistas": {
+     "meta_tunel": 18.6,
+     "captura": 16.2,
+     "pueblo": 14.7,
+     "tierra": 14.1,
+     "casino": 13.9,
+     "piloto_s300": 15.3,
+     "meta_puerto": 17.0
+    },
+    "peor_que_antes": 0
+   },
+   "lcs": {
+    "deltaE": 13.87,
+    "croma": 1.232,
+    "contraste": 1.19,
+    "vistas": {
+     "meta_tunel": 11.9,
+     "captura": 12.2,
+     "pueblo": 15.6,
+     "tierra": 15.9,
+     "casino": 17.0,
+     "piloto_s300": 10.1,
+     "meta_puerto": 14.4
+    },
+    "peor_que_antes": 0
+   },
+   "lcsy": {
+    "deltaE": 14.73,
+    "croma": 0.912,
+    "contraste": 0.93,
+    "vistas": {
+     "meta_tunel": 11.3,
+     "captura": 6.9,
+     "pueblo": 18.6,
+     "tierra": 18.7,
+     "casino": 22.2,
+     "piloto_s300": 8.9,
+     "meta_puerto": 16.5
+    },
+    "peor_que_antes": 0
+   },
+   "captura": {
+    "deltaE": 18.96,
+    "croma": 0.639,
+    "contraste": 0.909,
+    "vistas": {
+     "meta_tunel": 16.0,
+     "captura": 15.1,
+     "pueblo": 23.6,
+     "tierra": 24.7,
+     "casino": 18.4,
+     "piloto_s300": 13.5,
+     "meta_puerto": 21.4
+    },
+    "peor_que_antes": 0
+   },
+   "nubes": {
+    "deltaE": 12.57,
+    "croma": 0.874,
+    "contraste": 0.952,
+    "vistas": {
+     "meta_tunel": 14.1,
+     "captura": 12.7,
+     "pueblo": 12.7,
+     "tierra": 9.2,
+     "casino": 12.9,
+     "piloto_s300": 12.0,
+     "meta_puerto": 14.4
+    },
+    "peor_que_antes": 3
+   },
+   "coste": 18.48
+  },
+  "control": {
+   "ac": {
+    "deltaE": 14.8,
+    "croma": 0.982,
+    "contraste": 1.129,
+    "vistas": {
+     "bajada": 12.9,
+     "puente": 16.1,
+     "piloto_s2900": 15.4
+    },
+    "peor_que_antes": 0
+   },
+   "lcs": {
+    "deltaE": 13.23,
+    "croma": 1.198,
+    "contraste": 1.163,
+    "vistas": {
+     "bajada": 16.7,
+     "puente": 13.8,
+     "piloto_s2900": 9.2
+    },
+    "peor_que_antes": 0
+   },
+   "lcsy": {
+    "deltaE": 17.67,
+    "croma": 0.948,
+    "contraste": 0.89,
+    "vistas": {
+     "bajada": 23.8,
+     "puente": 17.9,
+     "piloto_s2900": 11.3
+    },
+    "peor_que_antes": 1
+   },
+   "captura": {
+    "deltaE": 19.53,
+    "croma": 0.509,
+    "contraste": 0.823,
+    "vistas": {
+     "bajada": 21.7,
+     "puente": 24.3,
+     "piloto_s2900": 12.6
+    },
+    "peor_que_antes": 0
+   },
+   "nubes": {
+    "deltaE": 13.07,
+    "croma": 0.958,
+    "contraste": 0.837,
+    "vistas": {
+     "bajada": 14.4,
+     "puente": 13.5,
+     "piloto_s2900": 11.3
+    },
+    "peor_que_antes": 0
+   },
+   "coste": 20.28
+  },
+  "textura_agua": [
+   83,
+   145,
+   230
+  ],
+  "lastre": {
+   "ac": [
+    16,
+    0.61
+   ],
+   "lcs": [
+    20,
+    0.64
+   ],
+   "lcsy": [
+    6,
+    0.82
+   ],
+   "captura": [
+    14,
+    0.33
+   ],
+   "nubes": [
+    17,
+    2.43
+   ]
+  }
+ },
+ {
+  "prueba": "asfalto sin pesos ni margen propios",
+  "ajuste": {
+   "ac": {
+    "deltaE": 14.59,
+    "croma": 0.893,
+    "contraste": 1.14,
+    "vistas": {
+     "meta_tunel": 18.1,
+     "captura": 16.5,
+     "pueblo": 12.7,
+     "tierra": 11.0,
+     "casino": 12.3,
+     "piloto_s300": 15.4,
+     "meta_puerto": 16.1
+    },
+    "peor_que_antes": 0
+   },
+   "lcs": {
+    "deltaE": 12.63,
+    "croma": 1.173,
+    "contraste": 1.141,
+    "vistas": {
+     "meta_tunel": 10.4,
+     "captura": 11.7,
+     "pueblo": 14.0,
+     "tierra": 14.4,
+     "casino": 15.8,
+     "piloto_s300": 9.3,
+     "meta_puerto": 12.8
+    },
+    "peor_que_antes": 0
+   },
+   "lcsy": {
+    "deltaE": 14.7,
+    "croma": 0.86,
+    "contraste": 0.889,
+    "vistas": {
+     "meta_tunel": 10.5,
+     "captura": 6.3,
+     "pueblo": 19.0,
+     "tierra": 20.3,
+     "casino": 22.5,
+     "piloto_s300": 8.1,
+     "meta_puerto": 16.2
+    },
+    "peor_que_antes": 0
+   },
+   "captura": {
+    "deltaE": 19.63,
+    "croma": 0.57,
+    "contraste": 0.882,
+    "vistas": {
+     "meta_tunel": 17.2,
+     "captura": 16.2,
+     "pueblo": 24.3,
+     "tierra": 24.5,
+     "casino": 19.1,
+     "piloto_s300": 13.9,
+     "meta_puerto": 22.2
+    },
+    "peor_que_antes": 0
+   },
+   "nubes": {
+    "deltaE": 12.47,
+    "croma": 0.809,
+    "contraste": 0.944,
+    "vistas": {
+     "meta_tunel": 13.0,
+     "captura": 11.8,
+     "pueblo": 12.9,
+     "tierra": 12.0,
+     "casino": 12.8,
+     "piloto_s300": 11.3,
+     "meta_puerto": 13.5
+    },
+    "peor_que_antes": 3
+   },
+   "coste": 18.76
+  },
+  "control": {
+   "ac": {
+    "deltaE": 14.23,
+    "croma": 0.931,
+    "contraste": 1.086,
+    "vistas": {
+     "bajada": 11.1,
+     "puente": 15.4,
+     "piloto_s2900": 16.2
+    },
+    "peor_que_antes": 0
+   },
+   "lcs": {
+    "deltaE": 11.9,
+    "croma": 1.114,
+    "contraste": 1.14,
+    "vistas": {
+     "bajada": 15.9,
+     "puente": 12.5,
+     "piloto_s2900": 7.3
+    },
+    "peor_que_antes": 0
+   },
+   "lcsy": {
+    "deltaE": 17.47,
+    "croma": 0.882,
+    "contraste": 0.878,
+    "vistas": {
+     "bajada": 24.0,
+     "puente": 17.3,
+     "piloto_s2900": 11.1
+    },
+    "peor_que_antes": 0
+   },
+   "captura": {
+    "deltaE": 20.33,
+    "croma": 0.468,
+    "contraste": 0.792,
+    "vistas": {
+     "bajada": 22.4,
+     "puente": 24.5,
+     "piloto_s2900": 14.1
+    },
+    "peor_que_antes": 0
+   },
+   "nubes": {
+    "deltaE": 12.63,
+    "croma": 0.875,
+    "contraste": 0.839,
+    "vistas": {
+     "bajada": 14.5,
+     "puente": 12.4,
+     "piloto_s2900": 11.0
+    },
+    "peor_que_antes": 0
+   },
+   "coste": 20.49
+  },
+  "textura_agua": [
+   89,
+   146,
+   230
+  ],
+  "lastre": {
+   "ac": [
+    3,
+    0.14
+   ],
+   "lcs": [
+    10,
+    0.27
+   ],
+   "lcsy": [
+    3,
+    0.41
+   ],
+   "captura": [
+    10,
+    0.33
+   ],
+   "nubes": [
+    10,
+    1.69
+   ]
+  }
+ },
+ {
+  "prueba": "asfalto con margen 3.0",
+  "ajuste": {
+   "ac": {
+    "deltaE": 14.11,
+    "croma": 0.886,
+    "contraste": 1.132,
+    "vistas": {
+     "meta_tunel": 17.2,
+     "captura": 15.4,
+     "pueblo": 12.6,
+     "tierra": 11.0,
+     "casino": 12.1,
+     "piloto_s300": 14.7,
+     "meta_puerto": 15.8
+    },
+    "peor_que_antes": 0
+   },
+   "lcs": {
+    "deltaE": 12.79,
+    "croma": 1.177,
+    "contraste": 1.181,
+    "vistas": {
+     "meta_tunel": 10.9,
+     "captura": 11.5,
+     "pueblo": 14.1,
+     "tierra": 14.4,
+     "casino": 15.9,
+     "piloto_s300": 9.6,
+     "meta_puerto": 13.1
+    },
+    "peor_que_antes": 0
+   },
+   "lcsy": {
+    "deltaE": 14.89,
+    "croma": 0.866,
+    "contraste": 0.922,
+    "vistas": {
+     "meta_tunel": 11.1,
+     "captura": 6.5,
+     "pueblo": 19.0,
+     "tierra": 20.3,
+     "casino": 22.5,
+     "piloto_s300": 8.5,
+     "meta_puerto": 16.3
+    },
+    "peor_que_antes": 0
+   },
+   "captura": {
+    "deltaE": 19.16,
+    "croma": 0.574,
+    "contraste": 0.931,
+    "vistas": {
+     "meta_tunel": 16.3,
+     "captura": 15.0,
+     "pueblo": 24.2,
+     "tierra": 24.5,
+     "casino": 18.9,
+     "piloto_s300": 13.3,
+     "meta_puerto": 21.9
+    },
+    "peor_que_antes": 0
+   },
+   "nubes": {
+    "deltaE": 13.03,
+    "croma": 0.809,
+    "contraste": 0.982,
+    "vistas": {
+     "meta_tunel": 14.0,
+     "captura": 13.0,
+     "pueblo": 13.1,
+     "tierra": 12.0,
+     "casino": 13.0,
+     "piloto_s300": 12.2,
+     "meta_puerto": 13.9
+    },
+    "peor_que_antes": 3
+   },
+   "coste": 18.37
+  },
+  "control": {
+   "ac": {
+    "deltaE": 13.63,
+    "croma": 0.926,
+    "contraste": 1.112,
+    "vistas": {
+     "bajada": 11.0,
+     "puente": 15.3,
+     "piloto_s2900": 14.6
+    },
+    "peor_que_antes": 0
+   },
+   "lcs": {
+    "deltaE": 12.43,
+    "croma": 1.116,
+    "contraste": 1.185,
+    "vistas": {
+     "bajada": 16.0,
+     "puente": 12.6,
+     "piloto_s2900": 8.7
+    },
+    "peor_que_antes": 0
+   },
+   "lcsy": {
+    "deltaE": 17.7,
+    "croma": 0.883,
+    "contraste": 0.912,
+    "vistas": {
+     "bajada": 24.0,
+     "puente": 17.3,
+     "piloto_s2900": 11.8
+    },
+    "peor_que_antes": 0
+   },
+   "captura": {
+    "deltaE": 19.73,
+    "croma": 0.475,
+    "contraste": 0.837,
+    "vistas": {
+     "bajada": 22.4,
+     "puente": 24.3,
+     "piloto_s2900": 12.5
+    },
+    "peor_que_antes": 0
+   },
+   "nubes": {
+    "deltaE": 13.23,
+    "croma": 0.875,
+    "contraste": 0.876,
+    "vistas": {
+     "bajada": 14.6,
+     "puente": 12.6,
+     "piloto_s2900": 12.5
+    },
+    "peor_que_antes": 0
+   },
+   "coste": 19.78
+  },
+  "textura_agua": [
+   89,
+   146,
+   230
+  ],
+  "lastre": {
+   "ac": [
+    3,
+    0.14
+   ],
+   "lcs": [
+    12,
+    0.33
+   ],
+   "lcsy": [
+    4,
+    0.77
+   ],
+   "captura": [
+    10,
+    0.33
+   ],
+   "nubes": [
+    10,
+    2.3
+   ]
+  }
+ },
+ {
+  "prueba": "agua sin croma_lineal propio",
+  "ajuste": {
+   "ac": {
+    "deltaE": 14.21,
+    "croma": 0.887,
+    "contraste": 1.134,
+    "vistas": {
+     "meta_tunel": 17.4,
+     "captura": 15.6,
+     "pueblo": 12.6,
+     "tierra": 11.0,
+     "casino": 12.1,
+     "piloto_s300": 14.8,
+     "meta_puerto": 16.0
+    },
+    "peor_que_antes": 0
+   },
+   "lcs": {
+    "deltaE": 12.74,
+    "croma": 1.176,
+    "contraste": 1.174,
+    "vistas": {
+     "meta_tunel": 10.8,
+     "captura": 11.6,
+     "pueblo": 14.1,
+     "tierra": 14.4,
+     "casino": 15.9,
+     "piloto_s300": 9.5,
+     "meta_puerto": 12.9
+    },
+    "peor_que_antes": 0
+   },
+   "lcsy": {
+    "deltaE": 14.8,
+    "croma": 0.865,
+    "contraste": 0.916,
+    "vistas": {
+     "meta_tunel": 10.9,
+     "captura": 6.4,
+     "pueblo": 19.0,
+     "tierra": 20.3,
+     "casino": 22.5,
+     "piloto_s300": 8.4,
+     "meta_puerto": 16.1
+    },
+    "peor_que_antes": 0
+   },
+   "captura": {
+    "deltaE": 19.26,
+    "croma": 0.576,
+    "contraste": 0.921,
+    "vistas": {
+     "meta_tunel": 16.5,
+     "captura": 15.2,
+     "pueblo": 24.2,
+     "tierra": 24.5,
+     "casino": 18.9,
+     "piloto_s300": 13.4,
+     "meta_puerto": 22.1
+    },
+    "peor_que_antes": 0
+   },
+   "nubes": {
+    "deltaE": 12.87,
+    "croma": 0.809,
+    "contraste": 0.975,
+    "vistas": {
+     "meta_tunel": 13.8,
+     "captura": 12.7,
+     "pueblo": 13.0,
+     "tierra": 12.0,
+     "casino": 13.0,
+     "piloto_s300": 12.0,
+     "meta_puerto": 13.6
+    },
+    "peor_que_antes": 3
+   },
+   "coste": 18.38
+  },
+  "control": {
+   "ac": {
+    "deltaE": 13.87,
+    "croma": 0.905,
+    "contraste": 1.121,
+    "vistas": {
+     "bajada": 11.0,
+     "puente": 15.7,
+     "piloto_s2900": 14.9
+    },
+    "peor_que_antes": 0
+   },
+   "lcs": {
+    "deltaE": 12.33,
+    "croma": 1.09,
+    "contraste": 1.194,
+    "vistas": {
+     "bajada": 16.0,
+     "puente": 12.6,
+     "piloto_s2900": 8.4
+    },
+    "peor_que_antes": 0
+   },
+   "lcsy": {
+    "deltaE": 17.5,
+    "croma": 0.862,
+    "contraste": 0.92,
+    "vistas": {
+     "bajada": 24.0,
+     "puente": 16.8,
+     "piloto_s2900": 11.7
+    },
+    "peor_que_antes": 0
+   },
+   "captura": {
+    "deltaE": 19.9,
+    "croma": 0.469,
+    "contraste": 0.829,
+    "vistas": {
+     "bajada": 22.4,
+     "puente": 24.5,
+     "piloto_s2900": 12.8
+    },
+    "peor_que_antes": 0
+   },
+   "nubes": {
+    "deltaE": 12.9,
+    "croma": 0.856,
+    "contraste": 0.881,
+    "vistas": {
+     "bajada": 14.6,
+     "puente": 11.9,
+     "piloto_s2900": 12.2
+    },
+    "peor_que_antes": 0
+   },
+   "coste": 20.05
+  },
+  "textura_agua": [
+   98,
+   154,
+   229
+  ],
+  "lastre": {
+   "ac": [
+    3,
+    0.14
+   ],
+   "lcs": [
+    12,
+    0.33
+   ],
+   "lcsy": [
+    4,
+    0.67
+   ],
+   "captura": [
+    10,
+    0.33
+   ],
+   "nubes": [
+    10,
+    2.18
+   ]
+  }
+ },
+ {
+  "prueba": "agua con pesos 0.7/0.15/0.15",
+  "ajuste": {
+   "ac": {
+    "deltaE": 14.19,
+    "croma": 0.888,
+    "contraste": 1.133,
+    "vistas": {
+     "meta_tunel": 17.4,
+     "captura": 15.6,
+     "pueblo": 12.6,
+     "tierra": 11.0,
+     "casino": 12.1,
+     "piloto_s300": 14.8,
+     "meta_puerto": 15.8
+    },
+    "peor_que_antes": 0
+   },
+   "lcs": {
+    "deltaE": 12.76,
+    "croma": 1.178,
+    "contraste": 1.172,
+    "vistas": {
+     "meta_tunel": 10.8,
+     "captura": 11.6,
+     "pueblo": 14.1,
+     "tierra": 14.4,
+     "casino": 15.9,
+     "piloto_s300": 9.5,
+     "meta_puerto": 13.0
+    },
+    "peor_que_antes": 0
+   },
+   "lcsy": {
+    "deltaE": 14.83,
+    "croma": 0.867,
+    "contraste": 0.915,
+    "vistas": {
+     "meta_tunel": 10.9,
+     "captura": 6.4,
+     "pueblo": 19.0,
+     "tierra": 20.3,
+     "casino": 22.5,
+     "piloto_s300": 8.4,
+     "meta_puerto": 16.3
+    },
+    "peor_que_antes": 0
+   },
+   "captura": {
+    "deltaE": 19.24,
+    "croma": 0.577,
+    "contraste": 0.921,
+    "vistas": {
+     "meta_tunel": 16.5,
+     "captura": 15.2,
+     "pueblo": 24.2,
+     "tierra": 24.5,
+     "casino": 18.9,
+     "piloto_s300": 13.4,
+     "meta_puerto": 22.0
+    },
+    "peor_que_antes": 0
+   },
+   "nubes": {
+    "deltaE": 12.9,
+    "croma": 0.811,
+    "contraste": 0.974,
+    "vistas": {
+     "meta_tunel": 13.8,
+     "captura": 12.7,
+     "pueblo": 13.0,
+     "tierra": 12.0,
+     "casino": 13.0,
+     "piloto_s300": 12.0,
+     "meta_puerto": 13.8
+    },
+    "peor_que_antes": 3
+   },
+   "coste": 18.36
+  },
+  "control": {
+   "ac": {
+    "deltaE": 13.7,
+    "croma": 0.931,
+    "contraste": 1.101,
+    "vistas": {
+     "bajada": 11.0,
+     "puente": 15.2,
+     "piloto_s2900": 14.9
+    },
+    "peor_que_antes": 0
+   },
+   "lcs": {
+    "deltaE": 12.37,
+    "croma": 1.122,
+    "contraste": 1.17,
+    "vistas": {
+     "bajada": 16.0,
+     "puente": 12.7,
+     "piloto_s2900": 8.4
+    },
+    "peor_que_antes": 0
+   },
+   "lcsy": {
+    "deltaE": 17.77,
+    "croma": 0.894,
+    "contraste": 0.9,
+    "vistas": {
+     "bajada": 24.0,
+     "puente": 17.6,
+     "piloto_s2900": 11.7
+    },
+    "peor_que_antes": 1
+   },
+   "captura": {
+    "deltaE": 19.83,
+    "croma": 0.475,
+    "contraste": 0.826,
+    "vistas": {
+     "bajada": 22.4,
+     "puente": 24.3,
+     "piloto_s2900": 12.8
+    },
+    "peor_que_antes": 0
+   },
+   "nubes": {
+    "deltaE": 13.23,
+    "croma": 0.887,
+    "contraste": 0.866,
+    "vistas": {
+     "bajada": 14.6,
+     "puente": 12.9,
+     "piloto_s2900": 12.2
+    },
+    "peor_que_antes": 0
+   },
+   "coste": 19.86
+  },
+  "textura_agua": [
+   86,
+   144,
+   230
+  ],
+  "lastre": {
+   "ac": [
+    3,
+    0.14
+   ],
+   "lcs": [
+    12,
+    0.32
+   ],
+   "lcsy": [
+    5,
+    0.73
+   ],
+   "captura": [
+    10,
+    0.33
+   ],
+   "nubes": [
+    10,
+    2.18
+   ]
+  }
+ },
+ {
+  "prueba": "agua con pesos 0.8/0.1/0.1 y croma_lineal 1.6",
+  "ajuste": {
+   "ac": {
+    "deltaE": 14.19,
+    "croma": 0.888,
+    "contraste": 1.132,
+    "vistas": {
+     "meta_tunel": 17.4,
+     "captura": 15.6,
+     "pueblo": 12.6,
+     "tierra": 11.0,
+     "casino": 12.1,
+     "piloto_s300": 14.8,
+     "meta_puerto": 15.8
+    },
+    "peor_que_antes": 0
+   },
+   "lcs": {
+    "deltaE": 12.77,
+    "croma": 1.178,
+    "contraste": 1.172,
+    "vistas": {
+     "meta_tunel": 10.8,
+     "captura": 11.6,
+     "pueblo": 14.1,
+     "tierra": 14.4,
+     "casino": 15.9,
+     "piloto_s300": 9.5,
+     "meta_puerto": 13.1
+    },
+    "peor_que_antes": 0
+   },
+   "lcsy": {
+    "deltaE": 14.83,
+    "croma": 0.867,
+    "contraste": 0.914,
+    "vistas": {
+     "meta_tunel": 10.9,
+     "captura": 6.4,
+     "pueblo": 19.0,
+     "tierra": 20.3,
+     "casino": 22.5,
+     "piloto_s300": 8.4,
+     "meta_puerto": 16.3
+    },
+    "peor_que_antes": 0
+   },
+   "captura": {
+    "deltaE": 19.23,
+    "croma": 0.577,
+    "contraste": 0.921,
+    "vistas": {
+     "meta_tunel": 16.5,
+     "captura": 15.2,
+     "pueblo": 24.2,
+     "tierra": 24.5,
+     "casino": 18.9,
+     "piloto_s300": 13.4,
+     "meta_puerto": 21.9
+    },
+    "peor_que_antes": 0
+   },
+   "nubes": {
+    "deltaE": 12.91,
+    "croma": 0.811,
+    "contraste": 0.974,
+    "vistas": {
+     "meta_tunel": 13.8,
+     "captura": 12.7,
+     "pueblo": 13.0,
+     "tierra": 12.0,
+     "casino": 13.0,
+     "piloto_s300": 12.0,
+     "meta_puerto": 13.9
+    },
+    "peor_que_antes": 3
+   },
+   "coste": 18.36
+  },
+  "control": {
+   "ac": {
+    "deltaE": 13.67,
+    "croma": 0.939,
+    "contraste": 1.096,
+    "vistas": {
+     "bajada": 11.0,
+     "puente": 15.1,
+     "piloto_s2900": 14.9
+    },
+    "peor_que_antes": 0
+   },
+   "lcs": {
+    "deltaE": 12.43,
+    "croma": 1.129,
+    "contraste": 1.164,
+    "vistas": {
+     "bajada": 16.0,
+     "puente": 12.9,
+     "piloto_s2900": 8.4
+    },
+    "peor_que_antes": 0
+   },
+   "lcsy": {
+    "deltaE": 17.87,
+    "croma": 0.901,
+    "contraste": 0.894,
+    "vistas": {
+     "bajada": 24.0,
+     "puente": 17.9,
+     "piloto_s2900": 11.7
+    },
+    "peor_que_antes": 1
+   },
+   "captura": {
+    "deltaE": 19.83,
+    "croma": 0.477,
+    "contraste": 0.826,
+    "vistas": {
+     "bajada": 22.4,
+     "puente": 24.3,
+     "piloto_s2900": 12.8
+    },
+    "peor_que_antes": 0
+   },
+   "nubes": {
+    "deltaE": 13.37,
+    "croma": 0.895,
+    "contraste": 0.863,
+    "vistas": {
+     "bajada": 14.6,
+     "puente": 13.3,
+     "piloto_s2900": 12.2
+    },
+    "peor_que_antes": 0
+   },
+   "coste": 19.87
+  },
+  "textura_agua": [
+   83,
+   141,
+   230
+  ],
+  "lastre": {
+   "ac": [
+    3,
+    0.14
+   ],
+   "lcs": [
+    12,
+    0.31
+   ],
+   "lcsy": [
+    5,
+    0.78
+   ],
+   "captura": [
+    10,
+    0.33
+   ],
+   "nubes": [
+    10,
+    2.22
+   ]
+  }
+ }
+]

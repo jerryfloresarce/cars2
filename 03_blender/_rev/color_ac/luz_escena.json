@@ -1,0 +1,319 @@
+{
+ "meta_tunel": {
+  "suelo_sol": {
+   "K": [
+    1.708,
+    1.796,
+    2.586
+   ],
+   "pixeles": 282,
+   "N.L_mediana": 0.765
+  },
+  "pared_sol": {
+   "K": [
+    0.93,
+    1.053,
+    1.187
+   ],
+   "pixeles": 814,
+   "N.L_mediana": 0.365
+  },
+  "sombra_pared": {
+   "K": [
+    0.295,
+    0.419,
+    0.585
+   ],
+   "pixeles": 82845,
+   "N.L_mediana": 0.0
+  },
+  "sombra_suelo": {
+   "K": [
+    0.217,
+    0.493,
+    0.661
+   ],
+   "pixeles": 516,
+   "N.L_mediana": 0.0
+  }
+ },
+ "captura": {
+  "suelo_sol": {
+   "K": [
+    1.579,
+    1.67,
+    2.192
+   ],
+   "pixeles": 491,
+   "N.L_mediana": 0.76
+  },
+  "pared_sol": {
+   "K": [
+    0.908,
+    1.033,
+    1.225
+   ],
+   "pixeles": 281,
+   "N.L_mediana": 0.345
+  },
+  "sombra_pared": {
+   "K": [
+    0.263,
+    0.383,
+    0.538
+   ],
+   "pixeles": 67900,
+   "N.L_mediana": 0.0
+  },
+  "sombra_suelo": {
+   "K": [
+    0.164,
+    0.285,
+    0.506
+   ],
+   "pixeles": 671,
+   "N.L_mediana": 0.0
+  }
+ },
+ "pueblo": {
+  "suelo_sol": {
+   "K": [
+    1.649,
+    1.822,
+    2.206
+   ],
+   "pixeles": 8964,
+   "N.L_mediana": 0.826
+  },
+  "pared_sol": {
+   "K": [
+    1.152,
+    1.304,
+    1.4
+   ],
+   "pixeles": 33847,
+   "N.L_mediana": 0.487
+  },
+  "sombra_pared": {
+   "K": [
+    0.321,
+    0.438,
+    0.61
+   ],
+   "pixeles": 30828,
+   "N.L_mediana": 0.0
+  },
+  "sombra_suelo": {
+   "K": [
+    0.227,
+    0.408,
+    0.748
+   ],
+   "pixeles": 6657,
+   "N.L_mediana": 0.0
+  }
+ },
+ "tierra": {
+  "suelo_sol": {
+   "K": [
+    1.536,
+    1.809,
+    2.553
+   ],
+   "pixeles": 8649,
+   "N.L_mediana": 0.759
+  },
+  "pared_sol": {
+   "K": [
+    1.406,
+    1.289,
+    1.839
+   ],
+   "pixeles": 572,
+   "N.L_mediana": 0.373
+  },
+  "sombra_pared": {
+   "K": [
+    0.391,
+    0.534,
+    0.729
+   ],
+   "pixeles": 5899,
+   "N.L_mediana": 0.0
+  }
+ },
+ "casino": {
+  "suelo_sol": {
+   "K": [
+    1.7,
+    1.865,
+    2.235
+   ],
+   "pixeles": 4370,
+   "N.L_mediana": 0.828
+  },
+  "pared_sol": {
+   "K": [
+    1.153,
+    1.291,
+    1.488
+   ],
+   "pixeles": 47601,
+   "N.L_mediana": 0.458
+  },
+  "sombra_pared": {
+   "K": [
+    0.404,
+    0.547,
+    0.76
+   ],
+   "pixeles": 7299,
+   "N.L_mediana": 0.0
+  },
+  "sombra_suelo": {
+   "K": [
+    0.288,
+    0.533,
+    1.021
+   ],
+   "pixeles": 247,
+   "N.L_mediana": 0.0
+  }
+ },
+ "piloto_s300": {
+  "sombra_pared": {
+   "K": [
+    0.396,
+    0.542,
+    0.697
+   ],
+   "pixeles": 105830,
+   "N.L_mediana": 0.0
+  },
+  "sombra_suelo": {
+   "K": [
+    0.227,
+    0.316,
+    0.435
+   ],
+   "pixeles": 1188,
+   "N.L_mediana": 0.0
+  }
+ },
+ "meta_puerto": {
+  "suelo_sol": {
+   "K": [
+    1.767,
+    1.794,
+    2.899
+   ],
+   "pixeles": 22983,
+   "N.L_mediana": 0.829
+  },
+  "pared_sol": {
+   "K": [
+    1.011,
+    1.091,
+    1.405
+   ],
+   "pixeles": 390,
+   "N.L_mediana": 0.338
+  },
+  "sombra_pared": {
+   "K": [
+    0.336,
+    0.468,
+    0.627
+   ],
+   "pixeles": 102173,
+   "N.L_mediana": 0.0
+  },
+  "sombra_suelo": {
+   "K": [
+    0.255,
+    0.408,
+    0.748
+   ],
+   "pixeles": 9437,
+   "N.L_mediana": 0.0
+  }
+ },
+ "bajada": {
+  "suelo_sol": {
+   "K": [
+    1.762,
+    1.92,
+    2.276
+   ],
+   "pixeles": 4321,
+   "N.L_mediana": 0.831
+  },
+  "pared_sol": {
+   "K": [
+    1.141,
+    1.271,
+    1.512
+   ],
+   "pixeles": 35360,
+   "N.L_mediana": 0.417
+  },
+  "sombra_pared": {
+   "K": [
+    0.434,
+    0.563,
+    0.81
+   ],
+   "pixeles": 2252,
+   "N.L_mediana": 0.002
+  }
+ },
+ "puente": {
+  "suelo_sol": {
+   "K": [
+    1.569,
+    1.74,
+    2.114
+   ],
+   "pixeles": 651,
+   "N.L_mediana": 0.762
+  },
+  "pared_sol": {
+   "K": [
+    1.014,
+    1.166,
+    1.438
+   ],
+   "pixeles": 1116,
+   "N.L_mediana": 0.362
+  },
+  "sombra_pared": {
+   "K": [
+    0.321,
+    0.455,
+    0.639
+   ],
+   "pixeles": 64530,
+   "N.L_mediana": 0.0
+  }
+ },
+ "piloto_s2900": {
+  "pared_sol": {
+   "K": [
+    1.235,
+    1.243,
+    1.546
+   ],
+   "pixeles": 9228,
+   "N.L_mediana": 0.487
+  },
+  "sombra_pared": {
+   "K": [
+    0.415,
+    0.63,
+    0.762
+   ],
+   "pixeles": 11615,
+   "N.L_mediana": 0.001
+  }
+ }
+}

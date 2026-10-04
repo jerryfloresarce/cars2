@@ -13,7 +13,9 @@ import zipfile
 from PIL import Image, ImageDraw
 
 BASE = r'E:\Escritorio\claude-pc\arnau-aseto-corsa'
-G = json.load(open(BASE + r'\03_blender\geometria_3d.json', encoding='utf-8'))
+# env GEOM: geometria de la escena congelada que se exporto (hacer_zip.sh), para que el mapa y la IA
+# coincidan con el kn5 aunque la escena viva ya haya cambiado
+G = json.load(open(os.environ.get('GEOM') or BASE + r'\03_blender\geometria_3d.json', encoding='utf-8'))
 PKG = BASE + r'\04_export\paquete'
 TRACK = os.path.join(PKG, 'content', 'tracks', 'porto_corsa')
 S = G['muestras']
@@ -122,15 +124,15 @@ VIBRATION_LENGTH=0.6
 
 [SURFACE_4]
 KEY=DIRT
-FRICTION=0.82
-DAMPING=0.05
+FRICTION=0.98
+DAMPING=0
 WAV=dirt.wav
 WAV_PITCH=0.9
 FF_EFFECT=0.5
 DIRT_ADDITIVE=1
 IS_VALID_TRACK=1
 BLACK_FLAG_TIME=0
-SIN_HEIGHT=0.025
+SIN_HEIGHT=0
 SIN_LENGTH=1.6
 IS_PITLANE=0
 VIBRATION_GAIN=0.25
@@ -190,7 +192,7 @@ ui = {
     'pitboxes': '20',
     'run': 'anticlockwise',
     'author': 'Arnau & Claude',
-    'version': '0.9',
+    'version': '1.1',
     'year': 2026,
 }
 with open(os.path.join(TRACK, 'ui', 'ui_track.json'), 'w', encoding='utf-8') as f:
@@ -283,6 +285,14 @@ if os.path.isdir(texdir):
     for fn in os.listdir(texdir):
         if fn.endswith('.png') and not fn.startswith('mosaico'):
             shutil.copy2(os.path.join(texdir, fn), dst)
+
+# ---------- extension/ext_config.ini (Custom Shaders Patch) ----------
+# se copia TAL CUAL 04_export/extension/ext_config.ini (se puede editar a mano; color_ac solo lo genera si no
+# existe) a content/tracks/porto_corsa/extension/, donde lo busca CSP (sin CSP la carpeta se ignora)
+import sys  # noqa: E402
+sys.path.insert(0, os.path.join(BASE, '04_export'))
+import color_ac  # noqa: E402
+print('ext_config.ini (CSP) ->', color_ac.copiar_ext_config(TRACK))
 
 # instrucciones al zip
 ins = BASE + r'\04_export\INSTRUCCIONES.md'

@@ -19,6 +19,42 @@
 03_blender/porto_corsa_matstest.blend
 03_blender/porto_corsa_textest.blend
 
+# --- renders de revision de los ciclos de agentes (GB) y copias de trabajo: regenerables ---
+03_blender/_rev/r[0-9]/
+03_blender/_rev/logs_*/
+03_blender/renders/capturas_avance/
+03_blender/renders/capturas_resumen/
+03_blender/_qa_snapshot.blend
+03_blender/assets/blend/
+03_blender/_rev/color_ac/*.png
+# --- copias de trabajo de los equipos (escenas, kn5 y pases de prueba): regenerables ---
+04_export/_fisica/
+04_export/_fisica_rev*/
+04_export/_zip_src/
+04_export/_color_ac_prueba/*.blend
+04_export/_color_ac_prueba/*.log
+04_export/_zip_logs/
+04_export/_zip_logs_cadena.txt
+04_export/informe_fisica_final.json
+03_blender/_rev/*.blend
+03_blender/_rev/promociones/
+03_blender/_rev/kn5_prueba/
+03_blender/_rev/cola/
+03_blender/_rev/color_ac/*.blend
+03_blender/_rev/color_ac/_pases/
+03_blender/_rev/color_ac/*_antes.png
+03_blender/_rev/color_ac/*_despues.png
+03_blender/_rev/color_ac/*_blender.png
+03_blender/_rev/color_ac/captura_usuario.webp
+03_blender/renders/ab/
+*.npy
+# texturas CC0 descargadas (50 MB; se vuelven a bajar con texturas/cc0/manifest.json)
+03_blender/texturas/cc0/*/
+!03_blender/texturas/cc0/manifest.json
+!03_blender/texturas/cc0/CREDITS.txt
+!03_blender/texturas/cc0/LICENSE_CC0.txt
+!03_blender/texturas/cc0/LEEME.md
+
 # --- imagenes de referencia de la pelicula / wiki (copyright): no se publican ---
 01_referencias/drive/
 01_referencias/usuario/

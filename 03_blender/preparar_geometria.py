@@ -3,6 +3,7 @@
 # construir_pista.py lo ensamble en Blender sin calculos pesados.
 import json
 import math
+import os
 
 import numpy as np
 from scipy.interpolate import PchipInterpolator
@@ -11,6 +12,9 @@ from scipy.spatial import cKDTree
 BASE = r'E:\Escritorio\claude-pc\arnau-aseto-corsa'
 SRC = BASE + r'\02_trazado\trazado_v1.json'
 OUT = BASE + r'\03_blender\geometria_3d.json'
+# v3 (pueblo_terreno): salida y carpeta de QA desviables para probar sin pisar geometria_3d.json (env GEOM_OUT / QA_DIR)
+OUT = os.environ.get('GEOM_OUT', OUT)
+QA_DIR = os.environ.get('QA_DIR', BASE + '/03_blender/renders/qa')
 
 data = json.load(open(SRC, encoding='utf-8'))
 S = data['muestras']
@@ -232,6 +236,74 @@ print('remuestreo uniforme: separacion antes %.2f..%.2f m -> ahora %.2f..%.2f m 
 print('horquilla Loews remodelada en curva 29; centro',
       round(loews_centro[0], 1), round(loews_centro[1], 1))
 
+
+# v3 (pueblo_terreno, revision E5): las horquillas de TIERRA 19 (s ~1872) y 26 (s ~2364) salian del SVG con un eje de
+# R 5.5-6.8 m y 10 m de ancho (borde interior colapsado: caras de PISTA con nz 0.4-0.6 y el arcen plegado). Se abren a
+# R >= HORQ_R_MIN conservando las tangentes de entrada/salida, la cota (Z va por indice) y el NUMERO de muestras del tramo:
+# proyeccion de la flecha de cada terna (vecinos a 1-4 muestras) sobre la de un circulo de R_MIN (+ holgura), suavizado solo
+# donde se toco (transicion sin escalon de curvatura) y remuestreo UNIFORME del tramo (paso ~1.90-1.96 m dentro, 2 fuera):
+# fuera de los tramos ninguna muestra cambia (las s del resto del circuito, sectores, pretiles, Loews, siguen igual)
+HORQ_R_MIN = 12.5
+HORQ_TRAMOS = [(1800.0, 1940.0), (2300.0, 2440.0)]     # curvas 18-19 (cima de tierra) y 26 (bajada)
+
+
+def _uniforme_tramo(P):
+    seg = np.hypot(*np.diff(P, axis=0).T); sc = np.concatenate([[0.0], np.cumsum(seg)])
+    sn = np.linspace(0.0, sc[-1], len(P))
+    return np.column_stack([np.interp(sn, sc, P[:, 0]), np.interp(sn, sc, P[:, 1])])
+
+
+def _proyectar_radio(P, R_min, fijos=3, iters=4000):
+    """mueve cada muestra hacia la cuerda de sus vecinos (a 1..4 muestras) hasta que su flecha es la de un circulo de
+    R_min; los 'fijos' extremos no se mueven. Devuelve (P uniforme, muestras tocadas)."""
+    P = P.copy(); n = len(P); tocado = np.zeros(n, bool)
+    for it in range(iters):
+        peor = 0.0
+        for k in (1, 2, 3, 4):
+            a = P[:-2 * k]; b = P[k:-k]; c = P[2 * k:]
+            v = b - 0.5 * (a + c); h = np.linalg.norm(v, axis=1); ch = np.linalg.norm(c - a, axis=1)
+            exc = h - (R_min - np.sqrt(np.maximum(R_min ** 2 - (ch / 2) ** 2, 0.0)))
+            idx = np.arange(k, n - k)
+            mal = (exc > 1e-4) & (idx >= fijos) & (idx < n - fijos)
+            if mal.any():
+                peor = max(peor, float(exc[mal].max()))
+                P[idx[mal]] -= (v / np.maximum(h, 1e-9)[:, None] * (0.5 * exc)[:, None])[mal]
+                tocado[idx[mal]] = True
+        if peor < 1e-4:
+            break
+        if it % 3 == 2:
+            P = _uniforme_tramo(P)
+    return _uniforme_tramo(P), tocado
+
+
+def _radio_min(P, k=2):
+    a = P[:-2 * k]; b = P[k:-k]; c = P[2 * k:]
+    cr = (b - a)[:, 0] * (c - a)[:, 1] - (b - a)[:, 1] * (c - a)[:, 0]
+    r = (np.linalg.norm(b - a, axis=1) * np.linalg.norm(c - b, axis=1) * np.linalg.norm(a - c, axis=1)
+         / (2.0 * np.maximum(np.abs(cr), 1e-9)))
+    return float(r.min())
+
+
+for _s_a, _s_b in HORQ_TRAMOS:
+    _ia, _ib = int(round(_s_a / paso)), int(round(_s_b / paso))
+    _P0 = np.column_stack([X[_ia:_ib + 1], Y[_ia:_ib + 1]]).astype(float)
+    _P, _toc = _proyectar_radio(_P0, HORQ_R_MIN + 1.5)
+    if not _toc.any():
+        continue
+    _n = len(_P); _i0 = int(np.argmax(_toc)); _i1 = int(_n - 1 - np.argmax(_toc[::-1]))
+    _w = np.array([max(0.0, 1.0 - max(_i0 - i, i - _i1, 0) / 5.0) for i in range(_n)])
+    _w[:3] = 0.0; _w[-3:] = 0.0
+    for _ in range(4):                  # transicion suave (sin escalon de curvatura) solo donde se toco
+        _Lp = np.zeros_like(_P); _Lp[1:-1] = 0.25 * _P[:-2] + 0.25 * _P[2:] - 0.5 * _P[1:-1]
+        _P = _P + _w[:, None] * _Lp
+    _P, _ = _proyectar_radio(_uniforme_tramo(_P), HORQ_R_MIN)
+    _dz = np.hypot(*(_P - _P0).T)
+    print('v3 E5 horquilla s %.0f-%.0f: radio minimo del eje %.1f -> %.1f m | muestras movidas hasta %.2f m | paso %.3f m '
+          '(largo %.1f -> %.1f m)' % (_s_a, _s_b, _radio_min(_P0), _radio_min(_P), _dz.max(),
+                                      float(np.hypot(*np.diff(_P, axis=0).T).mean()),
+                                      float(np.hypot(*np.diff(_P0, axis=0).T).sum()), float(np.hypot(*np.diff(_P, axis=0).T).sum())))
+    X[_ia:_ib + 1] = _P[:, 0]; Y[_ia:_ib + 1] = _P[:, 1]
+
 # RONDA 8b: el viaducto arranca nada mas salir de la rotonda (antes la pista
 # iba 40 m sobre el agua encima de un muro) y muere ya dentro de tierra
 _bi = [i for i, s_ in enumerate(sec) if s_ == 'bridge']
@@ -366,12 +438,27 @@ for k in range(kmax + 1):
     pit_pts.append({
         'x': round(float(X[i] - nx[i] * d), 3),
         'y': round(float(Y[i] - ny[i] * d), 3),
-        'z': round(float(Z[i]), 3),
+        # RONDA 15 v1 (revision B3/A-04): cota del PLANO PERALTADO de la pista prolongado hasta el eje del pit lane
+        # (el pit esta en la lateral -d: z = Z - lat*(-d)); antes la cota del EJE sin peralte dejaba la losa del pit
+        # 0.2-0.4 m por encima del asfalto en la salida (s 136-170, lat -0.04)
+        'z': round(float(Z[i] + lat[i] * d), 3),
         'nx': round(float(nx[i]), 4),
         'ny': round(float(ny[i]), 4),
         'w': round(3.0 + 4.5 * ss, 2),
     })
 print('pit lane:', len(pit_pts), 'muestras,', round(total_pit), 'm')
+
+# --- parrilla de salida (RONDA 15 v1, revision A-15): UNA sola definicion para construir_pista (marcas pintadas) y
+# exportar_ac (AC_START_0..19): 20 puestos en dos columnas tras la linea de meta, s = L - 14 - 8*(i//2), lateral
+# +2.3 (pares, izquierda) / -2.3 (impares); x, y, z sobre el plano peraltado y la tangente de la marcha ---
+parrilla = []
+for _k in range(20):
+    _s = L - 14.0 - 8.0 * (_k // 2)
+    _lat = 2.3 if _k % 2 == 0 else -2.3
+    _i = int(round(_s / paso)) % N
+    parrilla.append({'i': _k, 's': round(_s, 2), 'lat': _lat, 'x': round(float(X[_i] + nx[_i] * _lat), 3),
+                     'y': round(float(Y[_i] + ny[_i] * _lat), 3), 'z': round(float(Z[_i] - lat[_i] * _lat), 3),
+                     'tx': round(float(ny[_i]), 4), 'ty': round(float(-nx[_i]), 4)})
 
 # --- pianos: tramos con curvatura fuerte en asfalto ---
 fuerte = (np.abs(kappa) > 0.012) & np.array([s != 'dirt' for s in sec])  # tambien en el viaducto: van POR DENTRO
@@ -391,227 +478,35 @@ while i < N:
         i += 1
 print('pianos:', len(strips))
 
-# --- rejilla de terreno ---
-margen = 260.0
-gx0, gx1 = X.min() - margen, X.max() + margen
-gy0, gy1 = Y.min() - margen, Y.max() + margen
-cell = 8.0
-nxg = int((gx1 - gx0) / cell) + 1
-nyg = int((gy1 - gy0) / cell) + 1
-gx = gx0 + np.arange(nxg) * cell
-gy = gy0 + np.arange(nyg) * cell
-GX, GY = np.meshgrid(gx, gy)
-gpts = np.column_stack([GX.ravel(), GY.ravel()])
-
-no_bridge = np.array([s != 'bridge' for s in sec])
-tree_all = cKDTree(np.column_stack([X, Y]))
-tree_land = cKDTree(np.column_stack([X[no_bridge], Y[no_bridge]]))
-tree_bridge = cKDTree(np.column_stack([X[~no_bridge], Y[~no_bridge]])) if (~no_bridge).any() else None
-Z_land = Z[no_bridge]
-
-d_all, i_all = tree_all.query(gpts)
-d_land, i_land = tree_land.query(gpts)
-if tree_bridge is not None:
-    d_bri, i_bri = tree_bridge.query(gpts)
-else:
-    d_bri, i_bri = np.full(len(gpts), 1e9), np.zeros(len(gpts), dtype=int)
-
-# lado del mar respecto a la recta de meta (el puerto queda a la izquierda de
-# la marcha); verifica la orientacion con el propio trazado
-t0 = np.array([tx[0], ty[0]])
-p0 = np.array([X[0], Y[0]])
-v = gpts - p0
-side = t0[0] * v[:, 1] - t0[1] * v[:, 0]  # >0 = izquierda de la marcha
-v_tr = np.column_stack([X, Y]) - p0
-side_tr = t0[0] * v_tr[:, 1] - t0[1] * v_tr[:, 0]
-if np.mean(side_tr > 0) > 0.5:  # el circuito deberia quedar a la derecha
-    side = -side
-    print('orientacion del mar invertida')
-
-bridge_flag = ~no_bridge
-# cuanto mas ALTA va la pista, mas lejos queda la orilla: laderas, no muros
-# TIERRA PROTEGIDA alrededor de cada tramo en tierra, por bandas de altura
-_XY_land = np.column_stack([X[no_bridge], Y[no_bridge]])
-protegido = d_land <= 30.0
-for _zb in range(10, 140, 10):
-    _sel = Z_land >= _zb
-    if not _sel.any():
-        break
-    _d_b = cKDTree(_XY_land[_sel]).query(gpts)[0]
-    protegido |= _d_b <= 30.0 + 1.7 * (_zb - 4.0)
-cerca_de_puente = bridge_flag[i_all] & (d_all <= 18)  # bajo el puente: agua
-# GARGANTA DE MAR bajo el viaducto (salvo los 40 m de cada estribo): aunque la
-# montana del casino 'proteja' esa tierra, el tablero sale de un acantilado y
-# vuela sobre el agua -> arcos altisimos como en la pelicula
-_nb = int((~no_bridge).sum())
-_estribo = (i_bri * paso < 40.0) | ((_nb - 1 - i_bri) * paso < 40.0)
-mar_forzado = (d_bri <= 40.0) & bridge_flag[i_all] & ~_estribo
-es_mar = ((((side > 0) & (d_all > 45))
-           | ((d_bri < 90) & (bridge_flag[i_all] | (side > 0)))
-           | cerca_de_puente) & ~protegido) | mar_forzado
-# la colina: bump gaussiano centrado en el lazo de tierra
-dirt_idx = np.array([s == 'dirt' for s in sec])
-hc = np.array([X[dirt_idx].mean(), Y[dirt_idx].mean() + 60])
-dh = np.hypot(gpts[:, 0] - hc[0], gpts[:, 1] - hc[1])
-rng = np.random.default_rng(7)
-ruido = rng.normal(0, 1, (nyg, nxg))
-for _ in range(3):  # ruido suave
-    ruido = (ruido + np.roll(ruido, 1, 0) + np.roll(ruido, -1, 0)
-             + np.roll(ruido, 1, 1) + np.roll(ruido, -1, 1)) / 5
-ruido = (ruido * 2.5).ravel()
-
-z_hill = 24.0 + 120.0 * np.exp(-(dh / 360.0) ** 2) + ruido
-# promontorio del casino: el sector Monaco (33-38) va en alto sobre el mar
-cs_idx = [c['s_idx'] for c in data['curvas'] if c['n'] in (33, 34, 35, 36, 37, 38)]
-hc2 = np.array([X[cs_idx].mean(), Y[cs_idx].mean()])
-dh2 = np.hypot(gpts[:, 0] - hc2[0], gpts[:, 1] - hc2[1])
-z_hill = z_hill + 150.0 * np.exp(-(dh2 / 300.0) ** 2)
-# RONDA 14: COLINAS por todo el mapa (peticion: 'mas altibajos, las montanas no
-# solo atras'): ruido de valor multi-octava 'ridged' (crestas) de hasta 62 m,
-# atenuado junto a la pista (30..110 m), en los sectores de pueblo y en el pit
-from scipy.ndimage import zoom as _zoom
-_rng_h = np.random.default_rng(2024)
-_H = np.zeros((nyg, nxg))
-for _lam, _amp in ((340.0, 1.0), (170.0, 0.5), (85.0, 0.25), (42.0, 0.12)):
-    _ncx = max(4, int(round(nxg * cell / _lam)) + 2)
-    _ncy = max(4, int(round(nyg * cell / _lam)) + 2)
-    _g = _rng_h.uniform(-1.0, 1.0, (_ncy, _ncx))
-    _up = _zoom(_g, (nyg / float(_ncy), nxg / float(_ncx)), order=3)
-    _H += _amp * (1.0 - np.abs(_up[:nyg, :nxg]))
-_H = _H / 1.87                                   # ~0..1
-_H = np.clip(_H, 0.0, 1.0) ** 1.7
-_colinas = 62.0 * _H.ravel()
-_m1 = np.clip((d_land - 30.0) / 80.0, 0.0, 1.0)   # nada junto a la calzada
-_XY_pueblo = np.array([[X[i], Y[i]] for i in range(N)
-                       if any(a_ <= i * paso <= b_ for (a_, b_) in ((620, 1120), (1250, 1560), (2480, 2770), (3170, 3470), (4570, 4920)))])
-_d_pueblo = cKDTree(_XY_pueblo).query(gpts)[0] if len(_XY_pueblo) else np.full(len(gpts), 1e9)
-_m2 = 0.25 + 0.75 * np.clip((_d_pueblo - 90.0) / 120.0, 0.0, 1.0)
-_XY_pit = np.array([[q['x'], q['y']] for q in pit_pts]) if pit_pts else None
-_m3 = np.clip((cKDTree(_XY_pit).query(gpts)[0] - 140.0) / 150.0, 0.0, 1.0) if _XY_pit is not None else 1.0
-z_hill = z_hill + _colinas * _m1 * _m2 * _m3
-print('colinas: amplitud max %.0f m, media en tierra %.1f m' % (float((_colinas * _m1 * _m2 * _m3).max()), float((_colinas * _m1 * _m2 * _m3).mean())))
-z_cerca = Z_land[i_land] - 0.5 - d_land * 0.045
-w_tr = np.exp(-(d_land / 90.0) ** 2)
-z_land = w_tr * z_cerca + (1 - w_tr) * z_hill
-z_land = np.maximum(z_land, 1.0)
-# costa como campo continuo: suaviza la mascara de mar -> linea de costa curva
-coast = es_mar.astype(float).reshape(nyg, nxg)
-for _ in range(6):
-    coast = (coast + np.roll(coast, 1, 0) + np.roll(coast, -1, 0)
-             + np.roll(coast, 1, 1) + np.roll(coast, -1, 1)) / 5
-coastF = np.clip((coast.ravel() - 0.35) / 0.3, 0, 1)  # 0 tierra, 1 mar
-# las laderas bajan al mar con pendiente limitada (60%): nada de paredes
-# verticales de hierba en la orilla
-from scipy.ndimage import distance_transform_edt
-_dist_mar = distance_transform_edt(coastF.reshape(nyg, nxg) < 0.5) * cell
-# junto al viaducto se admiten ACANTILADOS (300%); lejos de el, laderas del 60%
-_pend = 0.60 + 2.40 * np.clip((200.0 - d_bri) / 120.0, 0.0, 1.0)
-z_land = np.minimum(z_land, 1.0 + _dist_mar.ravel() * _pend)
-z_grid = z_land * (1 - coastF) + (-4.0) * coastF
-Zg = z_grid.reshape(nyg, nxg)
-for _ in range(2):
-    Zg = (Zg + np.roll(Zg, 1, 0) + np.roll(Zg, -1, 0)
-          + np.roll(Zg, 1, 1) + np.roll(Zg, -1, 1)) / 5
-z_grid = Zg.ravel()
-z_grid = np.where(coastF > 0.5, np.minimum(z_grid, -3.0), z_grid)  # el mar siempre bajo el agua
-# el terreno nunca atraviesa ni oculta la pista: corredor rebajado con berma
-w_near = Wd[no_bridge][i_land]
-half = w_near / 2
-# RONDA 12: dentro de horquillas y lazos la muestra MAS CERCANA puede ser el lado
-# alto mientras el otro ramal pasa mucho mas bajo -> el triangulo de terreno
-# atravesaba el asfalto. Cota de referencia = MINIMO de las muestras en 16 m.
-_zmin_r = Z_land[i_land].copy()
-_cerca = np.where(d_land < half + 18)[0]
-_vec = tree_land.query_ball_point(gpts[_cerca], 28.0)
-_idx_land = np.where(no_bridge)[0]          # indice de muestra de cada punto de tree_land
-_n_dobles = 0
-for _k, _lst in zip(_cerca, _vec):
-    if len(_lst) < 2:
-        continue
-    _ii = np.sort(_idx_land[_lst])
-    _gap = np.diff(np.concatenate([_ii, [_ii[0] + N]])).max()
-    # solo donde la pista VUELVE sobre si misma (dos ramales distintos a <28 m):
-    # en una recta o curva normal las muestras son consecutivas (gap ~ N)
-    if (N - _gap) > 40 and d_land[_k] < half[_k] + 4.0:   # solo la banda pegada al asfalto
-        _zmin_r[_k] = min(_zmin_r[_k], Z_land[_lst].min())
-        _n_dobles += 1
-print('corredor: %d celdas rebajadas al minimo de dos ramales (horquillas/lazos)' % _n_dobles)
-techo = np.where(d_land < half + 6,
-                 _zmin_r - 0.7,
-                 _zmin_r - 0.7 + (d_land - half - 6) * 0.35)
-aplicar = (d_land < half + 18) & (coastF < 0.5)
-z_grid = np.where(aplicar, np.minimum(z_grid, techo), z_grid)
-# RONDA 14: TERRAZAS DEL PUEBLO. Cada sector de casas lleva bandas de terreno
-# LLANO escalonadas respecto a la calzada (0.5 / 6 / 12 m por terraza, 4 m de
-# transicion), medidas desde el borde del asfalto: filas de casas enteras
-# apoyadas, calles traseras llanas y muros de bancal entre niveles.
-TERRAZAS = [  # (s0, s1, lado, [(offset_ini, offset_fin, altura)])
-    (640, 1100, -1, [(6, 28, 0.5), (28, 48, 6.0), (48, 68, 12.0)]),
-    (1270, 1540, -1, [(6, 28, 0.5), (28, 48, 6.0), (48, 68, 12.0)]),
-    (2500, 2750, -1, [(6, 28, 0.5), (28, 48, 6.0)]),
-    (3190, 3450, -1, [(6, 28, 0.5), (28, 48, 6.0)]),
-    (3190, 3450, 1, [(6, 28, -0.5), (28, 48, -6.0)]),
-    (820, 1090, 1, [(6, 28, -0.5), (28, 48, -6.0)]),
-    (1300, 1500, 1, [(6, 28, -0.5)]),
-]
-_gi = _idx_land[i_land]                       # muestra (global) mas cercana de cada celda
-_s_cell = _gi * paso
-_off = d_land - half                          # distancia al BORDE del asfalto
-_vx = gpts[:, 0] - X[_gi]
-_vy = gpts[:, 1] - Y[_gi]
-_lado_cell = np.where(_vx * nx[_gi] + _vy * ny[_gi] > 0, 1, -1)
-_n_terr = 0
-for (_s0, _s1, _lado, _bandas) in TERRAZAS:
-    _en_s = (_s_cell >= _s0 - 10) & (_s_cell <= _s1 + 10) & (_lado_cell == _lado) & (coastF < 0.5) & (d_bri > 30.0)
-    _o_ini = _bandas[0][0]
-    _o_fin = _bandas[-1][1]
-    _sel = _en_s & (_off >= _o_ini) & (_off < _o_fin + 45.0)
-    if not _sel.any():
-        continue
-    _xp = [_o_ini]
-    _fp = [_bandas[0][2]]
-    for _k, (_a, _b, _h) in enumerate(_bandas):
-        if _k > 0:
-            _xp.append(_a + 4.0)
-            _fp.append(_h)
-        _xp.append(_b)
-        _fp.append(_h)
-    _hcel = np.interp(_off[_sel], _xp, _fp)
-    _z_t = Z[_gi[_sel]] + _hcel
-    # fundido con el terreno natural mas alla de la ultima terraza (26 m) y en los extremos del sector
-    _w_o = np.clip((_off[_sel] - _o_fin) / 45.0, 0.0, 1.0)
-    _w_s = np.clip(np.minimum(_s_cell[_sel] - (_s0 - 10), (_s1 + 10) - _s_cell[_sel]) / 30.0, 0.0, 1.0)
-    _w = (1.0 - _w_o) * _w_s
-    z_grid[_sel] = z_grid[_sel] * (1.0 - _w) + _z_t * _w
-    _n_terr += int(_sel.sum())
-print('terrazas del pueblo: %d celdas escalonadas' % _n_terr)
-# el terreno tampoco toca el tablero del viaducto donde este arranca en tierra
-if tree_bridge is not None:
-    _techo_b = Z[~no_bridge][i_bri] - 3.0
-    z_grid = np.where((d_bri < 15.0) & (coastF < 0.5), np.minimum(z_grid, _techo_b), z_grid)
-# el pit lane tambien lleva su caja en el terreno (antes la ladera lo cortaba)
-if pit_pts:
-    _pxy = np.array([[q['x'], q['y']] for q in pit_pts])
-    _pz = np.array([q['z'] for q in pit_pts])
-    _pw = np.array([q['w'] for q in pit_pts])
-    _dp, _ip = cKDTree(_pxy).query(gpts)
-    # explanada LLANA de 22 m tras el pit lane (edificio de boxes + tribuna) y luego talud
-    # RONDA 13: explanada de 28 m (boxes + paddock) y ladera SUAVE (22%) hasta 220 m:
-    # el talud del 45% salia como una pared gris detras de los boxes
-    _caja = (_dp < _pw[_ip] / 2 + 220.0) & (coastF < 0.5)
-    _techo_p = _pz[_ip] - 0.6 + np.maximum(_dp - _pw[_ip] / 2 - 28.0, 0.0) * 0.22
-    z_grid = np.where(_caja, np.minimum(z_grid, _techo_p), z_grid)
-# --- PASEO-MIRADOR (ronda 10, 'las vistas'): terraza de 15 m a nivel de la calzada
-# sobre un muro de arcadas; del lado del mar el terreno baja 10 m a partir de su borde ---
-MIRADORES = [(2990.0, 3150.0, 1, 15.0)]   # (s0, s1, lado, ancho)
-for (_s0m, _s1m, _sd, _an) in MIRADORES:
-    _en = (i_all >= int(_s0m / paso)) & (i_all <= int(_s1m / paso))
-    _latg = (gpts[:, 0] - X[i_all]) * nx[i_all] + (gpts[:, 1] - Y[i_all]) * ny[i_all]
-    _dl = _sd * _latg - Wd[i_all] / 2          # distancia lateral desde el borde
-    _zona = _en & (_dl > 8.0) & (_dl < 130.0) & (coastF < 0.5)
-    _techo_m = np.maximum(Z[i_all] - 10.0 - np.maximum(_dl - 8.0, 0.0) * 0.05, 1.0)
-    z_grid = np.where(_zona, np.minimum(z_grid, _techo_m), z_grid)
-es_mar = coastF > 0.5  # para el material del terreno
+# --- rejilla de terreno (RONDA 15: MACIZO DE MONTANA, ver terreno_montana.py) ---
+# Antes: colina gaussiana + colinas 'ridged' + corredor/terrazas/caja del pit/
+# miradores/estribos/garganta/costa, todo aqui. Ahora lo hace terreno_montana.construir
+# (macizo disenado: Monte Porto Corsa, espolon del coche, lomas, promontorio del
+# casino; cell = 4 m; terrazas desde urbanismo_spec.json) y devuelve ademas las
+# cumbres y la mascara de roca para el material.
+import terreno_montana
+# PASEO-MIRADOR (ronda 10): (s0, s1, lado, ancho). RONDA 15: lado -1, que es el del
+# MAR en esa recta (el +1 de la ronda 10 mira tierra adentro: el banco Z-10 tallaba
+# un rectangulo de 130x160 m en las lomas). integrar_escena lee este lado del JSON.
+MIRADORES = [(2990.0, 3150.0, -1, 15.0)]
+_spec_urb = json.load(open(BASE + '/03_blender/urbanismo_spec.json', encoding='utf-8'))
+# (coordinador, ronda 15c) las curvas van en METROS como en el JSON de salida: data['curvas']
+# trae x/y en unidades del SVG y la elipse del penon del casino salia en otro sitio
+_curvas_m = [{'n': c['n'], 's_idx': c['s_idx'], 'x': float((np.array(c['x']) - cx) * m_u),
+              'y': float((cy - np.array(c['y'])) * m_u)} for c in data['curvas']]
+# RONDA 15 v1: construir_loews_intacta = construir() con el terreno de la rotonda Loews congelado (peticion del usuario)
+# v2 (revision J-N2): la referencia de la Loews es FIJA (03_blender/assets/_loews_terreno.npz, terreno entregado el 03/10)
+# v2 (revision C2-01/D2-01/G2-03/E2-01/F2-11): se pasa el PERALTE (lat) para la garantia por triangulo de que la hierba no
+# asoma sobre el plano peraltado de la calzada (terreno_montana.bajar_bajo_asfalto)
+_res_t = terreno_montana.construir_loews_intacta(X, Y, Z, sec, Wd, nx, ny, paso, L, _curvas_m, pit_pts,
+                                                loews_centro, _spec_urb, MIRADORES, cell=4.0,
+                                                qa_dir=QA_DIR, lat=lat)
+gx0, gy0, cell = _res_t['x0'], _res_t['y0'], _res_t['cell']
+nxg, nyg = _res_t['nx'], _res_t['ny']
+z_grid = _res_t['z_grid']
+es_mar = _res_t['es_mar']  # para el material del terreno
+_cumbres = _res_t['extras']['cumbres']
+_mascara_roca = _res_t['extras']['mascara_roca']
 print(f'terreno: {nxg}x{nyg} celdas de {cell} m | mar: {100*es_mar.mean():.0f}%')
 
 out = {
@@ -633,6 +528,7 @@ out = {
     'loews': {'x': round(loews_centro[0], 2), 'y': round(loews_centro[1], 2),
               'radio_calzada': R_LOEWS, 's_idx': int(i29)},
     'pit_lane': pit_pts,
+    'parrilla': parrilla,
     'miradores': [{'s0': m[0], 's1': m[1], 'side': m[2], 'ancho': m[3]} for m in MIRADORES],
     'terreno': {
         'x0': round(gx0, 1), 'y0': round(gy0, 1), 'cell': cell,
@@ -640,6 +536,9 @@ out = {
         'z': [round(float(v), 2) for v in z_grid],
         'mar': [int(b) for b in es_mar],
     },
+    # RONDA 15: cumbres (x, y, z) y mascara de roca por celda (0..1) para el material
+    'cumbres': [[round(float(c[0]), 1), round(float(c[1]), 1), round(float(c[2]), 1)] for c in _cumbres],
+    'mascara_roca': [round(float(v), 2) for v in _mascara_roca],
     'nivel_mar': 0.0,
 }
 json.dump(out, open(OUT, 'w', encoding='utf-8'))

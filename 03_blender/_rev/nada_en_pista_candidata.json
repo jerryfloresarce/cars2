@@ -1,0 +1,116 @@
+{
+ "blend": "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/porto_corsa.blend",
+ "n": 11,
+ "fallos": [
+  {
+   "objeto": "CALLE_farola.001",
+   "raiz": "CALLE_farola.001",
+   "vertices_en_pista": 9,
+   "s": 630,
+   "sec": "norm",
+   "x": -705.4,
+   "y": 400.2,
+   "altura_sobre_pista": 4.11
+  },
+  {
+   "objeto": "CALLE_farola.002",
+   "raiz": "CALLE_farola.002",
+   "vertices_en_pista": 9,
+   "s": 674,
+   "sec": "tech",
+   "x": -685.5,
+   "y": 438.7,
+   "altura_sobre_pista": 4.43
+  },
+  {
+   "objeto": "CALLE_farola.004",
+   "raiz": "CALLE_farola.004",
+   "vertices_en_pista": 9,
+   "s": 762,
+   "sec": "tech",
+   "x": -620.5,
+   "y": 498.1,
+   "altura_sobre_pista": 4.56
+  },
+  {
+   "objeto": "CALLE_farola.007",
+   "raiz": "CALLE_farola.007",
+   "vertices_en_pista": 9,
+   "s": 894,
+   "sec": "tech",
+   "x": -507.2,
+   "y": 567.9,
+   "altura_sobre_pista": 4.74
+  },
+  {
+   "objeto": "CALLE_farola.011",
+   "raiz": "CALLE_farola.011",
+   "vertices_en_pista": 9,
+   "s": 1070,
+   "sec": "tech",
+   "x": -352.2,
+   "y": 550.5,
+   "altura_sobre_pista": 4.56
+  },
+  {
+   "objeto": "CALLE_farola.015",
+   "raiz": "CALLE_farola.015",
+   "vertices_en_pista": 9,
+   "s": 2490,
+   "sec": "straight",
+   "x": 24.4,
+   "y": 98.2,
+   "altura_sobre_pista": 4.07
+  },
+  {
+   "objeto": "CALLE_farola.016",
+   "raiz": "CALLE_farola.016",
+   "vertices_en_pista": 9,
+   "s": 2534,
+   "sec": "straight",
+   "x": 47.7,
+   "y": 59.1,
+   "altura_sobre_pista": 4.54
+  },
+  {
+   "objeto": "CALLE_farola.017",
+   "raiz": "CALLE_farola.017",
+   "vertices_en_pista": 9,
+   "s": 2578,
+   "sec": "straight",
+   "x": 39.3,
+   "y": 13.2,
+   "altura_sobre_pista": 4.69
+  },
+  {
+   "objeto": "CALLE_farola.018",
+   "raiz": "CALLE_farola.018",
+   "vertices_en_pista": 9,
+   "s": 2622,
+   "sec": "straight",
+   "x": 75.4,
+   "y": -16.2,
+   "altura_sobre_pista": 4.07
+  },
+  {
+   "objeto": "CALLE_farola.020",
+   "raiz": "CALLE_farola.020",
+   "vertices_en_pista": 9,
+   "s": 2710,
+   "sec": "straight",
+   "x": 149.7,
+   "y": -26.1,
+   "altura_sobre_pista": 4.69
+  },
+  {
+   "objeto": "CALLE_farola.024",
+   "raiz": "CALLE_farola.024",
+   "vertices_en_pista": 9,
+   "s": 3366,
+   "sec": "norm",
+   "x": 525.7,
+   "y": -466.5,
+   "altura_sobre_pista": 4.55
+  }
+ ]
+}

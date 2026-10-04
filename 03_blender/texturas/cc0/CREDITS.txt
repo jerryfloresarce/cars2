@@ -1,0 +1,36 @@
+Texturas CC0 de Poly Haven (polyhaven.com) y ambientCG (ambientcg.com)
+=======================================================================
+
+Mod "Porto Corsa" (Cars 2) para Assetto Corsa - carpeta 03_blender/texturas/cc0
+Descargadas el 2026-10-04 en resolucion 1K (JPG). Todas bajo Creative Commons
+CC0 1.0 Universal (dominio publico): la licencia no exige atribucion, pero la
+damos igualmente. Lista final de 03_blender/_rev/fase_visual/web_texturas_cc0.md.
+
+Poly Haven  (licencia: https://polyhaven.com/license)
+-----------------------------------------------------
+  carpeta             id                  nombre               autor(es)                        pagina
+  roca_caliza         rock_06             Rock 06              Rob Tuytel                       https://polyhaven.com/a/rock_06
+  hierba_seca         withered_grass      Withered Grass       Charlotte Baglioni               https://polyhaven.com/a/withered_grass
+  matorral            aerial_grass_rock   Aerial Grass Rock    Rob Tuytel                       https://polyhaven.com/a/aerial_grass_rock
+  asfalto             asphalt_track       Asphalt Track        Dimitrios Savva                  https://polyhaven.com/a/asphalt_track
+  estuco              white_stucco        White Stucco         Amal Kumar                       https://polyhaven.com/a/white_stucco
+  teja                clay_roof_tiles_03  Clay Roof Tiles 03   Amal Kumar                       https://polyhaven.com/a/clay_roof_tiles_03
+  roca_afloramiento   rock_face_03        Rock Face 03         Dario Barresi, Rico Cilliers     https://polyhaven.com/a/rock_face_03
+  pista_tierra        gravel_road         Gravel Road          Amal Kumar                       https://polyhaven.com/a/gravel_road
+  piedra_seca         rock_wall_10        Rock Wall 10         Amal Kumar                       https://polyhaven.com/a/rock_wall_10
+  escollera           rocks_ground_06     Rocks Ground 06      Rob Tuytel                       https://polyhaven.com/a/rocks_ground_06
+  fondo_marino        aerial_sand         Aerial Sand          Rob Tuytel                       https://polyhaven.com/a/aerial_sand
+  acantilado_lejano   marble_cliff_02     Marble Cliff 02      Amal Kumar                       https://polyhaven.com/a/marble_cliff_02
+
+ambientCG  (licencia: https://docs.ambientcg.com/license/)
+----------------------------------------------------------
+  carpeta             id                  nombre               pagina
+  tierra              Ground105           Ground 105           https://ambientcg.com/view?id=Ground105
+  adoquin             PavingStones150     Paving Stones 150    https://ambientcg.com/view?id=PavingStones150
+
+  Frase de atribucion sugerida por el sitio:
+  "Created using Ground105 from ambientCG.com, licensed under the Creative Commons CC0 1.0 Universal License."
+  "Created using PavingStones150 from ambientCG.com, licensed under the Creative Commons CC0 1.0 Universal License."
+
+Texto de la licencia: LICENSE_CC0.txt y https://creativecommons.org/publicdomain/zero/1.0/
+Detalle por fichero (mapas, bytes, sha256): manifest.json

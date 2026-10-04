@@ -1,0 +1,28 @@
+00:00.969  blend            | Read blend: "E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\escena_color.blend"
+E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\render_ac.py:90: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  negro.use_nodes = True
+E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\render_ac.py:245: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  if not m.use_nodes:
+00:06.312  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\meta_puerto_blender.png'
+00:07.375  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_pases\meta_puerto_clay.exr'
+00:08.453  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_pases\meta_puerto_sol.exr'
+00:09.594  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_pases\meta_puerto_geo.exr'
+00:10.594  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_pases\meta_puerto_id.exr'
+00:11.656  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_pases\meta_puerto_pat.exr'
+00:12.750  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_pases\meta_puerto_alb.exr'
+00:13.797  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\_pases\meta_puerto_msk.exr'
+escena: E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\_rev\color_ac\escena_color.blend
+caras de roca (criterio del writer): {'AGUA_fondo': [0, 1], 'ARCEN_DER': [754, 3892], 'ARCEN_IZQ': [474, 3892], 'ARCEN_PIT_entrada': [0, 76], 'ARCEN_PIT_salida': [0, 78], 'MCOCHE_roca': [4002, 53326], 'TERRENO': [13463, 530448], 'TUNEL_acantilado': [4002, 53453]}
+nodos de 484 materiales listos [1s]
+VISTA meta_puerto pase ref [5s]
+VISTA meta_puerto pase clay [6s]
+VISTA meta_puerto pase sol [8s]
+VISTA meta_puerto pase geo [9s]
+VISTA meta_puerto pase id [10s]
+VISTA meta_puerto pase pat [11s]
+VISTA meta_puerto pase alb [12s]
+VISTA meta_puerto pase msk [13s]
+OK render_ac [13s]
+Blender 5.1.2 (hash ec6e62d40fa9 built 2026-05-19 01:37:34)
+
+Blender quit

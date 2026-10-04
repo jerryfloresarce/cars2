@@ -1,0 +1,1564 @@
+{
+  "generado": "2026-10-04",
+  "descripcion": "Texturas CC0 1K JPG para la fase visual de Porto Corsa (lista final de 03_blender/_rev/fase_visual/web_texturas_cc0.md, seccion 5).",
+  "regla": "Solo 1K (1024x1024) JPG. Nunca subir 2K/4K al repo.",
+  "numero_texturas": 14,
+  "bytes_total": 50514307,
+  "mb_total": 50.51,
+  "fuentes": {
+    "Poly Haven": {
+      "licencia": "https://polyhaven.com/license",
+      "api": "https://api.polyhaven.com"
+    },
+    "ambientCG": {
+      "licencia": "https://docs.ambientcg.com/license/",
+      "api": "https://ambientcg.com/api/v2/full_json"
+    }
+  },
+  "texturas": [
+    {
+      "nombre_corto": "roca_caliza",
+      "asset_id": "rock_06",
+      "nombre": "Rock 06",
+      "uso": "Terreno capa ROCA (caliza calida estratificada)",
+      "sitio": "Poly Haven",
+      "url_pagina": "https://polyhaven.com/a/rock_06",
+      "url_api": "https://api.polyhaven.com/files/rock_06",
+      "autores": [
+        "Rob Tuytel"
+      ],
+      "fecha_publicacion": "2018-08-09",
+      "dimensiones_m": [
+        1.5,
+        1.5
+      ],
+      "resolucion": "1k",
+      "formato": "jpg",
+      "resolucion_maxima_disponible": [
+        8192,
+        8192
+      ],
+      "licencia": "CC0 1.0",
+      "licencia_url": "https://polyhaven.com/license",
+      "licencia_verificada": "polyhaven.com/license (CC0) y https://polyhaven.com/a/rock_06 (etiqueta 'CC0'), comprobado 2026-10-04",
+      "normal_convencion": "OpenGL (nor_gl, Y+ hacia arriba); no se ha bajado nor_dx",
+      "mapas": {
+        "diffuse": "roca_caliza/rock_06_diff_1k.jpg",
+        "normal_gl": "roca_caliza/rock_06_nor_gl_1k.jpg",
+        "roughness": "roca_caliza/rock_06_rough_1k.jpg",
+        "ao": "roca_caliza/rock_06_ao_1k.jpg",
+        "displacement": "roca_caliza/rock_06_disp_1k.jpg"
+      },
+      "ficheros": [
+        {
+          "ruta": "roca_caliza/rock_06_diff_1k.jpg",
+          "bytes": 913680,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "RGB",
+          "formato": "JPEG",
+          "sha256": "0f9f0fc0438f99cdd9e33cfadc9ba01c527f74c1085fdac425e06e6a808a7736",
+          "tipo": "diffuse",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rock_06/rock_06_diff_1k.jpg"
+        },
+        {
+          "ruta": "roca_caliza/rock_06_nor_gl_1k.jpg",
+          "bytes": 703275,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "RGB",
+          "formato": "JPEG",
+          "sha256": "e48374ac46351f6e3c45385074cc95bb936612ce9820bf78827b0d846de24869",
+          "tipo": "normal_gl",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rock_06/rock_06_nor_gl_1k.jpg"
+        },
+        {
+          "ruta": "roca_caliza/rock_06_rough_1k.jpg",
+          "bytes": 216165,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "7ff234224bb9ad113951279a06890c017215804e49653bd085f8eb511bb7630c",
+          "tipo": "roughness",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rock_06/rock_06_rough_1k.jpg"
+        },
+        {
+          "ruta": "roca_caliza/rock_06_ao_1k.jpg",
+          "bytes": 215114,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "3b3d7a53ba4508b69ade8bfe3e9338e295f10bea1e83ef5afdf2533e9f600860",
+          "tipo": "ao",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rock_06/rock_06_ao_1k.jpg"
+        },
+        {
+          "ruta": "roca_caliza/rock_06_disp_1k.jpg",
+          "bytes": 89203,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "9f6a95b51c201186581bac3e51c772ecb0cd78c9cace2ec905445f3ae078529d",
+          "tipo": "displacement",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rock_06/rock_06_disp_1k.jpg"
+        }
+      ],
+      "bytes_total": 2137437,
+      "fecha_descarga": "2026-10-04",
+      "nota": "Todos los mapas 1024x1024 px."
+    },
+    {
+      "nombre_corto": "hierba_seca",
+      "asset_id": "withered_grass",
+      "nombre": "Withered Grass",
+      "uso": "Terreno capa HIERBA SECA",
+      "sitio": "Poly Haven",
+      "url_pagina": "https://polyhaven.com/a/withered_grass",
+      "url_api": "https://api.polyhaven.com/files/withered_grass",
+      "autores": [
+        "Charlotte Baglioni"
+      ],
+      "fecha_publicacion": "2023-09-07",
+      "dimensiones_m": [
+        2.0,
+        2.0
+      ],
+      "resolucion": "1k",
+      "formato": "jpg",
+      "resolucion_maxima_disponible": [
+        8192,
+        8192
+      ],
+      "licencia": "CC0 1.0",
+      "licencia_url": "https://polyhaven.com/license",
+      "licencia_verificada": "polyhaven.com/license (CC0) y https://polyhaven.com/a/withered_grass (etiqueta 'CC0'), comprobado 2026-10-04",
+      "normal_convencion": "OpenGL (nor_gl, Y+ hacia arriba); no se ha bajado nor_dx",
+      "mapas": {
+        "diffuse": "hierba_seca/withered_grass_diff_1k.jpg",
+        "normal_gl": "hierba_seca/withered_grass_nor_gl_1k.jpg",
+        "roughness": "hierba_seca/withered_grass_rough_1k.jpg",
+        "ao": "hierba_seca/withered_grass_ao_1k.jpg",
+        "displacement": "hierba_seca/withered_grass_disp_1k.jpg"
+      },
+      "ficheros": [
+        {
+          "ruta": "hierba_seca/withered_grass_diff_1k.jpg",
+          "bytes": 1138384,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "RGB",
+          "formato": "JPEG",
+          "sha256": "8bebfb639ef74f651bc445526c46c845beee52a86d831848b82eb2bbbf2d98ee",
+          "tipo": "diffuse",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/withered_grass/withered_grass_diff_1k.jpg"
+        },
+        {
+          "ruta": "hierba_seca/withered_grass_nor_gl_1k.jpg",
+          "bytes": 1472149,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "RGB",
+          "formato": "JPEG",
+          "sha256": "5afc122862b4c91fa5fc4d4290e1b61d5abfdfa36a2ae05b754b5a8e32e9a110",
+          "tipo": "normal_gl",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/withered_grass/withered_grass_nor_gl_1k.jpg"
+        },
+        {
+          "ruta": "hierba_seca/withered_grass_rough_1k.jpg",
+          "bytes": 824502,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "RGB",
+          "formato": "JPEG",
+          "sha256": "81057bab0a684eed0ea2189ee522d4a982f65eec5a40b4b8762a28d217c1ac75",
+          "tipo": "roughness",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/withered_grass/withered_grass_rough_1k.jpg"
+        },
+        {
+          "ruta": "hierba_seca/withered_grass_ao_1k.jpg",
+          "bytes": 995037,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "ca155891bdfe490aa925e4751e4e5645c70c88f5b16b19e3b0639155a2f6ee91",
+          "tipo": "ao",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/withered_grass/withered_grass_ao_1k.jpg"
+        },
+        {
+          "ruta": "hierba_seca/withered_grass_disp_1k.jpg",
+          "bytes": 708467,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "a49673e103a735d0ffecae1cd63d2bb7aba76316bab6dc50b12051537271cbee",
+          "tipo": "displacement",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/withered_grass/withered_grass_disp_1k.jpg"
+        }
+      ],
+      "bytes_total": 5138539,
+      "fecha_descarga": "2026-10-04",
+      "nota": "Todos los mapas 1024x1024 px."
+    },
+    {
+      "nombre_corto": "matorral",
+      "asset_id": "aerial_grass_rock",
+      "nombre": "Aerial Grass Rock",
+      "uso": "Terreno capa MATORRAL (tintar a oliva)",
+      "sitio": "Poly Haven",
+      "url_pagina": "https://polyhaven.com/a/aerial_grass_rock",
+      "url_api": "https://api.polyhaven.com/files/aerial_grass_rock",
+      "autores": [
+        "Rob Tuytel"
+      ],
+      "fecha_publicacion": "2020-02-24",
+      "dimensiones_m": [
+        15.0,
+        15.0
+      ],
+      "resolucion": "1k",
+      "formato": "jpg",
+      "resolucion_maxima_disponible": [
+        8192,
+        8192
+      ],
+      "licencia": "CC0 1.0",
+      "licencia_url": "https://polyhaven.com/license",
+      "licencia_verificada": "polyhaven.com/license (CC0) y https://polyhaven.com/a/aerial_grass_rock (etiqueta 'CC0'), comprobado 2026-10-04",
+      "normal_convencion": "OpenGL (nor_gl, Y+ hacia arriba); no se ha bajado nor_dx",
+      "mapas": {
+        "diffuse": "matorral/aerial_grass_rock_diff_1k.jpg",
+        "normal_gl": "matorral/aerial_grass_rock_nor_gl_1k.jpg",
+        "roughness": "matorral/aerial_grass_rock_rough_1k.jpg",
+        "ao": "matorral/aerial_grass_rock_ao_1k.jpg",
+        "displacement": "matorral/aerial_grass_rock_disp_1k.jpg"
+      },
+      "ficheros": [
+        {
+          "ruta": "matorral/aerial_grass_rock_diff_1k.jpg",
+          "bytes": 666655,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "RGB",
+          "formato": "JPEG",
+          "sha256": "57b8041bfe0d0f01430e4dbaad45e7ddddf0a9fc97317f90dbc51f7b0d9e1b5d",
+          "tipo": "diffuse",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/aerial_grass_rock/aerial_grass_rock_diff_1k.jpg"
+        },
+        {
+          "ruta": "matorral/aerial_grass_rock_nor_gl_1k.jpg",
+          "bytes": 904956,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "RGB",
+          "formato": "JPEG",
+          "sha256": "1aa3e23bff453f152e089b9f83aa36b4901651e019f7e2ca01d5331a9bbbda78",
+          "tipo": "normal_gl",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/aerial_grass_rock/aerial_grass_rock_nor_gl_1k.jpg"
+        },
+        {
+          "ruta": "matorral/aerial_grass_rock_rough_1k.jpg",
+          "bytes": 362214,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "b9f3f76aba74007f708333c0dbe73c52eb83ea0c4187a13e2e994f888a25114a",
+          "tipo": "roughness",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/aerial_grass_rock/aerial_grass_rock_rough_1k.jpg"
+        },
+        {
+          "ruta": "matorral/aerial_grass_rock_ao_1k.jpg",
+          "bytes": 506528,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "4ad3b0c6d03f3a427a2195c115bb3a9c05924383d04309c7f2b1b14086aa4b9d",
+          "tipo": "ao",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/aerial_grass_rock/aerial_grass_rock_ao_1k.jpg"
+        },
+        {
+          "ruta": "matorral/aerial_grass_rock_disp_1k.jpg",
+          "bytes": 174116,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "c2eb4b602346c28c1641b9976704e177542cca0452d5d96900c790cb58685d46",
+          "tipo": "displacement",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/aerial_grass_rock/aerial_grass_rock_disp_1k.jpg"
+        }
+      ],
+      "bytes_total": 2614469,
+      "fecha_descarga": "2026-10-04",
+      "nota": "Todos los mapas 1024x1024 px."
+    },
+    {
+      "nombre_corto": "asfalto",
+      "asset_id": "asphalt_track",
+      "nombre": "Asphalt Track",
+      "uso": "Asfalto de pista y pit",
+      "sitio": "Poly Haven",
+      "url_pagina": "https://polyhaven.com/a/asphalt_track",
+      "url_api": "https://api.polyhaven.com/files/asphalt_track",
+      "autores": [
+        "Dimitrios Savva"
+      ],
+      "fecha_publicacion": "2024-08-01",
+      "dimensiones_m": [
+        2.0,
+        2.0
+      ],
+      "resolucion": "1k",
+      "formato": "jpg",
+      "resolucion_maxima_disponible": [
+        8192,
+        8192
+      ],
+      "licencia": "CC0 1.0",
+      "licencia_url": "https://polyhaven.com/license",
+      "licencia_verificada": "polyhaven.com/license (CC0) y https://polyhaven.com/a/asphalt_track (etiqueta 'CC0'), comprobado 2026-10-04",
+      "normal_convencion": "OpenGL (nor_gl, Y+ hacia arriba); no se ha bajado nor_dx",
+      "mapas": {
+        "diffuse": "asfalto/asphalt_track_diff_1k.jpg",
+        "normal_gl": "asfalto/asphalt_track_nor_gl_1k.jpg",
+        "roughness": "asfalto/asphalt_track_rough_1k.jpg",
+        "ao": "asfalto/asphalt_track_ao_1k.jpg",
+        "displacement": "asfalto/asphalt_track_disp_1k.jpg"
+      },
+      "ficheros": [
+        {
+          "ruta": "asfalto/asphalt_track_diff_1k.jpg",
+          "bytes": 858925,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "RGB",
+          "formato": "JPEG",
+          "sha256": "05c4e79cd99160075969d37bfc6ef72be262153a410bb45510b2c23f7303894c",
+          "tipo": "diffuse",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/asphalt_track/asphalt_track_diff_1k.jpg"
+        },
+        {
+          "ruta": "asfalto/asphalt_track_nor_gl_1k.jpg",
+          "bytes": 832851,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "RGB",
+          "formato": "JPEG",
+          "sha256": "18caf02427a7cd9cd577ceae5aa9daa7bb3ffba60598e2df8aaf75d1925a8a94",
+          "tipo": "normal_gl",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/asphalt_track/asphalt_track_nor_gl_1k.jpg"
+        },
+        {
+          "ruta": "asfalto/asphalt_track_rough_1k.jpg",
+          "bytes": 459197,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "0646d0cfbe6bf9ea4a8a9e43aec826e7ec32a10b8aff61bf5a4ec02b1bc3c363",
+          "tipo": "roughness",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/asphalt_track/asphalt_track_rough_1k.jpg"
+        },
+        {
+          "ruta": "asfalto/asphalt_track_ao_1k.jpg",
+          "bytes": 572610,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "7bced2814c5ff22c096446a15abe2fc714cf8321fb381f778be14f525e644ae7",
+          "tipo": "ao",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/asphalt_track/asphalt_track_ao_1k.jpg"
+        },
+        {
+          "ruta": "asfalto/asphalt_track_disp_1k.jpg",
+          "bytes": 280742,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "08f2b7352fdc6491c751405c09ff9171c80f40ad3dc6dc0b798b9cc7c5d302e5",
+          "tipo": "displacement",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/asphalt_track/asphalt_track_disp_1k.jpg"
+        }
+      ],
+      "bytes_total": 3004325,
+      "fecha_descarga": "2026-10-04",
+      "nota": "Todos los mapas 1024x1024 px."
+    },
+    {
+      "nombre_corto": "estuco",
+      "asset_id": "white_stucco",
+      "nombre": "White Stucco",
+      "uso": "Estuco de fachadas (tintar por casa)",
+      "sitio": "Poly Haven",
+      "url_pagina": "https://polyhaven.com/a/white_stucco",
+      "url_api": "https://api.polyhaven.com/files/white_stucco",
+      "autores": [
+        "Amal Kumar"
+      ],
+      "fecha_publicacion": "2026-08-11",
+      "dimensiones_m": [
+        1.998,
+        1.998
+      ],
+      "resolucion": "1k",
+      "formato": "jpg",
+      "resolucion_maxima_disponible": [
+        8192,
+        8192
+      ],
+      "licencia": "CC0 1.0",
+      "licencia_url": "https://polyhaven.com/license",
+      "licencia_verificada": "polyhaven.com/license (CC0) y https://polyhaven.com/a/white_stucco (etiqueta 'CC0'), comprobado 2026-10-04",
+      "normal_convencion": "OpenGL (nor_gl, Y+ hacia arriba); no se ha bajado nor_dx",
+      "mapas": {
+        "diffuse": "estuco/white_stucco_diff_1k.jpg",
+        "normal_gl": "estuco/white_stucco_nor_gl_1k.jpg",
+        "roughness": "estuco/white_stucco_rough_1k.jpg",
+        "ao": "estuco/white_stucco_ao_1k.jpg",
+        "displacement": "estuco/white_stucco_disp_1k.jpg"
+      },
+      "ficheros": [
+        {
+          "ruta": "estuco/white_stucco_diff_1k.jpg",
+          "bytes": 557550,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "RGB",
+          "formato": "JPEG",
+          "sha256": "5f2d11f5675ffe679155d8e38ed8eaa9b9972126675641e4977c8a4f905f276b",
+          "tipo": "diffuse",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/white_stucco/white_stucco_diff_1k.jpg"
+        },
+        {
+          "ruta": "estuco/white_stucco_nor_gl_1k.jpg",
+          "bytes": 932038,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "RGB",
+          "formato": "JPEG",
+          "sha256": "f0d4f34b30093ceca5e58d5168fc06c2f0cd0b81289708aa3eac7d0801bd069d",
+          "tipo": "normal_gl",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/white_stucco/white_stucco_nor_gl_1k.jpg"
+        },
+        {
+          "ruta": "estuco/white_stucco_rough_1k.jpg",
+          "bytes": 347861,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "04866e5a27a96148a744c526babad0abc27fe8c1b4c0c7edae65583d1ed6afb1",
+          "tipo": "roughness",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/white_stucco/white_stucco_rough_1k.jpg"
+        },
+        {
+          "ruta": "estuco/white_stucco_ao_1k.jpg",
+          "bytes": 477195,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "c7da3f7ccdb1f9688b472e235ce7ada684dc8262c0f175edd4122f3d6c5021ef",
+          "tipo": "ao",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/white_stucco/white_stucco_ao_1k.jpg"
+        },
+        {
+          "ruta": "estuco/white_stucco_disp_1k.jpg",
+          "bytes": 621336,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "cb7edfe07a49fec9b86a80580c912c492a95f9eba21262ee12302ed4967ddda8",
+          "tipo": "displacement",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/white_stucco/white_stucco_disp_1k.jpg"
+        }
+      ],
+      "bytes_total": 2935980,
+      "fecha_descarga": "2026-10-04",
+      "nota": "Todos los mapas 1024x1024 px."
+    },
+    {
+      "nombre_corto": "teja",
+      "asset_id": "clay_roof_tiles_03",
+      "nombre": "Clay Roof Tiles 03",
+      "uso": "Teja de barro",
+      "sitio": "Poly Haven",
+      "url_pagina": "https://polyhaven.com/a/clay_roof_tiles_03",
+      "url_api": "https://api.polyhaven.com/files/clay_roof_tiles_03",
+      "autores": [
+        "Amal Kumar"
+      ],
+      "fecha_publicacion": "2024-07-09",
+      "dimensiones_m": [
+        2.6,
+        2.6
+      ],
+      "resolucion": "1k",
+      "formato": "jpg",
+      "resolucion_maxima_disponible": [
+        8192,
+        8192
+      ],
+      "licencia": "CC0 1.0",
+      "licencia_url": "https://polyhaven.com/license",
+      "licencia_verificada": "polyhaven.com/license (CC0) y https://polyhaven.com/a/clay_roof_tiles_03 (etiqueta 'CC0'), comprobado 2026-10-04",
+      "normal_convencion": "OpenGL (nor_gl, Y+ hacia arriba); no se ha bajado nor_dx",
+      "mapas": {
+        "diffuse": "teja/clay_roof_tiles_03_diff_1k.jpg",
+        "normal_gl": "teja/clay_roof_tiles_03_nor_gl_1k.jpg",
+        "roughness": "teja/clay_roof_tiles_03_rough_1k.jpg",
+        "ao": "teja/clay_roof_tiles_03_ao_1k.jpg",
+        "displacement": "teja/clay_roof_tiles_03_disp_1k.jpg"
+      },
+      "ficheros": [
+        {
+          "ruta": "teja/clay_roof_tiles_03_diff_1k.jpg",
+          "bytes": 970368,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "RGB",
+          "formato": "JPEG",
+          "sha256": "6719293429932a27c8ed3526b22cd65d1cd1d43194ce30fa5f4590bb3c513844",
+          "tipo": "diffuse",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/clay_roof_tiles_03/clay_roof_tiles_03_diff_1k.jpg"
+        },
+        {
+          "ruta": "teja/clay_roof_tiles_03_nor_gl_1k.jpg",
+          "bytes": 974757,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "RGB",
+          "formato": "JPEG",
+          "sha256": "7db087939613b6b0ef1d0c21a3956eafcf7e9d0f146267290e409448f1adc17b",
+          "tipo": "normal_gl",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/clay_roof_tiles_03/clay_roof_tiles_03_nor_gl_1k.jpg"
+        },
+        {
+          "ruta": "teja/clay_roof_tiles_03_rough_1k.jpg",
+          "bytes": 440788,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "7fff6d8344688df8aa3abddeb7d099700ebba291f05a516d4d9dcaeb47f2da8b",
+          "tipo": "roughness",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/clay_roof_tiles_03/clay_roof_tiles_03_rough_1k.jpg"
+        },
+        {
+          "ruta": "teja/clay_roof_tiles_03_ao_1k.jpg",
+          "bytes": 573718,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "5fdf2175249dae45e9d16f66074b19c1a3d44b16c56ff52ee9b10f26e0fad3ac",
+          "tipo": "ao",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/clay_roof_tiles_03/clay_roof_tiles_03_ao_1k.jpg"
+        },
+        {
+          "ruta": "teja/clay_roof_tiles_03_disp_1k.jpg",
+          "bytes": 332301,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "56b33a8b1f99deda783c239f6ddc830b1d549391cecbda3710b2fcdbc738ebe3",
+          "tipo": "displacement",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/clay_roof_tiles_03/clay_roof_tiles_03_disp_1k.jpg"
+        }
+      ],
+      "bytes_total": 3291932,
+      "fecha_descarga": "2026-10-04",
+      "nota": "Todos los mapas 1024x1024 px."
+    },
+    {
+      "nombre_corto": "roca_afloramiento",
+      "asset_id": "rock_face_03",
+      "nombre": "Rock Face 03",
+      "uso": "Segunda roca (afloramientos, repisas)",
+      "sitio": "Poly Haven",
+      "url_pagina": "https://polyhaven.com/a/rock_face_03",
+      "url_api": "https://api.polyhaven.com/files/rock_face_03",
+      "autores": [
+        "Dario Barresi",
+        "Rico Cilliers"
+      ],
+      "fecha_publicacion": "2024-02-06",
+      "dimensiones_m": [
+        2.7,
+        2.7
+      ],
+      "resolucion": "1k",
+      "formato": "jpg",
+      "resolucion_maxima_disponible": [
+        16384,
+        16384
+      ],
+      "licencia": "CC0 1.0",
+      "licencia_url": "https://polyhaven.com/license",
+      "licencia_verificada": "polyhaven.com/license (CC0) y https://polyhaven.com/a/rock_face_03 (etiqueta 'CC0'), comprobado 2026-10-04",
+      "normal_convencion": "OpenGL (nor_gl, Y+ hacia arriba); no se ha bajado nor_dx",
+      "mapas": {
+        "diffuse": "roca_afloramiento/rock_face_03_diff_1k.jpg",
+        "normal_gl": "roca_afloramiento/rock_face_03_nor_gl_1k.jpg",
+        "roughness": "roca_afloramiento/rock_face_03_rough_1k.jpg",
+        "ao": "roca_afloramiento/rock_face_03_ao_1k.jpg",
+        "displacement": "roca_afloramiento/rock_face_03_disp_1k.jpg"
+      },
+      "ficheros": [
+        {
+          "ruta": "roca_afloramiento/rock_face_03_diff_1k.jpg",
+          "bytes": 927082,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "RGB",
+          "formato": "JPEG",
+          "sha256": "ea48e0e47ad42c8bd312476178b1248ec66f0eb19156a26a1c222f2a40caaf2d",
+          "tipo": "diffuse",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rock_face_03/rock_face_03_diff_1k.jpg"
+        },
+        {
+          "ruta": "roca_afloramiento/rock_face_03_nor_gl_1k.jpg",
+          "bytes": 1146788,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "RGB",
+          "formato": "JPEG",
+          "sha256": "c6423169583f31715cf0636954bad524e806848a5f2861fcea6794275f726ff0",
+          "tipo": "normal_gl",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rock_face_03/rock_face_03_nor_gl_1k.jpg"
+        },
+        {
+          "ruta": "roca_afloramiento/rock_face_03_rough_1k.jpg",
+          "bytes": 638904,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "9e3d9a2fd75244892e7acb6bab2eaed1279299510a7970672c0ee27ff1c19fea",
+          "tipo": "roughness",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rock_face_03/rock_face_03_rough_1k.jpg"
+        },
+        {
+          "ruta": "roca_afloramiento/rock_face_03_ao_1k.jpg",
+          "bytes": 689257,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "be3536db0cf69c950fff97a196310f486cef8b23d16e6eb48743a58fadef0917",
+          "tipo": "ao",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rock_face_03/rock_face_03_ao_1k.jpg"
+        },
+        {
+          "ruta": "roca_afloramiento/rock_face_03_disp_1k.jpg",
+          "bytes": 264231,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "fb053bfd46cef976da9cfee67f045367469cddd69469dcacd67d3fca4bd41545",
+          "tipo": "displacement",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rock_face_03/rock_face_03_disp_1k.jpg"
+        }
+      ],
+      "bytes_total": 3666262,
+      "fecha_descarga": "2026-10-04",
+      "nota": "Todos los mapas 1024x1024 px."
+    },
+    {
+      "nombre_corto": "pista_tierra",
+      "asset_id": "gravel_road",
+      "nombre": "Gravel Road",
+      "uso": "Pista de tierra (superficie conducible)",
+      "sitio": "Poly Haven",
+      "url_pagina": "https://polyhaven.com/a/gravel_road",
+      "url_api": "https://api.polyhaven.com/files/gravel_road",
+      "autores": [
+        "Amal Kumar"
+      ],
+      "fecha_publicacion": "2024-04-11",
+      "dimensiones_m": [
+        2.0,
+        2.0
+      ],
+      "resolucion": "1k",
+      "formato": "jpg",
+      "resolucion_maxima_disponible": [
+        16384,
+        16384
+      ],
+      "licencia": "CC0 1.0",
+      "licencia_url": "https://polyhaven.com/license",
+      "licencia_verificada": "polyhaven.com/license (CC0) y https://polyhaven.com/a/gravel_road (etiqueta 'CC0'), comprobado 2026-10-04",
+      "normal_convencion": "OpenGL (nor_gl, Y+ hacia arriba); no se ha bajado nor_dx",
+      "mapas": {
+        "diffuse": "pista_tierra/gravel_road_diff_1k.jpg",
+        "normal_gl": "pista_tierra/gravel_road_nor_gl_1k.jpg",
+        "roughness": "pista_tierra/gravel_road_rough_1k.jpg",
+        "ao": "pista_tierra/gravel_road_ao_1k.jpg",
+        "displacement": "pista_tierra/gravel_road_disp_1k.jpg"
+      },
+      "ficheros": [
+        {
+          "ruta": "pista_tierra/gravel_road_diff_1k.jpg",
+          "bytes": 684038,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "RGB",
+          "formato": "JPEG",
+          "sha256": "bccbb077a825bdd0eb6f607939578a6ee549822824278fb3a828f6eed3d05d45",
+          "tipo": "diffuse",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/gravel_road/gravel_road_diff_1k.jpg"
+        },
+        {
+          "ruta": "pista_tierra/gravel_road_nor_gl_1k.jpg",
+          "bytes": 983723,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "RGB",
+          "formato": "JPEG",
+          "sha256": "0920996cab9f2d62a2eb73a3589804527aa0273c4ca61b9f526ce4cba37edebc",
+          "tipo": "normal_gl",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/gravel_road/gravel_road_nor_gl_1k.jpg"
+        },
+        {
+          "ruta": "pista_tierra/gravel_road_rough_1k.jpg",
+          "bytes": 361584,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "de602a8ce72aea4ef931b25c9b15fb5e38636bfb32c7df91d0656f7aace193b0",
+          "tipo": "roughness",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/gravel_road/gravel_road_rough_1k.jpg"
+        },
+        {
+          "ruta": "pista_tierra/gravel_road_ao_1k.jpg",
+          "bytes": 422803,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "edc97d68db30ab6e3a75aebe155e958e424919d8a27691905b64cb9c49d15b27",
+          "tipo": "ao",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/gravel_road/gravel_road_ao_1k.jpg"
+        },
+        {
+          "ruta": "pista_tierra/gravel_road_disp_1k.jpg",
+          "bytes": 397749,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "7a8ea90d5d19aba04385067bfb4fe16a4f79301dba227aa710fb48922c364068",
+          "tipo": "displacement",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/gravel_road/gravel_road_disp_1k.jpg"
+        }
+      ],
+      "bytes_total": 2849897,
+      "fecha_descarga": "2026-10-04",
+      "nota": "Todos los mapas 1024x1024 px."
+    },
+    {
+      "nombre_corto": "piedra_seca",
+      "asset_id": "rock_wall_10",
+      "nombre": "Rock Wall 10",
+      "uso": "Piedra seca de bancal",
+      "sitio": "Poly Haven",
+      "url_pagina": "https://polyhaven.com/a/rock_wall_10",
+      "url_api": "https://api.polyhaven.com/files/rock_wall_10",
+      "autores": [
+        "Amal Kumar"
+      ],
+      "fecha_publicacion": "2023-09-21",
+      "dimensiones_m": [
+        1.8,
+        1.8
+      ],
+      "resolucion": "1k",
+      "formato": "jpg",
+      "resolucion_maxima_disponible": [
+        8192,
+        8192
+      ],
+      "licencia": "CC0 1.0",
+      "licencia_url": "https://polyhaven.com/license",
+      "licencia_verificada": "polyhaven.com/license (CC0) y https://polyhaven.com/a/rock_wall_10 (etiqueta 'CC0'), comprobado 2026-10-04",
+      "normal_convencion": "OpenGL (nor_gl, Y+ hacia arriba); no se ha bajado nor_dx",
+      "mapas": {
+        "diffuse": "piedra_seca/rock_wall_10_diff_1k.jpg",
+        "normal_gl": "piedra_seca/rock_wall_10_nor_gl_1k.jpg",
+        "roughness": "piedra_seca/rock_wall_10_rough_1k.jpg",
+        "ao": "piedra_seca/rock_wall_10_ao_1k.jpg",
+        "displacement": "piedra_seca/rock_wall_10_disp_1k.jpg"
+      },
+      "ficheros": [
+        {
+          "ruta": "piedra_seca/rock_wall_10_diff_1k.jpg",
+          "bytes": 788124,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "RGB",
+          "formato": "JPEG",
+          "sha256": "ac06de98dd57005c73e02c676a32c7a7fe71d1889d6b00df9393acfa91c6139d",
+          "tipo": "diffuse",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rock_wall_10/rock_wall_10_diff_1k.jpg"
+        },
+        {
+          "ruta": "piedra_seca/rock_wall_10_nor_gl_1k.jpg",
+          "bytes": 1319118,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "RGB",
+          "formato": "JPEG",
+          "sha256": "dbc31136e47d8a136c44cc18b0a5b0f92774956a043298b130902ee6f0675cae",
+          "tipo": "normal_gl",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rock_wall_10/rock_wall_10_nor_gl_1k.jpg"
+        },
+        {
+          "ruta": "piedra_seca/rock_wall_10_rough_1k.jpg",
+          "bytes": 543794,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "e5f53f778eba163b9471ef29b996119a0f51b12612fa1e01c639950b1704c591",
+          "tipo": "roughness",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rock_wall_10/rock_wall_10_rough_1k.jpg"
+        },
+        {
+          "ruta": "piedra_seca/rock_wall_10_ao_1k.jpg",
+          "bytes": 884790,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "0a0583e8a8fe6ef0c4f00aaa0dab108e1081100ec9f9386de4b47c98a0a0b6d4",
+          "tipo": "ao",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rock_wall_10/rock_wall_10_ao_1k.jpg"
+        },
+        {
+          "ruta": "piedra_seca/rock_wall_10_disp_1k.jpg",
+          "bytes": 266337,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "26b69bdacb616aab66d80fd4bd050bbcc35dff76d28df1b65732c7ae3dd714fa",
+          "tipo": "displacement",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rock_wall_10/rock_wall_10_disp_1k.jpg"
+        }
+      ],
+      "bytes_total": 3802163,
+      "fecha_descarga": "2026-10-04",
+      "nota": "Todos los mapas 1024x1024 px."
+    },
+    {
+      "nombre_corto": "escollera",
+      "asset_id": "rocks_ground_06",
+      "nombre": "Rocks Ground 06",
+      "uso": "Grava / escollera / pie de acantilado",
+      "sitio": "Poly Haven",
+      "url_pagina": "https://polyhaven.com/a/rocks_ground_06",
+      "url_api": "https://api.polyhaven.com/files/rocks_ground_06",
+      "autores": [
+        "Rob Tuytel"
+      ],
+      "fecha_publicacion": "2020-09-30",
+      "dimensiones_m": [
+        3.0,
+        3.0
+      ],
+      "resolucion": "1k",
+      "formato": "jpg",
+      "resolucion_maxima_disponible": [
+        8192,
+        8192
+      ],
+      "licencia": "CC0 1.0",
+      "licencia_url": "https://polyhaven.com/license",
+      "licencia_verificada": "polyhaven.com/license (CC0) y https://polyhaven.com/a/rocks_ground_06 (etiqueta 'CC0'), comprobado 2026-10-04",
+      "normal_convencion": "OpenGL (nor_gl, Y+ hacia arriba); no se ha bajado nor_dx",
+      "mapas": {
+        "diffuse": "escollera/rocks_ground_06_diff_1k.jpg",
+        "normal_gl": "escollera/rocks_ground_06_nor_gl_1k.jpg",
+        "roughness": "escollera/rocks_ground_06_rough_1k.jpg",
+        "ao": "escollera/rocks_ground_06_ao_1k.jpg",
+        "displacement": "escollera/rocks_ground_06_disp_1k.jpg"
+      },
+      "ficheros": [
+        {
+          "ruta": "escollera/rocks_ground_06_diff_1k.jpg",
+          "bytes": 782316,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "RGB",
+          "formato": "JPEG",
+          "sha256": "ea41cf6eef931346e43071a2ec7c1fced87e1e42eee565fe5600484fdcfe2b06",
+          "tipo": "diffuse",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rocks_ground_06/rocks_ground_06_diff_1k.jpg"
+        },
+        {
+          "ruta": "escollera/rocks_ground_06_nor_gl_1k.jpg",
+          "bytes": 1343952,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "RGB",
+          "formato": "JPEG",
+          "sha256": "9dd8e0ef4e845290d44b7007ea257330a971eda51f11be16dbc5aa8c5583e3ac",
+          "tipo": "normal_gl",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rocks_ground_06/rocks_ground_06_nor_gl_1k.jpg"
+        },
+        {
+          "ruta": "escollera/rocks_ground_06_rough_1k.jpg",
+          "bytes": 353521,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "cd61be42e46dc8db5a35d83b6d721607e63da066191318cf0687a60a21f587ef",
+          "tipo": "roughness",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rocks_ground_06/rocks_ground_06_rough_1k.jpg"
+        },
+        {
+          "ruta": "escollera/rocks_ground_06_ao_1k.jpg",
+          "bytes": 418805,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "bb8b5d7c726ca44b8745f30e52a00579b58d1b45c59d17bf0b1ef68940171bdd",
+          "tipo": "ao",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rocks_ground_06/rocks_ground_06_ao_1k.jpg"
+        },
+        {
+          "ruta": "escollera/rocks_ground_06_disp_1k.jpg",
+          "bytes": 132567,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "2a709b2a2ed6e3f362ed15bfba406a1a57088290241e5aa7d93359355e4460c3",
+          "tipo": "displacement",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rocks_ground_06/rocks_ground_06_disp_1k.jpg"
+        }
+      ],
+      "bytes_total": 3031161,
+      "fecha_descarga": "2026-10-04",
+      "nota": "Todos los mapas 1024x1024 px."
+    },
+    {
+      "nombre_corto": "fondo_marino",
+      "asset_id": "aerial_sand",
+      "nombre": "Aerial Sand",
+      "uso": "Fondo marino",
+      "sitio": "Poly Haven",
+      "url_pagina": "https://polyhaven.com/a/aerial_sand",
+      "url_api": "https://api.polyhaven.com/files/aerial_sand",
+      "autores": [
+        "Rob Tuytel"
+      ],
+      "fecha_publicacion": "2020-02-17",
+      "dimensiones_m": [
+        15.0,
+        15.0
+      ],
+      "resolucion": "1k",
+      "formato": "jpg",
+      "resolucion_maxima_disponible": [
+        8192,
+        8192
+      ],
+      "licencia": "CC0 1.0",
+      "licencia_url": "https://polyhaven.com/license",
+      "licencia_verificada": "polyhaven.com/license (CC0) y https://polyhaven.com/a/aerial_sand (etiqueta 'CC0'), comprobado 2026-10-04",
+      "normal_convencion": "OpenGL (nor_gl, Y+ hacia arriba); no se ha bajado nor_dx",
+      "mapas": {
+        "diffuse": "fondo_marino/aerial_sand_diff_1k.jpg",
+        "normal_gl": "fondo_marino/aerial_sand_nor_gl_1k.jpg",
+        "roughness": "fondo_marino/aerial_sand_rough_1k.jpg",
+        "ao": "fondo_marino/aerial_sand_ao_1k.jpg",
+        "displacement": "fondo_marino/aerial_sand_disp_1k.jpg"
+      },
+      "ficheros": [
+        {
+          "ruta": "fondo_marino/aerial_sand_diff_1k.jpg",
+          "bytes": 490916,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "RGB",
+          "formato": "JPEG",
+          "sha256": "d5195c44aec087d2a30d3ca3a3fa3458a1898986e0572e9a8043f8245598557a",
+          "tipo": "diffuse",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/aerial_sand/aerial_sand_diff_1k.jpg"
+        },
+        {
+          "ruta": "fondo_marino/aerial_sand_nor_gl_1k.jpg",
+          "bytes": 665488,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "RGB",
+          "formato": "JPEG",
+          "sha256": "cba74d670a681dfcdd72db72afbcb9879c7ec9f5854adae24cac8da2c432ad99",
+          "tipo": "normal_gl",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/aerial_sand/aerial_sand_nor_gl_1k.jpg"
+        },
+        {
+          "ruta": "fondo_marino/aerial_sand_rough_1k.jpg",
+          "bytes": 205159,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "7cccecb1d8d35a5404e1006688e3bd2b6675abe3c95ff26312a872a41d792897",
+          "tipo": "roughness",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/aerial_sand/aerial_sand_rough_1k.jpg"
+        },
+        {
+          "ruta": "fondo_marino/aerial_sand_ao_1k.jpg",
+          "bytes": 470122,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "b3d67546680a0ec2ee9feca32240c0bd3347c8f41353e12f6c98c3520a941814",
+          "tipo": "ao",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/aerial_sand/aerial_sand_ao_1k.jpg"
+        },
+        {
+          "ruta": "fondo_marino/aerial_sand_disp_1k.jpg",
+          "bytes": 209123,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "198c0b945961b4c04e06b1386da65a4873eda6dcc051d03aed10005e85f8a385",
+          "tipo": "displacement",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/aerial_sand/aerial_sand_disp_1k.jpg"
+        }
+      ],
+      "bytes_total": 2040808,
+      "fecha_descarga": "2026-10-04",
+      "nota": "Todos los mapas 1024x1024 px."
+    },
+    {
+      "nombre_corto": "acantilado_lejano",
+      "asset_id": "marble_cliff_02",
+      "nombre": "Marble Cliff 02",
+      "uso": "Acantilados lejanos (opcional, P3)",
+      "sitio": "Poly Haven",
+      "url_pagina": "https://polyhaven.com/a/marble_cliff_02",
+      "url_api": "https://api.polyhaven.com/files/marble_cliff_02",
+      "autores": [
+        "Amal Kumar"
+      ],
+      "fecha_publicacion": "2026-04-16",
+      "dimensiones_m": [
+        6.801,
+        6.801
+      ],
+      "resolucion": "1k",
+      "formato": "jpg",
+      "resolucion_maxima_disponible": [
+        8192,
+        8192
+      ],
+      "licencia": "CC0 1.0",
+      "licencia_url": "https://polyhaven.com/license",
+      "licencia_verificada": "polyhaven.com/license (CC0) y https://polyhaven.com/a/marble_cliff_02 (etiqueta 'CC0'), comprobado 2026-10-04",
+      "normal_convencion": "OpenGL (nor_gl, Y+ hacia arriba); no se ha bajado nor_dx",
+      "mapas": {
+        "diffuse": "acantilado_lejano/marble_cliff_02_diff_1k.jpg",
+        "normal_gl": "acantilado_lejano/marble_cliff_02_nor_gl_1k.jpg",
+        "roughness": "acantilado_lejano/marble_cliff_02_rough_1k.jpg",
+        "ao": "acantilado_lejano/marble_cliff_02_ao_1k.jpg",
+        "displacement": "acantilado_lejano/marble_cliff_02_disp_1k.jpg"
+      },
+      "ficheros": [
+        {
+          "ruta": "acantilado_lejano/marble_cliff_02_diff_1k.jpg",
+          "bytes": 1180448,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "RGB",
+          "formato": "JPEG",
+          "sha256": "a1ca15e1b5cd7d0d03cb7abb93d44a18feb4bf6757ec3458805518f51f3ae1f1",
+          "tipo": "diffuse",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/marble_cliff_02/marble_cliff_02_diff_1k.jpg"
+        },
+        {
+          "ruta": "acantilado_lejano/marble_cliff_02_nor_gl_1k.jpg",
+          "bytes": 1313569,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "RGB",
+          "formato": "JPEG",
+          "sha256": "046d22b521c769de9f52fe38cf99a34ad842687da53ce782fd6f3d48475f70a6",
+          "tipo": "normal_gl",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/marble_cliff_02/marble_cliff_02_nor_gl_1k.jpg"
+        },
+        {
+          "ruta": "acantilado_lejano/marble_cliff_02_rough_1k.jpg",
+          "bytes": 633675,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "702aefde0af04a7a64fd94994f9a2ff2d40260840fad7f9a16f551c6e438e342",
+          "tipo": "roughness",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/marble_cliff_02/marble_cliff_02_rough_1k.jpg"
+        },
+        {
+          "ruta": "acantilado_lejano/marble_cliff_02_ao_1k.jpg",
+          "bytes": 935166,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "48c8d91d9764affb8dec8f5eb37215bfb2d88e74187dd3ca3f58c8ee2ced764a",
+          "tipo": "ao",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/marble_cliff_02/marble_cliff_02_ao_1k.jpg"
+        },
+        {
+          "ruta": "acantilado_lejano/marble_cliff_02_disp_1k.jpg",
+          "bytes": 368267,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "9c43f52ded9237aa6c59faa68d60dde93158870052143816b26a28805e9ec97a",
+          "tipo": "displacement",
+          "url_origen": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/marble_cliff_02/marble_cliff_02_disp_1k.jpg"
+        }
+      ],
+      "bytes_total": 4431125,
+      "fecha_descarga": "2026-10-04",
+      "nota": "Todos los mapas 1024x1024 px."
+    },
+    {
+      "nombre_corto": "tierra",
+      "asset_id": "Ground105",
+      "nombre": "Ground 105",
+      "uso": "Terreno capa TIERRA (beige erosionada)",
+      "sitio": "ambientCG",
+      "url_pagina": "https://ambientcg.com/view?id=Ground105",
+      "url_api": "https://ambientcg.com/api/v2/full_json?id=Ground105&include=downloadData,tagData,mapData,dimensionsData",
+      "autores": [
+        "ambientCG (Lennart Demes)"
+      ],
+      "fecha_publicacion": "2026-01-20",
+      "metodo_creacion": "PBRPhotogrammetry",
+      "dimensiones_m": null,
+      "resolucion": "1K",
+      "formato": "jpg",
+      "tags": [
+        "105",
+        "beige",
+        "brown",
+        "dirt",
+        "dry",
+        "eroded",
+        "ground",
+        "layered",
+        "natural",
+        "rough",
+        "rustic",
+        "uneven"
+      ],
+      "licencia": "CC0 1.0",
+      "licencia_url": "https://docs.ambientcg.com/license/",
+      "licencia_verificada": "docs.ambientcg.com/license (CC0 1.0 Universal) y https://ambientcg.com/view?id=Ground105 ('Creative Commons CC0 license'), comprobado 2026-10-04",
+      "normal_convencion": "ambas: normal_gl = OpenGL (Y+ arriba), normal_dx = DirectX (Y- arriba); usar solo una",
+      "zip": {
+        "url": "https://ambientcg.com/get?file=Ground105_1K-JPG.zip",
+        "bytes": 9404375,
+        "sha256": "8531bd3c6391ee94d34517596b84e72519424497757ef659e1e78739621ff9c9",
+        "ficheros_no_mapa_descartados": [
+          "Ground105.png",
+          "Ground105_1K-JPG.blend",
+          "Ground105_1K-JPG.mtlx",
+          "Ground105_1K-JPG.tres",
+          "Ground105_1K-JPG.usdc"
+        ]
+      },
+      "mapas": {
+        "ao": "tierra/Ground105_1K-JPG_AmbientOcclusion.jpg",
+        "diffuse": "tierra/Ground105_1K-JPG_Color.jpg",
+        "displacement": "tierra/Ground105_1K-JPG_Displacement.jpg",
+        "normal_dx": "tierra/Ground105_1K-JPG_NormalDX.jpg",
+        "normal_gl": "tierra/Ground105_1K-JPG_NormalGL.jpg",
+        "roughness": "tierra/Ground105_1K-JPG_Roughness.jpg"
+      },
+      "ficheros": [
+        {
+          "ruta": "tierra/Ground105_1K-JPG_AmbientOcclusion.jpg",
+          "bytes": 792923,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "84fc0394828e69d8f09842259e8278c3cf78d69ce185c5b19a28253501a378ba",
+          "tipo": "ao",
+          "url_origen": "https://ambientcg.com/get?file=Ground105_1K-JPG.zip#Ground105_1K-JPG_AmbientOcclusion.jpg"
+        },
+        {
+          "ruta": "tierra/Ground105_1K-JPG_Color.jpg",
+          "bytes": 1626877,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "RGB",
+          "formato": "JPEG",
+          "sha256": "d1ab3fc8cfc65a822b717eb90908a7af915ba3dca7589b2121dd5b241f75c635",
+          "tipo": "diffuse",
+          "url_origen": "https://ambientcg.com/get?file=Ground105_1K-JPG.zip#Ground105_1K-JPG_Color.jpg"
+        },
+        {
+          "ruta": "tierra/Ground105_1K-JPG_Displacement.jpg",
+          "bytes": 512738,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "ac6e0db03ca4a4ff3ad85e558f0e51f266c7114df6d804c78cacfd558609cd0e",
+          "tipo": "displacement",
+          "url_origen": "https://ambientcg.com/get?file=Ground105_1K-JPG.zip#Ground105_1K-JPG_Displacement.jpg"
+        },
+        {
+          "ruta": "tierra/Ground105_1K-JPG_NormalDX.jpg",
+          "bytes": 2059698,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "RGB",
+          "formato": "JPEG",
+          "sha256": "03e320789a9dfa801ba630fe6897bc1e2723d30dceb4e29e20b082a4ea800ccb",
+          "tipo": "normal_dx",
+          "url_origen": "https://ambientcg.com/get?file=Ground105_1K-JPG.zip#Ground105_1K-JPG_NormalDX.jpg"
+        },
+        {
+          "ruta": "tierra/Ground105_1K-JPG_NormalGL.jpg",
+          "bytes": 2058954,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "RGB",
+          "formato": "JPEG",
+          "sha256": "76829c5da27b119c84233c441d53f6aac13fbfede58b3e8bc0e2148b56143de9",
+          "tipo": "normal_gl",
+          "url_origen": "https://ambientcg.com/get?file=Ground105_1K-JPG.zip#Ground105_1K-JPG_NormalGL.jpg"
+        },
+        {
+          "ruta": "tierra/Ground105_1K-JPG_Roughness.jpg",
+          "bytes": 760374,
+          "px": [
+            1024,
+            1024
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "658933e6563fe49790a2ec4e8b65a4f311107fb40b11715918be0b0ff40586f7",
+          "tipo": "roughness",
+          "url_origen": "https://ambientcg.com/get?file=Ground105_1K-JPG.zip#Ground105_1K-JPG_Roughness.jpg"
+        }
+      ],
+      "bytes_total": 7811564,
+      "fecha_descarga": "2026-10-04",
+      "nota": "Todos los mapas 1024x1024 px."
+    },
+    {
+      "nombre_corto": "adoquin",
+      "asset_id": "PavingStones150",
+      "nombre": "Paving Stones 150",
+      "uso": "Adoquin del pueblo",
+      "sitio": "ambientCG",
+      "url_pagina": "https://ambientcg.com/view?id=PavingStones150",
+      "url_api": "https://ambientcg.com/api/v2/full_json?id=PavingStones150&include=downloadData,tagData,mapData,dimensionsData",
+      "autores": [
+        "ambientCG (Lennart Demes)"
+      ],
+      "fecha_publicacion": "2025-11-03",
+      "metodo_creacion": "PBRPhotogrammetry",
+      "dimensiones_m": [
+        0.9,
+        0.9
+      ],
+      "resolucion": "1K",
+      "formato": "jpg",
+      "tags": [
+        "150",
+        "arches",
+        "beige",
+        "cobble",
+        "cobblestone",
+        "floor",
+        "gray",
+        "historic",
+        "natural",
+        "old",
+        "outdoor",
+        "patterned",
+        "pavement",
+        "paving",
+        "rough",
+        "rustic",
+        "stone",
+        "stones",
+        "urban"
+      ],
+      "licencia": "CC0 1.0",
+      "licencia_url": "https://docs.ambientcg.com/license/",
+      "licencia_verificada": "docs.ambientcg.com/license (CC0 1.0 Universal) y https://ambientcg.com/view?id=PavingStones150 ('Creative Commons CC0 license'), comprobado 2026-10-04",
+      "normal_convencion": "ambas: normal_gl = OpenGL (Y+ arriba), normal_dx = DirectX (Y- arriba); usar solo una",
+      "zip": {
+        "url": "https://ambientcg.com/get?file=PavingStones150_1K-JPG.zip",
+        "bytes": 5336973,
+        "sha256": "bcaffad6b5ae522394a740b698dbf1b478ff9daca465a3acca20ddbc45e1442f",
+        "ficheros_no_mapa_descartados": [
+          "PavingStones150.png",
+          "PavingStones150_1K-JPG.blend",
+          "PavingStones150_1K-JPG.mtlx",
+          "PavingStones150_1K-JPG.tres",
+          "PavingStones150_1K-JPG.usdc"
+        ]
+      },
+      "mapas": {
+        "ao": "adoquin/PavingStones150_1K-JPG_AmbientOcclusion.jpg",
+        "diffuse": "adoquin/PavingStones150_1K-JPG_Color.jpg",
+        "displacement": "adoquin/PavingStones150_1K-JPG_Displacement.jpg",
+        "normal_dx": "adoquin/PavingStones150_1K-JPG_NormalDX.jpg",
+        "normal_gl": "adoquin/PavingStones150_1K-JPG_NormalGL.jpg",
+        "roughness": "adoquin/PavingStones150_1K-JPG_Roughness.jpg"
+      },
+      "ficheros": [
+        {
+          "ruta": "adoquin/PavingStones150_1K-JPG_AmbientOcclusion.jpg",
+          "bytes": 390645,
+          "px": [
+            1024,
+            512
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "c9154b6f177906272857c8994decf7d26d51e4d338692f14a87dba55d2bc5705",
+          "tipo": "ao",
+          "url_origen": "https://ambientcg.com/get?file=PavingStones150_1K-JPG.zip#PavingStones150_1K-JPG_AmbientOcclusion.jpg"
+        },
+        {
+          "ruta": "adoquin/PavingStones150_1K-JPG_Color.jpg",
+          "bytes": 737414,
+          "px": [
+            1024,
+            512
+          ],
+          "modo": "RGB",
+          "formato": "JPEG",
+          "sha256": "dc766b466d2ab08b8c7bcbf4c59bd3e2c76dca2076aebe63473d5aab52645e72",
+          "tipo": "diffuse",
+          "url_origen": "https://ambientcg.com/get?file=PavingStones150_1K-JPG.zip#PavingStones150_1K-JPG_Color.jpg"
+        },
+        {
+          "ruta": "adoquin/PavingStones150_1K-JPG_Displacement.jpg",
+          "bytes": 286885,
+          "px": [
+            1024,
+            512
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "8d9fea7ca89251510da513d9a2e8e453feaf8188e6004e8ca8a770db0df86563",
+          "tipo": "displacement",
+          "url_origen": "https://ambientcg.com/get?file=PavingStones150_1K-JPG.zip#PavingStones150_1K-JPG_Displacement.jpg"
+        },
+        {
+          "ruta": "adoquin/PavingStones150_1K-JPG_NormalDX.jpg",
+          "bytes": 995156,
+          "px": [
+            1024,
+            512
+          ],
+          "modo": "RGB",
+          "formato": "JPEG",
+          "sha256": "a75b449296365acbcf97adf1bf5d69bae743a47ba31b310611befc9ea612f0d6",
+          "tipo": "normal_dx",
+          "url_origen": "https://ambientcg.com/get?file=PavingStones150_1K-JPG.zip#PavingStones150_1K-JPG_NormalDX.jpg"
+        },
+        {
+          "ruta": "adoquin/PavingStones150_1K-JPG_NormalGL.jpg",
+          "bytes": 995888,
+          "px": [
+            1024,
+            512
+          ],
+          "modo": "RGB",
+          "formato": "JPEG",
+          "sha256": "eaf2784c0cfe4c548fdd58bcf75b79d2e5ad9a8529a9b26cdcde121b89e1e106",
+          "tipo": "normal_gl",
+          "url_origen": "https://ambientcg.com/get?file=PavingStones150_1K-JPG.zip#PavingStones150_1K-JPG_NormalGL.jpg"
+        },
+        {
+          "ruta": "adoquin/PavingStones150_1K-JPG_Roughness.jpg",
+          "bytes": 352657,
+          "px": [
+            1024,
+            512
+          ],
+          "modo": "L",
+          "formato": "JPEG",
+          "sha256": "5fdfd003185f766c579a8f62cb2bd1c522800bfe426f73e81d41677f1407d586",
+          "tipo": "roughness",
+          "url_origen": "https://ambientcg.com/get?file=PavingStones150_1K-JPG.zip#PavingStones150_1K-JPG_Roughness.jpg"
+        }
+      ],
+      "bytes_total": 3758645,
+      "fecha_descarga": "2026-10-04",
+      "nota": "Los 6 mapas son 1024x512 px (no 1024x1024): el zip 1K-JPG de PavingStones150 en ambientCG es asi de origen (descarga integra, tamano del zip igual al anunciado por la API). Tilear con relacion 2:1 o recortar/replicar en recolorear_cc0.py."
+    }
+  ],
+  "verificacion": {
+    "metodo": "PIL Image.open()+verify(), tamano > 0, sha256; tamano de cada descarga comparado con el campo size de la API",
+    "ficheros": 72,
+    "todos_validos": true,
+    "no_cuadrados": [
+      "adoquin/* (1024x512, de origen)"
+    ],
+    "mayores_15mb": []
+  }
+}

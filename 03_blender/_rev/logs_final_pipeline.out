@@ -1,0 +1,28 @@
+preparar_geometria ok
+[urbanismo] QA: {"casas_total": 193, "solares_total": 207, "separacion_min_solares": 1.02, "peor_huella": {"travesia": 0.596, "rampa": 0.411, "plazoleta": 0.572, "plaza": 0.429, "calle_borde": [-0.799, 0.357], "solar": [-0.499, 0.723], "solar_rango": 0.996, "rampa_murete": 0.622}, "terrazas_vacias": [], "huecos": [["pueblo_subida_ladera", 0, 694.994, 759.29, 57.057], ["pueblo_subida_ladera", 0, 81
+[urbanismo] TOTAL casas 193 (objetivo >= 190) | huecos > 12 m entre solares de una fila: 515 m (objetivo < 300) | terrazas vacias: 0
+construir_pista exit 0 (6 s)
+integrar_escena exit 0 (101 s)
+ERRORES: ninguno
+revisar_flotantes exit 0 (5 s)
+revisar_invasores exit 0 (5 s)
+eliminar_sumergidos exit 0 (4 s)
+revisar_coches exit 0 (2 s)
+revisar_tunel exit 0 (2 s)
+asentar_objetos exit 0 (9 s)
+NADA_EN_PISTA objetos invasores: 11 (tierra: 0)
+revisar_urbanismo exit 0
+mejorar_materiales exit 0
+aplicar_texturas exit 0
+plot exit 0
+congelada: _rev/escena_rev.blend
+AUDITORIA {"casa_muro": 1, "arbol_calle": 1, "prop_pista": 1, "prop_pitlane": 1, "prop_camino": 1, "casa_flotante": 3, "objeto_salto_grande": 8, "bancal_mal_asentado": 1, "losa_hierba": 2, "plaza_muro": 1, "sendero_volado": 2, "sendero_enterrado": 1}
+[integrar] urbanismo: 193 casas (123 variantes), 14 plazoletas, 2 plazas, 73 calles/tramos, 82 muros, 11 escaleras, 7 rampas, 22 vallas, 10 salidas
+[integrar] casino: roca_casino base z=118 -> meseta z=132 (radio 60), bajada 1460 m (pend. max 11.0%, 2 horquillas), 0 objetos retirados
+[integrar] tunel: entrada en s=404, salida en s=540 (136 m de galeria)
+[integrar] roca del lazo (roca_lazo): checks ok=True, cumbre z=108, 17 casas, 0 objetos retirados de debajo
+[integrar] edicolas: 8 plazuelas con capillita al final de calles/salidas sin destino (0 con muro cruzando)
+[integrar] OK zona_edicolas
+[integrar] despeje final: 106 ejes de calle/camino, 207 edificios; quitados 139 arboles y 29 props (1 coches-camara con su peana y ramal), 1 carteles apartados, 0 peanas sin camara retiradas; quedan 5 coches-camara
+ERRORES: ninguno
+PIPELINE_RC 0

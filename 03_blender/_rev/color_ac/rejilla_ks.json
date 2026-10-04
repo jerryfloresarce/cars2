@@ -1,0 +1,5632 @@
+{
+ "antes_ajuste": {
+  "ac": {
+   "meta_tunel": 23.9,
+   "captura": 25.1,
+   "pueblo": 23.4,
+   "tierra": 36.3,
+   "casino": 23.2,
+   "piloto_s300": 24.0,
+   "meta_puerto": 23.4
+  },
+  "lcs": {
+   "meta_tunel": 16.8,
+   "captura": 16.8,
+   "pueblo": 21.7,
+   "tierra": 26.2,
+   "casino": 22.3,
+   "piloto_s300": 15.2,
+   "meta_puerto": 17.8
+  },
+  "lcsy": {
+   "meta_tunel": 12.4,
+   "captura": 11.6,
+   "pueblo": 25.2,
+   "tierra": 33.8,
+   "casino": 27.1,
+   "piloto_s300": 12.4,
+   "meta_puerto": 18.9
+  },
+  "captura": {
+   "meta_tunel": 22.2,
+   "captura": 24.8,
+   "pueblo": 29.9,
+   "tierra": 43.9,
+   "casino": 27.0,
+   "piloto_s300": 22.4,
+   "meta_puerto": 26.3
+  }
+ },
+ "antes_control": {
+  "ac": {
+   "bajada": 24.4,
+   "puente": 19.1,
+   "piloto_s2900": 29.7
+  },
+  "lcs": {
+   "bajada": 23.8,
+   "puente": 16.0,
+   "piloto_s2900": 13.5
+  },
+  "lcsy": {
+   "bajada": 29.1,
+   "puente": 17.3,
+   "piloto_s2900": 13.0
+  },
+  "captura": {
+   "bajada": 28.4,
+   "puente": 27.0,
+   "piloto_s2900": 27.4
+  }
+ },
+ "filas": [
+  {
+   "ksDiffuse": 0.6,
+   "ksAmbient": 0.42,
+   "cociente": 0.7,
+   "pesos_ajuste": "A",
+   "ajuste": {
+    "ac": {
+     "deltaE": 14.6,
+     "croma": 0.882,
+     "contraste": 1.158,
+     "vistas": {
+      "meta_tunel": 17.9,
+      "captura": 15.9,
+      "pueblo": 12.8,
+      "tierra": 11.2,
+      "casino": 12.3,
+      "piloto_s300": 15.5,
+      "meta_puerto": 16.6
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 12.87,
+     "croma": 1.183,
+     "contraste": 1.172,
+     "vistas": {
+      "meta_tunel": 10.8,
+      "captura": 11.7,
+      "pueblo": 14.2,
+      "tierra": 14.5,
+      "casino": 15.9,
+      "piloto_s300": 9.7,
+      "meta_puerto": 13.3
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 14.8,
+     "croma": 0.871,
+     "contraste": 0.919,
+     "vistas": {
+      "meta_tunel": 10.9,
+      "captura": 6.5,
+      "pueblo": 18.9,
+      "tierra": 20.1,
+      "casino": 22.3,
+      "piloto_s300": 8.5,
+      "meta_puerto": 16.4
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 18.67,
+     "croma": 0.583,
+     "contraste": 0.922,
+     "vistas": {
+      "meta_tunel": 15.7,
+      "captura": 14.4,
+      "pueblo": 23.9,
+      "tierra": 24.3,
+      "casino": 18.5,
+      "piloto_s300": 12.5,
+      "meta_puerto": 21.4
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 18.34
+   },
+   "control": {
+    "ac": {
+     "deltaE": 14.03,
+     "croma": 0.925,
+     "contraste": 1.125,
+     "vistas": {
+      "bajada": 11.2,
+      "puente": 16.0,
+      "piloto_s2900": 14.9
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 12.4,
+     "croma": 1.11,
+     "contraste": 1.198,
+     "vistas": {
+      "bajada": 15.9,
+      "puente": 12.8,
+      "piloto_s2900": 8.5
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 17.57,
+     "croma": 0.882,
+     "contraste": 0.924,
+     "vistas": {
+      "bajada": 23.8,
+      "puente": 17.3,
+      "piloto_s2900": 11.6
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 19.37,
+     "croma": 0.479,
+     "contraste": 0.839,
+     "vistas": {
+      "bajada": 22.1,
+      "puente": 23.9,
+      "piloto_s2900": 12.1
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 19.72
+   }
+  },
+  {
+   "ksDiffuse": 0.6,
+   "ksAmbient": 0.45,
+   "cociente": 0.75,
+   "pesos_ajuste": "A",
+   "ajuste": {
+    "ac": {
+     "deltaE": 14.2,
+     "croma": 0.888,
+     "contraste": 1.133,
+     "vistas": {
+      "meta_tunel": 17.4,
+      "captura": 15.6,
+      "pueblo": 12.6,
+      "tierra": 11.0,
+      "casino": 12.1,
+      "piloto_s300": 14.8,
+      "meta_puerto": 15.9
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 12.76,
+     "croma": 1.177,
+     "contraste": 1.173,
+     "vistas": {
+      "meta_tunel": 10.8,
+      "captura": 11.6,
+      "pueblo": 14.1,
+      "tierra": 14.4,
+      "casino": 15.9,
+      "piloto_s300": 9.5,
+      "meta_puerto": 13.0
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 14.81,
+     "croma": 0.866,
+     "contraste": 0.915,
+     "vistas": {
+      "meta_tunel": 10.9,
+      "captura": 6.4,
+      "pueblo": 19.0,
+      "tierra": 20.3,
+      "casino": 22.5,
+      "piloto_s300": 8.4,
+      "meta_puerto": 16.2
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 19.24,
+     "croma": 0.576,
+     "contraste": 0.921,
+     "vistas": {
+      "meta_tunel": 16.5,
+      "captura": 15.2,
+      "pueblo": 24.2,
+      "tierra": 24.5,
+      "casino": 18.9,
+      "piloto_s300": 13.4,
+      "meta_puerto": 22.0
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 18.37
+   },
+   "control": {
+    "ac": {
+     "deltaE": 13.73,
+     "croma": 0.926,
+     "contraste": 1.106,
+     "vistas": {
+      "bajada": 11.0,
+      "puente": 15.3,
+      "piloto_s2900": 14.9
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 12.33,
+     "croma": 1.114,
+     "contraste": 1.177,
+     "vistas": {
+      "bajada": 16.0,
+      "puente": 12.6,
+      "piloto_s2900": 8.4
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 17.67,
+     "croma": 0.883,
+     "contraste": 0.905,
+     "vistas": {
+      "bajada": 24.0,
+      "puente": 17.3,
+      "piloto_s2900": 11.7
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 19.87,
+     "croma": 0.475,
+     "contraste": 0.827,
+     "vistas": {
+      "bajada": 22.4,
+      "puente": 24.4,
+      "piloto_s2900": 12.8
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 19.9
+   }
+  },
+  {
+   "ksDiffuse": 0.6,
+   "ksAmbient": 0.48,
+   "cociente": 0.8,
+   "pesos_ajuste": "A",
+   "ajuste": {
+    "ac": {
+     "deltaE": 13.77,
+     "croma": 0.894,
+     "contraste": 1.111,
+     "vistas": {
+      "meta_tunel": 16.7,
+      "captura": 15.3,
+      "pueblo": 12.2,
+      "tierra": 10.8,
+      "casino": 12.0,
+      "piloto_s300": 14.2,
+      "meta_puerto": 15.2
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 12.81,
+     "croma": 1.174,
+     "contraste": 1.177,
+     "vistas": {
+      "meta_tunel": 11.2,
+      "captura": 11.5,
+      "pueblo": 14.0,
+      "tierra": 14.3,
+      "casino": 16.0,
+      "piloto_s300": 9.6,
+      "meta_puerto": 13.1
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 14.97,
+     "croma": 0.863,
+     "contraste": 0.916,
+     "vistas": {
+      "meta_tunel": 11.1,
+      "captura": 6.6,
+      "pueblo": 19.1,
+      "tierra": 20.5,
+      "casino": 22.7,
+      "piloto_s300": 8.5,
+      "meta_puerto": 16.3
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 19.9,
+     "croma": 0.571,
+     "contraste": 0.92,
+     "vistas": {
+      "meta_tunel": 17.5,
+      "captura": 16.0,
+      "pueblo": 24.8,
+      "tierra": 24.8,
+      "casino": 19.4,
+      "piloto_s300": 14.2,
+      "meta_puerto": 22.6
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 18.47
+   },
+   "control": {
+    "ac": {
+     "deltaE": 13.5,
+     "croma": 0.93,
+     "contraste": 1.094,
+     "vistas": {
+      "bajada": 10.8,
+      "puente": 14.8,
+      "piloto_s2900": 14.9
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 12.37,
+     "croma": 1.113,
+     "contraste": 1.166,
+     "vistas": {
+      "bajada": 16.1,
+      "puente": 12.5,
+      "piloto_s2900": 8.5
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 17.8,
+     "croma": 0.885,
+     "contraste": 0.897,
+     "vistas": {
+      "bajada": 24.2,
+      "puente": 17.4,
+      "piloto_s2900": 11.8
+     },
+     "peor_que_antes": 1
+    },
+    "captura": {
+     "deltaE": 20.37,
+     "croma": 0.468,
+     "contraste": 0.82,
+     "vistas": {
+      "bajada": 22.8,
+      "puente": 24.8,
+      "piloto_s2900": 13.5
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 20.12
+   }
+  },
+  {
+   "ksDiffuse": 0.6,
+   "ksAmbient": 0.54,
+   "cociente": 0.9,
+   "pesos_ajuste": "A",
+   "ajuste": {
+    "ac": {
+     "deltaE": 13.46,
+     "croma": 0.897,
+     "contraste": 1.095,
+     "vistas": {
+      "meta_tunel": 16.6,
+      "captura": 15.1,
+      "pueblo": 11.9,
+      "tierra": 10.5,
+      "casino": 11.8,
+      "piloto_s300": 14.0,
+      "meta_puerto": 14.3
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.09,
+     "croma": 1.162,
+     "contraste": 1.193,
+     "vistas": {
+      "meta_tunel": 12.3,
+      "captura": 11.6,
+      "pueblo": 13.9,
+      "tierra": 14.3,
+      "casino": 16.3,
+      "piloto_s300": 9.8,
+      "meta_puerto": 13.4
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 15.34,
+     "croma": 0.854,
+     "contraste": 0.928,
+     "vistas": {
+      "meta_tunel": 11.8,
+      "captura": 6.9,
+      "pueblo": 19.4,
+      "tierra": 20.9,
+      "casino": 23.3,
+      "piloto_s300": 8.7,
+      "meta_puerto": 16.4
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 20.71,
+     "croma": 0.563,
+     "contraste": 0.912,
+     "vistas": {
+      "meta_tunel": 18.2,
+      "captura": 17.3,
+      "pueblo": 25.4,
+      "tierra": 25.2,
+      "casino": 20.0,
+      "piloto_s300": 15.3,
+      "meta_puerto": 23.6
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 18.78
+   },
+   "control": {
+    "ac": {
+     "deltaE": 13.23,
+     "croma": 0.934,
+     "contraste": 1.065,
+     "vistas": {
+      "bajada": 10.7,
+      "puente": 14.1,
+      "piloto_s2900": 14.9
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 12.33,
+     "croma": 1.119,
+     "contraste": 1.127,
+     "vistas": {
+      "bajada": 16.3,
+      "puente": 12.2,
+      "piloto_s2900": 8.5
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 18.03,
+     "croma": 0.888,
+     "contraste": 0.863,
+     "vistas": {
+      "bajada": 24.5,
+      "puente": 17.6,
+      "piloto_s2900": 12.0
+     },
+     "peor_que_antes": 1
+    },
+    "captura": {
+     "deltaE": 21.13,
+     "croma": 0.462,
+     "contraste": 0.791,
+     "vistas": {
+      "bajada": 23.1,
+      "puente": 25.5,
+      "piloto_s2900": 14.8
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 20.73
+   }
+  },
+  {
+   "ksDiffuse": 0.55,
+   "ksAmbient": 0.385,
+   "cociente": 0.7,
+   "pesos_ajuste": "A",
+   "ajuste": {
+    "ac": {
+     "deltaE": 15.1,
+     "croma": 0.863,
+     "contraste": 1.164,
+     "vistas": {
+      "meta_tunel": 19.0,
+      "captura": 16.4,
+      "pueblo": 13.1,
+      "tierra": 11.2,
+      "casino": 12.5,
+      "piloto_s300": 15.9,
+      "meta_puerto": 17.6
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.33,
+     "croma": 1.214,
+     "contraste": 1.145,
+     "vistas": {
+      "meta_tunel": 11.1,
+      "captura": 12.2,
+      "pueblo": 14.6,
+      "tierra": 14.5,
+      "casino": 16.1,
+      "piloto_s300": 10.9,
+      "meta_puerto": 13.9
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 15.04,
+     "croma": 0.894,
+     "contraste": 0.894,
+     "vistas": {
+      "meta_tunel": 10.9,
+      "captura": 6.9,
+      "pueblo": 19.0,
+      "tierra": 20.1,
+      "casino": 22.5,
+      "piloto_s300": 9.1,
+      "meta_puerto": 16.8
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 18.37,
+     "croma": 0.585,
+     "contraste": 0.893,
+     "vistas": {
+      "meta_tunel": 14.9,
+      "captura": 14.1,
+      "pueblo": 23.7,
+      "tierra": 24.3,
+      "casino": 18.5,
+      "piloto_s300": 12.2,
+      "meta_puerto": 20.9
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 18.79
+   },
+   "control": {
+    "ac": {
+     "deltaE": 14.2,
+     "croma": 0.915,
+     "contraste": 1.108,
+     "vistas": {
+      "bajada": 11.5,
+      "puente": 16.2,
+      "piloto_s2900": 14.9
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 12.4,
+     "croma": 1.115,
+     "contraste": 1.172,
+     "vistas": {
+      "bajada": 16.1,
+      "puente": 12.7,
+      "piloto_s2900": 8.4
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 17.53,
+     "croma": 0.873,
+     "contraste": 0.897,
+     "vistas": {
+      "bajada": 24.0,
+      "puente": 17.0,
+      "piloto_s2900": 11.6
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 19.37,
+     "croma": 0.479,
+     "contraste": 0.831,
+     "vistas": {
+      "bajada": 22.1,
+      "puente": 23.9,
+      "piloto_s2900": 12.1
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 19.88
+   }
+  },
+  {
+   "ksDiffuse": 0.55,
+   "ksAmbient": 0.44,
+   "cociente": 0.8,
+   "pesos_ajuste": "A",
+   "ajuste": {
+    "ac": {
+     "deltaE": 14.29,
+     "croma": 0.885,
+     "contraste": 1.112,
+     "vistas": {
+      "meta_tunel": 17.6,
+      "captura": 15.8,
+      "pueblo": 12.5,
+      "tierra": 10.8,
+      "casino": 12.1,
+      "piloto_s300": 15.1,
+      "meta_puerto": 16.1
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 12.79,
+     "croma": 1.181,
+     "contraste": 1.135,
+     "vistas": {
+      "meta_tunel": 10.7,
+      "captura": 11.6,
+      "pueblo": 14.1,
+      "tierra": 14.3,
+      "casino": 16.1,
+      "piloto_s300": 9.6,
+      "meta_puerto": 13.1
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 15.0,
+     "croma": 0.867,
+     "contraste": 0.879,
+     "vistas": {
+      "meta_tunel": 11.0,
+      "captura": 6.5,
+      "pueblo": 19.2,
+      "tierra": 20.5,
+      "casino": 22.9,
+      "piloto_s300": 8.5,
+      "meta_puerto": 16.4
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 19.6,
+     "croma": 0.569,
+     "contraste": 0.889,
+     "vistas": {
+      "meta_tunel": 16.9,
+      "captura": 15.7,
+      "pueblo": 24.6,
+      "tierra": 24.8,
+      "casino": 19.3,
+      "piloto_s300": 13.7,
+      "meta_puerto": 22.2
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 18.83
+   },
+   "control": {
+    "ac": {
+     "deltaE": 13.7,
+     "croma": 0.923,
+     "contraste": 1.078,
+     "vistas": {
+      "bajada": 11.1,
+      "puente": 15.1,
+      "piloto_s2900": 14.9
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 12.27,
+     "croma": 1.113,
+     "contraste": 1.139,
+     "vistas": {
+      "bajada": 16.2,
+      "puente": 12.2,
+      "piloto_s2900": 8.4
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 17.73,
+     "croma": 0.872,
+     "contraste": 0.867,
+     "vistas": {
+      "bajada": 24.3,
+      "puente": 17.1,
+      "piloto_s2900": 11.8
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 20.3,
+     "croma": 0.468,
+     "contraste": 0.809,
+     "vistas": {
+      "bajada": 22.6,
+      "puente": 24.8,
+      "piloto_s2900": 13.5
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 20.43
+   }
+  },
+  {
+   "ksDiffuse": 0.55,
+   "ksAmbient": 0.413,
+   "cociente": 0.75,
+   "pesos_ajuste": "A",
+   "ajuste": {
+    "ac": {
+     "deltaE": 14.6,
+     "croma": 0.866,
+     "contraste": 1.136,
+     "vistas": {
+      "meta_tunel": 18.3,
+      "captura": 16.0,
+      "pueblo": 12.8,
+      "tierra": 11.0,
+      "casino": 12.3,
+      "piloto_s300": 15.2,
+      "meta_puerto": 16.6
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.09,
+     "croma": 1.209,
+     "contraste": 1.144,
+     "vistas": {
+      "meta_tunel": 10.9,
+      "captura": 11.9,
+      "pueblo": 14.2,
+      "tierra": 14.4,
+      "casino": 16.1,
+      "piloto_s300": 10.5,
+      "meta_puerto": 13.6
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 15.07,
+     "croma": 0.89,
+     "contraste": 0.888,
+     "vistas": {
+      "meta_tunel": 11.0,
+      "captura": 6.7,
+      "pueblo": 19.1,
+      "tierra": 20.3,
+      "casino": 22.7,
+      "piloto_s300": 9.1,
+      "meta_puerto": 16.6
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 18.96,
+     "croma": 0.577,
+     "contraste": 0.893,
+     "vistas": {
+      "meta_tunel": 15.6,
+      "captura": 14.9,
+      "pueblo": 24.1,
+      "tierra": 24.5,
+      "casino": 18.9,
+      "piloto_s300": 13.1,
+      "meta_puerto": 21.6
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 18.84
+   },
+   "control": {
+    "ac": {
+     "deltaE": 13.9,
+     "croma": 0.919,
+     "contraste": 1.09,
+     "vistas": {
+      "bajada": 11.2,
+      "puente": 15.6,
+      "piloto_s2900": 14.9
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 12.3,
+     "croma": 1.114,
+     "contraste": 1.152,
+     "vistas": {
+      "bajada": 16.1,
+      "puente": 12.4,
+      "piloto_s2900": 8.4
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 17.63,
+     "croma": 0.874,
+     "contraste": 0.879,
+     "vistas": {
+      "bajada": 24.1,
+      "puente": 17.1,
+      "piloto_s2900": 11.7
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 19.83,
+     "croma": 0.472,
+     "contraste": 0.818,
+     "vistas": {
+      "bajada": 22.3,
+      "puente": 24.4,
+      "piloto_s2900": 12.8
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 20.17
+   }
+  },
+  {
+   "ksDiffuse": 0.55,
+   "ksAmbient": 0.495,
+   "cociente": 0.9,
+   "pesos_ajuste": "A",
+   "ajuste": {
+    "ac": {
+     "deltaE": 13.63,
+     "croma": 0.896,
+     "contraste": 1.075,
+     "vistas": {
+      "meta_tunel": 16.6,
+      "captura": 15.3,
+      "pueblo": 12.0,
+      "tierra": 10.5,
+      "casino": 11.9,
+      "piloto_s300": 14.1,
+      "meta_puerto": 15.0
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 12.91,
+     "croma": 1.174,
+     "contraste": 1.147,
+     "vistas": {
+      "meta_tunel": 11.3,
+      "captura": 11.5,
+      "pueblo": 14.0,
+      "tierra": 14.3,
+      "casino": 16.3,
+      "piloto_s300": 9.8,
+      "meta_puerto": 13.2
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 15.27,
+     "croma": 0.862,
+     "contraste": 0.886,
+     "vistas": {
+      "meta_tunel": 11.3,
+      "captura": 6.7,
+      "pueblo": 19.5,
+      "tierra": 20.9,
+      "casino": 23.4,
+      "piloto_s300": 8.7,
+      "meta_puerto": 16.4
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 20.64,
+     "croma": 0.561,
+     "contraste": 0.887,
+     "vistas": {
+      "meta_tunel": 18.4,
+      "captura": 17.2,
+      "pueblo": 25.3,
+      "tierra": 25.2,
+      "casino": 19.9,
+      "piloto_s300": 15.3,
+      "meta_puerto": 23.2
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 18.97
+   },
+   "control": {
+    "ac": {
+     "deltaE": 13.3,
+     "croma": 0.929,
+     "contraste": 1.053,
+     "vistas": {
+      "bajada": 10.8,
+      "puente": 14.2,
+      "piloto_s2900": 14.9
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 12.3,
+     "croma": 1.116,
+     "contraste": 1.11,
+     "vistas": {
+      "bajada": 16.3,
+      "puente": 12.1,
+      "piloto_s2900": 8.5
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 17.93,
+     "croma": 0.876,
+     "contraste": 0.845,
+     "vistas": {
+      "bajada": 24.6,
+      "puente": 17.2,
+      "piloto_s2900": 12.0
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 21.13,
+     "croma": 0.461,
+     "contraste": 0.788,
+     "vistas": {
+      "bajada": 23.0,
+      "puente": 25.6,
+      "piloto_s2900": 14.8
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 20.9
+   }
+  },
+  {
+   "ksDiffuse": 0.6,
+   "ksAmbient": 0.6,
+   "cociente": 1.0,
+   "pesos_ajuste": "A",
+   "ajuste": {
+    "ac": {
+     "deltaE": 13.27,
+     "croma": 0.903,
+     "contraste": 1.078,
+     "vistas": {
+      "meta_tunel": 16.2,
+      "captura": 14.9,
+      "pueblo": 11.8,
+      "tierra": 10.2,
+      "casino": 11.8,
+      "piloto_s300": 13.9,
+      "meta_puerto": 14.1
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.33,
+     "croma": 1.156,
+     "contraste": 1.187,
+     "vistas": {
+      "meta_tunel": 12.7,
+      "captura": 11.6,
+      "pueblo": 14.1,
+      "tierra": 14.3,
+      "casino": 16.7,
+      "piloto_s300": 9.9,
+      "meta_puerto": 14.0
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 15.71,
+     "croma": 0.849,
+     "contraste": 0.927,
+     "vistas": {
+      "meta_tunel": 12.0,
+      "captura": 7.4,
+      "pueblo": 19.8,
+      "tierra": 21.3,
+      "casino": 23.8,
+      "piloto_s300": 9.0,
+      "meta_puerto": 16.7
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 21.47,
+     "croma": 0.557,
+     "contraste": 0.894,
+     "vistas": {
+      "meta_tunel": 19.4,
+      "captura": 18.6,
+      "pueblo": 25.8,
+      "tierra": 25.6,
+      "casino": 20.4,
+      "piloto_s300": 16.3,
+      "meta_puerto": 24.2
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 19.13
+   },
+   "control": {
+    "ac": {
+     "deltaE": 13.07,
+     "croma": 0.941,
+     "contraste": 1.034,
+     "vistas": {
+      "bajada": 10.7,
+      "puente": 13.6,
+      "piloto_s2900": 14.9
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 12.47,
+     "croma": 1.123,
+     "contraste": 1.087,
+     "vistas": {
+      "bajada": 16.6,
+      "puente": 12.2,
+      "piloto_s2900": 8.6
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 18.33,
+     "croma": 0.893,
+     "contraste": 0.829,
+     "vistas": {
+      "bajada": 25.0,
+      "puente": 17.8,
+      "piloto_s2900": 12.2
+     },
+     "peor_que_antes": 1
+    },
+    "captura": {
+     "deltaE": 21.83,
+     "croma": 0.456,
+     "contraste": 0.764,
+     "vistas": {
+      "bajada": 23.4,
+      "puente": 26.1,
+      "piloto_s2900": 16.0
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 21.37
+   }
+  },
+  {
+   "ksDiffuse": 0.55,
+   "ksAmbient": 0.55,
+   "cociente": 1.0,
+   "pesos_ajuste": "A",
+   "ajuste": {
+    "ac": {
+     "deltaE": 13.37,
+     "croma": 0.905,
+     "contraste": 1.061,
+     "vistas": {
+      "meta_tunel": 16.5,
+      "captura": 15.1,
+      "pueblo": 11.8,
+      "tierra": 10.2,
+      "casino": 11.7,
+      "piloto_s300": 13.9,
+      "meta_puerto": 14.4
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.16,
+     "croma": 1.16,
+     "contraste": 1.161,
+     "vistas": {
+      "meta_tunel": 12.1,
+      "captura": 11.5,
+      "pueblo": 14.1,
+      "tierra": 14.3,
+      "casino": 16.6,
+      "piloto_s300": 9.9,
+      "meta_puerto": 13.6
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 15.59,
+     "croma": 0.85,
+     "contraste": 0.898,
+     "vistas": {
+      "meta_tunel": 11.7,
+      "captura": 7.1,
+      "pueblo": 19.8,
+      "tierra": 21.2,
+      "casino": 23.8,
+      "piloto_s300": 8.9,
+      "meta_puerto": 16.6
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 21.46,
+     "croma": 0.557,
+     "contraste": 0.877,
+     "vistas": {
+      "meta_tunel": 19.3,
+      "captura": 18.5,
+      "pueblo": 25.9,
+      "tierra": 25.6,
+      "casino": 20.5,
+      "piloto_s300": 16.3,
+      "meta_puerto": 24.1
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 19.25
+   },
+   "control": {
+    "ac": {
+     "deltaE": 13.1,
+     "croma": 0.933,
+     "contraste": 1.029,
+     "vistas": {
+      "bajada": 10.7,
+      "puente": 13.7,
+      "piloto_s2900": 14.9
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 12.47,
+     "croma": 1.12,
+     "contraste": 1.086,
+     "vistas": {
+      "bajada": 16.6,
+      "puente": 12.2,
+      "piloto_s2900": 8.6
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 18.17,
+     "croma": 0.879,
+     "contraste": 0.826,
+     "vistas": {
+      "bajada": 24.9,
+      "puente": 17.4,
+      "piloto_s2900": 12.2
+     },
+     "peor_que_antes": 1
+    },
+    "captura": {
+     "deltaE": 21.9,
+     "croma": 0.454,
+     "contraste": 0.765,
+     "vistas": {
+      "bajada": 23.5,
+      "puente": 26.2,
+      "piloto_s2900": 16.0
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 21.46
+   }
+  },
+  {
+   "ksDiffuse": 0.5,
+   "ksAmbient": 0.35,
+   "cociente": 0.7,
+   "pesos_ajuste": "A",
+   "ajuste": {
+    "ac": {
+     "deltaE": 15.9,
+     "croma": 0.86,
+     "contraste": 1.179,
+     "vistas": {
+      "meta_tunel": 20.3,
+      "captura": 17.2,
+      "pueblo": 13.7,
+      "tierra": 11.2,
+      "casino": 13.0,
+      "piloto_s300": 16.9,
+      "meta_puerto": 19.0
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.79,
+     "croma": 1.219,
+     "contraste": 1.117,
+     "vistas": {
+      "meta_tunel": 11.9,
+      "captura": 12.8,
+      "pueblo": 14.9,
+      "tierra": 14.5,
+      "casino": 16.5,
+      "piloto_s300": 11.6,
+      "meta_puerto": 14.3
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 15.27,
+     "croma": 0.896,
+     "contraste": 0.867,
+     "vistas": {
+      "meta_tunel": 10.9,
+      "captura": 7.4,
+      "pueblo": 19.3,
+      "tierra": 20.1,
+      "casino": 22.9,
+      "piloto_s300": 9.3,
+      "meta_puerto": 17.0
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 17.89,
+     "croma": 0.59,
+     "contraste": 0.854,
+     "vistas": {
+      "meta_tunel": 13.9,
+      "captura": 13.8,
+      "pueblo": 23.3,
+      "tierra": 24.2,
+      "casino": 18.2,
+      "piloto_s300": 11.5,
+      "meta_puerto": 20.3
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 19.45
+   },
+   "control": {
+    "ac": {
+     "deltaE": 14.6,
+     "croma": 0.908,
+     "contraste": 1.093,
+     "vistas": {
+      "bajada": 12.0,
+      "puente": 16.8,
+      "piloto_s2900": 15.0
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 12.47,
+     "croma": 1.116,
+     "contraste": 1.133,
+     "vistas": {
+      "bajada": 16.3,
+      "puente": 12.6,
+      "piloto_s2900": 8.5
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 17.6,
+     "croma": 0.864,
+     "contraste": 0.856,
+     "vistas": {
+      "bajada": 24.3,
+      "puente": 16.9,
+      "piloto_s2900": 11.6
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 19.27,
+     "croma": 0.478,
+     "contraste": 0.809,
+     "vistas": {
+      "bajada": 21.9,
+      "puente": 23.9,
+      "piloto_s2900": 12.0
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 20.42
+   }
+  },
+  {
+   "ksDiffuse": 0.5,
+   "ksAmbient": 0.375,
+   "cociente": 0.75,
+   "pesos_ajuste": "A",
+   "ajuste": {
+    "ac": {
+     "deltaE": 15.34,
+     "croma": 0.861,
+     "contraste": 1.146,
+     "vistas": {
+      "meta_tunel": 19.5,
+      "captura": 16.7,
+      "pueblo": 13.3,
+      "tierra": 11.0,
+      "casino": 12.7,
+      "piloto_s300": 16.2,
+      "meta_puerto": 18.0
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.44,
+     "croma": 1.217,
+     "contraste": 1.104,
+     "vistas": {
+      "meta_tunel": 11.4,
+      "captura": 12.3,
+      "pueblo": 14.6,
+      "tierra": 14.4,
+      "casino": 16.4,
+      "piloto_s300": 11.0,
+      "meta_puerto": 14.0
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 15.26,
+     "croma": 0.894,
+     "contraste": 0.853,
+     "vistas": {
+      "meta_tunel": 10.9,
+      "captura": 7.0,
+      "pueblo": 19.4,
+      "tierra": 20.3,
+      "casino": 23.1,
+      "piloto_s300": 9.2,
+      "meta_puerto": 16.9
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 18.53,
+     "croma": 0.581,
+     "contraste": 0.855,
+     "vistas": {
+      "meta_tunel": 14.7,
+      "captura": 14.6,
+      "pueblo": 23.8,
+      "tierra": 24.5,
+      "casino": 18.7,
+      "piloto_s300": 12.4,
+      "meta_puerto": 21.0
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 19.52
+   },
+   "control": {
+    "ac": {
+     "deltaE": 14.23,
+     "croma": 0.912,
+     "contraste": 1.074,
+     "vistas": {
+      "bajada": 11.7,
+      "puente": 16.0,
+      "piloto_s2900": 15.0
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 12.33,
+     "croma": 1.115,
+     "contraste": 1.116,
+     "vistas": {
+      "bajada": 16.3,
+      "puente": 12.3,
+      "piloto_s2900": 8.4
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 17.67,
+     "croma": 0.863,
+     "contraste": 0.842,
+     "vistas": {
+      "bajada": 24.4,
+      "puente": 16.9,
+      "piloto_s2900": 11.7
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 19.77,
+     "croma": 0.471,
+     "contraste": 0.801,
+     "vistas": {
+      "bajada": 22.2,
+      "puente": 24.4,
+      "piloto_s2900": 12.7
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 20.64
+   }
+  },
+  {
+   "ksDiffuse": 0.5,
+   "ksAmbient": 0.4,
+   "cociente": 0.8,
+   "pesos_ajuste": "A",
+   "ajuste": {
+    "ac": {
+     "deltaE": 14.83,
+     "croma": 0.866,
+     "contraste": 1.118,
+     "vistas": {
+      "meta_tunel": 18.8,
+      "captura": 16.3,
+      "pueblo": 12.8,
+      "tierra": 10.9,
+      "casino": 12.4,
+      "piloto_s300": 15.5,
+      "meta_puerto": 17.1
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.14,
+     "croma": 1.211,
+     "contraste": 1.1,
+     "vistas": {
+      "meta_tunel": 11.0,
+      "captura": 12.0,
+      "pueblo": 14.3,
+      "tierra": 14.3,
+      "casino": 16.3,
+      "piloto_s300": 10.5,
+      "meta_puerto": 13.6
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 15.26,
+     "croma": 0.889,
+     "contraste": 0.847,
+     "vistas": {
+      "meta_tunel": 11.0,
+      "captura": 6.8,
+      "pueblo": 19.4,
+      "tierra": 20.5,
+      "casino": 23.2,
+      "piloto_s300": 9.1,
+      "meta_puerto": 16.8
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 19.19,
+     "croma": 0.573,
+     "contraste": 0.856,
+     "vistas": {
+      "meta_tunel": 15.7,
+      "captura": 15.4,
+      "pueblo": 24.3,
+      "tierra": 24.8,
+      "casino": 19.2,
+      "piloto_s300": 13.3,
+      "meta_puerto": 21.6
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 19.55
+   },
+   "control": {
+    "ac": {
+     "deltaE": 13.93,
+     "croma": 0.915,
+     "contraste": 1.059,
+     "vistas": {
+      "bajada": 11.4,
+      "puente": 15.4,
+      "piloto_s2900": 15.0
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 12.27,
+     "croma": 1.114,
+     "contraste": 1.105,
+     "vistas": {
+      "bajada": 16.3,
+      "puente": 12.1,
+      "piloto_s2900": 8.4
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 17.73,
+     "croma": 0.861,
+     "contraste": 0.833,
+     "vistas": {
+      "bajada": 24.5,
+      "puente": 16.9,
+      "piloto_s2900": 11.8
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 20.3,
+     "croma": 0.466,
+     "contraste": 0.796,
+     "vistas": {
+      "bajada": 22.5,
+      "puente": 24.9,
+      "piloto_s2900": 13.5
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 20.83
+   }
+  },
+  {
+   "ksDiffuse": 0.5,
+   "ksAmbient": 0.45,
+   "cociente": 0.9,
+   "pesos_ajuste": "A",
+   "ajuste": {
+    "ac": {
+     "deltaE": 14.06,
+     "croma": 0.888,
+     "contraste": 1.072,
+     "vistas": {
+      "meta_tunel": 17.4,
+      "captura": 15.7,
+      "pueblo": 12.2,
+      "tierra": 10.5,
+      "casino": 12.0,
+      "piloto_s300": 14.8,
+      "meta_puerto": 15.8
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 12.86,
+     "croma": 1.18,
+     "contraste": 1.102,
+     "vistas": {
+      "meta_tunel": 10.8,
+      "captura": 11.6,
+      "pueblo": 14.2,
+      "tierra": 14.3,
+      "casino": 16.5,
+      "piloto_s300": 9.6,
+      "meta_puerto": 13.0
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 15.24,
+     "croma": 0.862,
+     "contraste": 0.845,
+     "vistas": {
+      "meta_tunel": 11.1,
+      "captura": 6.5,
+      "pueblo": 19.6,
+      "tierra": 20.9,
+      "casino": 23.5,
+      "piloto_s300": 8.6,
+      "meta_puerto": 16.5
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 20.39,
+     "croma": 0.559,
+     "contraste": 0.855,
+     "vistas": {
+      "meta_tunel": 17.9,
+      "captura": 16.9,
+      "pueblo": 25.2,
+      "tierra": 25.2,
+      "casino": 19.9,
+      "piloto_s300": 14.8,
+      "meta_puerto": 22.8
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 19.55
+   },
+   "control": {
+    "ac": {
+     "deltaE": 13.5,
+     "croma": 0.921,
+     "contraste": 1.036,
+     "vistas": {
+      "bajada": 11.0,
+      "puente": 14.6,
+      "piloto_s2900": 14.9
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 12.3,
+     "croma": 1.112,
+     "contraste": 1.083,
+     "vistas": {
+      "bajada": 16.5,
+      "puente": 11.9,
+      "piloto_s2900": 8.5
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 17.9,
+     "croma": 0.86,
+     "contraste": 0.817,
+     "vistas": {
+      "bajada": 24.8,
+      "puente": 16.9,
+      "piloto_s2900": 12.0
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 21.13,
+     "croma": 0.458,
+     "contraste": 0.778,
+     "vistas": {
+      "bajada": 23.0,
+      "puente": 25.6,
+      "piloto_s2900": 14.8
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 21.27
+   }
+  },
+  {
+   "ksDiffuse": 0.5,
+   "ksAmbient": 0.5,
+   "cociente": 1.0,
+   "pesos_ajuste": "A",
+   "ajuste": {
+    "ac": {
+     "deltaE": 13.54,
+     "croma": 0.897,
+     "contraste": 1.042,
+     "vistas": {
+      "meta_tunel": 16.6,
+      "captura": 15.4,
+      "pueblo": 11.9,
+      "tierra": 10.2,
+      "casino": 11.8,
+      "piloto_s300": 14.0,
+      "meta_puerto": 14.9
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.01,
+     "croma": 1.173,
+     "contraste": 1.117,
+     "vistas": {
+      "meta_tunel": 11.4,
+      "captura": 11.5,
+      "pueblo": 14.1,
+      "tierra": 14.3,
+      "casino": 16.7,
+      "piloto_s300": 9.9,
+      "meta_puerto": 13.2
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 15.5,
+     "croma": 0.859,
+     "contraste": 0.854,
+     "vistas": {
+      "meta_tunel": 11.3,
+      "captura": 6.8,
+      "pueblo": 19.8,
+      "tierra": 21.2,
+      "casino": 23.9,
+      "piloto_s300": 8.9,
+      "meta_puerto": 16.6
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 21.31,
+     "croma": 0.551,
+     "contraste": 0.852,
+     "vistas": {
+      "meta_tunel": 19.3,
+      "captura": 18.2,
+      "pueblo": 25.8,
+      "tierra": 25.6,
+      "casino": 20.5,
+      "piloto_s300": 16.2,
+      "meta_puerto": 23.6
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 19.71
+   },
+   "control": {
+    "ac": {
+     "deltaE": 13.2,
+     "croma": 0.928,
+     "contraste": 1.015,
+     "vistas": {
+      "bajada": 10.8,
+      "puente": 13.9,
+      "piloto_s2900": 14.9
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 12.4,
+     "croma": 1.114,
+     "contraste": 1.064,
+     "vistas": {
+      "bajada": 16.7,
+      "puente": 11.9,
+      "piloto_s2900": 8.6
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 18.07,
+     "croma": 0.862,
+     "contraste": 0.8,
+     "vistas": {
+      "bajada": 25.0,
+      "puente": 17.0,
+      "piloto_s2900": 12.2
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 21.87,
+     "croma": 0.452,
+     "contraste": 0.76,
+     "vistas": {
+      "bajada": 23.4,
+      "puente": 26.2,
+      "piloto_s2900": 16.0
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 21.72
+   }
+  },
+  {
+   "ksDiffuse": 0.45,
+   "ksAmbient": 0.36,
+   "cociente": 0.8,
+   "pesos_ajuste": "A",
+   "ajuste": {
+    "ac": {
+     "deltaE": 15.71,
+     "croma": 0.86,
+     "contraste": 1.133,
+     "vistas": {
+      "meta_tunel": 20.1,
+      "captura": 17.1,
+      "pueblo": 13.6,
+      "tierra": 10.9,
+      "casino": 13.0,
+      "piloto_s300": 16.6,
+      "meta_puerto": 18.7
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.69,
+     "croma": 1.222,
+     "contraste": 1.057,
+     "vistas": {
+      "meta_tunel": 11.5,
+      "captura": 12.6,
+      "pueblo": 14.9,
+      "tierra": 14.4,
+      "casino": 17.0,
+      "piloto_s300": 11.3,
+      "meta_puerto": 14.1
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 15.51,
+     "croma": 0.894,
+     "contraste": 0.809,
+     "vistas": {
+      "meta_tunel": 11.0,
+      "captura": 7.2,
+      "pueblo": 19.7,
+      "tierra": 20.6,
+      "casino": 23.7,
+      "piloto_s300": 9.3,
+      "meta_puerto": 17.1
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 18.71,
+     "croma": 0.576,
+     "contraste": 0.813,
+     "vistas": {
+      "meta_tunel": 15.0,
+      "captura": 15.0,
+      "pueblo": 23.9,
+      "tierra": 24.7,
+      "casino": 18.8,
+      "piloto_s300": 12.6,
+      "meta_puerto": 21.0
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 20.39
+   },
+   "control": {
+    "ac": {
+     "deltaE": 14.53,
+     "croma": 0.904,
+     "contraste": 1.046,
+     "vistas": {
+      "bajada": 12.2,
+      "puente": 16.3,
+      "piloto_s2900": 15.1
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 12.47,
+     "croma": 1.126,
+     "contraste": 1.063,
+     "vistas": {
+      "bajada": 16.7,
+      "puente": 12.3,
+      "piloto_s2900": 8.4
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 17.87,
+     "croma": 0.857,
+     "contraste": 0.793,
+     "vistas": {
+      "bajada": 24.8,
+      "puente": 16.9,
+      "piloto_s2900": 11.9
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 20.13,
+     "croma": 0.466,
+     "contraste": 0.773,
+     "vistas": {
+      "bajada": 22.4,
+      "puente": 24.7,
+      "piloto_s2900": 13.3
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 21.42
+   }
+  },
+  {
+   "ksDiffuse": 0.45,
+   "ksAmbient": 0.338,
+   "cociente": 0.75,
+   "pesos_ajuste": "A",
+   "ajuste": {
+    "ac": {
+     "deltaE": 16.27,
+     "croma": 0.856,
+     "contraste": 1.163,
+     "vistas": {
+      "meta_tunel": 20.8,
+      "captura": 17.5,
+      "pueblo": 14.2,
+      "tierra": 11.1,
+      "casino": 13.4,
+      "piloto_s300": 17.3,
+      "meta_puerto": 19.6
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 14.1,
+     "croma": 1.224,
+     "contraste": 1.071,
+     "vistas": {
+      "meta_tunel": 12.1,
+      "captura": 13.1,
+      "pueblo": 15.2,
+      "tierra": 14.5,
+      "casino": 17.1,
+      "piloto_s300": 12.1,
+      "meta_puerto": 14.6
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 15.59,
+     "croma": 0.897,
+     "contraste": 0.822,
+     "vistas": {
+      "meta_tunel": 11.0,
+      "captura": 7.6,
+      "pueblo": 19.7,
+      "tierra": 20.4,
+      "casino": 23.6,
+      "piloto_s300": 9.5,
+      "meta_puerto": 17.3
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 18.14,
+     "croma": 0.582,
+     "contraste": 0.813,
+     "vistas": {
+      "meta_tunel": 14.1,
+      "captura": 14.3,
+      "pueblo": 23.5,
+      "tierra": 24.5,
+      "casino": 18.4,
+      "piloto_s300": 11.7,
+      "meta_puerto": 20.5
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 20.4
+   },
+   "control": {
+    "ac": {
+     "deltaE": 14.9,
+     "croma": 0.891,
+     "contraste": 1.061,
+     "vistas": {
+      "bajada": 12.5,
+      "puente": 17.1,
+      "piloto_s2900": 15.1
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 12.67,
+     "croma": 1.126,
+     "contraste": 1.074,
+     "vistas": {
+      "bajada": 16.7,
+      "puente": 12.7,
+      "piloto_s2900": 8.6
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 17.9,
+     "croma": 0.857,
+     "contraste": 0.802,
+     "vistas": {
+      "bajada": 24.7,
+      "puente": 17.1,
+      "piloto_s2900": 11.9
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 19.63,
+     "croma": 0.467,
+     "contraste": 0.779,
+     "vistas": {
+      "bajada": 22.1,
+      "puente": 24.2,
+      "piloto_s2900": 12.6
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 21.4
+   }
+  },
+  {
+   "ksDiffuse": 0.45,
+   "ksAmbient": 0.315,
+   "cociente": 0.7,
+   "pesos_ajuste": "A",
+   "ajuste": {
+    "ac": {
+     "deltaE": 16.89,
+     "croma": 0.849,
+     "contraste": 1.197,
+     "vistas": {
+      "meta_tunel": 21.7,
+      "captura": 18.0,
+      "pueblo": 14.8,
+      "tierra": 11.3,
+      "casino": 13.8,
+      "piloto_s300": 18.0,
+      "meta_puerto": 20.6
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 14.71,
+     "croma": 1.221,
+     "contraste": 1.099,
+     "vistas": {
+      "meta_tunel": 13.1,
+      "captura": 13.8,
+      "pueblo": 15.7,
+      "tierra": 14.6,
+      "casino": 17.4,
+      "piloto_s300": 13.0,
+      "meta_puerto": 15.4
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 15.81,
+     "croma": 0.899,
+     "contraste": 0.847,
+     "vistas": {
+      "meta_tunel": 11.4,
+      "captura": 8.2,
+      "pueblo": 19.7,
+      "tierra": 20.2,
+      "casino": 23.6,
+      "piloto_s300": 9.9,
+      "meta_puerto": 17.7
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 17.59,
+     "croma": 0.587,
+     "contraste": 0.815,
+     "vistas": {
+      "meta_tunel": 13.3,
+      "captura": 13.5,
+      "pueblo": 23.1,
+      "tierra": 24.2,
+      "casino": 18.1,
+      "piloto_s300": 10.9,
+      "meta_puerto": 20.0
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 20.44
+   },
+   "control": {
+    "ac": {
+     "deltaE": 15.33,
+     "croma": 0.885,
+     "contraste": 1.082,
+     "vistas": {
+      "bajada": 12.8,
+      "puente": 18.0,
+      "piloto_s2900": 15.2
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 12.9,
+     "croma": 1.122,
+     "contraste": 1.098,
+     "vistas": {
+      "bajada": 16.9,
+      "puente": 13.1,
+      "piloto_s2900": 8.7
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 17.9,
+     "croma": 0.856,
+     "contraste": 0.821,
+     "vistas": {
+      "bajada": 24.7,
+      "puente": 17.2,
+      "piloto_s2900": 11.8
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 19.17,
+     "croma": 0.473,
+     "contraste": 0.789,
+     "vistas": {
+      "bajada": 22.0,
+      "puente": 23.6,
+      "piloto_s2900": 11.9
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 21.27
+   }
+  },
+  {
+   "ksDiffuse": 0.45,
+   "ksAmbient": 0.405,
+   "cociente": 0.9,
+   "pesos_ajuste": "A",
+   "ajuste": {
+    "ac": {
+     "deltaE": 14.74,
+     "croma": 0.864,
+     "contraste": 1.079,
+     "vistas": {
+      "meta_tunel": 18.8,
+      "captura": 16.4,
+      "pueblo": 12.7,
+      "tierra": 10.5,
+      "casino": 12.4,
+      "piloto_s300": 15.4,
+      "meta_puerto": 17.0
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.27,
+     "croma": 1.212,
+     "contraste": 1.056,
+     "vistas": {
+      "meta_tunel": 10.9,
+      "captura": 12.0,
+      "pueblo": 14.6,
+      "tierra": 14.3,
+      "casino": 16.9,
+      "piloto_s300": 10.6,
+      "meta_puerto": 13.6
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 15.56,
+     "croma": 0.887,
+     "contraste": 0.804,
+     "vistas": {
+      "meta_tunel": 11.1,
+      "captura": 6.8,
+      "pueblo": 19.9,
+      "tierra": 20.9,
+      "casino": 23.9,
+      "piloto_s300": 9.3,
+      "meta_puerto": 17.0
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 19.93,
+     "croma": 0.561,
+     "contraste": 0.818,
+     "vistas": {
+      "meta_tunel": 16.7,
+      "captura": 16.5,
+      "pueblo": 24.9,
+      "tierra": 25.2,
+      "casino": 19.7,
+      "piloto_s300": 14.3,
+      "meta_puerto": 22.2
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 20.45
+   },
+   "control": {
+    "ac": {
+     "deltaE": 13.83,
+     "croma": 0.911,
+     "contraste": 1.016,
+     "vistas": {
+      "bajada": 11.5,
+      "puente": 15.0,
+      "piloto_s2900": 15.0
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 12.37,
+     "croma": 1.115,
+     "contraste": 1.044,
+     "vistas": {
+      "bajada": 16.8,
+      "puente": 11.9,
+      "piloto_s2900": 8.4
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 17.93,
+     "croma": 0.848,
+     "contraste": 0.778,
+     "vistas": {
+      "bajada": 25.0,
+      "puente": 16.8,
+      "piloto_s2900": 12.0
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 21.07,
+     "croma": 0.456,
+     "contraste": 0.763,
+     "vistas": {
+      "bajada": 22.9,
+      "puente": 25.6,
+      "piloto_s2900": 14.7
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 21.76
+   }
+  },
+  {
+   "ksDiffuse": 0.45,
+   "ksAmbient": 0.45,
+   "cociente": 1.0,
+   "pesos_ajuste": "A",
+   "ajuste": {
+    "ac": {
+     "deltaE": 13.9,
+     "croma": 0.871,
+     "contraste": 1.036,
+     "vistas": {
+      "meta_tunel": 17.4,
+      "captura": 15.7,
+      "pueblo": 12.0,
+      "tierra": 10.2,
+      "casino": 12.0,
+      "piloto_s300": 14.3,
+      "meta_puerto": 15.7
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.24,
+     "croma": 1.204,
+     "contraste": 1.077,
+     "vistas": {
+      "meta_tunel": 11.0,
+      "captura": 11.7,
+      "pueblo": 14.6,
+      "tierra": 14.3,
+      "casino": 17.0,
+      "piloto_s300": 10.5,
+      "meta_puerto": 13.6
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 15.73,
+     "croma": 0.881,
+     "contraste": 0.816,
+     "vistas": {
+      "meta_tunel": 11.4,
+      "captura": 6.9,
+      "pueblo": 20.1,
+      "tierra": 21.2,
+      "casino": 24.1,
+      "piloto_s300": 9.5,
+      "meta_puerto": 16.9
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 21.11,
+     "croma": 0.546,
+     "contraste": 0.826,
+     "vistas": {
+      "meta_tunel": 18.8,
+      "captura": 17.9,
+      "pueblo": 25.8,
+      "tierra": 25.6,
+      "casino": 20.5,
+      "piloto_s300": 15.9,
+      "meta_puerto": 23.3
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 20.51
+   },
+   "control": {
+    "ac": {
+     "deltaE": 13.4,
+     "croma": 0.917,
+     "contraste": 0.998,
+     "vistas": {
+      "bajada": 11.1,
+      "puente": 14.2,
+      "piloto_s2900": 14.9
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 12.5,
+     "croma": 1.114,
+     "contraste": 1.042,
+     "vistas": {
+      "bajada": 17.0,
+      "puente": 11.9,
+      "piloto_s2900": 8.6
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 18.1,
+     "croma": 0.849,
+     "contraste": 0.778,
+     "vistas": {
+      "bajada": 25.2,
+      "puente": 16.9,
+      "piloto_s2900": 12.2
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 21.93,
+     "croma": 0.448,
+     "contraste": 0.754,
+     "vistas": {
+      "bajada": 23.5,
+      "puente": 26.3,
+      "piloto_s2900": 16.0
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 22.07
+   }
+  },
+  {
+   "ksDiffuse": 0.55,
+   "ksAmbient": 0.688,
+   "cociente": 1.25,
+   "pesos_ajuste": "A",
+   "ajuste": {
+    "ac": {
+     "deltaE": 12.87,
+     "croma": 0.895,
+     "contraste": 1.027,
+     "vistas": {
+      "meta_tunel": 16.2,
+      "captura": 15.0,
+      "pueblo": 11.5,
+      "tierra": 8.0,
+      "casino": 11.3,
+      "piloto_s300": 14.0,
+      "meta_puerto": 14.1
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 14.03,
+     "croma": 1.122,
+     "contraste": 1.179,
+     "vistas": {
+      "meta_tunel": 13.9,
+      "captura": 11.6,
+      "pueblo": 14.7,
+      "tierra": 14.4,
+      "casino": 17.8,
+      "piloto_s300": 10.4,
+      "meta_puerto": 15.4
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 16.91,
+     "croma": 0.82,
+     "contraste": 0.93,
+     "vistas": {
+      "meta_tunel": 13.1,
+      "captura": 8.5,
+      "pueblo": 21.0,
+      "tierra": 23.2,
+      "casino": 25.4,
+      "piloto_s300": 9.6,
+      "meta_puerto": 17.6
+     },
+     "peor_que_antes": 1
+    },
+    "captura": {
+     "deltaE": 23.13,
+     "croma": 0.534,
+     "contraste": 0.855,
+     "vistas": {
+      "meta_tunel": 21.8,
+      "captura": 21.0,
+      "pueblo": 26.9,
+      "tierra": 26.6,
+      "casino": 21.5,
+      "piloto_s300": 18.5,
+      "meta_puerto": 25.6
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 20.51
+   },
+   "control": {
+    "ac": {
+     "deltaE": 12.87,
+     "croma": 0.937,
+     "contraste": 0.956,
+     "vistas": {
+      "bajada": 11.0,
+      "puente": 12.7,
+      "piloto_s2900": 14.9
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.0,
+     "croma": 1.106,
+     "contraste": 1.017,
+     "vistas": {
+      "bajada": 17.6,
+      "puente": 12.4,
+      "piloto_s2900": 9.0
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 19.07,
+     "croma": 0.875,
+     "contraste": 0.769,
+     "vistas": {
+      "bajada": 26.2,
+      "puente": 17.9,
+      "piloto_s2900": 13.1
+     },
+     "peor_que_antes": 2
+    },
+    "captura": {
+     "deltaE": 23.5,
+     "croma": 0.443,
+     "contraste": 0.704,
+     "vistas": {
+      "bajada": 24.4,
+      "puente": 27.4,
+      "piloto_s2900": 18.7
+     },
+     "peor_que_antes": 1
+    },
+    "coste": 23.0
+   }
+  },
+  {
+   "ksDiffuse": 0.6,
+   "ksAmbient": 0.75,
+   "cociente": 1.25,
+   "pesos_ajuste": "A",
+   "ajuste": {
+    "ac": {
+     "deltaE": 12.84,
+     "croma": 0.894,
+     "contraste": 1.047,
+     "vistas": {
+      "meta_tunel": 16.1,
+      "captura": 14.9,
+      "pueblo": 11.5,
+      "tierra": 8.0,
+      "casino": 11.3,
+      "piloto_s300": 14.0,
+      "meta_puerto": 14.1
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 14.2,
+     "croma": 1.117,
+     "contraste": 1.2,
+     "vistas": {
+      "meta_tunel": 14.4,
+      "captura": 11.7,
+      "pueblo": 14.7,
+      "tierra": 14.4,
+      "casino": 17.8,
+      "piloto_s300": 10.4,
+      "meta_puerto": 16.0
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 17.09,
+     "croma": 0.818,
+     "contraste": 0.958,
+     "vistas": {
+      "meta_tunel": 13.5,
+      "captura": 8.9,
+      "pueblo": 21.0,
+      "tierra": 23.2,
+      "casino": 25.3,
+      "piloto_s300": 9.6,
+      "meta_puerto": 18.1
+     },
+     "peor_que_antes": 1
+    },
+    "captura": {
+     "deltaE": 23.2,
+     "croma": 0.532,
+     "contraste": 0.866,
+     "vistas": {
+      "meta_tunel": 22.0,
+      "captura": 21.1,
+      "pueblo": 26.9,
+      "tierra": 26.6,
+      "casino": 21.5,
+      "piloto_s300": 18.5,
+      "meta_puerto": 25.8
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 20.54
+   },
+   "control": {
+    "ac": {
+     "deltaE": 12.87,
+     "croma": 0.94,
+     "contraste": 0.965,
+     "vistas": {
+      "bajada": 11.0,
+      "puente": 12.7,
+      "piloto_s2900": 14.9
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.03,
+     "croma": 1.108,
+     "contraste": 1.029,
+     "vistas": {
+      "bajada": 17.6,
+      "puente": 12.5,
+      "piloto_s2900": 9.0
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 19.2,
+     "croma": 0.885,
+     "contraste": 0.783,
+     "vistas": {
+      "bajada": 26.2,
+      "puente": 18.3,
+      "piloto_s2900": 13.1
+     },
+     "peor_que_antes": 2
+    },
+    "captura": {
+     "deltaE": 23.47,
+     "croma": 0.443,
+     "contraste": 0.706,
+     "vistas": {
+      "bajada": 24.4,
+      "puente": 27.3,
+      "piloto_s2900": 18.7
+     },
+     "peor_que_antes": 1
+    },
+    "coste": 22.89
+   }
+  },
+  {
+   "ksDiffuse": 0.5,
+   "ksAmbient": 0.625,
+   "cociente": 1.25,
+   "pesos_ajuste": "A",
+   "ajuste": {
+    "ac": {
+     "deltaE": 12.99,
+     "croma": 0.898,
+     "contraste": 1.003,
+     "vistas": {
+      "meta_tunel": 16.5,
+      "captura": 15.2,
+      "pueblo": 11.5,
+      "tierra": 8.0,
+      "casino": 11.3,
+      "piloto_s300": 14.0,
+      "meta_puerto": 14.4
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.86,
+     "croma": 1.127,
+     "contraste": 1.149,
+     "vistas": {
+      "meta_tunel": 13.4,
+      "captura": 11.7,
+      "pueblo": 14.6,
+      "tierra": 14.4,
+      "casino": 17.7,
+      "piloto_s300": 10.4,
+      "meta_puerto": 14.8
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 16.74,
+     "croma": 0.821,
+     "contraste": 0.893,
+     "vistas": {
+      "meta_tunel": 12.6,
+      "captura": 8.1,
+      "pueblo": 21.0,
+      "tierra": 23.2,
+      "casino": 25.4,
+      "piloto_s300": 9.5,
+      "meta_puerto": 17.4
+     },
+     "peor_que_antes": 1
+    },
+    "captura": {
+     "deltaE": 23.01,
+     "croma": 0.535,
+     "contraste": 0.838,
+     "vistas": {
+      "meta_tunel": 21.5,
+      "captura": 20.8,
+      "pueblo": 26.9,
+      "tierra": 26.6,
+      "casino": 21.5,
+      "piloto_s300": 18.4,
+      "meta_puerto": 25.4
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 20.57
+   },
+   "control": {
+    "ac": {
+     "deltaE": 12.9,
+     "croma": 0.932,
+     "contraste": 0.945,
+     "vistas": {
+      "bajada": 11.0,
+      "puente": 12.8,
+      "piloto_s2900": 14.9
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 12.93,
+     "croma": 1.103,
+     "contraste": 1.002,
+     "vistas": {
+      "bajada": 17.5,
+      "puente": 12.3,
+      "piloto_s2900": 9.0
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 18.93,
+     "croma": 0.858,
+     "contraste": 0.752,
+     "vistas": {
+      "bajada": 26.2,
+      "puente": 17.5,
+      "piloto_s2900": 13.1
+     },
+     "peor_que_antes": 2
+    },
+    "captura": {
+     "deltaE": 23.5,
+     "croma": 0.44,
+     "contraste": 0.703,
+     "vistas": {
+      "bajada": 24.4,
+      "puente": 27.4,
+      "piloto_s2900": 18.7
+     },
+     "peor_que_antes": 1
+    },
+    "coste": 23.17
+   }
+  },
+  {
+   "ksDiffuse": 0.6,
+   "ksAmbient": 0.42,
+   "cociente": 0.7,
+   "pesos_ajuste": "B",
+   "ajuste": {
+    "ac": {
+     "deltaE": 15.29,
+     "croma": 0.784,
+     "contraste": 1.139,
+     "vistas": {
+      "meta_tunel": 18.4,
+      "captura": 16.7,
+      "pueblo": 14.0,
+      "tierra": 10.8,
+      "casino": 13.0,
+      "piloto_s300": 16.2,
+      "meta_puerto": 17.9
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 12.94,
+     "croma": 1.07,
+     "contraste": 1.181,
+     "vistas": {
+      "meta_tunel": 10.7,
+      "captura": 11.6,
+      "pueblo": 14.9,
+      "tierra": 13.0,
+      "casino": 17.5,
+      "piloto_s300": 9.7,
+      "meta_puerto": 13.2
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 16.4,
+     "croma": 0.779,
+     "contraste": 0.926,
+     "vistas": {
+      "meta_tunel": 11.0,
+      "captura": 7.0,
+      "pueblo": 21.3,
+      "tierra": 24.7,
+      "casino": 24.9,
+      "piloto_s300": 8.6,
+      "meta_puerto": 17.3
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 19.53,
+     "croma": 0.505,
+     "contraste": 0.945,
+     "vistas": {
+      "meta_tunel": 15.1,
+      "captura": 14.5,
+      "pueblo": 25.0,
+      "tierra": 27.2,
+      "casino": 20.4,
+      "piloto_s300": 12.7,
+      "meta_puerto": 21.8
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 20.75
+   },
+   "control": {
+    "ac": {
+     "deltaE": 14.83,
+     "croma": 0.838,
+     "contraste": 1.102,
+     "vistas": {
+      "bajada": 12.5,
+      "puente": 16.3,
+      "piloto_s2900": 15.7
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.03,
+     "croma": 1.002,
+     "contraste": 1.183,
+     "vistas": {
+      "bajada": 17.9,
+      "puente": 13.0,
+      "piloto_s2900": 8.2
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 18.83,
+     "croma": 0.793,
+     "contraste": 0.913,
+     "vistas": {
+      "bajada": 26.0,
+      "puente": 17.4,
+      "piloto_s2900": 13.1
+     },
+     "peor_que_antes": 2
+    },
+    "captura": {
+     "deltaE": 20.17,
+     "croma": 0.423,
+     "contraste": 0.819,
+     "vistas": {
+      "bajada": 23.6,
+      "puente": 23.8,
+      "piloto_s2900": 13.1
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 22.06
+   }
+  },
+  {
+   "ksDiffuse": 0.45,
+   "ksAmbient": 0.562,
+   "cociente": 1.25,
+   "pesos_ajuste": "A",
+   "ajuste": {
+    "ac": {
+     "deltaE": 12.97,
+     "croma": 0.89,
+     "contraste": 0.98,
+     "vistas": {
+      "meta_tunel": 16.4,
+      "captura": 15.2,
+      "pueblo": 11.5,
+      "tierra": 8.0,
+      "casino": 11.3,
+      "piloto_s300": 13.9,
+      "meta_puerto": 14.5
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.71,
+     "croma": 1.14,
+     "contraste": 1.119,
+     "vistas": {
+      "meta_tunel": 12.7,
+      "captura": 11.7,
+      "pueblo": 14.8,
+      "tierra": 14.4,
+      "casino": 17.7,
+      "piloto_s300": 10.4,
+      "meta_puerto": 14.3
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 16.63,
+     "croma": 0.832,
+     "contraste": 0.857,
+     "vistas": {
+      "meta_tunel": 12.2,
+      "captura": 7.7,
+      "pueblo": 21.0,
+      "tierra": 23.2,
+      "casino": 25.4,
+      "piloto_s300": 9.6,
+      "meta_puerto": 17.3
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 22.96,
+     "croma": 0.53,
+     "contraste": 0.823,
+     "vistas": {
+      "meta_tunel": 21.4,
+      "captura": 20.7,
+      "pueblo": 26.9,
+      "tierra": 26.6,
+      "casino": 21.5,
+      "piloto_s300": 18.4,
+      "meta_puerto": 25.2
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 20.83
+   },
+   "control": {
+    "ac": {
+     "deltaE": 13.0,
+     "croma": 0.924,
+     "contraste": 0.933,
+     "vistas": {
+      "bajada": 11.0,
+      "puente": 13.1,
+      "piloto_s2900": 14.9
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 12.97,
+     "croma": 1.099,
+     "contraste": 0.991,
+     "vistas": {
+      "bajada": 17.6,
+      "puente": 12.3,
+      "piloto_s2900": 9.0
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 18.8,
+     "croma": 0.841,
+     "contraste": 0.739,
+     "vistas": {
+      "bajada": 26.2,
+      "puente": 17.1,
+      "piloto_s2900": 13.1
+     },
+     "peor_que_antes": 1
+    },
+    "captura": {
+     "deltaE": 23.53,
+     "croma": 0.438,
+     "contraste": 0.701,
+     "vistas": {
+      "bajada": 24.4,
+      "puente": 27.5,
+      "piloto_s2900": 18.7
+     },
+     "peor_que_antes": 1
+    },
+    "coste": 23.37
+   }
+  },
+  {
+   "ksDiffuse": 0.55,
+   "ksAmbient": 0.385,
+   "cociente": 0.7,
+   "pesos_ajuste": "B",
+   "ajuste": {
+    "ac": {
+     "deltaE": 15.86,
+     "croma": 0.779,
+     "contraste": 1.143,
+     "vistas": {
+      "meta_tunel": 19.4,
+      "captura": 17.2,
+      "pueblo": 14.4,
+      "tierra": 10.8,
+      "casino": 13.2,
+      "piloto_s300": 17.1,
+      "meta_puerto": 18.9
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.11,
+     "croma": 1.076,
+     "contraste": 1.144,
+     "vistas": {
+      "meta_tunel": 11.0,
+      "captura": 11.9,
+      "pueblo": 14.9,
+      "tierra": 13.0,
+      "casino": 17.6,
+      "piloto_s300": 10.2,
+      "meta_puerto": 13.2
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 16.54,
+     "croma": 0.782,
+     "contraste": 0.891,
+     "vistas": {
+      "meta_tunel": 10.9,
+      "captura": 7.2,
+      "pueblo": 21.5,
+      "tierra": 24.7,
+      "casino": 25.2,
+      "piloto_s300": 8.8,
+      "meta_puerto": 17.5
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 19.17,
+     "croma": 0.507,
+     "contraste": 0.908,
+     "vistas": {
+      "meta_tunel": 14.4,
+      "captura": 14.2,
+      "pueblo": 24.8,
+      "tierra": 27.2,
+      "casino": 20.2,
+      "piloto_s300": 12.1,
+      "meta_puerto": 21.3
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 20.93
+   },
+   "control": {
+    "ac": {
+     "deltaE": 15.07,
+     "croma": 0.834,
+     "contraste": 1.082,
+     "vistas": {
+      "bajada": 12.8,
+      "puente": 16.7,
+      "piloto_s2900": 15.7
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 12.93,
+     "croma": 0.996,
+     "contraste": 1.152,
+     "vistas": {
+      "bajada": 17.8,
+      "puente": 12.8,
+      "piloto_s2900": 8.2
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 18.8,
+     "croma": 0.778,
+     "contraste": 0.881,
+     "vistas": {
+      "bajada": 26.1,
+      "puente": 17.2,
+      "piloto_s2900": 13.1
+     },
+     "peor_que_antes": 1
+    },
+    "captura": {
+     "deltaE": 20.13,
+     "croma": 0.421,
+     "contraste": 0.807,
+     "vistas": {
+      "bajada": 23.4,
+      "puente": 23.8,
+      "piloto_s2900": 13.2
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 22.4
+   }
+  },
+  {
+   "ksDiffuse": 0.6,
+   "ksAmbient": 0.45,
+   "cociente": 0.75,
+   "pesos_ajuste": "B",
+   "ajuste": {
+    "ac": {
+     "deltaE": 15.2,
+     "croma": 0.783,
+     "contraste": 1.119,
+     "vistas": {
+      "meta_tunel": 18.1,
+      "captura": 16.5,
+      "pueblo": 14.1,
+      "tierra": 11.5,
+      "casino": 13.1,
+      "piloto_s300": 15.8,
+      "meta_puerto": 17.3
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.1,
+     "croma": 1.049,
+     "contraste": 1.187,
+     "vistas": {
+      "meta_tunel": 11.1,
+      "captura": 11.5,
+      "pueblo": 15.1,
+      "tierra": 13.4,
+      "casino": 17.8,
+      "piloto_s300": 9.5,
+      "meta_puerto": 13.3
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 16.7,
+     "croma": 0.762,
+     "contraste": 0.928,
+     "vistas": {
+      "meta_tunel": 11.2,
+      "captura": 7.0,
+      "pueblo": 21.7,
+      "tierra": 25.6,
+      "casino": 25.3,
+      "piloto_s300": 8.7,
+      "meta_puerto": 17.4
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 20.24,
+     "croma": 0.494,
+     "contraste": 0.945,
+     "vistas": {
+      "meta_tunel": 15.7,
+      "captura": 15.3,
+      "pueblo": 25.7,
+      "tierra": 27.9,
+      "casino": 21.0,
+      "piloto_s300": 13.5,
+      "meta_puerto": 22.6
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 21.2
+   },
+   "control": {
+    "ac": {
+     "deltaE": 14.8,
+     "croma": 0.836,
+     "contraste": 1.085,
+     "vistas": {
+      "bajada": 12.7,
+      "puente": 15.8,
+      "piloto_s2900": 15.9
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.17,
+     "croma": 0.993,
+     "contraste": 1.165,
+     "vistas": {
+      "bajada": 18.3,
+      "puente": 12.8,
+      "piloto_s2900": 8.4
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 19.07,
+     "croma": 0.789,
+     "contraste": 0.9,
+     "vistas": {
+      "bajada": 26.3,
+      "puente": 17.5,
+      "piloto_s2900": 13.4
+     },
+     "peor_que_antes": 2
+    },
+    "captura": {
+     "deltaE": 20.77,
+     "croma": 0.413,
+     "contraste": 0.809,
+     "vistas": {
+      "bajada": 24.1,
+      "puente": 24.2,
+      "piloto_s2900": 14.0
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 22.49
+   }
+  },
+  {
+   "ksDiffuse": 0.55,
+   "ksAmbient": 0.413,
+   "cociente": 0.75,
+   "pesos_ajuste": "B",
+   "ajuste": {
+    "ac": {
+     "deltaE": 15.59,
+     "croma": 0.775,
+     "contraste": 1.112,
+     "vistas": {
+      "meta_tunel": 18.5,
+      "captura": 16.9,
+      "pueblo": 14.3,
+      "tierra": 11.6,
+      "casino": 13.2,
+      "piloto_s300": 16.5,
+      "meta_puerto": 18.1
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.03,
+     "croma": 1.058,
+     "contraste": 1.139,
+     "vistas": {
+      "meta_tunel": 10.5,
+      "captura": 11.6,
+      "pueblo": 15.1,
+      "tierra": 13.4,
+      "casino": 17.8,
+      "piloto_s300": 9.7,
+      "meta_puerto": 13.1
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 16.73,
+     "croma": 0.767,
+     "contraste": 0.886,
+     "vistas": {
+      "meta_tunel": 11.0,
+      "captura": 7.1,
+      "pueblo": 21.8,
+      "tierra": 25.6,
+      "casino": 25.5,
+      "piloto_s300": 8.7,
+      "meta_puerto": 17.4
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 20.03,
+     "croma": 0.49,
+     "contraste": 0.91,
+     "vistas": {
+      "meta_tunel": 15.7,
+      "captura": 15.0,
+      "pueblo": 25.5,
+      "tierra": 27.9,
+      "casino": 21.0,
+      "piloto_s300": 13.0,
+      "meta_puerto": 22.1
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 21.39
+   },
+   "control": {
+    "ac": {
+     "deltaE": 14.93,
+     "croma": 0.829,
+     "contraste": 1.066,
+     "vistas": {
+      "bajada": 12.9,
+      "puente": 16.0,
+      "piloto_s2900": 15.9
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.03,
+     "croma": 0.991,
+     "contraste": 1.138,
+     "vistas": {
+      "bajada": 18.1,
+      "puente": 12.6,
+      "piloto_s2900": 8.4
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 19.0,
+     "croma": 0.776,
+     "contraste": 0.868,
+     "vistas": {
+      "bajada": 26.4,
+      "puente": 17.2,
+      "piloto_s2900": 13.4
+     },
+     "peor_que_antes": 1
+    },
+    "captura": {
+     "deltaE": 20.73,
+     "croma": 0.412,
+     "contraste": 0.798,
+     "vistas": {
+      "bajada": 23.9,
+      "puente": 24.3,
+      "piloto_s2900": 14.0
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 22.84
+   }
+  },
+  {
+   "ksDiffuse": 0.6,
+   "ksAmbient": 0.48,
+   "cociente": 0.8,
+   "pesos_ajuste": "B",
+   "ajuste": {
+    "ac": {
+     "deltaE": 15.17,
+     "croma": 0.776,
+     "contraste": 1.103,
+     "vistas": {
+      "meta_tunel": 17.6,
+      "captura": 16.4,
+      "pueblo": 14.3,
+      "tierra": 12.3,
+      "casino": 13.2,
+      "piloto_s300": 15.5,
+      "meta_puerto": 16.9
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.26,
+     "croma": 1.035,
+     "contraste": 1.187,
+     "vistas": {
+      "meta_tunel": 11.4,
+      "captura": 11.5,
+      "pueblo": 15.1,
+      "tierra": 13.9,
+      "casino": 18.0,
+      "piloto_s300": 9.5,
+      "meta_puerto": 13.4
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 16.97,
+     "croma": 0.753,
+     "contraste": 0.925,
+     "vistas": {
+      "meta_tunel": 11.4,
+      "captura": 7.2,
+      "pueblo": 22.0,
+      "tierra": 26.3,
+      "casino": 25.7,
+      "piloto_s300": 8.8,
+      "meta_puerto": 17.4
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 20.83,
+     "croma": 0.485,
+     "contraste": 0.939,
+     "vistas": {
+      "meta_tunel": 16.4,
+      "captura": 16.0,
+      "pueblo": 26.1,
+      "tierra": 28.6,
+      "casino": 21.5,
+      "piloto_s300": 14.2,
+      "meta_puerto": 23.0
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 21.62
+   },
+   "control": {
+    "ac": {
+     "deltaE": 14.83,
+     "croma": 0.833,
+     "contraste": 1.065,
+     "vistas": {
+      "bajada": 12.9,
+      "puente": 15.4,
+      "piloto_s2900": 16.2
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.23,
+     "croma": 0.99,
+     "contraste": 1.139,
+     "vistas": {
+      "bajada": 18.3,
+      "puente": 12.7,
+      "piloto_s2900": 8.7
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 19.33,
+     "croma": 0.785,
+     "contraste": 0.877,
+     "vistas": {
+      "bajada": 26.7,
+      "puente": 17.6,
+      "piloto_s2900": 13.7
+     },
+     "peor_que_antes": 2
+    },
+    "captura": {
+     "deltaE": 21.2,
+     "croma": 0.405,
+     "contraste": 0.793,
+     "vistas": {
+      "bajada": 24.2,
+      "puente": 24.6,
+      "piloto_s2900": 14.8
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 23.03
+   }
+  },
+  {
+   "ksDiffuse": 0.5,
+   "ksAmbient": 0.35,
+   "cociente": 0.7,
+   "pesos_ajuste": "B",
+   "ajuste": {
+    "ac": {
+     "deltaE": 16.5,
+     "croma": 0.763,
+     "contraste": 1.147,
+     "vistas": {
+      "meta_tunel": 20.5,
+      "captura": 17.8,
+      "pueblo": 15.0,
+      "tierra": 10.9,
+      "casino": 13.6,
+      "piloto_s300": 17.6,
+      "meta_puerto": 20.1
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.66,
+     "croma": 1.101,
+     "contraste": 1.108,
+     "vistas": {
+      "meta_tunel": 11.7,
+      "captura": 12.6,
+      "pueblo": 15.0,
+      "tierra": 13.0,
+      "casino": 17.8,
+      "piloto_s300": 11.6,
+      "meta_puerto": 13.9
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 16.91,
+     "croma": 0.799,
+     "contraste": 0.857,
+     "vistas": {
+      "meta_tunel": 11.0,
+      "captura": 7.9,
+      "pueblo": 21.8,
+      "tierra": 24.7,
+      "casino": 25.6,
+      "piloto_s300": 9.5,
+      "meta_puerto": 17.9
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 18.9,
+     "croma": 0.507,
+     "contraste": 0.869,
+     "vistas": {
+      "meta_tunel": 13.8,
+      "captura": 13.9,
+      "pueblo": 24.6,
+      "tierra": 27.2,
+      "casino": 20.2,
+      "piloto_s300": 11.7,
+      "meta_puerto": 20.9
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 21.66
+   },
+   "control": {
+    "ac": {
+     "deltaE": 15.4,
+     "croma": 0.825,
+     "contraste": 1.059,
+     "vistas": {
+      "bajada": 13.4,
+      "puente": 17.1,
+      "piloto_s2900": 15.7
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 12.97,
+     "croma": 1.003,
+     "contraste": 1.11,
+     "vistas": {
+      "bajada": 17.9,
+      "puente": 12.8,
+      "piloto_s2900": 8.2
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 18.93,
+     "croma": 0.773,
+     "contraste": 0.838,
+     "vistas": {
+      "bajada": 26.5,
+      "puente": 17.1,
+      "piloto_s2900": 13.2
+     },
+     "peor_que_antes": 1
+    },
+    "captura": {
+     "deltaE": 20.17,
+     "croma": 0.421,
+     "contraste": 0.787,
+     "vistas": {
+      "bajada": 23.5,
+      "puente": 23.9,
+      "piloto_s2900": 13.1
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 23.0
+   }
+  },
+  {
+   "ksDiffuse": 0.55,
+   "ksAmbient": 0.44,
+   "cociente": 0.8,
+   "pesos_ajuste": "B",
+   "ajuste": {
+    "ac": {
+     "deltaE": 15.44,
+     "croma": 0.77,
+     "contraste": 1.094,
+     "vistas": {
+      "meta_tunel": 18.1,
+      "captura": 16.7,
+      "pueblo": 14.3,
+      "tierra": 12.3,
+      "casino": 13.3,
+      "piloto_s300": 15.9,
+      "meta_puerto": 17.5
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.17,
+     "croma": 1.045,
+     "contraste": 1.149,
+     "vistas": {
+      "meta_tunel": 10.8,
+      "captura": 11.5,
+      "pueblo": 15.2,
+      "tierra": 13.9,
+      "casino": 18.0,
+      "piloto_s300": 9.6,
+      "meta_puerto": 13.2
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 16.99,
+     "croma": 0.758,
+     "contraste": 0.889,
+     "vistas": {
+      "meta_tunel": 11.3,
+      "captura": 7.2,
+      "pueblo": 22.0,
+      "tierra": 26.3,
+      "casino": 25.8,
+      "piloto_s300": 8.8,
+      "meta_puerto": 17.5
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 20.7,
+     "croma": 0.481,
+     "contraste": 0.913,
+     "vistas": {
+      "meta_tunel": 16.5,
+      "captura": 15.8,
+      "pueblo": 26.0,
+      "tierra": 28.6,
+      "casino": 21.4,
+      "piloto_s300": 13.9,
+      "meta_puerto": 22.7
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 21.76
+   },
+   "control": {
+    "ac": {
+     "deltaE": 14.93,
+     "croma": 0.827,
+     "contraste": 1.054,
+     "vistas": {
+      "bajada": 13.0,
+      "puente": 15.6,
+      "piloto_s2900": 16.2
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.17,
+     "croma": 0.987,
+     "contraste": 1.121,
+     "vistas": {
+      "bajada": 18.4,
+      "puente": 12.4,
+      "piloto_s2900": 8.7
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 19.23,
+     "croma": 0.774,
+     "contraste": 0.857,
+     "vistas": {
+      "bajada": 26.7,
+      "puente": 17.3,
+      "piloto_s2900": 13.7
+     },
+     "peor_que_antes": 1
+    },
+    "captura": {
+     "deltaE": 21.2,
+     "croma": 0.404,
+     "contraste": 0.787,
+     "vistas": {
+      "bajada": 24.2,
+      "puente": 24.6,
+      "piloto_s2900": 14.8
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 23.28
+   }
+  },
+  {
+   "ksDiffuse": 0.5,
+   "ksAmbient": 0.375,
+   "cociente": 0.75,
+   "pesos_ajuste": "B",
+   "ajuste": {
+    "ac": {
+     "deltaE": 16.21,
+     "croma": 0.757,
+     "contraste": 1.119,
+     "vistas": {
+      "meta_tunel": 19.7,
+      "captura": 17.5,
+      "pueblo": 14.8,
+      "tierra": 11.6,
+      "casino": 13.6,
+      "piloto_s300": 17.0,
+      "meta_puerto": 19.3
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.47,
+     "croma": 1.087,
+     "contraste": 1.104,
+     "vistas": {
+      "meta_tunel": 11.2,
+      "captura": 12.0,
+      "pueblo": 15.1,
+      "tierra": 13.4,
+      "casino": 18.0,
+      "piloto_s300": 11.0,
+      "meta_puerto": 13.6
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 17.03,
+     "croma": 0.789,
+     "contraste": 0.852,
+     "vistas": {
+      "meta_tunel": 11.0,
+      "captura": 7.6,
+      "pueblo": 22.0,
+      "tierra": 25.6,
+      "casino": 25.8,
+      "piloto_s300": 9.4,
+      "meta_puerto": 17.8
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 19.64,
+     "croma": 0.492,
+     "contraste": 0.874,
+     "vistas": {
+      "meta_tunel": 14.7,
+      "captura": 14.7,
+      "pueblo": 25.2,
+      "tierra": 27.9,
+      "casino": 20.8,
+      "piloto_s300": 12.6,
+      "meta_puerto": 21.6
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 21.98
+   },
+   "control": {
+    "ac": {
+     "deltaE": 15.3,
+     "croma": 0.82,
+     "contraste": 1.046,
+     "vistas": {
+      "bajada": 13.4,
+      "puente": 16.5,
+      "piloto_s2900": 16.0
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.03,
+     "croma": 0.993,
+     "contraste": 1.1,
+     "vistas": {
+      "bajada": 18.2,
+      "puente": 12.5,
+      "piloto_s2900": 8.4
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 19.07,
+     "croma": 0.764,
+     "contraste": 0.829,
+     "vistas": {
+      "bajada": 26.7,
+      "puente": 17.1,
+      "piloto_s2900": 13.4
+     },
+     "peor_que_antes": 1
+    },
+    "captura": {
+     "deltaE": 20.7,
+     "croma": 0.41,
+     "contraste": 0.782,
+     "vistas": {
+      "bajada": 23.8,
+      "puente": 24.3,
+      "piloto_s2900": 14.0
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 23.41
+   }
+  },
+  {
+   "ksDiffuse": 0.5,
+   "ksAmbient": 0.4,
+   "cociente": 0.8,
+   "pesos_ajuste": "B",
+   "ajuste": {
+    "ac": {
+     "deltaE": 16.1,
+     "croma": 0.764,
+     "contraste": 1.097,
+     "vistas": {
+      "meta_tunel": 19.2,
+      "captura": 17.3,
+      "pueblo": 14.7,
+      "tierra": 12.3,
+      "casino": 13.6,
+      "piloto_s300": 16.9,
+      "meta_puerto": 18.7
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.33,
+     "croma": 1.051,
+     "contraste": 1.101,
+     "vistas": {
+      "meta_tunel": 10.9,
+      "captura": 11.8,
+      "pueblo": 15.3,
+      "tierra": 13.9,
+      "casino": 18.3,
+      "piloto_s300": 9.9,
+      "meta_puerto": 13.2
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 17.07,
+     "croma": 0.76,
+     "contraste": 0.846,
+     "vistas": {
+      "meta_tunel": 11.0,
+      "captura": 7.3,
+      "pueblo": 22.2,
+      "tierra": 26.3,
+      "casino": 26.1,
+      "piloto_s300": 8.9,
+      "meta_puerto": 17.7
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 20.33,
+     "croma": 0.481,
+     "contraste": 0.874,
+     "vistas": {
+      "meta_tunel": 15.5,
+      "captura": 15.5,
+      "pueblo": 25.8,
+      "tierra": 28.6,
+      "casino": 21.4,
+      "piloto_s300": 13.3,
+      "meta_puerto": 22.2
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 22.34
+   },
+   "control": {
+    "ac": {
+     "deltaE": 15.2,
+     "croma": 0.818,
+     "contraste": 1.031,
+     "vistas": {
+      "bajada": 13.4,
+      "puente": 16.0,
+      "piloto_s2900": 16.2
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.1,
+     "croma": 0.982,
+     "contraste": 1.086,
+     "vistas": {
+      "bajada": 18.5,
+      "puente": 12.2,
+      "piloto_s2900": 8.6
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 19.27,
+     "croma": 0.757,
+     "contraste": 0.819,
+     "vistas": {
+      "bajada": 27.0,
+      "puente": 17.1,
+      "piloto_s2900": 13.7
+     },
+     "peor_que_antes": 1
+    },
+    "captura": {
+     "deltaE": 21.23,
+     "croma": 0.401,
+     "contraste": 0.773,
+     "vistas": {
+      "bajada": 24.2,
+      "puente": 24.7,
+      "piloto_s2900": 14.8
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 23.83
+   }
+  },
+  {
+   "ksDiffuse": 0.6,
+   "ksAmbient": 0.54,
+   "cociente": 0.9,
+   "pesos_ajuste": "B",
+   "ajuste": {
+    "ac": {
+     "deltaE": 15.1,
+     "croma": 0.771,
+     "contraste": 1.082,
+     "vistas": {
+      "meta_tunel": 16.9,
+      "captura": 16.0,
+      "pueblo": 14.2,
+      "tierra": 13.5,
+      "casino": 13.5,
+      "piloto_s300": 15.3,
+      "meta_puerto": 16.3
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.8,
+     "croma": 1.016,
+     "contraste": 1.196,
+     "vistas": {
+      "meta_tunel": 11.8,
+      "captura": 11.4,
+      "pueblo": 15.9,
+      "tierra": 15.0,
+      "casino": 18.7,
+      "piloto_s300": 9.8,
+      "meta_puerto": 14.0
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 17.5,
+     "croma": 0.738,
+     "contraste": 0.937,
+     "vistas": {
+      "meta_tunel": 11.6,
+      "captura": 7.5,
+      "pueblo": 22.5,
+      "tierra": 27.6,
+      "casino": 26.4,
+      "piloto_s300": 9.2,
+      "meta_puerto": 17.7
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 22.01,
+     "croma": 0.468,
+     "contraste": 0.929,
+     "vistas": {
+      "meta_tunel": 18.0,
+      "captura": 17.5,
+      "pueblo": 27.0,
+      "tierra": 29.9,
+      "casino": 22.3,
+      "piloto_s300": 15.4,
+      "meta_puerto": 24.0
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 22.41
+   },
+   "control": {
+    "ac": {
+     "deltaE": 14.8,
+     "croma": 0.832,
+     "contraste": 1.046,
+     "vistas": {
+      "bajada": 13.1,
+      "puente": 14.7,
+      "piloto_s2900": 16.6
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.6,
+     "croma": 0.984,
+     "contraste": 1.122,
+     "vistas": {
+      "bajada": 19.1,
+      "puente": 12.5,
+      "piloto_s2900": 9.2
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 19.7,
+     "croma": 0.786,
+     "contraste": 0.869,
+     "vistas": {
+      "bajada": 27.1,
+      "puente": 17.9,
+      "piloto_s2900": 14.1
+     },
+     "peor_que_antes": 2
+    },
+    "captura": {
+     "deltaE": 22.13,
+     "croma": 0.397,
+     "contraste": 0.779,
+     "vistas": {
+      "bajada": 24.9,
+      "puente": 25.2,
+      "piloto_s2900": 16.3
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 23.65
+   }
+  },
+  {
+   "ksDiffuse": 0.55,
+   "ksAmbient": 0.495,
+   "cociente": 0.9,
+   "pesos_ajuste": "B",
+   "ajuste": {
+    "ac": {
+     "deltaE": 15.4,
+     "croma": 0.771,
+     "contraste": 1.067,
+     "vistas": {
+      "meta_tunel": 17.6,
+      "captura": 16.5,
+      "pueblo": 14.4,
+      "tierra": 13.5,
+      "casino": 13.5,
+      "piloto_s300": 15.5,
+      "meta_puerto": 16.8
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.7,
+     "croma": 1.017,
+     "contraste": 1.159,
+     "vistas": {
+      "meta_tunel": 11.6,
+      "captura": 11.5,
+      "pueblo": 15.7,
+      "tierra": 15.0,
+      "casino": 18.7,
+      "piloto_s300": 9.8,
+      "meta_puerto": 13.6
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 17.46,
+     "croma": 0.737,
+     "contraste": 0.898,
+     "vistas": {
+      "meta_tunel": 11.5,
+      "captura": 7.4,
+      "pueblo": 22.5,
+      "tierra": 27.6,
+      "casino": 26.4,
+      "piloto_s300": 9.1,
+      "meta_puerto": 17.7
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 21.83,
+     "croma": 0.469,
+     "contraste": 0.904,
+     "vistas": {
+      "meta_tunel": 17.5,
+      "captura": 17.3,
+      "pueblo": 26.8,
+      "tierra": 29.8,
+      "casino": 22.3,
+      "piloto_s300": 15.3,
+      "meta_puerto": 23.8
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 22.43
+   },
+   "control": {
+    "ac": {
+     "deltaE": 14.87,
+     "croma": 0.828,
+     "contraste": 1.029,
+     "vistas": {
+      "bajada": 13.2,
+      "puente": 14.8,
+      "piloto_s2900": 16.6
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.47,
+     "croma": 0.984,
+     "contraste": 1.098,
+     "vistas": {
+      "bajada": 18.9,
+      "puente": 12.3,
+      "piloto_s2900": 9.2
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 19.6,
+     "croma": 0.774,
+     "contraste": 0.84,
+     "vistas": {
+      "bajada": 27.2,
+      "puente": 17.5,
+      "piloto_s2900": 14.1
+     },
+     "peor_que_antes": 2
+    },
+    "captura": {
+     "deltaE": 22.1,
+     "croma": 0.396,
+     "contraste": 0.769,
+     "vistas": {
+      "bajada": 24.7,
+      "puente": 25.3,
+      "piloto_s2900": 16.3
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 23.94
+   }
+  },
+  {
+   "ksDiffuse": 0.45,
+   "ksAmbient": 0.315,
+   "cociente": 0.7,
+   "pesos_ajuste": "B",
+   "ajuste": {
+    "ac": {
+     "deltaE": 17.41,
+     "croma": 0.756,
+     "contraste": 1.158,
+     "vistas": {
+      "meta_tunel": 21.8,
+      "captura": 18.7,
+      "pueblo": 15.9,
+      "tierra": 10.9,
+      "casino": 14.3,
+      "piloto_s300": 18.6,
+      "meta_puerto": 21.7
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 14.29,
+     "croma": 1.105,
+     "contraste": 1.078,
+     "vistas": {
+      "meta_tunel": 12.7,
+      "captura": 13.5,
+      "pueblo": 15.2,
+      "tierra": 13.0,
+      "casino": 18.2,
+      "piloto_s300": 12.9,
+      "meta_puerto": 14.5
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 17.34,
+     "croma": 0.8,
+     "contraste": 0.827,
+     "vistas": {
+      "meta_tunel": 11.4,
+      "captura": 8.7,
+      "pueblo": 22.0,
+      "tierra": 24.7,
+      "casino": 26.2,
+      "piloto_s300": 10.2,
+      "meta_puerto": 18.2
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 18.57,
+     "croma": 0.507,
+     "contraste": 0.825,
+     "vistas": {
+      "meta_tunel": 13.3,
+      "captura": 13.7,
+      "pueblo": 24.3,
+      "tierra": 27.1,
+      "casino": 20.0,
+      "piloto_s300": 11.1,
+      "meta_puerto": 20.5
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 22.58
+   },
+   "control": {
+    "ac": {
+     "deltaE": 16.13,
+     "croma": 0.806,
+     "contraste": 1.044,
+     "vistas": {
+      "bajada": 14.2,
+      "puente": 18.3,
+      "piloto_s2900": 15.9
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.07,
+     "croma": 1.004,
+     "contraste": 1.065,
+     "vistas": {
+      "bajada": 18.0,
+      "puente": 13.0,
+      "piloto_s2900": 8.2
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 19.1,
+     "croma": 0.762,
+     "contraste": 0.793,
+     "vistas": {
+      "bajada": 26.8,
+      "puente": 17.3,
+      "piloto_s2900": 13.2
+     },
+     "peor_que_antes": 1
+    },
+    "captura": {
+     "deltaE": 20.0,
+     "croma": 0.417,
+     "contraste": 0.763,
+     "vistas": {
+      "bajada": 23.4,
+      "puente": 23.6,
+      "piloto_s2900": 13.0
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 23.85
+   }
+  },
+  {
+   "ksDiffuse": 0.5,
+   "ksAmbient": 0.45,
+   "cociente": 0.9,
+   "pesos_ajuste": "B",
+   "ajuste": {
+    "ac": {
+     "deltaE": 15.7,
+     "croma": 0.761,
+     "contraste": 1.058,
+     "vistas": {
+      "meta_tunel": 18.1,
+      "captura": 16.8,
+      "pueblo": 14.5,
+      "tierra": 13.5,
+      "casino": 13.6,
+      "piloto_s300": 15.9,
+      "meta_puerto": 17.5
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.6,
+     "croma": 1.026,
+     "contraste": 1.119,
+     "vistas": {
+      "meta_tunel": 11.0,
+      "captura": 11.6,
+      "pueblo": 15.8,
+      "tierra": 15.0,
+      "casino": 18.7,
+      "piloto_s300": 9.8,
+      "meta_puerto": 13.3
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 17.47,
+     "croma": 0.742,
+     "contraste": 0.858,
+     "vistas": {
+      "meta_tunel": 11.4,
+      "captura": 7.3,
+      "pueblo": 22.6,
+      "tierra": 27.6,
+      "casino": 26.5,
+      "piloto_s300": 9.1,
+      "meta_puerto": 17.8
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 21.66,
+     "croma": 0.465,
+     "contraste": 0.877,
+     "vistas": {
+      "meta_tunel": 17.2,
+      "captura": 17.1,
+      "pueblo": 26.8,
+      "tierra": 29.8,
+      "casino": 22.3,
+      "piloto_s300": 15.0,
+      "meta_puerto": 23.4
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 22.9
+   },
+   "control": {
+    "ac": {
+     "deltaE": 15.03,
+     "croma": 0.819,
+     "contraste": 1.012,
+     "vistas": {
+      "bajada": 13.4,
+      "puente": 15.1,
+      "piloto_s2900": 16.6
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.4,
+     "croma": 0.979,
+     "contraste": 1.073,
+     "vistas": {
+      "bajada": 18.9,
+      "puente": 12.1,
+      "piloto_s2900": 9.2
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 19.53,
+     "croma": 0.757,
+     "contraste": 0.812,
+     "vistas": {
+      "bajada": 27.3,
+      "puente": 17.2,
+      "piloto_s2900": 14.1
+     },
+     "peor_que_antes": 1
+    },
+    "captura": {
+     "deltaE": 22.1,
+     "croma": 0.394,
+     "contraste": 0.762,
+     "vistas": {
+      "bajada": 24.7,
+      "puente": 25.3,
+      "piloto_s2900": 16.3
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 24.32
+   }
+  },
+  {
+   "ksDiffuse": 0.45,
+   "ksAmbient": 0.338,
+   "cociente": 0.75,
+   "pesos_ajuste": "B",
+   "ajuste": {
+    "ac": {
+     "deltaE": 17.13,
+     "croma": 0.748,
+     "contraste": 1.126,
+     "vistas": {
+      "meta_tunel": 21.0,
+      "captura": 18.3,
+      "pueblo": 15.7,
+      "tierra": 11.6,
+      "casino": 14.3,
+      "piloto_s300": 18.1,
+      "meta_puerto": 20.9
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.99,
+     "croma": 1.095,
+     "contraste": 1.058,
+     "vistas": {
+      "meta_tunel": 12.0,
+      "captura": 12.8,
+      "pueblo": 15.3,
+      "tierra": 13.4,
+      "casino": 18.4,
+      "piloto_s300": 12.0,
+      "meta_puerto": 14.0
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 17.37,
+     "croma": 0.79,
+     "contraste": 0.808,
+     "vistas": {
+      "meta_tunel": 11.1,
+      "captura": 8.2,
+      "pueblo": 22.3,
+      "tierra": 25.6,
+      "casino": 26.4,
+      "piloto_s300": 9.8,
+      "meta_puerto": 18.2
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 19.3,
+     "croma": 0.493,
+     "contraste": 0.825,
+     "vistas": {
+      "meta_tunel": 14.1,
+      "captura": 14.4,
+      "pueblo": 24.9,
+      "tierra": 27.9,
+      "casino": 20.7,
+      "piloto_s300": 12.0,
+      "meta_puerto": 21.1
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 22.97
+   },
+   "control": {
+    "ac": {
+     "deltaE": 15.93,
+     "croma": 0.806,
+     "contraste": 1.023,
+     "vistas": {
+      "bajada": 14.2,
+      "puente": 17.5,
+      "piloto_s2900": 16.1
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.07,
+     "croma": 0.994,
+     "contraste": 1.044,
+     "vistas": {
+      "bajada": 18.3,
+      "puente": 12.5,
+      "piloto_s2900": 8.4
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 19.23,
+     "croma": 0.751,
+     "contraste": 0.777,
+     "vistas": {
+      "bajada": 27.1,
+      "puente": 17.1,
+      "piloto_s2900": 13.5
+     },
+     "peor_que_antes": 1
+    },
+    "captura": {
+     "deltaE": 20.57,
+     "croma": 0.41,
+     "contraste": 0.751,
+     "vistas": {
+      "bajada": 23.8,
+      "puente": 24.1,
+      "piloto_s2900": 13.8
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 24.27
+   }
+  },
+  {
+   "ksDiffuse": 0.6,
+   "ksAmbient": 0.6,
+   "cociente": 1.0,
+   "pesos_ajuste": "B",
+   "ajuste": {
+    "ac": {
+     "deltaE": 15.3,
+     "croma": 0.771,
+     "contraste": 1.061,
+     "vistas": {
+      "meta_tunel": 16.8,
+      "captura": 16.0,
+      "pueblo": 14.6,
+      "tierra": 14.5,
+      "casino": 13.8,
+      "piloto_s300": 15.3,
+      "meta_puerto": 16.1
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 14.23,
+     "croma": 0.991,
+     "contraste": 1.183,
+     "vistas": {
+      "meta_tunel": 12.5,
+      "captura": 11.4,
+      "pueblo": 15.8,
+      "tierra": 16.0,
+      "casino": 19.1,
+      "piloto_s300": 10.0,
+      "meta_puerto": 14.8
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 18.06,
+     "croma": 0.72,
+     "contraste": 0.927,
+     "vistas": {
+      "meta_tunel": 12.1,
+      "captura": 8.0,
+      "pueblo": 23.0,
+      "tierra": 28.6,
+      "casino": 27.1,
+      "piloto_s300": 9.5,
+      "meta_puerto": 18.1
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 22.96,
+     "croma": 0.456,
+     "contraste": 0.901,
+     "vistas": {
+      "meta_tunel": 19.3,
+      "captura": 18.9,
+      "pueblo": 27.4,
+      "tierra": 30.9,
+      "casino": 22.8,
+      "piloto_s300": 16.5,
+      "meta_puerto": 24.9
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 23.13
+   },
+   "control": {
+    "ac": {
+     "deltaE": 14.9,
+     "croma": 0.833,
+     "contraste": 1.009,
+     "vistas": {
+      "bajada": 13.6,
+      "puente": 14.1,
+      "piloto_s2900": 17.0
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.73,
+     "croma": 0.984,
+     "contraste": 1.072,
+     "vistas": {
+      "bajada": 19.1,
+      "puente": 12.5,
+      "piloto_s2900": 9.6
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 20.17,
+     "croma": 0.786,
+     "contraste": 0.818,
+     "vistas": {
+      "bajada": 27.8,
+      "puente": 18.2,
+      "piloto_s2900": 14.5
+     },
+     "peor_que_antes": 2
+    },
+    "captura": {
+     "deltaE": 22.87,
+     "croma": 0.387,
+     "contraste": 0.747,
+     "vistas": {
+      "bajada": 25.1,
+      "puente": 25.8,
+      "piloto_s2900": 17.7
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 24.59
+   }
+  },
+  {
+   "ksDiffuse": 0.55,
+   "ksAmbient": 0.55,
+   "cociente": 1.0,
+   "pesos_ajuste": "B",
+   "ajuste": {
+    "ac": {
+     "deltaE": 15.33,
+     "croma": 0.767,
+     "contraste": 1.046,
+     "vistas": {
+      "meta_tunel": 16.8,
+      "captura": 16.1,
+      "pueblo": 14.6,
+      "tierra": 14.5,
+      "casino": 13.7,
+      "piloto_s300": 15.3,
+      "meta_puerto": 16.3
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 14.1,
+     "croma": 1.002,
+     "contraste": 1.16,
+     "vistas": {
+      "meta_tunel": 12.0,
+      "captura": 11.4,
+      "pueblo": 15.8,
+      "tierra": 16.0,
+      "casino": 19.0,
+      "piloto_s300": 10.0,
+      "meta_puerto": 14.5
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 17.93,
+     "croma": 0.728,
+     "contraste": 0.901,
+     "vistas": {
+      "meta_tunel": 11.8,
+      "captura": 7.7,
+      "pueblo": 22.9,
+      "tierra": 28.6,
+      "casino": 27.1,
+      "piloto_s300": 9.4,
+      "meta_puerto": 18.0
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 22.87,
+     "croma": 0.453,
+     "contraste": 0.889,
+     "vistas": {
+      "meta_tunel": 19.1,
+      "captura": 18.7,
+      "pueblo": 27.4,
+      "tierra": 30.9,
+      "casino": 22.9,
+      "piloto_s300": 16.4,
+      "meta_puerto": 24.7
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 23.16
+   },
+   "control": {
+    "ac": {
+     "deltaE": 14.9,
+     "croma": 0.825,
+     "contraste": 1.004,
+     "vistas": {
+      "bajada": 13.5,
+      "puente": 14.2,
+      "piloto_s2900": 17.0
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.7,
+     "croma": 0.979,
+     "contraste": 1.071,
+     "vistas": {
+      "bajada": 19.1,
+      "puente": 12.4,
+      "piloto_s2900": 9.6
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 20.0,
+     "croma": 0.773,
+     "contraste": 0.817,
+     "vistas": {
+      "bajada": 27.7,
+      "puente": 17.8,
+      "piloto_s2900": 14.5
+     },
+     "peor_que_antes": 2
+    },
+    "captura": {
+     "deltaE": 22.9,
+     "croma": 0.384,
+     "contraste": 0.749,
+     "vistas": {
+      "bajada": 25.1,
+      "puente": 25.9,
+      "piloto_s2900": 17.7
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 24.7
+   }
+  },
+  {
+   "ksDiffuse": 0.45,
+   "ksAmbient": 0.36,
+   "cociente": 0.8,
+   "pesos_ajuste": "B",
+   "ajuste": {
+    "ac": {
+     "deltaE": 16.86,
+     "croma": 0.745,
+     "contraste": 1.102,
+     "vistas": {
+      "meta_tunel": 20.4,
+      "captura": 18.0,
+      "pueblo": 15.5,
+      "tierra": 12.3,
+      "casino": 14.2,
+      "piloto_s300": 17.5,
+      "meta_puerto": 20.1
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.83,
+     "croma": 1.078,
+     "contraste": 1.053,
+     "vistas": {
+      "meta_tunel": 11.5,
+      "captura": 12.3,
+      "pueblo": 15.5,
+      "tierra": 13.9,
+      "casino": 18.6,
+      "piloto_s300": 11.3,
+      "meta_puerto": 13.7
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 17.49,
+     "croma": 0.779,
+     "contraste": 0.803,
+     "vistas": {
+      "meta_tunel": 11.1,
+      "captura": 7.9,
+      "pueblo": 22.6,
+      "tierra": 26.4,
+      "casino": 26.6,
+      "piloto_s300": 9.6,
+      "meta_puerto": 18.2
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 19.97,
+     "croma": 0.481,
+     "contraste": 0.829,
+     "vistas": {
+      "meta_tunel": 14.8,
+      "captura": 15.2,
+      "pueblo": 25.5,
+      "tierra": 28.6,
+      "casino": 21.2,
+      "piloto_s300": 12.8,
+      "meta_puerto": 21.7
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 23.24
+   },
+   "control": {
+    "ac": {
+     "deltaE": 15.67,
+     "croma": 0.805,
+     "contraste": 1.008,
+     "vistas": {
+      "bajada": 14.1,
+      "puente": 16.6,
+      "piloto_s2900": 16.3
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.2,
+     "croma": 0.989,
+     "contraste": 1.036,
+     "vistas": {
+      "bajada": 18.6,
+      "puente": 12.4,
+      "piloto_s2900": 8.6
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 19.37,
+     "croma": 0.75,
+     "contraste": 0.769,
+     "vistas": {
+      "bajada": 27.3,
+      "puente": 17.1,
+      "piloto_s2900": 13.7
+     },
+     "peor_que_antes": 1
+    },
+    "captura": {
+     "deltaE": 21.13,
+     "croma": 0.402,
+     "contraste": 0.751,
+     "vistas": {
+      "bajada": 24.1,
+      "puente": 24.6,
+      "piloto_s2900": 14.7
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 24.52
+   }
+  },
+  {
+   "ksDiffuse": 0.5,
+   "ksAmbient": 0.5,
+   "cociente": 1.0,
+   "pesos_ajuste": "B",
+   "ajuste": {
+    "ac": {
+     "deltaE": 15.6,
+     "croma": 0.76,
+     "contraste": 1.031,
+     "vistas": {
+      "meta_tunel": 17.5,
+      "captura": 16.5,
+      "pueblo": 14.7,
+      "tierra": 14.4,
+      "casino": 13.8,
+      "piloto_s300": 15.5,
+      "meta_puerto": 16.8
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.94,
+     "croma": 1.006,
+     "contraste": 1.121,
+     "vistas": {
+      "meta_tunel": 11.4,
+      "captura": 11.5,
+      "pueblo": 15.8,
+      "tierra": 16.0,
+      "casino": 19.1,
+      "piloto_s300": 10.0,
+      "meta_puerto": 13.8
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 17.87,
+     "croma": 0.728,
+     "contraste": 0.861,
+     "vistas": {
+      "meta_tunel": 11.6,
+      "captura": 7.5,
+      "pueblo": 23.0,
+      "tierra": 28.6,
+      "casino": 27.2,
+      "piloto_s300": 9.3,
+      "meta_puerto": 17.9
+     },
+     "peor_que_antes": 1
+    },
+    "captura": {
+     "deltaE": 22.69,
+     "croma": 0.452,
+     "contraste": 0.863,
+     "vistas": {
+      "meta_tunel": 18.5,
+      "captura": 18.5,
+      "pueblo": 27.3,
+      "tierra": 30.9,
+      "casino": 22.9,
+      "piloto_s300": 16.4,
+      "meta_puerto": 24.3
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 23.59
+   },
+   "control": {
+    "ac": {
+     "deltaE": 15.03,
+     "croma": 0.818,
+     "contraste": 0.988,
+     "vistas": {
+      "bajada": 13.7,
+      "puente": 14.4,
+      "piloto_s2900": 17.0
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.63,
+     "croma": 0.974,
+     "contraste": 1.045,
+     "vistas": {
+      "bajada": 19.1,
+      "puente": 12.2,
+      "piloto_s2900": 9.6
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 19.93,
+     "croma": 0.757,
+     "contraste": 0.788,
+     "vistas": {
+      "bajada": 27.9,
+      "puente": 17.4,
+      "piloto_s2900": 14.5
+     },
+     "peor_que_antes": 2
+    },
+    "captura": {
+     "deltaE": 22.93,
+     "croma": 0.382,
+     "contraste": 0.742,
+     "vistas": {
+      "bajada": 25.1,
+      "puente": 26.0,
+      "piloto_s2900": 17.7
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 25.06
+   }
+  },
+  {
+   "ksDiffuse": 0.45,
+   "ksAmbient": 0.405,
+   "cociente": 0.9,
+   "pesos_ajuste": "B",
+   "ajuste": {
+    "ac": {
+     "deltaE": 16.41,
+     "croma": 0.754,
+     "contraste": 1.057,
+     "vistas": {
+      "meta_tunel": 19.2,
+      "captura": 17.4,
+      "pueblo": 15.1,
+      "tierra": 13.5,
+      "casino": 14.0,
+      "piloto_s300": 16.9,
+      "meta_puerto": 18.8
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.66,
+     "croma": 1.037,
+     "contraste": 1.054,
+     "vistas": {
+      "meta_tunel": 10.8,
+      "captura": 11.8,
+      "pueblo": 15.8,
+      "tierra": 15.0,
+      "casino": 19.0,
+      "piloto_s300": 10.0,
+      "meta_puerto": 13.2
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 17.6,
+     "croma": 0.747,
+     "contraste": 0.802,
+     "vistas": {
+      "meta_tunel": 11.2,
+      "captura": 7.4,
+      "pueblo": 22.9,
+      "tierra": 27.6,
+      "casino": 27.0,
+      "piloto_s300": 9.1,
+      "meta_puerto": 18.0
+     },
+     "peor_que_antes": 0
+    },
+    "captura": {
+     "deltaE": 21.27,
+     "croma": 0.466,
+     "contraste": 0.831,
+     "vistas": {
+      "meta_tunel": 16.6,
+      "captura": 16.7,
+      "pueblo": 26.5,
+      "tierra": 29.8,
+      "casino": 22.1,
+      "piloto_s300": 14.3,
+      "meta_puerto": 22.9
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 23.68
+   },
+   "control": {
+    "ac": {
+     "deltaE": 15.43,
+     "croma": 0.808,
+     "contraste": 0.984,
+     "vistas": {
+      "bajada": 14.0,
+      "puente": 15.6,
+      "piloto_s2900": 16.7
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.37,
+     "croma": 0.975,
+     "contraste": 1.025,
+     "vistas": {
+      "bajada": 19.0,
+      "puente": 12.0,
+      "piloto_s2900": 9.1
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 19.67,
+     "croma": 0.742,
+     "contraste": 0.763,
+     "vistas": {
+      "bajada": 27.7,
+      "puente": 17.1,
+      "piloto_s2900": 14.2
+     },
+     "peor_que_antes": 1
+    },
+    "captura": {
+     "deltaE": 22.1,
+     "croma": 0.391,
+     "contraste": 0.744,
+     "vistas": {
+      "bajada": 24.6,
+      "puente": 25.4,
+      "piloto_s2900": 16.3
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 25.02
+   }
+  },
+  {
+   "ksDiffuse": 0.45,
+   "ksAmbient": 0.45,
+   "cociente": 1.0,
+   "pesos_ajuste": "B",
+   "ajuste": {
+    "ac": {
+     "deltaE": 16.0,
+     "croma": 0.752,
+     "contraste": 1.023,
+     "vistas": {
+      "meta_tunel": 18.2,
+      "captura": 17.0,
+      "pueblo": 14.8,
+      "tierra": 14.4,
+      "casino": 13.9,
+      "piloto_s300": 16.0,
+      "meta_puerto": 17.7
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.91,
+     "croma": 1.016,
+     "contraste": 1.074,
+     "vistas": {
+      "meta_tunel": 11.0,
+      "captura": 11.6,
+      "pueblo": 16.1,
+      "tierra": 16.0,
+      "casino": 19.2,
+      "piloto_s300": 10.0,
+      "meta_puerto": 13.5
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 17.93,
+     "croma": 0.735,
+     "contraste": 0.816,
+     "vistas": {
+      "meta_tunel": 11.5,
+      "captura": 7.5,
+      "pueblo": 23.2,
+      "tierra": 28.6,
+      "casino": 27.3,
+      "piloto_s300": 9.3,
+      "meta_puerto": 18.1
+     },
+     "peor_que_antes": 1
+    },
+    "captura": {
+     "deltaE": 22.46,
+     "croma": 0.45,
+     "contraste": 0.832,
+     "vistas": {
+      "meta_tunel": 18.1,
+      "captura": 18.2,
+      "pueblo": 27.3,
+      "tierra": 30.9,
+      "casino": 22.8,
+      "piloto_s300": 16.0,
+      "meta_puerto": 23.9
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 24.15
+   },
+   "control": {
+    "ac": {
+     "deltaE": 15.17,
+     "croma": 0.811,
+     "contraste": 0.967,
+     "vistas": {
+      "bajada": 13.9,
+      "puente": 14.6,
+      "piloto_s2900": 17.0
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 13.73,
+     "croma": 0.973,
+     "contraste": 1.019,
+     "vistas": {
+      "bajada": 19.3,
+      "puente": 12.3,
+      "piloto_s2900": 9.6
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 19.9,
+     "croma": 0.742,
+     "contraste": 0.759,
+     "vistas": {
+      "bajada": 28.0,
+      "puente": 17.2,
+      "piloto_s2900": 14.5
+     },
+     "peor_que_antes": 1
+    },
+    "captura": {
+     "deltaE": 22.97,
+     "croma": 0.38,
+     "contraste": 0.734,
+     "vistas": {
+      "bajada": 25.1,
+      "puente": 26.1,
+      "piloto_s2900": 17.7
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 25.48
+   }
+  },
+  {
+   "ksDiffuse": 0.5,
+   "ksAmbient": 0.625,
+   "cociente": 1.25,
+   "pesos_ajuste": "B",
+   "ajuste": {
+    "ac": {
+     "deltaE": 15.67,
+     "croma": 0.774,
+     "contraste": 1.007,
+     "vistas": {
+      "meta_tunel": 16.8,
+      "captura": 16.2,
+      "pueblo": 15.0,
+      "tierra": 15.9,
+      "casino": 14.4,
+      "piloto_s300": 15.3,
+      "meta_puerto": 16.1
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 15.04,
+     "croma": 0.97,
+     "contraste": 1.149,
+     "vistas": {
+      "meta_tunel": 13.2,
+      "captura": 11.7,
+      "pueblo": 16.5,
+      "tierra": 17.7,
+      "casino": 20.0,
+      "piloto_s300": 10.7,
+      "meta_puerto": 15.5
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 18.81,
+     "croma": 0.701,
+     "contraste": 0.894,
+     "vistas": {
+      "meta_tunel": 12.7,
+      "captura": 8.8,
+      "pueblo": 23.7,
+      "tierra": 30.0,
+      "casino": 28.0,
+      "piloto_s300": 10.0,
+      "meta_puerto": 18.5
+     },
+     "peor_que_antes": 2
+    },
+    "captura": {
+     "deltaE": 24.8,
+     "croma": 0.441,
+     "contraste": 0.837,
+     "vistas": {
+      "meta_tunel": 21.5,
+      "captura": 21.3,
+      "pueblo": 28.6,
+      "tierra": 32.9,
+      "casino": 24.3,
+      "piloto_s300": 18.8,
+      "meta_puerto": 26.2
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 24.8
+   },
+   "control": {
+    "ac": {
+     "deltaE": 14.97,
+     "croma": 0.833,
+     "contraste": 0.947,
+     "vistas": {
+      "bajada": 14.2,
+      "puente": 13.2,
+      "piloto_s2900": 17.5
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 14.23,
+     "croma": 0.975,
+     "contraste": 1.007,
+     "vistas": {
+      "bajada": 19.7,
+      "puente": 12.4,
+      "piloto_s2900": 10.6
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 20.5,
+     "croma": 0.763,
+     "contraste": 0.756,
+     "vistas": {
+      "bajada": 28.6,
+      "puente": 17.8,
+      "piloto_s2900": 15.1
+     },
+     "peor_que_antes": 2
+    },
+    "captura": {
+     "deltaE": 24.6,
+     "croma": 0.376,
+     "contraste": 0.705,
+     "vistas": {
+      "bajada": 26.0,
+      "puente": 27.2,
+      "piloto_s2900": 20.6
+     },
+     "peor_que_antes": 1
+    },
+    "coste": 26.12
+   }
+  },
+  {
+   "ksDiffuse": 0.55,
+   "ksAmbient": 0.688,
+   "cociente": 1.25,
+   "pesos_ajuste": "B",
+   "ajuste": {
+    "ac": {
+     "deltaE": 15.67,
+     "croma": 0.773,
+     "contraste": 1.028,
+     "vistas": {
+      "meta_tunel": 16.9,
+      "captura": 16.2,
+      "pueblo": 15.0,
+      "tierra": 15.9,
+      "casino": 14.3,
+      "piloto_s300": 15.3,
+      "meta_puerto": 16.1
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 15.19,
+     "croma": 0.962,
+     "contraste": 1.172,
+     "vistas": {
+      "meta_tunel": 13.7,
+      "captura": 11.7,
+      "pueblo": 16.5,
+      "tierra": 17.7,
+      "casino": 19.9,
+      "piloto_s300": 10.7,
+      "meta_puerto": 16.1
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 18.99,
+     "croma": 0.695,
+     "contraste": 0.923,
+     "vistas": {
+      "meta_tunel": 13.2,
+      "captura": 9.1,
+      "pueblo": 23.7,
+      "tierra": 30.0,
+      "casino": 27.9,
+      "piloto_s300": 10.1,
+      "meta_puerto": 18.9
+     },
+     "peor_que_antes": 2
+    },
+    "captura": {
+     "deltaE": 24.86,
+     "croma": 0.44,
+     "contraste": 0.848,
+     "vistas": {
+      "meta_tunel": 21.6,
+      "captura": 21.4,
+      "pueblo": 28.6,
+      "tierra": 32.9,
+      "casino": 24.3,
+      "piloto_s300": 18.8,
+      "meta_puerto": 26.4
+     },
+     "peor_que_antes": 1
+    },
+    "coste": 24.81
+   },
+   "control": {
+    "ac": {
+     "deltaE": 14.93,
+     "croma": 0.836,
+     "contraste": 0.96,
+     "vistas": {
+      "bajada": 14.2,
+      "puente": 13.1,
+      "piloto_s2900": 17.5
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 14.27,
+     "croma": 0.975,
+     "contraste": 1.024,
+     "vistas": {
+      "bajada": 19.7,
+      "puente": 12.5,
+      "piloto_s2900": 10.6
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 20.63,
+     "croma": 0.779,
+     "contraste": 0.773,
+     "vistas": {
+      "bajada": 28.6,
+      "puente": 18.2,
+      "piloto_s2900": 15.1
+     },
+     "peor_que_antes": 2
+    },
+    "captura": {
+     "deltaE": 24.6,
+     "croma": 0.378,
+     "contraste": 0.708,
+     "vistas": {
+      "bajada": 26.0,
+      "puente": 27.2,
+      "piloto_s2900": 20.6
+     },
+     "peor_que_antes": 1
+    },
+    "coste": 25.91
+   }
+  },
+  {
+   "ksDiffuse": 0.6,
+   "ksAmbient": 0.75,
+   "cociente": 1.25,
+   "pesos_ajuste": "B",
+   "ajuste": {
+    "ac": {
+     "deltaE": 15.57,
+     "croma": 0.766,
+     "contraste": 1.043,
+     "vistas": {
+      "meta_tunel": 16.7,
+      "captura": 16.0,
+      "pueblo": 15.0,
+      "tierra": 15.9,
+      "casino": 14.3,
+      "piloto_s300": 15.2,
+      "meta_puerto": 15.9
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 15.3,
+     "croma": 0.962,
+     "contraste": 1.188,
+     "vistas": {
+      "meta_tunel": 14.2,
+      "captura": 11.6,
+      "pueblo": 16.6,
+      "tierra": 17.7,
+      "casino": 19.9,
+      "piloto_s300": 10.7,
+      "meta_puerto": 16.4
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 19.13,
+     "croma": 0.699,
+     "contraste": 0.946,
+     "vistas": {
+      "meta_tunel": 13.6,
+      "captura": 9.5,
+      "pueblo": 23.7,
+      "tierra": 30.0,
+      "casino": 27.9,
+      "piloto_s300": 10.1,
+      "meta_puerto": 19.1
+     },
+     "peor_que_antes": 3
+    },
+    "captura": {
+     "deltaE": 24.91,
+     "croma": 0.436,
+     "contraste": 0.858,
+     "vistas": {
+      "meta_tunel": 21.8,
+      "captura": 21.5,
+      "pueblo": 28.6,
+      "tierra": 32.9,
+      "casino": 24.3,
+      "piloto_s300": 18.8,
+      "meta_puerto": 26.5
+     },
+     "peor_que_antes": 1
+    },
+    "coste": 24.84
+   },
+   "control": {
+    "ac": {
+     "deltaE": 14.97,
+     "croma": 0.831,
+     "contraste": 0.951,
+     "vistas": {
+      "bajada": 14.2,
+      "puente": 13.2,
+      "piloto_s2900": 17.5
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 14.3,
+     "croma": 0.975,
+     "contraste": 1.015,
+     "vistas": {
+      "bajada": 19.7,
+      "puente": 12.5,
+      "piloto_s2900": 10.7
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 20.5,
+     "croma": 0.765,
+     "contraste": 0.767,
+     "vistas": {
+      "bajada": 28.6,
+      "puente": 17.8,
+      "piloto_s2900": 15.1
+     },
+     "peor_que_antes": 2
+    },
+    "captura": {
+     "deltaE": 24.6,
+     "croma": 0.376,
+     "contraste": 0.708,
+     "vistas": {
+      "bajada": 26.0,
+      "puente": 27.2,
+      "piloto_s2900": 20.6
+     },
+     "peor_que_antes": 1
+    },
+    "coste": 26.06
+   }
+  },
+  {
+   "ksDiffuse": 0.45,
+   "ksAmbient": 0.562,
+   "cociente": 1.25,
+   "pesos_ajuste": "B",
+   "ajuste": {
+    "ac": {
+     "deltaE": 15.74,
+     "croma": 0.761,
+     "contraste": 0.985,
+     "vistas": {
+      "meta_tunel": 17.0,
+      "captura": 16.4,
+      "pueblo": 15.0,
+      "tierra": 15.8,
+      "casino": 14.3,
+      "piloto_s300": 15.3,
+      "meta_puerto": 16.4
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 14.84,
+     "croma": 0.981,
+     "contraste": 1.114,
+     "vistas": {
+      "meta_tunel": 12.5,
+      "captura": 11.7,
+      "pueblo": 16.5,
+      "tierra": 17.7,
+      "casino": 19.9,
+      "piloto_s300": 10.7,
+      "meta_puerto": 14.9
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 18.69,
+     "croma": 0.71,
+     "contraste": 0.855,
+     "vistas": {
+      "meta_tunel": 12.2,
+      "captura": 8.4,
+      "pueblo": 23.7,
+      "tierra": 30.0,
+      "casino": 28.0,
+      "piloto_s300": 10.0,
+      "meta_puerto": 18.5
+     },
+     "peor_que_antes": 1
+    },
+    "captura": {
+     "deltaE": 24.64,
+     "croma": 0.434,
+     "contraste": 0.816,
+     "vistas": {
+      "meta_tunel": 21.1,
+      "captura": 21.1,
+      "pueblo": 28.6,
+      "tierra": 32.9,
+      "casino": 24.3,
+      "piloto_s300": 18.7,
+      "meta_puerto": 25.8
+     },
+     "peor_que_antes": 0
+    },
+    "coste": 25.16
+   },
+   "control": {
+    "ac": {
+     "deltaE": 15.03,
+     "croma": 0.823,
+     "contraste": 0.935,
+     "vistas": {
+      "bajada": 14.2,
+      "puente": 13.4,
+      "piloto_s2900": 17.5
+     },
+     "peor_que_antes": 0
+    },
+    "lcs": {
+     "deltaE": 14.2,
+     "croma": 0.968,
+     "contraste": 0.996,
+     "vistas": {
+      "bajada": 19.6,
+      "puente": 12.4,
+      "piloto_s2900": 10.6
+     },
+     "peor_que_antes": 0
+    },
+    "lcsy": {
+     "deltaE": 20.37,
+     "croma": 0.746,
+     "contraste": 0.742,
+     "vistas": {
+      "bajada": 28.6,
+      "puente": 17.4,
+      "piloto_s2900": 15.1
+     },
+     "peor_que_antes": 2
+    },
+    "captura": {
+     "deltaE": 24.63,
+     "croma": 0.373,
+     "contraste": 0.704,
+     "vistas": {
+      "bajada": 26.0,
+      "puente": 27.3,
+      "piloto_s2900": 20.6
+     },
+     "peor_que_antes": 1
+    },
+    "coste": 26.37
+   }
+  }
+ ]
+}

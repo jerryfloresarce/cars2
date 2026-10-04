@@ -17,7 +17,7 @@ from mathutils import Vector
 BASE = r'E:\Escritorio\claude-pc\arnau-aseto-corsa'
 OUT = BASE + r'\03_blender\renders\inspeccion'
 os.makedirs(OUT, exist_ok=True)
-G = json.load(open(BASE + r'\03_blender\geometria_3d.json', encoding='utf-8'))
+G = json.load(open(os.environ.get('GEOM', BASE + r'\03_blender\geometria_3d.json'), encoding='utf-8'))
 bpy.ops.wm.open_mainfile(filepath=BASE + r'\03_blender\porto_corsa.blend')
 S = G['muestras']
 T = G['terreno']

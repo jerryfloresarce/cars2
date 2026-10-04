@@ -1,0 +1,6305 @@
+{
+ "version": "color_ac v2 (2026-10-04)",
+ "vistas": [
+  "meta_tunel",
+  "captura",
+  "pueblo",
+  "tierra",
+  "casino",
+  "piloto_s300",
+  "meta_puerto"
+ ],
+ "min_pixeles": 150,
+ "materiales": {
+  "MAT_acera_piedra": {
+   "color_writer": [
+    0.34,
+    0.31,
+    0.27
+   ],
+   "familia": "edificio",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.713699996471405,
+      0.694100022315979,
+      0.666700005531311
+     ],
+     "nl": 0.834,
+     "nz": 0.986,
+     "pixeles": 7369,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.30979999899864197,
+      0.3765000104904175,
+      0.4392000138759613
+     ],
+     "nl": 0.0,
+     "nz": 0.998,
+     "pixeles": 1883,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.2797999978065491,
+    0.24079999327659607,
+    0.18310000002384186
+   ]
+  },
+  "MAT_agua": {
+   "color_writer": [
+    0.05,
+    0.42,
+    0.55
+   ],
+   "familia": "agua",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.6078000068664551,
+      0.8313999772071838,
+      0.9725000262260437
+     ],
+     "nl": 0.829,
+     "nz": 1.0,
+     "pixeles": 6000,
+     "vistas": [
+      "meta_puerto"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.03290000185370445,
+    0.3736000061035156,
+    0.49639999866485596
+   ]
+  },
+  "MAT_asfalto": {
+   "color_writer": [
+    0.105,
+    0.102,
+    0.108
+   ],
+   "familia": "asfalto",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.38429999351501465,
+      0.3961000144481659,
+      0.43529999256134033
+     ],
+     "nl": 0.828,
+     "nz": 0.999,
+     "pixeles": 36000,
+     "vistas": [
+      "captura",
+      "casino",
+      "meta_puerto",
+      "meta_tunel",
+      "piloto_s300",
+      "pueblo"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.15690000355243683,
+      0.2078000009059906,
+      0.2745000123977661
+     ],
+     "nl": 0.0,
+     "nz": 0.999,
+     "pixeles": 10886,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel",
+      "piloto_s300",
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.04769999906420708,
+    0.04690000042319298,
+    0.04580000042915344
+   ]
+  },
+  "MAT_bordillo_piedra": {
+   "color_writer": [
+    0.4,
+    0.37,
+    0.33
+   ],
+   "familia": "edificio",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.6823999881744385,
+      0.6549000144004822,
+      0.6118000149726868
+     ],
+     "nl": 0.542,
+     "nz": 0.0,
+     "pixeles": 4294,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.33730000257492065,
+      0.3686000108718872,
+      0.3765000104904175
+     ],
+     "nl": 0.0,
+     "nz": 0.012,
+     "pixeles": 914,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.3206000030040741,
+    0.27880001068115234,
+    0.21619999408721924
+   ]
+  },
+  "MAT_CALLE_band_blanco": {
+   "color_writer": [
+    0.93,
+    0.91,
+    0.86
+   ],
+   "familia": "pintado",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.8626999855041504,
+      0.9175999760627747,
+      0.9509999752044678
+     ],
+     "nl": 0.279,
+     "nz": 0.141,
+     "pixeles": 176,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.7797999978065491,
+    0.7573999762535095,
+    0.7020999789237976
+   ]
+  },
+  "MAT_CALLE_band_rojo": {
+   "color_writer": [
+    0.78,
+    0.07,
+    0.05
+   ],
+   "familia": "pintado",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.8626999855041504,
+      0.35690000653266907,
+      0.35690000653266907
+     ],
+     "nl": 0.308,
+     "nz": 0.18,
+     "pixeles": 211,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.6901000142097473,
+    0.10170000046491623,
+    0.07349999994039536
+   ]
+  },
+  "MAT_CALLE_band_verde": {
+   "color_writer": [
+    0.05,
+    0.45,
+    0.14
+   ],
+   "familia": "pintado",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.29019999504089355,
+      0.7293999791145325,
+      0.5019999742507935
+     ],
+     "nl": 0.285,
+     "nz": 0.15,
+     "pixeles": 255,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.0835999995470047,
+    0.4142000079154968,
+    0.14190000295639038
+   ]
+  },
+  "MAT_CALLE_cuerda": {
+   "color_writer": [
+    0.42,
+    0.33,
+    0.22
+   ],
+   "familia": "pintado",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.6549000144004822,
+      0.6510000228881836,
+      0.5764999985694885
+     ],
+     "nl": 0.362,
+     "nz": 0.293,
+     "pixeles": 218,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.39149999618530273,
+    0.32829999923706055,
+    0.22259999811649323
+   ]
+  },
+  "MAT_CALLE_poste": {
+   "color_writer": [
+    0.05,
+    0.16,
+    0.1
+   ],
+   "familia": "metal",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.31369999051094055,
+      0.513700008392334,
+      0.45879998803138733
+     ],
+     "nl": 0.359,
+     "nz": 0.0,
+     "pixeles": 1156,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.2549000084400177,
+      0.4156999886035919,
+      0.3961000144481659
+     ],
+     "nl": 0.012,
+     "nz": 0.0,
+     "pixeles": 174,
+     "vistas": [
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.07010000199079514,
+    0.1679999977350235,
+    0.1046999990940094
+   ]
+  },
+  "MAT_CAMINO_acera": {
+   "color_writer": [
+    0.62,
+    0.57,
+    0.45
+   ],
+   "familia": "edificio",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.9685999751091003,
+      0.9646999835968018,
+      0.9215999841690063
+     ],
+     "nl": 0.803,
+     "nz": 0.99,
+     "pixeles": 1050,
+     "vistas": [
+      "pueblo"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.8666999936103821,
+      0.8587999939918518,
+      0.7843000292778015
+     ],
+     "nl": 0.561,
+     "nz": 0.257,
+     "pixeles": 479,
+     "vistas": [
+      "pueblo"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.4196000099182129,
+      0.4235000014305115,
+      0.43529999256134033
+     ],
+     "nl": 0.0,
+     "nz": 0.022,
+     "pixeles": 175,
+     "vistas": [
+      "pueblo"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.3961000144481659,
+      0.49410000443458557,
+      0.5764999985694885
+     ],
+     "nl": 0.0,
+     "nz": 0.991,
+     "pixeles": 1047,
+     "vistas": [
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.5889999866485596,
+    0.5457000136375427,
+    0.42500001192092896
+   ]
+  },
+  "MAT_CAMINO_adoquin": {
+   "color_writer": [
+    0.4,
+    0.33,
+    0.32
+   ],
+   "familia": "edificio",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.8274999856948853,
+      0.7922000288963318,
+      0.8234999775886536
+     ],
+     "nl": 0.816,
+     "nz": 0.996,
+     "pixeles": 2966,
+     "vistas": [
+      "pueblo"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.33730000257492065,
+      0.40389999747276306,
+      0.5254999995231628
+     ],
+     "nl": 0.0,
+     "nz": 0.993,
+     "pixeles": 3474,
+     "vistas": [
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.41100001335144043,
+    0.33899998664855957,
+    0.32350000739097595
+   ]
+  },
+  "MAT_CAMINO_adoquin_plaza": {
+   "color_writer": [
+    0.55,
+    0.5,
+    0.46
+   ],
+   "familia": "edificio",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.9451000094413757,
+      0.9333000183105469,
+      0.9254999756813049
+     ],
+     "nl": 0.829,
+     "nz": 1.0,
+     "pixeles": 1562,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.5424000024795532,
+    0.49540001153945923,
+    0.4523000121116638
+   ]
+  },
+  "MAT_CAMINO_asfalto": {
+   "color_writer": [
+    0.11,
+    0.11,
+    0.12
+   ],
+   "familia": "asfalto",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.53329998254776,
+      0.5569000244140625,
+      0.6078000068664551
+     ],
+     "nl": 0.809,
+     "nz": 0.992,
+     "pixeles": 169,
+     "vistas": [
+      "captura",
+      "meta_puerto"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.14659999310970306,
+    0.15620000660419464,
+    0.15209999680519104
+   ]
+  },
+  "MAT_CAMINO_asfalto_calle": {
+   "color_writer": [
+    0.239,
+    0.2285,
+    0.224
+   ],
+   "familia": "asfalto",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.6549000144004822,
+      0.6705999970436096,
+      0.7098000049591064
+     ],
+     "nl": 0.816,
+     "nz": 0.989,
+     "pixeles": 12000,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.27059999108314514,
+      0.3490000069141388,
+      0.45489999651908875
+     ],
+     "nl": 0.0,
+     "nz": 0.999,
+     "pixeles": 5410,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.22509999573230743,
+    0.21469999849796295,
+    0.20900000631809235
+   ]
+  },
+  "MAT_CAMINO_blanco": {
+   "color_writer": [
+    0.93,
+    0.92,
+    0.88
+   ],
+   "familia": "pintado",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.8902000188827515,
+      0.8863000273704529,
+      0.8784000277519226
+     ],
+     "nl": 0.528,
+     "nz": 0.107,
+     "pixeles": 294,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.7580000162124634,
+    0.6563000082969666,
+    0.6033999919891357
+   ]
+  },
+  "MAT_CAMINO_bordillo": {
+   "color_writer": [
+    0.6,
+    0.55,
+    0.43
+   ],
+   "familia": "edificio",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.9412000179290771,
+      0.9451000094413757,
+      0.9020000100135803
+     ],
+     "nl": 0.779,
+     "nz": 0.891,
+     "pixeles": 2139,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.8587999939918518,
+      0.8626999855041504,
+      0.800000011920929
+     ],
+     "nl": 0.572,
+     "nz": 0.217,
+     "pixeles": 2668,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.4627000093460083,
+      0.5175999999046326,
+      0.5450999736785889
+     ],
+     "nl": 0.0,
+     "nz": 0.188,
+     "pixeles": 311,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.40779998898506165,
+      0.5059000253677368,
+      0.5842999815940857
+     ],
+     "nl": 0.0,
+     "nz": 0.978,
+     "pixeles": 501,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.5412999987602234,
+    0.5058000087738037,
+    0.38749998807907104
+   ]
+  },
+  "MAT_CAMINO_gris_metal": {
+   "color_writer": [
+    0.5,
+    0.52,
+    0.54
+   ],
+   "familia": "metal",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.6019999980926514,
+      0.652899980545044,
+      0.6901999711990356
+     ],
+     "nl": 0.415,
+     "nz": 0.298,
+     "pixeles": 154,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.44859999418258667,
+    0.45190000534057617,
+    0.41940000653266907
+   ]
+  },
+  "MAT_CAMINO_mortero": {
+   "color_writer": [
+    0.25,
+    0.22,
+    0.17
+   ],
+   "familia": "edificio",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.6510000228881836,
+      0.6352999806404114,
+      0.5450999736785889
+     ],
+     "nl": 0.519,
+     "nz": 0.043,
+     "pixeles": 2658,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.30979999899864197,
+      0.33329999446868896,
+      0.3215999901294708
+     ],
+     "nl": 0.0,
+     "nz": 0.005,
+     "pixeles": 1324,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.32089999318122864,
+    0.26759999990463257,
+    0.18639999628067017
+   ]
+  },
+  "MAT_CAMINO_muelle_agua": {
+   "color_writer": [
+    0.19,
+    0.22,
+    0.18
+   ],
+   "familia": "pintado",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.36079999804496765,
+      0.43140000104904175,
+      0.47450000047683716
+     ],
+     "nl": 0.0,
+     "nz": 0.12,
+     "pixeles": 154,
+     "vistas": [
+      "meta_puerto"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.17339999973773956,
+    0.23600000143051147,
+    0.2190999984741211
+   ]
+  },
+  "MAT_CAMINO_piedra_a": {
+   "color_writer": [
+    0.5,
+    0.42,
+    0.3
+   ],
+   "familia": "edificio",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.713699996471405,
+      0.6783999800682068,
+      0.5647000074386597
+     ],
+     "nl": 0.528,
+     "nz": 0.025,
+     "pixeles": 5332,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.3490000069141388,
+      0.3686000108718872,
+      0.35690000653266907
+     ],
+     "nl": 0.0,
+     "nz": 0.021,
+     "pixeles": 1545,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.387800008058548,
+    0.3084999918937683,
+    0.19740000367164612
+   ]
+  },
+  "MAT_CAMINO_piedra_b": {
+   "color_writer": [
+    0.38,
+    0.32,
+    0.23
+   ],
+   "familia": "edificio",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.6510000228881836,
+      0.6234999895095825,
+      0.5175999999046326
+     ],
+     "nl": 0.525,
+     "nz": 0.026,
+     "pixeles": 2434,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.33730000257492065,
+      0.35690000653266907,
+      0.3490000069141388
+     ],
+     "nl": 0.0,
+     "nz": 0.021,
+     "pixeles": 817,
+     "vistas": [
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.314300000667572,
+    0.2513999938964844,
+    0.1623000055551529
+   ]
+  },
+  "MAT_CAMINO_piedra_c": {
+   "color_writer": [
+    0.6,
+    0.52,
+    0.38
+   ],
+   "familia": "edificio",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.8823999762535095,
+      0.8431000113487244,
+      0.7569000124931335
+     ],
+     "nl": 0.82,
+     "nz": 0.971,
+     "pixeles": 2036,
+     "vistas": [
+      "pueblo"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.7608000040054321,
+      0.733299970626831,
+      0.6118000149726868
+     ],
+     "nl": 0.537,
+     "nz": 0.068,
+     "pixeles": 3405,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.3450999855995178,
+      0.3725000023841858,
+      0.33329999446868896
+     ],
+     "nl": 0.0,
+     "nz": 0.015,
+     "pixeles": 1055,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.4593000113964081,
+    0.3752000033855438,
+    0.2418999969959259
+   ]
+  },
+  "MAT_CAMINO_piedra_puente": {
+   "color_writer": [
+    0.52,
+    0.46,
+    0.35
+   ],
+   "familia": "edificio",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.35690000653266907,
+      0.38429999351501465,
+      0.3686000108718872
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 1307,
+     "vistas": [
+      "meta_puerto"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.3758000135421753,
+    0.310699999332428,
+    0.20900000631809235
+   ]
+  },
+  "MAT_CAMINO_rojo": {
+   "color_writer": [
+    0.8,
+    0.06,
+    0.05
+   ],
+   "familia": "pintado",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.9294000267982483,
+      0.5490000247955322,
+      0.5314000248908997
+     ],
+     "nl": 0.526,
+     "nz": 0.076,
+     "pixeles": 280,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.7271999716758728,
+    0.2303999960422516,
+    0.19859999418258667
+   ]
+  },
+  "MAT_CAMINO_tierra": {
+   "color_writer": [
+    0.46,
+    0.3,
+    0.13
+   ],
+   "familia": "terreno",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.7882000207901001,
+      0.694100022315979,
+      0.5490000247955322
+     ],
+     "nl": 0.752,
+     "nz": 0.985,
+     "pixeles": 819,
+     "vistas": [
+      "tierra"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.3707999885082245,
+    0.24779999256134033,
+    0.10429999977350235
+   ]
+  },
+  "MAT_CAMINO_tierra_borde": {
+   "color_writer": [
+    0.17,
+    0.17,
+    0.06
+   ],
+   "familia": "terreno",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.5450999736785889,
+      0.6234999895095825,
+      0.45100000500679016
+     ],
+     "nl": 0.688,
+     "nz": 0.938,
+     "pixeles": 292,
+     "vistas": [
+      "tierra"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.38429999351501465,
+      0.5019999742507935,
+      0.3255000114440918
+     ],
+     "nl": 0.301,
+     "nz": 0.364,
+     "pixeles": 283,
+     "vistas": [
+      "tierra"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.15209999680519104,
+    0.2004999965429306,
+    0.05730000138282776
+   ]
+  },
+  "MAT_CARRERA_blanco": {
+   "color_writer": [
+    0.92,
+    0.9,
+    0.86
+   ],
+   "familia": "pintado",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "nl": 0.608,
+     "nz": 0.951,
+     "pixeles": 3201,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel",
+      "piloto_s300"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.8510000109672546,
+      0.9294000267982483,
+      0.9451000094413757
+     ],
+     "nl": 0.235,
+     "nz": 0.0,
+     "pixeles": 19225,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel",
+      "piloto_s300"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.513700008392334,
+      0.6157000064849854,
+      0.6510000228881836
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 18186,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel",
+      "piloto_s300"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.8921999931335449,
+    0.8794000148773193,
+    0.8324999809265137
+   ]
+  },
+  "MAT_CARRERA_crema": {
+   "color_writer": [
+    0.95,
+    0.86,
+    0.62
+   ],
+   "familia": "pintado",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "nl": 0.828,
+     "nz": 1.0,
+     "pixeles": 3539,
+     "vistas": [
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.7843000292778015,
+      0.7882000207901001,
+      0.7490000128746033
+     ],
+     "nl": 0.275,
+     "nz": 0.384,
+     "pixeles": 377,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.5372999906539917,
+      0.5960999727249146,
+      0.6000000238418579
+     ],
+     "nl": 0.0,
+     "nz": 0.012,
+     "pixeles": 2827,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.48240000009536743,
+      0.5960999727249146,
+      0.6783999800682068
+     ],
+     "nl": 0.0,
+     "nz": 0.896,
+     "pixeles": 943,
+     "vistas": [
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.8870999813079834,
+    0.8023999929428101,
+    0.5902000069618225
+   ]
+  },
+  "MAT_CARRERA_gris_acero": {
+   "color_writer": [
+    0.3,
+    0.33,
+    0.36
+   ],
+   "familia": "metal",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.45879998803138733,
+      0.5490000247955322,
+      0.5842999815940857
+     ],
+     "nl": 0.243,
+     "nz": 0.103,
+     "pixeles": 6509,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel",
+      "piloto_s300"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.3882000148296356,
+      0.4666999876499176,
+      0.53329998254776
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 14161,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel",
+      "piloto_s300"
+     ]
+    },
+    "suelo_sol": {
+     "rgb": [
+      0.5293999910354614,
+      0.6823999881744385,
+      0.6078000068664551
+     ],
+     "nl": 0.58,
+     "nz": 0.654,
+     "pixeles": 812,
+     "vistas": [
+      "captura",
+      "meta_puerto"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.31540000438690186,
+    0.3488999903202057,
+    0.3578000068664551
+   ]
+  },
+  "MAT_CARRERA_gris_oscuro": {
+   "color_writer": [
+    0.09,
+    0.09,
+    0.1
+   ],
+   "familia": "pintado",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.2353000044822693,
+      0.26669999957084656,
+      0.30979999899864197
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 473,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.163100004196167,
+    0.13860000669956207,
+    0.14730000495910645
+   ]
+  },
+  "MAT_CARRERA_negro": {
+   "color_writer": [
+    0.02,
+    0.02,
+    0.02
+   ],
+   "familia": "pintado",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.46470001339912415,
+      0.46470001339912415,
+      0.47839999198913574
+     ],
+     "nl": 0.261,
+     "nz": 0.161,
+     "pixeles": 1240,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.2117999941110611,
+      0.24310000240802765,
+      0.2549000084400177
+     ],
+     "nl": 0.0,
+     "nz": 0.002,
+     "pixeles": 6955,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.1729000061750412,
+    0.15479999780654907,
+    0.13860000669956207
+   ]
+  },
+  "MAT_CARRERA_paja": {
+   "color_writer": [
+    0.85,
+    0.62,
+    0.2
+   ],
+   "familia": "terreno",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.7882000207901001,
+      0.7411999702453613,
+      0.49410000443458557
+     ],
+     "nl": 0.264,
+     "nz": 0.092,
+     "pixeles": 328,
+     "vistas": [
+      "tierra"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.5529000163078308,
+      0.5647000074386597,
+      0.3882000148296356
+     ],
+     "nl": 0.001,
+     "nz": 0.0,
+     "pixeles": 377,
+     "vistas": [
+      "tierra"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.7718999981880188,
+    0.5705000162124634,
+    0.181099995970726
+   ]
+  },
+  "MAT_CARRERA_pantalla_luz": {
+   "color_writer": [
+    0.04,
+    0.12,
+    0.4
+   ],
+   "familia": "luz",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.9333000183105469,
+      1.0,
+      1.0
+     ],
+     "nl": 0.234,
+     "nz": 0.0,
+     "pixeles": 497,
+     "vistas": [
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.046799998730421066,
+    0.12720000743865967,
+    0.3903999924659729
+   ]
+  },
+  "MAT_CARRERA_piedra_clara": {
+   "color_writer": [
+    0.58,
+    0.52,
+    0.4
+   ],
+   "familia": "edificio",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.9175999760627747,
+      0.8863000273704529,
+      0.800000011920929
+     ],
+     "nl": 0.852,
+     "nz": 0.911,
+     "pixeles": 3331,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.3725000023841858,
+      0.4156999886035919,
+      0.3882000148296356
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 4998,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.38429999351501465,
+      0.48240000009536743,
+      0.486299991607666
+     ],
+     "nl": 0.0,
+     "nz": 0.903,
+     "pixeles": 1251,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.4934000074863434,
+    0.4189999997615814,
+    0.289900004863739
+   ]
+  },
+  "MAT_CARRERA_pub_amarillo": {
+   "color_writer": [
+    0.95,
+    0.72,
+    0.08
+   ],
+   "familia": "pintado",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      1.0,
+      1.0,
+      0.5411999821662903
+     ],
+     "nl": 0.747,
+     "nz": 0.911,
+     "pixeles": 403,
+     "vistas": [
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.9020000100135803,
+      0.8549000024795532,
+      0.45100000500679016
+     ],
+     "nl": 0.379,
+     "nz": 0.289,
+     "pixeles": 417,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.45489999651908875,
+      0.49799999594688416,
+      0.2824000120162964
+     ],
+     "nl": 0.0,
+     "nz": 0.217,
+     "pixeles": 3832,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.5216000080108643,
+      0.592199981212616,
+      0.39800000190734863
+     ],
+     "nl": 0.0,
+     "nz": 0.684,
+     "pixeles": 210,
+     "vistas": [
+      "meta_puerto"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.8858000040054321,
+    0.6816999912261963,
+    0.1193000003695488
+   ]
+  },
+  "MAT_CARRERA_pub_azul": {
+   "color_writer": [
+    0.08,
+    0.22,
+    0.78
+   ],
+   "familia": "pintado",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.4666999876499176,
+      0.6823999881744385,
+      1.0
+     ],
+     "nl": 0.693,
+     "nz": 0.812,
+     "pixeles": 229,
+     "vistas": [
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.3882000148296356,
+      0.5569000244140625,
+      0.9333000183105469
+     ],
+     "nl": 0.385,
+     "nz": 0.289,
+     "pixeles": 284,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.19609999656677246,
+      0.3215999901294708,
+      0.5803999900817871
+     ],
+     "nl": 0.0,
+     "nz": 0.203,
+     "pixeles": 3602,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.2824000120162964,
+      0.4235000014305115,
+      0.8156999945640564
+     ],
+     "nl": 0.0,
+     "nz": 0.713,
+     "pixeles": 176,
+     "vistas": [
+      "meta_puerto"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.1298999935388565,
+    0.24390000104904175,
+    0.7300999760627747
+   ]
+  },
+  "MAT_CARRERA_pub_blanco": {
+   "color_writer": [
+    0.9,
+    0.9,
+    0.88
+   ],
+   "familia": "pintado",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "nl": 0.673,
+     "nz": 0.609,
+     "pixeles": 618,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.8863000273704529,
+      0.9373000264167786,
+      0.9922000169754028
+     ],
+     "nl": 0.496,
+     "nz": 0.351,
+     "pixeles": 1661,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.4471000134944916,
+      0.5608000159263611,
+      0.6431000232696533
+     ],
+     "nl": 0.0,
+     "nz": 0.351,
+     "pixeles": 4215,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.4431000053882599,
+      0.5803999900817871,
+      0.6823999881744385
+     ],
+     "nl": 0.0,
+     "nz": 0.59,
+     "pixeles": 586,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.7232999801635742,
+    0.7325000166893005,
+    0.7271999716758728
+   ]
+  },
+  "MAT_CARRERA_pub_cian": {
+   "color_writer": [
+    0.08,
+    0.62,
+    0.68
+   ],
+   "familia": "pintado",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.47450000047683716,
+      1.0,
+      1.0
+     ],
+     "nl": 0.789,
+     "nz": 0.965,
+     "pixeles": 261,
+     "vistas": [
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.38040000200271606,
+      0.8392000198364258,
+      0.9215999841690063
+     ],
+     "nl": 0.398,
+     "nz": 0.276,
+     "pixeles": 166,
+     "vistas": [
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.2117999941110611,
+      0.49410000443458557,
+      0.5842999815940857
+     ],
+     "nl": 0.0,
+     "nz": 0.24,
+     "pixeles": 1314,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.11900000274181366,
+    0.5952000021934509,
+    0.6449999809265137
+   ]
+  },
+  "MAT_CARRERA_pub_cristal": {
+   "color_writer": [
+    0.2,
+    0.33,
+    0.45
+   ],
+   "familia": "cristal",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.7275000214576721,
+      0.8077999949455261,
+      0.9235000014305115
+     ],
+     "nl": 0.663,
+     "nz": 0.609,
+     "pixeles": 626,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.5960999727249146,
+      0.7059000134468079,
+      0.819599986076355
+     ],
+     "nl": 0.457,
+     "nz": 0.351,
+     "pixeles": 1789,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.34119999408721924,
+      0.4666999876499176,
+      0.5685999989509583
+     ],
+     "nl": 0.0,
+     "nz": 0.363,
+     "pixeles": 2982,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.3528999984264374,
+      0.48240000009536743,
+      0.5940999984741211
+     ],
+     "nl": 0.0,
+     "nz": 0.587,
+     "pixeles": 472,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.36579999327659607,
+    0.4271000027656555,
+    0.4927000105381012
+   ]
+  },
+  "MAT_CARRERA_pub_morado": {
+   "color_writer": [
+    0.42,
+    0.09,
+    0.58
+   ],
+   "familia": "pintado",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.6705999970436096,
+      0.42750000953674316,
+      0.8353000283241272
+     ],
+     "nl": 0.395,
+     "nz": 0.291,
+     "pixeles": 301,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.3450999855995178,
+      0.2549000084400177,
+      0.5411999821662903
+     ],
+     "nl": 0.0,
+     "nz": 0.22,
+     "pixeles": 1617,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.41190001368522644,
+    0.11460000276565552,
+    0.5508999824523926
+   ]
+  },
+  "MAT_CARRERA_pub_naranja": {
+   "color_writer": [
+    0.9,
+    0.36,
+    0.04
+   ],
+   "familia": "pintado",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.8842999935150146,
+      0.666700005531311,
+      0.3921999931335449
+     ],
+     "nl": 0.394,
+     "nz": 0.276,
+     "pixeles": 344,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.5059000253677368,
+      0.4196000099182129,
+      0.2587999999523163
+     ],
+     "nl": 0.0,
+     "nz": 0.215,
+     "pixeles": 3395,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "suelo_sol": {
+     "rgb": [
+      1.0,
+      0.8313999772071838,
+      0.47450000047683716
+     ],
+     "nl": 0.818,
+     "nz": 0.983,
+     "pixeles": 276,
+     "vistas": [
+      "meta_puerto"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.5254999995231628,
+      0.486299991607666,
+      0.3686000108718872
+     ],
+     "nl": 0.0,
+     "nz": 0.854,
+     "pixeles": 306,
+     "vistas": [
+      "meta_puerto"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.8518999814987183,
+    0.36410000920295715,
+    0.07460000365972519
+   ]
+  },
+  "MAT_CARRERA_pub_rojo": {
+   "color_writer": [
+    0.8,
+    0.08,
+    0.06
+   ],
+   "familia": "pintado",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      1.0,
+      0.49799999594688416,
+      0.5059000253677368
+     ],
+     "nl": 0.755,
+     "nz": 0.903,
+     "pixeles": 784,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.847100019454956,
+      0.40389999747276306,
+      0.41179999709129333
+     ],
+     "nl": 0.291,
+     "nz": 0.193,
+     "pixeles": 1038,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.43140000104904175,
+      0.25099998712539673,
+      0.2745000123977661
+     ],
+     "nl": 0.0,
+     "nz": 0.238,
+     "pixeles": 4977,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.47839999198913574,
+      0.3176000118255615,
+      0.3882000148296356
+     ],
+     "nl": 0.0,
+     "nz": 0.593,
+     "pixeles": 154,
+     "vistas": [
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.7549999952316284,
+    0.1225999966263771,
+    0.10180000215768814
+   ]
+  },
+  "MAT_CARRERA_pub_verde": {
+   "color_writer": [
+    0.1,
+    0.58,
+    0.16
+   ],
+   "familia": "pintado",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.22349999845027924,
+      0.486299991607666,
+      0.3686000108718872
+     ],
+     "nl": 0.0,
+     "nz": 0.247,
+     "pixeles": 1481,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.1404999941587448,
+    0.5461999773979187,
+    0.1826000064611435
+   ]
+  },
+  "MAT_CARRERA_terracota": {
+   "color_writer": [
+    0.62,
+    0.25,
+    0.12
+   ],
+   "familia": "pintado",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.486299991607666,
+      0.42750000953674316,
+      0.3528999984264374
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 465,
+     "vistas": [
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "suelo_sol": {
+     "rgb": [
+      0.8980000019073486,
+      0.7175999879837036,
+      0.6352999806404114
+     ],
+     "nl": 0.65,
+     "nz": 0.785,
+     "pixeles": 197,
+     "vistas": [
+      "meta_puerto"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.6194000244140625,
+    0.3034999966621399,
+    0.17710000276565552
+   ]
+  },
+  "MAT_CARRERA_verde_wgp": {
+   "color_writer": [
+    0.04,
+    0.58,
+    0.18
+   ],
+   "familia": "pintado",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.5411999821662903,
+      1.0,
+      0.7569000124931335
+     ],
+     "nl": 0.838,
+     "nz": 0.905,
+     "pixeles": 1065,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.3019999861717224,
+      0.7529000043869019,
+      0.5293999910354614
+     ],
+     "nl": 0.235,
+     "nz": 0.0,
+     "pixeles": 2645,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.22349999845027924,
+      0.592199981212616,
+      0.4235000014305115
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 7201,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel",
+      "piloto_s300"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.2980000078678131,
+      0.6118000149726868,
+      0.53329998254776
+     ],
+     "nl": 0.0,
+     "nz": 0.722,
+     "pixeles": 164,
+     "vistas": [
+      "captura"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.11559999734163284,
+    0.5963000059127808,
+    0.23330000042915344
+   ]
+  },
+  "MAT_CASAS_carpinteria": {
+   "color_writer": [
+    0.85244,
+    0.79311,
+    0.61207
+   ],
+   "familia": "edificio",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.8039000034332275,
+      0.8313999772071838,
+      0.800000011920929
+     ],
+     "nl": 0.502,
+     "nz": 0.0,
+     "pixeles": 1472,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.41179999709129333,
+      0.48240000009536743,
+      0.5059000253677368
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 193,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.47279998660087585,
+    0.46140000224113464,
+    0.3723999857902527
+   ]
+  },
+  "MAT_CASAS_cromo": {
+   "color_writer": [
+    0.69939,
+    0.73611,
+    0.79311
+   ],
+   "familia": "metal",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.5881999731063843,
+      0.7020000219345093,
+      0.8313999772071838
+     ],
+     "nl": 0.397,
+     "nz": 0.0,
+     "pixeles": 463,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.5814999938011169,
+    0.6121000051498413,
+    0.6320000290870667
+   ]
+  },
+  "MAT_CASAS_fachada_amarillo": {
+   "color_writer": [
+    0.89329,
+    0.54675,
+    0.03575
+   ],
+   "familia": "edificio",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.8234999775886536,
+      0.7098000049591064,
+      0.29019999504089355
+     ],
+     "nl": 0.338,
+     "nz": 0.0,
+     "pixeles": 2531,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.5960999727249146,
+      0.5529000163078308,
+      0.21960000693798065
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 4533,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.7886999845504761,
+    0.49480000138282776,
+    0.05480000004172325
+   ]
+  },
+  "MAT_CASAS_fachada_crema": {
+   "color_writer": [
+    0.87273,
+    0.6637,
+    0.26841
+   ],
+   "familia": "edificio",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      1.0,
+      0.9569000005722046,
+      0.6862999796867371
+     ],
+     "nl": 0.536,
+     "nz": 0.0,
+     "pixeles": 12000,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.6588000059127808,
+      0.6470999717712402,
+      0.5019999742507935
+     ],
+     "nl": 0.001,
+     "nz": 0.0,
+     "pixeles": 5587,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.7861999869346619,
+    0.5989999771118164,
+    0.24549999833106995
+   ]
+  },
+  "MAT_CASAS_fachada_ocre": {
+   "color_writer": [
+    0.69939,
+    0.27926,
+    0.02299
+   ],
+   "familia": "edificio",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.486299991607666,
+      0.3882000148296356,
+      0.21960000693798065
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 413,
+     "vistas": [
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.6215999722480774,
+    0.29159998893737793,
+    0.06610000133514404
+   ]
+  },
+  "MAT_CASAS_fachada_rosa": {
+   "color_writer": [
+    0.79311,
+    0.20818,
+    0.18116
+   ],
+   "familia": "edificio",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.8823999762535095,
+      0.5569000244140625,
+      0.53329998254776
+     ],
+     "nl": 0.451,
+     "nz": 0.0,
+     "pixeles": 10067,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.53329998254776,
+      0.36079999804496765,
+      0.3725000023841858
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 3311,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.7139999866485596,
+    0.21050000190734863,
+    0.17249999940395355
+   ]
+  },
+  "MAT_CASAS_fachada_salmon": {
+   "color_writer": [
+    0.81263,
+    0.19894,
+    0.0993
+   ],
+   "familia": "edificio",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.9333000183105469,
+      0.5450999736785889,
+      0.4392000138759613
+     ],
+     "nl": 0.372,
+     "nz": 0.0,
+     "pixeles": 6657,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.5175999999046326,
+      0.34119999408721924,
+      0.2980000078678131
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 3173,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.7383999824523926,
+    0.20170000195503235,
+    0.10289999842643738
+   ]
+  },
+  "MAT_CASAS_forja": {
+   "color_writer": [
+    0.02,
+    0.02,
+    0.025
+   ],
+   "familia": "metal",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.3176000118255615,
+      0.36079999804496765,
+      0.3215999901294708
+     ],
+     "nl": 0.361,
+     "nz": 0.0,
+     "pixeles": 3635,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.2980000078678131,
+      0.3176000118255615,
+      0.2980000078678131
+     ],
+     "nl": 0.0,
+     "nz": 0.007,
+     "pixeles": 1141,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.14229999482631683,
+    0.11869999766349792,
+    0.0722000002861023
+   ]
+  },
+  "MAT_CASAS_madera": {
+   "color_writer": [
+    0.1483,
+    0.0433,
+    0.00778
+   ],
+   "familia": "pintado",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.2824000120162964,
+      0.24310000240802765,
+      0.2313999980688095
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 1260,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.4666999876499176,
+      0.3019999861717224,
+      0.21570000052452087
+     ],
+     "nl": 0.536,
+     "nz": 0.0,
+     "pixeles": 1506,
+     "vistas": [
+      "casino"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.17100000381469727,
+    0.07509999722242355,
+    0.03220000118017197
+   ]
+  },
+  "MAT_CASAS_metal": {
+   "color_writer": [
+    0.23725,
+    0.2474,
+    0.26841
+   ],
+   "familia": "metal",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.4392000138759613,
+      0.49410000443458557,
+      0.5450999736785889
+     ],
+     "nl": 0.388,
+     "nz": 0.0,
+     "pixeles": 385,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.24160000681877136,
+    0.24940000474452972,
+    0.24379999935626984
+   ]
+  },
+  "MAT_CASAS_persiana": {
+   "color_writer": [
+    0.0433,
+    0.17261,
+    0.03575
+   ],
+   "familia": "pintado",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.3255000114440918,
+      0.5569000244140625,
+      0.3450999855995178
+     ],
+     "nl": 0.474,
+     "nz": 0.0,
+     "pixeles": 12000,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.2824000120162964,
+      0.3765000104904175,
+      0.27059999108314514
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 4673,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.11069999635219574,
+    0.19689999520778656,
+    0.05510000139474869
+   ]
+  },
+  "MAT_CASAS_piedra": {
+   "color_writer": [
+    0.81263,
+    0.69939,
+    0.48544
+   ],
+   "familia": "edificio",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.9059000015258789,
+      0.8549000024795532,
+      0.733299970626831
+     ],
+     "nl": 0.618,
+     "nz": 0.825,
+     "pixeles": 1883,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.8823999762535095,
+      0.8313999772071838,
+      0.7098000049591064
+     ],
+     "nl": 0.458,
+     "nz": 0.0,
+     "pixeles": 12000,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.47839999198913574,
+      0.48240000009536743,
+      0.43140000104904175
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 7867,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.4235000014305115,
+      0.48240000009536743,
+      0.5
+     ],
+     "nl": 0.0,
+     "nz": 0.805,
+     "pixeles": 456,
+     "vistas": [
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.6201000213623047,
+    0.4855000078678131,
+    0.289900004863739
+   ]
+  },
+  "MAT_CASAS_teja": {
+   "color_writer": [
+    0.41435,
+    0.0561,
+    0.01323
+   ],
+   "familia": "edificio",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.9059000015258789,
+      0.3490000069141388,
+      0.31369999051094055
+     ],
+     "nl": 0.944,
+     "nz": 0.906,
+     "pixeles": 12000,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.7882000207901001,
+      0.3019999861717224,
+      0.25099998712539673
+     ],
+     "nl": 0.535,
+     "nz": 0.018,
+     "pixeles": 4767,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.4442000091075897,
+    0.03240000084042549,
+    0.009399999864399433
+   ]
+  },
+  "MAT_CASAS_toldo_blanco": {
+   "color_writer": [
+    0.89329,
+    0.85244,
+    0.75485
+   ],
+   "familia": "pintado",
+   "clases": {
+    "sombra_suelo": {
+     "rgb": [
+      0.48240000009536743,
+      0.5254999995231628,
+      0.6176000237464905
+     ],
+     "nl": 0.0,
+     "nz": 0.831,
+     "pixeles": 258,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    },
+    "suelo_sol": {
+     "rgb": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "nl": 0.984,
+     "nz": 0.876,
+     "pixeles": 476,
+     "vistas": [
+      "casino"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      1.0,
+      1.0,
+      0.9764999747276306
+     ],
+     "nl": 0.536,
+     "nz": 0.008,
+     "pixeles": 176,
+     "vistas": [
+      "casino"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.7450000047683716,
+    0.6980000138282776,
+    0.6092000007629395
+   ]
+  },
+  "MAT_CASAS_toldo_verde": {
+   "color_writer": [
+    0.01774,
+    0.19894,
+    0.03575
+   ],
+   "familia": "pintado",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.30979999899864197,
+      0.6744999885559082,
+      0.38040000200271606
+     ],
+     "nl": 0.984,
+     "nz": 0.876,
+     "pixeles": 296,
+     "vistas": [
+      "casino"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.0820000022649765,
+    0.2287999987602234,
+    0.08060000091791153
+   ]
+  },
+  "MAT_CASAS_vidrio": {
+   "color_writer": [
+    0.03575,
+    0.09317,
+    0.11899
+   ],
+   "familia": "cristal",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.3215999901294708,
+      0.4392000138759613,
+      0.49799999594688416
+     ],
+     "nl": 0.458,
+     "nz": 0.0,
+     "pixeles": 11973,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.2549000084400177,
+      0.3294000029563904,
+      0.38040000200271606
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 3972,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.1062999963760376,
+    0.14499999582767487,
+    0.14740000665187836
+   ]
+  },
+  "MAT_CASINO_dorado": {
+   "color_writer": [
+    0.91,
+    0.575,
+    0.1
+   ],
+   "familia": "metal",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.8744999766349792,
+      0.7569000124931335,
+      0.45879998803138733
+     ],
+     "nl": 0.534,
+     "nz": -0.008,
+     "pixeles": 1191,
+     "vistas": [
+      "casino"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.7795000076293945,
+    0.5072000026702881,
+    0.15729999542236328
+   ]
+  },
+  "MAT_CASINO_fachada": {
+   "color_writer": [
+    0.78,
+    0.5,
+    0.215
+   ],
+   "familia": "edificio",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.9059000015258789,
+      0.7724999785423279,
+      0.5608000159263611
+     ],
+     "nl": 0.539,
+     "nz": 0.0,
+     "pixeles": 1589,
+     "vistas": [
+      "casino"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.40389999747276306,
+      0.38429999351501465,
+      0.3019999861717224
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 409,
+     "vistas": [
+      "casino"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.739300012588501,
+    0.48809999227523804,
+    0.22200000286102295
+   ]
+  },
+  "MAT_CASINO_molduras": {
+   "color_writer": [
+    0.86,
+    0.72,
+    0.5
+   ],
+   "familia": "edificio",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.9373000264167786,
+      0.8744999766349792,
+      0.7529000043869019
+     ],
+     "nl": 0.534,
+     "nz": 0.0,
+     "pixeles": 2874,
+     "vistas": [
+      "casino"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.7788000106811523,
+    0.6212000250816345,
+    0.4074000120162964
+   ]
+  },
+  "MAT_CASINO_tejado": {
+   "color_writer": [
+    0.78,
+    0.235,
+    0.05
+   ],
+   "familia": "edificio",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      1.0,
+      0.5372999906539917,
+      0.38429999351501465
+     ],
+     "nl": 0.896,
+     "nz": 0.672,
+     "pixeles": 319,
+     "vistas": [
+      "casino"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.9961000084877014,
+      0.490200012922287,
+      0.3255000114440918
+     ],
+     "nl": 0.562,
+     "nz": 0.187,
+     "pixeles": 592,
+     "vistas": [
+      "casino"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.809499979019165,
+    0.1526000052690506,
+    0.05009999871253967
+   ]
+  },
+  "MAT_CASINO_vidrio": {
+   "color_writer": [
+    0.045,
+    0.1,
+    0.15
+   ],
+   "familia": "cristal",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.2784000039100647,
+      0.38040000200271606,
+      0.45879998803138733
+     ],
+     "nl": 0.551,
+     "nz": 0.0,
+     "pixeles": 1135,
+     "vistas": [
+      "casino"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.1881999969482422,
+      0.2824000120162964,
+      0.36469998955726624
+     ],
+     "nl": 0.006,
+     "nz": 0.0,
+     "pixeles": 223,
+     "vistas": [
+      "casino"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.12839999794960022,
+    0.1574999988079071,
+    0.16990000009536743
+   ]
+  },
+  "MAT_CASINO_vidrio_hueco": {
+   "color_writer": [
+    0.035,
+    0.04,
+    0.055
+   ],
+   "familia": "cristal",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.3255000114440918,
+      0.33730000257492065,
+      0.3528999984264374
+     ],
+     "nl": 0.547,
+     "nz": 0.0,
+     "pixeles": 326,
+     "vistas": [
+      "casino"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.1315000057220459,
+    0.11630000174045563,
+    0.10109999775886536
+   ]
+  },
+  "MAT_CIVICO_blanco": {
+   "color_writer": [
+    0.90067,
+    0.8689,
+    0.74841
+   ],
+   "familia": "edificio",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.6195999979972839,
+      0.7020000219345093,
+      0.7569000124931335
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 602,
+     "vistas": [
+      "meta_puerto"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.8216000199317932,
+    0.7940000295639038,
+    0.6836000084877014
+   ]
+  },
+  "MAT_CIVICO_crema": {
+   "color_writer": [
+    0.84809,
+    0.71057,
+    0.42003
+   ],
+   "familia": "edificio",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.5764999985694885,
+      0.6118000149726868,
+      0.5647000074386597
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 707,
+     "vistas": [
+      "meta_puerto"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.7186999917030334,
+    0.6057999730110168,
+    0.357699990272522
+   ]
+  },
+  "MAT_CIVICO_persiana": {
+   "color_writer": [
+    0.02198,
+    0.13287,
+    0.03007
+   ],
+   "familia": "edificio",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.20000000298023224,
+      0.33730000257492065,
+      0.2587999999523163
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 297,
+     "vistas": [
+      "meta_puerto"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.10970000177621841,
+    0.1931000053882599,
+    0.06970000267028809
+   ]
+  },
+  "MAT_CIVICO_ventana": {
+   "color_writer": [
+    0.01165,
+    0.01961,
+    0.02721
+   ],
+   "familia": "cristal",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.23919999599456787,
+      0.26669999957084656,
+      0.2980000078678131
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 601,
+     "vistas": [
+      "meta_puerto"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.10999999940395355,
+    0.09399999678134918,
+    0.07180000096559525
+   ]
+  },
+  "MAT_guardarrail": {
+   "color_writer": [
+    0.3,
+    0.26,
+    0.2
+   ],
+   "familia": "metal",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.5314000248908997,
+      0.5293999910354614,
+      0.5293999910354614
+     ],
+     "nl": 0.714,
+     "nz": 0.712,
+     "pixeles": 430,
+     "vistas": [
+      "casino"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.5019999742507935,
+      0.5098000168800354,
+      0.49410000443458557
+     ],
+     "nl": 0.515,
+     "nz": 0.13,
+     "pixeles": 7688,
+     "vistas": [
+      "casino",
+      "piloto_s300"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.35690000653266907,
+      0.3921999931335449,
+      0.4000000059604645
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 865,
+     "vistas": [
+      "casino",
+      "piloto_s300"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.30140000581741333,
+    0.262800008058548,
+    0.2020999938249588
+   ]
+  },
+  "MAT_HOTEL_fachada": {
+   "color_writer": [
+    0.92222,
+    0.72935,
+    0.34239
+   ],
+   "familia": "edificio",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.5803999900817871,
+      0.6000000238418579,
+      0.5059000253677368
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 2035,
+     "vistas": [
+      "meta_puerto"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.8151999711990356,
+    0.6341999769210815,
+    0.304500013589859
+   ]
+  },
+  "MAT_HOTEL_mansarda": {
+   "color_writer": [
+    0.03968,
+    0.06838,
+    0.11928
+   ],
+   "familia": "edificio",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.48240000009536743,
+      0.5372999906539917,
+      0.6313999891281128
+     ],
+     "nl": 0.51,
+     "nz": 0.789,
+     "pixeles": 211,
+     "vistas": [
+      "meta_puerto"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.0502999983727932,
+    0.07590000331401825,
+    0.11620000004768372
+   ]
+  },
+  "MAT_HOTEL_toldo": {
+   "color_writer": [
+    0.67386,
+    0.01002,
+    0.00598
+   ],
+   "familia": "edificio",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.49219998717308044,
+      0.2921999990940094,
+      0.3059000074863434
+     ],
+     "nl": 0.0,
+     "nz": 0.088,
+     "pixeles": 236,
+     "vistas": [
+      "meta_puerto"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.652999997138977,
+    0.13449999690055847,
+    0.06469999998807907
+   ]
+  },
+  "MAT_ITAL_cipres": {
+   "color_writer": [
+    0.05,
+    0.18,
+    0.07
+   ],
+   "familia": "vegetacion",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.3490000069141388,
+      0.5216000080108643,
+      0.3882000148296356
+     ],
+     "nl": 0.325,
+     "nz": 0.205,
+     "pixeles": 242,
+     "vistas": [
+      "tierra"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.1607999950647354,
+      0.3215999901294708,
+      0.2587999999523163
+     ],
+     "nl": 0.002,
+     "nz": 0.054,
+     "pixeles": 346,
+     "vistas": [
+      "tierra"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.06750000268220901,
+    0.19110000133514404,
+    0.07519999891519547
+   ]
+  },
+  "MAT_ITAL_piedra_crema": {
+   "color_writer": [
+    0.82,
+    0.7,
+    0.48
+   ],
+   "familia": "edificio",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.5254999995231628,
+      0.5490000247955322,
+      0.5019999742507935
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 171,
+     "vistas": [
+      "tierra"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.6281999945640564,
+    0.4812000095844269,
+    0.2865999937057495
+   ]
+  },
+  "MAT_ITAL_piedra_seca": {
+   "color_writer": [
+    0.62,
+    0.52,
+    0.35
+   ],
+   "familia": "edificio",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.38429999351501465,
+      0.40389999747276306,
+      0.3587999939918518
+     ],
+     "nl": 0.0,
+     "nz": 0.077,
+     "pixeles": 388,
+     "vistas": [
+      "tierra"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.3456999957561493,
+    0.2653999924659729,
+    0.15029999613761902
+   ]
+  },
+  "MAT_linea_salida": {
+   "color_writer": [
+    0.95,
+    0.95,
+    0.95
+   ],
+   "familia": "pintura_vial",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "nl": 0.811,
+     "nz": 0.999,
+     "pixeles": 245,
+     "vistas": [
+      "meta_puerto"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.5529000163078308,
+      0.7175999879837036,
+      0.9059000015258789
+     ],
+     "nl": 0.0,
+     "nz": 0.999,
+     "pixeles": 509,
+     "vistas": [
+      "meta_puerto"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.8931999802589417,
+    0.8931000232696533,
+    0.8932999968528748
+   ]
+  },
+  "MAT_marca_blanca": {
+   "color_writer": [
+    0.88,
+    0.88,
+    0.86
+   ],
+   "familia": "pintura_vial",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "nl": 0.794,
+     "nz": 0.997,
+     "pixeles": 9287,
+     "vistas": [
+      "captura",
+      "casino",
+      "meta_puerto",
+      "meta_tunel",
+      "piloto_s300",
+      "pueblo"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.5019999742507935,
+      0.6470999717712402,
+      0.819599986076355
+     ],
+     "nl": 0.001,
+     "nz": 0.999,
+     "pixeles": 1311,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel",
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.7487999796867371,
+    0.7487000226974487,
+    0.7318999767303467
+   ]
+  },
+  "MAT_MCOCHE_caliza": {
+   "color_writer": [
+    0.6,
+    0.49,
+    0.33
+   ],
+   "familia": "roca",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.8392000198364258,
+      0.8234999775886536,
+      0.7724999785423279
+     ],
+     "nl": 0.492,
+     "nz": 0.795,
+     "pixeles": 7206,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.7724999785423279,
+      0.7724999785423279,
+      0.7254999876022339
+     ],
+     "nl": 0.326,
+     "nz": 0.378,
+     "pixeles": 1935,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel",
+      "piloto_s300"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.45100000500679016,
+      0.490200012922287,
+      0.49410000443458557
+     ],
+     "nl": 0.0,
+     "nz": 0.09,
+     "pixeles": 22880,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel",
+      "piloto_s300"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.40779998898506165,
+      0.4706000089645386,
+      0.5098000168800354
+     ],
+     "nl": 0.0,
+     "nz": 0.727,
+     "pixeles": 5109,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel",
+      "piloto_s300"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.6491000056266785,
+    0.5501999855041504,
+    0.3937999904155731
+   ]
+  },
+  "MAT_MCOCHE_caliza_clara": {
+   "color_writer": [
+    0.74,
+    0.66,
+    0.5
+   ],
+   "familia": "roca",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.89410001039505,
+      0.9020000100135803,
+      0.8705999851226807
+     ],
+     "nl": 0.494,
+     "nz": 0.802,
+     "pixeles": 1955,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.8077999949455261,
+      0.8353000283241272,
+      0.8039000034332275
+     ],
+     "nl": 0.327,
+     "nz": 0.413,
+     "pixeles": 479,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.5098000168800354,
+      0.5685999989509583,
+      0.5803999900817871
+     ],
+     "nl": 0.0,
+     "nz": 0.01,
+     "pixeles": 12130,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel",
+      "piloto_s300"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.41179999709129333,
+      0.4706000089645386,
+      0.49799999594688416
+     ],
+     "nl": 0.0,
+     "nz": 0.688,
+     "pixeles": 3798,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel",
+      "piloto_s300"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.7572000026702881,
+    0.6808000206947327,
+    0.5238999724388123
+   ]
+  },
+  "MAT_MCOCHE_caliza_grieta": {
+   "color_writer": [
+    0.522,
+    0.426,
+    0.287
+   ],
+   "familia": "roca",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.47839999198913574,
+      0.5059000253677368,
+      0.49410000443458557
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 3283,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel",
+      "piloto_s300"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.5580000281333923,
+    0.4681999981403351,
+    0.33000001311302185
+   ]
+  },
+  "MAT_MCOCHE_caliza_monte": {
+   "color_writer": [
+    0.34,
+    0.28,
+    0.19
+   ],
+   "familia": "roca",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.6862999796867371,
+      0.666700005531311,
+      0.6118000149726868
+     ],
+     "nl": 0.511,
+     "nz": 0.775,
+     "pixeles": 5387,
+     "vistas": [
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.5685999989509583,
+      0.5529000163078308,
+      0.5059000253677368
+     ],
+     "nl": 0.285,
+     "nz": 0.421,
+     "pixeles": 592,
+     "vistas": [
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.3765000104904175,
+      0.40389999747276306,
+      0.40779998898506165
+     ],
+     "nl": 0.0,
+     "nz": 0.238,
+     "pixeles": 1257,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.3019999861717224,
+      0.3490000069141388,
+      0.3765000104904175
+     ],
+     "nl": 0.0,
+     "nz": 0.795,
+     "pixeles": 1315,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel",
+      "piloto_s300"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.40230000019073486,
+    0.3357999920845032,
+    0.23319999873638153
+   ]
+  },
+  "MAT_MCOCHE_caliza_oscura": {
+   "color_writer": [
+    0.4,
+    0.31,
+    0.2
+   ],
+   "familia": "roca",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.7254999876022339,
+      0.694100022315979,
+      0.6352999806404114
+     ],
+     "nl": 0.503,
+     "nz": 0.791,
+     "pixeles": 5668,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.6431000232696533,
+      0.6195999979972839,
+      0.5647000074386597
+     ],
+     "nl": 0.317,
+     "nz": 0.411,
+     "pixeles": 1224,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel",
+      "piloto_s300"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.36469998955726624,
+      0.3765000104904175,
+      0.36079999804496765
+     ],
+     "nl": 0.0,
+     "nz": 0.002,
+     "pixeles": 10220,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel",
+      "piloto_s300"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.30979999899864197,
+      0.33329999446868896,
+      0.33730000257492065
+     ],
+     "nl": 0.0,
+     "nz": 0.76,
+     "pixeles": 6336,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel",
+      "piloto_s300"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.450300008058548,
+    0.3626999855041504,
+    0.24740000069141388
+   ]
+  },
+  "MAT_MCOCHE_cristal_pulido": {
+   "color_writer": [
+    0.05,
+    0.062,
+    0.08
+   ],
+   "familia": "cristal",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.14900000393390656,
+      0.22349999845027924,
+      0.33329999446868896
+     ],
+     "nl": 0.0,
+     "nz": 0.476,
+     "pixeles": 3810,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.15289999544620514,
+      0.2313999980688095,
+      0.34119999408721924
+     ],
+     "nl": 0.0,
+     "nz": 0.525,
+     "pixeles": 1673,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.0640999972820282,
+    0.0731000006198883,
+    0.0869000032544136
+   ]
+  },
+  "MAT_MCOCHE_hueco": {
+   "color_writer": [
+    0.085,
+    0.065,
+    0.045
+   ],
+   "familia": "roca",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.16859999299049377,
+      0.16859999299049377,
+      0.15289999544620514
+     ],
+     "nl": 0.0,
+     "nz": -0.05,
+     "pixeles": 8628,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel",
+      "piloto_s300"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.20000000298023224,
+      0.2117999941110611,
+      0.2117999941110611
+     ],
+     "nl": 0.0,
+     "nz": 0.536,
+     "pixeles": 349,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "piloto_s300"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.12020000070333481,
+    0.09880000352859497,
+    0.07289999723434448
+   ]
+  },
+  "MAT_MCOCHE_hueso": {
+   "color_writer": [
+    0.8,
+    0.75,
+    0.62
+   ],
+   "familia": "roca",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.49410000443458557,
+      0.5569000244140625,
+      0.5685999989509583
+     ],
+     "nl": 0.0,
+     "nz": 0.077,
+     "pixeles": 4102,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel",
+      "piloto_s300"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.4666999876499176,
+      0.5490000247955322,
+      0.6078000068664551
+     ],
+     "nl": 0.0,
+     "nz": 0.601,
+     "pixeles": 491,
+     "vistas": [
+      "piloto_s300"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.7904999852180481,
+    0.7469000220298767,
+    0.6230000257492065
+   ]
+  },
+  "MAT_MCOCHE_veg": {
+   "color_writer": [
+    0.062,
+    0.195,
+    0.058
+   ],
+   "familia": "vegetacion",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.16859999299049377,
+      0.3490000069141388,
+      0.24709999561309814
+     ],
+     "nl": 0.001,
+     "nz": 0.234,
+     "pixeles": 261,
+     "vistas": [
+      "meta_puerto",
+      "piloto_s300"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.06849999725818634,
+    0.19470000267028809,
+    0.06080000102519989
+   ]
+  },
+  "MAT_MCOCHE_veg_clara": {
+   "color_writer": [
+    0.13,
+    0.31,
+    0.09
+   ],
+   "familia": "vegetacion",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.2313999980688095,
+      0.40779998898506165,
+      0.28630000352859497
+     ],
+     "nl": 0.001,
+     "nz": 0.331,
+     "pixeles": 405,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "piloto_s300"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.12960000336170197,
+    0.29789999127388,
+    0.08879999816417694
+   ]
+  },
+  "MAT_PENON_balaustrada": {
+   "color_writer": [
+    0.9,
+    0.87,
+    0.8
+   ],
+   "familia": "edificio",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.9097999930381775,
+      0.9136999845504761,
+      0.89410001039505
+     ],
+     "nl": 0.478,
+     "nz": -0.004,
+     "pixeles": 603,
+     "vistas": [
+      "casino"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.711899995803833,
+    0.679099977016449,
+    0.5925999879837036
+   ]
+  },
+  "MAT_piano_blanco": {
+   "color_writer": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "familia": "pintura_vial",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "nl": 0.81,
+     "nz": 0.986,
+     "pixeles": 1302,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.8371000289916992,
+    0.770799994468689,
+    0.7682999968528748
+   ]
+  },
+  "MAT_piano_rojo": {
+   "color_writer": [
+    0.75,
+    0.05,
+    0.05
+   ],
+   "familia": "pintura_vial",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      1.0,
+      0.42750000953674316,
+      0.47450000047683716
+     ],
+     "nl": 0.807,
+     "nz": 0.986,
+     "pixeles": 1318,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.7184000015258789,
+    0.11559999734163284,
+    0.11320000141859055
+   ]
+  },
+  "MAT_piedra": {
+   "color_writer": [
+    0.78,
+    0.72,
+    0.6
+   ],
+   "familia": "edificio",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.4706000089645386,
+      0.5059000253677368,
+      0.490200012922287
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 3027,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel",
+      "piloto_s300"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.6128000020980835,
+    0.5271000266075134,
+    0.3862999975681305
+   ]
+  },
+  "MAT_PIT_amarillo": {
+   "color_writer": [
+    0.96,
+    0.78,
+    0.08
+   ],
+   "familia": "pintado",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.6549000144004822,
+      0.6862999796867371,
+      0.36469998955726624
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 1835,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.9276000261306763,
+    0.761900007724762,
+    0.13429999351501465
+   ]
+  },
+  "MAT_PIT_azul_claro": {
+   "color_writer": [
+    0.42,
+    0.66,
+    0.92
+   ],
+   "familia": "pintado",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.5175999999046326,
+      0.6980000138282776,
+      0.8980000019073486
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 6386,
+     "vistas": [
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.4203000068664551,
+    0.6549999713897705,
+    0.9093000292778015
+   ]
+  },
+  "MAT_PIT_azul_oscuro": {
+   "color_writer": [
+    0.03,
+    0.08,
+    0.3
+   ],
+   "familia": "pintado",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.19220000505447388,
+      0.2784000039100647,
+      0.49799999594688416
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 2516,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.10840000212192535,
+    0.15299999713897705,
+    0.3499999940395355
+   ]
+  },
+  "MAT_PIT_azul_techo": {
+   "color_writer": [
+    0.02,
+    0.1,
+    0.55
+   ],
+   "familia": "pintado",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.1412000060081482,
+      0.2549000084400177,
+      0.5764999985694885
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 1585,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.09430000185966492,
+    0.16050000488758087,
+    0.5421000123023987
+   ]
+  },
+  "MAT_PIT_blanco": {
+   "color_writer": [
+    0.92,
+    0.91,
+    0.88
+   ],
+   "familia": "pintado",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.6078000068664551,
+      0.6823999881744385,
+      0.7608000040054321
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 18000,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.5372999906539917,
+      0.6626999974250793,
+      0.8274999856948853
+     ],
+     "nl": 0.0,
+     "nz": 1.0,
+     "pixeles": 5299,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.6510000228881836,
+      0.7254999876022339,
+      0.7940999865531921
+     ],
+     "nl": 0.279,
+     "nz": 0.357,
+     "pixeles": 254,
+     "vistas": [
+      "captura",
+      "meta_puerto"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.8809999823570251,
+    0.8611000180244446,
+    0.829200029373169
+   ]
+  },
+  "MAT_PIT_crema": {
+   "color_writer": [
+    0.93,
+    0.85,
+    0.64
+   ],
+   "familia": "pintado",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.5529000163078308,
+      0.6078000068664551,
+      0.6195999979972839
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 12000,
+     "vistas": [
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.47450000047683716,
+      0.5881999731063843,
+      0.6744999885559082
+     ],
+     "nl": 0.0,
+     "nz": 0.92,
+     "pixeles": 388,
+     "vistas": [
+      "meta_puerto"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.88919997215271,
+    0.8152999877929688,
+    0.6247000098228455
+   ]
+  },
+  "MAT_PIT_cristal": {
+   "color_writer": [
+    0.2,
+    0.36,
+    0.5
+   ],
+   "familia": "cristal",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.3725000023841858,
+      0.490200012922287,
+      0.5842999815940857
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 5771,
+     "vistas": [
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.2574000060558319,
+    0.4020000100135803,
+    0.5249000191688538
+   ]
+  },
+  "MAT_PIT_cromo": {
+   "color_writer": [
+    0.88,
+    0.89,
+    0.9
+   ],
+   "familia": "metal",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.5098000168800354,
+      0.5842999815940857,
+      0.6588000059127808
+     ],
+     "nl": 0.0,
+     "nz": 0.017,
+     "pixeles": 4953,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.7325000166893005,
+    0.7351999878883362,
+    0.7351999878883362
+   ]
+  },
+  "MAT_PIT_goma": {
+   "color_writer": [
+    0.03,
+    0.03,
+    0.03
+   ],
+   "familia": "pintado",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.1745000034570694,
+      0.2078000009059906,
+      0.24310000240802765
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 552,
+     "vistas": [
+      "captura",
+      "meta_tunel"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.06300000101327896,
+    0.06610000133514404,
+    0.08420000225305557
+   ]
+  },
+  "MAT_PIT_gris_acero": {
+   "color_writer": [
+    0.55,
+    0.57,
+    0.6
+   ],
+   "familia": "metal",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.49410000443458557,
+      0.6313999891281128,
+      0.6157000064849854
+     ],
+     "nl": 0.267,
+     "nz": 0.372,
+     "pixeles": 645,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.490200012922287,
+      0.5647000074386597,
+      0.6352999806404114
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 15663,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.4706000089645386,
+      0.5529000163078308,
+      0.6195999979972839
+     ],
+     "nl": 0.0,
+     "nz": 0.756,
+     "pixeles": 497,
+     "vistas": [
+      "meta_puerto"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.5378999710083008,
+    0.555400013923645,
+    0.5760999917984009
+   ]
+  },
+  "MAT_PIT_gris_oscuro": {
+   "color_writer": [
+    0.1,
+    0.1,
+    0.11
+   ],
+   "familia": "pintado",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.2745000123977661,
+      0.3176000118255615,
+      0.3686000108718872
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 15844,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.17309999465942383,
+    0.17239999771118164,
+    0.17730000615119934
+   ]
+  },
+  "MAT_PIT_hormigon": {
+   "color_writer": [
+    0.62,
+    0.62,
+    0.6
+   ],
+   "familia": "asfalto",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.9175999760627747,
+      0.9528999924659729,
+      1.0
+     ],
+     "nl": 0.664,
+     "nz": 0.965,
+     "pixeles": 597,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.5216000080108643,
+      0.6000000238418579,
+      0.6783999800682068
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 18000,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.40779998898506165,
+      0.5059000253677368,
+      0.6118000149726868
+     ],
+     "nl": 0.0,
+     "nz": 0.882,
+     "pixeles": 594,
+     "vistas": [
+      "meta_puerto"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.6211000084877014,
+    0.6197999715805054,
+    0.5967000126838684
+   ]
+  },
+  "MAT_PIT_luz_blanca": {
+   "color_writer": [
+    0.95,
+    0.95,
+    0.9
+   ],
+   "familia": "luz",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "nl": 0.0,
+     "nz": -0.015,
+     "pixeles": 337,
+     "vistas": [
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.8835999965667725,
+    0.8816999793052673,
+    0.8378999829292297
+   ]
+  },
+  "MAT_PIT_marca_amarilla": {
+   "color_writer": [
+    0.96,
+    0.78,
+    0.08
+   ],
+   "familia": "pintura_vial",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      1.0,
+      1.0,
+      0.6313999891281128
+     ],
+     "nl": 0.812,
+     "nz": 1.0,
+     "pixeles": 733,
+     "vistas": [
+      "meta_puerto"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.4196000099182129,
+      0.490200012922287,
+      0.3255000114440918
+     ],
+     "nl": 0.0,
+     "nz": 1.0,
+     "pixeles": 673,
+     "vistas": [
+      "meta_puerto"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.6279000043869019,
+    0.5120999813079834,
+    0.06459999829530716
+   ]
+  },
+  "MAT_PIT_marca_blanca": {
+   "color_writer": [
+    0.93,
+    0.93,
+    0.9
+   ],
+   "familia": "pintura_vial",
+   "clases": {
+    "sombra_suelo": {
+     "rgb": [
+      0.45879998803138733,
+      0.592199981212616,
+      0.733299970626831
+     ],
+     "nl": 0.0,
+     "nz": 1.0,
+     "pixeles": 405,
+     "vistas": [
+      "meta_puerto"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.7444000244140625,
+    0.7681000232696533,
+    0.7106000185012817
+   ]
+  },
+  "MAT_PIT_negro": {
+   "color_writer": [
+    0.02,
+    0.02,
+    0.02
+   ],
+   "familia": "pintado",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.2745000123977661,
+      0.30979999899864197,
+      0.33329999446868896
+     ],
+     "nl": 0.0,
+     "nz": -0.011,
+     "pixeles": 4843,
+     "vistas": [
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.19629999995231628,
+    0.1712999939918518,
+    0.14730000495910645
+   ]
+  },
+  "MAT_PIT_ocre": {
+   "color_writer": [
+    0.86,
+    0.56,
+    0.22
+   ],
+   "familia": "pintado",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.53329998254776,
+      0.5216000080108643,
+      0.43140000104904175
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 8148,
+     "vistas": [
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.8349000215530396,
+    0.5586000084877014,
+    0.2442999929189682
+   ]
+  },
+  "MAT_PIT_piedra_clara": {
+   "color_writer": [
+    0.6,
+    0.54,
+    0.42
+   ],
+   "familia": "edificio",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.4471000134944916,
+      0.5019999742507935,
+      0.5175999999046326
+     ],
+     "nl": 0.0,
+     "nz": -0.023,
+     "pixeles": 191,
+     "vistas": [
+      "captura",
+      "meta_puerto"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.4000000059604645,
+      0.47839999198913574,
+      0.5216000080108643
+     ],
+     "nl": 0.0,
+     "nz": 0.837,
+     "pixeles": 1784,
+     "vistas": [
+      "meta_puerto"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.5038999915122986,
+    0.4343000054359436,
+    0.3061000108718872
+   ]
+  },
+  "MAT_PIT_pub_amarillo": {
+   "color_writer": [
+    0.95,
+    0.72,
+    0.08
+   ],
+   "familia": "pintado",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.53329998254776,
+      0.5608000159263611,
+      0.38429999351501465
+     ],
+     "nl": 0.0,
+     "nz": 0.002,
+     "pixeles": 3843,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.53329998254776,
+      0.6157000064849854,
+      0.6078000068664551
+     ],
+     "nl": 0.0,
+     "nz": 0.724,
+     "pixeles": 235,
+     "vistas": [
+      "captura",
+      "meta_puerto"
+     ]
+    },
+    "suelo_sol": {
+     "rgb": [
+      1.0,
+      1.0,
+      0.7098000049591064
+     ],
+     "nl": 0.83,
+     "nz": 0.999,
+     "pixeles": 752,
+     "vistas": [
+      "meta_puerto"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.8859000205993652,
+    0.6866000294685364,
+    0.14380000531673431
+   ]
+  },
+  "MAT_PIT_pub_azul": {
+   "color_writer": [
+    0.08,
+    0.22,
+    0.78
+   ],
+   "familia": "pintado",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.3059000074863434,
+      0.4392000138759613,
+      0.6626999974250793
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 3846,
+     "vistas": [
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.16339999437332153,
+    0.2745000123977661,
+    0.737500011920929
+   ]
+  },
+  "MAT_PIT_pub_blanco": {
+   "color_writer": [
+    0.9,
+    0.9,
+    0.88
+   ],
+   "familia": "pintado",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.5098000168800354,
+      0.6039000153541565,
+      0.7020000219345093
+     ],
+     "nl": 0.0,
+     "nz": 0.199,
+     "pixeles": 5230,
+     "vistas": [
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.5254999995231628,
+      0.6431000232696533,
+      0.7803999781608582
+     ],
+     "nl": 0.0,
+     "nz": 0.59,
+     "pixeles": 703,
+     "vistas": [
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.7599999904632568,
+    0.7670000195503235,
+    0.7563999891281128
+   ]
+  },
+  "MAT_PIT_pub_cian": {
+   "color_writer": [
+    0.08,
+    0.62,
+    0.68
+   ],
+   "familia": "pintado",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.3255000114440918,
+      0.5803999900817871,
+      0.6783999800682068
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 3234,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.3686000108718872,
+      0.5842999815940857,
+      0.7215999960899353
+     ],
+     "nl": 0.0,
+     "nz": 0.771,
+     "pixeles": 277,
+     "vistas": [
+      "captura",
+      "meta_puerto"
+     ]
+    },
+    "suelo_sol": {
+     "rgb": [
+      0.5608000159263611,
+      0.9843000173568726,
+      1.0
+     ],
+     "nl": 0.83,
+     "nz": 0.999,
+     "pixeles": 1145,
+     "vistas": [
+      "meta_puerto"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.14839999377727509,
+    0.609499990940094,
+    0.6571000218391418
+   ]
+  },
+  "MAT_PIT_pub_cristal": {
+   "color_writer": [
+    0.2,
+    0.33,
+    0.45
+   ],
+   "familia": "cristal",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.4235000014305115,
+      0.5293999910354614,
+      0.6470999717712402
+     ],
+     "nl": 0.0,
+     "nz": 0.292,
+     "pixeles": 3200,
+     "vistas": [
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.4431000053882599,
+      0.5685999989509583,
+      0.7175999879837036
+     ],
+     "nl": 0.0,
+     "nz": 0.586,
+     "pixeles": 514,
+     "vistas": [
+      "meta_puerto"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.38100001215934753,
+    0.4438999891281128,
+    0.5023999810218811
+   ]
+  },
+  "MAT_PIT_pub_morado": {
+   "color_writer": [
+    0.42,
+    0.09,
+    0.58
+   ],
+   "familia": "pintado",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.40389999747276306,
+      0.35690000653266907,
+      0.5685999989509583
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 1665,
+     "vistas": [
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.4417000114917755,
+    0.15539999306201935,
+    0.5544000267982483
+   ]
+  },
+  "MAT_PIT_pub_naranja": {
+   "color_writer": [
+    0.9,
+    0.36,
+    0.04
+   ],
+   "familia": "pintado",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.5569000244140625,
+      0.486299991607666,
+      0.4000000059604645
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 2753,
+     "vistas": [
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.8449000120162964,
+    0.3824999928474426,
+    0.10540000349283218
+   ]
+  },
+  "MAT_PIT_pub_rojo": {
+   "color_writer": [
+    0.8,
+    0.08,
+    0.06
+   ],
+   "familia": "pintado",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.5059000253677368,
+      0.33730000257492065,
+      0.3686000108718872
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 5966,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    },
+    "suelo_sol": {
+     "rgb": [
+      1.0,
+      0.6234999895095825,
+      0.6626999974250793
+     ],
+     "nl": 0.831,
+     "nz": 0.999,
+     "pixeles": 1837,
+     "vistas": [
+      "meta_puerto"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.5175999999046326,
+      0.5175999999046326,
+      0.6118000149726868
+     ],
+     "nl": 0.0,
+     "nz": 0.744,
+     "pixeles": 253,
+     "vistas": [
+      "meta_puerto"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.7656999826431274,
+    0.14000000059604645,
+    0.11810000240802765
+   ]
+  },
+  "MAT_PIT_pub_verde": {
+   "color_writer": [
+    0.1,
+    0.58,
+    0.16
+   ],
+   "familia": "pintado",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.33730000257492065,
+      0.5411999821662903,
+      0.4627000093460083
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 3312,
+     "vistas": [
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.16779999434947968,
+    0.5625,
+    0.19850000739097595
+   ]
+  },
+  "MAT_PIT_rojo": {
+   "color_writer": [
+    0.8,
+    0.08,
+    0.06
+   ],
+   "familia": "pintado",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.6234999895095825,
+      0.3725000023841858,
+      0.3961000144481659
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 7078,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.8037999868392944,
+    0.18400000035762787,
+    0.15929999947547913
+   ]
+  },
+  "MAT_PIT_suelo_box": {
+   "color_writer": [
+    0.4,
+    0.43,
+    0.48
+   ],
+   "familia": "asfalto",
+   "clases": {
+    "sombra_suelo": {
+     "rgb": [
+      0.3059000074863434,
+      0.3961000144481659,
+      0.513700008392334
+     ],
+     "nl": 0.0,
+     "nz": 1.0,
+     "pixeles": 2109,
+     "vistas": [
+      "meta_puerto"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.41190001368522644,
+    0.4410000145435333,
+    0.47690001130104065
+   ]
+  },
+  "MAT_PIT_verde_wgp": {
+   "color_writer": [
+    0.04,
+    0.58,
+    0.18
+   ],
+   "familia": "pintado",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.25099998712539673,
+      0.5450999736785889,
+      0.4627000093460083
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 3971,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.12839999794960022,
+    0.590499997138977,
+    0.23770000040531158
+   ]
+  },
+  "MAT_PPUEBLO_muro": {
+   "color_writer": [
+    0.75,
+    0.67,
+    0.51
+   ],
+   "familia": "edificio",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.8744999766349792,
+      0.8587999939918518,
+      0.7646999955177307
+     ],
+     "nl": 0.535,
+     "nz": 0.001,
+     "pixeles": 157,
+     "vistas": [
+      "casino"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.6830999851226807,
+    0.6324999928474426,
+    0.4790000021457672
+   ]
+  },
+  "MAT_PPUEBLO_roca": {
+   "color_writer": [
+    0.55,
+    0.47,
+    0.36
+   ],
+   "familia": "roca",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.89410001039505,
+      0.8489999771118164,
+      0.7764999866485596
+     ],
+     "nl": 0.85,
+     "nz": 0.584,
+     "pixeles": 1252,
+     "vistas": [
+      "casino"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.800000011920929,
+      0.7608000040054321,
+      0.6901999711990356
+     ],
+     "nl": 0.613,
+     "nz": 0.198,
+     "pixeles": 6000,
+     "vistas": [
+      "casino"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.47999998927116394,
+    0.4032999873161316,
+    0.29829999804496765
+   ]
+  },
+  "MAT_PPUEBLO_roca_oscura": {
+   "color_writer": [
+    0.46,
+    0.39,
+    0.3
+   ],
+   "familia": "roca",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.8077999949455261,
+      0.7685999870300293,
+      0.6744999885559082
+     ],
+     "nl": 0.911,
+     "nz": 0.691,
+     "pixeles": 460,
+     "vistas": [
+      "casino"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.6823999881744385,
+      0.6470999717712402,
+      0.5803999900817871
+     ],
+     "nl": 0.501,
+     "nz": 0.0,
+     "pixeles": 2413,
+     "vistas": [
+      "casino"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.3984000086784363,
+    0.33820000290870667,
+    0.24469999969005585
+   ]
+  },
+  "MAT_terreno": {
+   "color_writer": [
+    0.32,
+    0.45,
+    0.2
+   ],
+   "familia": "terreno",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.4196000099182129,
+      0.7098000049591064,
+      0.34119999408721924
+     ],
+     "nl": 0.784,
+     "nz": 0.951,
+     "pixeles": 42000,
+     "vistas": [
+      "captura",
+      "casino",
+      "meta_puerto",
+      "meta_tunel",
+      "piloto_s300",
+      "pueblo",
+      "tierra"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.513700008392334,
+      0.6744999885559082,
+      0.5569000244140625
+     ],
+     "nl": 0.411,
+     "nz": 0.408,
+     "pixeles": 2131,
+     "vistas": [
+      "captura",
+      "casino",
+      "meta_puerto",
+      "meta_tunel",
+      "piloto_s300",
+      "pueblo",
+      "tierra"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.17649999260902405,
+      0.38429999351501465,
+      0.21960000693798065
+     ],
+     "nl": 0.0,
+     "nz": 0.99,
+     "pixeles": 19962,
+     "vistas": [
+      "captura",
+      "casino",
+      "meta_puerto",
+      "meta_tunel",
+      "piloto_s300",
+      "pueblo",
+      "tierra"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.09700000286102295,
+    0.2831000089645386,
+    0.038600001484155655
+   ]
+  },
+  "MAT_tierra": {
+   "color_writer": [
+    0.6,
+    0.43,
+    0.24
+   ],
+   "familia": "terreno",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.8626999855041504,
+      0.713699996471405,
+      0.5450999736785889
+     ],
+     "nl": 0.76,
+     "nz": 0.987,
+     "pixeles": 6000,
+     "vistas": [
+      "tierra"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.46140000224113464,
+    0.25540000200271606,
+    0.1005999967455864
+   ]
+  },
+  "MAT_URB_escalera": {
+   "color_writer": [
+    0.58,
+    0.55,
+    0.5
+   ],
+   "familia": "edificio",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.6922000050544739,
+      0.7156999707221985,
+      0.7059000134468079
+     ],
+     "nl": 0.295,
+     "nz": 0.031,
+     "pixeles": 396,
+     "vistas": [
+      "pueblo"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.3215999901294708,
+      0.3961000144481659,
+      0.3765000104904175
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 1819,
+     "vistas": [
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.5758000016212463,
+    0.5462999939918518,
+    0.4952000081539154
+   ]
+  },
+  "MAT_VEG_adelfa_hoja": {
+   "color_writer": [
+    0.1,
+    0.32,
+    0.1
+   ],
+   "familia": "vegetacion",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.47450000047683716,
+      0.7569000124931335,
+      0.4471000134944916
+     ],
+     "nl": 0.872,
+     "nz": 0.745,
+     "pixeles": 281,
+     "vistas": [
+      "casino"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.43140000104904175,
+      0.6980000138282776,
+      0.40389999747276306
+     ],
+     "nl": 0.534,
+     "nz": 0.162,
+     "pixeles": 265,
+     "vistas": [
+      "casino"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.11659999936819077,
+    0.28780001401901245,
+    0.07580000162124634
+   ]
+  },
+  "MAT_VEG_cipres_b": {
+   "color_writer": [
+    0.06,
+    0.22,
+    0.11
+   ],
+   "familia": "vegetacion",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.1647000014781952,
+      0.36469998955726624,
+      0.2587999999523163
+     ],
+     "nl": 0.0,
+     "nz": 0.012,
+     "pixeles": 2532,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "pueblo",
+      "tierra"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.3176000118255615,
+      0.5450999736785889,
+      0.38040000200271606
+     ],
+     "nl": 0.472,
+     "nz": 0.046,
+     "pixeles": 2827,
+     "vistas": [
+      "casino",
+      "pueblo",
+      "tierra"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.06459999829530716,
+    0.21050000190734863,
+    0.08139999955892563
+   ]
+  },
+  "MAT_VEG_encina_b": {
+   "color_writer": [
+    0.09,
+    0.26,
+    0.1
+   ],
+   "familia": "vegetacion",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.43140000104904175,
+      0.666700005531311,
+      0.45100000500679016
+     ],
+     "nl": 0.644,
+     "nz": 0.769,
+     "pixeles": 358,
+     "vistas": [
+      "captura",
+      "pueblo"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.20389999449253082,
+      0.3765000104904175,
+      0.2587999999523163
+     ],
+     "nl": 0.0,
+     "nz": 0.044,
+     "pixeles": 1031,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "piloto_s300",
+      "pueblo"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.3686000108718872,
+      0.5863000154495239,
+      0.3765000104904175
+     ],
+     "nl": 0.44,
+     "nz": 0.229,
+     "pixeles": 296,
+     "vistas": [
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.09049999713897705,
+    0.2502000033855438,
+    0.07329999655485153
+   ]
+  },
+  "MAT_VEG_encina_b_luz": {
+   "color_writer": [
+    0.14,
+    0.34,
+    0.13
+   ],
+   "familia": "vegetacion",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.48240000009536743,
+      0.7098000049591064,
+      0.48240000009536743
+     ],
+     "nl": 0.581,
+     "nz": 0.741,
+     "pixeles": 252,
+     "vistas": [
+      "captura",
+      "pueblo"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.23919999599456787,
+      0.41179999709129333,
+      0.2824000120162964
+     ],
+     "nl": 0.0,
+     "nz": 0.089,
+     "pixeles": 1002,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "piloto_s300",
+      "pueblo"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.43140000104904175,
+      0.6470999717712402,
+      0.40779998898506165
+     ],
+     "nl": 0.407,
+     "nz": 0.247,
+     "pixeles": 246,
+     "vistas": [
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.13819999992847443,
+    0.32510000467300415,
+    0.09470000118017197
+   ]
+  },
+  "MAT_VEG_olivo_plata": {
+   "color_writer": [
+    0.29,
+    0.42,
+    0.25
+   ],
+   "familia": "vegetacion",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.3528999984264374,
+      0.5019999742507935,
+      0.40779998898506165
+     ],
+     "nl": 0.0,
+     "nz": 0.122,
+     "pixeles": 309,
+     "vistas": [
+      "captura",
+      "tierra"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.27320000529289246,
+    0.392300009727478,
+    0.17870000004768372
+   ]
+  },
+  "MAT_VEG_olivo_salvia": {
+   "color_writer": [
+    0.19,
+    0.33,
+    0.15
+   ],
+   "familia": "vegetacion",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.2980000078678131,
+      0.47839999198913574,
+      0.3255000114440918
+     ],
+     "nl": 0.0,
+     "nz": 0.044,
+     "pixeles": 533,
+     "vistas": [
+      "captura",
+      "tierra"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.18310000002384186,
+    0.31220000982284546,
+    0.10939999669790268
+   ]
+  },
+  "MAT_VEG_palma_abanico": {
+   "color_writer": [
+    0.1,
+    0.4,
+    0.17
+   ],
+   "familia": "vegetacion",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.1843000054359436,
+      0.4156999886035919,
+      0.27059999108314514
+     ],
+     "nl": 0.0,
+     "nz": -0.116,
+     "pixeles": 343,
+     "vistas": [
+      "captura"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.10100000351667404,
+    0.3741999864578247,
+    0.121799997985363
+   ]
+  },
+  "MAT_VEG_palma_clara": {
+   "color_writer": [
+    0.15,
+    0.55,
+    0.15
+   ],
+   "familia": "vegetacion",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.5529000163078308,
+      0.9490000009536743,
+      0.53329998254776
+     ],
+     "nl": 0.879,
+     "nz": 0.685,
+     "pixeles": 362,
+     "vistas": [
+      "casino"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.49410000443458557,
+      0.7411999702453613,
+      0.47839999198913574
+     ],
+     "nl": 0.404,
+     "nz": 0.198,
+     "pixeles": 185,
+     "vistas": [
+      "casino"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.15330000221729279,
+    0.4693000018596649,
+    0.10750000178813934
+   ]
+  },
+  "MAT_VEG_pino_a": {
+   "color_writer": [
+    0.1,
+    0.35,
+    0.09
+   ],
+   "familia": "vegetacion",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.20389999449253082,
+      0.4235000014305115,
+      0.24310000240802765
+     ],
+     "nl": 0.0,
+     "nz": 0.062,
+     "pixeles": 234,
+     "vistas": [
+      "captura",
+      "meta_puerto"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.09960000216960907,
+    0.33340001106262207,
+    0.06650000065565109
+   ]
+  },
+  "MAT_VEG_pino_a_luz": {
+   "color_writer": [
+    0.17,
+    0.45,
+    0.13
+   ],
+   "familia": "vegetacion",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.26269999146461487,
+      0.47839999198913574,
+      0.2824000120162964
+     ],
+     "nl": 0.0,
+     "nz": 0.09,
+     "pixeles": 185,
+     "vistas": [
+      "captura",
+      "meta_puerto"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.16429999470710754,
+    0.421999990940094,
+    0.09489999711513519
+   ]
+  },
+  "MAT_VEG_pino_c": {
+   "color_writer": [
+    0.14,
+    0.36,
+    0.06
+   ],
+   "familia": "vegetacion",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.2745000123977661,
+      0.486299991607666,
+      0.24310000240802765
+     ],
+     "nl": 0.0,
+     "nz": 0.033,
+     "pixeles": 971,
+     "vistas": [
+      "captura",
+      "piloto_s300",
+      "pueblo",
+      "tierra"
+     ]
+    },
+    "suelo_sol": {
+     "rgb": [
+      0.5019999742507935,
+      0.7569000124931335,
+      0.3961000144481659
+     ],
+     "nl": 0.62,
+     "nz": 0.789,
+     "pixeles": 299,
+     "vistas": [
+      "pueblo",
+      "tierra"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.4196000099182129,
+      0.6313999891281128,
+      0.3176000118255615
+     ],
+     "nl": 0.342,
+     "nz": 0.205,
+     "pixeles": 248,
+     "vistas": [
+      "pueblo",
+      "tierra"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.23919999599456787,
+      0.4627000093460083,
+      0.2549000084400177
+     ],
+     "nl": 0.0,
+     "nz": 0.656,
+     "pixeles": 186,
+     "vistas": [
+      "tierra"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.13930000364780426,
+    0.3416000008583069,
+    0.04500000178813934
+   ]
+  },
+  "MAT_VEG_pino_c_luz": {
+   "color_writer": [
+    0.22,
+    0.47,
+    0.09
+   ],
+   "familia": "vegetacion",
+   "clases": {
+    "suelo_sol": {
+     "rgb": [
+      0.5724999904632568,
+      0.819599986076355,
+      0.4431000053882599
+     ],
+     "nl": 0.588,
+     "nz": 0.82,
+     "pixeles": 209,
+     "vistas": [
+      "pueblo",
+      "tierra"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.34119999408721924,
+      0.5724999904632568,
+      0.29409998655319214
+     ],
+     "nl": 0.0,
+     "nz": 0.076,
+     "pixeles": 748,
+     "vistas": [
+      "piloto_s300",
+      "pueblo",
+      "tierra"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.2094999998807907,
+    0.4392000138759613,
+    0.06469999998807907
+   ]
+  },
+  "MAT_VEG_pino_joven": {
+   "color_writer": [
+    0.18,
+    0.48,
+    0.12
+   ],
+   "familia": "vegetacion",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.24310000240802765,
+      0.45100000500679016,
+      0.2549000084400177
+     ],
+     "nl": 0.0,
+     "nz": 0.118,
+     "pixeles": 526,
+     "vistas": [
+      "captura",
+      "pueblo",
+      "tierra"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.48240000009536743,
+      0.7569000124931335,
+      0.3961000144481659
+     ],
+     "nl": 0.467,
+     "nz": 0.222,
+     "pixeles": 318,
+     "vistas": [
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.17180000245571136,
+    0.44369998574256897,
+    0.08619999885559082
+   ]
+  },
+  "MAT_VEG_pino_joven_luz": {
+   "color_writer": [
+    0.27,
+    0.58,
+    0.16
+   ],
+   "familia": "vegetacion",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.30979999899864197,
+      0.5254999995231628,
+      0.2980000078678131
+     ],
+     "nl": 0.001,
+     "nz": 0.059,
+     "pixeles": 245,
+     "vistas": [
+      "captura",
+      "pueblo",
+      "tierra"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.5608000159263611,
+      0.7979999780654907,
+      0.4372999966144562
+     ],
+     "nl": 0.458,
+     "nz": 0.293,
+     "pixeles": 166,
+     "vistas": [
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.25859999656677246,
+    0.532800018787384,
+    0.1152999997138977
+   ]
+  },
+  "MAT_VEG_tronco": {
+   "color_writer": [
+    0.3,
+    0.17,
+    0.08
+   ],
+   "familia": "vegetacion",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.34119999408721924,
+      0.3255000114440918,
+      0.23919999599456787
+     ],
+     "nl": 0.0,
+     "nz": -0.026,
+     "pixeles": 301,
+     "vistas": [
+      "captura",
+      "piloto_s300",
+      "pueblo",
+      "tierra"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.49219998717308044,
+      0.5038999915122986,
+      0.31369999051094055
+     ],
+     "nl": 0.332,
+     "nz": 0.182,
+     "pixeles": 152,
+     "vistas": [
+      "casino",
+      "pueblo",
+      "tierra"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.2705000042915344,
+    0.18070000410079956,
+    0.06509999930858612
+   ]
+  },
+  "MAT_VEG_tronco_abanico": {
+   "color_writer": [
+    0.32,
+    0.21,
+    0.11
+   ],
+   "familia": "vegetacion",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.2824000120162964,
+      0.3019999861717224,
+      0.22349999845027924
+     ],
+     "nl": 0.0,
+     "nz": 0.124,
+     "pixeles": 209,
+     "vistas": [
+      "captura"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.2865000069141388,
+    0.22030000388622284,
+    0.08380000293254852
+   ]
+  },
+  "MAT_VEG_tronco_encina": {
+   "color_writer": [
+    0.22,
+    0.15,
+    0.09
+   ],
+   "familia": "vegetacion",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.2353000044822693,
+      0.2451000064611435,
+      0.20000000298023224
+     ],
+     "nl": 0.0,
+     "nz": 0.109,
+     "pixeles": 438,
+     "vistas": [
+      "captura",
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.21199999749660492,
+    0.15189999341964722,
+    0.07509999722242355
+   ]
+  },
+  "MAT_VEG_tronco_olivo": {
+   "color_writer": [
+    0.36,
+    0.28,
+    0.18
+   ],
+   "familia": "vegetacion",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.36079999804496765,
+      0.3882000148296356,
+      0.3215999901294708
+     ],
+     "nl": 0.0,
+     "nz": 0.047,
+     "pixeles": 302,
+     "vistas": [
+      "captura",
+      "tierra"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.3400000035762787,
+    0.2653000056743622,
+    0.12839999794960022
+   ]
+  },
+  "MAT_VEG_tronco_palmera": {
+   "color_writer": [
+    0.38,
+    0.24,
+    0.11
+   ],
+   "familia": "vegetacion",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.38040000200271606,
+      0.3765000104904175,
+      0.2549000084400177
+     ],
+     "nl": 0.0,
+     "nz": -0.007,
+     "pixeles": 290,
+     "vistas": [
+      "casino"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.3513999879360199,
+    0.2280000001192093,
+    0.07840000092983246
+   ]
+  },
+  "MAT_zocalo_piedra": {
+   "color_writer": [
+    0.8,
+    0.8,
+    0.8
+   ],
+   "familia": "edificio",
+   "clases": {
+    "pared_sol": {
+     "rgb": [
+      0.7411999702453613,
+      0.7175999879837036,
+      0.6274999976158142
+     ],
+     "nl": 0.514,
+     "nz": 0.0,
+     "pixeles": 2582,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    },
+    "sombra_pared": {
+     "rgb": [
+      0.40389999747276306,
+      0.43140000104904175,
+      0.4235000014305115
+     ],
+     "nl": 0.0,
+     "nz": 0.0,
+     "pixeles": 865,
+     "vistas": [
+      "casino",
+      "pueblo"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.4625000059604645,
+    0.39489999413490295,
+    0.27379998564720154
+   ]
+  },
+  "MAT_terreno_roca": {
+   "color_writer": [
+    0.34,
+    0.27,
+    0.18
+   ],
+   "familia": "terreno",
+   "clases": {
+    "sombra_pared": {
+     "rgb": [
+      0.34119999408721924,
+      0.3765000104904175,
+      0.3765000104904175
+     ],
+     "nl": 0.0,
+     "nz": 0.478,
+     "pixeles": 2151,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "meta_tunel",
+      "piloto_s300",
+      "tierra"
+     ]
+    },
+    "sombra_suelo": {
+     "rgb": [
+      0.30979999899864197,
+      0.38429999351501465,
+      0.3528999984264374
+     ],
+     "nl": 0.0,
+     "nz": 0.594,
+     "pixeles": 9544,
+     "vistas": [
+      "captura",
+      "casino",
+      "meta_puerto",
+      "meta_tunel",
+      "piloto_s300",
+      "tierra"
+     ]
+    },
+    "suelo_sol": {
+     "rgb": [
+      0.6431000232696533,
+      0.6705999970436096,
+      0.5881999731063843
+     ],
+     "nl": 0.582,
+     "nz": 0.719,
+     "pixeles": 19093,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "piloto_s300",
+      "pueblo",
+      "tierra"
+     ]
+    },
+    "pared_sol": {
+     "rgb": [
+      0.7724999785423279,
+      0.7254999876022339,
+      0.6352999806404114
+     ],
+     "nl": 0.873,
+     "nz": 0.478,
+     "pixeles": 2076,
+     "vistas": [
+      "captura",
+      "meta_puerto",
+      "piloto_s300",
+      "pueblo",
+      "tierra"
+     ]
+    }
+   },
+   "albedo_escena": [
+    0.22679999470710754,
+    0.2565999925136566,
+    0.11159999668598175
+   ]
+  }
+ }
+}

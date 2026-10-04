@@ -182,7 +182,8 @@ for ob in root.children:
     elif b == "ITAL_bancal":
         largo = float(ob["largo"])
         fijo = sum(tris(c) for c in ob.children if base(c.name) in ("ITAL_bancal_muro", "ITAL_bancal_tierra"))
-        check("%s muro+tierra (%.0f m)" % (ob.name, largo), fijo, int(40 * largo))
+        # 40/m de muro frontal + 50/m de fondo por los dos muros de vuelta (E2-09)
+        check("%s muro+tierra (%.0f m)" % (ob.name, largo), fijo, int(40 * largo + 50 * float(ob["fondo"])))
         for c in ob.children:
             if base(c.name) == "ITAL_olivo":
                 check(c.name, tris(c), 400)
@@ -235,6 +236,60 @@ quad("TEST_suelo", [(-S, -S, -0.02), (S, -S, -0.02), (S, S, -0.02), (-S, S, -0.0
 quad("TEST_terraza1", [(-S, -S, 1.59), (S, -S, 1.59), (S, -0.62, 1.59), (-S, -0.62, 1.59)], hierba)
 quad("TEST_terraza2", [(-S, -S, 3.19), (S, -S, 3.19), (S, -9.25, 3.19), (-S, -9.25, 3.19)], hierba)
 quad("TEST_camino", [(-60, 9.0, 0.0), (60, 9.0, 0.0), (60, 14.0, 0.0), (-60, 14.0, 0.0)], tierra)
+
+# --- E2-09: bancal de la CIMA en ladera, como lo pone integrar_escena.zona_caminos
+# (largo 14, fondo 3.5, pie 0.3 bajo la cara, corona 0.1 sobre el fondo). Ladera
+# medida en ITAL_bancal.001/.003/.005: terreno 0.65-0.8 m sobre el pie a y=-0.6 y +0.56/m
+# hacia el fondo. En los extremos (x = +-L/2) nada de relleno a la vista sobre el terreno.
+from mathutils.bvhtree import BVHTree
+OX, OY = 400.0, 0.0
+LB, FB, PEND = 14.0, 3.5, 0.56
+
+
+def z_ladera(lx, ly):
+    return 0.46 + PEND * (-ly) + 0.02 * lx
+
+
+AB = max(z_ladera(lx, -FB) for lx in (-7.0, 7.0)) + 0.1
+ladera = quad("TEST_ladera", [(OX + lx, OY + ly, z_ladera(lx, ly)) for (lx, ly) in
+                              ((-16.0, -12.0), (16.0, -12.0), (16.0, 10.0), (-16.0, 10.0))], hierba)
+bl = ik.build_bancal(coll, largo=LB, alto=AB, seed=4, fondo=FB)
+bl.location = (OX, OY, 0.0)
+bpy.context.view_layer.update()
+vs_b, fs_b, fm_b = [], [], []
+for c in bl.children:
+    if c.type != "MESH" or base(c.name) not in ("ITAL_bancal_muro", "ITAL_bancal_tierra"):
+        continue
+    b0 = len(vs_b)
+    vs_b.extend(c.matrix_world @ v.co for v in c.data.vertices)
+    for p in c.data.polygons:
+        fs_b.append([b0 + i for i in p.vertices])
+        fm_b.append(c.material_slots[p.material_index].material.name)
+bvh_b = BVHTree.FromPolygons(vs_b, fs_b)
+# relleno = tierra y hierba de la corona (las matas que asoman sobre la albardilla son vegetacion, no cuna)
+RELLENO = ("MAT_ITAL_tierra", "MAT_ITAL_hierba_seca")
+print("== E2-09 extremos del bancal en ladera (L %.0f, A %.2f, F %.1f) ==" % (LB, AB, FB))
+peor_ext = 0.0
+for sx in (-1.0, 1.0):
+    fila_antes, fila_ahora = [], []
+    for j in range(36):
+        ly = -FB + 0.05 + j * (FB - 0.1) / 35.0
+        zt = z_ladera(sx * LB / 2.0, ly)
+        vista = 0.0
+        z = zt + 0.02
+        while z < AB + 0.25:
+            h = bvh_b.ray_cast(Vector((OX + sx * (LB / 2.0 + 3.0), OY + ly, z)), Vector((-sx, 0.0, 0.0)), 6.0)
+            if h[0] is not None and fm_b[h[2]] in RELLENO:
+                vista += 0.02
+            z += 0.02
+        fila_ahora.append(vista)
+        fila_antes.append(max(0.0, AB - zt))
+        peor_ext = max(peor_ext, vista)
+    print("  extremo %+d: relleno a la vista antes (sin vuelta) max %.2f m (y=-0.6: %.2f, -F/2: %.2f, -F: %.2f);"
+          " ahora max %.2f m" % (sx, max(fila_antes), AB - z_ladera(sx * 7, -0.6), AB - z_ladera(sx * 7, -FB / 2),
+                                 AB - z_ladera(sx * 7, -FB), max(fila_ahora)))
+if peor_ext > 0.3:
+    fallos.append("E2-09: relleno del bancal a la vista en un extremo: %.2f m (> 0.3)" % peor_ext)
 
 # --- luz: sol calido + cielo azul uniforme -----------------------------------
 world = bpy.data.worlds.new("WORLD_ital")
@@ -294,6 +349,13 @@ TOMAS = (
     ("italiano_pergola", (23.0, 13.0, 3.2), (20.0, 4.0, 1.6), 32.0),
     ("italiano_detalles", (-7.0, 12.5, 2.2), (-11.0, 5.8, 1.1), 35.0),
     ("italiano_hito", (-6.8, 10.3, 1.1), (-8.0, 8.0, 0.5), 45.0),
+    # E2-09: el bancal de ladera visto como en la revision (L/2+7 m de lado, 6 m delante, 2.5 m sobre el suelo)
+    ("italiano_bancal_extremo", (OX + LB / 2 + 7.0, OY + 6.0, z_ladera(LB / 2 + 7.0, 6.0) + 2.5),
+     (OX + LB / 2, OY, AB * 0.5), 28.0),
+    ("italiano_bancal_extremo_izq", (OX - LB / 2 - 7.0, OY + 6.0, z_ladera(-LB / 2 - 7.0, 6.0) + 2.5),
+     (OX - LB / 2, OY, AB * 0.5), 28.0),
+    ("italiano_bancal_extremo_fondo", (OX + LB / 2 + 6.0, OY - FB - 6.0, z_ladera(LB / 2 + 6.0, -FB - 6.0) + 2.0),
+     (OX + LB / 2 - 1.0, OY - FB / 2, AB * 0.8), 28.0),
 )
 for nombre, pos, obj, lente in TOMAS:
     mirar(pos, obj, lente)

@@ -1,0 +1,22 @@
+{
+ "3_clear (usado)": {
+  "antes": [
+   25.0,
+   0.79
+  ],
+  "despues": [
+   14.9,
+   0.98
+  ]
+ },
+ "system/cfg/colorCurves.ini": {
+  "antes": [
+   25.5,
+   0.65
+  ],
+  "despues": [
+   15.0,
+   0.89
+  ]
+ }
+}

@@ -1,0 +1,24 @@
+CC0 1.0 Universal (CC0 1.0) - Dedicacion al dominio publico
+============================================================
+
+Las texturas de esta carpeta (ver CREDITS.txt y manifest.json) fueron publicadas
+por sus autores en Poly Haven y ambientCG bajo Creative Commons CC0 1.0 Universal.
+
+Resumen (no es el texto legal; el texto legal completo esta en el enlace de abajo):
+
+- Quien aplica CC0 a una obra renuncia, en la medida en que la ley lo permite, a
+  todos sus derechos de autor y derechos conexos sobre ella en todo el mundo.
+- Cualquiera puede copiar, modificar, distribuir y usar la obra, incluso con
+  fines comerciales, sin pedir permiso y sin obligacion de dar credito.
+- La obra se ofrece "tal cual", sin garantias de ningun tipo.
+- CC0 no afecta a derechos de terceros (marcas, derechos de imagen, patentes)
+  que pudieran recaer sobre la obra o sobre su uso.
+- La dedicacion es irrevocable.
+
+Texto legal completo y resumen oficial:
+  https://creativecommons.org/publicdomain/zero/1.0/
+  https://creativecommons.org/publicdomain/zero/1.0/legalcode
+
+Politica de licencia de cada fuente:
+  Poly Haven: https://polyhaven.com/license
+  ambientCG:  https://docs.ambientcg.com/license/

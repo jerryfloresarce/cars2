@@ -1,0 +1,4234 @@
+{
+ "meta_tunel": {
+  "MAT_asfalto": {
+   "pixeles": 182079,
+   "blender": [
+    100,
+    104,
+    114
+   ],
+   "ac_antes": [
+    167,
+    160,
+    151
+   ],
+   "ac_despues": [
+    123,
+    121,
+    112
+   ],
+   "lcs_antes": [
+    133,
+    136,
+    155
+   ],
+   "lcs_despues": [
+    92,
+    100,
+    116
+   ],
+   "lcsy_antes": [
+    112,
+    114,
+    128
+   ],
+   "lcsy_despues": [
+    85,
+    89,
+    100
+   ],
+   "captura_antes": [
+    156,
+    155,
+    158
+   ],
+   "captura_despues": [
+    112,
+    115,
+    117
+   ],
+   "captura1_antes": [
+    230,
+    229,
+    231
+   ],
+   "captura1_despues": [
+    196,
+    199,
+    201
+   ],
+   "nubes_antes": [
+    109,
+    112,
+    117
+   ],
+   "nubes_despues": [
+    71,
+    76,
+    79
+   ],
+   "nubes2_antes": [
+    150,
+    152,
+    157
+   ],
+   "nubes2_despues": [
+    105,
+    110,
+    113
+   ]
+  },
+  "MAT_terreno": {
+   "pixeles": 6594,
+   "blender": [
+    118,
+    203,
+    96
+   ],
+   "ac_antes": [
+    216,
+    226,
+    182
+   ],
+   "ac_despues": [
+    131,
+    200,
+    105
+   ],
+   "lcs_antes": [
+    203,
+    221,
+    195
+   ],
+   "lcs_despues": [
+    105,
+    204,
+    108
+   ],
+   "lcsy_antes": [
+    173,
+    194,
+    164
+   ],
+   "lcsy_despues": [
+    96,
+    172,
+    98
+   ],
+   "captura_antes": [
+    209,
+    223,
+    189
+   ],
+   "captura_despues": [
+    122,
+    195,
+    112
+   ],
+   "captura1_antes": [
+    250,
+    253,
+    245
+   ],
+   "captura1_despues": [
+    206,
+    247,
+    196
+   ],
+   "nubes_antes": [
+    167,
+    190,
+    151
+   ],
+   "nubes_despues": [
+    79,
+    152,
+    77
+   ],
+   "nubes2_antes": [
+    210,
+    223,
+    201
+   ],
+   "nubes2_despues": [
+    133,
+    189,
+    130
+   ]
+  },
+  "MAT_MCOCHE_caliza": {
+   "pixeles": 2395,
+   "blender": [
+    201,
+    196,
+    183
+   ],
+   "ac_antes": [
+    206,
+    194,
+    169
+   ],
+   "ac_despues": [
+    213,
+    204,
+    190
+   ],
+   "lcs_antes": [
+    209,
+    205,
+    197
+   ],
+   "lcs_despues": [
+    227,
+    225,
+    227
+   ],
+   "lcsy_antes": [
+    179,
+    174,
+    165
+   ],
+   "lcsy_despues": [
+    203,
+    200,
+    203
+   ],
+   "captura_antes": [
+    217,
+    218,
+    218
+   ],
+   "captura_despues": [
+    219,
+    220,
+    222
+   ],
+   "captura1_antes": [
+    252,
+    252,
+    252
+   ],
+   "captura1_despues": [
+    252,
+    252,
+    253
+   ],
+   "nubes_antes": [
+    180,
+    176,
+    163
+   ],
+   "nubes_despues": [
+    188,
+    187,
+    185
+   ],
+   "nubes2_antes": [
+    216,
+    214,
+    206
+   ],
+   "nubes2_despues": [
+    222,
+    221,
+    220
+   ]
+  },
+  "MAT_CARRERA_blanco": {
+   "pixeles": 4561,
+   "blender": [
+    243,
+    255,
+    255
+   ],
+   "ac_antes": [
+    208,
+    204,
+    195
+   ],
+   "ac_despues": [
+    208,
+    205,
+    195
+   ],
+   "lcs_antes": [
+    221,
+    224,
+    229
+   ],
+   "lcs_despues": [
+    228,
+    231,
+    234
+   ],
+   "lcsy_antes": [
+    194,
+    198,
+    206
+   ],
+   "lcsy_despues": [
+    205,
+    209,
+    215
+   ],
+   "captura_antes": [
+    228,
+    227,
+    226
+   ],
+   "captura_despues": [
+    225,
+    226,
+    224
+   ],
+   "captura1_antes": [
+    253,
+    253,
+    253
+   ],
+   "captura1_despues": [
+    253,
+    253,
+    253
+   ],
+   "nubes_antes": [
+    196,
+    201,
+    204
+   ],
+   "nubes_despues": [
+    193,
+    198,
+    201
+   ],
+   "nubes2_antes": [
+    229,
+    231,
+    233
+   ],
+   "nubes2_despues": [
+    226,
+    229,
+    231
+   ]
+  }
+ },
+ "captura": {
+  "MAT_asfalto": {
+   "pixeles": 274475,
+   "blender": [
+    98,
+    102,
+    112
+   ],
+   "ac_antes": [
+    169,
+    162,
+    153
+   ],
+   "ac_despues": [
+    125,
+    122,
+    113
+   ],
+   "lcs_antes": [
+    133,
+    136,
+    155
+   ],
+   "lcs_despues": [
+    108,
+    116,
+    133
+   ],
+   "lcsy_antes": [
+    112,
+    114,
+    127
+   ],
+   "lcsy_despues": [
+    95,
+    100,
+    111
+   ],
+   "captura_antes": [
+    157,
+    155,
+    159
+   ],
+   "captura_despues": [
+    113,
+    116,
+    118
+   ],
+   "captura1_antes": [
+    230,
+    230,
+    232
+   ],
+   "captura1_despues": [
+    197,
+    200,
+    202
+   ],
+   "nubes_antes": [
+    109,
+    112,
+    117
+   ],
+   "nubes_despues": [
+    71,
+    76,
+    79
+   ],
+   "nubes2_antes": [
+    150,
+    153,
+    157
+   ],
+   "nubes2_despues": [
+    105,
+    110,
+    113
+   ]
+  },
+  "MAT_terreno": {
+   "pixeles": 35308,
+   "blender": [
+    98,
+    168,
+    83
+   ],
+   "ac_antes": [
+    194,
+    205,
+    159
+   ],
+   "ac_despues": [
+    99,
+    166,
+    79
+   ],
+   "lcs_antes": [
+    187,
+    209,
+    177
+   ],
+   "lcs_despues": [
+    101,
+    200,
+    103
+   ],
+   "lcsy_antes": [
+    156,
+    178,
+    148
+   ],
+   "lcsy_despues": [
+    93,
+    168,
+    94
+   ],
+   "captura_antes": [
+    204,
+    216,
+    189
+   ],
+   "captura_despues": [
+    133,
+    193,
+    131
+   ],
+   "captura1_antes": [
+    249,
+    252,
+    245
+   ],
+   "captura1_despues": [
+    215,
+    246,
+    213
+   ],
+   "nubes_antes": [
+    155,
+    179,
+    142
+   ],
+   "nubes_despues": [
+    70,
+    137,
+    69
+   ],
+   "nubes2_antes": [
+    200,
+    214,
+    192
+   ],
+   "nubes2_despues": [
+    119,
+    175,
+    118
+   ]
+  },
+  "MAT_terreno_roca": {
+   "pixeles": 2321,
+   "blender": [
+    155,
+    154,
+    144
+   ],
+   "ac_antes": [
+    160,
+    175,
+    127
+   ],
+   "ac_despues": [
+    142,
+    147,
+    125
+   ],
+   "lcs_antes": [
+    168,
+    196,
+    161
+   ],
+   "lcs_despues": [
+    177,
+    193,
+    189
+   ],
+   "lcsy_antes": [
+    139,
+    164,
+    134
+   ],
+   "lcsy_despues": [
+    147,
+    160,
+    157
+   ],
+   "captura_antes": [
+    203,
+    213,
+    202
+   ],
+   "captura_despues": [
+    195,
+    202,
+    201
+   ],
+   "captura1_antes": [
+    249,
+    251,
+    249
+   ],
+   "captura1_despues": [
+    247,
+    249,
+    248
+   ],
+   "nubes_antes": [
+    141,
+    166,
+    131
+   ],
+   "nubes_despues": [
+    120,
+    134,
+    125
+   ],
+   "nubes2_antes": [
+    187,
+    204,
+    181
+   ],
+   "nubes2_despues": [
+    164,
+    175,
+    169
+   ]
+  },
+  "MAT_MCOCHE_caliza": {
+   "pixeles": 1832,
+   "blender": [
+    204,
+    202,
+    189
+   ],
+   "ac_antes": [
+    208,
+    196,
+    170
+   ],
+   "ac_despues": [
+    213,
+    203,
+    189
+   ],
+   "lcs_antes": [
+    209,
+    205,
+    197
+   ],
+   "lcs_despues": [
+    234,
+    232,
+    234
+   ],
+   "lcsy_antes": [
+    178,
+    174,
+    165
+   ],
+   "lcsy_despues": [
+    214,
+    211,
+    214
+   ],
+   "captura_antes": [
+    217,
+    217,
+    215
+   ],
+   "captura_despues": [
+    220,
+    220,
+    220
+   ],
+   "captura1_antes": [
+    252,
+    252,
+    251
+   ],
+   "captura1_despues": [
+    252,
+    252,
+    252
+   ],
+   "nubes_antes": [
+    181,
+    177,
+    163
+   ],
+   "nubes_despues": [
+    188,
+    187,
+    184
+   ],
+   "nubes2_antes": [
+    216,
+    214,
+    206
+   ],
+   "nubes2_despues": [
+    222,
+    221,
+    220
+   ]
+  },
+  "MAT_CARRERA_blanco": {
+   "pixeles": 2236,
+   "blender": [
+    241,
+    255,
+    255
+   ],
+   "ac_antes": [
+    219,
+    215,
+    206
+   ],
+   "ac_despues": [
+    220,
+    217,
+    207
+   ],
+   "lcs_antes": [
+    225,
+    228,
+    233
+   ],
+   "lcs_despues": [
+    238,
+    239,
+    242
+   ],
+   "lcsy_antes": [
+    201,
+    204,
+    212
+   ],
+   "lcsy_despues": [
+    221,
+    224,
+    230
+   ],
+   "captura_antes": [
+    231,
+    230,
+    229
+   ],
+   "captura_despues": [
+    229,
+    229,
+    228
+   ],
+   "captura1_antes": [
+    254,
+    254,
+    254
+   ],
+   "captura1_despues": [
+    254,
+    254,
+    253
+   ],
+   "nubes_antes": [
+    201,
+    205,
+    208
+   ],
+   "nubes_despues": [
+    198,
+    203,
+    205
+   ],
+   "nubes2_antes": [
+    232,
+    234,
+    235
+   ],
+   "nubes2_despues": [
+    230,
+    232,
+    233
+   ]
+  },
+  "MAT_CARRERA_verde_wgp": {
+   "pixeles": 407,
+   "blender": [
+    132,
+    251,
+    189
+   ],
+   "ac_antes": [
+    101,
+    228,
+    166
+   ],
+   "ac_despues": [
+    131,
+    239,
+    192
+   ],
+   "lcs_antes": [
+    58,
+    227,
+    182
+   ],
+   "lcs_despues": [
+    123,
+    245,
+    226
+   ],
+   "lcsy_antes": [
+    68,
+    202,
+    152
+   ],
+   "lcsy_despues": [
+    114,
+    235,
+    203
+   ],
+   "captura_antes": [
+    107,
+    228,
+    183
+   ],
+   "captura_despues": [
+    129,
+    237,
+    200
+   ],
+   "captura1_antes": [
+    191,
+    253,
+    243
+   ],
+   "captura1_despues": [
+    212,
+    254,
+    248
+   ],
+   "nubes_antes": [
+    65,
+    198,
+    140
+   ],
+   "nubes_despues": [
+    85,
+    213,
+    164
+   ],
+   "nubes2_antes": [
+    138,
+    226,
+    192
+   ],
+   "nubes2_despues": [
+    163,
+    236,
+    211
+   ]
+  },
+  "MAT_VEG_encina_b": {
+   "pixeles": 174,
+   "blender": [
+    101,
+    155,
+    112
+   ],
+   "ac_antes": [
+    117,
+    164,
+    110
+   ],
+   "ac_despues": [
+    104,
+    161,
+    103
+   ],
+   "lcs_antes": [
+    86,
+    169,
+    116
+   ],
+   "lcs_despues": [
+    116,
+    201,
+    155
+   ],
+   "lcsy_antes": [
+    82,
+    138,
+    101
+   ],
+   "lcsy_despues": [
+    103,
+    169,
+    130
+   ],
+   "captura_antes": [
+    149,
+    192,
+    158
+   ],
+   "captura_despues": [
+    142,
+    190,
+    155
+   ],
+   "captura1_antes": [
+    226,
+    246,
+    231
+   ],
+   "captura1_despues": [
+    221,
+    245,
+    229
+   ],
+   "nubes_antes": [
+    87,
+    143,
+    100
+   ],
+   "nubes_despues": [
+    80,
+    141,
+    99
+   ],
+   "nubes2_antes": [
+    137,
+    181,
+    149
+   ],
+   "nubes2_despues": [
+    131,
+    179,
+    146
+   ]
+  }
+ },
+ "pueblo": {
+  "MAT_asfalto": {
+   "pixeles": 20743,
+   "blender": [
+    92,
+    96,
+    105
+   ],
+   "ac_antes": [
+    162,
+    155,
+    147
+   ],
+   "ac_despues": [
+    118,
+    116,
+    108
+   ],
+   "lcs_antes": [
+    89,
+    91,
+    110
+   ],
+   "lcs_despues": [
+    58,
+    63,
+    76
+   ],
+   "lcsy_antes": [
+    82,
+    84,
+    95
+   ],
+   "lcsy_despues": [
+    61,
+    65,
+    73
+   ],
+   "captura_antes": [
+    166,
+    167,
+    171
+   ],
+   "captura_despues": [
+    133,
+    137,
+    141
+   ],
+   "captura1_antes": [
+    235,
+    236,
+    238
+   ],
+   "captura1_despues": [
+    214,
+    218,
+    220
+   ],
+   "nubes_antes": [
+    106,
+    109,
+    115
+   ],
+   "nubes_despues": [
+    69,
+    74,
+    78
+   ],
+   "nubes2_antes": [
+    147,
+    149,
+    154
+   ],
+   "nubes2_despues": [
+    102,
+    107,
+    111
+   ]
+  },
+  "MAT_terreno": {
+   "pixeles": 113365,
+   "blender": [
+    101,
+    174,
+    80
+   ],
+   "ac_antes": [
+    214,
+    224,
+    182
+   ],
+   "ac_despues": [
+    128,
+    197,
+    106
+   ],
+   "lcs_antes": [
+    164,
+    191,
+    154
+   ],
+   "lcs_despues": [
+    67,
+    167,
+    69
+   ],
+   "lcsy_antes": [
+    136,
+    159,
+    128
+   ],
+   "lcsy_despues": [
+    70,
+    137,
+    71
+   ],
+   "captura_antes": [
+    212,
+    221,
+    207
+   ],
+   "captura_despues": [
+    180,
+    207,
+    189
+   ],
+   "captura1_antes": [
+    251,
+    253,
+    250
+   ],
+   "captura1_despues": [
+    242,
+    250,
+    245
+   ],
+   "nubes_antes": [
+    164,
+    188,
+    152
+   ],
+   "nubes_despues": [
+    79,
+    151,
+    78
+   ],
+   "nubes2_antes": [
+    208,
+    221,
+    201
+   ],
+   "nubes2_despues": [
+    132,
+    188,
+    132
+   ]
+  },
+  "MAT_terreno_roca": {
+   "pixeles": 15137,
+   "blender": [
+    199,
+    190,
+    164
+   ],
+   "ac_antes": [
+    232,
+    238,
+    204
+   ],
+   "ac_despues": [
+    215,
+    218,
+    195
+   ],
+   "lcs_antes": [
+    177,
+    200,
+    164
+   ],
+   "lcs_despues": [
+    172,
+    185,
+    179
+   ],
+   "lcsy_antes": [
+    147,
+    168,
+    137
+   ],
+   "lcsy_despues": [
+    142,
+    153,
+    148
+   ],
+   "captura_antes": [
+    217,
+    228,
+    208
+   ],
+   "captura_despues": [
+    205,
+    211,
+    204
+   ],
+   "captura1_antes": [
+    252,
+    253,
+    250
+   ],
+   "captura1_despues": [
+    249,
+    251,
+    249
+   ],
+   "nubes_antes": [
+    178,
+    199,
+    163
+   ],
+   "nubes_despues": [
+    154,
+    167,
+    154
+   ],
+   "nubes2_antes": [
+    218,
+    229,
+    210
+   ],
+   "nubes2_despues": [
+    197,
+    205,
+    197
+   ]
+  },
+  "MAT_CASAS_fachada_amarillo": {
+   "pixeles": 736,
+   "blender": [
+    215,
+    180,
+    67
+   ],
+   "ac_antes": [
+    208,
+    182,
+    56
+   ],
+   "ac_despues": [
+    210,
+    196,
+    76
+   ],
+   "lcs_antes": [
+    193,
+    168,
+    24
+   ],
+   "lcs_despues": [
+    206,
+    198,
+    53
+   ],
+   "lcsy_antes": [
+    160,
+    139,
+    41
+   ],
+   "lcsy_despues": [
+    175,
+    166,
+    64
+   ],
+   "captura_antes": [
+    224,
+    213,
+    143
+   ],
+   "captura_despues": [
+    224,
+    219,
+    155
+   ],
+   "captura1_antes": [
+    253,
+    251,
+    222
+   ],
+   "captura1_despues": [
+    253,
+    252,
+    229
+   ],
+   "nubes_antes": [
+    194,
+    176,
+    58
+   ],
+   "nubes_despues": [
+    192,
+    186,
+    76
+   ],
+   "nubes2_antes": [
+    223,
+    213,
+    132
+   ],
+   "nubes2_despues": [
+    224,
+    220,
+    151
+   ]
+  },
+  "MAT_VEG_encina_b": {
+   "pixeles": 500,
+   "blender": [
+    106,
+    165,
+    108
+   ],
+   "ac_antes": [
+    134,
+    184,
+    126
+   ],
+   "ac_despues": [
+    130,
+    188,
+    128
+   ],
+   "lcs_antes": [
+    67,
+    143,
+    89
+   ],
+   "lcs_despues": [
+    80,
+    167,
+    112
+   ],
+   "lcsy_antes": [
+    69,
+    118,
+    83
+   ],
+   "lcsy_despues": [
+    79,
+    137,
+    99
+   ],
+   "captura_antes": [
+    170,
+    204,
+    180
+   ],
+   "captura_despues": [
+    167,
+    205,
+    180
+   ],
+   "captura1_antes": [
+    237,
+    249,
+    241
+   ],
+   "captura1_despues": [
+    236,
+    249,
+    241
+   ],
+   "nubes_antes": [
+    92,
+    151,
+    106
+   ],
+   "nubes_despues": [
+    89,
+    152,
+    107
+   ],
+   "nubes2_antes": [
+    145,
+    189,
+    156
+   ],
+   "nubes2_despues": [
+    142,
+    190,
+    157
+   ]
+  },
+  "MAT_CASAS_teja": {
+   "pixeles": 14747,
+   "blender": [
+    230,
+    94,
+    85
+   ],
+   "ac_antes": [
+    233,
+    128,
+    53
+   ],
+   "ac_despues": [
+    238,
+    108,
+    91
+   ],
+   "lcs_antes": [
+    190,
+    57,
+    12
+   ],
+   "lcs_despues": [
+    210,
+    48,
+    50
+   ],
+   "lcsy_antes": [
+    155,
+    61,
+    28
+   ],
+   "lcsy_despues": [
+    177,
+    55,
+    57
+   ],
+   "captura_antes": [
+    223,
+    130,
+    69
+   ],
+   "captura_despues": [
+    227,
+    110,
+    104
+   ],
+   "captura1_antes": [
+    253,
+    212,
+    143
+   ],
+   "captura1_despues": [
+    253,
+    194,
+    188
+   ],
+   "nubes_antes": [
+    183,
+    81,
+    35
+   ],
+   "nubes_despues": [
+    188,
+    63,
+    60
+   ],
+   "nubes2_antes": [
+    205,
+    124,
+    79
+   ],
+   "nubes2_despues": [
+    208,
+    105,
+    102
+   ]
+  }
+ },
+ "tierra": {
+  "MAT_terreno": {
+   "pixeles": 306272,
+   "blender": [
+    96,
+    166,
+    79
+   ],
+   "ac_antes": [
+    212,
+    221,
+    179
+   ],
+   "ac_despues": [
+    116,
+    186,
+    94
+   ],
+   "lcs_antes": [
+    131,
+    161,
+    120
+   ],
+   "lcs_despues": [
+    57,
+    153,
+    59
+   ],
+   "lcsy_antes": [
+    111,
+    133,
+    104
+   ],
+   "lcsy_despues": [
+    63,
+    125,
+    64
+   ],
+   "captura_antes": [
+    210,
+    221,
+    198
+   ],
+   "captura_despues": [
+    142,
+    198,
+    138
+   ],
+   "captura1_antes": [
+    250,
+    252,
+    248
+   ],
+   "captura1_despues": [
+    221,
+    247,
+    218
+   ],
+   "nubes_antes": [
+    164,
+    187,
+    150
+   ],
+   "nubes_despues": [
+    75,
+    145,
+    73
+   ],
+   "nubes2_antes": [
+    207,
+    220,
+    199
+   ],
+   "nubes2_despues": [
+    126,
+    182,
+    125
+   ]
+  },
+  "MAT_terreno_roca": {
+   "pixeles": 11363,
+   "blender": [
+    147,
+    168,
+    130
+   ],
+   "ac_antes": [
+    214,
+    222,
+    184
+   ],
+   "ac_despues": [
+    182,
+    185,
+    161
+   ],
+   "lcs_antes": [
+    128,
+    158,
+    117
+   ],
+   "lcs_despues": [
+    141,
+    157,
+    150
+   ],
+   "lcsy_antes": [
+    109,
+    130,
+    102
+   ],
+   "lcsy_despues": [
+    118,
+    129,
+    124
+   ],
+   "captura_antes": [
+    212,
+    221,
+    210
+   ],
+   "captura_despues": [
+    203,
+    210,
+    208
+   ],
+   "captura1_antes": [
+    251,
+    253,
+    251
+   ],
+   "captura1_despues": [
+    249,
+    250,
+    250
+   ],
+   "nubes_antes": [
+    165,
+    188,
+    153
+   ],
+   "nubes_despues": [
+    135,
+    149,
+    138
+   ],
+   "nubes2_antes": [
+    208,
+    221,
+    201
+   ],
+   "nubes2_despues": [
+    180,
+    190,
+    182
+   ]
+  }
+ },
+ "casino": {
+  "MAT_asfalto": {
+   "pixeles": 24667,
+   "blender": [
+    90,
+    94,
+    104
+   ],
+   "ac_antes": [
+    161,
+    154,
+    146
+   ],
+   "ac_despues": [
+    118,
+    116,
+    107
+   ],
+   "lcs_antes": [
+    79,
+    81,
+    98
+   ],
+   "lcs_despues": [
+    48,
+    53,
+    64
+   ],
+   "lcsy_antes": [
+    75,
+    77,
+    87
+   ],
+   "lcsy_despues": [
+    54,
+    57,
+    65
+   ],
+   "captura_antes": [
+    163,
+    163,
+    167
+   ],
+   "captura_despues": [
+    127,
+    132,
+    135
+   ],
+   "captura1_antes": [
+    234,
+    234,
+    236
+   ],
+   "captura1_despues": [
+    210,
+    213,
+    216
+   ],
+   "nubes_antes": [
+    106,
+    109,
+    115
+   ],
+   "nubes_despues": [
+    69,
+    74,
+    78
+   ],
+   "nubes2_antes": [
+    147,
+    149,
+    154
+   ],
+   "nubes2_despues": [
+    102,
+    107,
+    110
+   ]
+  },
+  "MAT_terreno": {
+   "pixeles": 75344,
+   "blender": [
+    110,
+    180,
+    84
+   ],
+   "ac_antes": [
+    224,
+    232,
+    193
+   ],
+   "ac_despues": [
+    142,
+    210,
+    116
+   ],
+   "lcs_antes": [
+    161,
+    188,
+    149
+   ],
+   "lcs_despues": [
+    62,
+    160,
+    63
+   ],
+   "lcsy_antes": [
+    134,
+    156,
+    125
+   ],
+   "lcsy_despues": [
+    66,
+    131,
+    67
+   ],
+   "captura_antes": [
+    213,
+    226,
+    201
+   ],
+   "captura_despues": [
+    148,
+    204,
+    144
+   ],
+   "captura1_antes": [
+    251,
+    253,
+    248
+   ],
+   "captura1_despues": [
+    225,
+    249,
+    223
+   ],
+   "nubes_antes": [
+    172,
+    195,
+    157
+   ],
+   "nubes_despues": [
+    84,
+    158,
+    81
+   ],
+   "nubes2_antes": [
+    214,
+    226,
+    205
+   ],
+   "nubes2_despues": [
+    138,
+    194,
+    136
+   ]
+  },
+  "MAT_CASAS_fachada_amarillo": {
+   "pixeles": 768,
+   "blender": [
+    252,
+    216,
+    77
+   ],
+   "ac_antes": [
+    228,
+    206,
+    70
+   ],
+   "ac_despues": [
+    230,
+    219,
+    94
+   ],
+   "lcs_antes": [
+    199,
+    175,
+    26
+   ],
+   "lcs_despues": [
+    210,
+    200,
+    55
+   ],
+   "lcsy_antes": [
+    166,
+    144,
+    43
+   ],
+   "lcsy_despues": [
+    179,
+    169,
+    65
+   ],
+   "captura_antes": [
+    231,
+    219,
+    131
+   ],
+   "captura_despues": [
+    231,
+    225,
+    147
+   ],
+   "captura1_antes": [
+    254,
+    252,
+    213
+   ],
+   "captura1_despues": [
+    254,
+    253,
+    224
+   ],
+   "nubes_antes": [
+    203,
+    186,
+    63
+   ],
+   "nubes_despues": [
+    203,
+    196,
+    83
+   ],
+   "nubes2_antes": [
+    230,
+    220,
+    141
+   ],
+   "nubes2_despues": [
+    231,
+    227,
+    161
+   ]
+  },
+  "MAT_CASINO_fachada": {
+   "pixeles": 1518,
+   "blender": [
+    231,
+    197,
+    143
+   ],
+   "ac_antes": [
+    226,
+    206,
+    157
+   ],
+   "ac_despues": [
+    213,
+    192,
+    145
+   ],
+   "lcs_antes": [
+    194,
+    171,
+    125
+   ],
+   "lcs_despues": [
+    183,
+    162,
+    120
+   ],
+   "lcsy_antes": [
+    161,
+    141,
+    108
+   ],
+   "lcsy_despues": [
+    151,
+    133,
+    104
+   ],
+   "captura_antes": [
+    224,
+    219,
+    207
+   ],
+   "captura_despues": [
+    216,
+    212,
+    202
+   ],
+   "captura1_antes": [
+    253,
+    252,
+    250
+   ],
+   "captura1_despues": [
+    252,
+    251,
+    249
+   ],
+   "nubes_antes": [
+    198,
+    182,
+    144
+   ],
+   "nubes_despues": [
+    176,
+    162,
+    128
+   ],
+   "nubes2_antes": [
+    227,
+    219,
+    197
+   ],
+   "nubes2_despues": [
+    211,
+    202,
+    180
+   ]
+  },
+  "MAT_CASAS_teja": {
+   "pixeles": 18198,
+   "blender": [
+    229,
+    87,
+    77
+   ],
+   "ac_antes": [
+    232,
+    128,
+    54
+   ],
+   "ac_despues": [
+    237,
+    108,
+    92
+   ],
+   "lcs_antes": [
+    179,
+    50,
+    10
+   ],
+   "lcs_despues": [
+    199,
+    40,
+    41
+   ],
+   "lcsy_antes": [
+    145,
+    56,
+    26
+   ],
+   "lcsy_despues": [
+    164,
+    49,
+    50
+   ],
+   "captura_antes": [
+    223,
+    137,
+    82
+   ],
+   "captura_despues": [
+    226,
+    119,
+    115
+   ],
+   "captura1_antes": [
+    253,
+    218,
+    162
+   ],
+   "captura1_despues": [
+    253,
+    202,
+    199
+   ],
+   "nubes_antes": [
+    183,
+    82,
+    36
+   ],
+   "nubes_despues": [
+    188,
+    64,
+    61
+   ],
+   "nubes2_antes": [
+    206,
+    125,
+    80
+   ],
+   "nubes2_despues": [
+    209,
+    106,
+    103
+   ]
+  }
+ },
+ "piloto_s300": {
+  "MAT_asfalto": {
+   "pixeles": 207255,
+   "blender": [
+    101,
+    106,
+    115
+   ],
+   "ac_antes": [
+    164,
+    157,
+    149
+   ],
+   "ac_despues": [
+    121,
+    118,
+    109
+   ],
+   "lcs_antes": [
+    128,
+    131,
+    150
+   ],
+   "lcs_despues": [
+    100,
+    107,
+    124
+   ],
+   "lcsy_antes": [
+    108,
+    110,
+    124
+   ],
+   "lcsy_despues": [
+    89,
+    94,
+    105
+   ],
+   "captura_antes": [
+    153,
+    152,
+    155
+   ],
+   "captura_despues": [
+    109,
+    112,
+    114
+   ],
+   "captura1_antes": [
+    228,
+    227,
+    229
+   ],
+   "captura1_despues": [
+    193,
+    196,
+    198
+   ],
+   "nubes_antes": [
+    107,
+    110,
+    116
+   ],
+   "nubes_despues": [
+    70,
+    75,
+    78
+   ],
+   "nubes2_antes": [
+    148,
+    151,
+    155
+   ],
+   "nubes2_despues": [
+    103,
+    108,
+    111
+   ]
+  },
+  "MAT_terreno": {
+   "pixeles": 36672,
+   "blender": [
+    105,
+    184,
+    87
+   ],
+   "ac_antes": [
+    211,
+    221,
+    177
+   ],
+   "ac_despues": [
+    116,
+    186,
+    93
+   ],
+   "lcs_antes": [
+    194,
+    215,
+    186
+   ],
+   "lcs_despues": [
+    105,
+    205,
+    108
+   ],
+   "lcsy_antes": [
+    163,
+    186,
+    155
+   ],
+   "lcsy_despues": [
+    96,
+    173,
+    98
+   ],
+   "captura_antes": [
+    206,
+    220,
+    187
+   ],
+   "captura_despues": [
+    119,
+    189,
+    110
+   ],
+   "captura1_antes": [
+    249,
+    252,
+    244
+   ],
+   "captura1_despues": [
+    203,
+    245,
+    195
+   ],
+   "nubes_antes": [
+    163,
+    187,
+    149
+   ],
+   "nubes_despues": [
+    75,
+    145,
+    72
+   ],
+   "nubes2_antes": [
+    207,
+    220,
+    198
+   ],
+   "nubes2_despues": [
+    126,
+    183,
+    124
+   ]
+  },
+  "MAT_terreno_roca": {
+   "pixeles": 54529,
+   "blender": [
+    158,
+    157,
+    147
+   ],
+   "ac_antes": [
+    166,
+    179,
+    129
+   ],
+   "ac_despues": [
+    146,
+    150,
+    126
+   ],
+   "lcs_antes": [
+    167,
+    195,
+    160
+   ],
+   "lcs_despues": [
+    173,
+    188,
+    184
+   ],
+   "lcsy_antes": [
+    139,
+    163,
+    133
+   ],
+   "lcsy_despues": [
+    143,
+    156,
+    152
+   ],
+   "captura_antes": [
+    191,
+    206,
+    175
+   ],
+   "captura_despues": [
+    174,
+    182,
+    171
+   ],
+   "captura1_antes": [
+    245,
+    250,
+    239
+   ],
+   "captura1_despues": [
+    239,
+    242,
+    238
+   ],
+   "nubes_antes": [
+    143,
+    168,
+    131
+   ],
+   "nubes_despues": [
+    121,
+    135,
+    125
+   ],
+   "nubes2_antes": [
+    190,
+    206,
+    182
+   ],
+   "nubes2_despues": [
+    166,
+    176,
+    169
+   ]
+  },
+  "MAT_MCOCHE_caliza": {
+   "pixeles": 354,
+   "blender": [
+    200,
+    205,
+    204
+   ],
+   "ac_antes": [
+    187,
+    173,
+    145
+   ],
+   "ac_despues": [
+    198,
+    187,
+    171
+   ],
+   "lcs_antes": [
+    196,
+    192,
+    183
+   ],
+   "lcs_despues": [
+    224,
+    222,
+    225
+   ],
+   "lcsy_antes": [
+    163,
+    160,
+    152
+   ],
+   "lcsy_despues": [
+    198,
+    196,
+    200
+   ],
+   "captura_antes": [
+    213,
+    208,
+    198
+   ],
+   "captura_despues": [
+    218,
+    215,
+    212
+   ],
+   "captura1_antes": [
+    251,
+    250,
+    248
+   ],
+   "captura1_despues": [
+    252,
+    251,
+    251
+   ],
+   "nubes_antes": [
+    172,
+    168,
+    154
+   ],
+   "nubes_despues": [
+    181,
+    180,
+    178
+   ],
+   "nubes2_antes": [
+    210,
+    207,
+    198
+   ],
+   "nubes2_despues": [
+    217,
+    216,
+    215
+   ]
+  },
+  "MAT_CARRERA_blanco": {
+   "pixeles": 724,
+   "blender": [
+    226,
+    243,
+    254
+   ],
+   "ac_antes": [
+    221,
+    218,
+    209
+   ],
+   "ac_despues": [
+    222,
+    219,
+    210
+   ],
+   "lcs_antes": [
+    225,
+    227,
+    232
+   ],
+   "lcs_despues": [
+    236,
+    238,
+    241
+   ],
+   "lcsy_antes": [
+    200,
+    203,
+    211
+   ],
+   "lcsy_despues": [
+    218,
+    222,
+    227
+   ],
+   "captura_antes": [
+    232,
+    231,
+    230
+   ],
+   "captura_despues": [
+    230,
+    230,
+    229
+   ],
+   "captura1_antes": [
+    254,
+    254,
+    254
+   ],
+   "captura1_despues": [
+    254,
+    254,
+    254
+   ],
+   "nubes_antes": [
+    202,
+    206,
+    209
+   ],
+   "nubes_despues": [
+    199,
+    204,
+    206
+   ],
+   "nubes2_antes": [
+    232,
+    234,
+    235
+   ],
+   "nubes2_despues": [
+    231,
+    233,
+    234
+   ]
+  }
+ },
+ "meta_puerto": {
+  "MAT_asfalto": {
+   "pixeles": 55466,
+   "blender": [
+    100,
+    104,
+    113
+   ],
+   "ac_antes": [
+    168,
+    161,
+    152
+   ],
+   "ac_despues": [
+    124,
+    122,
+    113
+   ],
+   "lcs_antes": [
+    112,
+    114,
+    134
+   ],
+   "lcs_despues": [
+    70,
+    76,
+    90
+   ],
+   "lcsy_antes": [
+    97,
+    99,
+    112
+   ],
+   "lcsy_despues": [
+    69,
+    73,
+    82
+   ],
+   "captura_antes": [
+    164,
+    164,
+    168
+   ],
+   "captura_despues": [
+    127,
+    131,
+    133
+   ],
+   "captura1_antes": [
+    234,
+    234,
+    236
+   ],
+   "captura1_despues": [
+    209,
+    213,
+    215
+   ],
+   "nubes_antes": [
+    109,
+    111,
+    117
+   ],
+   "nubes_despues": [
+    71,
+    76,
+    80
+   ],
+   "nubes2_antes": [
+    150,
+    152,
+    157
+   ],
+   "nubes2_despues": [
+    105,
+    110,
+    113
+   ]
+  },
+  "MAT_terreno": {
+   "pixeles": 45967,
+   "blender": [
+    124,
+    203,
+    100
+   ],
+   "ac_antes": [
+    216,
+    226,
+    184
+   ],
+   "ac_despues": [
+    129,
+    200,
+    106
+   ],
+   "lcs_antes": [
+    186,
+    209,
+    178
+   ],
+   "lcs_despues": [
+    80,
+    183,
+    84
+   ],
+   "lcsy_antes": [
+    155,
+    178,
+    148
+   ],
+   "lcsy_despues": [
+    79,
+    151,
+    81
+   ],
+   "captura_antes": [
+    209,
+    223,
+    196
+   ],
+   "captura_despues": [
+    142,
+    200,
+    138
+   ],
+   "captura1_antes": [
+    250,
+    253,
+    247
+   ],
+   "captura1_despues": [
+    221,
+    248,
+    218
+   ],
+   "nubes_antes": [
+    165,
+    190,
+    152
+   ],
+   "nubes_despues": [
+    78,
+    152,
+    77
+   ],
+   "nubes2_antes": [
+    209,
+    222,
+    201
+   ],
+   "nubes2_despues": [
+    132,
+    189,
+    131
+   ]
+  },
+  "MAT_terreno_roca": {
+   "pixeles": 1063,
+   "blender": [
+    155,
+    155,
+    144
+   ],
+   "ac_antes": [
+    160,
+    175,
+    128
+   ],
+   "ac_despues": [
+    141,
+    146,
+    124
+   ],
+   "lcs_antes": [
+    146,
+    178,
+    139
+   ],
+   "lcs_despues": [
+    133,
+    151,
+    146
+   ],
+   "lcsy_antes": [
+    122,
+    146,
+    117
+   ],
+   "lcsy_despues": [
+    112,
+    125,
+    122
+   ],
+   "captura_antes": [
+    206,
+    215,
+    210
+   ],
+   "captura_despues": [
+    201,
+    208,
+    209
+   ],
+   "captura1_antes": [
+    250,
+    251,
+    250
+   ],
+   "captura1_despues": [
+    248,
+    250,
+    250
+   ],
+   "nubes_antes": [
+    141,
+    166,
+    132
+   ],
+   "nubes_despues": [
+    119,
+    134,
+    126
+   ],
+   "nubes2_antes": [
+    187,
+    204,
+    181
+   ],
+   "nubes2_despues": [
+    164,
+    175,
+    169
+   ]
+  },
+  "MAT_agua": {
+   "pixeles": 17065,
+   "blender": [
+    154,
+    212,
+    248
+   ],
+   "ac_antes": [
+    124,
+    225,
+    227
+   ],
+   "ac_despues": [
+    169,
+    216,
+    240
+   ],
+   "lcs_antes": [
+    62,
+    208,
+    227
+   ],
+   "lcs_despues": [
+    126,
+    202,
+    241
+   ],
+   "lcsy_antes": [
+    70,
+    177,
+    201
+   ],
+   "lcsy_despues": [
+    111,
+    171,
+    226
+   ],
+   "captura_antes": [
+    156,
+    221,
+    229
+   ],
+   "captura_despues": [
+    178,
+    213,
+    238
+   ],
+   "captura1_antes": [
+    230,
+    253,
+    254
+   ],
+   "captura1_despues": [
+    241,
+    251,
+    254
+   ],
+   "nubes_antes": [
+    77,
+    187,
+    203
+   ],
+   "nubes_despues": [
+    110,
+    171,
+    220
+   ],
+   "nubes2_antes": [
+    146,
+    219,
+    228
+   ],
+   "nubes2_despues": [
+    168,
+    208,
+    237
+   ]
+  },
+  "MAT_MCOCHE_caliza": {
+   "pixeles": 7394,
+   "blender": [
+    209,
+    207,
+    195
+   ],
+   "ac_antes": [
+    210,
+    198,
+    173
+   ],
+   "ac_despues": [
+    216,
+    207,
+    193
+   ],
+   "lcs_antes": [
+    196,
+    191,
+    182
+   ],
+   "lcs_despues": [
+    215,
+    212,
+    215
+   ],
+   "lcsy_antes": [
+    164,
+    159,
+    151
+   ],
+   "lcsy_despues": [
+    186,
+    182,
+    186
+   ],
+   "captura_antes": [
+    217,
+    219,
+    218
+   ],
+   "captura_despues": [
+    219,
+    221,
+    222
+   ],
+   "captura1_antes": [
+    252,
+    252,
+    252
+   ],
+   "captura1_despues": [
+    252,
+    252,
+    253
+   ],
+   "nubes_antes": [
+    182,
+    178,
+    165
+   ],
+   "nubes_despues": [
+    189,
+    188,
+    186
+   ],
+   "nubes2_antes": [
+    217,
+    215,
+    207
+   ],
+   "nubes2_despues": [
+    223,
+    222,
+    221
+   ]
+  },
+  "MAT_CARRERA_blanco": {
+   "pixeles": 5499,
+   "blender": [
+    244,
+    255,
+    255
+   ],
+   "ac_antes": [
+    208,
+    204,
+    194
+   ],
+   "ac_despues": [
+    208,
+    205,
+    195
+   ],
+   "lcs_antes": [
+    209,
+    212,
+    219
+   ],
+   "lcs_despues": [
+    215,
+    218,
+    224
+   ],
+   "lcsy_antes": [
+    179,
+    183,
+    191
+   ],
+   "lcsy_despues": [
+    186,
+    190,
+    198
+   ],
+   "captura_antes": [
+    228,
+    227,
+    226
+   ],
+   "captura_despues": [
+    225,
+    226,
+    224
+   ],
+   "captura1_antes": [
+    253,
+    253,
+    253
+   ],
+   "captura1_despues": [
+    253,
+    253,
+    253
+   ],
+   "nubes_antes": [
+    196,
+    201,
+    204
+   ],
+   "nubes_despues": [
+    193,
+    198,
+    201
+   ],
+   "nubes2_antes": [
+    229,
+    231,
+    232
+   ],
+   "nubes2_despues": [
+    226,
+    229,
+    231
+   ]
+  },
+  "MAT_CARRERA_verde_wgp": {
+   "pixeles": 905,
+   "blender": [
+    138,
+    255,
+    193
+   ],
+   "ac_antes": [
+    123,
+    237,
+    184
+   ],
+   "ac_despues": [
+    148,
+    245,
+    206
+   ],
+   "lcs_antes": [
+    52,
+    221,
+    172
+   ],
+   "lcs_despues": [
+    90,
+    236,
+    207
+   ],
+   "lcsy_antes": [
+    64,
+    194,
+    143
+   ],
+   "lcsy_despues": [
+    91,
+    218,
+    178
+   ],
+   "captura_antes": [
+    121,
+    232,
+    191
+   ],
+   "captura_despues": [
+    139,
+    240,
+    208
+   ],
+   "captura1_antes": [
+    205,
+    254,
+    246
+   ],
+   "captura1_despues": [
+    219,
+    255,
+    250
+   ],
+   "nubes_antes": [
+    72,
+    205,
+    149
+   ],
+   "nubes_despues": [
+    91,
+    219,
+    171
+   ],
+   "nubes2_antes": [
+    148,
+    230,
+    199
+   ],
+   "nubes2_despues": [
+    170,
+    239,
+    216
+   ]
+  },
+  "MAT_PIT_blanco": {
+   "pixeles": 195,
+   "blender": [
+    221,
+    234,
+    246
+   ],
+   "ac_antes": [
+    226,
+    222,
+    215
+   ],
+   "ac_despues": [
+    226,
+    223,
+    216
+   ],
+   "lcs_antes": [
+    218,
+    221,
+    228
+   ],
+   "lcs_despues": [
+    224,
+    226,
+    232
+   ],
+   "lcsy_antes": [
+    190,
+    194,
+    203
+   ],
+   "lcsy_despues": [
+    198,
+    202,
+    211
+   ],
+   "captura_antes": [
+    232,
+    232,
+    232
+   ],
+   "captura_despues": [
+    231,
+    231,
+    231
+   ],
+   "captura1_antes": [
+    254,
+    254,
+    254
+   ],
+   "captura1_despues": [
+    254,
+    254,
+    254
+   ],
+   "nubes_antes": [
+    204,
+    208,
+    211
+   ],
+   "nubes_despues": [
+    201,
+    206,
+    210
+   ],
+   "nubes2_antes": [
+    234,
+    236,
+    237
+   ],
+   "nubes2_despues": [
+    232,
+    234,
+    236
+   ]
+  }
+ },
+ "bajada": {
+  "MAT_asfalto": {
+   "pixeles": 17323,
+   "blender": [
+    92,
+    97,
+    107
+   ],
+   "ac_antes": [
+    163,
+    157,
+    149
+   ],
+   "ac_despues": [
+    120,
+    118,
+    109
+   ],
+   "lcs_antes": [
+    79,
+    80,
+    97
+   ],
+   "lcs_despues": [
+    49,
+    54,
+    65
+   ],
+   "lcsy_antes": [
+    75,
+    76,
+    87
+   ],
+   "lcsy_despues": [
+    55,
+    58,
+    65
+   ],
+   "captura_antes": [
+    167,
+    168,
+    172
+   ],
+   "captura_despues": [
+    135,
+    139,
+    143
+   ],
+   "captura1_antes": [
+    236,
+    236,
+    238
+   ],
+   "captura1_despues": [
+    216,
+    219,
+    222
+   ],
+   "nubes_antes": [
+    107,
+    110,
+    116
+   ],
+   "nubes_despues": [
+    70,
+    75,
+    79
+   ],
+   "nubes2_antes": [
+    148,
+    151,
+    155
+   ],
+   "nubes2_despues": [
+    103,
+    108,
+    112
+   ]
+  },
+  "MAT_terreno": {
+   "pixeles": 98078,
+   "blender": [
+    108,
+    185,
+    86
+   ],
+   "ac_antes": [
+    217,
+    226,
+    183
+   ],
+   "ac_despues": [
+    132,
+    200,
+    107
+   ],
+   "lcs_antes": [
+    154,
+    181,
+    140
+   ],
+   "lcs_despues": [
+    58,
+    153,
+    59
+   ],
+   "lcsy_antes": [
+    128,
+    149,
+    118
+   ],
+   "lcsy_despues": [
+    64,
+    126,
+    64
+   ],
+   "captura_antes": [
+    212,
+    222,
+    206
+   ],
+   "captura_despues": [
+    167,
+    207,
+    171
+   ],
+   "captura1_antes": [
+    251,
+    253,
+    249
+   ],
+   "captura1_despues": [
+    236,
+    250,
+    237
+   ],
+   "nubes_antes": [
+    168,
+    190,
+    152
+   ],
+   "nubes_despues": [
+    81,
+    153,
+    78
+   ],
+   "nubes2_antes": [
+    210,
+    223,
+    201
+   ],
+   "nubes2_despues": [
+    134,
+    189,
+    132
+   ]
+  },
+  "MAT_terreno_roca": {
+   "pixeles": 52224,
+   "blender": [
+    176,
+    171,
+    151
+   ],
+   "ac_antes": [
+    201,
+    211,
+    163
+   ],
+   "ac_despues": [
+    185,
+    188,
+    162
+   ],
+   "lcs_antes": [
+    141,
+    169,
+    127
+   ],
+   "lcs_despues": [
+    134,
+    148,
+    141
+   ],
+   "lcsy_antes": [
+    118,
+    139,
+    109
+   ],
+   "lcsy_despues": [
+    113,
+    123,
+    117
+   ],
+   "captura_antes": [
+    206,
+    218,
+    196
+   ],
+   "captura_despues": [
+    195,
+    201,
+    194
+   ],
+   "captura1_antes": [
+    250,
+    252,
+    247
+   ],
+   "captura1_despues": [
+    247,
+    248,
+    246
+   ],
+   "nubes_antes": [
+    159,
+    182,
+    144
+   ],
+   "nubes_despues": [
+    138,
+    151,
+    139
+   ],
+   "nubes2_antes": [
+    203,
+    216,
+    194
+   ],
+   "nubes2_despues": [
+    182,
+    191,
+    183
+   ]
+  },
+  "MAT_CASAS_fachada_amarillo": {
+   "pixeles": 415,
+   "blender": [
+    224,
+    193,
+    98
+   ],
+   "ac_antes": [
+    225,
+    203,
+    75
+   ],
+   "ac_despues": [
+    227,
+    215,
+    98
+   ],
+   "lcs_antes": [
+    196,
+    171,
+    25
+   ],
+   "lcs_despues": [
+    208,
+    199,
+    54
+   ],
+   "lcsy_antes": [
+    163,
+    140,
+    42
+   ],
+   "lcsy_despues": [
+    177,
+    167,
+    64
+   ],
+   "captura_antes": [
+    221,
+    220,
+    207
+   ],
+   "captura_despues": [
+    221,
+    222,
+    210
+   ],
+   "captura1_antes": [
+    252,
+    252,
+    250
+   ],
+   "captura1_despues": [
+    252,
+    253,
+    250
+   ],
+   "nubes_antes": [
+    200,
+    183,
+    66
+   ],
+   "nubes_despues": [
+    199,
+    193,
+    85
+   ],
+   "nubes2_antes": [
+    228,
+    218,
+    143
+   ],
+   "nubes2_despues": [
+    229,
+    226,
+    161
+   ]
+  },
+  "MAT_VEG_encina_b": {
+   "pixeles": 254,
+   "blender": [
+    112,
+    175,
+    112
+   ],
+   "ac_antes": [
+    143,
+    195,
+    137
+   ],
+   "ac_despues": [
+    145,
+    201,
+    143
+   ],
+   "lcs_antes": [
+    63,
+    138,
+    85
+   ],
+   "lcs_despues": [
+    76,
+    161,
+    106
+   ],
+   "lcsy_antes": [
+    67,
+    115,
+    80
+   ],
+   "lcsy_despues": [
+    76,
+    132,
+    95
+   ],
+   "captura_antes": [
+    194,
+    213,
+    204
+   ],
+   "captura_despues": [
+    193,
+    214,
+    205
+   ],
+   "captura1_antes": [
+    246,
+    251,
+    249
+   ],
+   "captura1_despues": [
+    246,
+    251,
+    249
+   ],
+   "nubes_antes": [
+    96,
+    156,
+    111
+   ],
+   "nubes_despues": [
+    95,
+    159,
+    114
+   ],
+   "nubes2_antes": [
+    149,
+    193,
+    161
+   ],
+   "nubes2_despues": [
+    149,
+    196,
+    164
+   ]
+  },
+  "MAT_CASAS_teja": {
+   "pixeles": 48450,
+   "blender": [
+    228,
+    85,
+    74
+   ],
+   "ac_antes": [
+    232,
+    128,
+    53
+   ],
+   "ac_despues": [
+    237,
+    108,
+    91
+   ],
+   "lcs_antes": [
+    178,
+    49,
+    10
+   ],
+   "lcs_despues": [
+    200,
+    40,
+    41
+   ],
+   "lcsy_antes": [
+    144,
+    56,
+    26
+   ],
+   "lcsy_despues": [
+    164,
+    49,
+    50
+   ],
+   "captura_antes": [
+    223,
+    128,
+    67
+   ],
+   "captura_despues": [
+    227,
+    107,
+    102
+   ],
+   "captura1_antes": [
+    253,
+    211,
+    139
+   ],
+   "captura1_despues": [
+    253,
+    191,
+    186
+   ],
+   "nubes_antes": [
+    183,
+    82,
+    36
+   ],
+   "nubes_despues": [
+    189,
+    64,
+    61
+   ],
+   "nubes2_antes": [
+    206,
+    125,
+    80
+   ],
+   "nubes2_despues": [
+    209,
+    106,
+    103
+   ]
+  }
+ },
+ "puente": {
+  "MAT_asfalto": {
+   "pixeles": 30057,
+   "blender": [
+    97,
+    102,
+    112
+   ],
+   "ac_antes": [
+    167,
+    161,
+    153
+   ],
+   "ac_despues": [
+    124,
+    122,
+    114
+   ],
+   "lcs_antes": [
+    103,
+    105,
+    125
+   ],
+   "lcs_despues": [
+    68,
+    73,
+    87
+   ],
+   "lcsy_antes": [
+    92,
+    93,
+    105
+   ],
+   "lcsy_despues": [
+    68,
+    71,
+    80
+   ],
+   "captura_antes": [
+    169,
+    169,
+    173
+   ],
+   "captura_despues": [
+    135,
+    140,
+    143
+   ],
+   "captura1_antes": [
+    236,
+    237,
+    239
+   ],
+   "captura1_despues": [
+    216,
+    220,
+    222
+   ],
+   "nubes_antes": [
+    108,
+    111,
+    118
+   ],
+   "nubes_despues": [
+    71,
+    77,
+    80
+   ],
+   "nubes2_antes": [
+    150,
+    152,
+    157
+   ],
+   "nubes2_despues": [
+    105,
+    110,
+    114
+   ]
+  },
+  "MAT_terreno": {
+   "pixeles": 7067,
+   "blender": [
+    102,
+    171,
+    87
+   ],
+   "ac_antes": [
+    191,
+    204,
+    161
+   ],
+   "ac_despues": [
+    107,
+    173,
+    95
+   ],
+   "lcs_antes": [
+    161,
+    189,
+    151
+   ],
+   "lcs_despues": [
+    63,
+    162,
+    66
+   ],
+   "lcsy_antes": [
+    134,
+    157,
+    126
+   ],
+   "lcsy_despues": [
+    67,
+    133,
+    69
+   ],
+   "captura_antes": [
+    214,
+    221,
+    223
+   ],
+   "captura_despues": [
+    212,
+    219,
+    222
+   ],
+   "captura1_antes": [
+    251,
+    252,
+    253
+   ],
+   "captura1_despues": [
+    251,
+    252,
+    253
+   ],
+   "nubes_antes": [
+    152,
+    177,
+    145
+   ],
+   "nubes_despues": [
+    72,
+    140,
+    78
+   ],
+   "nubes2_antes": [
+    198,
+    213,
+    193
+   ],
+   "nubes2_despues": [
+    123,
+    178,
+    128
+   ]
+  },
+  "MAT_terreno_roca": {
+   "pixeles": 4994,
+   "blender": [
+    155,
+    158,
+    141
+   ],
+   "ac_antes": [
+    163,
+    178,
+    132
+   ],
+   "ac_despues": [
+    145,
+    150,
+    130
+   ],
+   "lcs_antes": [
+    138,
+    170,
+    130
+   ],
+   "lcs_despues": [
+    130,
+    148,
+    143
+   ],
+   "lcsy_antes": [
+    116,
+    140,
+    111
+   ],
+   "lcsy_despues": [
+    110,
+    123,
+    119
+   ],
+   "captura_antes": [
+    199,
+    211,
+    193
+   ],
+   "captura_despues": [
+    188,
+    196,
+    191
+   ],
+   "captura1_antes": [
+    248,
+    251,
+    246
+   ],
+   "captura1_despues": [
+    244,
+    247,
+    245
+   ],
+   "nubes_antes": [
+    142,
+    167,
+    133
+   ],
+   "nubes_despues": [
+    121,
+    135,
+    128
+   ],
+   "nubes2_antes": [
+    188,
+    205,
+    183
+   ],
+   "nubes2_despues": [
+    165,
+    176,
+    171
+   ]
+  },
+  "MAT_agua": {
+   "pixeles": 109897,
+   "blender": [
+    137,
+    209,
+    249
+   ],
+   "ac_antes": [
+    123,
+    223,
+    226
+   ],
+   "ac_despues": [
+    166,
+    214,
+    239
+   ],
+   "lcs_antes": [
+    55,
+    200,
+    221
+   ],
+   "lcs_despues": [
+    120,
+    197,
+    239
+   ],
+   "lcsy_antes": [
+    64,
+    167,
+    192
+   ],
+   "lcsy_despues": [
+    106,
+    165,
+    222
+   ],
+   "captura_antes": [
+    206,
+    221,
+    226
+   ],
+   "captura_despues": [
+    209,
+    219,
+    229
+   ],
+   "captura1_antes": [
+    250,
+    252,
+    253
+   ],
+   "captura1_despues": [
+    250,
+    252,
+    254
+   ],
+   "nubes_antes": [
+    78,
+    186,
+    203
+   ],
+   "nubes_despues": [
+    109,
+    170,
+    219
+   ],
+   "nubes2_antes": [
+    146,
+    218,
+    228
+   ],
+   "nubes2_despues": [
+    167,
+    207,
+    236
+   ]
+  },
+  "MAT_MCOCHE_caliza": {
+   "pixeles": 1374,
+   "blender": [
+    209,
+    209,
+    198
+   ],
+   "ac_antes": [
+    204,
+    193,
+    172
+   ],
+   "ac_despues": [
+    211,
+    203,
+    191
+   ],
+   "lcs_antes": [
+    187,
+    181,
+    171
+   ],
+   "lcs_despues": [
+    211,
+    208,
+    211
+   ],
+   "lcsy_antes": [
+    155,
+    150,
+    141
+   ],
+   "lcsy_despues": [
+    180,
+    177,
+    181
+   ],
+   "captura_antes": [
+    216,
+    221,
+    224
+   ],
+   "captura_despues": [
+    216,
+    221,
+    225
+   ],
+   "captura1_antes": [
+    252,
+    252,
+    253
+   ],
+   "captura1_despues": [
+    252,
+    252,
+    253
+   ],
+   "nubes_antes": [
+    177,
+    175,
+    165
+   ],
+   "nubes_despues": [
+    185,
+    185,
+    186
+   ],
+   "nubes2_antes": [
+    214,
+    213,
+    207
+   ],
+   "nubes2_despues": [
+    220,
+    220,
+    221
+   ]
+  },
+  "MAT_CARRERA_verde_wgp": {
+   "pixeles": 333,
+   "blender": [
+    155,
+    255,
+    211
+   ],
+   "ac_antes": [
+    116,
+    231,
+    179
+   ],
+   "ac_despues": [
+    139,
+    240,
+    199
+   ],
+   "lcs_antes": [
+    43,
+    213,
+    157
+   ],
+   "lcs_despues": [
+    81,
+    233,
+    200
+   ],
+   "lcsy_antes": [
+    56,
+    182,
+    131
+   ],
+   "lcsy_despues": [
+    85,
+    212,
+    170
+   ],
+   "captura_antes": [
+    210,
+    222,
+    223
+   ],
+   "captura_despues": [
+    211,
+    223,
+    223
+   ],
+   "captura1_antes": [
+    251,
+    253,
+    253
+   ],
+   "captura1_despues": [
+    251,
+    253,
+    253
+   ],
+   "nubes_antes": [
+    71,
+    199,
+    148
+   ],
+   "nubes_despues": [
+    89,
+    214,
+    169
+   ],
+   "nubes2_antes": [
+    145,
+    227,
+    198
+   ],
+   "nubes2_despues": [
+    166,
+    236,
+    214
+   ]
+  }
+ },
+ "piloto_s2900": {
+  "MAT_asfalto": {
+   "pixeles": 209804,
+   "blender": [
+    93,
+    98,
+    110
+   ],
+   "ac_antes": [
+    168,
+    161,
+    153
+   ],
+   "ac_despues": [
+    125,
+    122,
+    113
+   ],
+   "lcs_antes": [
+    101,
+    103,
+    122
+   ],
+   "lcs_despues": [
+    76,
+    82,
+    97
+   ],
+   "lcsy_antes": [
+    90,
+    91,
+    103
+   ],
+   "lcsy_despues": [
+    73,
+    77,
+    87
+   ],
+   "captura_antes": [
+    155,
+    153,
+    157
+   ],
+   "captura_despues": [
+    110,
+    113,
+    115
+   ],
+   "captura1_antes": [
+    229,
+    228,
+    230
+   ],
+   "captura1_despues": [
+    194,
+    197,
+    199
+   ],
+   "nubes_antes": [
+    109,
+    112,
+    117
+   ],
+   "nubes_despues": [
+    71,
+    76,
+    79
+   ],
+   "nubes2_antes": [
+    150,
+    152,
+    157
+   ],
+   "nubes2_despues": [
+    105,
+    110,
+    113
+   ]
+  },
+  "MAT_terreno": {
+   "pixeles": 56006,
+   "blender": [
+    111,
+    190,
+    91
+   ],
+   "ac_antes": [
+    224,
+    232,
+    192
+   ],
+   "ac_despues": [
+    142,
+    209,
+    114
+   ],
+   "lcs_antes": [
+    181,
+    204,
+    168
+   ],
+   "lcs_despues": [
+    92,
+    192,
+    92
+   ],
+   "lcsy_antes": [
+    151,
+    172,
+    140
+   ],
+   "lcsy_despues": [
+    87,
+    159,
+    87
+   ],
+   "captura_antes": [
+    214,
+    226,
+    196
+   ],
+   "captura_despues": [
+    137,
+    202,
+    130
+   ],
+   "captura1_antes": [
+    251,
+    253,
+    247
+   ],
+   "captura1_despues": [
+    217,
+    249,
+    212
+   ],
+   "nubes_antes": [
+    173,
+    195,
+    156
+   ],
+   "nubes_despues": [
+    84,
+    158,
+    80
+   ],
+   "nubes2_antes": [
+    214,
+    226,
+    205
+   ],
+   "nubes2_despues": [
+    139,
+    194,
+    136
+   ]
+  },
+  "MAT_CASAS_fachada_amarillo": {
+   "pixeles": 258,
+   "blender": [
+    230,
+    198,
+    96
+   ],
+   "ac_antes": [
+    226,
+    204,
+    73
+   ],
+   "ac_despues": [
+    228,
+    217,
+    97
+   ],
+   "lcs_antes": [
+    212,
+    190,
+    34
+   ],
+   "lcs_despues": [
+    228,
+    221,
+    80
+   ],
+   "lcsy_antes": [
+    181,
+    158,
+    49
+   ],
+   "lcsy_despues": [
+    204,
+    195,
+    84
+   ],
+   "captura_antes": [
+    224,
+    219,
+    189
+   ],
+   "captura_despues": [
+    224,
+    223,
+    195
+   ],
+   "captura1_antes": [
+    253,
+    252,
+    245
+   ],
+   "captura1_despues": [
+    253,
+    253,
+    246
+   ],
+   "nubes_antes": [
+    201,
+    184,
+    65
+   ],
+   "nubes_despues": [
+    201,
+    194,
+    84
+   ],
+   "nubes2_antes": [
+    228,
+    219,
+    142
+   ],
+   "nubes2_despues": [
+    229,
+    226,
+    161
+   ]
+  },
+  "MAT_VEG_encina_b": {
+   "pixeles": 1085,
+   "blender": [
+    107,
+    169,
+    106
+   ],
+   "ac_antes": [
+    141,
+    193,
+    132
+   ],
+   "ac_despues": [
+    137,
+    195,
+    134
+   ],
+   "lcs_antes": [
+    78,
+    156,
+    100
+   ],
+   "lcs_despues": [
+    103,
+    189,
+    137
+   ],
+   "lcsy_antes": [
+    77,
+    128,
+    91
+   ],
+   "lcsy_despues": [
+    94,
+    157,
+    116
+   ],
+   "captura_antes": [
+    162,
+    202,
+    171
+   ],
+   "captura_despues": [
+    158,
+    203,
+    172
+   ],
+   "captura1_antes": [
+    233,
+    249,
+    238
+   ],
+   "captura1_despues": [
+    231,
+    249,
+    238
+   ],
+   "nubes_antes": [
+    95,
+    155,
+    108
+   ],
+   "nubes_despues": [
+    91,
+    155,
+    110
+   ],
+   "nubes2_antes": [
+    148,
+    192,
+    158
+   ],
+   "nubes2_despues": [
+    145,
+    193,
+    159
+   ]
+  },
+  "MAT_CASAS_teja": {
+   "pixeles": 264,
+   "blender": [
+    224,
+    105,
+    95
+   ],
+   "ac_antes": [
+    223,
+    117,
+    51
+   ],
+   "ac_despues": [
+    229,
+    97,
+    84
+   ],
+   "lcs_antes": [
+    190,
+    58,
+    13
+   ],
+   "lcs_despues": [
+    217,
+    56,
+    57
+   ],
+   "lcsy_antes": [
+    155,
+    62,
+    28
+   ],
+   "lcsy_despues": [
+    186,
+    61,
+    62
+   ],
+   "captura_antes": [
+    217,
+    189,
+    178
+   ],
+   "captura_despues": [
+    219,
+    183,
+    187
+   ],
+   "captura1_antes": [
+    252,
+    245,
+    241
+   ],
+   "captura1_despues": [
+    252,
+    243,
+    244
+   ],
+   "nubes_antes": [
+    176,
+    79,
+    37
+   ],
+   "nubes_despues": [
+    181,
+    62,
+    60
+   ],
+   "nubes2_antes": [
+    200,
+    121,
+    80
+   ],
+   "nubes2_despues": [
+    202,
+    102,
+    100
+   ]
+  }
+ }
+}
