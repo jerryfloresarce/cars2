@@ -10,9 +10,11 @@ Uso desde cualquier script (python del sistema o bpy):
     paleta.srgb_hex('hierba_seca')     -> '#C4B37C'
     paleta.familia_ac('hierba_seca')   -> 'terreno'                familia de 04_export/color_ac.py
     paleta.variante('salvia', 0.85)    -> salvia al 85 % de luminancia (matices _clara/_oscura de los kits)
-    paleta.nombres()                   -> los 12 nombres; paleta.cargar() -> el JSON entero (cacheado)
-Las fachadas propuestas se piden como 'fachada_<nombre>' (p. ej. rgb('fachada_rojo_pompeya')) y las actuales
-de casas_kit_v2 como 'fachada_actual_<nombre>'.
+    paleta.nombres()                   -> los 18 nombres (v2); paleta.cargar() -> el JSON entero (cacheado)
+Las fachadas propuestas (v2: azafran, ocre_naranja, siena, rojo_pompeyano, melocoton, crema_calido) se piden como
+'fachada_<nombre>' (p. ej. rgb('fachada_rojo_pompeyano')) y las de la escena v0 como 'fachada_actual_<nombre>'.
+Alias (seccion 'alias' del JSON, misma entrada): caliza_clara = caliza_ocre, caliza_media = caliza_gris_calido,
+roca_oscura = caliza_sombra.
 Linea de ordenes:  python paleta.py            lista la paleta y comprueba que srgb_hex == sRGB(rgb)
                    python paleta.py --png out.png   dibuja las muestras planas (PIL) para el README
 REGLA: diffuse_color / Base Color sin enlazar = media lineal deseada (es lo que lee kn5_writer_opt.py).
@@ -47,6 +49,9 @@ def _todas(ruta=None):
     for k, v in P.get('fachadas_actual', {}).items():
         if not k.startswith('_'):
             t['fachada_actual_' + k] = dict(v, familia_ac='edificio')
+    for k, destino in P.get('alias', {}).items():          # v2: caliza_clara / caliza_media / roca_oscura
+        if not k.startswith('_') and destino in t and k not in t:
+            t[k] = t[destino]
     return t
 
 
@@ -58,7 +63,7 @@ def _entrada(nombre, ruta=None):
 
 
 def nombres(ruta=None):
-    """Los 12 nombres de la paleta (sin fachadas), en el orden del JSON."""
+    """Los nombres de la paleta (sin fachadas ni alias; 18 en la v2), en el orden del JSON."""
     return list(cargar(ruta)['colores'].keys())
 
 

@@ -35,11 +35,32 @@ Optimizaciones (sin cambiar el formato):
      antes). isTransparent / alphaBlendMode se mantienen por material.
   4. Ninguna textura embebida supera 1024 px: las tintadas se generan a 512 px (como antes), las
      planas son 8x8 y limitar_tamano() reduce cualquier imagen mayor de 1024 antes de embeberla.
+v1.2 (05/10/2026, decision 16 del coordinador; PETICIONES_04_EXPORT.md P1/P2/P6/P10/X7):
+  5. TERRENO por texel (TERRENO_MODO, por defecto 'detalle' = opcion (b); 'base' = opcion (a)): en (a) MAT_terreno sale
+     como ksPerPixel (el mismo shader y el mismo formato PNG que v1.1) con txDiffuse = texturas/terreno_base.png a 2048 (1 m/texel: paleta x parches x AO, la roca ya
+     pintada por texel) y UV PLANAR DE MUNDO u = (x - x0)/Lx, v = (y - y0)/Ly en TODAS las caras con MAT_terreno (TERRENO,
+     arcenes, falda del McLaren; es la UV que pinta Blender por Geometry.Position). La textura se calibra con color_ac
+     como un material cuyo albedo es la media de terreno_base en tierra firme (ganancia por canal: conserva el dibujo).
+     color_ac.separar_roca_terreno(modo='base') solo separa las paredes casi verticales que no son suelo (caliza P1).
+     'detalle' (b, por defecto) = (a) + grano de 3 m con ksPerPixelMultiMap/txDetail (ver material_terreno_detalle:
+     nombres verificados en kn5_refs, semantica de CM cubierta con alfa 0.5); eleccion y pruebas en
+     04_export/_v12_dev/medidas/comparacion_terreno.json (kn5_vista + medir_capturas de a/b/c/tile);
+     'tile' = v1.1 (tile hierba seca 512 a 3 m, roca por cara; IGNORA la UV 0..1 del terreno, P10 interino);
+     'caras' = opcion (c) de la tarea (4 materiales por cara segun la mascara, tiles de 3-6 m): solo para comparar.
+     TERRENO_DDS=1: la textura del terreno como DDS A8R8G8B8 con mipmaps (formato del ensayo D de kn5_ensayo.py).
+  6. P2: lado de las texturas tintadas por material: 1024 para familias roca/asfalto y para los materiales con
+     ac_tex_max >= 1024 (MCOCHE/PPUEBLO caliza, MAT_cesped...), 512 el resto (TEX_P2=0: todo a 512 como v1.1).
+  7. P6: HORIZ_ (montes del horizonte a 2-5 km) sin sombra (DECO_SIN_SOMBRA).
+  8. P3 (solo lo seguro): ac_shader distinto de ksPerPixel se ignora con aviso (el multicapa NO va en v1.2); el resumen
+     compara la imagen que elige analizar_material con ac_samplers['txDiffuse'] (sin cambiar nada).
 Ejecutar:
   "C:/Program Files/Blender Foundation/Blender 5.1/blender.exe" --background --factory-startup
       --python E:/Escritorio/claude-pc/arnau-aseto-corsa/04_export/kn5_writer_opt.py
 Salida: 04_export/kn5/porto_corsa_opt.kn5 y 04_export/kn5/resumen_writer_opt.json
-  (env BLEND / KN5 / KN5_JSON cambian la escena de entrada y las salidas: pruebas en 04_export/_fisica)
+  (env BLEND / KN5 / KN5_JSON cambian la escena de entrada y las salidas: pruebas en 04_export/_fisica;
+   env GEOM = geometria de la escena (rejilla del terreno para la UV planar; si falta se ajusta a la UV del TERRENO);
+   env TERRENO_BASE / TERRENO_MASK = copia congelada de las texturas del terreno (hacer_zip.sh v1.2))
+Importable (ensayo_f_pueblo.py): main() solo corre como script (__name__ == '__main__').
 """
 import hashlib
 import json
@@ -65,9 +86,21 @@ BLEND = os.environ.get('BLEND') or BASE + r'\04_export\porto_corsa_export.blend'
 OUT_KN5 = os.environ.get('KN5') or BASE + r'\04_export\kn5\porto_corsa_opt.kn5'
 OUT_JSON = (os.environ.get('KN5_JSON') or (os.path.splitext(OUT_KN5)[0] + '_resumen.json' if os.environ.get('KN5')
                                            else BASE + r'\04_export\kn5\resumen_writer_opt.json'))
-ROOT_NAME = 'porto_corsa'
+ROOT_NAME = os.environ.get('KN5_RAIZ') or 'porto_corsa'
 TEX_SIZE = 512            # lado de las texturas tintadas embebidas (las fuentes son de 1024)
-TEX_MAX = 1024            # ninguna textura embebida supera este lado
+TEX_MAX = 1024            # ninguna textura embebida supera este lado (salvo la del terreno por texel: TEX_TERRENO)
+# v1.2 -------------------------------------------------------------------------------------------------------------
+TERRENO_MODO = os.environ.get('TERRENO_MODO', 'detalle')   # 'detalle' (v1.2, opcion b) | 'base' (a) | 'tile' (v1.1) | 'caras' (c)
+TERRENO_DDS = os.environ.get('TERRENO_DDS', '0') == '1'     # textura del terreno como DDS con mipmaps
+TEX_TERRENO = 2048                                          # terreno_base.png tal cual (1 m/texel)
+TERRENO_MAT = 'MAT_terreno'
+GEOM_JSON = os.environ.get('GEOM')
+TEX_P2 = os.environ.get('TEX_P2', '1') != '0'               # P2: 1024 para roca/asfalto y ac_tex_max >= 1024
+TEX_SIZE_P2 = 1024
+TEX_P2_FAMILIAS = ('roca', 'asfalto')
+SHADERS_V12 = ('ksPerPixel',)                               # ac_shader que se respeta en v1.2 (el multicapa espera a la foto A;
+                                                            # MAT_terreno en modo 'detalle' sale como ksPerPixelMultiMap)
+PLANAR = {}                                                 # x0, y0, Lx, Ly de la UV planar del terreno (main)
 MAX_VERTS = 65000         # limite por malla (indices uint16)
 ROUND_POS, ROUND_NRM, ROUND_UV = 1e-4, 1e-3, 1e-4   # redondeos de la soldadura
 MORTON_CELL = 25.0        # celda (m) de la curva Z para ordenar espacialmente los objetos fusionados
@@ -77,7 +110,7 @@ GROUND_PREFIXES = ('1ROAD', '1DIRT', '1KERB', '1GRASS', '2GRASS', '1PIT', 'AGUA'
 AC_LOGICAL = ('AC_START_', 'AC_PIT_', 'AC_TIME_', 'AC_HOTLAP_START_', 'AC_AUDIO_', 'AC_CREW_', 'AC_OPEN_')
 FIS_PREFIXES = ('1ROAD_', '1KERB_', '1GRASS_', '2GRASS_', '1WALL_', '1DIRT_', '1PIT_')
 KEEP_PREFIXES = ('AC_', 'PIT_LANE', 'PISTA', 'TERRENO', 'AGUA')     # dummy por objeto, como antes
-DECO_SIN_SOMBRA = ('VEG_', 'OLI_')                                   # castShadows = 0 dentro de DECO
+DECO_SIN_SOMBRA = ('VEG_', 'OLI_', 'HORIZ_')                         # castShadows = 0 dentro de DECO (v1.2: + HORIZ_, P6)
 DECO_MAT_SIN_SOMBRA = ('MAT_VEG_', 'MAT_OLI_')   # ... tambien por material (palmeras de HOTEL_/PUERTO_...)
 DECO_NAME = 'DECO'
 DEFAULT_MAT = 'MAT_default'
@@ -162,7 +195,31 @@ def png_bytes(img8):
             + chunk(b'IEND', b''))
 
 
-_tex_stats = {'reducidas': 0, 'max_lado': 0}
+def dds_bytes(img8):
+    """DDS sin comprimir A8R8G8B8 (BGRA en memoria) con la cadena COMPLETA de mipmaps (media 2x2 de los valores tal cual:
+    AC sombrea en espacio gamma y la textura es UNORM). Mismo formato y cabecera que kn5_ensayo.dds_mips (ensayo D).
+    img8 (H, W, 3|4) uint8, lados potencia de 2. Devuelve (bytes, n_niveles)."""
+    h, w = img8.shape[:2]
+    rgba = img8 if img8.shape[2] == 4 else np.concatenate([img8, np.full((h, w, 1), 255, np.uint8)], axis=2)
+    x = rgba.astype(np.float32)
+    niveles = []
+    while True:
+        q = np.clip(x + 0.5, 0, 255).astype(np.uint8)
+        niveles.append(np.ascontiguousarray(q[..., [2, 1, 0, 3]]).tobytes())
+        if x.shape[0] == 1 and x.shape[1] == 1:
+            break
+        hh, ww = max(1, x.shape[0] // 2), max(1, x.shape[1] // 2)
+        x = x[:hh * 2 if x.shape[0] > 1 else 1, :ww * 2 if x.shape[1] > 1 else 1]
+        x = x.reshape(hh, x.shape[0] // hh, ww, x.shape[1] // ww, 4).mean(axis=(1, 3))
+    flags = 0x1 | 0x2 | 0x4 | 0x8 | 0x1000 | 0x20000          # CAPS HEIGHT WIDTH PITCH PIXELFORMAT MIPMAPCOUNT
+    pf = struct.pack('<8I', 32, 0x41, 0, 32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000)   # RGB + ALPHAPIXELS
+    caps = 0x8 | 0x1000 | 0x400000                               # COMPLEX TEXTURE MIPMAP
+    cab = (struct.pack('<7I', 124, flags, h, w, w * 4, 0, len(niveles)) + bytes(44) + pf
+           + struct.pack('<5I', caps, 0, 0, 0, 0))
+    return b'DDS ' + cab + b''.join(niveles), len(niveles)
+
+
+_tex_stats = {'reducidas': 0, 'max_lado': 0, 'por_lado': {}}
 
 
 def limitar_tamano(img8, limite=TEX_MAX):
@@ -190,8 +247,9 @@ _img_cache = {}
 
 def imagen_lineal(img, size):
     """Pixeles RGB lineales (H, W, 3) de una bpy.types.Image, filas arriba->abajo, reducida a `size`."""
-    if img.name in _img_cache:
-        return _img_cache[img.name]
+    clave = (img.name, int(size))          # v1.2: el lado depende del material (P2), no solo de la imagen
+    if clave in _img_cache:
+        return _img_cache[clave]
     res = None
     try:
         n = len(img.pixels)
@@ -206,7 +264,7 @@ def imagen_lineal(img, size):
             res = lin.astype(np.float32)
     except Exception as e:  # noqa
         print('AVISO: no se pudo leer la imagen', img.name, e)
-    _img_cache[img.name] = res
+    _img_cache[clave] = res
     return res
 
 
@@ -218,10 +276,76 @@ def _socket(node, identifier):
     return None
 
 
+def _cargar_imagen(ruta):
+    """bpy.types.Image de un fichero (sRGB), o None si no existe."""
+    if not ruta or not os.path.exists(ruta):
+        print('AVISO: no existe la imagen', ruta)
+        return None
+    img = bpy.data.images.load(ruta, check_existing=True)
+    img.colorspace_settings.name = 'sRGB'
+    return img
+
+
+def _ac_prop(m, clave, defecto=None):
+    """Custom prop ac_* de un material como tipo python (los IDPropertyGroup a dict)."""
+    v = m.get(clave, defecto)
+    try:
+        return v.to_dict()
+    except AttributeError:
+        return v
+
+
+def _tex_max_material(m):
+    """ac_tex_max del material para txDiffuse (int o dict por sampler) o None."""
+    v = _ac_prop(m, 'ac_tex_max')
+    if isinstance(v, dict):
+        v = v.get('txDiffuse')
+    try:
+        return int(v) if v is not None else None
+    except (TypeError, ValueError):
+        return None
+
+
 def analizar_material(m):
     """Resume un material de Blender: color base lineal, alpha, imagen de color y su mapping.
     En esta escena el color plano original queda en material.diffuse_color (color de viewport) y la
-    cadena de textura es TEX_imagen -> TEX_ganancia(x gain) -> TEX_multiplicar(factor) -> Base Color."""
+    cadena de textura es TEX_imagen -> TEX_ganancia(x gain) -> TEX_multiplicar(factor) -> Base Color.
+    v1.2: MAT_terreno segun TERRENO_MODO, 'ac_tile' (MAT_terreno_roca y los del reparto por caras) y ac_tex_max."""
+    info = _analizar_material_v11(m)
+    info['tex_max_ac'] = _tex_max_material(m)
+    sh = _ac_prop(m, 'ac_shader')
+    info['ac_shader_pedido'] = str(sh) if sh else None
+    st = _ac_prop(m, 'ac_samplers') or {}
+    info['ac_txdiffuse'] = os.path.basename(str(st.get('txDiffuse'))) if isinstance(st, dict) and st.get('txDiffuse') else None
+    tile = _ac_prop(m, 'ac_tile')
+    if isinstance(tile, dict) and tile.get('imagen'):
+        img = _cargar_imagen(tile['imagen'])
+        if img is not None:
+            info.update(img=img, scale=float(tile.get('escala', 1.0 / 3.0)), proj=str(tile.get('proj', 'FLAT')),
+                        factor=1.0, gain=1.0, ignorar_uv=True, tile_ac=os.path.basename(tile['imagen']))
+    if m.name == TERRENO_MAT:
+        if TERRENO_MODO in ('base', 'detalle'):
+            ruta = os.environ.get('TERRENO_BASE')
+            if not ruta and isinstance(st, dict) and st.get('txDiffuse'):
+                ruta = str(st['txDiffuse'])
+            img = _cargar_imagen(ruta) if ruta else None
+            if img is None:                      # la imagen del nodo TERRENO_base del material
+                n = m.node_tree.nodes.get('TERRENO_base') if m.node_tree else None
+                img = n.image if (n is not None and n.bl_idname == 'ShaderNodeTexImage') else None
+            if img is not None:
+                info.update(img=img, modo_terreno=TERRENO_MODO, proj='PLANAR_MUNDO', factor=1.0, gain=1.0, scale=1.0,
+                            ruta_terreno_base=bpy.path.abspath(img.filepath))
+            else:
+                print('AVISO: MAT_terreno sin terreno_base.png: se exporta como en v1.1 (tile)')
+                info['ignorar_uv'] = True
+        else:                                    # 'tile' / 'caras': la UV 0..1 de la mascara NO vale para el tile
+            info['ignorar_uv'] = True
+            info['modo_terreno'] = TERRENO_MODO
+    return info
+
+
+def _analizar_material_v11(m):
+    """analizar_material de v1.1 (sin cambios)."""
     info = {'name': m.name, 'color': tuple(float(c) for c in m.diffuse_color[:3]), 'alpha': 1.0,
             'img': None, 'gain': 1.0, 'factor': 1.0, 'scale': 1.0, 'proj': 'FLAT'}
     nt = m.node_tree
@@ -264,12 +388,79 @@ def analizar_material(m):
     return info
 
 
+def lado_textura(info):
+    """Lado de la textura tintada del material (v1.2, P2): 1024 para las familias TEX_P2_FAMILIAS y para los materiales
+    con ac_tex_max >= 1024; TEX_SIZE (512) el resto, o todos si TEX_P2 = 0."""
+    if not TEX_P2:
+        return TEX_SIZE
+    fam = info.get('familia') or color_ac.familia(info['name'])
+    tmax = info.get('tex_max_ac')
+    if fam in TEX_P2_FAMILIAS or (tmax is not None and tmax >= TEX_SIZE_P2):
+        return TEX_SIZE_P2
+    return TEX_SIZE
+
+
+def media_tierra(lin):
+    """Media lineal (3,) de la textura del terreno en tierra firme: celdas de la rejilla con mar = 0 (GEOM) llevadas a
+    los texeles (fila 0 = y maximo, como el PNG). Sin GEOM: media de toda la imagen."""
+    try:
+        if GEOM_JSON and os.path.exists(GEOM_JSON):
+            T = json.load(open(GEOM_JSON, encoding='utf-8'))['terreno']
+            nx, ny = int(T['nx']), int(T['ny'])
+            mar = np.asarray(T['mar'], np.float32).reshape(ny, nx)[::-1] > 0.5
+            h, w = lin.shape[:2]
+            ri = np.minimum((np.arange(h) * ny / h).astype(int), ny - 1)
+            ci = np.minimum((np.arange(w) * nx / w).astype(int), nx - 1)
+            tierra = ~mar[ri][:, ci]
+            if tierra.sum() > 1000:
+                return lin[tierra].mean(axis=0), 'tierra firme (%.0f %% de los texeles, rejilla de GEOM)' % (
+                    100.0 * tierra.mean())
+    except Exception as e:  # noqa
+        print('AVISO: media_tierra sin GEOM (%s)' % e)
+    return lin.reshape(-1, 3).mean(axis=0), 'imagen entera (sin GEOM)'
+
+
+_terreno_info = {}
+
+
+def textura_terreno_base(info):
+    """(nombre, bytes) de la textura del terreno por texel: terreno_base.png a TEX_TERRENO (2048) SIN reducir, con la
+    ganancia por canal que lleva su media de tierra firme al color calibrado por color_ac (info['color'], lineal):
+    conserva paleta, parches y AO de la mascara. PNG (por defecto) o DDS con mipmaps (TERRENO_DDS=1)."""
+    lin = imagen_lineal(info['img'], TEX_TERRENO)
+    media = np.asarray(info.get('media_base', lin.reshape(-1, 3).mean(axis=0)), np.float32)
+    gain = (np.asarray(info['color'], np.float32) / np.maximum(media, 1e-4)).reshape(1, 1, 3)
+    rgb = lin_to_srgb(lin * gain)
+    if info.get('modo_terreno') == 'detalle':       # opcion (b): RGBA, alfa = DET_ALFA y el factor medio del detalle
+        rgb = np.clip(rgb / factor_medio_detalle(), 0.0, 1.0)   # compensado EN ESPACIO GAMMA (AC multiplica tal cual)
+        rgb = np.concatenate([rgb, np.full(rgb.shape[:2] + (1,), DET_ALFA, np.float32)], axis=2)
+    img8 = np.ascontiguousarray((rgb * 255.0 + 0.5).astype(np.uint8))
+    _tex_stats['max_lado'] = max(_tex_stats['max_lado'], *img8.shape[:2])
+    _terreno_info.update({'lado': int(img8.shape[0]), 'ganancia_lineal': [round(float(g), 4) for g in gain.ravel()],
+                          'media_srgb8_salida': [int(round(c)) for c in img8[..., :3].reshape(-1, 3).mean(axis=0)],
+                          'recortados_255_pct': round(float((img8[..., :3] == 255).mean() * 100), 3),
+                          'canales': int(img8.shape[2])})
+    if TERRENO_DDS:
+        data, n = dds_bytes(img8)
+        _terreno_info.update(formato='DDS A8R8G8B8 con %d mipmaps' % n, bytes=len(data))
+        return 'terreno_base_%d.dds' % img8.shape[0], data
+    data = png_bytes(img8)
+    _terreno_info.update(formato='PNG %s sin mipmaps propios' % ('RGBA' if img8.shape[2] == 4 else 'RGB'), bytes=len(data))
+    return 'terreno_base_%d.png' % img8.shape[0], data
+
+
 def construir_textura(info):
     """Devuelve (nombre_png, bytes_png). Imagen tintada 512px o PNG plano 8x8 del color base.
-    Antes de codificar, limitar_tamano() garantiza que ningun lado supere TEX_MAX (1024)."""
+    Antes de codificar, limitar_tamano() garantiza que ningun lado supere TEX_MAX (1024).
+    v1.2: lado por material (lado_textura, P2) y textura del terreno por texel (textura_terreno_base)."""
+    if info.get('modo_terreno') in ('base', 'detalle') and info['img'] is not None:
+        return textura_terreno_base(info)
     color = np.array(info['color'], np.float32).reshape(1, 1, 3)
     alpha = info['alpha']
-    lin = imagen_lineal(info['img'], TEX_SIZE) if info['img'] is not None else None
+    lado = lado_textura(info)
+    lin = imagen_lineal(info['img'], lado) if info['img'] is not None else None
+    if lin is not None:
+        _tex_stats['por_lado'][str(lin.shape[0])] = _tex_stats['por_lado'].get(str(lin.shape[0]), 0) + 1
     if lin is None:
         rgb = np.broadcast_to(lin_to_srgb(color), (8, 8, 3))
         nombre = 'flat_%s.png' % info['name']
@@ -301,13 +492,97 @@ def recopilar_materiales(objs):
     infos = [analizar_material(m) for m in orden]
     infos.append({'name': DEFAULT_MAT, 'color': (0.5, 0.5, 0.5), 'alpha': 1.0, 'img': None,
                   'gain': 1.0, 'factor': 1.0, 'scale': 1.0, 'proj': 'FLAT'})
+    for i in infos:
+        # v1.2: el albedo del terreno por texel = media de terreno_base en tierra firme (no el diffuse_color de viewport);
+        # color_ac calibra esa media y textura_terreno_base() lleva la imagen a ella con una ganancia por canal
+        if i.get('modo_terreno') in ('base', 'detalle') and i['img'] is not None:
+            media, fuente = media_tierra(imagen_lineal(i['img'], TEX_TERRENO))
+            _terreno_info.update(media_lineal_tierra=[round(float(c), 4) for c in media], media_fuente=fuente,
+                                 diffuse_color_viewport=[round(float(c), 4) for c in i['color']])
+            i['media_base'] = tuple(float(c) for c in media)
+            i['color'] = i['media_base']
+        if i.get('ac_shader_pedido') and i['ac_shader_pedido'] not in SHADERS_V12:
+            print('AVISO: %s pide ac_shader %s: se ignora en v1.2 (multicapa pendiente de la foto del ensayo A); sale como %s'
+                  % (i['name'], i['ac_shader_pedido'],
+                     'ksPerPixelMultiMap' if i.get('modo_terreno') == 'detalle' else 'ksPerPixel'))
     if USAR_COLOR_AC:       # color para AC (aspecto medido en Blender + modelos de luz de AC) y props por familia
         infos = color_ac.calibrar_todos(infos)
     return infos
 
 
+# ----------------------------------------------------------------------------- v1.2 opcion (b): detalle sobre la base
+# TERRENO_MODO='detalle': (a) + grano cercano con ksPerPixelMultiMap (shader de Kunos; nombres VERIFICADOS en kn5_refs:
+# AcTools.Render MaterialsProviderDark.cs l.83 'ksPerPixelMultiMap'; Kn5MaterialDarkMaps.cs l.26-29 samplers txNormal,
+# txMaps, txDetail y l.43/56 props useDetail, detailUVMultiplier; kn5-converter Program.cs l.261-290 useDetail /
+# detailUVMultiplier / txDetail leidos de los KN5 de Kunos; slots txDiffuse 0, txNormal 1, txMaps 2, txDetail 3 del
+# exportador de referencia material_writer.py l.23-27). Semantica (AcTools DarkMaterial.Unpack.fx Unpack_Maps l.92-106,
+# reimplementacion de CM, NO comprobada en AC): color = txDiffuse.rgb * lerp(txDetail.rgb, 1, txDiffuse.a), detalle con
+# UV * detailUVMultiplier. Para no depender de esa semantica: alfa del diffuse = 0.5 (lerp(d, 1, 0.5) = lerp(1, d, 0.5): da
+# lo mismo si AC lo hiciera al reves) y el diffuse va dividido por la media del factor (si AC ignorase el detalle, el
+# terreno saldria un 1/factor_medio_detalle() ~ +14 % mas claro, sin grano: es decir, la opcion (a) algo mas clara). txNormal plano (128,128,255,128: plano tambien si AC
+# leyera la normal de los canales A/G) y txMaps negro (sin especular ni reflejo). Detalle = grano de luminancia de
+# hierba_seca_d + caliza_d (neutro, sin tono). Riesgo: shader nuevo en el mod (R4) -> ver la decision en el informe.
+DET_PERIODO_M = 3.0          # periodo del grano (m), el del tile de hierba seca de v1.1
+DET_LADO = 512
+DET_AMP = 0.25               # amplitud (desv. tipica) del grano en la textura de detalle (se reduce a la mitad con alfa 0.5)
+DET_MEDIA = 0.75             # media de la textura de detalle (la real, tras recortar a 0..1, la mide textura_detalle)
+DET_ALFA = 0.5
+_detalle = {}
+
+
+def factor_medio_detalle():
+    """Media real de lerp(d, 1, DET_ALFA) con la textura de detalle (~0.875): el diffuse va dividido por ella."""
+    textura_detalle()
+    return DET_ALFA + (1 - DET_ALFA) * _detalle['media']
+
+
+def _textura_pequena(rgba, lado=4):
+    return png_bytes(np.ascontiguousarray(np.broadcast_to(np.asarray(rgba, np.uint8), (lado, lado, len(rgba)))))
+
+
+def textura_detalle():
+    """Grano neutro (gris) para txDetail: luminancia de hierba_seca_d y caliza_d (texturas/) normalizada a media DET_MEDIA y
+    desviacion DET_AMP, DET_LADO px, sin tono (RGB iguales). Alfa 255. Cacheada (bytes y media real en _detalle)."""
+    if 'png' in _detalle:
+        return _detalle['png']
+    capas = []
+    for fichero in ('hierba_seca_d.png', 'caliza_d.png'):
+        img = _cargar_imagen(os.path.join(BASE, '03_blender', 'texturas', fichero))
+        if img is None:
+            continue
+        lin = imagen_lineal(img, DET_LADO)
+        L = lin_to_srgb(lin) @ np.array([0.2126, 0.7152, 0.0722], np.float32)
+        capas.append((L - L.mean()) / max(float(L.std()), 1e-4))
+    g = np.mean(capas, axis=0) if capas else np.zeros((DET_LADO, DET_LADO), np.float32)
+    g = g / max(float(g.std()), 1e-4)
+    d = np.clip(DET_MEDIA + DET_AMP * g, 0.0, 1.0)
+    d8 = (d * 255.0 + 0.5).astype(np.uint8)
+    rgba = np.stack([d8, d8, d8, np.full_like(d8, 255)], axis=-1)
+    _detalle['media'] = float(d8.mean()) / 255.0
+    _terreno_info['detalle'] = {'lado': DET_LADO, 'media': round(_detalle['media'], 3), 'desv': round(float(d.std()), 3),
+                                'recortado_pct': round(float(((d <= 0) | (d >= 1)).mean() * 100), 2),
+                                'fuentes': ['hierba_seca_d.png', 'caliza_d.png'][:len(capas)]}
+    _detalle['png'] = png_bytes(np.ascontiguousarray(rgba))
+    return _detalle['png']
+
+
+def material_terreno_detalle(info, nombre_base):
+    """(shader, props extra, [(sampler, slot, nombre, bytes)]) del MAT_terreno en modo 'detalle'."""
+    mult = PLANAR['Lx'] / DET_PERIODO_M
+    extra = [('isAdditive', 0.0), ('useDetail', 1.0), ('detailUVMultiplier', mult), ('fresnelC', 0.0),
+             ('fresnelEXP', 1.0), ('fresnelMaxLevel', 0.0), ('nmObjectSpace', 0.0), ('sunSpecular', 0.0),
+             ('sunSpecularEXP', 1.0)]
+    tex = [('txNormal', 1, 'terreno_normal_plana.png', _textura_pequena((128, 128, 255, 128))),
+           ('txMaps', 2, 'terreno_maps_negro.png', _textura_pequena((0, 0, 0))),
+           ('txDetail', 3, 'terreno_detalle_%d.png' % DET_LADO, textura_detalle())]
+    _terreno_info['multimap'] = {'detailUVMultiplier': round(mult, 3), 'periodo_m': DET_PERIODO_M, 'alfa_diffuse': DET_ALFA,
+                                 'factor_medio': round(factor_medio_detalle(), 4)}
+    return 'ksPerPixelMultiMap', extra, tex
+
+
 def escribir_texturas_y_materiales(w, infos):
-    """Escribe la seccion de texturas y la de materiales; anota en cada info su id y textura."""
+    """Escribe la seccion de texturas y la de materiales; anota en cada info su id y textura.
+    v1.2: un material puede llevar shader y samplers extra (MAT_terreno en modo 'detalle'); el resto, como v1.1."""
     texturas = []            # [(nombre, bytes)]
     por_hash = {}
     for info in infos:
@@ -319,6 +594,11 @@ def escribir_texturas_y_materiales(w, infos):
             por_hash[h] = nombre
             texturas.append((nombre, data))
             info['tex'] = nombre
+        if info.get('modo_terreno') == 'detalle' and info['img'] is not None:
+            sh, extra, tex = material_terreno_detalle(info, nombre)
+            info['shader_kn5'], info['props_extra'] = sh, extra
+            info['samplers_extra'] = [(s, slot, n) for s, slot, n, _ in tex]
+            texturas += [(n, b) for _, _, n, b in tex]
     w.i32(len(texturas))
     for nombre, data in texturas:
         w.i32(1)                 # activa
@@ -329,11 +609,11 @@ def escribir_texturas_y_materiales(w, infos):
         info['id'] = mid
         info['transparent'] = info['alpha'] < 0.999
         w.string(info['name'])
-        w.string('ksPerPixel')
+        w.string(info.get('shader_kn5', 'ksPerPixel'))
         w.u8(1 if info['transparent'] else 0)     # alphaBlendMode: 0 opaco, 1 alpha blend
         w.u8(0)                                   # alphaTested
         w.i32(0)                                  # depthMode: DepthNormal
-        props = info.get('props_ac', SHADER_PROPS)   # por familia de material (color_ac.FAMILIAS)
+        props = list(info.get('props_ac', SHADER_PROPS)) + list(info.get('props_extra', ()))   # color_ac.FAMILIAS
         w.i32(len(props))
         for pname, val in props:
             w.string(pname)
@@ -341,10 +621,12 @@ def escribir_texturas_y_materiales(w, infos):
             w.floats((0.0, 0.0))                  # B
             w.floats((val, val, val) if pname == 'ksEmissive' else (0.0, 0.0, 0.0))  # C
             w.floats((0.0, 0.0, 0.0, 0.0))        # D
-        w.i32(1)
-        w.string('txDiffuse')
-        w.i32(0)
-        w.string(info['tex'])
+        samplers = [('txDiffuse', 0, info['tex'])] + list(info.get('samplers_extra', ()))
+        w.i32(len(samplers))
+        for sname, slot, tname in samplers:
+            w.string(sname)
+            w.i32(slot)
+            w.string(tname)
     return texturas
 
 
@@ -393,14 +675,24 @@ def info_material(me, mi, infos_por_nombre, default_info):
     return info if info is not None else default_info
 
 
-def loops_grupo(A, mask, info):
+def loops_grupo(A, mask, info, MW=None):
     """Por loop del grupo de triangulos `mask`: posicion y normal LOCALES en ejes Blender y UV con la
     v ya invertida. Las UV generadas (material con imagen sin uv_layer) se calculan en locales, igual
-    que kn5_writer.py, ANTES de cualquier paso a coordenadas mundo."""
+    que kn5_writer.py, ANTES de cualquier paso a coordenadas mundo.
+    v1.2: proj 'PLANAR_MUNDO' (terreno por texel) = UV planar de MUNDO de la rejilla del terreno (PLANAR) con la matriz
+    MW del objeto; info['ignorar_uv'] (tiles del terreno) = UV generada aunque la malla tenga uv_layers (P10 interino)."""
     loops = A['tl'][mask].reshape(-1)
     P = A['co'][A['lv'][loops]]
     N = A['nr'][loops]
-    if A['uv'] is not None:
+    if info.get('proj') == 'PLANAR_MUNDO':
+        if MW is not None:
+            M = np.array(MW, np.float64).reshape(4, 4)
+            Pw = P.astype(np.float64) @ M[:3, :3].T + M[:3, 3]
+        else:
+            Pw = P.astype(np.float64)
+        UV = np.stack([(Pw[:, 0] - PLANAR['x0']) / PLANAR['Lx'], (Pw[:, 1] - PLANAR['y0']) / PLANAR['Ly']],
+                      axis=1).astype(np.float32)
+    elif A['uv'] is not None and not info.get('ignorar_uv'):
         UV = A['uv'][loops].astype(np.float32)
     elif info['img'] is not None:
         # Reproduce el mapping del material: coordenadas Object * Scale, proyeccion FLAT o BOX
@@ -508,16 +800,16 @@ def clave_espacial(centro):
     return code
 
 
-def piezas_objeto(me, infos_por_nombre, default_info):
+def piezas_objeto(me, infos_por_nombre, default_info, MW=None):
     """Objeto suelto (dummy propio con matriz): lista de (verts, idx, info) en coordenadas LOCALES,
-    separadas por material, soldadas y partidas."""
+    separadas por material, soldadas y partidas. MW (v1.2): solo para la UV planar de mundo del terreno."""
     A = arrays_malla(me)
     if A is None:
         return []
     piezas = []
     for mi in np.unique(A['tmat']):
         info = info_material(me, mi, infos_por_nombre, default_info)
-        P, N, UV = loops_grupo(A, A['tmat'] == mi, info)
+        P, N, UV = loops_grupo(A, A['tmat'] == mi, info, MW)
         P, N, _ = a_ejes_kn5(P, N)
         V, inv = soldar(P, N, UV)
         for v, ix in partir(con_tangentes(V), inv):
@@ -536,7 +828,7 @@ def aportar_fusion(me, MW, cast, grupos, infos_por_nombre, default_info, mats_si
     for mi in np.unique(A['tmat']):
         info = info_material(me, mi, infos_por_nombre, default_info)
         cast_g = 0 if (mats_sin_sombra and info['name'].startswith(mats_sin_sombra)) else cast
-        P, N, UV = loops_grupo(A, A['tmat'] == mi, info)
+        P, N, UV = loops_grupo(A, A['tmat'] == mi, info, MW)
         P, N, espejo = a_ejes_kn5(P, N, MW)
         V, inv = soldar(P, N, UV)                    # winding: orden de loops de Blender, sin tocar
         espejo_ob = espejo_ob or espejo              # (solo se cuenta; ningun objeto lo tiene)
@@ -672,7 +964,7 @@ class Estado:
 def escribir_objeto_suelto(w, ob, depsgraph, por_nombre, default_info, E):
     """Dummy con la matriz mundo del objeto + mallas hijas en locales (igual que kn5_writer.py)."""
     me, ev = obtener_malla(ob, depsgraph)
-    piezas = piezas_objeto(me, por_nombre, default_info)
+    piezas = piezas_objeto(me, por_nombre, default_info, ob.matrix_world)
     escribir_dummy(w, ob.name, len(piezas), matriz_objeto(ob))
     E.s['n_dummies'] += 1
     cast = not ob.name.startswith(GROUND_PREFIXES)
@@ -736,6 +1028,127 @@ def escribir_dummy_fusion(w, nombre_dummy, grupos, nombre_fn, clase, E, t0, rend
         nombre_dummy, len(claves), len(trozos), sum(len(t[1]) for t in trozos), time.time() - t0))
 
 
+# ----------------------------------------------------------------------------- v1.2: terreno
+def params_planar(objs):
+    """x0, y0, Lx, Ly de la UV planar del terreno: la rejilla de GEOM ('terreno': x0, y0, nx*cell, ny*cell, el contrato de
+    mascara_terreno / construir_pista) y, como comprobacion (o si no hay GEOM), el ajuste lineal u = (x - x0)/Lx a la
+    uv_layers[0] del TERRENO. Devuelve el dict (y lo deja en PLANAR) con la fuente y el error del ajuste en metros."""
+    out = {}
+    if GEOM_JSON and os.path.exists(GEOM_JSON):
+        T = json.load(open(GEOM_JSON, encoding='utf-8'))['terreno']
+        out = {'x0': float(T['x0']), 'y0': float(T['y0']), 'Lx': float(T['nx']) * float(T['cell']),
+               'Ly': float(T['ny']) * float(T['cell']), 'fuente': 'GEOM %s' % os.path.basename(GEOM_JSON)}
+    ter = next((o for o in objs if o.name in ('1GRASS_terreno', 'TERRENO') and o.data.uv_layers), None)
+    if ter is not None:
+        me = ter.data
+        n = len(me.loops)
+        uv = np.empty(n * 2, np.float32)
+        me.uv_layers[0].data.foreach_get('uv', uv)
+        lv = np.empty(n, np.int32)
+        me.loops.foreach_get('vertex_index', lv)
+        co = np.empty(len(me.vertices) * 3, np.float32)
+        me.vertices.foreach_get('co', co)
+        M = np.array(ter.matrix_world, np.float64)
+        P = co.reshape(-1, 3)[lv].astype(np.float64) @ M[:3, :3].T + M[:3, 3]
+        uv = uv.reshape(-1, 2).astype(np.float64)
+        sel = slice(None, None, max(1, n // 200000))
+        ax, bx = np.polyfit(P[sel, 0], uv[sel, 0], 1)
+        ay, by = np.polyfit(P[sel, 1], uv[sel, 1], 1)
+        ajuste = {'x0': -bx / ax, 'y0': -by / ay, 'Lx': 1.0 / ax, 'Ly': 1.0 / ay}
+        if not out:
+            out = dict(ajuste, fuente='ajuste a la UV de %s' % ter.name)
+        u = (P[:, 0] - out['x0']) / out['Lx']
+        v = (P[:, 1] - out['y0']) / out['Ly']
+        out['error_uv_m'] = round(float(max(np.abs(u - uv[:, 0]).max() * out['Lx'], np.abs(v - uv[:, 1]).max() * out['Ly'])), 3)
+        out['ajuste_uv'] = {k: round(float(v_), 3) for k, v_ in ajuste.items()}
+    if not out:
+        raise RuntimeError('TERRENO_MODO=base sin GEOM ni TERRENO con UV: no se puede calcular la UV planar')
+    PLANAR.update(out)
+    return out
+
+
+def repartir_terreno_caras(objs):
+    """Opcion (c) de la tarea v1.2 (P10 via A), SOLO para comparar con kn5_vista: cada cara con MAT_terreno toma el canal
+    dominante de terreno_mask.png en su centro (UV planar de mundo): R matorral (matorral_d a 6 m), G hierba seca (MAT_terreno,
+    hierba_seca_d a 3 m), B tierra (tierra_d a 6 m), A roca (MAT_terreno_roca, caliza_d a 3 m BOX). Color = paleta x AO media
+    (como terreno_base). Bordes por cara (2 m en la banda, 4 m en el resto). No guarda el .blend. Devuelve {material: caras}."""
+    sys.path.insert(0, os.path.join(BASE, '03_blender'))
+    import paleta
+    base = bpy.data.materials.get(TERRENO_MAT)
+    ruta_m = os.environ.get('TERRENO_MASK') or os.path.join(BASE, '03_blender', 'texturas', 'terreno_mask.png')
+    ruta_ao = os.path.join(os.path.dirname(ruta_m), 'terreno_ao.png')
+    img = bpy.data.images.load(ruta_m, check_existing=False)
+    img.colorspace_settings.name = 'Non-Color'
+    w_, h_ = img.size
+    buf = np.empty(w_ * h_ * 4, np.float32)
+    img.pixels.foreach_get(buf)
+    mask = buf.reshape(h_, w_, 4)                       # fila 0 = abajo (y minimo), como la UV de Blender
+    ao_m = 0.757
+    if os.path.exists(ruta_ao):
+        ia = bpy.data.images.load(ruta_ao, check_existing=False)
+        ia.colorspace_settings.name = 'Non-Color'
+        b2 = np.empty(ia.size[0] * ia.size[1] * 4, np.float32)
+        ia.pixels.foreach_get(b2)
+        ao_m = float(b2.reshape(-1, 4)[:, 0].mean())
+    tex = os.path.join(BASE, '03_blender', 'texturas')
+    defs = {0: ('MAT_terreno_c_matorral', 'oliva_oscuro', 'matorral_d.png', 1 / 6.0, 'FLAT'),
+            2: ('MAT_terreno_c_tierra', 'tierra', 'tierra_d.png', 1 / 6.0, 'FLAT'),
+            3: (color_ac.ROCA_MAT, 'caliza_ocre', 'caliza_d.png', 1 / 3.0, 'BOX')}
+    mats = {}
+    for k, (nombre, col, fichero, esc, proj) in defs.items():
+        m = bpy.data.materials.get(nombre) or base.copy()
+        m.name = nombre
+        for key in [key for key in m.keys() if key.startswith('ac_')]:
+            del m[key]
+        c = np.asarray(paleta.rgb(col), np.float64) * ao_m
+        m.diffuse_color = (c[0], c[1], c[2], 1.0)
+        m['ac_tile'] = {'imagen': os.path.join(tex, fichero), 'escala': esc, 'proj': proj}
+        mats[k] = m
+    cG = np.asarray(paleta.rgb('hierba_seca'), np.float64) * ao_m
+    base.diffuse_color = (cG[0], cG[1], cG[2], 1.0)
+    cuenta = {TERRENO_MAT: 0}
+    for ob in objs:
+        me = ob.data
+        if not any(m is not None and m.name == TERRENO_MAT for m in me.materials) or me.library is not None:
+            continue
+        n = len(me.polygons)
+        pm = np.empty(n, np.int32)
+        me.polygons.foreach_get('material_index', pm)
+        kb = [i for i, m in enumerate(me.materials) if m is not None and m.name == TERRENO_MAT]
+        sel = np.isin(pm, kb)
+        cen = np.empty(n * 3, np.float32)
+        me.polygons.foreach_get('center', cen)
+        M = np.array(ob.matrix_world, np.float64)
+        Pw = cen.reshape(-1, 3).astype(np.float64) @ M[:3, :3].T + M[:3, 3]
+        u = np.clip((Pw[:, 0] - PLANAR['x0']) / PLANAR['Lx'], 0, 1 - 1e-6)
+        v = np.clip((Pw[:, 1] - PLANAR['y0']) / PLANAR['Ly'], 0, 1 - 1e-6)
+        dom = mask[(v * h_).astype(int), (u * w_).astype(int)].argmax(axis=1)
+        for k, m in mats.items():
+            if not any(x is not None and x.name == m.name for x in me.materials):
+                me.materials.append(m)
+            idx = next(i for i, x in enumerate(me.materials) if x is not None and x.name == m.name)
+            caras = sel & (dom == k)
+            pm[caras] = idx
+            cuenta[m.name] = cuenta.get(m.name, 0) + int(caras.sum())
+        cuenta[TERRENO_MAT] += int((sel & (dom == 1)).sum())
+        me.polygons.foreach_set('material_index', pm)
+        me.update()
+    return cuenta
+
+
+def comprobar_p3(infos):
+    """P3 sin cambiar nada: materiales cuya ac_samplers['txDiffuse'] no es la imagen que elige analizar_material."""
+    out = []
+    for i in infos:
+        pedida = i.get('ac_txdiffuse')
+        if not pedida or i.get('modo_terreno') or i.get('tile_ac'):
+            continue
+        elegida = os.path.basename(bpy.path.abspath(i['img'].filepath)) if i.get('img') is not None else None
+        if elegida != pedida:
+            out.append({'material': i['name'], 'ac_samplers_txDiffuse': pedida, 'writer': elegida})
+    return out
+
+
 # ----------------------------------------------------------------------------- principal
 def main():
     t0 = time.time()
@@ -748,11 +1161,20 @@ def main():
     print('escena de export v%d: giro de 180 grados de AC_* %s' % (
         export_v, 'APLICADO (escena antigua)' if any(AC_GIRAR_180.values()) else 'NO necesario'))
     os.makedirs(os.path.dirname(OUT_KN5), exist_ok=True)
-    # color_ac: las caras de roca de MAT_terreno (mismo criterio que el nodo de Blender) pasan a MAT_terreno_roca,
-    # solo en memoria (el .blend no se guarda)
-    roca_ac = color_ac.separar_roca_terreno() if USAR_COLOR_AC else {}
-    print('color_ac: %d caras de roca -> %s %s' % (sum(roca_ac.values()), color_ac.ROCA_MAT, roca_ac))
     objs = objetos_exportables()
+    # v1.2: UV planar del terreno (rejilla de GEOM, comprobada contra la UV del TERRENO)
+    planar = params_planar(objs) if TERRENO_MODO in ('base', 'detalle', 'caras') else None
+    print('terreno: modo %s%s; UV planar %s' % (TERRENO_MODO, ' (DDS con mipmaps)' if TERRENO_DDS else '', planar))
+    # color_ac: las caras de roca de MAT_terreno (mismo criterio que el nodo de Blender) pasan a MAT_terreno_roca,
+    # solo en memoria (el .blend no se guarda). v1.2 'base': solo paredes casi verticales que no son suelo (caliza P1);
+    # 'caras': reparto por caras de la opcion (c) (repartir_terreno_caras, incluye la roca)
+    if TERRENO_MODO == 'caras':
+        roca_ac = repartir_terreno_caras(objs)
+        print('terreno por caras (opcion c): %s' % roca_ac)
+    else:
+        roca_ac = (color_ac.separar_roca_terreno(modo='base' if TERRENO_MODO in ('base', 'detalle') else 'tile')
+                   if USAR_COLOR_AC else {})
+        print('color_ac: %d caras de roca -> %s %s' % (sum(roca_ac.values()), color_ac.ROCA_MAT, roca_ac))
     infos = recopilar_materiales(objs)
     por_nombre = {i['name']: i for i in infos}
     default_info = por_nombre[DEFAULT_MAT]
@@ -865,6 +1287,20 @@ def main():
         'segundos': round(time.time() - t0, 1),
         'color_ac': color_ac.informe(infos) if USAR_COLOR_AC else 'desactivado (COLOR_AC=0)',
         'color_ac_roca_terreno': roca_ac,
+        'v12': {
+            'terreno_modo': TERRENO_MODO, 'terreno_dds': TERRENO_DDS, 'uv_planar': planar,
+            'terreno_textura': dict(_terreno_info),
+            'terreno_info_material': {k: (list(v) if isinstance(v, tuple) else v) for k, v in
+                                      (next((i for i in infos if i['name'] == TERRENO_MAT), {}) or {}).items()
+                                      if k in ('modo_terreno', 'proj', 'familia', 'tx_ac', 'albedo_fuente',
+                                               'ruta_terreno_base', 'media_base')},
+            'tex_p2': TEX_P2, 'texturas_por_lado': dict(_tex_stats['por_lado']),
+            'deco_sin_sombra': list(DECO_SIN_SOMBRA),
+            'ac_shader_ignorados': sorted({i['name']: i['ac_shader_pedido'] for i in infos
+                                           if i.get('ac_shader_pedido') and i['ac_shader_pedido'] not in SHADERS_V12}.items()),
+            'p3_txdiffuse_distinta': comprobar_p3(infos),
+            'materiales_tile_ac': {i['name']: i['tile_ac'] for i in infos if i.get('tile_ac')},
+        },
     }
     json.dump(resumen, open(OUT_JSON, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
     r2 = dict(resumen)
@@ -873,4 +1309,5 @@ def main():
     print('OK KN5 -> %s (%.1f MB)' % (OUT_KN5, size_mb))
 
 
-main()
+if __name__ == '__main__':      # Blender --python ejecuta el script como __main__; ensayo_f_pueblo.py lo importa
+    main()

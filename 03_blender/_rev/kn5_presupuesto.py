@@ -2,9 +2,10 @@
 """kn5_presupuesto.py -- presupuesto duro del KN5 (plan de la fase visual, decision 8 / plan B secc. 0 y 1.4).
 
 Lee el informe JSON de 04_export/kn5_check.py (claves totales, mallas, materiales, texturas) y FALLA (exit 1) si se supera
-un tope: tris <= 6.0 M, mallas <= 800, materiales <= 520, texturas <= 80 MB, KN5 <= 450 MB. Con --base compara familias
-(prefijo fisico de malla, familia de material MAT_X) y AVISA (no falla) si una crece > 50 % en tris, mallas, materiales o
-bytes de textura; --estricto convierte los avisos en fallos.
+un tope: tris <= 6.0 M, mallas <= 800, materiales <= 520, texturas <= 80 MB, KN5 <= 450 MB. Los MB son DECIMALES
+(1 MB = 1e6 bytes, como el plan "hoy 355 MB", el zip y `ls -l`; NO MiB: 450 MiB serian 471.9 MB, un 4.9 % mas permisivo).
+Con --base compara familias (prefijo fisico de malla, familia de material MAT_X) y AVISA (no falla) si una crece > 50 % en
+tris, mallas, materiales o bytes de textura; --estricto convierte los avisos en fallos.
   python 03_blender/_rev/kn5_presupuesto.py <informe_check.json> [--base 04_export/kn5/informe_check_opt.json] [--json salida.json] [--estricto]
   Base por defecto: 04_export/kn5/informe_check_opt.json (zip v1.0, 02/10) si existe, si no 04_export/_fisica/informe_check_fisica.json.
   Sin bpy: python del sistema. Codigos de salida: 0 dentro del presupuesto, 1 tope superado (o aviso con --estricto), 2 error de lectura.
@@ -21,12 +22,13 @@ import sys
 EXPORT = r'E:\Escritorio\claude-pc\arnau-aseto-corsa\04_export'
 BASES_DEFECTO = (os.path.join(EXPORT, 'kn5', 'informe_check_opt.json'),
                  os.path.join(EXPORT, '_fisica', 'informe_check_fisica.json'))
+MB = 1e6                    # MB decimales (1e6 bytes), la unidad del plan y de `ls -l`; no MiB
 TOPES = {  # clave del informe -> (tope, etiqueta, divisor para imprimir, unidad)
     'total_triangulos': (6_000_000, 'triangulos', 1e6, 'M'),
     'n_mallas': (800, 'mallas (draw calls)', 1, ''),
     'n_materiales': (520, 'materiales', 1, ''),
-    'bytes_texturas': (80 * 1024 * 1024, 'bytes de texturas en el KN5', 1024 * 1024, 'MB'),
-    'bytes_fichero': (450 * 1024 * 1024, 'bytes del KN5', 1024 * 1024, 'MB'),
+    'bytes_texturas': (int(80 * MB), 'bytes de texturas en el KN5', MB, 'MB (decimales, 1e6 bytes)'),
+    'bytes_fichero': (int(450 * MB), 'bytes del KN5', MB, 'MB (decimales, 1e6 bytes)'),
 }
 CRECIMIENTO_MAX = 0.50      # +50 % respecto a la base dispara el aviso
 MIN_TRIS_FAMILIA = 20_000   # familias mas pequenas no se avisan por tris (ruido)
@@ -98,8 +100,8 @@ def evaluar(ruta: str, base: str | None = None) -> dict:
         if val is None:
             avisos.append('el informe no trae totales.%s' % k)
             continue
-        totales[k] = {'valor': val, 'tope': tope, 'pct': round(100.0 * val / tope, 1)}
-        txt = '%s: %.2f %s de %.2f %s (%.0f %%)' % (etiqueta, val / div, uni, tope / div, uni, 100.0 * val / tope) if div != 1 \
+        totales[k] = {'valor': val, 'tope': tope, 'pct': round(100.0 * val / tope, 1), 'unidad': uni or 'n'}
+        txt = '%s: %.2f de %.2f %s (%.0f %%)' % (etiqueta, val / div, tope / div, uni, 100.0 * val / tope) if div != 1 \
             else '%s: %d de %d (%.0f %%)' % (etiqueta, val, tope, 100.0 * val / tope)
         if val > tope:
             fallos.append('TOPE SUPERADO ' + txt)

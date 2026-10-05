@@ -1,0 +1,870 @@
+{
+ "ok": true,
+ "fichero": "E:/Escritorio/claude-pc/arnau-aseto-corsa/04_export/kn5/porto_corsa_opt.kn5",
+ "generado": "2026-10-05 10:31:42",
+ "base": "04_export/_v12_dev/respaldo_v11/informe_check_opt.json",
+ "fallos": [],
+ "avisos": [
+  "tris por familia MAT_: familia NUEVA MAT_HORIZ = 210778",
+  "mallas por familia MAT_: familia NUEVA MAT_HORIZ = 13",
+  "materiales por familia MAT_: MAT_CASAS crece +68 % (19 -> 32)",
+  "materiales por familia MAT_: familia NUEVA MAT_HORIZ = 14",
+  "bytes de textura por familia MAT_: MAT_CASAS crece +237 % (1648125 -> 5561959)",
+  "bytes de textura por familia MAT_: MAT_CASINO crece +86 % (1033066 -> 1922269)",
+  "bytes de textura por familia MAT_: MAT_CIVICO crece +83 % (1834810 -> 3359629)",
+  "bytes de textura por familia MAT_: MAT_LOEWS crece +192 % (215308 -> 628981)",
+  "bytes de textura por familia MAT_: MAT_MCOCHE crece +1026574 % (814 -> 8357128)",
+  "bytes de textura por familia MAT_: MAT_PPUEBLO crece +543 % (1220537 -> 7845973)",
+  "bytes de textura por familia MAT_: MAT_VEG crece +54928 % (3182 -> 1751000)",
+  "bytes de textura por familia MAT_: MAT_asfalto crece +601 % (194992 -> 1367721)",
+  "bytes de textura por familia MAT_: familia NUEVA MAT_cesped = 1289370",
+  "bytes de textura por familia MAT_: MAT_terreno crece +796 % (564335 -> 5058450)"
+ ],
+ "info": [
+  "triangulos: 4.94 de 6.00 M (82 %)",
+  "mallas (draw calls): 626 de 800 (78 %)",
+  "materiales: 493 de 520 (95 %)",
+  "bytes de texturas en el KN5: 41.80 de 80.00 MB (decimales, 1e6 bytes) (52 %)",
+  "bytes del KN5: 326.56 de 450.00 MB (decimales, 1e6 bytes) (73 %)",
+  "tris de vegetacion (MAT_VEG+MAT_OLI): 1.35 M (objetivo del plan <= 0.9 M)"
+ ],
+ "totales": {
+  "total_triangulos": {
+   "valor": 4935674,
+   "tope": 6000000,
+   "pct": 82.3,
+   "unidad": "M"
+  },
+  "n_mallas": {
+   "valor": 626,
+   "tope": 800,
+   "pct": 78.2,
+   "unidad": "n"
+  },
+  "n_materiales": {
+   "valor": 493,
+   "tope": 520,
+   "pct": 94.8,
+   "unidad": "n"
+  },
+  "bytes_texturas": {
+   "valor": 41804705,
+   "tope": 80000000,
+   "pct": 52.3,
+   "unidad": "MB (decimales, 1e6 bytes)"
+  },
+  "bytes_fichero": {
+   "valor": 326556077,
+   "tope": 450000000,
+   "pct": 72.6,
+   "unidad": "MB (decimales, 1e6 bytes)"
+  },
+  "veg_tris": 1349084
+ },
+ "familias": {
+  "pref_tris": {
+   "1DIRT": [
+    19357,
+    19937
+   ],
+   "1GRASS": [
+    530530,
+    616498
+   ],
+   "1KERB": [
+    2932,
+    2932
+   ],
+   "1PIT": [
+    15666,
+    15666
+   ],
+   "1ROAD": [
+    87733,
+    87733
+   ],
+   "1WALL": [
+    1432836,
+    1429106
+   ],
+   "2GRASS": [
+    79116,
+    79116
+   ],
+   "AC": [
+    564,
+    564
+   ],
+   "AGUA": [
+    4,
+    4
+   ],
+   "DECO": [
+    2462693,
+    2684118
+   ]
+  },
+  "pref_mallas": {
+   "1DIRT": [
+    5,
+    5
+   ],
+   "1GRASS": [
+    6,
+    5
+   ],
+   "1KERB": [
+    3,
+    3
+   ],
+   "1PIT": [
+    3,
+    3
+   ],
+   "1ROAD": [
+    34,
+    34
+   ],
+   "1WALL": [
+    141,
+    141
+   ],
+   "2GRASS": [
+    3,
+    2
+   ],
+   "AC": [
+    47,
+    47
+   ],
+   "AGUA": [
+    2,
+    2
+   ],
+   "DECO": [
+    358,
+    384
+   ]
+  },
+  "mat_tris": {
+   "MAT_AYTO": [
+    144,
+    144
+   ],
+   "MAT_CALLE": [
+    23754,
+    23754
+   ],
+   "MAT_CAMARA": [
+    27534,
+    27534
+   ],
+   "MAT_CAMINO": [
+    903908,
+    902544
+   ],
+   "MAT_CAMPANILE": [
+    30,
+    30
+   ],
+   "MAT_CARRERA": [
+    120860,
+    118592
+   ],
+   "MAT_CASAS": [
+    500932,
+    500662
+   ],
+   "MAT_CASINO": [
+    25712,
+    25712
+   ],
+   "MAT_CIVICO": [
+    22020,
+    22020
+   ],
+   "MAT_COCHE": [
+    220838,
+    220838
+   ],
+   "MAT_HORIZ": [
+    0,
+    210778
+   ],
+   "MAT_HOTEL": [
+    640,
+    640
+   ],
+   "MAT_ITAL": [
+    41853,
+    44526
+   ],
+   "MAT_LOEWS": [
+    4884,
+    4788
+   ],
+   "MAT_MCOCHE": [
+    103613,
+    103613
+   ],
+   "MAT_MIRADOR": [
+    12034,
+    12034
+   ],
+   "MAT_OLI": [
+    125516,
+    123116
+   ],
+   "MAT_PENON": [
+    10896,
+    10896
+   ],
+   "MAT_PIT": [
+    113002,
+    113002
+   ],
+   "MAT_PPUEBLO": [
+    234346,
+    234346
+   ],
+   "MAT_PUENTES": [
+    87858,
+    87858
+   ],
+   "MAT_PUERTO": [
+    25546,
+    26086
+   ],
+   "MAT_URB": [
+    4968,
+    4968
+   ],
+   "MAT_VEG": [
+    1215372,
+    1225968
+   ],
+   "MAT_YATE": [
+    49752,
+    49752
+   ],
+   "MAT_acera": [
+    2202,
+    2202
+   ],
+   "MAT_agua": [
+    2,
+    2
+   ],
+   "MAT_asfalto": [
+    34968,
+    34968
+   ],
+   "MAT_bordillo": [
+    6448,
+    6448
+   ],
+   "MAT_cesped": [
+    0,
+    96
+   ],
+   "MAT_cierre": [
+    54030,
+    54030
+   ],
+   "MAT_default": [
+    564,
+    564
+   ],
+   "MAT_dirigible": [
+    300,
+    300
+   ],
+   "MAT_fondo": [
+    0,
+    2
+   ],
+   "MAT_guardarrail": [
+    17972,
+    17972
+   ],
+   "MAT_linea": [
+    2,
+    2
+   ],
+   "MAT_marca": [
+    9354,
+    9354
+   ],
+   "MAT_muro": [
+    2368,
+    2368
+   ],
+   "MAT_piano": [
+    2272,
+    2272
+   ],
+   "MAT_piedra": [
+    536,
+    536
+   ],
+   "MAT_terreno": [
+    612267,
+    698233
+   ],
+   "MAT_tierra": [
+    8096,
+    8096
+   ],
+   "MAT_tunel": [
+    264,
+    264
+   ],
+   "MAT_zocalo": [
+    3774,
+    3764
+   ]
+  },
+  "mat_mallas": {
+   "MAT_AYTO": [
+    2,
+    2
+   ],
+   "MAT_CALLE": [
+    22,
+    22
+   ],
+   "MAT_CAMARA": [
+    36,
+    36
+   ],
+   "MAT_CAMINO": [
+    54,
+    54
+   ],
+   "MAT_CAMPANILE": [
+    2,
+    2
+   ],
+   "MAT_CARRERA": [
+    28,
+    28
+   ],
+   "MAT_CASAS": [
+    28,
+    41
+   ],
+   "MAT_CASINO": [
+    13,
+    13
+   ],
+   "MAT_CIVICO": [
+    14,
+    14
+   ],
+   "MAT_COCHE": [
+    27,
+    27
+   ],
+   "MAT_HORIZ": [
+    0,
+    13
+   ],
+   "MAT_HOTEL": [
+    3,
+    3
+   ],
+   "MAT_ITAL": [
+    39,
+    39
+   ],
+   "MAT_LOEWS": [
+    13,
+    12
+   ],
+   "MAT_MCOCHE": [
+    11,
+    11
+   ],
+   "MAT_MIRADOR": [
+    32,
+    32
+   ],
+   "MAT_OLI": [
+    5,
+    5
+   ],
+   "MAT_PENON": [
+    5,
+    5
+   ],
+   "MAT_PIT": [
+    51,
+    51
+   ],
+   "MAT_PPUEBLO": [
+    31,
+    31
+   ],
+   "MAT_PUENTES": [
+    11,
+    11
+   ],
+   "MAT_PUERTO": [
+    19,
+    19
+   ],
+   "MAT_URB": [
+    1,
+    1
+   ],
+   "MAT_VEG": [
+    43,
+    43
+   ],
+   "MAT_YATE": [
+    30,
+    30
+   ],
+   "MAT_acera": [
+    1,
+    1
+   ],
+   "MAT_agua": [
+    1,
+    1
+   ],
+   "MAT_asfalto": [
+    2,
+    2
+   ],
+   "MAT_bordillo": [
+    3,
+    3
+   ],
+   "MAT_cesped": [
+    0,
+    1
+   ],
+   "MAT_cierre": [
+    4,
+    4
+   ],
+   "MAT_default": [
+    47,
+    47
+   ],
+   "MAT_dirigible": [
+    2,
+    2
+   ],
+   "MAT_fondo": [
+    0,
+    1
+   ],
+   "MAT_guardarrail": [
+    1,
+    1
+   ],
+   "MAT_linea": [
+    1,
+    1
+   ],
+   "MAT_marca": [
+    2,
+    2
+   ],
+   "MAT_muro": [
+    1,
+    1
+   ],
+   "MAT_piano": [
+    2,
+    2
+   ],
+   "MAT_piedra": [
+    1,
+    1
+   ],
+   "MAT_terreno": [
+    11,
+    8
+   ],
+   "MAT_tierra": [
+    1,
+    1
+   ],
+   "MAT_tunel": [
+    1,
+    1
+   ],
+   "MAT_zocalo": [
+    1,
+    1
+   ]
+  },
+  "mat_n": {
+   "MAT_AYTO": [
+    2,
+    2
+   ],
+   "MAT_CALLE": [
+    21,
+    21
+   ],
+   "MAT_CAMARA": [
+    36,
+    36
+   ],
+   "MAT_CAMINO": [
+    26,
+    26
+   ],
+   "MAT_CAMPANILE": [
+    2,
+    2
+   ],
+   "MAT_CARRERA": [
+    23,
+    23
+   ],
+   "MAT_CASAS": [
+    19,
+    32
+   ],
+   "MAT_CASINO": [
+    12,
+    12
+   ],
+   "MAT_CIVICO": [
+    17,
+    17
+   ],
+   "MAT_COCHE": [
+    27,
+    27
+   ],
+   "MAT_HORIZ": [
+    0,
+    14
+   ],
+   "MAT_HOTEL": [
+    3,
+    3
+   ],
+   "MAT_ITAL": [
+    39,
+    39
+   ],
+   "MAT_LOEWS": [
+    13,
+    12
+   ],
+   "MAT_MCOCHE": [
+    11,
+    11
+   ],
+   "MAT_MIRADOR": [
+    26,
+    26
+   ],
+   "MAT_OLI": [
+    5,
+    5
+   ],
+   "MAT_PENON": [
+    5,
+    5
+   ],
+   "MAT_PIT": [
+    33,
+    33
+   ],
+   "MAT_PPUEBLO": [
+    24,
+    24
+   ],
+   "MAT_PUENTES": [
+    9,
+    9
+   ],
+   "MAT_PUERTO": [
+    16,
+    16
+   ],
+   "MAT_URB": [
+    1,
+    1
+   ],
+   "MAT_VEG": [
+    43,
+    43
+   ],
+   "MAT_YATE": [
+    30,
+    30
+   ],
+   "MAT_acera": [
+    1,
+    1
+   ],
+   "MAT_agua": [
+    1,
+    1
+   ],
+   "MAT_asfalto": [
+    1,
+    1
+   ],
+   "MAT_bordillo": [
+    1,
+    1
+   ],
+   "MAT_cesped": [
+    0,
+    1
+   ],
+   "MAT_cierre": [
+    1,
+    1
+   ],
+   "MAT_default": [
+    1,
+    1
+   ],
+   "MAT_dirigible": [
+    2,
+    2
+   ],
+   "MAT_fondo": [
+    0,
+    1
+   ],
+   "MAT_guardarrail": [
+    1,
+    1
+   ],
+   "MAT_linea": [
+    1,
+    1
+   ],
+   "MAT_marca": [
+    2,
+    2
+   ],
+   "MAT_muro": [
+    1,
+    1
+   ],
+   "MAT_piano": [
+    2,
+    2
+   ],
+   "MAT_piedra": [
+    1,
+    1
+   ],
+   "MAT_puente": [
+    1,
+    1
+   ],
+   "MAT_terreno": [
+    2,
+    2
+   ],
+   "MAT_tierra": [
+    1,
+    1
+   ],
+   "MAT_tunel": [
+    1,
+    1
+   ],
+   "MAT_zocalo": [
+    1,
+    1
+   ]
+  },
+  "mat_tex_bytes": {
+   "MAT_AYTO": [
+    148,
+    148
+   ],
+   "MAT_CALLE": [
+    1554,
+    1554
+   ],
+   "MAT_CAMARA": [
+    177223,
+    176580
+   ],
+   "MAT_CAMINO": [
+    856440,
+    850306
+   ],
+   "MAT_CAMPANILE": [
+    181691,
+    182847
+   ],
+   "MAT_CARRERA": [
+    204418,
+    205230
+   ],
+   "MAT_CASAS": [
+    1648125,
+    5561959
+   ],
+   "MAT_CASINO": [
+    1033066,
+    1922269
+   ],
+   "MAT_CIVICO": [
+    1834810,
+    3359629
+   ],
+   "MAT_COCHE": [
+    1998,
+    1998
+   ],
+   "MAT_HORIZ": [
+    0,
+    1036
+   ],
+   "MAT_HOTEL": [
+    222947,
+    493654
+   ],
+   "MAT_ITAL": [
+    988082,
+    1349838
+   ],
+   "MAT_LOEWS": [
+    215308,
+    628981
+   ],
+   "MAT_MCOCHE": [
+    814,
+    8357128
+   ],
+   "MAT_MIRADOR": [
+    2037057,
+    2038301
+   ],
+   "MAT_OLI": [
+    370,
+    370
+   ],
+   "MAT_PENON": [
+    370,
+    370
+   ],
+   "MAT_PIT": [
+    209348,
+    209442
+   ],
+   "MAT_PPUEBLO": [
+    1220537,
+    7845973
+   ],
+   "MAT_PUENTES": [
+    943532,
+    946642
+   ],
+   "MAT_PUERTO": [
+    189258,
+    194081
+   ],
+   "MAT_URB": [
+    74,
+    74
+   ],
+   "MAT_VEG": [
+    3182,
+    1751000
+   ],
+   "MAT_YATE": [
+    2222,
+    2222
+   ],
+   "MAT_acera": [
+    170416,
+    188142
+   ],
+   "MAT_agua": [
+    76,
+    76
+   ],
+   "MAT_asfalto": [
+    194992,
+    1367721
+   ],
+   "MAT_bordillo": [
+    189478,
+    198840
+   ],
+   "MAT_cesped": [
+    0,
+    1289370
+   ],
+   "MAT_cierre": [
+    74,
+    74
+   ],
+   "MAT_default": [
+    74,
+    74
+   ],
+   "MAT_dirigible": [
+    148,
+    148
+   ],
+   "MAT_fondo": [
+    0,
+    74
+   ],
+   "MAT_guardarrail": [
+    74,
+    74
+   ],
+   "MAT_linea": [
+    74,
+    74
+   ],
+   "MAT_marca": [
+    148,
+    148
+   ],
+   "MAT_muro": [
+    205426,
+    216341
+   ],
+   "MAT_piano": [
+    148,
+    148
+   ],
+   "MAT_piedra": [
+    220215,
+    219181
+   ],
+   "MAT_puente": [
+    74,
+    74
+   ],
+   "MAT_terreno": [
+    564335,
+    5058450
+   ],
+   "MAT_tierra": [
+    255509,
+    469670
+   ],
+   "MAT_tunel": [
+    74,
+    74
+   ],
+   "MAT_zocalo": [
+    181432,
+    185850
+   ]
+  }
+ }
+}

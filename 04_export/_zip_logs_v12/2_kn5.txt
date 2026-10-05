@@ -1,0 +1,1048 @@
+00:00.922  blend            | Read blend: "E:\Escritorio\claude-pc\arnau-aseto-corsa\04_export\porto_corsa_export.blend"
+blend abierto en 0.5s
+escena de export v2: giro de 180 grados de AC_* NO necesario
+terreno: modo detalle; UV planar {'x0': -932.9, 'y0': -907.8, 'Lx': 2068.0, 'Ly': 2060.0, 'fuente': 'GEOM geometria_v12.json', 'error_uv_m': 0.0, 'ajuste_uv': {'x0': -932.9, 'y0': -907.8, 'Lx': 2068.0, 'Ly': 2060.0}}
+color_ac: 3894 caras de roca -> MAT_terreno_roca {'1WALL_tunel_acantilado': 3894}
+AVISO: MAT_terreno pide ac_shader ksMultilayer_fresnel_nm: se ignora en v1.2 (multicapa pendiente de la foto del ensayo A); sale como ksPerPixelMultiMap
+texturas: 489 (41.8 MB, lado max 2048), materiales: 493, objetos: 4979 (AC 47, sueltos 2, fisica 1026, deco 3898) [10.5s]
+  AC 47 + sueltos 2 escritos (2 mallas) [10s]
+  1ROAD_: 0/138 objetos acumulados, 1 grupos [10s]
+  1ROAD_fusion: 33 grupos -> 33 mallas, 107068 verts [11s]
+  1KERB_: 0/5 objetos acumulados, 1 grupos [11s]
+  1KERB_fusion: 3 grupos -> 3 mallas, 5212 verts [11s]
+  1GRASS_: 0/1 objetos acumulados, 1 grupos [12s]
+  1GRASS_fusion: 1 grupos -> 5 mallas, 319499 verts [12s]
+  2GRASS_: 0/4 objetos acumulados, 1 grupos [12s]
+  2GRASS_fusion: 1 grupos -> 1 mallas, 39593 verts [12s]
+  1WALL_: 0/872 objetos acumulados, 1 grupos [12s]
+  1WALL_fusion: 114 grupos -> 139 mallas, 2402627 verts [14s]
+  1DIRT_: 0/3 objetos acumulados, 4 grupos [14s]
+  1DIRT_fusion: 5 grupos -> 5 mallas, 29017 verts [14s]
+  1PIT_: 0/3 objetos acumulados, 1 grupos [14s]
+  1PIT_fusion: 3 grupos -> 3 mallas, 20559 verts [14s]
+  1ROAD_invisible: 0/1 objetos acumulados, 1 grupos [14s]
+  1ROAD_invisible: 1 grupos -> 1 mallas, 2294 verts [14s]
+  2GRASS_invisible: 0/1 objetos acumulados, 1 grupos [14s]
+  2GRASS_invisible: 1 grupos -> 1 mallas, 15965 verts [14s]
+  1WALL_invisible: 0/4 objetos acumulados, 1 grupos [14s]
+  1WALL_invisible: 1 grupos -> 2 mallas, 73800 verts [14s]
+  DECO: 0/3898 objetos acumulados, 12 grupos [14s]
+  DECO: 1000/3898 objetos acumulados, 234 grupos [16s]
+  DECO: 2000/3898 objetos acumulados, 310 grupos [16s]
+  DECO: 3000/3898 objetos acumulados, 328 grupos [17s]
+  DECO: 374 grupos -> 384 mallas, 2775239 verts [18s]
+RESUMEN: {
+ "kn5": "E:/Escritorio/claude-pc/arnau-aseto-corsa/04_export/kn5/porto_corsa_opt.kn5",
+ "copia": null,
+ "tamano_MB": 326.6,
+ "n_texturas": 489,
+ "texturas_MB": 41.8,
+ "n_materiales": 493,
+ "materiales_transparentes": [
+  "MAT_agua",
+  "MAT_CAMARA_disco_rotor",
+  "MAT_YATE_cristal_claro"
+ ],
+ "materiales_con_imagen": 120,
+ "n_nodos_dummy": 61,
+ "n_mallas": 626,
+ "n_vertices": 5792009,
+ "n_triangulos": 4935674,
+ "objetos_partidos": 0,
+ "objetos_sin_geometria": 0,
+ "n_nodos_AC": 47,
+ "nodos_AC": "47 nodos (ver json)",
+ "bbox_kn5_min": [
+  -9932.9,
+  -26.06,
+  -10152.2
+ ],
+ "bbox_kn5_max": [
+  10135.1,
+  525.5,
+  9907.8
+ ],
+ "convenciones": {
+  "cabecera": "sc6969 + int32 5",
+  "ejes": "(x,y,z)_blender -> (x,z,-y)_kn5",
+  "winding": "orden de loops de Blender conservado",
+  "uv": "(u, 1-v)",
+  "matriz": "m[col][row] por filas (traslacion en floats 12..14)",
+  "nodos": "raiz identidad > [AC_* dummy (matriz) > mini-malla isRenderable=0 | dummy por objeto (matriz mundo) > mallas en locales | <prefijo>fusion / DECO identidad > mallas en mundo]",
+  "tex_size": 512,
+  "tex_max": 1024,
+  "max_verts": 65000,
+  "soldadura": {
+   "pos": 0.0001,
+   "normal": 0.001,
+   "uv": 0.0001
+  }
+ },
+ "optimizacion": {
+  "objetos": {
+   "AC": 47,
+   "sueltos": 2,
+   "fisica": 1026,
+   "deco": 3898,
+   "invisible": 6,
+   "omitidos": 0
+  },
+  "mallas_invisibles_solo_colision": 4,
+  "objetos_invisibles": [
+   "1ROAD_viaducto_labio_invisible",
+   "1WALL_cierre_boxes",
+   "1WALL_cierre_der",
+   "1WALL_cierre_horquillas",
+   "1WALL_cierre_izq",
+   "2GRASS_cuna_pit_invisible"
+  ],
+  "no_fisicos_con_marca_invisible_escritos_visibles": [],
+  "prefijos_fisica": [
+   "1ROAD_",
+   "1KERB_",
+   "1GRASS_",
+   "2GRASS_",
+   "1WALL_",
+   "1DIRT_",
+   "1PIT_"
+  ],
+  "deco_sin_sombra": [
+   "VEG_",
+   "OLI_",
+   "HORIZ_"
+  ],
+  "deco_mat_sin_sombra": [
+   "MAT_VEG_",
+   "MAT_OLI_"
+  ],
+  "mallas_ac_no_renderables": 47,
+  "mallas_sueltas": 2,
+  "mallas_fisica": 189,
+  "mallas_deco": 384,
+  "grupos_fisica": 160,
+  "grupos_deco": 374,
+  "grupos_partidos": 10,
+  "objetos_con_det_negativo_(winding_no_tocado)": 0,
+  "texturas_reducidas_a_1024": 0,
+  "n_nodos_total": 687,
+  "orden_espacial_celda_m": 25.0
+ },
+ "segundos": 18.5,
+ "color_ac": {
+  "version": "color_ac v3 (2026-10-04)",
+  "exposicion_diseno": 0.2,
+  "peso_modos": {
+   "ac": 0.6,
+   "cap": 0.0,
+   "lcs": 0.2,
+   "lcsy": 0.2
+  },
+  "familias": {
+   "agua": {
+    "n": 3,
+    "props": {
+     "ksAmbient": 0.45,
+     "ksDiffuse": 0.6,
+     "ksSpecular": 0.8,
+     "ksSpecularEXP": 250.0,
+     "ksEmissive": 0.0,
+     "ksAlphaRef": 0.0
+    },
+    "textura_antes": [
+     77,
+     191,
+     209
+    ],
+    "textura_despues": [
+     64,
+     186,
+     229
+    ],
+    "lum_textura_antes": 167.8,
+    "lum_textura_despues": 163.4,
+    "sat_antes": 0.631,
+    "sat_despues": 0.721,
+    "suelo_sol_blender": [
+     123,
+     235,
+     252
+    ],
+    "suelo_sol_ac_antes": [
+     147,
+     232,
+     232
+    ],
+    "suelo_sol_ac_despues": [
+     132,
+     233,
+     241
+    ],
+    "pared_sol_blender": [
+     104,
+     207,
+     228
+    ],
+    "pared_sol_ac_antes": [
+     95,
+     191,
+     193
+    ],
+    "pared_sol_ac_despues": [
+     83,
+     193,
+     208
+    ],
+    "sombra_pared_blender": [
+     59,
+     135,
+     164
+    ],
+    "sombra_pared_ac_antes": [
+     32,
+     86,
+     95
+    ],
+    "sombra_pared_ac_despues": [
+     26,
+     84,
+     105
+    ],
+    "deltaE_ac_antes": 20.4,
+    "deltaE_ac_despues": 16.5
+   },
+   "asfalto": {
+    "n": 10,
+    "props": {
+     "ksAmbient": 0.45,
+     "ksDiffuse": 0.6,
+     "ksSpecular": 0.08,
+     "ksSpecularEXP": 20.0,
+     "ksEmissive": 0.0,
+     "ksAlphaRef": 0.0
+    },
+    "textura_antes": [
+     137,
+     136,
+     137
+    ],
+    "textura_despues": [
+     120,
+     124,
+     129
+    ],
+    "lum_textura_antes": 136.5,
+    "lum_textura_despues": 123.9,
+    "sat_antes": 0.034,
+    "sat_despues": 0.07,
+    "suelo_sol_blender": [
+     169,
+     176,
+     192
+    ],
+    "suelo_sol_ac_antes": [
+     200,
+     195,
+     187
+    ],
+    "suelo_sol_ac_despues": [
+     186,
+     185,
+     179
+    ],
+    "pared_sol_blender": [
+     145,
+     152,
+     160
+    ],
+    "pared_sol_ac_antes": [
+     152,
+     147,
+     140
+    ],
+    "pared_sol_ac_despues": [
+     138,
+     138,
+     134
+    ],
+    "sombra_pared_blender": [
+     84,
+     98,
+     112
+    ],
+    "sombra_pared_ac_antes": [
+     59,
+     59,
+     60
+    ],
+    "sombra_pared_ac_despues": [
+     51,
+     53,
+     56
+    ],
+    "deltaE_ac_antes": 16.4,
+    "deltaE_ac_despues": 15.9
+   },
+   "cristal": {
+    "n": 18,
+    "props": {
+     "ksAmbient": 0.45,
+     "ksDiffuse": 0.6,
+     "ksSpecular": 0.6,
+     "ksSpecularEXP": 150.0,
+     "ksEmissive": 0.0,
+     "ksAlphaRef": 0.0
+    },
+    "textura_antes": [
+     79,
+     105,
+     130
+    ],
+    "textura_despues": [
+     89,
+     107,
+     126
+    ],
+    "lum_textura_antes": 101.4,
+    "lum_textura_despues": 104.8,
+    "sat_antes": 0.424,
+    "sat_despues": 0.316,
+    "suelo_sol_blender": [
+     118,
+     146,
+     181
+    ],
+    "suelo_sol_ac_antes": [
+     122,
+     151,
+     169
+    ],
+    "suelo_sol_ac_despues": [
+     145,
+     162,
+     173
+    ],
+    "pared_sol_blender": [
+     97,
+     124,
+     154
+    ],
+    "pared_sol_ac_antes": [
+     88,
+     112,
+     128
+    ],
+    "pared_sol_ac_despues": [
+     105,
+     120,
+     131
+    ],
+    "sombra_pared_blender": [
+     58,
+     83,
+     113
+    ],
+    "sombra_pared_ac_antes": [
+     33,
+     44,
+     56
+    ],
+    "sombra_pared_ac_despues": [
+     37,
+     45,
+     54
+    ],
+    "deltaE_ac_antes": 17.9,
+    "deltaE_ac_despues": 18.9
+   },
+   "edificio": {
+    "n": 137,
+    "props": {
+     "ksAmbient": 0.45,
+     "ksDiffuse": 0.6,
+     "ksSpecular": 0.03,
+     "ksSpecularEXP": 12.0,
+     "ksEmissive": 0.0,
+     "ksAlphaRef": 0.0
+    },
+    "textura_antes": [
+     192,
+     169,
+     144
+    ],
+    "textura_despues": [
+     187,
+     166,
+     145
+    ],
+    "lum_textura_antes": 172.5,
+    "lum_textura_despues": 168.6,
+    "sat_antes": 0.328,
+    "sat_despues": 0.304,
+    "suelo_sol_blender": [
+     218,
+     201,
+     183
+    ],
+    "suelo_sol_ac_antes": [
+     223,
+     213,
+     186
+    ],
+    "suelo_sol_ac_despues": [
+     224,
+     212,
+     189
+    ],
+    "pared_sol_blender": [
+     195,
+     176,
+     153
+    ],
+    "pared_sol_ac_antes": [
+     189,
+     172,
+     143
+    ],
+    "pared_sol_ac_despues": [
+     190,
+     173,
+     148
+    ],
+    "sombra_pared_blender": [
+     114,
+     114,
+     107
+    ],
+    "sombra_pared_ac_antes": [
+     87,
+     76,
+     64
+    ],
+    "sombra_pared_ac_despues": [
+     85,
+     74,
+     65
+    ],
+    "deltaE_ac_antes": 14.0,
+    "deltaE_ac_despues": 12.2
+   },
+   "luz": {
+    "n": 8,
+    "props": {
+     "ksAmbient": 0.45,
+     "ksDiffuse": 0.6,
+     "ksSpecular": 0.1,
+     "ksSpecularEXP": 40.0,
+     "ksEmissive": 1.2,
+     "ksAlphaRef": 0.0
+    },
+    "textura_antes": [
+     185,
+     132,
+     146
+    ],
+    "textura_despues": [
+     163,
+     132,
+     148
+    ],
+    "lum_textura_antes": 144.6,
+    "lum_textura_despues": 140.1,
+    "sat_antes": 0.559,
+    "sat_despues": 0.479,
+    "suelo_sol_blender": [
+     199,
+     155,
+     179
+    ],
+    "suelo_sol_ac_antes": [
+     207,
+     169,
+     167
+    ],
+    "suelo_sol_ac_despues": [
+     221,
+     172,
+     173
+    ],
+    "pared_sol_blender": [
+     211,
+     160,
+     168
+    ],
+    "pared_sol_ac_antes": [
+     171,
+     126,
+     129
+    ],
+    "pared_sol_ac_despues": [
+     188,
+     144,
+     149
+    ],
+    "sombra_pared_blender": [
+     129,
+     104,
+     126
+    ],
+    "sombra_pared_ac_antes": [
+     83,
+     58,
+     65
+    ],
+    "sombra_pared_ac_despues": [
+     115,
+     92,
+     102
+    ],
+    "deltaE_ac_antes": 21.0,
+    "deltaE_ac_despues": 17.3
+   },
+   "metal": {
+    "n": 41,
+    "props": {
+     "ksAmbient": 0.45,
+     "ksDiffuse": 0.6,
+     "ksSpecular": 0.4,
+     "ksSpecularEXP": 60.0,
+     "ksEmissive": 0.0,
+     "ksAlphaRef": 0.0
+    },
+    "textura_antes": [
+     164,
+     162,
+     143
+    ],
+    "textura_despues": [
+     158,
+     159,
+     144
+    ],
+    "lum_textura_antes": 160.7,
+    "lum_textura_despues": 158.0,
+    "sat_antes": 0.184,
+    "sat_despues": 0.179,
+    "suelo_sol_blender": [
+     187,
+     195,
+     187
+    ],
+    "suelo_sol_ac_antes": [
+     202,
+     202,
+     183
+    ],
+    "suelo_sol_ac_despues": [
+     203,
+     205,
+     187
+    ],
+    "pared_sol_blender": [
+     164,
+     171,
+     159
+    ],
+    "pared_sol_ac_antes": [
+     162,
+     160,
+     139
+    ],
+    "pared_sol_ac_despues": [
+     162,
+     163,
+     143
+    ],
+    "sombra_pared_blender": [
+     103,
+     117,
+     118
+    ],
+    "sombra_pared_ac_antes": [
+     73,
+     72,
+     64
+    ],
+    "sombra_pared_ac_despues": [
+     70,
+     71,
+     64
+    ],
+    "deltaE_ac_antes": 16.3,
+    "deltaE_ac_despues": 15.5
+   },
+   "pintado": {
+    "n": 148,
+    "props": {
+     "ksAmbient": 0.45,
+     "ksDiffuse": 0.6,
+     "ksSpecular": 0.12,
+     "ksSpecularEXP": 40.0,
+     "ksEmissive": 0.0,
+     "ksAlphaRef": 0.0
+    },
+    "textura_antes": [
+     166,
+     149,
+     133
+    ],
+    "textura_despues": [
+     163,
+     150,
+     137
+    ],
+    "lum_textura_antes": 151.2,
+    "lum_textura_despues": 151.9,
+    "sat_antes": 0.428,
+    "sat_despues": 0.396,
+    "suelo_sol_blender": [
+     190,
+     182,
+     176
+    ],
+    "suelo_sol_ac_antes": [
+     194,
+     187,
+     167
+    ],
+    "suelo_sol_ac_despues": [
+     201,
+     192,
+     177
+    ],
+    "pared_sol_blender": [
+     173,
+     163,
+     154
+    ],
+    "pared_sol_ac_antes": [
+     159,
+     146,
+     126
+    ],
+    "pared_sol_ac_despues": [
+     164,
+     152,
+     135
+    ],
+    "sombra_pared_blender": [
+     104,
+     108,
+     111
+    ],
+    "sombra_pared_ac_antes": [
+     74,
+     66,
+     58
+    ],
+    "sombra_pared_ac_despues": [
+     73,
+     67,
+     61
+    ],
+    "deltaE_ac_antes": 16.9,
+    "deltaE_ac_despues": 15.9
+   },
+   "pintura_vial": {
+    "n": 10,
+    "props": {
+     "ksAmbient": 0.45,
+     "ksDiffuse": 0.6,
+     "ksSpecular": 0.06,
+     "ksSpecularEXP": 20.0,
+     "ksEmissive": 0.0,
+     "ksAlphaRef": 0.0
+    },
+    "textura_antes": [
+     244,
+     220,
+     171
+    ],
+    "textura_despues": [
+     231,
+     211,
+     162
+    ],
+    "lum_textura_antes": 221.6,
+    "lum_textura_despues": 211.5,
+    "sat_antes": 0.301,
+    "sat_despues": 0.306,
+    "suelo_sol_blender": [
+     254,
+     240,
+     198
+    ],
+    "suelo_sol_ac_antes": [
+     246,
+     231,
+     189
+    ],
+    "suelo_sol_ac_despues": [
+     247,
+     231,
+     188
+    ],
+    "pared_sol_blender": [
+     242,
+     229,
+     183
+    ],
+    "pared_sol_ac_antes": [
+     220,
+     201,
+     155
+    ],
+    "pared_sol_ac_despues": [
+     220,
+     201,
+     154
+    ],
+    "sombra_pared_blender": [
+     148,
+     155,
+     137
+    ],
+    "sombra_pared_ac_antes": [
+     112,
+     101,
+     78
+    ],
+    "sombra_pared_ac_despues": [
+     106,
+     97,
+     74
+    ],
+    "deltaE_ac_antes": 17.7,
+    "deltaE_ac_despues": 17.3
+   },
+   "roca": {
+    "n": 26,
+    "props": {
+     "ksAmbient": 0.45,
+     "ksDiffuse": 0.6,
+     "ksSpecular": 0.02,
+     "ksSpecularEXP": 8.0,
+     "ksEmissive": 0.0,
+     "ksAlphaRef": 0.0
+    },
+    "textura_antes": [
+     149,
+     145,
+     144
+    ],
+    "textura_despues": [
+     142,
+     144,
+     147
+    ],
+    "lum_textura_antes": 145.9,
+    "lum_textura_despues": 143.6,
+    "sat_antes": 0.191,
+    "sat_despues": 0.163,
+    "suelo_sol_blender": [
+     186,
+     190,
+     209
+    ],
+    "suelo_sol_ac_antes": [
+     211,
+     205,
+     195
+    ],
+    "suelo_sol_ac_despues": [
+     210,
+     209,
+     204
+    ],
+    "pared_sol_blender": [
+     159,
+     162,
+     169
+    ],
+    "pared_sol_ac_antes": [
+     163,
+     156,
+     146
+    ],
+    "pared_sol_ac_despues": [
+     161,
+     160,
+     155
+    ],
+    "sombra_pared_blender": [
+     92,
+     104,
+     118
+    ],
+    "sombra_pared_ac_antes": [
+     65,
+     64,
+     63
+    ],
+    "sombra_pared_ac_despues": [
+     62,
+     63,
+     65
+    ],
+    "deltaE_ac_antes": 17.4,
+    "deltaE_ac_despues": 15.7
+   },
+   "terreno": {
+    "n": 13,
+    "props": {
+     "ksAmbient": 0.45,
+     "ksDiffuse": 0.6,
+     "ksSpecular": 0.0,
+     "ksSpecularEXP": 1.0,
+     "ksEmissive": 0.0,
+     "ksAlphaRef": 0.0
+    },
+    "textura_antes": [
+     165,
+     163,
+     115
+    ],
+    "textura_despues": [
+     151,
+     157,
+     111
+    ],
+    "lum_textura_antes": 160.1,
+    "lum_textura_despues": 152.4,
+    "sat_antes": 0.388,
+    "sat_despues": 0.399,
+    "suelo_sol_blender": [
+     198,
+     205,
+     162
+    ],
+    "suelo_sol_ac_antes": [
+     219,
+     215,
+     168
+    ],
+    "suelo_sol_ac_despues": [
+     211,
+     214,
+     167
+    ],
+    "pared_sol_blender": [
+     167,
+     175,
+     131
+    ],
+    "pared_sol_ac_antes": [
+     171,
+     166,
+     118
+    ],
+    "pared_sol_ac_despues": [
+     163,
+     166,
+     117
+    ],
+    "sombra_pared_blender": [
+     100,
+     116,
+     92
+    ],
+    "sombra_pared_ac_antes": [
+     74,
+     73,
+     50
+    ],
+    "sombra_pared_ac_despues": [
+     67,
+     70,
+     48
+    ],
+    "deltaE_ac_antes": 14.4,
+    "deltaE_ac_despues": 13.0
+   },
+   "vegetacion": {
+    "n": 79,
+    "props": {
+     "ksAmbient": 0.45,
+     "ksDiffuse": 0.6,
+     "ksSpecular": 0.0,
+     "ksSpecularEXP": 1.0,
+     "ksEmissive": 0.0,
+     "ksAlphaRef": 0.0
+    },
+    "textura_antes": [
+     145,
+     139,
+     108
+    ],
+    "textura_despues": [
+     134,
+     136,
+     105
+    ],
+    "lum_textura_antes": 138.3,
+    "lum_textura_despues": 133.1,
+    "sat_antes": 0.404,
+    "sat_despues": 0.414,
+    "suelo_sol_blender": [
+     174,
+     180,
+     150
+    ],
+    "suelo_sol_ac_antes": [
+     200,
+     198,
+     160
+    ],
+    "suelo_sol_ac_despues": [
+     197,
+     199,
+     163
+    ],
+    "pared_sol_blender": [
+     152,
+     155,
+     123
+    ],
+    "pared_sol_ac_antes": [
+     154,
+     149,
+     112
+    ],
+    "pared_sol_ac_despues": [
+     150,
+     151,
+     114
+    ],
+    "sombra_pared_blender": [
+     89,
+     99,
+     86
+    ],
+    "sombra_pared_ac_antes": [
+     63,
+     61,
+     46
+    ],
+    "sombra_pared_ac_despues": [
+     58,
+     59,
+     44
+    ],
+    "deltaE_ac_antes": 15.0,
+    "deltaE_ac_despues": 13.3
+   }
+  },
+  "fuentes": {
+   "aspecto medido en las vistas de Blender": 110,
+   "color del material": 256,
+   "efectivo (reflejo del cielo)": 2,
+   "diffuse (medida obsoleta: el material cambio)": 56,
+   "medido en Blender": 69
+  }
+ },
+ "color_ac_roca_terreno": {
+  "1WALL_tunel_acantilado": 3894
+ },
+ "v12": {
+  "terreno_modo": "detalle",
+  "terreno_dds": false,
+  "uv_planar": {
+   "x0": -932.9,
+   "y0": -907.8,
+   "Lx": 2068.0,
+   "Ly": 2060.0,
+   "fuente": "GEOM geometria_v12.json",
+   "error_uv_m": 0.0,
+   "ajuste_uv": {
+    "x0": -932.9,
+    "y0": -907.8,
+    "Lx": 2068.0,
+    "Ly": 2060.0
+   }
+  },
+  "terreno_textura": {
+   "media_lineal_tierra": [
+    0.2858,
+    0.2612,
+    0.1459
+   ],
+   "media_fuente": "tierra firme (39 % de los texeles, rejilla de GEOM)",
+   "diffuse_color_viewport": [
+    0.55,
+    0.45,
+    0.2
+   ],
+   "detalle": {
+    "lado": 512,
+    "media": 0.734,
+    "desv": 0.227,
+    "recortado_pct": 17.31,
+    "fuentes": [
+     "hierba_seca_d.png",
+     "caliza_d.png"
+    ]
+   },
+   "lado": 2048,
+   "ganancia_lineal": [
+    0.7101,
+    0.7814,
+    0.9091
+   ],
+   "media_srgb8_salida": [
+    140,
+    141,
+    125
+   ],
+   "recortados_255_pct": 0.0,
+   "canales": 4,
+   "formato": "PNG RGBA sin mipmaps propios",
+   "bytes": 2633251,
+   "multimap": {
+    "detailUVMultiplier": 689.333,
+    "periodo_m": 3.0,
+    "alfa_diffuse": 0.5,
+    "factor_medio": 0.8671
+   }
+  },
+  "terreno_info_material": {
+   "proj": "PLANAR_MUNDO",
+   "modo_terreno": "detalle",
+   "ruta_terreno_base": "E:/Escritorio/claude-pc/arnau-aseto-corsa/04_export/_zip_src/texturas_v12/terreno_base.png",
+   "media_base": [
+    0.2857975363731384,
+    0.26115772128105164,
+    0.14588716626167297
+   ],
+   "albedo_fuente": "diffuse (medida obsoleta: el material cambio)",
+   "familia": "terreno",
+   "tx_ac": [
+    0.4878243827612917,
+    0.4890674110272077,
+    0.3996457602642974
+   ]
+  },
+  "tex_p2": true,
+  "texturas_por_lado": {
+   "512": 106,
+   "1024": 13
+  },
+  "deco_sin_sombra": [
+   "VEG_",
+   "OLI_",
+   "HORIZ_"
+  ],
+  "ac_shader_ignorados": [
+   [
+    "MAT_terreno",
+    "ksMultilayer_fresnel_nm"
+   ]
+  ],
+  "p3_txdiffuse_distinta": [],
+  "materiales_tile_ac": {
+   "MAT_terreno_roca": "caliza_d.png"
+  }
+ }
+}
+OK KN5 -> E:/Escritorio/claude-pc/arnau-aseto-corsa/04_export/kn5/porto_corsa_opt.kn5 (326.6 MB)
+Blender 5.1.2 (hash ec6e62d40fa9 built 2026-05-19 01:37:34)
+
+Blender quit

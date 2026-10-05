@@ -1,0 +1,54 @@
+preparar_geometria ok
+  F1 tierra tallada (s 1430-2440): pared Y caida a 25 m 33.6% (a 50 m 23.3%), pared en algun lado 52.2%, caida en algun lado 55.3%; muestras con lado alto definido 401 (lado +1 en 48%); celdas levantadas (ladera) 1372 (max 14.0 m), rebajadas (caida) 1148 (max 17.2 m), lomo minimo 0 celdas, costillas
+  invariantes: celdas_invaden_pista 0 (sobre Z-0.3: 3) | hierba_asfalto (proxy) 0 puntos (max -0.020 m) | loews_ref_dz_max 0.0 -> ok | foso (proxy 1D, aviso; la referencia es la QA de construir) max 2.25 m {'pueblo_subida_ladera': 0.79, 'pueblo_subida_mar': 0.44, 'pueblo_alto_ladera': 2.25, 'pueblo_
+  invariantes: celdas_invaden_pista 0 (sobre Z-0.3: 3) | hierba_asfalto (proxy) 0 puntos (max -0.020 m) | loews_ref_dz_max 0.0 -> ok | foso (proxy 1D, aviso; la referencia es la QA de construir) max 1.90 m {'pueblo_subida_ladera': 1.66, 'pueblo_subida_mar': 0.44, 'pueblo_alto_ladera': 1.9, 'pueblo_a
+  KPI antes -> despues: pared_y_caida_25m 4.5 -> 33.6 % | 50 m 22.1 -> 23.3 % | pared_roca tierra 22.7 -> 52.2 % | roca > 35 grados 21.2 -> 81.7 % | 120 m tras pueblo_subida_ladera 83.0 -> 83.0 m
+[urbanismo] QA: {"casas_total": 193, "solares_total": 207, "separacion_min_solares": 1.02, "peor_huella": {"travesia": 0.596, "rampa": 0.411, "plazoleta": 0.49, "plaza": 0.429, "calle_borde": [-0.799, 0.357], "solar": [-0.499, 0.723], "solar_rango": 0.996, "rampa_murete": 0.622}, "terrazas_vacias": [], "huecos": [["pueblo_subida_ladera", 0, 694.994, 759.29, 57.057], ["pueblo_subida_ladera", 0, 815
+[urbanismo] TOTAL casas 193 (objetivo >= 190) | huecos > 12 m entre solares de una fila: 515 m (objetivo < 300) | terrazas vacias: 0
+MASCARA_TERRENO: 2048x2048 | area tierra {"matorral": 45.87, "hierba_seca": 21.55, "tierra": 4.76, "roca": 27.81} | suma ok 100.00 % | nz<0.7: roca 99.8 % verde 0.1 % | pend>0.84: roca 92.9 % | borde dirt tierra 91.7 % | AO 0.757 | veg_plan | 6.2 s
+[vegetacion] TOTAL 22705 plantas: 7537 arboles (objetivo 6-9 k) + 15168 matas (15-20 k) en 299 masas | vecino < 6 m 83.7 % | z > 80 m 52.6 % | 5.8 s
+[vegetacion] VERIFICACION {"pista_lt_w2_mas_12": 0, "dentro_de_solar_o_edificio": 0, "en_mar": 0}
+construir_pista exit 0 (10 s)
+integrar_escena exit 0 (161 s)
+ERRORES: ninguno
+revisar_flotantes exit 0 (5 s)
+revisar_invasores exit 0 (6 s)
+eliminar_sumergidos exit 0 (5 s)
+revisar_coches exit 0 (3 s)
+revisar_tunel exit 0 (3 s)
+asentar_objetos exit 0 (11 s)
+NADA_EN_PISTA objetos invasores: 11 (tierra: 0)
+revisar_urbanismo exit 0
+mejorar_materiales exit 0
+aplicar_texturas exit 0
+MAT_terreno v2: mascara terreno_mask.png, base terreno_base.png, tiles {'txDetailG': 'hierba_seca_d.png', 'txDetailR': 'matorral_d.png', 'txDetailB': 'tierra_d.png', 'txDetailA': 'caliza_d.png'}, normal caliza_n.png
+terreno: atributo roca = canal A de E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\texturas\terreno_mask.png en 266255 vertices (media 0.118; > 0.49 en el 26.8 % de los vertices de tierra; mascara_roca v1 > 0.49: 27.6 %, difieren en el 4.45 %)
+BISEL BARATO: 645 mallas suavizadas (auto smooth 35 grados, 751369 aristas vivas), 0 ya hechas/saltadas
+HORIZONTE: 14 materiales mezclados con la bruma #9499B0 (cielo #DAECFD x 0.42 x tinte) al 35-55 % entre 2400 y 4500 m; albedo max 0.36; V max 0.63 (<= 0.85), S min 0.15 (>= 0.15): OK
+APLICAR_TEXTURAS: tocados=112 saltados=11 rehechos=0 caliza_val_dia mates=6
+plot exit 0
+E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/escena_candidata.blend: 198.7 MB descomprimido | rutas de imagen relativas: 0 | absolutas: 15 (de texturas/: 14)
+candidata: E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/escena_candidata.blend (md5 d7e23a550d9c32d1f55f315f47951542) | manifiesto E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/candidata.json | logs E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/logs_f1_r3
+PUERTA ok: FALSE -> E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/puerta.json
+  MOTIVO: revisar_urbanismo: 27 fallos > base 23
+  MOTIVO: asentar: flotaban_mas_0_6 = 29 peor que la base 28
+  MOTIVO: asentar: enterrados_mas_0_6 = 60 peor que la base 57
+  aviso: revisar_urbanismo: tipos de fallo nuevos respecto a la base: {'camino_sin_destino': 1}
+  aviso: terreno: costuras max 2.03 m (objetivo del plan < 0.6 es del bloque 1; la puerta exige "no peor que la base")
+  diff con la base (2026-10-04 15:12): 5 claves distintas
+    asentar.arboles_quitados           base 3 -> candidata 2
+    asentar.bancales_mal               base 1 -> candidata 0
+    asentar.enterrados_mas_0_6         base 57 -> candidata 60
+    asentar.flotaban_mas_0_6           base 28 -> candidata 29
+    revisar_urbanismo_fallos           base 23 -> candidata 27
+PUERTA exit 1 (0 = ok: true; promover con: bash 03_blender/_rev/promover.sh <bloque> <hoja>)
+AUDITORIA {"casa_muro": 1, "prop_pista": 1, "prop_pitlane": 1, "prop_camino": 2, "camino_sin_destino": 1, "casa_flotante": 3, "objeto_salto_grande": 11, "losa_hierba": 2, "plaza_muro": 1, "sendero_volado": 2, "sendero_enterrado": 2}
+[integrar] urbanismo: 193 casas (123 variantes), 14 plazoletas, 2 plazas, 73 calles/tramos, 81 muros, 11 escaleras, 7 rampas, 22 vallas, 10 salidas
+[integrar] casino: roca_casino base z=118 -> meseta z=132 (radio 60), bajada 1460 m (pend. max 11.0%, 2 horquillas), 0 objetos retirados
+[integrar] horizonte: 22 objetos HORIZ_, 197690 tris, 14 materiales MAT_HORIZ_, 9 cordilleras + 9 lomas + 3 pueblos + 1 faro; anillo 327.5..167.5 grados (abertura 160 grados centrada en brujula 202.5); cielo (0.7, 0.84, 0.98)
+[integrar] tunel: entrada en s=404, salida en s=540 (136 m de galeria)
+[integrar] roca del lazo (roca_lazo): checks ok=True, cumbre z=108, 17 casas, 0 objetos retirados de debajo
+[integrar] edicolas: 7 plazuelas con capillita al final de calles/salidas sin destino (0 con muro cruzando)
+[integrar] OK zona_edicolas
+[integrar] despeje final: 105 ejes de calle/camino, 207 edificios; quitados 126 arboles y 36 props (0 coches-camara con su peana y ramal), 1 carteles apartados, 0 peanas sin camara retiradas; quedan 5 coches-camara
+ERRORES: ninguno

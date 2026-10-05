@@ -1,0 +1,29 @@
+E:\Escritorio\claude-pc\arnau-aseto-corsa\04_export\kn5_vista.py:194: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+E:\Escritorio\claude-pc\arnau-aseto-corsa\04_export\kn5_vista.py:502: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  w.use_nodes = True
+00:12.578  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\renders\ab\v12_como_ac\_01_aerea_general.exr'
+00:13.718  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\renders\ab\v12_como_ac\_49_piloto_s300.exr'
+00:14.953  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\renders\ab\v12_como_ac\_50_piloto_s800.exr'
+00:16.109  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\renders\ab\v12_como_ac\_51_piloto_s1700.exr'
+00:17.296  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\renders\ab\v12_como_ac\_52_piloto_s2900.exr'
+00:18.468  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\renders\ab\v12_como_ac\_53_piloto_s3400.exr'
+00:19.656  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\renders\ab\v12_como_ac\_54_piloto_s4150.exr'
+00:20.875  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\renders\ab\v12_como_ac\_56_postal_cima_bahia.exr'
+00:22.078  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\03_blender\renders\ab\v12_como_ac\_59_postal_recta_puerto.exr'
+KN5 E:/Escritorio/claude-pc/arnau-aseto-corsa/04_export/kn5/porto_corsa_opt.kn5: 326.6 MB, 489 texturas, 493 materiales, 626 mallas, 61 dummies [0.1s]
+shaders en el KN5: ['ksPerPixel', 'ksPerPixelMultiMap']
+escena: {"mallas": 575, "triangulos": 4881080, "mallas_sin_sombra": 113, "omitidas_no_renderables": 51, "texturas": {"png": 489, "dds": 0, "otras": 0, "lados": {"8": 373, "512": 101, "1024": 12, "2048": 1, "4": 2}}, "materiales": 493, "multimap_con_detalle": ["MAT_terreno"]} [10.3s]
+01_aerea_general 1.6s cielo 0.0 % media [154, 189, 200]
+49_piloto_s300 0.9s cielo 3.3 % media [110, 108, 98]
+50_piloto_s800 1.0s cielo 16.6 % media [125, 126, 123]
+51_piloto_s1700 0.9s cielo 27.7 % media [164, 159, 150]
+52_piloto_s2900 1.0s cielo 41.1 % media [101, 111, 123]
+53_piloto_s3400 1.0s cielo 28.8 % media [112, 116, 121]
+54_piloto_s4150 1.0s cielo 19.0 % media [81, 87, 91]
+56_postal_cima_bahia 1.0s cielo 36.4 % media [162, 159, 151]
+59_postal_recta_puerto 1.0s cielo 18.5 % media [97, 105, 105]
+OK kn5_vista -> E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/renders/ab/v12_como_ac (9 tomas, 22s)
+Blender 5.1.2 (hash ec6e62d40fa9 built 2026-05-19 01:37:34)
+
+Blender quit

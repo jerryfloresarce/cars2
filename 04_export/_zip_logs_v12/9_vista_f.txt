@@ -1,0 +1,17 @@
+E:\Escritorio\claude-pc\arnau-aseto-corsa\04_export\kn5_vista.py:194: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+E:\Escritorio\claude-pc\arnau-aseto-corsa\04_export\kn5_vista.py:502: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  w.use_nodes = True
+00:05.625  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\04_export\ensayo_f\vista_f\_50_piloto_s800.exr'
+00:06.391  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\04_export\ensayo_f\vista_f\_40_pueblo_travesia.exr'
+00:06.969  render           | Saved: 'E:\Escritorio\claude-pc\arnau-aseto-corsa\04_export\ensayo_f\vista_f\_06_pueblo_calle.exr'
+KN5 E:/Escritorio/claude-pc/arnau-aseto-corsa/04_export/ensayo_f/ensayo_f_pueblo.kn5: 120.5 MB, 213 texturas, 210 materiales, 274 mallas, 56 dummies [0.0s]
+shaders en el KN5: ['ksPerPixel', 'ksPerPixelMultiMap']
+escena: {"mallas": 228, "triangulos": 1714252, "mallas_sin_sombra": 84, "omitidas_no_renderables": 46, "texturas": {"png": 213, "dds": 0, "otras": 0, "lados": {"8": 160, "512": 42, "2048": 1, "4": 2, "1024": 8}}, "materiales": 210, "multimap_con_detalle": ["MAT_terreno"]} [3.8s]
+50_piloto_s800 1.1s cielo 16.6 % media [125, 126, 123]
+40_pueblo_travesia 0.5s cielo 35.6 % media [120, 124, 131]
+06_pueblo_calle 0.5s cielo 25.6 % media [138, 137, 134]
+OK kn5_vista -> E:/Escritorio/claude-pc/arnau-aseto-corsa/04_export/ensayo_f/vista_f (3 tomas, 6s)
+Blender 5.1.2 (hash ec6e62d40fa9 built 2026-05-19 01:37:34)
+
+Blender quit

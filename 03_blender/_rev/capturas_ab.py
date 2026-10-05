@@ -3,15 +3,23 @@
 
   bash 03_blender/_rev/blender_cola.sh --python 03_blender/_rev/capturas_ab.py -- \
        --blend <escena.blend> --geom <geometria.json> --set <BASE|bloque|bloque+bloque|TODAS|lista,de,prefijos> \
-       --out <dir> [--camaras cams.json | --guardar-camaras cams.json] [--solo 49,50] [--res 1600x900] [--modo-ac] [--sin-base]
+       --out <dir> [--camaras cams.json | --guardar-camaras cams.json [--anadir | --forzar]] [--solo 49,50] [--res 1600x900]
+       [--modo-ac] [--sin-base]
 Sin --camaras: calcula las tomas con tomas_capturas.construir_tomas (mismas formulas que renderizar_capturas.py), pasa
   por camara_segura UNA sola vez (exentas: piloto, postal, desde_pista, tunel...) y guarda loc/tgt/lens en --guardar-camaras.
 Con --camaras: lee loc/tgt/lens TAL CUAL y no mueve nada; si una camara queda dentro de geometria lo avisa en ab.log y
   renderiza igual (regla 16 del plan: toma nueva con otro nombre, nunca mover la vieja).
+--guardar-camaras sobre un JSON que YA EXISTE se NIEGA (exit 2, antes de renderizar): las camaras congeladas no se pisan.
+  --anadir: renderiza y anade SOLO las tomas que no esten en el JSON (las que ya estan se saltan y se avisa; nunca se reescriben).
+  --forzar: sustituye a sabiendas las tomas pedidas (conserva las demas); queda anotado en _meta.actualizaciones.
 --modo-ac (aproximacion honesta de AC "a pelo", NO es AC): sin sombras de suelo/vegetacion (castShadows=0 como
   04_export/kn5_writer_opt.py GROUND_PREFIXES/DECO_SIN_SOMBRA tras los renombres de exportar_ac.py), sin AO/raytracing
-  de EEVEE, y cada material reducido a lo que escribe el writer (analizar_material + construir_textura: color plano o
-  tile tintado de 512 px con mapping Object*escala FLAT/BOX, alfa; sin bump, sin normal, sin procedurales).
+  de EEVEE, caras de roca de MAT_terreno separadas como hace el writer (color_ac.separar_roca_terreno, solo ejecutado),
+  y cada material reducido a lo que escribe el writer (analizar_material + construir_textura: color plano o tile tintado
+  de 512 px con mapping Object*escala FLAT/BOX, alfa; sin bump, sin normal, sin procedurales). NO se aplica la
+  calibracion color_ac.calibrar_todos() (el writer si, kn5_writer_opt.py l.305): esos colores compensan la luz de AC
+  (gamma de Kunos, sol, autoexposicion) y bajo la luz de Blender darian una imagen falsa. RATIFICADO por el coordinador
+  (04/10/2026): el modo AC se juzga con los colores SIN calibrar; es determinista (diff 0 entre dos pasadas).
 Misma luz, mundo y view transform (Standard, exposicion 0.12) que renderizar_capturas.py. Escribe <out>/<toma>.png,
 <out>/ab.log y <out>/arboles.json (posiciones de VEG_/OLI_ para medir_capturas.siluetas_20_120). Nunca guarda el blend.
 """
@@ -58,19 +66,20 @@ SETS = {
     'horizonte': ['14_puente_mar', '16_retorno_chicane', '13_puente_alto', '08_tierra_cima', '19_penon_casino_foto',
                   '63_horizonte_piloto_s2200'],
     'carificacion': ['10_casino_sector', '19_penon_casino_foto', '20_penon_casino_cerca', '36_roca_casino_general',
-                     '53_piloto_s3400', '58_postal_loews'],
+                     '53_piloto_s3400', '58_postal_loews', '02_meta_y_puerto', '29_boxes_desde_pista'],   # plan secc. 10: 53, 58, 02/29
     'csp': ['02_meta_y_puerto', '29_boxes_desde_pista', '12_rotonda_loews', '28_helicoptero_camara', '53_piloto_s3400'],
 }
 # camara_segura NO se aplica a estas (ademas de su propia lista NO_TOCAR): las postales son vistas desde el coche
 SIN_CAMARA_SEGURA = ('postal',)
 
 # ------------------------------------------------------------------ reglas de AC (copiadas, no importadas: 04_export esta cerrado)
-# kn5_writer_opt.py l.69/74/75
+# kn5_writer_opt.py l.69 (TEX_SIZE), l.75 (GROUND_PREFIXES), l.80-81 (DECO_SIN_SOMBRA, DECO_MAT_SIN_SOMBRA); comprobado 04/10 tarde
 GROUND_PREFIXES = ('1ROAD', '1DIRT', '1KERB', '1GRASS', '2GRASS', '1PIT', 'AGUA', 'MARCA', 'linea')
 DECO_SIN_SOMBRA = ('VEG_', 'OLI_')
 DECO_MAT_SIN_SOMBRA = ('MAT_VEG_', 'MAT_OLI_')
 TEX_SIZE = 512
-# exportar_ac.py l.61-62 y l.68-161: renombres que convierten un objeto de la escena en SUELO (castShadows = 0)
+# exportar_ac.py l.61 (1ROAD_pista), l.69-71 (RENOMBRAR) y l.92-149 (1ROAD_/1DIRT_/2GRASS_/BORDILLO_): renombres que
+# convierten un objeto de la escena en SUELO (castShadows = 0)
 RENOMBRAR = {'PIT_LANE': '1PIT_pit', 'PIANOS': '1KERB_pianos', 'TERRENO': '1GRASS_terreno',
              'LINEA_SALIDA': 'linea_salida_visual', 'PISTA': '1ROAD_pista'}
 A_1ROAD = ('MIRADOR_pasarela', 'MIRADOR_parking_cubierta', 'TUNEL_suelo', 'PUERTO_dique_malla', 'CAMINO_asfalto', 'CAMINO_adoquin',
@@ -113,8 +122,8 @@ def categoria_sombra(ob):
     return None
 
 
-# --- copia fiel de kn5_writer_opt.py: srgb_to_lin / lin_to_srgb (l.133-140), imagen_lineal (l.189-212),
-#     analizar_material (l.215-258), construir_textura (l.261-285)
+# --- copia fiel de kn5_writer_opt.py: srgb_to_lin / lin_to_srgb (l.139-148), imagen_lineal (l.191-213),
+#     analizar_material (l.221-266), construir_textura (l.267-291)   [lineas comprobadas con grep el 04/10 tarde]
 def srgb_to_lin(c):
     c = np.asarray(c, dtype=np.float32)
     return np.where(c <= 0.04045, c / 12.92, np.power((c + 0.055) / 1.055, 2.4)).astype(np.float32)
@@ -216,9 +225,47 @@ def aplicar_modo_ac(sc, log):
     """Reduce la escena a lo que llega al KN5 (ver docstring). Devuelve un dict con las cifras para ab.log."""
     t0 = time.time()
     st = {'sombras': {'suelo': 0, 'veg': 0, 'mat_veg': 0, 'mixto': 0}, 'mixtos': [], 'materiales': {'plano': 0, 'tile': 0, 'alfa': 0, 'sin_imagen_legible': 0},
-          'eevee': {}, 'uv_propias_con_imagen': 0}
+          'eevee': {}, 'uv_propias_con_imagen': 0, 'roca_terreno': None}
     lib = bpy.data.collections.get('LIB')
     en_lib = set(o.name for o in lib.all_objects) if lib else set()
+    # 0) como el writer (kn5_writer_opt.py l.753): las caras de roca de MAT_terreno pasan a MAT_terreno_roca
+    #    (color_ac.separar_roca_terreno l.517: copia del material con diffuse_color = ROCA_COLOR). Solo se EJECUTA color_ac
+    #    (04_export esta cerrado); NO se aplica calibrar_todos() (writer l.305): esos colores estan pre-compensados para la
+    #    luz de AC (gamma, sol 170/160/140, autoexposicion) y con la luz de Blender darian una imagen falsa.
+    #    RATIFICADO por el coordinador (04/10): el modo AC se juzga con colores sin calibrar.
+    try:
+        sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(AQUI)), '04_export'))
+        import color_ac
+        roca = color_ac.separar_roca_terreno()
+        st['roca_terreno'] = {'caras': int(sum(roca.values())), 'objetos': len(roca), 'material': color_ac.ROCA_MAT}
+        # F1 r3 (PARCHES_F1_materiales.md 10.2 = decision del director r2 n.3): la pared del desmonte en el proxy AC = caliza
+        # media con su sombra propia (materiales_roca.color_roca_terreno_ac = caliza_gris_calido x ao_pared x AO media) + tile
+        # de caliza a 3 m, lo mismo que pide P1 al writer (PETICIONES_04_EXPORT.md). roca_caras SIGUE siendo la del writer de
+        # hoy (nz < 0.5 / atributo 'roca'): la mitad "caras por el canal A" de P1 queda [W]. El proxy se ADELANTA al writer solo
+        # en color + imagen de MAT_terreno_roca; mientras P1 no se aplique, el KN5 real sale con ROCA_COLOR literal + tile de
+        # hierba (anotado en PETICIONES P1 y en ab.log).
+        try:
+            sys.path.insert(0, os.path.join(os.path.dirname(AQUI), 'assets'))
+            import materiales_roca
+            m_r = bpy.data.materials.get(color_ac.ROCA_MAT)
+            if m_r is not None and m_r.node_tree:
+                m_r.diffuse_color = tuple(materiales_roca.color_roca_terreno_ac()) + (1.0,)
+                tex = next((n for n in m_r.node_tree.nodes if n.bl_idname == 'ShaderNodeTexImage' and n.image
+                            and n.image.colorspace_settings.name != 'Non-Color' and n.outputs['Color'].is_linked), None)
+                ruta = os.path.join(os.path.dirname(AQUI), 'texturas', 'caliza_d.png')
+                if tex is not None and os.path.exists(ruta):
+                    tex.image = bpy.data.images.load(ruta, check_existing=True)
+                    tex.image.colorspace_settings.name = 'sRGB'
+                    mp = m_r.node_tree.nodes.get('TEX_mapping')
+                    if mp is not None:
+                        mp.inputs['Scale'].default_value = (1.0 / 3.0,) * 3
+                log('modo AC: MAT_terreno_roca = materiales_roca.color_roca_terreno_ac %s + caliza_d 3 m (proxy adelantado a P1 '
+                    'en color+imagen; caras por nz/atributo como el writer de hoy)' % (tuple(round(c, 3) for c in m_r.diffuse_color[:3]),))
+                st['roca_terreno']['color_p1'] = [round(float(c), 3) for c in m_r.diffuse_color[:3]]
+        except Exception as e:  # noqa
+            log('modo AC: materiales_roca no disponible (%s): ROCA_COLOR literal' % e)
+    except Exception as e:  # noqa
+        st['roca_terreno'] = 'ERR %s' % e
     # 1) sombras: castShadows = 0 -> el objeto no proyecta sombra
     for ob in bpy.data.objects:
         if ob.type != 'MESH' or ob.name in en_lib:
@@ -254,7 +301,9 @@ def aplicar_modo_ac(sc, log):
         bsdf.location = (0, 0)
         nt.links.new(bsdf.outputs['BSDF'], out.inputs['Surface'])
         # ksPerPixel: ksAmbient 0.45, ksDiffuse 0.55, ksSpecular 0.15, ksSpecularEXP 24 -> brillo bajo y ancho
-        for nombre, val in (('Roughness', 0.7), ('Specular IOR Level', 0.3), ('Metallic', 0.0), ('Coat Weight', 0.0),
+        # F1 r3 (PARCHES_F1_materiales.md 10.1): ksPerPixel (ksSpecular 0.15, exp 24) no tiene Fresnel; con 0.3 las caras a vista
+        # rasante (McLaren en 49, roca del lazo en 13) devolvian el cielo = un cian que AC no tendra
+        for nombre, val in (('Roughness', 0.9), ('Specular IOR Level', 0.0), ('Metallic', 0.0), ('Coat Weight', 0.0),
                             ('Emission Strength', 0.0), ('Alpha', info['alpha'])):
             if nombre in bsdf.inputs:
                 bsdf.inputs[nombre].default_value = val
@@ -298,9 +347,9 @@ def aplicar_modo_ac(sc, log):
             except Exception as e:
                 st['eevee'][attr] = 'ERR %s' % e
     st['segundos'] = round(time.time() - t0, 1)
-    log('MODO AC: sombras quitadas %s; mallas mixtas (aprox.) %d; materiales %s; uv propias con imagen %d; eevee %s; %.1fs' % (
-        json.dumps(st['sombras']), len(st['mixtos']), json.dumps(st['materiales']), st['uv_propias_con_imagen'],
-        json.dumps(st['eevee']), st['segundos']))
+    log('MODO AC: roca de terreno %s; sombras quitadas %s; mallas mixtas (aprox.) %d; materiales %s; uv propias con imagen %d; '
+        'eevee %s; %.1fs' % (json.dumps(st['roca_terreno']), json.dumps(st['sombras']), len(st['mixtos']), json.dumps(st['materiales']),
+                             st['uv_propias_con_imagen'], json.dumps(st['eevee']), st['segundos']))
     return st
 
 
@@ -380,15 +429,18 @@ def main():
     ap.add_argument('--res', default='1600x900')
     ap.add_argument('--modo-ac', action='store_true')
     ap.add_argument('--sin-base', action='store_true')
+    ap.add_argument('--anadir', action='store_true', help='con --guardar-camaras existente: anade solo las tomas que falten')
+    ap.add_argument('--forzar', action='store_true', help='con --guardar-camaras existente: sustituye las tomas pedidas (a sabiendas)')
     A = ap.parse_args(sys.argv[sys.argv.index('--') + 1:])
     if A.camaras and A.guardar_camaras:
         sys.exit('ERROR: --camaras y --guardar-camaras son excluyentes')
+    if A.anadir and A.forzar:
+        sys.exit('ERROR: --anadir y --forzar son excluyentes')
+    if (A.anadir or A.forzar) and not A.guardar_camaras:
+        sys.exit('ERROR: --anadir/--forzar solo tienen sentido con --guardar-camaras')
     rx, ry = (int(v) for v in A.res.lower().replace(',', 'x').split('x'))
     A.out = os.path.abspath(A.out)          # Blender resuelve render.filepath relativo al .blend, no al cwd
     t0 = time.time()
-    G = json.load(open(A.geom, encoding='utf-8'))
-    bpy.ops.wm.open_mainfile(filepath=os.path.abspath(A.blend))
-    sc = bpy.context.scene
     os.makedirs(A.out, exist_ok=True)
     flog = open(os.path.join(A.out, 'ab.log'), 'a', encoding='utf-8')
 
@@ -396,9 +448,23 @@ def main():
         print(msg)
         flog.write(msg + '\n')
         flog.flush()
-    log('== %s | blend %s | geom %s | set %s | res %dx%d | modo %s | camaras %s' % (
+    log('== %s | blend %s | geom %s | set %s | res %dx%d | modo %s | camaras %s%s' % (
         datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'), A.blend, A.geom, A.set, rx, ry,
-        'AC' if A.modo_ac else 'normal', A.camaras or ('(calcular -> %s)' % A.guardar_camaras)))
+        'AC' if A.modo_ac else 'normal', A.camaras or ('(calcular -> %s)' % A.guardar_camaras),
+        ' [--anadir]' if A.anadir else (' [--forzar]' if A.forzar else '')))
+    # camaras congeladas: un JSON existente NO se pisa (regla 16 del plan). Se decide ANTES de abrir el blend y renderizar.
+    existentes = {}
+    if A.guardar_camaras and os.path.exists(A.guardar_camaras):
+        existentes = {k: v for k, v in json.load(open(A.guardar_camaras, encoding='utf-8')).items() if not k.startswith('_')}
+        if not (A.anadir or A.forzar):
+            log('ERROR: %s ya existe (%d tomas congeladas) y --guardar-camaras lo reescribiria. Las camaras congeladas no se pisan: '
+                'usa --camaras %s para renderizar con ellas (el "despues"), --anadir para anadir SOLO las tomas que falten, '
+                'o --forzar para sustituir las pedidas a sabiendas.' % (A.guardar_camaras, len(existentes), A.guardar_camaras))
+            flog.close()
+            sys.exit(2)
+    G = json.load(open(A.geom, encoding='utf-8'))
+    bpy.ops.wm.open_mainfile(filepath=os.path.abspath(A.blend))
+    sc = bpy.context.scene
     # mismos ajustes que renderizar_capturas.py / construir_pista.py (plan secc. 3.6: capturas_ab fuerza los mismos)
     sc.render.resolution_x, sc.render.resolution_y = rx, ry
     sc.render.resolution_percentage = 100
@@ -444,6 +510,18 @@ def main():
     if solo:
         quiero = [n for n in quiero if n.startswith(tuple(solo))]
     tomas = [t for t in tomas if t[0] in quiero]
+    if existentes:
+        repetidas = sorted(t[0] for t in tomas if t[0] in existentes)
+        if A.anadir:
+            if repetidas:
+                log('--anadir: se saltan %d tomas ya congeladas en %s (nunca se reescriben): %s' % (len(repetidas), A.guardar_camaras, repetidas))
+            tomas = [t for t in tomas if t[0] not in existentes]
+            if not tomas:
+                log('ERROR: --anadir sin nada nuevo: todas las tomas pedidas ya estan congeladas en %s' % A.guardar_camaras)
+                sys.exit(2)
+        elif repetidas:
+            log('FORZADO (--forzar): se SUSTITUYEN %d tomas congeladas en %s: %s' % (len(repetidas), A.guardar_camaras, repetidas))
+        movidas = {k: v for k, v in movidas.items() if k in set(t[0] for t in tomas)}
     if not tomas:
         log('ERROR: ninguna toma seleccionada')
         sys.exit(2)
@@ -481,16 +559,28 @@ def main():
         if nombre in desc:
             guardar[nombre]['desc'] = desc[nombre]
     if A.guardar_camaras:
-        meta = {'fecha': datetime.datetime.now().strftime('%Y-%m-%d %H:%M'), 'blend': os.path.abspath(A.blend),
-                'geom': os.path.abspath(A.geom), 'set': A.set or 'BASE', 'res': [rx, ry], 'n': len(guardar),
-                'camara_segura': 'aplicada UNA vez al congelar (exentas: %s + NO_TOCAR/LIGERO de camara_segura.py); '
-                                 'el "despues" lee loc/tgt/lens tal cual' % list(SIN_CAMARA_SEGURA),
-                'movidas_por_camara_segura': sorted(movidas)}
+        ahora = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
+        meta = {'fecha': ahora, 'blend': os.path.abspath(A.blend), 'geom': os.path.abspath(A.geom), 'set': A.set or 'BASE',
+                'res': [rx, ry], 'camara_segura': 'aplicada UNA vez al congelar (exentas: %s + NO_TOCAR/LIGERO de camara_segura.py); '
+                'el "despues" lee loc/tgt/lens tal cual' % list(SIN_CAMARA_SEGURA), 'movidas_por_camara_segura': sorted(movidas)}
         out = {'_meta': meta}
+        # si el fichero ya existe (solo se llega aqui con --anadir o --forzar) se conservan todas sus tomas: con --anadir solo
+        # entran las nuevas (las repetidas se filtraron antes de renderizar); con --forzar se sustituyen las pedidas (anotado)
+        if os.path.exists(A.guardar_camaras):
+            viejo = json.load(open(A.guardar_camaras, encoding='utf-8'))
+            out = {'_meta': dict(viejo.get('_meta', {}))}
+            out.update({k: v for k, v in viejo.items() if not k.startswith('_')})
+            sustituidas = sorted(k for k in guardar if k in out and not k.startswith('_'))
+            out['_meta'].setdefault('actualizaciones', []).append({
+                'fecha': ahora, 'modo': 'anadir' if A.anadir else 'forzar', 'tomas': sorted(guardar), 'set': A.set or 'BASE',
+                'sustituidas': sustituidas})
+            out['_meta']['movidas_por_camara_segura'] = sorted(set(out['_meta'].get('movidas_por_camara_segura', [])) | set(movidas))
         out.update(guardar)
+        out['_meta']['n'] = len([k for k in out if not k.startswith('_')])
         os.makedirs(os.path.dirname(os.path.abspath(A.guardar_camaras)), exist_ok=True)
         json.dump(out, open(A.guardar_camaras, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
-        log('camaras congeladas -> %s (%d; movidas por camara_segura: %s)' % (A.guardar_camaras, len(guardar), sorted(movidas) or 'ninguna'))
+        log('camaras congeladas -> %s (%d en el fichero, %d de esta pasada; movidas por camara_segura: %s)' % (
+            A.guardar_camaras, out['_meta']['n'], len(guardar), sorted(movidas) or 'ninguna'))
     log('OK capturas_ab: %d tomas -> %s | render %.0fs | total %.0fs' % (len(tomas), A.out, t_ren, time.time() - t0))
     flog.close()
 

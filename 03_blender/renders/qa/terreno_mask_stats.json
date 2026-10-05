@@ -1,0 +1,166 @@
+{
+ "px": 2048,
+ "texel_m": [
+  1.0098,
+  1.0059
+ ],
+ "seed": 15,
+ "origen_pesos": "extras.capas de geometria_3d.json (+ bordes +-6 m, ruido A 0.20 / B 0.20 en la frontera, roca dura > 1.00)",
+ "umbrales": {
+  "PEND_ROCA": [
+   0.68,
+   0.8
+  ],
+  "PEND_ROCA_ANCHO": 0.12,
+  "PEND_SUAVIZADO_M": 8.0,
+  "PEND_ROCA_DURA": 1.0,
+  "PEND_ROCA_DURA_ANCHO": 0.3,
+  "WARP_BORDE_M": [
+   6.0,
+   30.0
+  ],
+  "ROCA_MIN_CELDAS": 12,
+  "ROCA_ATR": 0.5,
+  "ROCA_ATR_RUIDO": 0.2,
+  "TIERRA_RUIDO": 0.2,
+  "ROCA_NZ_ZONA": 0.62,
+  "ROCA_ZONA_MIN_CARAS": 6,
+  "ROCA_ZONA_FUNDIDO_M": 12.0,
+  "ROCA_NZ_ZONAS": {
+   "56_postal_cima_bahia": [
+    47.972,
+    567.543,
+    150.0
+   ],
+   "51_piloto_s1700": [
+    15.023,
+    426.256,
+    150.0
+   ],
+   "07_tierra_subida": [
+    -12.016,
+    294.887,
+    150.0
+   ]
+  },
+  "BANDA_2M_M": 25.0,
+  "PIE_M": [
+   6.0,
+   10.0
+  ],
+  "DIRT_BORDE_M": 8.0,
+  "LLANO_PEND": 0.35,
+  "LLANO_DIST_M": 60.0,
+  "LLANO_Z": 60.0,
+  "RUIDO_M": [
+   10.0,
+   30.0
+  ],
+  "LOEWS_R_INTACTA": 90.0
+ },
+ "sol": {
+  "elev_deg": 48.0,
+  "azimut_deg": 151.0,
+  "rot_blender_deg": [
+   42.0,
+   0.0,
+   -119.0
+  ]
+ },
+ "veg_plan": true,
+ "pct_texeles_tierra": 38.61,
+ "area_pct_tierra_dominante": {
+  "matorral": 45.89,
+  "hierba_seca": 21.53,
+  "tierra": 5.16,
+  "roca": 27.42
+ },
+ "media_canal_tierra": {
+  "matorral": 0.4435,
+  "hierba_seca": 0.2018,
+  "tierra": 0.0783,
+  "roca": 0.2764
+ },
+ "histograma_8_bins_pct_tierra": {
+  "matorral": [
+   37.27,
+   9.62,
+   4.94,
+   3.59,
+   3.4,
+   4.55,
+   10.62,
+   26.01
+  ],
+  "hierba_seca": [
+   69.8,
+   3.66,
+   3.01,
+   2.95,
+   2.61,
+   5.67,
+   7.03,
+   5.26
+  ],
+  "tierra": [
+   85.15,
+   5.79,
+   2.72,
+   2.1,
+   1.54,
+   0.92,
+   0.39,
+   1.38
+  ],
+  "roca": [
+   67.72,
+   2.05,
+   1.68,
+   2.22,
+   2.26,
+   1.47,
+   1.14,
+   21.46
+  ]
+ },
+ "suma_ok_pct": 100.0,
+ "suma_desvio_max_8bit": 1,
+ "nz_lt_0_7": {
+  "pct_texeles_tierra": 4.78,
+  "pct_roca_A_gt_0_5": 99.77,
+  "pct_verde_RG_gt_0_5": 0.11
+ },
+ "pend_gt_0_84": {
+  "pct_texeles_tierra": 14.29,
+  "pct_roca_A_gt_0_5": 92.91,
+  "pct_verde_RG_gt_0_5": 4.8
+ },
+ "dirt_borde_lt_8m": {
+  "texeles": 16864,
+  "pct_tierra_B_gt_0_5": 92.54
+ },
+ "ao": {
+  "media_tierra": 0.7576,
+  "p05": 0.596,
+  "p95": 0.8971
+ },
+ "base_media_lineal_tierra": [
+  0.2859,
+  0.261,
+  0.1454
+ ],
+ "tiempo_s": 5.5,
+ "ficheros": {
+  "mask": "E:\\Escritorio\\claude-pc\\arnau-aseto-corsa\\03_blender\\texturas\\terreno_mask.png",
+  "base": "E:\\Escritorio\\claude-pc\\arnau-aseto-corsa\\03_blender\\texturas\\terreno_base.png",
+  "ao": "E:\\Escritorio\\claude-pc\\arnau-aseto-corsa\\03_blender\\texturas\\terreno_ao.png",
+  "geom": "E:\\Escritorio\\claude-pc\\arnau-aseto-corsa\\03_blender\\geometria_3d.json",
+  "urb": "E:\\Escritorio\\claude-pc\\arnau-aseto-corsa\\03_blender\\urbanismo.json"
+ },
+ "bytes": {
+  "mask": 3087512,
+  "base": 1539943,
+  "ao": 481324
+ },
+ "qa": "E:\\Escritorio\\claude-pc\\arnau-aseto-corsa\\03_blender\\renders\\qa\\terreno_mask.png"
+}

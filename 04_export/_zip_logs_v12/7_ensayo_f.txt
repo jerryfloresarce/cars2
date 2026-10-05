@@ -1,0 +1,14 @@
+escena F: 842 mallas, 770 dentro de la zona (891732 tris), 4183 borradas, recortadas {'1DIRT_camino_tierra.003': 532, '1KERB_pianos': 119, '1ROAD_camino_calle.009': 1452, '1ROAD_pista': 2169, '1WALL_casas_colision': 552, '1WALL_cierre_der': 1226, '1WALL_cierre_horquillas': 106, '1WALL_cierre_izq': 1048, '1WALL_tunel_acantilado': 11136, '2GRASS_arcen_der': 579, '2GRASS_arcen_izq': 524, 'MARCA_BORDE_1_0': 265, 'MCOCHE_veg.001': 610}, enteras ['1GRASS_terreno', 'AGUA', 'AGUA_fondo', 'HORIZ_cordillera', 'HORIZ_cordillera.001', 'HORIZ_cordillera.002', 'HORIZ_cordillera.003', 'HORIZ_cordillera.004', 'HORIZ_cordillera.005', 'HORIZ_cordillera.006', 'HORIZ_cordillera.007', 'HORIZ_cordillera.008', 'HORIZ_faro', 'HORIZ_loma', 'HORIZ_loma.001', 'HORIZ_loma.002', 'HORIZ_loma.003', 'HORIZ_loma.004', 'HORIZ_loma.005', 'HORIZ_loma.006', 'HORIZ_loma.007', 'HORIZ_loma.008', 'HORIZ_loma.009', 'HORIZ_pueblo', 'HORIZ_pueblo.001', 'HORIZ_pueblo.002']
+["terreno: modo detalle; UV planar {'x0': -932.9, 'y0': -907.8, 'Lx': 2068.0, 'Ly': 2060.0, 'fuente': 'GEOM geometria_v12.json', 'error_uv_m': 0.0, 'ajuste_uv': {'x0': -932.9, 'y0': -907.8, 'Lx': 2068.0, 'Ly': 2060.0}}", 'texturas: 213 (25.0 MB, lado max 2048), materiales: 210, objetos: 842 (AC 45, sueltos 2, fisica 201, deco 590) [5.6s]', 'OK KN5 -> E:\\Escritorio\\claude-pc\\arnau-aseto-corsa\\04_export\\ensayo_f\\ensayo_f_pueblo.kn5 (120.5 MB)']
+  (1) OK    dummies AC_START/AC_PIT/AC_TIME/AC_HOTLAP con matriz y posiciones plausibles
+  (2) OK    mallas con prefijos 1ROAD_/1KERB_/1GRASS_/1WALL_
+  (3) OK    indices dentro de n_vertices y materialId dentro del rango de materiales
+  (4) OK    ninguna malla supera 65535 vertices
+  (5) OK    todas las texturas referenciadas por samplers existen en la tabla
+  (6) OK    bbox del circuito (mallas fisicas): Y (arriba) entre ~3 y ~150 m y plano XZ de ~1900 x 1800 m
+  (7) OK    normales de las mallas 1ROAD_ mayoritariamente hacia +Y (geometricas, ponderadas por area)
+  (8) OK    la lectura consume exactamente todos los bytes del fichero
+  (9) OK    shaders conocidos, samplers esperados por shader y texturas potencia de 2 <= 4096 (opcional)
+kn5_check F: OK
+OK zip F -> E:\Escritorio\claude-pc\arnau-aseto-corsa\04_export\ensayo_f\ensayo_f_pueblo.zip (68.9 MB)
+OK ensayo F (29s)

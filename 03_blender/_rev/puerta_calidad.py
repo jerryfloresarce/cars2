@@ -11,6 +11,14 @@ Fuentes: urbanismo.log (QA del plan: fallos 0, casas >= 190), urbanismo_informe.
 casa_pista/casa_muro/losa*), nada_en_pista.json (<= base, 0 en tierra), asentar.json (resumen no peor que la base),
 preparar_geometria.log (celdas_invaden_pista 0, hierba_asfalto 0, fosos 0 muestras > 1.5 m, costuras no peores, loews 0.000),
 integrar_escena.log ("ERRORES: ninguno", casas >= 190). Codigos de salida: 0 ok, 1 no pasa, 2 error de uso.
+Falla cerrada (decisiones del coordinador 04/10, M1/M2 de la verificacion):
+  - la AUSENCIA de una clave esencial es motivo: urbanismo_informe.json total_fallos/total_avisos/resumen/fecha,
+    nada_en_pista.json n/fallos, asentar.json resumen/fecha, QA de urbanismo.log fallos/casas_total (antes un json truncado pasaba);
+  - FRESCURA: la "fecha" de urbanismo_informe.json y asentar.json debe ser >= mtime de preparar_geometria.log (al minuto) de la
+    carpeta de logs juzgada, y nada_en_pista.log debe existir, tener la linea "NADA_EN_PISTA objetos invasores: N", no contener
+    Traceback, coincidir en N con nada_en_pista.json y ser posterior a preparar_geometria.log (si nada_en_pista.py o
+    revisar_urbanismo.py fallan, pipeline_escena.sh copia los json del pipeline anterior como *_candidata.json: asi se detecta).
+  - costuras (M3): se mantiene "no peor que la base + 0.05 m" como criterio (aviso si >= 0.6 m, no motivo): ver puerta_README.md.
 """
 from __future__ import annotations
 
@@ -32,6 +40,18 @@ ASENTAR_NO_PEOR = ('arboles_quitados', 'flotaban_mas_0_6', 'enterrados_mas_0_6',
                    'fuera_del_terreno', 'edificios_flotantes', 'edificios_enterrados', 'edificios_sin_suelo',
                    'losas_con_aire', 'bancales_mal', 'coches_quitados', 'dentro_de_muro_quitados')
 TOL_COSTURAS_M = 0.05   # redondeo del log (2 decimales)
+FMT_FECHA = '%Y-%m-%d %H:%M'   # formato de "fecha" en urbanismo_informe.json / asentar.json (minuto)
+
+
+def exigir_claves(d: dict | None, claves: tuple, etiqueta: str, motivos: list[str]) -> bool:
+    """M1: una clave esencial ausente = motivo (un json truncado o de otro programa no puede pasar la puerta)."""
+    if d is None:
+        return False
+    faltan = [k for k in claves if k not in d]
+    if faltan:
+        motivos.append('%s sin clave(s) esencial(es) %s (truncado o de otra version): no se juzga' % (etiqueta, faltan))
+        return False
+    return True
 
 
 def _p(*a):
@@ -80,6 +100,8 @@ def valores_urbanismo_log(txt: str | None, v: dict, motivos: list[str]):
     except Exception as e:
         motivos.append('urbanismo.log: QA ilegible: %r' % e)
         return
+    if not exigir_claves(qa, ('fallos', 'casas_total'), 'urbanismo.log QA', motivos):
+        return
     fallos = qa.get('fallos', {}) or {}
     v['urbanismo_plan_fallos'] = int(sum(int(x) for x in fallos.values()))
     v['urbanismo_plan_fallos_por_tipo'] = {k: int(x) for k, x in fallos.items() if int(x)}
@@ -91,32 +113,81 @@ def valores_urbanismo_log(txt: str | None, v: dict, motivos: list[str]):
         v['urbanismo_plan_casas_total_linea'] = int(m2.group(1))
 
 
-def valores_informe(inf: dict | None, v: dict):
-    """revisar_urbanismo.py -> urbanismo_informe.json."""
-    if inf is None:
+def valores_informe(inf: dict | None, v: dict, motivos: list[str]):
+    """revisar_urbanismo.py -> urbanismo_informe.json (claves esenciales: total_fallos, total_avisos, resumen, fecha)."""
+    if not exigir_claves(inf, ('total_fallos', 'total_avisos', 'resumen', 'fecha'), 'urbanismo_informe.json', motivos):
         return
-    v['revisar_urbanismo_fallos'] = int(inf.get('total_fallos', -1))
+    v['revisar_urbanismo_fallos'] = int(inf['total_fallos'])
     v['revisar_urbanismo_por_tipo'] = {k: int(x) for k, x in (inf.get('resumen') or {}).items()}
-    v['revisar_urbanismo_avisos'] = int(inf.get('total_avisos', 0))
+    v['revisar_urbanismo_avisos'] = int(inf['total_avisos'])
     v['revisar_urbanismo_n_casas_huella'] = int((inf.get('n_huellas') or {}).get('casas', 0))
 
 
-def valores_nada(nada: dict | None, v: dict):
-    if nada is None:
+def valores_nada(nada: dict | None, v: dict, motivos: list[str]):
+    """nada_en_pista.py -> nada_en_pista.json (claves esenciales: n, fallos)."""
+    if not exigir_claves(nada, ('n', 'fallos'), 'nada_en_pista.json', motivos):
         return
-    fallos = nada.get('fallos', []) or []
-    v['nada_en_pista'] = int(nada.get('n', len(fallos)))
+    fallos = nada['fallos'] or []
+    v['nada_en_pista'] = int(nada['n'])
+    if v['nada_en_pista'] != len(fallos):
+        motivos.append('nada_en_pista.json: n=%d pero la lista "fallos" tiene %d entradas (truncado)' % (v['nada_en_pista'], len(fallos)))
     v['nada_en_pista_tierra'] = int(sum(1 for f in fallos if f.get('sec') == 'dirt'))
     v['nada_en_pista_objetos'] = sorted(f.get('objeto', '?') for f in fallos)
 
 
-def valores_asentar(asentar: dict | None, v: dict):
-    if asentar is None:
+def valores_asentar(asentar: dict | None, v: dict, motivos: list[str]):
+    """asentar_objetos.py -> asentar.json (claves esenciales: resumen, fecha)."""
+    if not exigir_claves(asentar, ('resumen', 'fecha'), 'asentar.json', motivos):
         return
     res = asentar.get('resumen') or {}
     v['asentar'] = {k: res.get(k) for k in ASENTAR_NO_PEOR if k in res}
+    if not v['asentar']:
+        motivos.append('asentar.json: el resumen no trae ninguna de las claves vigiladas %s (truncado o de otra version)' % list(ASENTAR_NO_PEOR[:3]))
     v['asentar_movidos'] = res.get('movidos')
     v['asentar_candidatos'] = res.get('candidatos')
+
+
+def frescura(fuentes: dict, informe: dict | None, asentar: dict | None, nada: dict | None, v: dict, motivos: list[str]):
+    """M2: los json de QA deben ser de la MISMA regeneracion que los logs juzgados: "fecha" (minuto) >= mtime de
+    preparar_geometria.log (primer paso del pipeline); nada_en_pista.log terminado (linea NADA_EN_PISTA, sin Traceback,
+    mismo n que el json) y posterior a preparar_geometria.log. Si no, pipeline_escena.sh habria copiado json rancios."""
+    log_pg = fuentes.get('preparar_geometria.log')
+    if not log_pg or not os.path.isfile(log_pg):
+        return   # ya es motivo ("falta preparar_geometria.log")
+    ref = _dt.datetime.fromtimestamp(os.path.getmtime(log_pg)).replace(second=0, microsecond=0)
+    fr: dict = {'preparar_geometria_log_mtime': ref.strftime(FMT_FECHA)}
+    for etiqueta, d in (('urbanismo_informe.json', informe), ('asentar.json', asentar)):
+        if d is None or 'fecha' not in d:
+            continue   # la ausencia ya es motivo en valores_*
+        f = str(d['fecha'])
+        try:
+            fd = _dt.datetime.strptime(f[:16], FMT_FECHA)
+        except ValueError:
+            motivos.append('%s: "fecha" ilegible %r (se espera %s)' % (etiqueta, f, FMT_FECHA))
+            continue
+        fr[etiqueta + '_fecha'] = f
+        if fd < ref:
+            motivos.append('%s RANCIO: fecha %s anterior a preparar_geometria.log (%s): no es de esta regeneracion'
+                           % (etiqueta, f, ref.strftime(FMT_FECHA)))
+    log_np = fuentes.get('nada_en_pista.log')
+    txt = leer_texto(log_np, motivos, 'nada_en_pista.log')
+    if txt is not None:
+        m = re.search(r'NADA_EN_PISTA objetos invasores: (\d+) \(tierra: (\d+)\)', txt)
+        if 'Traceback' in txt:
+            motivos.append('nada_en_pista.log contiene Traceback: nada_en_pista.py fallo y el json puede ser del pipeline anterior')
+        elif not m:
+            motivos.append('nada_en_pista.log sin linea "NADA_EN_PISTA objetos invasores: N (tierra: T)" (no termino)')
+        else:
+            fr['nada_en_pista_log_n'] = int(m.group(1))
+            fr['nada_en_pista_log_tierra'] = int(m.group(2))
+            if nada is not None and 'n' in nada and int(nada['n']) != int(m.group(1)):
+                motivos.append('nada_en_pista.json RANCIO: n=%s pero nada_en_pista.log dice %s' % (nada['n'], m.group(1)))
+        mt = _dt.datetime.fromtimestamp(os.path.getmtime(log_np)).replace(second=0, microsecond=0)
+        fr['nada_en_pista_log_mtime'] = mt.strftime(FMT_FECHA)
+        if mt < ref:
+            motivos.append('nada_en_pista.log (%s) anterior a preparar_geometria.log (%s): no es de esta regeneracion'
+                           % (mt.strftime(FMT_FECHA), ref.strftime(FMT_FECHA)))
+    v['frescura'] = fr
 
 
 def valores_terreno(txt: str | None, v: dict, motivos: list[str]):
@@ -260,7 +331,9 @@ def juzgar(v: dict, base: dict | None, motivos: list[str], avisos: list[str], di
         if bc6 is not None and v.get('terreno_costuras_celdas_gt_0p6', 0) > bc6:
             motivos.append('terreno: %d celdas con costura > 0.6 m > base %d' % (v['terreno_costuras_celdas_gt_0p6'], bc6))
         if v['terreno_costuras_max_m'] >= 0.6:
-            avisos.append('terreno: costuras max %.2f m (objetivo del plan < 0.6; hoy la base ya lo supera, se exige "no peor")'
+            # M3 (decision del coordinador 04/10): "< 0.6 m" es objetivo del bloque 1, no criterio de puerta; la puerta exige
+            # "no peor que la base + 0.05 m" (motivo) y deja constancia como aviso. Ver puerta_README.md punto 4.
+            avisos.append('terreno: costuras max %.2f m (objetivo del plan < 0.6 es del bloque 1; la puerta exige "no peor que la base")'
                           % v['terreno_costuras_max_m'])
     if 'terreno_loews_ref_dz_max' in v and abs(v['terreno_loews_ref_dz_max']) > 0.0005:
         motivos.append('terreno: Loews |z - referencia| = %.3f m (debe ser 0.000)' % v['terreno_loews_ref_dz_max'])
@@ -343,17 +416,21 @@ def main(argv: list[str]) -> int:
     if not logs:
         motivos.append('no se sabe donde estan los logs del pipeline (--logs o manifiesto)')
         logs = ''
-    for k in ('preparar_geometria', 'urbanismo', 'integrar_escena'):
+    for k in ('preparar_geometria', 'urbanismo', 'integrar_escena', 'nada_en_pista'):
         fuentes[k + '.log'] = os.path.join(logs, k + '.log') if logs else ''
     fuentes['blend'] = blend
 
     v: dict = {}
     valores_urbanismo_log(leer_texto(fuentes['urbanismo.log'], motivos, 'urbanismo.log'), v, motivos)
-    valores_informe(leer_json(fuentes['urbanismo_informe'], motivos, 'urbanismo_informe.json'), v)
-    valores_nada(leer_json(fuentes['nada_en_pista'], motivos, 'nada_en_pista.json'), v)
-    valores_asentar(leer_json(fuentes['asentar'], motivos, 'asentar.json'), v)
+    informe = leer_json(fuentes['urbanismo_informe'], motivos, 'urbanismo_informe.json')
+    nada = leer_json(fuentes['nada_en_pista'], motivos, 'nada_en_pista.json')
+    asentar = leer_json(fuentes['asentar'], motivos, 'asentar.json')
+    valores_informe(informe, v, motivos)
+    valores_nada(nada, v, motivos)
+    valores_asentar(asentar, v, motivos)
     valores_terreno(leer_texto(fuentes['preparar_geometria.log'], motivos, 'preparar_geometria.log'), v, motivos)
     valores_integrar(leer_texto(fuentes['integrar_escena.log'], motivos, 'integrar_escena.log'), v, motivos)
+    frescura(fuentes, informe, asentar, nada, v, motivos)
     md5 = md5_fichero(blend) if blend else None
     if blend and md5 is None:
         avisos.append('no existe el .blend juzgado (%s): se juzgan solo json/logs' % blend)
@@ -374,6 +451,7 @@ def main(argv: list[str]) -> int:
                   'terreno_costuras_celdas_gt_0p6', 'terreno_loews_ref_dz_max', 'integrar_errores', 'integrar_casas'):
             _p('  %-34s %s' % (k, v.get(k)))
         _p('  asentar', json.dumps(v.get('asentar')))
+        _p('  frescura', json.dumps(v.get('frescura')))
         return 0
 
     base = None

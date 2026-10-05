@@ -139,11 +139,13 @@ T = G['terreno']
 # ronda 15: el integrador talla EXPLANADAS en la malla TERRENO (tribunas, hotel, ayuntamiento,
 # plazuelas): la cota real es la de la malla, no la del JSON
 _ter_m = bpy.data.objects.get('TERRENO')
-if _ter_m is not None and _ter_m.type == 'MESH' and len(_ter_m.data.vertices) == T['nx'] * T['ny']:
+# F1 r4 (PARCHES_F1_mascara.md R4.4 A9): '>=' y solo los nx*ny primeros: tras banda_terreno_2m.py (ultimo paso del pipeline)
+# el TERRENO lleva +45 k vertices de la banda de 2 m AL FINAL; la rejilla conserva sus indices j*nx+i
+if _ter_m is not None and _ter_m.type == 'MESH' and len(_ter_m.data.vertices) >= T['nx'] * T['ny']:
     _co = [0.0] * (3 * len(_ter_m.data.vertices))
     _ter_m.data.vertices.foreach_get('co', _co)
     T = dict(T)
-    T['z'] = _co[2::3]
+    T['z'] = _co[2::3][:T['nx'] * T['ny']]
 
 
 def empieza(nombre, prefijos):

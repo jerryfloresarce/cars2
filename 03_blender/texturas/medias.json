@@ -1,0 +1,356 @@
+{
+ "_doc": "media LINEAL de cada tile de texturas/ (sRGB -> lineal) y ganancia = 1/media_lum. La escribe generar_texturas.py (PIL) o recolorear_cc0.py (CC0 recoloreado, origen cc0:<id>). aplicar_texturas.py la lee (FAMILIAS.ganancia es el valor de respaldo).",
+ "asfalto_d.png": {
+  "media_lineal": [
+   0.17997,
+   0.17801,
+   0.18497
+  ],
+  "media_lum": 0.17893,
+  "ganancia": 5.5889,
+  "origen": "cc0:asphalt_track",
+  "tile_m": 8.0,
+  "fecha": "2026-10-04",
+  "cc0": "asphalt_track",
+  "sitio": "Poly Haven",
+  "dimensiones_m": [
+   2.0,
+   2.0
+  ],
+  "tinte": "tintes_texturas/asfalto",
+  "croma": 0.15,
+  "costura": 0.9884,
+  "fundido_bordes": false
+ },
+ "tierra_d.png": {
+  "media_lineal": [
+   0.51887,
+   0.36996,
+   0.20001
+  ],
+  "media_lum": 0.38935,
+  "ganancia": 2.5684,
+  "origen": "cc0:Ground105",
+  "tile_m": 6.0,
+  "fecha": "2026-10-04",
+  "cc0": "Ground105",
+  "sitio": "ambientCG",
+  "dimensiones_m": null,
+  "tinte": "tierra",
+  "croma": 0.15,
+  "costura": 1.2629,
+  "fundido_bordes": false
+ },
+ "teja_d.png": {
+  "media_lineal": [
+   0.52041,
+   0.12739,
+   0.0513
+  ],
+  "media_lum": 0.20545,
+  "ganancia": 4.8673,
+  "origen": "cc0:clay_roof_tiles_03",
+  "tile_m": 2.0,
+  "fecha": "2026-10-04",
+  "cc0": "clay_roof_tiles_03",
+  "sitio": "Poly Haven",
+  "dimensiones_m": [
+   2.6,
+   2.6
+  ],
+  "tinte": "terracota",
+  "croma": 0.15,
+  "costura": 1.2903,
+  "fundido_bordes": false
+ },
+ "estuco_d.png": {
+  "media_lineal": [
+   0.79924,
+   0.79924,
+   0.79924
+  ],
+  "media_lum": 0.79924,
+  "ganancia": 1.2512,
+  "origen": "cc0:white_stucco",
+  "tile_m": 4.0,
+  "fecha": "2026-10-04",
+  "cc0": "white_stucco",
+  "sitio": "Poly Haven",
+  "dimensiones_m": [
+   1.998,
+   1.998
+  ],
+  "tinte": "tintes_texturas/estuco",
+  "croma": 0.15,
+  "costura": 1.0499,
+  "fundido_bordes": false
+ },
+ "piedra_d.png": {
+  "media_lineal": [
+   0.56555,
+   0.49761,
+   0.35853
+  ],
+  "media_lum": 0.50201,
+  "ganancia": 1.992,
+  "origen": "pil",
+  "tile_m": 3.0,
+  "fecha": "2026-10-04"
+ },
+ "cesped_d.png": {
+  "media_lineal": [
+   0.25251,
+   0.49806,
+   0.09808
+  ],
+  "media_lum": 0.41698,
+  "ganancia": 2.3982,
+  "origen": "pil",
+  "tile_m": 3.0,
+  "fecha": "2026-10-04"
+ },
+ "hierba_d.png": {
+  "media_lineal": [
+   0.25251,
+   0.49806,
+   0.09808
+  ],
+  "media_lum": 0.41698,
+  "ganancia": 2.3982,
+  "origen": "pil",
+  "tile_m": 3.0,
+  "fecha": "2026-10-04"
+ },
+ "hierba_seca_d.png": {
+  "media_lineal": [
+   0.54989,
+   0.44999,
+   0.19999
+  ],
+  "media_lum": 0.45318,
+  "ganancia": 2.2066,
+  "origen": "cc0:withered_grass",
+  "tile_m": 3.0,
+  "fecha": "2026-10-04",
+  "cc0": "withered_grass",
+  "sitio": "Poly Haven",
+  "dimensiones_m": [
+   2.0,
+   2.0
+  ],
+  "tinte": "hierba_seca",
+  "croma": 0.15,
+  "costura": 0.9611,
+  "fundido_bordes": false
+ },
+ "matorral_d.png": {
+  "media_lineal": [
+   0.16001,
+   0.20001,
+   0.08
+  ],
+  "media_lum": 0.18284,
+  "ganancia": 5.4693,
+  "origen": "cc0:aerial_grass_rock",
+  "tile_m": 6.0,
+  "fecha": "2026-10-04",
+  "cc0": "aerial_grass_rock",
+  "sitio": "Poly Haven",
+  "dimensiones_m": [
+   15.0,
+   15.0
+  ],
+  "tinte": "oliva_oscuro",
+  "croma": 0.15,
+  "costura": 1.269,
+  "fundido_bordes": false
+ },
+ "caliza_d.png": {
+  "media_lineal": [
+   0.60819,
+   0.56287,
+   0.43104
+  ],
+  "media_lum": 0.56299,
+  "ganancia": 1.7762,
+  "origen": "cc0:rock_06",
+  "tile_m": 3.0,
+  "fecha": "2026-10-04",
+  "cc0": "rock_06",
+  "sitio": "Poly Haven",
+  "dimensiones_m": [
+   1.5,
+   1.5
+  ],
+  "tinte": "caliza_ocre",
+  "croma": 0.15,
+  "costura": 1.0522,
+  "fundido_bordes": false
+ },
+ "adoquin_d.png": {
+  "media_lineal": [
+   0.39978,
+   0.31986,
+   0.23988
+  ],
+  "media_lum": 0.33108,
+  "ganancia": 3.0205,
+  "origen": "cc0:PavingStones150",
+  "tile_m": null,
+  "fecha": "2026-10-04",
+  "cc0": "PavingStones150",
+  "sitio": "ambientCG",
+  "dimensiones_m": [
+   0.9,
+   0.9
+  ],
+  "tinte": "tintes_texturas/adoquin",
+  "croma": 0.15,
+  "costura": 1.0114,
+  "fundido_bordes": true
+ },
+ "piedra_seca_d.png": {
+  "media_lineal": [
+   0.65791,
+   0.58944,
+   0.43256
+  ],
+  "media_lum": 0.59267,
+  "ganancia": 1.6873,
+  "origen": "cc0:rock_wall_10",
+  "tile_m": null,
+  "fecha": "2026-10-04",
+  "cc0": "rock_wall_10",
+  "sitio": "Poly Haven",
+  "dimensiones_m": [
+   1.8,
+   1.8
+  ],
+  "tinte": "caliza_ocre",
+  "croma": 0.15,
+  "costura": 0.9705,
+  "fundido_bordes": false
+ },
+ "escollera_d.png": {
+  "media_lineal": [
+   0.45006,
+   0.38125,
+   0.2542
+  ],
+  "media_lum": 0.38671,
+  "ganancia": 2.5859,
+  "origen": "cc0:rocks_ground_06",
+  "tile_m": null,
+  "fecha": "2026-10-04",
+  "cc0": "rocks_ground_06",
+  "sitio": "Poly Haven",
+  "dimensiones_m": [
+   3.0,
+   3.0
+  ],
+  "tinte": "caliza_gris_calido",
+  "croma": 0.15,
+  "costura": 1.0054,
+  "fundido_bordes": false
+ },
+ "fondo_marino_d.png": {
+  "media_lineal": [
+   0.76288,
+   0.71277,
+   0.54998
+  ],
+  "media_lum": 0.71167,
+  "ganancia": 1.4051,
+  "origen": "cc0:aerial_sand",
+  "tile_m": null,
+  "fecha": "2026-10-04",
+  "cc0": "aerial_sand",
+  "sitio": "Poly Haven",
+  "dimensiones_m": [
+   15.0,
+   15.0
+  ],
+  "tinte": "arena",
+  "croma": 0.15,
+  "costura": 1.2997,
+  "fundido_bordes": false
+ },
+ "pista_tierra_d.png": {
+  "media_lineal": [
+   0.51993,
+   0.37004,
+   0.19991
+  ],
+  "media_lum": 0.38962,
+  "ganancia": 2.5666,
+  "origen": "cc0:gravel_road",
+  "tile_m": null,
+  "fecha": "2026-10-04",
+  "cc0": "gravel_road",
+  "sitio": "Poly Haven",
+  "dimensiones_m": [
+   2.0,
+   2.0
+  ],
+  "tinte": "tierra",
+  "croma": 0.15,
+  "costura": 1.0173,
+  "fundido_bordes": false
+ },
+ "afloramiento_d.png": {
+  "media_lineal": [
+   0.67458,
+   0.59939,
+   0.4341
+  ],
+  "media_lum": 0.60344,
+  "ganancia": 1.6572,
+  "origen": "cc0:rock_face_03",
+  "tile_m": null,
+  "fecha": "2026-10-04",
+  "cc0": "rock_face_03",
+  "sitio": "Poly Haven",
+  "dimensiones_m": [
+   2.7,
+   2.7
+  ],
+  "tinte": "caliza_ocre",
+  "croma": 0.15,
+  "costura": 0.9681,
+  "fundido_bordes": false
+ },
+ "acantilado_d.png": {
+  "media_lineal": [
+   0.448,
+   0.38059,
+   0.2542
+  ],
+  "media_lum": 0.38579,
+  "ganancia": 2.5921,
+  "origen": "cc0:marble_cliff_02",
+  "tile_m": null,
+  "fecha": "2026-10-04",
+  "cc0": "marble_cliff_02",
+  "sitio": "Poly Haven",
+  "dimensiones_m": [
+   6.801,
+   6.801
+  ],
+  "tinte": "caliza_gris_calido",
+  "croma": 0.15,
+  "costura": 1.0852,
+  "fundido_bordes": false
+ },
+ "caliza_grande_d.png": {
+  "media_lineal": [
+   0.65505,
+   0.59181,
+   0.43609
+  ],
+  "media_lum": 0.59401,
+  "ganancia": 1.6835,
+  "origen": "pil",
+  "tile_m": 24.0,
+  "fecha": "2026-10-05"
+ }
+}

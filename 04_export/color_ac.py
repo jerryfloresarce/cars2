@@ -23,7 +23,9 @@ SOLUCION (sin tocar la geometria salvo el reparto hierba / roca del terreno):
     en ningun modo, en las caras de referencia).
   * FAMILIAS: ksAmbient 0.45 / ksDiffuse 0.60 en todas (rejilla_ks.py con la configuracion estimada del amigo en el
     coste) y ksSpecular/ksSpecularEXP por familia.
-  * separar_roca_terreno(): en el writer, las caras de roca de MAT_terreno pasan a MAT_terreno_roca.
+  * separar_roca_terreno(): en el writer, las caras de roca de MAT_terreno pasan a MAT_terreno_roca. v1.2 (modo
+    'base', terreno por texel con terreno_base.png): solo las paredes casi verticales que no son suelo del terreno.
+  * v1.2 (X7): reglas de familia para los materiales nuevos de F1 (cesped, fondo marino, HORIZ_, buganvilla).
   * generar_ext_config(ruta) / copiar_ext_config(destino): extension/ext_config.ini para CSP (sin CSP no se lee);
     nunca machaca un ext_config.ini ya ajustado a mano.
   * informe(infos): antes/despues por familia (modo gamma; los demas se comparan en las vistas).
@@ -348,12 +350,17 @@ PESO_SUELO_CROMA = 3.0
 SUELO_TX = 0.03          # nada por debajo de sRGB 8: los negros no se aplastan
 
 _REGLAS = (   # (familia, subcadenas del nombre en minusculas), en este orden
+    # v1.2 (X7 de PETICIONES_04_EXPORT.md): los materiales nuevos de F1 que caian en 'pintado' (brillo 0.12/40):
+    # MAT_cesped y MAT_fondo_marino son suelo mate ('terreno'), los 14 MAT_HORIZ_* (montes a 2-5 km) roca mate, la
+    # buganvilla vegetacion. 'matorral', 'seca' y 'caliza' ya caian bien ('matorral' se anade por si llega un MAT_ suelto)
+    ('terreno', ('cesped', 'fondo_marino', 'hierba_seca')),
+    ('roca', ('mat_horiz_',)),
     ('vegetacion', ('mat_veg_tronco', 'mat_veg_pino', 'mat_veg_cip', 'mat_veg_enc', 'mat_veg_ol', 'mat_veg_pal',
                     'mat_veg_ad', 'mat_veg_fl', 'mat_veg_lav', 'mat_veg_ret', 'mat_veg_rom', 'mat_veg_pla',
                     'mat_veg_dat', 'mat_oli_', 'mcoche_veg', 'mcoche_tronco', 'ital_cipres', 'ital_olivo',
                     'ital_parra', 'ital_hierba_mata', 'ital_tronco', 'ital_uva', 'loews_palma', 'loews_seto',
                     'loews_flor', 'loews_coco', 'loews_tronco', 'calle_hojas', 'calle_flor', 'ital_flor',
-                    'ppueblo_mata', 'yate_hoja')),
+                    'ppueblo_mata', 'yate_hoja', 'mat_veg_bug', 'matorral')),
     ('luz', ('_luz', 'pantalla', 'tally')),
     ('agua', ('mat_agua', 'ital_agua', 'agua_piscina')),
     ('cristal', ('vidrio', 'cristal', 'ventana', 'lente', 'optica')),
@@ -377,6 +384,9 @@ def familia(nombre):
     n = nombre.lower()
     if n.startswith('mat_casas_') and any(k in n for k in ('madera', 'persiana', 'toldo')):
         return 'pintado'
+    if n.startswith('mat_terreno'):       # MAT_terreno y los del reparto por caras (v1.2): 'terreno' aunque el nombre
+        # lleve 'matorral'; MAT_terreno_roca: en v1.2 (modo 'base') son paredes casi verticales -> 'roca' (pesos de pared)
+        return 'roca' if (n == ROCA_MAT.lower() and MODO_ROCA.get('modo') == 'base') else 'terreno'
     for fam, claves in _REGLAS:
         if any(k in n for k in claves):
             return fam
@@ -514,11 +524,53 @@ def roca_caras(ob):
     return es_ter & mascara_roca(nz, roca)
 
 
-def separar_roca_terreno(objetos=None):
+# ----------------------------------------------------------------------------- v1.2: terreno por texel (modo 'base')
+# kn5_writer_opt.py v1.2 exporta MAT_terreno como ksPerPixel con txDiffuse = texturas/terreno_base.png (2048, 1 m/texel:
+# paleta x parches x AO, la roca YA va pintada por texel con el canal A de la mascara) sobre la UV planar 0..1 del
+# terreno. Con eso, partir el SUELO del terreno en caras de roca (lo de v1.1) duplicaria la roca con borde en sierra de
+# 2-4 m. En modo 'base' separar_roca_terreno() solo pasa a MAT_terreno_roca las caras CASI VERTICALES (|N.z| < 0.5,
+# > 60 grados: donde la UV planar se estira x2 o mas) de las mallas que NO son el suelo del terreno (1WALL_tunel_
+# acantilado: la falda del McLaren con MAT_terreno), con la caliza de P1: color materiales_roca.color_roca_terreno_ac()
+# + tile caliza_d.png a 3 m en proyeccion BOX (lo mismo que ya pinta el proxy --modo-ac de capturas_ab).
+# modo 'tile' (por defecto, el de v1.1 y el que llama capturas_ab.py): sin cambios.
+ROCA_NZ_PARED = 0.50
+SUELO_TERRENO = ('1GRASS_', '2GRASS_', 'TERRENO', 'ARCEN')
+ROCA_COLOR_P1 = (0.242, 0.205, 0.138)        # respaldo de materiales_roca.color_roca_terreno_ac() (r3: #877D68)
+ROCA_TILE_P1 = ('caliza_d.png', 1.0 / 3.0, 'BOX')
+MODO_ROCA = {'modo': 'tile'}
+
+
+def color_roca_p1():
+    """(color lineal, fuente) de la roca del terreno de P1: materiales_roca.color_roca_terreno_ac() (sigue a paleta.json y
+    a la AO del terreno) o el respaldo ROCA_COLOR_P1 si no se puede importar (python del sistema, sin bpy)."""
+    try:
+        import sys
+        d = os.path.join(AQUI, '..', '03_blender', 'assets')
+        for p in (d, os.path.join(AQUI, '..', '03_blender')):
+            if p not in sys.path:
+                sys.path.insert(0, p)
+        import materiales_roca  # noqa
+        return tuple(float(c) for c in materiales_roca.color_roca_terreno_ac()), 'materiales_roca.color_roca_terreno_ac'
+    except Exception as e:  # noqa
+        return ROCA_COLOR_P1, 'respaldo ROCA_COLOR_P1 (%s)' % str(e)[:80]
+
+
+def roca_caras_pared(ob):
+    """Modo 'base': caras de MAT_terreno casi verticales (|N.z| < ROCA_NZ_PARED) de una malla que no es suelo del terreno."""
+    es_ter, nz, _roca = datos_caras(ob)
+    if ob.name.startswith(SUELO_TERRENO):
+        return np.zeros(len(es_ter), bool)
+    return es_ter & (np.abs(nz) < ROCA_NZ_PARED)
+
+
+def separar_roca_terreno(objetos=None, modo='tile'):
     """SOLO dentro de Blender (writer, antes de recopilar_materiales): crea MAT_terreno_roca (copia de MAT_terreno con
     diffuse_color = ROCA_COLOR) y le pasa las caras de roca de cada malla con MAT_terreno. No guarda el .blend.
+    modo 'tile' (v1.1, por defecto): caras por nz < ROCA_NZ / atributo 'roca'. modo 'base' (v1.2, terreno por texel):
+    solo paredes casi verticales de mallas que no son el suelo, con la caliza de P1 (ver arriba).
     Devuelve {objeto: caras de roca}."""
     import bpy
+    MODO_ROCA['modo'] = modo
     base = bpy.data.materials.get(ROCA_BASE)
     if base is None:
         return {}
@@ -526,7 +578,17 @@ def separar_roca_terreno(objetos=None):
     if nuevo is None:
         nuevo = base.copy()
         nuevo.name = ROCA_MAT
-    nuevo.diffuse_color = (ROCA_COLOR[0], ROCA_COLOR[1], ROCA_COLOR[2], 1.0)
+    if modo == 'base':
+        col, fuente = color_roca_p1()
+        nuevo.diffuse_color = (col[0], col[1], col[2], 1.0)
+        for k in [k for k in nuevo.keys() if k.startswith('ac_')]:
+            del nuevo[k]                          # la copia hereda el multicapa de MAT_terreno: aqui es ksPerPixel
+        img = os.path.join(AQUI, '..', '03_blender', 'texturas', ROCA_TILE_P1[0])
+        nuevo['ac_shader'] = 'ksPerPixel'
+        nuevo['ac_tile'] = {'imagen': os.path.normpath(img), 'escala': ROCA_TILE_P1[1], 'proj': ROCA_TILE_P1[2]}
+        nuevo['ac_roca_color_fuente'] = fuente
+    else:
+        nuevo.diffuse_color = (ROCA_COLOR[0], ROCA_COLOR[1], ROCA_COLOR[2], 1.0)
     obs = objetos if objetos is not None else [o for o in bpy.data.objects if o.type == 'MESH' and any(
         m is not None and m.name == ROCA_BASE for m in o.data.materials)]
     out, hechas = {}, set()
@@ -534,7 +596,7 @@ def separar_roca_terreno(objetos=None):
         me = ob.data
         if me.name in hechas or me.library is not None:
             continue
-        mask = roca_caras(ob)
+        mask = roca_caras_pared(ob) if modo == 'base' else roca_caras(ob)
         if not mask.any():
             continue
         hechas.add(me.name)
@@ -887,8 +949,8 @@ EXT_CONFIG = """; extension/ext_config.ini - Porto Corsa. Generado por 04_export
 
 [ABOUT]
 AUTHOR = Arnau & Claude
-VERSION = 1.1
-DATE_RELEASE = 2026-10-04
+VERSION = 1.2
+DATE_RELEASE = 2026-10-05
 NOTES = Porto Corsa (Cars 2). Iluminacion de pista para CSP.
 
 [BASIC]

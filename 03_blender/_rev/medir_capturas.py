@@ -5,6 +5,8 @@
          [--out medidas.json] [--solo 49,50]
 Escribe medidas.json (defecto: en la carpeta padre del primer dir) con, por carpeta y toma:
   pct_cesped      % de pixeles con HSV H 95-135 grados, S > 0.45, V > 0.5 (el verde cesped del tile actual). Objetivo < 8 % en piloto.
+  pct_verde       % de pixeles verdes en sentido amplio (H 70-150, S > 0.2, V > 0.4): en modo AC el tile tintado del terreno es
+                  un verde palido (S < 0.45) y pct_cesped sale ~0 sin que haya cambiado nada; pct_verde si lo cuenta.
   riqueza         entropia de color local (bits): imagen cuantizada a 4 bits/canal, bloques de 16x16 px con >= 50 % de
                   "terreno" (ni cielo/mar azul, ni gris S < 0.12, ni casi negro), entropia de Shannon del histograma de
                   colores del bloque, media de bloques. Max teorico 8 bits. Objetivo x2 en terreno.
@@ -13,10 +15,20 @@ Escribe medidas.json (defecto: en la carpeta padre del primer dir) con, por carp
                   exterior (dilatacion 3 px) es >= 50 % verde (H 70-150, S > 0.25): los dientes de sierra de 07/08. Objetivo 0.
   pared_lisa      % de pixeles de roca (S < 0.35, 0.45 < V < 0.9, H 15-60 u S < 0.12, no claros, no azules) con desviacion
                   local de V (9x9) < 0.02. Objetivo < 30 %. Se da tambien pct_roca para saber cuanta roca hay en el cuadro.
-  siluetas_20_120 n. de arboles (VEG_pino/cipres/olivo/encina/palmera, OLI_olivo, *_penon_*, MIRADOR_palmera) a 20-120 m de la
-                  camara dentro de un cono de 60 grados (+-30) alrededor de la direccion de la vista, solo tomas piloto/postal;
-                  necesita camaras.json (loc/tgt) y arboles.json (los escribe capturas_ab.py). Objetivo x3.
+  pct_roca        % de pixeles del cuadro que caen en la mascara de roca de pared_lisa (cuanta roca hay en la toma: sirve para
+                  ponderar pared_lisa; una toma con pct_roca < 2 % no dice nada de la roca). Informativo, sin objetivo.
+  pct_azul        % de pixeles azules (H 185-250, S > 0.2, V > 0.35): cielo + mar. Son los que riqueza/varianza_local excluyen
+                  de "terreno"; sirve para detectar que una toma cambio de encuadre (mas/menos cielo). Informativo.
+  siluetas_20_120 n. de ARBOLES a 20-120 m de la camara dentro de un cono de 60 grados (+-30) alrededor de la direccion de la
+                  vista (en planta), solo tomas piloto/postal. Cuenta como arbol (ARBOLES): VEG_pino, VEG_cipres, VEG_olivo,
+                  VEG_encina, VEG_palmera, VEG_plazoleta (arbol de plaza: incluido por decision del coordinador 04/10),
+                  OLI_olivo, VEG_penon_pino/palmera/cipres y MIRADOR_palmera. EXCLUIDOS a proposito porque no dan silueta de
+                  arbol (NO_ARBOLES): VEG_arbusto, VEG_adelfa, VEG_penon_arbusto, OLI_matorral (arbustos/matorral) y VEG_roca
+                  (rocas decorativas). El tipo es el nombre del objeto sin el sufijo numerico. Necesita camaras.json (loc/tgt)
+                  y arboles.json (los escribe capturas_ab.py en cada carpeta). Objetivo x3.
 Con exactamente 2 carpetas anade "_delta" (segunda - primera) por toma; "_resumen" da medias por carpeta (piloto / aereas).
+"_doc" lleva la definicion COMPLETA de cada metrica (este docstring); "_meta.tipos_vegetacion" cuenta los tipos de arboles.json
+que se contaron y los que se excluyeron, para que no haya tipos nuevos sin clasificar.
 """
 import argparse
 import datetime
@@ -29,9 +41,39 @@ import numpy as np
 from PIL import Image
 from scipy import ndimage
 
-ARBOLES = ('VEG_pino', 'VEG_cipres', 'VEG_olivo', 'VEG_encina', 'VEG_palmera', 'OLI_olivo',
+# tipos de arboles.json (nombre sin sufijo numerico) que cuentan como silueta de arbol / que se excluyen a proposito
+ARBOLES = ('VEG_pino', 'VEG_cipres', 'VEG_olivo', 'VEG_encina', 'VEG_palmera', 'VEG_plazoleta', 'OLI_olivo',
            'VEG_penon_pino', 'VEG_penon_palmera', 'VEG_penon_cipres', 'MIRADOR_palmera')
-METRICAS = ('pct_cesped', 'riqueza', 'varianza_local', 'bandas_blancas', 'pared_lisa', 'pct_roca', 'pct_azul', 'siluetas_20_120')
+NO_ARBOLES = ('VEG_arbusto', 'VEG_adelfa', 'VEG_penon_arbusto', 'OLI_matorral', 'VEG_roca')
+METRICAS = ('pct_cesped', 'pct_verde', 'riqueza', 'varianza_local', 'bandas_blancas', 'pared_lisa', 'pct_roca', 'pct_azul',
+            'siluetas_20_120')
+
+
+def doc_metricas():
+    """{metrica: definicion completa} a partir del docstring (una entrada empieza con 2 espacios + nombre; las lineas
+    siguientes mas sangradas son su continuacion)."""
+    doc, cur = {}, None
+    for l in __doc__.splitlines():
+        tok = l.split()
+        if l.startswith('  ') and not l.startswith('   ') and tok and tok[0] in METRICAS:
+            cur = tok[0]
+            doc[cur] = ' '.join(tok[1:])
+        elif cur and l.startswith('    ') and tok:
+            doc[cur] += ' ' + ' '.join(tok)
+        else:
+            cur = None
+    doc['_arboles'] = {'cuentan': list(ARBOLES), 'excluidos': list(NO_ARBOLES)}
+    return doc
+
+
+def clasificar_tipos(arboles):
+    """Cuenta por tipo lo que se conto, lo excluido a proposito y lo que no esta en ninguna lista (aviso)."""
+    out = {'contados': {}, 'excluidos': {}, 'sin_clasificar': {}}
+    for a in arboles or []:
+        t = a['tipo']
+        k = 'contados' if t in ARBOLES else ('excluidos' if t in NO_ARBOLES else 'sin_clasificar')
+        out[k][t] = out[k].get(t, 0) + 1
+    return out
 
 
 def hsv(rgb8):
@@ -95,6 +137,7 @@ def medir_imagen(ruta):
     gris = S < 0.12
     claro = (V > 0.75) & (S < 0.15)
     verde = (H >= 70) & (H <= 150) & (S > 0.25) & (V > 0.2)
+    verde_amplio = (H >= 70) & (H <= 150) & (S > 0.2) & (V > 0.4)
     terreno = ~azul & ~gris & (V > 0.08)
     roca = (S < 0.35) & (V > 0.45) & (V < 0.9) & (((H >= 15) & (H <= 60)) | gris) & ~claro & ~azul
     sd = std_local(V, 9)
@@ -102,6 +145,7 @@ def medir_imagen(ruta):
     n_roca = int(roca.sum())
     return {
         'pct_cesped': round(float(cesped.mean() * 100.0), 2),
+        'pct_verde': round(float(verde_amplio.mean() * 100.0), 2),
         'riqueza': None if riq is None else round(riq, 3),
         'bloques_terreno': nb,
         'varianza_local': round(float(sd[terreno].mean()), 4) if terreno.any() else None,
@@ -150,13 +194,20 @@ def main():
     cams_path = A.camaras or (os.path.join(padre, 'camaras.json') if os.path.exists(os.path.join(padre, 'camaras.json')) else None)
     cams = {k: v for k, v in json.load(open(cams_path, encoding='utf-8')).items() if not k.startswith('_')} if cams_path else {}
     solo = [p for p in A.solo.split(',') if p]
-    R = {'_meta': {'fecha': datetime.datetime.now().strftime('%Y-%m-%d %H:%M'), 'dirs': dirs, 'camaras': cams_path, 'arboles': {}},
-         '_doc': {l.split()[0]: l.strip() for l in __doc__.splitlines() if l.startswith('  ') and l.split() and l.split()[0] in METRICAS}}
+    R = {'_meta': {'fecha': datetime.datetime.now().strftime('%Y-%m-%d %H:%M'), 'dirs': dirs, 'camaras': cams_path, 'arboles': {},
+                   'tipos_vegetacion': {}},
+         '_doc': doc_metricas()}
     for d in dirs:
         clave = os.path.basename(d)
         arb_path = A.arboles or (os.path.join(d, 'arboles.json') if os.path.exists(os.path.join(d, 'arboles.json')) else None)
         arboles = json.load(open(arb_path, encoding='utf-8')) if arb_path else None
         R['_meta']['arboles'][clave] = arb_path
+        if arboles is not None:
+            tipos = clasificar_tipos(arboles)
+            R['_meta']['tipos_vegetacion'][clave] = tipos
+            if tipos['sin_clasificar']:
+                print('AVISO %s: tipos de vegetacion sin clasificar (ni ARBOLES ni NO_ARBOLES; no cuentan en siluetas): %s'
+                      % (clave, tipos['sin_clasificar']))
         res = {}
         for f in sorted(os.listdir(d)):
             if not f.endswith('.png') or f.startswith(('AB_', 'hoja_')):
@@ -167,9 +218,9 @@ def main():
             m = medir_imagen(os.path.join(d, f))
             m['siluetas_20_120'] = siluetas(cams[toma], arboles) if (arboles is not None and toma in cams and es_piloto(toma)) else None
             res[toma] = m
-            print('%-14s %-32s cesped %5.1f%%  riqueza %s  var %s  bandas %d  pared_lisa %s (roca %4.1f%%)  azul %4.1f%%  siluetas %s' % (
-                clave[:14], toma, m['pct_cesped'], m['riqueza'], m['varianza_local'], m['bandas_blancas'], m['pared_lisa'],
-                m['pct_roca'], m['pct_azul'], m['siluetas_20_120']))
+            print('%-14s %-32s cesped %5.1f%% verde %5.1f%%  riqueza %s  var %s  bandas %d  pared_lisa %s (roca %4.1f%%)  azul %4.1f%%  '
+                  'siluetas %s' % (clave[:14], toma, m['pct_cesped'], m['pct_verde'], m['riqueza'], m['varianza_local'], m['bandas_blancas'],
+                                   m['pared_lisa'], m['pct_roca'], m['pct_azul'], m['siluetas_20_120']))
         R[clave] = res
     claves = [os.path.basename(d) for d in dirs]
     R['_resumen'] = {}

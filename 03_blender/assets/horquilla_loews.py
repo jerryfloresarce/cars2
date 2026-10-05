@@ -350,7 +350,8 @@ def build(parent_collection, radio=9.0, seed=0, **params):
     SEG = 48
 
     # --- suelo de tierra bajo todo el interior ------------------------------
-    mb.add(*_lathe([(R - 0.35, 0.03), (0.0, 0.03)], seg=SEG), _mat("tierra"))
+    # fase visual F1 (3.5, PARCHES_F1_mascara.md A3.a, aplicado por el integrador): cesped en la isleta; _mat("tierra") como respaldo
+    mb.add(*_lathe([(R - 0.35, 0.03), (0.0, 0.03)], seg=SEG), bpy.data.materials.get('MAT_cesped') or _mat("tierra"))
 
     # --- 1. murete exterior de piedra clara (~1.1 m con remate) -------------
     perfil_murete = [
@@ -415,7 +416,7 @@ def build(parent_collection, radio=9.0, seed=0, **params):
         (rp - 0.34, ztop),         # remate
     ]
     mb.add(*_lathe(perfil_parterre, seg=SEG), _mat("piedra"))
-    mb.add(*_lathe([(rp - 0.30, ztop), (0.0, ztop)], seg=SEG), _mat("tierra"))
+    mb.add(*_lathe([(rp - 0.30, ztop), (0.0, ztop)], seg=SEG), bpy.data.materials.get('MAT_cesped') or _mat("tierra"))
 
     # llanta: seto anular en el borde superior
     ro_l, ri_l = rp - 0.12, rp - 0.72

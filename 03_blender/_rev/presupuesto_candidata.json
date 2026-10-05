@@ -1,0 +1,1492 @@
+{
+ "blend": "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/escena_candidata.blend",
+ "tris_total_sin_lib": 4754728,
+ "mallas": 4922,
+ "materiales": 512,
+ "imagenes": 16,
+ "horiz_tris": 210778,
+ "veg_tris": 1342076,
+ "familias_tris": {
+  "VEG_": 1218960,
+  "CAMINO_": 898156,
+  "TERRENO_": 616392,
+  "CASAS_": 492546,
+  "PENON_": 254344,
+  "COCHE_": 220838,
+  "HORIZ_": 210778,
+  "OLI_": 123116,
+  "CARRERA_": 116956,
+  "TUNEL_": 113088,
+  "PIT_": 99040,
+  "VIADUCTO_": 87930,
+  "YATE_": 49752,
+  "ITAL_": 44526,
+  "CAMARA_": 27534,
+  "PUERTO_": 26086,
+  "CASINO_": 25712,
+  "CALLE_": 24778,
+  "MIRADOR_": 19042,
+  "HOTEL_": 16016,
+  "ARCEN_": 15876,
+  "GUARDARRAIL_": 10104,
+  "MARCA_": 9354,
+  "PISTA_": 5200,
+  "AYTO_": 5174,
+  "BORDILLO_": 5128,
+  "LOEWS_": 4932,
+  "ACERA_": 3522,
+  "MCOCHE_": 3384,
+  "MUROC_": 2368,
+  "PIANOS_": 2272,
+  "CAMPANILE_": 1518,
+  "DIRIGIBLE_": 300,
+  "AGUA_": 4,
+  "LINEA_": 2
+ },
+ "paleta_resumen": {
+  "exacto": 17,
+  "variante": 62,
+  "horizonte": 14,
+  "FUERA": 30
+ },
+ "paleta_fuera": [
+  "MAT_LOEWS_coco",
+  "MAT_LOEWS_flor_azul",
+  "MAT_LOEWS_flor_azul_cl",
+  "MAT_LOEWS_flor_roja",
+  "MAT_LOEWS_flor_rosa",
+  "MAT_LOEWS_palma",
+  "MAT_LOEWS_palma_clara",
+  "MAT_LOEWS_seto",
+  "MAT_LOEWS_seto_claro",
+  "MAT_LOEWS_tronco",
+  "MAT_MCOCHE_cristal_pulido",
+  "MAT_MCOCHE_hueco",
+  "MAT_MCOCHE_tronco",
+  "MAT_MCOCHE_veg",
+  "MAT_MCOCHE_veg_clara",
+  "MAT_OLI_hoja_salvia",
+  "MAT_OLI_matorral",
+  "MAT_OLI_matorral_claro",
+  "MAT_PENON_bolardo",
+  "MAT_PENON_poste",
+  "MAT_VEG_cipres_b_luz",
+  "MAT_VEG_flor_amarilla",
+  "MAT_VEG_flor_lavanda",
+  "MAT_VEG_flor_roja",
+  "MAT_VEG_pino_c",
+  "MAT_VEG_pino_c_luz",
+  "MAT_VEG_retama_luz",
+  "MAT_VEG_tronco",
+  "MAT_VEG_tronco_encina",
+  "MAT_VEG_tronco_palmera"
+ ],
+ "paleta_detalle": {
+  "MAT_CASAS_fachada_azafran": {
+   "clase": "exacto",
+   "paleta": "fachadas_propuesta.azafran",
+   "k": 1.0,
+   "residuo_rel": 0.0,
+   "hex": "#E2A84A",
+   "rgb": [
+    0.7605,
+    0.3916,
+    0.0685
+   ]
+  },
+  "MAT_CASAS_fachada_azafran_cla": {
+   "clase": "variante",
+   "paleta": "fachadas_actual.amarillo",
+   "k": 0.949,
+   "residuo_rel": 0.042,
+   "hex": "#EDBE4E",
+   "rgb": [
+    0.8493,
+    0.5131,
+    0.0756
+   ]
+  },
+  "MAT_CASAS_fachada_azafran_osc": {
+   "clase": "variante",
+   "paleta": "fachadas_propuesta.ocre_naranja",
+   "k": 1.006,
+   "residuo_rel": 0.057,
+   "hex": "#D79446",
+   "rgb": [
+    0.6774,
+    0.2943,
+    0.0618
+   ]
+  },
+  "MAT_CASAS_fachada_crema_calido": {
+   "clase": "exacto",
+   "paleta": "fachadas_propuesta.crema_calido",
+   "k": 1.0,
+   "residuo_rel": 0.0,
+   "hex": "#E6D4B0",
+   "rgb": [
+    0.7913,
+    0.6584,
+    0.4342
+   ]
+  },
+  "MAT_CASAS_fachada_crema_calido_cla": {
+   "clase": "variante",
+   "paleta": "fachadas_propuesta.crema_calido",
+   "k": 1.135,
+   "residuo_rel": 0.023,
+   "hex": "#F2E3B9",
+   "rgb": [
+    0.8838,
+    0.7707,
+    0.484
+   ]
+  },
+  "MAT_CASAS_fachada_crema_calido_osc": {
+   "clase": "variante",
+   "paleta": "fachadas_propuesta.crema_calido",
+   "k": 0.877,
+   "residuo_rel": 0.023,
+   "hex": "#DBC5A7",
+   "rgb": [
+    0.7047,
+    0.5592,
+    0.3875
+   ]
+  },
+  "MAT_CASAS_fachada_melocoton": {
+   "clase": "exacto",
+   "paleta": "fachadas_propuesta.melocoton",
+   "k": 1.0,
+   "residuo_rel": 0.0,
+   "hex": "#E6A487",
+   "rgb": [
+    0.7913,
+    0.3712,
+    0.2423
+   ]
+  },
+  "MAT_CASAS_fachada_melocoton_cla": {
+   "clase": "variante",
+   "paleta": "fachadas_propuesta.melocoton",
+   "k": 1.137,
+   "residuo_rel": 0.04,
+   "hex": "#F2B58E",
+   "rgb": [
+    0.8838,
+    0.4593,
+    0.2695
+   ]
+  },
+  "MAT_CASAS_fachada_melocoton_osc": {
+   "clase": "variante",
+   "paleta": "fachadas_propuesta.melocoton",
+   "k": 0.876,
+   "residuo_rel": 0.038,
+   "hex": "#DB9480",
+   "rgb": [
+    0.7047,
+    0.2973,
+    0.2168
+   ]
+  },
+  "MAT_CASAS_fachada_ocre_naranja": {
+   "clase": "exacto",
+   "paleta": "fachadas_propuesta.ocre_naranja",
+   "k": 1.0,
+   "residuo_rel": 0.0,
+   "hex": "#D88A4C",
+   "rgb": [
+    0.6867,
+    0.2542,
+    0.0723
+   ]
+  },
+  "MAT_CASAS_fachada_ocre_naranja_cla": {
+   "clase": "variante",
+   "paleta": "fachadas_propuesta.ocre_naranja",
+   "k": 1.142,
+   "residuo_rel": 0.06,
+   "hex": "#E39D50",
+   "rgb": [
+    0.7666,
+    0.3379,
+    0.0798
+   ]
+  },
+  "MAT_CASAS_fachada_ocre_naranja_osc": {
+   "clase": "variante",
+   "paleta": "fachadas_propuesta.siena",
+   "k": 1.121,
+   "residuo_rel": 0.043,
+   "hex": "#CD7848",
+   "rgb": [
+    0.6118,
+    0.1879,
+    0.0652
+   ]
+  },
+  "MAT_CASAS_fachada_rojo_pompeyano": {
+   "clase": "exacto",
+   "paleta": "fachadas_propuesta.rojo_pompeyano",
+   "k": 1.0,
+   "residuo_rel": 0.0,
+   "hex": "#B04A3B",
+   "rgb": [
+    0.4342,
+    0.0685,
+    0.0437
+   ]
+  },
+  "MAT_CASAS_fachada_rojo_pompeyano_cla": {
+   "clase": "variante",
+   "paleta": "terracota",
+   "k": 0.92,
+   "residuo_rel": 0.041,
+   "hex": "#B9583E",
+   "rgb": [
+    0.484,
+    0.0975,
+    0.0481
+   ]
+  },
+  "MAT_CASAS_fachada_rojo_pompeyano_osc": {
+   "clase": "variante",
+   "paleta": "fachadas_propuesta.rojo_pompeyano",
+   "k": 0.888,
+   "residuo_rel": 0.036,
+   "hex": "#A73D38",
+   "rgb": [
+    0.3875,
+    0.0467,
+    0.0396
+   ]
+  },
+  "MAT_CASAS_fachada_siena": {
+   "clase": "exacto",
+   "paleta": "fachadas_propuesta.siena",
+   "k": 1.0,
+   "residuo_rel": 0.0,
+   "hex": "#C46A43",
+   "rgb": [
+    0.552,
+    0.1441,
+    0.0561
+   ]
+  },
+  "MAT_CASAS_fachada_siena_cla": {
+   "clase": "variante",
+   "paleta": "fachadas_propuesta.ocre_naranja",
+   "k": 0.882,
+   "residuo_rel": 0.045,
+   "hex": "#CE7B46",
+   "rgb": [
+    0.6158,
+    0.1966,
+    0.0618
+   ]
+  },
+  "MAT_CASAS_fachada_siena_osc": {
+   "clase": "variante",
+   "paleta": "terracota",
+   "k": 0.938,
+   "residuo_rel": 0.033,
+   "hex": "#BA5A40",
+   "rgb": [
+    0.4922,
+    0.1034,
+    0.0507
+   ]
+  },
+  "MAT_CASAS_teja": {
+   "clase": "exacto",
+   "paleta": "terracota",
+   "k": 1.0,
+   "residuo_rel": 0.0,
+   "hex": "#BF6440",
+   "rgb": [
+    0.521,
+    0.1274,
+    0.0513
+   ]
+  },
+  "MAT_HORIZ_cerca_bosque": {
+   "clase": "horizonte/exacto",
+   "paleta": "oliva_oscuro",
+   "k": 1.0,
+   "hex": "#818799",
+   "base_hex": "#6F7C50"
+  },
+  "MAT_HORIZ_cerca_bosque_claro": {
+   "clase": "horizonte/exacto",
+   "paleta": "salvia",
+   "k": 1.0,
+   "hex": "#898FA2",
+   "base_hex": "#95A281"
+  },
+  "MAT_HORIZ_cerca_cumbre": {
+   "clase": "horizonte/exacto",
+   "paleta": "caliza_ocre",
+   "k": 1.0,
+   "hex": "#8A8EA2",
+   "base_hex": "#D8CCB0"
+  },
+  "MAT_HORIZ_cerca_cumbre_clara": {
+   "clase": "horizonte/variante",
+   "paleta": "caliza_ocre",
+   "k": 1.25,
+   "hex": "#898DA2",
+   "base_hex": "#EEE1C3"
+  },
+  "MAT_HORIZ_cerca_cumbre_oscura": {
+   "clase": "horizonte/exacto",
+   "paleta": "caliza_sombra",
+   "k": 1.0,
+   "hex": "#83869A",
+   "base_hex": "#7F766A"
+  },
+  "MAT_HORIZ_lejos_bosque": {
+   "clase": "horizonte/exacto",
+   "paleta": "caliza_gris_calido",
+   "k": 1.0,
+   "hex": "#898DA2",
+   "base_hex": "#B3A68A"
+  },
+  "MAT_HORIZ_lejos_cumbre": {
+   "clase": "horizonte/exacto",
+   "paleta": "caliza_ocre",
+   "k": 1.0,
+   "hex": "#898DA2",
+   "base_hex": "#D8CCB0"
+  },
+  "MAT_HORIZ_lejos_cumbre_clara": {
+   "clase": "horizonte/variante",
+   "paleta": "caliza_ocre",
+   "k": 1.25,
+   "hex": "#898EA2",
+   "base_hex": "#EEE1C3"
+  },
+  "MAT_HORIZ_loma_bosque": {
+   "clase": "horizonte/exacto",
+   "paleta": "oliva_oscuro",
+   "k": 1.0,
+   "hex": "#7F8496",
+   "base_hex": "#6F7C50"
+  },
+  "MAT_HORIZ_loma_bosque_claro": {
+   "clase": "horizonte/exacto",
+   "paleta": "salvia",
+   "k": 1.0,
+   "hex": "#898FA2",
+   "base_hex": "#95A281"
+  },
+  "MAT_HORIZ_loma_cumbre": {
+   "clase": "horizonte/exacto",
+   "paleta": "caliza_ocre",
+   "k": 1.0,
+   "hex": "#898DA2",
+   "base_hex": "#D8CCB0"
+  },
+  "MAT_HORIZ_loma_cumbre_clara": {
+   "clase": "horizonte/variante",
+   "paleta": "caliza_ocre",
+   "k": 1.25,
+   "hex": "#898DA2",
+   "base_hex": "#EEE1C3"
+  },
+  "MAT_HORIZ_loma_cumbre_oscura": {
+   "clase": "horizonte/exacto",
+   "paleta": "caliza_sombra",
+   "k": 1.0,
+   "hex": "#818497",
+   "base_hex": "#7F766A"
+  },
+  "MAT_HORIZ_pueblo": {
+   "clase": "horizonte/exacto",
+   "paleta": "marmol_casino",
+   "k": 1.0,
+   "hex": "#8A8EA2",
+   "base_hex": "#EEE4CF"
+  },
+  "MAT_LOEWS_coco": {
+   "clase": "FUERA",
+   "paleta": "fachadas_actual.crema",
+   "k": 0.5,
+   "residuo_rel": 0.118,
+   "hex": "#B39059",
+   "rgb": [
+    0.45,
+    0.28,
+    0.1
+   ]
+  },
+  "MAT_LOEWS_flor_azul": {
+   "clase": "FUERA",
+   "paleta": "mar_profundo",
+   "k": 1.5,
+   "residuo_rel": 0.486,
+   "hex": "#5986F1",
+   "rgb": [
+    0.1,
+    0.24,
+    0.88
+   ]
+  },
+  "MAT_LOEWS_flor_azul_cl": {
+   "clase": "FUERA",
+   "paleta": "mar_orilla",
+   "k": 1.011,
+   "residuo_rel": 0.319,
+   "hex": "#95BCFD",
+   "rgb": [
+    0.3,
+    0.5,
+    0.98
+   ]
+  },
+  "MAT_LOEWS_flor_blanca": {
+   "clase": "variante",
+   "paleta": "marco_ventana_crema",
+   "k": 1.146,
+   "residuo_rel": 0.062,
+   "hex": "#F9F7ED",
+   "rgb": [
+    0.95,
+    0.93,
+    0.85
+   ]
+  },
+  "MAT_LOEWS_flor_roja": {
+   "clase": "FUERA",
+   "paleta": "terracota",
+   "k": 1.5,
+   "residuo_rel": 0.178,
+   "hex": "#EA3F4B",
+   "rgb": [
+    0.82,
+    0.05,
+    0.07
+   ]
+  },
+  "MAT_LOEWS_flor_rosa": {
+   "clase": "FUERA",
+   "paleta": "fachadas_propuesta.melocoton",
+   "k": 1.193,
+   "residuo_rel": 0.243,
+   "hex": "#F895BF",
+   "rgb": [
+    0.94,
+    0.3,
+    0.52
+   ]
+  },
+  "MAT_LOEWS_palma": {
+   "clase": "FUERA",
+   "paleta": "cesped_jardin",
+   "k": 0.852,
+   "residuo_rel": 0.304,
+   "hex": "#4BAD59",
+   "rgb": [
+    0.07,
+    0.42,
+    0.1
+   ]
+  },
+  "MAT_LOEWS_palma_clara": {
+   "clase": "FUERA",
+   "paleta": "cesped_jardin",
+   "k": 1.179,
+   "residuo_rel": 0.208,
+   "hex": "#6CC46C",
+   "rgb": [
+    0.15,
+    0.55,
+    0.15
+   ]
+  },
+  "MAT_LOEWS_piedra": {
+   "clase": "variante",
+   "paleta": "arena",
+   "k": 1.036,
+   "residuo_rel": 0.013,
+   "hex": "#EADFC5",
+   "rgb": [
+    0.82,
+    0.74,
+    0.56
+   ]
+  },
+  "MAT_LOEWS_seto": {
+   "clase": "FUERA",
+   "paleta": "cesped_jardin",
+   "k": 0.735,
+   "residuo_rel": 0.292,
+   "hex": "#48A252",
+   "rgb": [
+    0.065,
+    0.36,
+    0.085
+   ]
+  },
+  "MAT_LOEWS_seto_claro": {
+   "clase": "FUERA",
+   "paleta": "cesped_jardin",
+   "k": 0.969,
+   "residuo_rel": 0.238,
+   "hex": "#5DB561",
+   "rgb": [
+    0.11,
+    0.46,
+    0.12
+   ]
+  },
+  "MAT_LOEWS_tronco": {
+   "clase": "FUERA",
+   "paleta": "tierra",
+   "k": 0.721,
+   "residuo_rel": 0.094,
+   "hex": "#AA895D",
+   "rgb": [
+    0.4,
+    0.25,
+    0.11
+   ]
+  },
+  "MAT_MCOCHE_caliza": {
+   "clase": "variante",
+   "paleta": "fachadas_propuesta.crema_calido",
+   "k": 0.651,
+   "residuo_rel": 0.028,
+   "hex": "#BFAF8C",
+   "rgb": [
+    0.5231,
+    0.4312,
+    0.2637
+   ]
+  },
+  "MAT_MCOCHE_caliza_clara": {
+   "clase": "variante",
+   "paleta": "fachadas_propuesta.crema_calido",
+   "k": 0.717,
+   "residuo_rel": 0.027,
+   "hex": "#C8B793",
+   "rgb": [
+    0.5755,
+    0.475,
+    0.2911
+   ]
+  },
+  "MAT_MCOCHE_caliza_grieta": {
+   "clase": "variante",
+   "paleta": "fachadas_propuesta.crema_calido",
+   "k": 0.655,
+   "residuo_rel": 0.009,
+   "hex": "#BFAF92",
+   "rgb": [
+    0.522,
+    0.426,
+    0.287
+   ]
+  },
+  "MAT_MCOCHE_caliza_monte": {
+   "clase": "variante",
+   "paleta": "caliza_gris_calido",
+   "k": 0.746,
+   "residuo_rel": 0.012,
+   "hex": "#9E9079",
+   "rgb": [
+    0.34,
+    0.28,
+    0.19
+   ]
+  },
+  "MAT_MCOCHE_caliza_oscura": {
+   "clase": "variante",
+   "paleta": "caliza_sombra",
+   "k": 0.865,
+   "residuo_rel": 0.07,
+   "hex": "#7A6E5D",
+   "rgb": [
+    0.1939,
+    0.1572,
+    0.1086
+   ]
+  },
+  "MAT_MCOCHE_cristal_pulido": {
+   "clase": "FUERA",
+   "paleta": "cipres_pino_oscuro",
+   "k": 1.072,
+   "residuo_rel": 0.391,
+   "hex": "#3F4650",
+   "rgb": [
+    0.05,
+    0.062,
+    0.08
+   ]
+  },
+  "MAT_MCOCHE_hueco": {
+   "clase": "FUERA",
+   "paleta": "oliva_oscuro",
+   "k": 0.5,
+   "residuo_rel": 0.308,
+   "hex": "#52483C",
+   "rgb": [
+    0.085,
+    0.065,
+    0.045
+   ]
+  },
+  "MAT_MCOCHE_hueso": {
+   "clase": "variante",
+   "paleta": "marco_ventana_crema",
+   "k": 0.664,
+   "residuo_rel": 0.006,
+   "hex": "#C8C3B3",
+   "rgb": [
+    0.58,
+    0.5437,
+    0.4495
+   ]
+  },
+  "MAT_MCOCHE_tronco": {
+   "clase": "FUERA",
+   "paleta": "tierra",
+   "k": 0.5,
+   "residuo_rel": 0.163,
+   "hex": "#846C55",
+   "rgb": [
+    0.23,
+    0.15,
+    0.09
+   ]
+  },
+  "MAT_MCOCHE_veg": {
+   "clase": "FUERA",
+   "paleta": "contraventanas",
+   "k": 1.277,
+   "residuo_rel": 0.127,
+   "hex": "#467A44",
+   "rgb": [
+    0.062,
+    0.195,
+    0.058
+   ]
+  },
+  "MAT_MCOCHE_veg_clara": {
+   "clase": "FUERA",
+   "paleta": "cesped_jardin",
+   "k": 0.709,
+   "residuo_rel": 0.084,
+   "hex": "#659755",
+   "rgb": [
+    0.13,
+    0.31,
+    0.09
+   ]
+  },
+  "MAT_OLI_hoja_plata": {
+   "clase": "variante",
+   "paleta": "salvia",
+   "k": 1.265,
+   "residuo_rel": 0.015,
+   "hex": "#A6B58E",
+   "rgb": [
+    0.38,
+    0.46,
+    0.27
+   ]
+  },
+  "MAT_OLI_hoja_salvia": {
+   "clase": "FUERA",
+   "paleta": "oliva_oscuro",
+   "k": 1.5,
+   "residuo_rel": 0.114,
+   "hex": "#819E69",
+   "rgb": [
+    0.22,
+    0.34,
+    0.14
+   ]
+  },
+  "MAT_OLI_matorral": {
+   "clase": "FUERA",
+   "paleta": "contraventanas",
+   "k": 1.419,
+   "residuo_rel": 0.092,
+   "hex": "#45804D",
+   "rgb": [
+    0.06,
+    0.215,
+    0.075
+   ]
+  },
+  "MAT_OLI_matorral_claro": {
+   "clase": "FUERA",
+   "paleta": "cesped_jardin",
+   "k": 0.742,
+   "residuo_rel": 0.126,
+   "hex": "#659961",
+   "rgb": [
+    0.13,
+    0.32,
+    0.12
+   ]
+  },
+  "MAT_OLI_tronco_olivo": {
+   "clase": "variante",
+   "paleta": "tierra",
+   "k": 0.516,
+   "residuo_rel": 0.011,
+   "hex": "#8E7959",
+   "rgb": [
+    0.27,
+    0.19,
+    0.1
+   ]
+  },
+  "MAT_PENON_balaustrada": {
+   "clase": "variante",
+   "paleta": "marco_ventana_crema",
+   "k": 1.079,
+   "residuo_rel": 0.06,
+   "hex": "#F3F0E7",
+   "rgb": [
+    0.9,
+    0.87,
+    0.8
+   ]
+  },
+  "MAT_PENON_bolardo": {
+   "clase": "FUERA",
+   "paleta": "caliza_sombra",
+   "k": 1.119,
+   "residuo_rel": 0.195,
+   "hex": "#7C7C81",
+   "rgb": [
+    0.2,
+    0.2,
+    0.22
+   ]
+  },
+  "MAT_PENON_farol": {
+   "clase": "variante",
+   "paleta": "fachadas_propuesta.crema_calido",
+   "k": 1.279,
+   "residuo_rel": 0.016,
+   "hex": "#FFEFC4",
+   "rgb": [
+    1.0,
+    0.86,
+    0.55
+   ]
+  },
+  "MAT_PENON_muelle": {
+   "clase": "variante",
+   "paleta": "marco_ventana_crema",
+   "k": 0.688,
+   "residuo_rel": 0.01,
+   "hex": "#CBC5B6",
+   "rgb": [
+    0.6,
+    0.56,
+    0.47
+   ]
+  },
+  "MAT_PENON_poste": {
+   "clase": "FUERA",
+   "paleta": "caliza_sombra",
+   "k": 0.669,
+   "residuo_rel": 0.188,
+   "hex": "#616165",
+   "rgb": [
+    0.12,
+    0.12,
+    0.13
+   ]
+  },
+  "MAT_PPUEBLO_roca": {
+   "clase": "variante",
+   "paleta": "fachadas_propuesta.crema_calido",
+   "k": 0.649,
+   "residuo_rel": 0.02,
+   "hex": "#BEB08E",
+   "rgb": [
+    0.5175,
+    0.4319,
+    0.2685
+   ]
+  },
+  "MAT_PPUEBLO_roca_clara": {
+   "clase": "variante",
+   "paleta": "fachadas_propuesta.crema_calido",
+   "k": 0.715,
+   "residuo_rel": 0.019,
+   "hex": "#C7B794",
+   "rgb": [
+    0.5694,
+    0.4758,
+    0.2964
+   ]
+  },
+  "MAT_PPUEBLO_roca_oscura": {
+   "clase": "variante",
+   "paleta": "caliza_sombra",
+   "k": 0.864,
+   "residuo_rel": 0.06,
+   "hex": "#796F5D",
+   "rgb": [
+    0.1918,
+    0.1575,
+    0.1106
+   ]
+  },
+  "MAT_VEG_adelfa_hoja": {
+   "clase": "variante",
+   "paleta": "oliva_oscuro",
+   "k": 1.273,
+   "residuo_rel": 0.062,
+   "hex": "#7C8862",
+   "rgb": [
+    0.202,
+    0.248,
+    0.122
+   ]
+  },
+  "MAT_VEG_buganvilla": {
+   "clase": "exacto",
+   "paleta": "buganvilla",
+   "k": 1.0,
+   "residuo_rel": 0.0,
+   "hex": "#C2407A",
+   "rgb": [
+    0.5395,
+    0.0513,
+    0.1946
+   ]
+  },
+  "MAT_VEG_cipres": {
+   "clase": "exacto",
+   "paleta": "cipres_pino_oscuro",
+   "k": 1.0,
+   "residuo_rel": 0.0,
+   "hex": "#34503A",
+   "rgb": [
+    0.0343,
+    0.0802,
+    0.0423
+   ]
+  },
+  "MAT_VEG_cipres_b": {
+   "clase": "exacto",
+   "paleta": "cipres_pino_oscuro",
+   "k": 1.0,
+   "residuo_rel": 0.01,
+   "hex": "#314C37",
+   "rgb": [
+    0.0309,
+    0.0722,
+    0.0381
+   ]
+  },
+  "MAT_VEG_cipres_b_luz": {
+   "clase": "FUERA",
+   "paleta": "cipres_pino_oscuro",
+   "k": 1.5,
+   "residuo_rel": 0.094,
+   "hex": "#3D604E",
+   "rgb": [
+    0.0471,
+    0.1159,
+    0.0757
+   ]
+  },
+  "MAT_VEG_cipres_luz": {
+   "clase": "variante",
+   "paleta": "cipres_pino_oscuro",
+   "k": 1.4,
+   "residuo_rel": 0.0,
+   "hex": "#3E5E45",
+   "rgb": [
+    0.048,
+    0.1123,
+    0.0592
+   ]
+  },
+  "MAT_VEG_datil": {
+   "clase": "variante",
+   "paleta": "fachadas_propuesta.azafran",
+   "k": 1.028,
+   "residuo_rel": 0.034,
+   "hex": "#E5AA59",
+   "rgb": [
+    0.78,
+    0.4,
+    0.1
+   ]
+  },
+  "MAT_VEG_encina_b": {
+   "clase": "variante",
+   "paleta": "oliva_oscuro",
+   "k": 1.009,
+   "residuo_rel": 0.039,
+   "hex": "#707B55",
+   "rgb": [
+    0.1606,
+    0.1985,
+    0.0908
+   ]
+  },
+  "MAT_VEG_encina_b_luz": {
+   "clase": "variante",
+   "paleta": "oliva_oscuro",
+   "k": 1.262,
+   "residuo_rel": 0.042,
+   "hex": "#7C885F",
+   "rgb": [
+    0.2008,
+    0.248,
+    0.1144
+   ]
+  },
+  "MAT_VEG_flor_amarilla": {
+   "clase": "FUERA",
+   "paleta": "fachadas_actual.amarillo",
+   "k": 1.182,
+   "residuo_rel": 0.148,
+   "hex": "#FAE750",
+   "rgb": [
+    0.96,
+    0.8,
+    0.08
+   ]
+  },
+  "MAT_VEG_flor_lavanda": {
+   "clase": "FUERA",
+   "paleta": "marco_ventana_crema",
+   "k": 0.573,
+   "residuo_rel": 0.455,
+   "hex": "#B389DD",
+   "rgb": [
+    0.45,
+    0.25,
+    0.72
+   ]
+  },
+  "MAT_VEG_flor_roja": {
+   "clase": "FUERA",
+   "paleta": "terracota",
+   "k": 1.476,
+   "residuo_rel": 0.163,
+   "hex": "#E74550",
+   "rgb": [
+    0.8,
+    0.06,
+    0.08
+   ]
+  },
+  "MAT_VEG_flor_roja_clara": {
+   "clase": "variante",
+   "paleta": "fachadas_actual.rosa",
+   "k": 1.151,
+   "residuo_rel": 0.023,
+   "hex": "#F6817C",
+   "rgb": [
+    0.92,
+    0.22,
+    0.2
+   ]
+  },
+  "MAT_VEG_flor_rosa": {
+   "clase": "exacto",
+   "paleta": "buganvilla",
+   "k": 1.0,
+   "residuo_rel": 0.0,
+   "hex": "#C2407A",
+   "rgb": [
+    0.5395,
+    0.0513,
+    0.1946
+   ]
+  },
+  "MAT_VEG_flor_rosa_clara": {
+   "clase": "variante",
+   "paleta": "buganvilla",
+   "k": 1.5,
+   "residuo_rel": 0.063,
+   "hex": "#EF5197",
+   "rgb": [
+    0.8632,
+    0.0821,
+    0.3114
+   ]
+  },
+  "MAT_VEG_lavanda": {
+   "clase": "variante",
+   "paleta": "salvia",
+   "k": 1.131,
+   "residuo_rel": 0.044,
+   "hex": "#A2A888",
+   "rgb": [
+    0.3602,
+    0.3923,
+    0.245
+   ]
+  },
+  "MAT_VEG_lavanda_luz": {
+   "clase": "variante",
+   "paleta": "salvia",
+   "k": 1.281,
+   "residuo_rel": 0.039,
+   "hex": "#ABB290",
+   "rgb": [
+    0.4052,
+    0.4463,
+    0.2781
+   ]
+  },
+  "MAT_VEG_olivo_plata": {
+   "clase": "variante",
+   "paleta": "salvia",
+   "k": 1.15,
+   "residuo_rel": 0.0,
+   "hex": "#9FAC8A",
+   "rgb": [
+    0.345,
+    0.414,
+    0.253
+   ]
+  },
+  "MAT_VEG_olivo_salvia": {
+   "clase": "variante",
+   "paleta": "salvia",
+   "k": 0.85,
+   "residuo_rel": 0.0,
+   "hex": "#8A9678",
+   "rgb": [
+    0.255,
+    0.306,
+    0.187
+   ]
+  },
+  "MAT_VEG_palma": {
+   "clase": "variante",
+   "paleta": "oliva_oscuro",
+   "k": 1.481,
+   "residuo_rel": 0.062,
+   "hex": "#859269",
+   "rgb": [
+    0.235,
+    0.2885,
+    0.142
+   ]
+  },
+  "MAT_VEG_palma_abanico": {
+   "clase": "variante",
+   "paleta": "oliva_oscuro",
+   "k": 1.449,
+   "residuo_rel": 0.064,
+   "hex": "#849168",
+   "rgb": [
+    0.2298,
+    0.282,
+    0.1394
+   ]
+  },
+  "MAT_VEG_palma_abanico_clara": {
+   "clase": "variante",
+   "paleta": "salvia",
+   "k": 0.904,
+   "residuo_rel": 0.062,
+   "hex": "#8F9D73",
+   "rgb": [
+    0.2761,
+    0.3377,
+    0.1727
+   ]
+  },
+  "MAT_VEG_palma_clara": {
+   "clase": "variante",
+   "paleta": "salvia",
+   "k": 0.96,
+   "residuo_rel": 0.055,
+   "hex": "#93A178",
+   "rgb": [
+    0.2925,
+    0.357,
+    0.1865
+   ]
+  },
+  "MAT_VEG_palma_seca": {
+   "clase": "variante",
+   "paleta": "hierba_seca",
+   "k": 0.9,
+   "residuo_rel": 0.0,
+   "hex": "#BBAB76",
+   "rgb": [
+    0.495,
+    0.405,
+    0.18
+   ]
+  },
+  "MAT_VEG_palma_wash": {
+   "clase": "variante",
+   "paleta": "salvia",
+   "k": 0.8,
+   "residuo_rel": 0.069,
+   "hex": "#88956C",
+   "rgb": [
+    0.2448,
+    0.3,
+    0.1504
+   ]
+  },
+  "MAT_VEG_palma_wash_clara": {
+   "clase": "variante",
+   "paleta": "salvia",
+   "k": 0.985,
+   "residuo_rel": 0.054,
+   "hex": "#95A379",
+   "rgb": [
+    0.3,
+    0.366,
+    0.192
+   ]
+  },
+  "MAT_VEG_piedra": {
+   "clase": "variante",
+   "paleta": "caliza_ocre",
+   "k": 1.25,
+   "residuo_rel": 0.0,
+   "hex": "#EEE1C3",
+   "rgb": [
+    0.8584,
+    0.7548,
+    0.5428
+   ]
+  },
+  "MAT_VEG_pino_a": {
+   "clase": "exacto",
+   "paleta": "cipres_pino_oscuro",
+   "k": 1.0,
+   "residuo_rel": 0.0,
+   "hex": "#34503A",
+   "rgb": [
+    0.0343,
+    0.0802,
+    0.0423
+   ]
+  },
+  "MAT_VEG_pino_a_luz": {
+   "clase": "variante",
+   "paleta": "cipres_pino_oscuro",
+   "k": 1.45,
+   "residuo_rel": 0.0,
+   "hex": "#3F6046",
+   "rgb": [
+    0.0497,
+    0.1163,
+    0.0613
+   ]
+  },
+  "MAT_VEG_pino_c": {
+   "clase": "FUERA",
+   "paleta": "oliva_oscuro",
+   "k": 0.64,
+   "residuo_rel": 0.089,
+   "hex": "#556645",
+   "rgb": [
+    0.0909,
+    0.1341,
+    0.0593
+   ]
+  },
+  "MAT_VEG_pino_c_luz": {
+   "clase": "FUERA",
+   "paleta": "oliva_oscuro",
+   "k": 0.806,
+   "residuo_rel": 0.099,
+   "hex": "#5E724E",
+   "rgb": [
+    0.1128,
+    0.1698,
+    0.0758
+   ]
+  },
+  "MAT_VEG_pino_joven": {
+   "clase": "variante",
+   "paleta": "salvia",
+   "k": 0.789,
+   "residuo_rel": 0.059,
+   "hex": "#87946D",
+   "rgb": [
+    0.2406,
+    0.294,
+    0.1518
+   ]
+  },
+  "MAT_VEG_pino_joven_luz": {
+   "clase": "variante",
+   "paleta": "salvia",
+   "k": 0.934,
+   "residuo_rel": 0.053,
+   "hex": "#919F76",
+   "rgb": [
+    0.2845,
+    0.347,
+    0.1825
+   ]
+  },
+  "MAT_VEG_platano": {
+   "clase": "variante",
+   "paleta": "salvia",
+   "k": 1.077,
+   "residuo_rel": 0.063,
+   "hex": "#A0A580",
+   "rgb": [
+    0.35,
+    0.378,
+    0.216
+   ]
+  },
+  "MAT_VEG_platano_b": {
+   "clase": "variante",
+   "paleta": "salvia",
+   "k": 0.784,
+   "residuo_rel": 0.027,
+   "hex": "#869270",
+   "rgb": [
+    0.237,
+    0.2868,
+    0.1626
+   ]
+  },
+  "MAT_VEG_platano_b_luz": {
+   "clase": "variante",
+   "paleta": "salvia",
+   "k": 1.023,
+   "residuo_rel": 0.014,
+   "hex": "#97A481",
+   "rgb": [
+    0.308,
+    0.3712,
+    0.2184
+   ]
+  },
+  "MAT_VEG_platano_luz": {
+   "clase": "variante",
+   "paleta": "salvia",
+   "k": 1.284,
+   "residuo_rel": 0.067,
+   "hex": "#ADB38B",
+   "rgb": [
+    0.4187,
+    0.45,
+    0.2562
+   ]
+  },
+  "MAT_VEG_retama": {
+   "clase": "exacto",
+   "paleta": "salvia",
+   "k": 1.0,
+   "residuo_rel": 0.0,
+   "hex": "#95A281",
+   "rgb": [
+    0.3,
+    0.36,
+    0.22
+   ]
+  },
+  "MAT_VEG_retama_luz": {
+   "clase": "FUERA",
+   "paleta": "salvia",
+   "k": 1.265,
+   "residuo_rel": 0.094,
+   "hex": "#AFB187",
+   "rgb": [
+    0.4265,
+    0.4383,
+    0.2416
+   ]
+  },
+  "MAT_VEG_roca": {
+   "clase": "variante",
+   "paleta": "fachadas_propuesta.crema_calido",
+   "k": 0.649,
+   "residuo_rel": 0.02,
+   "hex": "#BEB08E",
+   "rgb": [
+    0.5175,
+    0.4319,
+    0.2685
+   ]
+  },
+  "MAT_VEG_romero": {
+   "clase": "variante",
+   "paleta": "salvia",
+   "k": 0.739,
+   "residuo_rel": 0.063,
+   "hex": "#838F69",
+   "rgb": [
+    0.2256,
+    0.276,
+    0.1408
+   ]
+  },
+  "MAT_VEG_romero_luz": {
+   "clase": "variante",
+   "paleta": "salvia",
+   "k": 0.884,
+   "residuo_rel": 0.052,
+   "hex": "#8E9B73",
+   "rgb": [
+    0.269,
+    0.328,
+    0.173
+   ]
+  },
+  "MAT_VEG_tronco": {
+   "clase": "FUERA",
+   "paleta": "tierra",
+   "k": 0.525,
+   "residuo_rel": 0.124,
+   "hex": "#957350",
+   "rgb": [
+    0.3,
+    0.17,
+    0.08
+   ]
+  },
+  "MAT_VEG_tronco_abanico": {
+   "clase": "variante",
+   "paleta": "tierra",
+   "k": 0.595,
+   "residuo_rel": 0.043,
+   "hex": "#997E5D",
+   "rgb": [
+    0.32,
+    0.21,
+    0.11
+   ]
+  },
+  "MAT_VEG_tronco_encina": {
+   "clase": "FUERA",
+   "paleta": "caliza_sombra",
+   "k": 0.88,
+   "residuo_rel": 0.18,
+   "hex": "#816C55",
+   "rgb": [
+    0.22,
+    0.15,
+    0.09
+   ]
+  },
+  "MAT_VEG_tronco_olivo": {
+   "clase": "variante",
+   "paleta": "caliza_gris_calido",
+   "k": 0.762,
+   "residuo_rel": 0.049,
+   "hex": "#A29076",
+   "rgb": [
+    0.36,
+    0.28,
+    0.18
+   ]
+  },
+  "MAT_VEG_tronco_palmera": {
+   "clase": "FUERA",
+   "paleta": "tierra",
+   "k": 0.689,
+   "residuo_rel": 0.083,
+   "hex": "#A6865D",
+   "rgb": [
+    0.38,
+    0.24,
+    0.11
+   ]
+  },
+  "MAT_VEG_tronco_platano": {
+   "clase": "variante",
+   "paleta": "caliza_ocre",
+   "k": 0.542,
+   "residuo_rel": 0.035,
+   "hex": "#A29B89",
+   "rgb": [
+    0.36,
+    0.33,
+    0.25
+   ]
+  },
+  "MAT_VEG_tronco_platano_claro": {
+   "clase": "variante",
+   "paleta": "marco_ventana_crema",
+   "k": 0.643,
+   "residuo_rel": 0.024,
+   "hex": "#C5C2AD",
+   "rgb": [
+    0.56,
+    0.54,
+    0.42
+   ]
+  },
+  "MAT_VEG_tronco_wash": {
+   "clase": "variante",
+   "paleta": "fachadas_propuesta.crema_calido",
+   "k": 0.535,
+   "residuo_rel": 0.04,
+   "hex": "#B19E81",
+   "rgb": [
+    0.44,
+    0.34,
+    0.22
+   ]
+  },
+  "MAT_cesped": {
+   "clase": "exacto",
+   "paleta": "cesped_jardin",
+   "k": 1.0,
+   "residuo_rel": 0.0,
+   "hex": "#81AD61",
+   "rgb": [
+    0.22,
+    0.42,
+    0.12
+   ]
+  },
+  "MAT_fondo_marino": {
+   "clase": "exacto",
+   "paleta": "mar_orilla",
+   "k": 1.0,
+   "residuo_rel": 0.0,
+   "hex": "#89E1DD",
+   "rgb": [
+    0.25,
+    0.75,
+    0.72
+   ]
+  },
+  "MAT_terreno": {
+   "clase": "exacto",
+   "paleta": "hierba_seca",
+   "k": 1.0,
+   "residuo_rel": 0.0,
+   "hex": "#C4B37C",
+   "rgb": [
+    0.55,
+    0.45,
+    0.2
+   ]
+  },
+  "MAT_tierra": {
+   "clase": "exacto",
+   "paleta": "tierra",
+   "k": 1.0,
+   "residuo_rel": 0.0,
+   "hex": "#BFA47C",
+   "rgb": [
+    0.52,
+    0.37,
+    0.2
+   ]
+  }
+ }
+}

@@ -133,8 +133,10 @@ Materiales: MAT_PPUEBLO_roca / _roca_clara / _roca_oscura / _repisa (familia
 roca de aplicar_texturas.py), MAT_PPUEBLO_piedra_* (familia piedra),
 MAT_CIVICO_campanile_lazo (estuco) / _teja (teja). Sin bpy.ops. Metros.
 """
+import importlib.util
 import json
 import math
+import os
 import random
 import sys
 
@@ -148,11 +150,21 @@ TAN75 = 3.732
 Z_FONDO_REL = -6.0          # la roca se corta a z_mar + Z_FONDO_REL (bajo el fondo del mar)
 
 # ----------------------------------------------------------------- materiales
+# FASE VISUAL F1 (bloque 3.1 / 2.1): la caliza sale de 03_blender/paleta.json (misma que roca_casino: antes el
+# mismo nombre MAT_PPUEBLO_roca tenia dos valores) y los 4 materiales de roca llevan el grupo compartido
+# NG_caliza_estratos (assets/materiales_roca.aplicar_a) con caliza_d.png para el writer.
+# Paleta v2 (usuario 04/10): caliza_ocre = caliza CLARA #D8CCB0, caliza_gris_calido = MEDIA #B3A68A (repisa),
+# caliza_sombra = roca OSCURA #7F766A; sin gris azulado (las claves no cambian, cambian los valores en paleta.json).
+_RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if _RAIZ not in sys.path:
+    sys.path.insert(0, _RAIZ)
+import paleta as _paleta  # noqa: E402
+
 _PALETA = {
-    'roca':            ((0.46, 0.39, 0.28), 0.95),
-    'roca_clara':      ((0.62, 0.55, 0.42), 0.95),
-    'roca_oscura':     ((0.29, 0.24, 0.17), 0.96),
-    'repisa':          ((0.42, 0.37, 0.27), 0.95),
+    'roca':            (_paleta.rgb('caliza_ocre'), 0.95),
+    'roca_clara':      (_paleta.variante('caliza_ocre', 1.15), 0.95),
+    'roca_oscura':     (_paleta.rgb('caliza_sombra'), 0.96),
+    'repisa':          (_paleta.rgb('caliza_gris_calido'), 0.95),
     'piedra_muro':     ((0.68, 0.62, 0.50), 0.90),
     'piedra_escalera': ((0.74, 0.68, 0.56), 0.88),
     'piedra_plaza':    ((0.62, 0.57, 0.47), 0.85),
@@ -177,10 +189,33 @@ _NOMBRES = {'campanile_estuco': 'MAT_CIVICO_campanile_lazo',
             'campanile_piedra': 'MAT_CIVICO_campanile_lazo_piedra'}
 
 
+_CLAVES_CALIZA = ('roca', 'roca_clara', 'roca_oscura', 'repisa')
+
+
+def _materiales_roca():
+    """assets/materiales_roca (grupo de caliza compartido) o None si no se puede importar."""
+    if 'materiales_roca' in sys.modules:
+        return sys.modules['materiales_roca']
+    try:
+        ruta = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'materiales_roca.py')
+        spec = importlib.util.spec_from_file_location('materiales_roca', ruta)
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules['materiales_roca'] = mod
+        spec.loader.exec_module(mod)
+        return mod
+    except Exception as e:  # noqa
+        print('roca_lazo: AVISO materiales_roca no disponible (%s): roca de color plano' % e)
+        return None
+
+
 def _mat(clave):
     nombre = _NOMBRES.get(clave, 'MAT_PPUEBLO_' + clave)
     m = bpy.data.materials.get(nombre)
     if m is not None:
+        if clave in _CLAVES_CALIZA:
+            mr = _materiales_roca()
+            if mr is not None and not mr.tiene_caliza(m):
+                mr.aplicar_a(m, tono_base=_PALETA[clave][0])
         return m
     color, rough = _PALETA[clave]
     m = bpy.data.materials.new(nombre)
@@ -190,6 +225,12 @@ def _mat(clave):
         bs.inputs['Base Color'].default_value = (color[0], color[1], color[2], 1.0)
         bs.inputs['Roughness'].default_value = rough
     m.diffuse_color = (color[0], color[1], color[2], 1.0)
+    if clave in _CLAVES_CALIZA:
+        mr = _materiales_roca()
+        if mr is not None:
+            # caliza compartida con estratos en coordenadas de mundo (misma fase que el terreno y el casino);
+            # la roca oscura (bajo el agua) sin bancos alternos y mas mojada
+            mr.aplicar_a(m, tono_base=color, contraste_bancos=0.0 if clave == 'roca_oscura' else 0.12)
     return m
 
 

@@ -59,7 +59,9 @@ FAMILIAS_BARRERA = ('CARRERA_muro', 'CARRERA_valla', 'CARRERA_paca', 'CARRERA_po
 NO_OBSTACULO = ('VEG_', 'OLI_', 'ITAL_cipres', 'ITAL_olivo', 'MARCA', 'linea', 'LINEA', 'AGUA', 'DIRIGIBLE',
                 'CAMARA_helicoptero', 'CALLE_guirnalda', 'PIT_marcas', 'MCOCHE_veg', 'PENON_puente_matas',
                 'CARRERA_tribuna_publico', 'PIT_boxes_publico', 'CAMINO_marcas', 'PIT_boxes_banderas',
-                'PIT_pasarela_banderas')
+                'PIT_pasarela_banderas',
+                # v1.2 (P6 de PETICIONES_04_EXPORT.md): montes del horizonte a 2-5 km (decorado, nunca junto a la pista)
+                'HORIZ_')
 H_RAYOS = (0.4, 0.7, 1.0)     # alturas de los rayos de barrera sobre el borde peraltado (0.7: viga del guardarrail)
 D_MAX = 14.0                  # alcance de los rayos de barrera desde el borde
 DS_BARRERA = 0.5              # paso (m) de los rayos de barrera a lo largo de la pista

@@ -106,6 +106,48 @@
 #      la caja del pit con limitador al 92 % (B10); banco del mirador fuera de los 6 m extremos del paseo (F-01); nodos del
 #      tunel bajo la rasante (B5). Nada de eso toca la Loews (< R_LOEWS_INTACTA, tambien la mascara), el entorno del penon
 #      (r < 1.9), la huella del McLaren (zonas_excluidas + 10/25 m) ni el corredor de la pista.
+#   FASE VISUAL F1 (propietario 'terreno', 04/10; comentarios 'F1 (bloque X)'; plan FASE_VISUAL_PLAN.md secc. 5 y 4):
+#      (1.1) TIERRA TALLADA en s 1540-2440 (TIERRA_TALLADA_S; 1430-1540 son las terrazas de pueblo_alto): por muestra se
+#      elige el LADO ALTO (donde el terreno natural z_land es mas alto a 40 m; si empata, el interior de la curva) y por
+#      celda: en el lado alto el desmonte C1 pasa de 1.15 a TIERRA_PEND_INT (63 grados) y hay una LADERA MINIMA (suelo)
+#      al 85 % hasta +TIERRA_PARED_H (pared de roca tambien donde el tiron a la rasante aplanaba la ladera); en el lado
+#      bajo berma llana TIERRA_BERMA (7.5 m > w/2+6.75 del cierre_ac), terraplen hasta TIERRA_SFL_EXT y una CAIDA
+#      MINIMA (techo) al 45 % hasta -TIERRA_CAIDA_H. Todo acotado por techo/suelo de TODOS los ramales (nunca bajo el
+#      corredor de otra rama), apagado a < 25-40 m de otra rama (islas de horquilla), donde el natural exterior sube
+#      (pie del macizo) y con fundidos en s y en distancia. El peso del tiron en tierra es TIERRA_PESO_TIRON (relativo).
+#      (1.1 v2, sesion 2) BANCO DE HORQUILLA: donde una rama plegada (rumbo opuesto, > 40 m por la pista y < 80 % en recta, a
+#      < 45 m de la celda) esta >= TIERRA_BANCO_DZ mas alta que la muestra, la isla sube de la rama baja a la alta (lomo con la
+#      altura de la rama alta, sin el apagado de 'otra rama', solo entre las dos ramas) y queda fuera de la caja del pit y de su
+#      limitador B10; el tramo de terrazas usa como base el natural + lomo - vaguada (antes recalculaba desde z_land a 180 m
+#      de pueblo_alto_mar y borraba el banco); fac_sect a 21n + 45 m (perfil de la QA de fosos); caida 0.45 -> 0.55.
+#      Umbrales de roca importados de mascara_terreno.UMBRALES (PARCHES_F1_mascara A2); medidas en _rev/medir_relieve.py.
+#      (1.2) BERMA de 15-25 m (ruido 60 m) entre el patio de la ultima terraza y el arranque de la cara, bancales
+#      BANCO_H 11.5 / BANCO_A 1.65 (= 0.9*H/2pi: amplitud maxima sin invertir la pendiente) y costillas hasta 4 m en
+#      caras > 20 m; solo en sectores pueblo_* fuera del espolon del coche (la berma retrasa la cara 20 m: rebajaria
+#      37 m el espolon a 120 m del tunel) y del McLaren.
+#      (2.2) ROCA POR PENDIENTE: umbral natural ROCA_UMBRAL_PEND +- ROCA_UMBRAL_RUIDO (35-40 grados) con apertura 3x3 y
+#      manchas >= ROCA_MIN_CELDAS; PIE DE DERRUBIOS (ROCA_PIE_VALOR) a ROCA_PIE_M bajo cada afloramiento. Constantes
+#      exportadas (umbrales_roca()) para mascara_terreno.py y color_ac.
+#      (1.6) CAPAS para la mascara por texel: extras['capas'] = {matorral, hierba_seca, tierra, roca} (0..1, suma 1)
+#      por celda (pendiente, z, dist_mar, dedge0, acantilado, desmonte, sectores, cumbres); mascara_roca se mantiene.
+#      QA: checks pared_y_caida_25m_pct, pct_pista_con_pared_roca_tierra, celdas_35_roca_pct, erosion_corredor_dz_max
+#      (0.000: la erosion es F4) y figura terreno_capas.png. Medidas independientes: _rev/medir_relieve.py.
+#   FASE VISUAL F1 RONDA 2 (director_f1_r1.md problemas 2, 3, 9 y 12; comentarios 'F1 r2'):
+#      - El lomo de la tierra es una LOMA redondeada (subida 1-(1-u)^2.5 en 20 m, cresta 18 m, bajada con acuerdo, cresta
+#        que serpentea +-4 m) con costillas tambien en su cara (relleno > 2 m, a < 20 m del borde): la 'piramide facetada'
+#        de la postal 56 era la tienda lineal con meseta plana y caras planas. Vaguada con arranque parabolico (2 m) y
+#        fondo redondeado; caida 0.55 -> 0.60 y ruido 0.9-1.2 (el KPI de 25 m se perdia por ruido en s 1670/1690/2000).
+#      - Lomo y vaguada a 0 en el corredor (< 4.5 m del borde de asfalto MAS CERCANO, propio u otro ramal) y el peso del
+#        tiron de la tierra solo cambia z_land dentro de la tierra (< 100 m de una muestra dirt, fundido a 160) y fuera del
+#        corredor: celdas con |dz| > 0.5 respecto a la base 13 522 -> 6 872, McLaren + 10 m 0.000.
+#      - Lo nuevo de F1 cerca del McLaren (bancales en el espolon, berma, costillas de 4 m) con margen +30 m (_w_mcl_f1).
+#      - Berma tras la ultima terraza: acuerdo parabolico de 3 m con la cara, cara x1.8 (2.07) y bancales en fase cero al
+#        final de la berma (A (1 - cos)): terreno a 120 m tras pueblo_subida_ladera 78.1 -> 83.0 m (= base) y fosos 0.
+#      - Banda de los perfiles de la QA de fosos (o_fin-3..+40 por la normal de cada muestra del sector) sin lomo/vaguada.
+#      - Capas: el canal B (tierra) de los cortes someros es continuo con ruido de 15 m en pendiente y profundidad (toma 36).
+#      - Probado y DESACTIVADO: lomo minimo de 10 m (TIERRA_PARED_H_MIN): +0.2 % de PyC por 131 celdas levantadas. El KPI
+#        'pared Y caida a 25 m' se queda en 25.5 % (obj 40) por geometria: las ramas del zigzag van a ~50 m con 10-14 m de
+#        desnivel y a 25 m solo UNA de cada par puede tener pared y caida (a 20 m: 27.3 %, a 15 m: 11.3 %); ver PARCHES r2.
 #   Prueba aislada: python terreno_montana.py [qa_dir]  (usa la copia
 #   assets/_geom_snapshot_terreno.json). debug_xy=[(x,y),...] imprime el valor
 #   de cada etapa en esas celdas.
@@ -115,7 +157,7 @@ import os as _osp
 import numpy as np
 from scipy.ndimage import (zoom as _zoom, gaussian_filter, gaussian_filter1d, distance_transform_edt,
                            label as _label, maximum_filter, map_coordinates, binary_dilation, grey_closing,
-                           grey_dilation, binary_opening)
+                           grey_dilation, binary_opening, maximum_filter1d)
 from scipy.spatial import cKDTree
 
 NIVEL_MAR = 0.0
@@ -191,6 +233,207 @@ R_LOEWS_CONG = (40.0, 65.0)  # v1: radio (m) del terreno congelado alrededor de 
 R_LOEWS_INTACTA = 90.0       # v1: radio alrededor de la rotonda Loews donde los cambios de costa del penon (G4/G10/G11) no actuan
 ZONA_COCHE_D = 170.0         # celdas a < 170 m del tunel (s 380-640) y en su lado -1: espolon del coche
 PEND_DESMONTE_COCHE = 2.0    # desmonte (63 grados) detras de las terrazas que miran al coche (plan: >= 90 m a 120 m)
+
+# ---------------------------------------------------------------------------
+# FASE VISUAL F1 (bloque 1.1): TIERRA TALLADA (s 1430-2440; las reglas actuan desde 1540, pasado pueblo_alto)
+# ---------------------------------------------------------------------------
+TIERRA_S = (1430.0, 2440.0)          # tramo de tierra (sec == 'dirt')
+TIERRA_TALLADA_S = (1540.0, 2440.0)  # donde actuan la ladera interior y la caida exterior (fundido 30 m en los extremos)
+TIERRA_PESO_TIRON = 0.5              # peso (relativo) de las muestras de tierra en el tiron a la rasante (_idw_pull)
+TIERRA_TIRON_ALCANCE = (60.0, 110.0) # F1 r3: el peso 0.5 solo actua a < 60 m de una muestra de tierra (fundido a 110; r2: 100-160)
+TIERRA_PEND_INT = 2.0                # desmonte C1 en el lado ALTO (63 grados; 1.15 en el resto)
+TIERRA_PARED_PEND = 0.85             # ladera minima en el lado alto (40 grados) desde 4.5 m del borde...
+TIERRA_PARED_H = 14.0                # ... hasta esta altura sobre la rasante (pared tambien donde el natural no llega)
+# F1 r2: el lomo es una LOMA REDONDEADA, no una tienda (director r1, postal 56: 'piramide facetada'): subida 1-(1-u)^2.5 en
+# TIERRA_LOMO_SUBIDA m desde 4.5 m del borde (arranque 2.5h/L = 1.75 bajo el techo de 2.0, cresta con pendiente 0), cresta de
+# TIERRA_LOMO_CRESTA m y bajada al 50 % con acuerdo parabolico de TIERRA_LOMO_T m; la cresta serpentea (ruido de 50 m en la
+# distancia, +-TIERRA_LOMO_SERP m) y la altura varia entre 0.9 y 1.2 (ruido de 30 m, antes 0.8-1.2: con 0.8 la pared se quedaba
+# en 7-8 m y el KPI de 25 m fallaba por el ruido)
+TIERRA_LOMO_SUBIDA = 20.0            # m del pie (4.5 m del borde) a la cresta: la cresta esta a 24.5 m (el KPI se mide a 25 m)
+TIERRA_LOMO_CRESTA = 18.0            # m de cresta (redondeada) antes de bajar al natural
+TIERRA_LOMO_T = 12.0                 # acuerdo parabolico de la bajada (m)
+TIERRA_LOMO_SERP = 4.0               # +- m de serpenteo de la cresta (ruido de 50 m)
+# F1 r2: LOMO MINIMO. Donde el natural sube >= 3 m a 60-80 m (hay ladera que acercar) el lomo mide al menos TIERRA_PARED_H_MIN
+# (fundido 3-6 m de subida natural): la meseta del interior del lazo (s 1880-1960) y la salida de la C26 daban paredes de 3-7 m,
+# no de 8. NO en las islas de horquilla (interior de curvas R < 25) ni a < TIERRA_SIN_MIN_APEX m del apex de una horquilla
+# (R < 15: C18-19 y C26): la isla de la cima es lo que ve la postal 56 (frozen) y no debe crecer mas
+TIERRA_PARED_H_MIN = 0.0             # DESACTIVADO (0): probado con 10 m (10 x 0.9 de ruido - 0.5 = 8.5 m > 8 a 25 m): 131 celdas levantadas
+                                     # 1.2 m de media (s 2000-2200) por solo +0.2 % de PyC: donde faltaba pared manda el techo de la rama
+                                     # de al lado (isla B-C de la cima: natural +14, techo de la rama baja +5), no la altura del lomo
+TIERRA_SIN_MIN_APEX = 50.0
+# F1 r3 (director r2, problema 2): CAIDA LIBRE por muestra. La vaguada de una muestra solo se excava si su punto de medida
+# (25 m del borde, lado bajo) NO esta en la ZONA DE PARED de otra rama (celdas a < TIERRA_CAIDA_LIBRE_D del borde de una
+# muestra que tiene ese punto en su lado ALTO y cuya pared es real: natural >= z + TIERRA_PARED_REAL o lomo natural >= 7.5)
+# ni a < TIERRA_CAIDA_LIBRE_ASF del asfalto de otra rama. Antes la vaguada de la horquilla de la cima (B, s 1770-1860, lado
+# bajo = isla) abria una ZANJA de 13-14 m en la isla natural (+13..+15) que es la pared de la rama C (s 1880-1960, lado alto):
+# C se quedaba sin pared a 25 m (0 % de PyC en 1830-1960) y B no ganaba caida (su punto de 25 m sigue sobre el lomo de C);
+# la zanja era ademas la 'piramide facetada de dos picos' de la postal 56. Con el lado bajo bloqueado ese lado es un CORTE
+# (ambas caras de la isla a TIERRA_PEND_INT), no un relleno.
+TIERRA_CAIDA_LIBRE_D = 27.0          # zona de pared de otra rama: hasta 27 m de su borde (el KPI se mide a 25 m + 2 de margen)
+TIERRA_CAIDA_LIBRE_ASF = 12.0        # ... o asfalto de otra rama a < 12 m del punto de medida: no hay sitio para una vaguada
+TIERRA_PARED_REAL = 7.0              # pared 'real' de la otra rama: natural >= z + 7 m en el punto (o lomo natural >= 7.5)
+TIERRA_BLOQ_APEX = 30.0              # a < 30 m (por la pista) de un apex de horquilla el lado bajo bloqueado conserva el cono de 1.15
+                                     # (la isla de la cima que mira la postal 56 no crece: horizonte de terreno en la fila 25, no 18)
+TIERRA_LOMO_H_NAT = (3.0, 5.0)       # lomo solo donde el natural sube >= 3 m a 60-80 m (pleno a 5). r3: probado (6, 8): -5 puntos de PyC
+                                     # a 50 m (s 2320-2350) y sin ganancia a 25 m; se queda como en r2
+# F1 r3: ZONA DE PARED y COLA del lomo. El lomo manda (apaga la vaguada de cualquier otra rama) solo en su zona de pared
+# (dedge <= TIERRA_LOMO_CORE: subida + cresta); su COLA (meseta final y bajada, hasta 70 m del borde) ya no apaga vaguadas y,
+# donde una rama de enfrente excava su vaguada, se recorta al techo de esa vaguada con un fundido de TIERRA_LOMO_COLA_T m
+# (pendiente <= ~0.7). Antes la cola del lomo de 14 m de la rama baja (meseta a la cota de la rama alta) dejaba a la rama
+# alta un hombro llano a 25 m en vez de la caida (s 1600-1690 contra 2150-2220 y el collado de s 1588): 'gana el lomo' sigue
+# valiendo dentro de la zona de pared (ramas a < 57 m), y a >= 60 m la rama alta recupera su caida (zanja entre el lomo y ella)
+TIERRA_LOMO_CORE = 32.0
+TIERRA_LOMO_COLA_T = 1e9             # recorte de la cola al techo de la vaguada de enfrente: DESACTIVADO (1e9). Probado con 15 m (v35):
+                                     # PyC 34.6 % pero zanja en V de 10-16 m entre el lomo de la rama baja y la rama alta (s 1610-1620 /
+                                     # 2140-2180) y hoyo cerrado en el collado: 'formas suaves' manda; se deja el mecanismo por si F2 lo usa
+TIERRA_LOMO_GAP = 60.0               # hueco entre ramas (dedge + distancia a la otra rama) por debajo del cual el lomo manda entero
+TIERRA_BERMA = 7.5                   # berma llana en el lado BAJO (arcen + pacas + cierre invisible a w/2+6.75)
+TIERRA_SFL_EXT = 1.3                 # terraplen maximo en el lado bajo (antes 0.55)
+TIERRA_CAIDA_PEND = 0.60             # caida minima tras la berma (techo; r2: 0.55 -> 0.60 y ruido 0.9-1.2: 0.6 x 17.5 x 0.9 = -9.4 m a 25 m,
+                                     # antes 0.55 x 17.5 x 0.8 = -7.7: en s 1670/1690/2000 la caida se quedaba en -6.4..-7.6 por el ruido)...
+TIERRA_CAIDA_H = 16.0                # ... hasta esta profundidad bajo la rasante (fondo redondeado: minimo suave de TIERRA_CAIDA_K m)
+TIERRA_CAIDA_T = 2.0                 # acuerdo parabolico del arranque de la caida tras la berma (m; con 6 la caida a 25 m se quedaba en
+                                     # -8.7 x ruido y PyC perdia 1 punto)
+TIERRA_CAIDA_K = 2.0                 # suavidad (m) del fondo de la vaguada
+TIERRA_SIN_CORREDOR = (4.5, 8.0)     # lomo y vaguada a 0 hasta 4.5 m del borde (fundido a 8): el corredor (z0-0.5 .. z0-0.6) no cambia ni 1 cm
+TIERRA_MCL_MARGEN = (30.0, 15.0)     # F1 r2: lo nuevo de F1 (bancales en el espolon, costillas de 4 m) a 0 hasta +30 m de la huella del
+                                     # McLaren (fundido 15): la EDT de la huella y la de medir_relieve difieren 2-4 m (r1: 0.68 m a 22.6 m)
+TIERRA_BANCO_DZ = 4.0                # banco de horquilla: si la OTRA rama esta >= 4 m mas alta, la isla sube de la rama baja a la alta
+TIERRA_LOMO_EXTRA = 0.0              # m que la cresta del corte puede sobresalir del natural a 60-80 m donde hay ladera ('labio'; probado
+                                     # con 3.0: pared en algun lado 39 -> 44 % pero el lomo apaga la vaguada vecina (PyC 21.7 -> 20.9) y
+                                     # abre un foso de 1.68 m tras pueblo_alto_ladera: se deja a 0)
+TIERRA_LADO_SONDA = 60.0             # distancias (m, y +20) a las que se compara el natural de ambos lados para elegir el lado alto
+TIERRA_OTRA_RAMA = (10.0, 25.0)      # lomo y vaguada se apagan a < 10 m del borde de OTRA rama (1 a 25 m; otra rama = muestra
+                                     # a > 100 m por la pista): islas de horquilla y espina entre ramas paralelas
+TIERRA_OTRA_RAMA_DS = 100.0          # (m por la pista) a partir de los que una muestra cuenta como OTRA rama para ese apagado
+TIERRA_LON_M = 16.0                  # una muestra solo talla las celdas que tiene en su normal (desfase |lon| < 16 m, fundido 8 m)
+
+# FASE VISUAL F1 (bloque 1.2): berma + bancales + costillas tras la ultima terraza (sectores pueblo_*)
+BERMA_TERRAZA = (15.0, 25.0)         # berma (ruido de 60 m) entre el patio de la ultima terraza y el arranque de la cara
+BERMA_TERRAZA_PEND = 0.25            # la berma sube suave (14 grados, pradera/olivar): ni mesa de agua ni otra terraza llana
+BERMA_ACUERDO_T = 3.0                # F1 r2: acuerdo parabolico (m) entre la berma y la cara (antes quiebro seco 0.25 -> 1.15-2.2: los
+                                     # olivos/pinos del integrador en ese quiebro salian 'enterrados > 0.6' al asentarlos). Con 10 m la cara
+                                     # retrocedia 5 m (terreno a 120 m -3 m) y el escalon a la rama vecina abria 2.1 m de agua atrapada en s 950
+BERMA_CARA_FACTOR = 1.8              # F1 r2: la cara tras la berma es x1.8 mas empinada (1.15 -> 2.07, 64 grados; en el espolon del coche
+                                     # sigue a 2.0) para que el terreno a 120 m tras pueblo_subida_ladera no quede por debajo de la base
+                                     # (83.0 m; con berma y 1.15 bajaba a 78.1; medido con acuerdo 3 m: x1.5 82.6, x1.75 82.9, x1.8 83.0; con x1.75 y acuerdo 2 m un
+                                     # foso de 1.52 m en s 960): los bancales
+                                     # (repisa 0.1x / cara 1.9x), la berma de 15-25 m y las costillas de 4 m la leen como monte con pie, no como tajo
+BANCOS_EN_COCHE = True               # bancales tambien en el espolon del coche (w_coche): probado el 04/10 (v22), checks['coche_120m_*']
+                                     # no bajan (min 27 / max 110 / >= 90 m en 17 %, fuera de terrazas 57 %) y los fosos no cambian
+COSTILLA_TOPE = (2.0, 4.0)           # costillas de erosion: 2 m en caras someras, 4 m en caras > 20 m (> 0.8 de pendiente)
+
+# FASE VISUAL F1 r4 (acotacion 1 del coordinador; director r3 n.º 2): CUPULA de la ISLA DE LA CIMA (postal 56). La isla es el
+# interior de la horquilla C18-19 (eje de la pista s_apex +- CUPULA_DS, cerrado; apex = cota maxima del tramo de tierra, s 1864).
+# En r3 era el natural (129 m) cortado por los conos rectos del desmonte (W 1.7-1.8 = 60 grados, E 1.0-1.3): 'cono de arista
+# recta' visto de frente desde la camara 56 (que esta EN el apex mirando al S por el eje de la isla) + roca por cara con dientes.
+# r4: la isla es un TECHO propio que se IMPONE (rellena y rebaja: el corte r3 de 52-60 grados al pie de la rama baja desaparece;
+# el corredor < 4.5 m del asfalto no cambia, fundido 4.5-6 m), hecho con dos familias de perfiles por muestra (solo las que tienen
+# la celda en su normal, |lon| < CUPULA_LON_M), minimo por familia y SMOOTH-MIN entre familias (cresta redondeada de radio
+# ~CUPULA_K_CRESTA, nunca arista), + suavizado CUPULA_SUAVE_M:
+#  - rama BAJA (la que SUBE a la cima, s < apex; 2.4-4.7 m por debajo de la otra en cada seccion): flanco a CUPULA_PEND_B
+#    (49 grados) con acuerdo parabolico de CUPULA_T_B m al pie. Mira al OESTE: desde la camara 56 (x 48) es cara trasera (solo se ve
+#    su cresta). ES LA PARED del KPI de las filas de la rama alta s 1926-1976: a 25 m del borde de la rama alta (x 41-43, 15-16 m mas
+#    alla del corredor de la baja) hace falta z >= Z_alta + 8 = Z_baja + 12.1..13.2 (media >= 37 grados desde el corredor): con <= 30
+#    grados en ese flanco se pierden 6-9 filas (PyC 31 -> 25 %, exp_cupula.py; ver PARCHES_F1_terreno.md r4).
+#  - rama ALTA (s > apex): CUPULA convexa h (1 - (1 - u)^CUPULA_P_C), u = q / CUPULA_L_C: pendiente p h / L al pie (1.5 x 12.5 / 33
+#    = 0.57 = 29.6 grados) que baja a 0 en la cumbre; es la cara que ve la camara 56 (r4b: todas sus caras a < 20 m de la cumbre
+#    <= 30 grados; con p = 2 y L 27 el pie iba a 38-40 grados y era lo unico que pasaba de 30 en lo que ve 56).
+#  - NARIZ (s de la rama alta < CUPULA_S_NARIZ, los 30-50 m de isla delante de la camara 56): techo absoluto Z_apex + CUPULA_NARIZ_DZ
+#    (smooth-min) que sube CUPULA_NARIZ_PEND por metro de s hacia el sur: la cima queda POR DEBAJO del ojo de la camara (121.9) y
+#    no hay silueta de cono contra el cielo; ahi el KPI no se juega (filas de pared a ambos lados o ya sin pared en r3).
+#  - en los ultimos CUPULA_FUNDIDO_S m de cada media rama el techo se funde con el terreno de fuera (en r4-v46 el cierre recto del
+#    poligono dejaba un escalon de 4-5 m en y 460-470).
+#  - la CUPULA NO lleva roca (mascara_roca, capas.roca), ni 'tierra' de corte en las capas, ni costillas: sin frontera de material
+#    sobre el flanco no hay fila de dientes por cara (color_ac.roca_caras: nz < 0.50 o atributo > 0.49 por cara de 4 m). r4b: salvo
+#    el flanco oculto de la rama baja hasta CUPULA_ROCA_B_S (roca al fondo de la recta de 51) y la loma sur (CUPULA_SUR_T), que es r3.
+CUPULA_DS = 150.0                    # medias ramas de la horquilla que forman la isla (m por la pista a cada lado del apex; los 30 ultimos son fundido)
+CUPULA_FUNDIDO_S = 30.0              # fundido del techo con el terreno de fuera en el extremo sur de la isla (m de s)
+CUPULA_LON_M = 6.0                   # una muestra solo acota las celdas de su normal (|lon| < 6 m: con 24 m las muestras de 24 m
+                                     # atras, 3.4 m mas bajas en una rampa del 14 %, acotaban la cresta 3 m por debajo)
+CUPULA_PEND_B = 1.15                 # flanco de la rama baja (pared del KPI, cara trasera desde 56): 49 grados
+CUPULA_T_B = 2.0                     # acuerdo parabolico (m) del pie del flanco de la rama baja
+CUPULA_BASE_B = 0.5                  # m sobre z-0.5 en que arranca el flanco de la rama baja (= cota del corredor a 4.5 m)
+CUPULA_H_C = 12.5                    # altura de la cupula convexa sobre la rama alta (m)
+CUPULA_L_C = 33.0                    # anchura de la cupula (m desde 4.5 m del borde de la rama alta hasta su cumbre)
+CUPULA_P_C = 1.5                     # exponente del perfil (pendiente al pie p H/L = 0.57, 0 en la cumbre; 2 = parabola)
+CUPULA_K_CRESTA = 0.6                # smooth-min (m) entre familias y con el techo de la nariz: cresta redondeada
+CUPULA_NARIZ_DZ = 0.3                # techo de la nariz = Z_apex + 0.3 m ...
+CUPULA_S_NARIZ = 1909.0              # ... hasta s 1909 de la rama alta (por la isla) y despues sube CUPULA_NARIZ_PEND por m de s
+CUPULA_NARIZ_PEND = 0.15
+CUPULA_RUIDO = (0.03, 0.06)          # +- ruido (50 m) en la pendiente del flanco B y en la altura/anchura de la cupula C
+CUPULA_SUAVE_M = 1.5                 # sigma (m) del suavizado final del techo
+CUPULA_D_MIN = (4.5, 6.0)            # el techo se impone a > 6 m del borde del asfalto (fundido desde 4.5): el corredor no cambia
+# r4b (05/10): la LOMA SUR de la isla (s de la rama baja <= ~1760, la alta >= ~1960) lleva la pared derecha de roca de la toma de PILOTO 51
+# (la mejora mas grande de F1 segun el director r3) y la que ve la 07; desde 56 es cara trasera (el flanco de la rama baja mira al O y la
+# camara esta al E de la cresta; el de la rama alta, a > 40 grados, tampoco se ve). En r4-v48 la cupula llegaba hasta ahi: el flanco de 43
+# grados sin roca bajaba la pared 3-8 m y la dejaba en hierba (vista sintetica de 51: pared de roca -> ladera dorada). Ahora la cupula
+# (familias B y C + nariz) manda a < CUPULA_SUR_T[0] m del apex por la isla y el terreno de r3 a > CUPULA_SUR_T[1] (transicion smoothstep);
+# la loma sur la acota la LINEA DE VISTA del ojo de 56 (apex + CUPULA_VIS_DZ, CUPULA_VIS_GRADOS sobre la horizontal).
+CUPULA_SUR_T = (70.0, 95.0)          # m por la isla desde el apex: cupula hasta, terreno de r3 desde
+CUPULA_VIS_DZ = 1.2                  # ojo de la camara 56 sobre la rasante del apex (121.9 - 120.7)
+CUPULA_VIS_GRADOS = 0.0              # angulo maximo de la cresta de la loma sur desde el ojo (queda a -0.2..-0.6; la cumbre de la cupula a +0.4..+0.5)
+CUPULA_K_VIS = 1.0                   # smooth-min (m) del recorte de la loma sur por la linea de vista
+CUPULA_LADO_M = 16.0                 # transicion (m) entre el lado de la rama baja y el de la alta alrededor de la linea media de la isla
+CUPULA_ROCA_B_S = (1815.0, 1830.0)   # el flanco de la rama baja de la cupula conserva la roca hasta s 1815 (fundido hasta 1830)
+
+
+# FASE VISUAL F1 (bloque 2.2): ROCA POR PENDIENTE. UN SOLO SITIO de verdad para los umbrales: mascara_terreno.UMBRALES
+# (propietario 'mascara', PARCHES_F1_mascara.md A2); de ahi salen estas constantes, que a su vez exportan umbrales_roca() y
+# ROCA_UMBRAL_NZ para color_ac (P1) y los revisores. Si mascara_terreno no se puede importar (p. ej. una copia suelta del
+# modulo) valen los defectos de abajo, que son los mismos numeros.
+try:
+    from mascara_terreno import UMBRALES as _UMB_MASCARA    # importable sin scipy; lee paleta.json (python del sistema)
+except Exception:                                           # noqa: BLE001
+    _UMB_MASCARA = None
+
+
+def _umb(clave, defecto):
+    return defecto if (_UMB_MASCARA is None or clave not in _UMB_MASCARA) else _UMB_MASCARA[clave]
+
+
+_P_ROCA = tuple(_umb('PEND_ROCA', (0.70, 0.84)))
+ROCA_UMBRAL_PEND = round(0.5 * (_P_ROCA[0] + _P_ROCA[1]), 3)   # 0.77: pendiente (tan) suavizada a partir de la que una ladera natural es roca
+ROCA_UMBRAL_RUIDO = round(0.5 * (_P_ROCA[1] - _P_ROCA[0]), 3)  # +-0.07 con ruido de 30 m: 0.70-0.84 (35-40 grados, plan 2.2)
+ROCA_UMBRAL_NZ = round(1.0 / math.sqrt(1.0 + ROCA_UMBRAL_PEND ** 2), 3)   # el mismo umbral como nz de la cara (0.792)
+# F1 r4 (acotacion 4 del coordinador; propietario 'mascara'): umbral nz de la roca POR CARA (proxy AC / writer) en la cima de 56 y
+# en las laderas a < 150 m de las tomas 51/07 (0.62 en vez de 0.82: sin dientes aislados) y ruido del atributo roca 0.08 -> 0.20.
+# VIVEN en mascara_terreno.UMBRALES (ROCA_NZ_ZONA, ROCA_NZ_ZONAS, ROCA_ATR_RUIDO; los aplica construir_pista.roca_zonas_nz): aqui
+# solo se LEEN y se exportan en umbrales_roca() -> geometria_3d.json extras.umbrales_roca para los revisores y color_ac (P1).
+ROCA_NZ_ZONA = float(_umb('ROCA_NZ_ZONA', 0.62))
+ROCA_ATR_RUIDO = float(_umb('ROCA_ATR_RUIDO', 0.20))
+ROCA_NZ_ZONAS = {k: tuple(v) for k, v in dict(_umb('ROCA_NZ_ZONAS', {'56_postal_cima_bahia': (47.972, 567.543, 150.0),
+                                                                     '51_piloto_s1700': (15.023, 426.256, 150.0),
+                                                                     '07_tierra_subida': (-12.016, 294.887, 150.0)})).items()}
+ROCA_SIGMA_M = float(_umb('PEND_SUAVIZADO_M', 10.0))   # suavizado de la pendiente (m; /cell = celdas) antes del umbral (anti 'camuflaje' v3 N1)
+ROCA_MIN_CELDAS = int(_umb('ROCA_MIN_CELDAS', 12))     # manchas naturales mas pequenas se quitan (apertura 3x3 + tamano minimo)
+ROCA_PIE_M = tuple(_umb('PIE_M', (6.0, 10.0)))         # pie de derrubios: banda de 6-10 m ladera ABAJO de cada afloramiento...
+ROCA_PIE_VALOR = 0.5                 # ... con este valor en mascara_roca (plan 2.2; 'tierra' en las capas)
+ROCA_CORTE_PEND = 0.75               # umbral (+- ruido) de la pendiente en los cortes (_corte), como v2
+
+# FASE VISUAL F1 (bloque 1.6): CAPAS de la mascara por texel (R matorral, G hierba seca, B tierra, A roca); mismos umbrales
+CAPAS_LLANO_PEND = float(_umb('LLANO_PEND', 0.35))       # hierba seca en llanos (pendiente < 0.35)...
+CAPAS_HIERBA_D_PISTA = float(_umb('LLANO_DIST_M', 60.0))  # ... a < 60 m de la pista...
+CAPAS_HIERBA_Z = float(_umb('LLANO_Z', 60.0))            # ... y z < 60 m (y en las terrazas del pueblo y la vega baja)
+CAPAS_DIRT_BORDE_M = float(_umb('DIRT_BORDE_M', 8.0))    # 'tierra' a < 8 m del borde del asfalto en el tramo de tierra
+CAPAS_MATORRAL_Z = 150.0             # por encima no hay hierba seca (matorral y roca)
+CAPAS_RUIDO_M = 20.0                 # ruido de los bordes entre capas (m)
+# F1 r4 (probado y APAGADO en r4b): el pie de derrubios (mascara_roca 0.5) fuera del canal A ('tierra' en las capas). Con True:
+# banda de tierra de 6-10 m al pie de cada roca en modo normal (51, 07: pie de la pared en marron), roca en la tierra 27.5 -> 24.6 %,
+# tierra 5.2 -> 8.1 %, y en AC NO quita dientes (rejilla 4 m tras las zonas de 'mascara': 1265 -> 1314, +4 %; caras de roca 46 235 ->
+# 44 911). Sin beneficio medido y con cambio visible en una toma de piloto: False = el pie como en r1-r3 (0.5 en capas.roca)
+CAPAS_PIE_FUERA_DE_A = False
+
+
+def umbrales_roca():
+    """F1 (bloque 2.2): umbrales compartidos con mascara_terreno.py (propietario 'mascara') y color_ac (P1): un solo sitio."""
+    return dict(pend=ROCA_UMBRAL_PEND, ruido=ROCA_UMBRAL_RUIDO, pend_rango=list(_P_ROCA), nz=ROCA_UMBRAL_NZ, sigma_m=ROCA_SIGMA_M,
+                min_celdas=ROCA_MIN_CELDAS, pie_m=list(ROCA_PIE_M), pie_valor=ROCA_PIE_VALOR, corte_pend=ROCA_CORTE_PEND,
+                # F1 r4 (acotacion 4): umbral nz por cara en la cima de 56 / laderas de 51 y 07 y ruido del atributo (de mascara_terreno)
+                nz_zona=ROCA_NZ_ZONA, nz_zonas={k: list(v) for k, v in ROCA_NZ_ZONAS.items()}, atr_ruido=ROCA_ATR_RUIDO,
+                origen='mascara_terreno.UMBRALES' if _UMB_MASCARA is not None else 'defectos de terreno_montana',
+                capas=dict(llano_pend=CAPAS_LLANO_PEND, hierba_d_pista=CAPAS_HIERBA_D_PISTA, hierba_z=CAPAS_HIERBA_Z,
+                           matorral_z=CAPAS_MATORRAL_Z, ruido_m=CAPAS_RUIDO_M, dirt_borde_m=CAPAS_DIRT_BORDE_M))
 
 # valles de drenaje: polilineas (x, y) de arriba a abajo; anchura base y
 # profundidad relativa (fraccion de la cota local, acotada: prof x min(M, 80))
@@ -724,19 +967,36 @@ def techo_desmonte_c1(z0, dedge, T=T_DESMONTE_C1, d_llano=4.5, pend=1.15):
     return z0 - 0.5 + pend * np.where(t < T, t * t / (2.0 * T), t - 0.5 * T)
 
 
-BANCO_H = 16.0           # v3 (revision C-02): cada BANCO_H m de cota la cara tras la ultima terraza tiene una repisa (fascia)
-BANCO_A = 1.6            # v3 (C-02): amplitud (m) de la modulacion: pendiente entre 0.16x y 1.84x de la cara, sin invertirse
+BANCO_H = 11.5           # v3 (revision C-02): cada BANCO_H m de cota la cara tras la ultima terraza tiene una repisa (fascia)
+                         # F1 (bloque 1.2): 16 -> 11.5 (2-4 repisas en una cara de 25-50 m)
+BANCO_CONTRASTE = 0.9    # F1: fraccion de la amplitud maxima sin invertir la pendiente (repisa 0.1x, cara 1.9x)
+BANCO_A = round(BANCO_CONTRASTE * BANCO_H / (2.0 * math.pi), 2)   # 1.65 m (con 2.5 y H 11.5 la cara se invertia: fosos)
 
 
-def techo_tras_terraza(rise, p_desm, w_banco):
+def techo_tras_terraza(rise, p_desm, w_banco, berma=0.0):
     """v3 (revision C-02): techo detras de la ultima terraza a 'rise' m del pie (o - o_fin - TM/2). Antes una cara UNICA de
     p_desm (1.15) de hasta 50-55 m (tajo plano de cantera pintado entero de roca detras de pueblo_subida_ladera). Ahora la
     misma pendiente MEDIA (no se rebaja el espolon del coche: plan T1, >= 90 m a 120 m del tunel) pero en BANCALES ligures:
-    la cota del corte c = rise*p_desm se modula c - A*(1 + sin(2*pi*c/H)): repisas casi llanas cada H = 16 m de cota (hierba)
-    y caras de ~10 m mas empinadas entre ellas (roca); continua, monotona, solo baja (como mucho 2A = 3.2 m) y nula en los
-    primeros 3 m (el patio de la terraza no cambia). w_banco (0..1): peso (0 en el espolon del coche y fuera del pueblo)."""
-    c = np.maximum(rise, 0.0) * p_desm
-    return c - w_banco * np.clip((c - 3.0) / 3.0, 0.0, 1.0) * BANCO_A * (1.0 + np.sin(2.0 * np.pi * c / BANCO_H))
+    la cota del corte c = rise*p_desm se modula c - A*(1 + sin(2*pi*c/H)): repisas casi llanas cada H m de cota (hierba)
+    y caras mas empinadas entre ellas (roca); continua, monotona, solo baja (como mucho 2A) y nula en los
+    primeros 3 m (el patio de la terraza no cambia). w_banco (0..1): peso (0 en el espolon del coche y fuera del pueblo).
+    F1 (bloque 1.2): 'berma' (m, escalar o array por celda) = franja casi llana (BERMA_TERRAZA_PEND) entre el patio y el
+    arranque de la cara; la cara empieza 'berma' m mas lejos. Con berma 0 es exactamente la v3.
+    F1 r2: tras la berma, acuerdo parabolico de BERMA_ACUERDO_T m (escalado por la berma: con berma 0 no hay acuerdo) y cara
+    x BERMA_CARA_FACTOR (solo donde hay berma; en el espolon del coche, sin berma, sigue p_desm)."""
+    r = np.maximum(rise, 0.0)
+    _wb = np.clip(np.asarray(berma, float) / 10.0, 0.0, 1.0)
+    _T = np.maximum(BERMA_ACUERDO_T * _wb, 1e-3)
+    x = np.maximum(r - berma, 0.0)
+    q = np.where(_wb > 0.0, np.where(x < _T, x * x / (2.0 * _T), x - 0.5 * _T), x)   # (sin berma: q = x exacto, v3)
+    c = BERMA_TERRAZA_PEND * np.minimum(r, berma) + q * p_desm * (1.0 + (BERMA_CARA_FACTOR - 1.0) * _wb)
+    # bancales: v3 = c - A (1 + sin(2 pi c / H)) con rampa desde c = 3. Con berma (r2) la modulacion arranca en FASE CERO al final
+    # de la berma (c0 = 0.25 x berma): A (1 - cos(2 pi (c - c0) / H)), nula y con derivada nula en c0 (la rampa de la v3 sobre
+    # el seno abria un diente de 1-2 m justo tras la berma: 'agua atrapada' de 2.04 m en pueblo_alto_ladera); pendiente >= 0.1x
+    c0 = BERMA_TERRAZA_PEND * np.asarray(berma, float)
+    mod_v3 = np.clip((c - 3.0) / 3.0, 0.0, 1.0) * BANCO_A * (1.0 + np.sin(2.0 * np.pi * c / BANCO_H))
+    mod_r2 = np.where(c > c0, BANCO_A * (1.0 - np.cos(2.0 * np.pi * np.maximum(c - c0, 0.0) / BANCO_H)), 0.0)
+    return c - w_banco * ((1.0 - _wb) * mod_v3 + _wb * mod_r2)
 
 
 def tri_malla(zg, gx0, gy0, cell, nxg, nyg, px, py):
@@ -936,6 +1196,9 @@ def construir(X, Y, Z, sec, Wd, nx, ny, paso, L, curvas, pit_pts, loews_centro,
     _dbg_idx = []
     _w_mcl = peso_fuera_zonas(gpts, nxg, nyg, cell, spec_urb)      # v3: 0 en la huella del McLaren (+25 m)
     _w_mcl_c = peso_fuera_zonas(gpts, nxg, nyg, cell, spec_urb, margen=10.0, fundido=10.0)   # ... (+10 m: orilla J6)
+    # F1 r2: lo NUEVO de F1 (bancales en el espolon del coche, costillas de 4 m) a 0 hasta +30 m (fundido 15): medir_relieve
+    # (EDT de la huella con otra rasterizacion) media 0.68 m a 22.6 m con el margen de 25; el encaje del coche exige 0.000 a < 25 m
+    _w_mcl_f1 = peso_fuera_zonas(gpts, nxg, nyg, cell, spec_urb, margen=TIERRA_MCL_MARGEN[0], fundido=TIERRA_MCL_MARGEN[1])
     if debug_xy:
         for (qx, qy) in debug_xy:
             _dbg_idx.append(int(round((qy - gy0) / cell)) * nxg + int(round((qx - gx0) / cell)))
@@ -1081,7 +1344,24 @@ def construir(X, Y, Z, sec, Wd, nx, ny, paso, L, curvas, pit_pts, loews_centro,
     # la recta del tunel (s 200-640) tira poco: sus dos flancos son desmonte
     # (espolon del coche) y acantilado al mar, no una ladera que seguir
     peso = np.where((s_land >= 200.0) & (s_land <= 640.0), 0.3, 1.0)
+    # F1 (bloque 1.1): las muestras de tierra pesan TIERRA_PESO_TIRON (es un peso RELATIVO dentro de la media gaussiana: solo
+    # cambia algo donde conviven con muestras de asfalto, en los dos extremos del tramo; en medio del lazo la media es la misma)
+    _dirt_s = np.array([s_ == 'dirt' for s_ in sec])
+    peso0 = peso
+    peso = np.where(_dirt_s[no_bridge], TIERRA_PESO_TIRON, peso)
     C = _idw_pull(GX, GY, M, cell, X[no_bridge], Y[no_bridge], Z_land, sigma=100.0, cada=8.0, paso=paso, peso=peso)
+    # F1 r2: el peso de la tierra solo cambia el tiron DENTRO del tramo de tierra (celdas a < 100 m de una muestra 'dirt',
+    # fundido a 160 m) y FUERA del corredor (< 4.5 m del borde, fundido a 8 m): en el resto z_land es el de antes de F1. La
+    # media gaussiana (sigma 100 m) cambiaba 0.01-0.11 m a 300 m de la tierra (McLaren + 14-23 m: 'dz 0.11 a < 25 m') y en el
+    # corredor volteaba el clip z0-0.6 / z0-0.5 (dz 0.10 en 224 celdas): los dos deben ser 0.000
+    if _dirt_s[no_bridge].any():
+        C0 = _idw_pull(GX, GY, M, cell, X[no_bridge], Y[no_bridge], Z_land, sigma=100.0, cada=8.0, paso=paso, peso=peso0)
+        _dd_dirt, _ = cKDTree(np.column_stack([X[no_bridge][_dirt_s[no_bridge]], Y[no_bridge][_dirt_s[no_bridge]]])).query(gpts)
+        # F1 r3: alcance 100-160 -> TIERRA_TIRON_ALCANCE (60-110): a 85-110 m de la tierra (ermita y cipreses del sendero ERMITA tras
+        # pueblo_alto_ladera) el peso 0.5 bajaba el natural 0.6-1.5 m sin cambiar nada del KPI (que se mide a 25 m)
+        _w_dirt = (np.clip((TIERRA_TIRON_ALCANCE[1] - _dd_dirt) / (TIERRA_TIRON_ALCANCE[1] - TIERRA_TIRON_ALCANCE[0]), 0.0, 1.0)
+                   * np.clip((d_land - half_c - TIERRA_SIN_CORREDOR[0]) / (TIERRA_SIN_CORREDOR[1] - TIERRA_SIN_CORREDOR[0]), 0.0, 1.0))
+        C = C0 + (C - C0) * _w_dirt.reshape(C.shape)
     # v2 (revision J2-01/J2-03, probado por el revisor): el tiron NORMALIZADO actua entero hasta ~170 m de la pista (sw >> 1
     # con muestras cada 8 m): al S de la salida del viaducto dejaba una MESA a 109 m (cota de la rasante sobre un macizo
     # de 18 m) con paredes de 60-105 m al mar, y al E del penon una cara plana de 156 m. Solo ahi el tiron POSITIVO decae
@@ -1294,11 +1574,78 @@ def construir(X, Y, Z, sec, Wd, nx, ny, paso, L, curvas, pit_pts, loews_centro,
     # de 0.9 m mas un quiebro en d = 6 que, muestreado con celdas de 4 m en diagonal, hacia el pie del desmonte en diente
     # de sierra (1.0-1.5 m) y la muesca de s 1662. Ahora llano a z0-0.5 hasta 4.5 m y acuerdo parabolico de T m hasta la
     # pendiente 1.15 (solo BAJA el terreno: la cara retrocede 1.15*(T/2-0.72) m)
-    techo = techo_desmonte_c1(z0, dedge0)
-    # v1 (revision B8): en el lado +1 de s 320-402 (entre la pista y el pedestal del McLaren) el macizo dejaba una loma conica
-    # de +7.6 m: explanada a cota de pista (+1 m) hasta 30 m y despues al 25 % (el pedestal cubre lo que quede debajo)
     _lat0 = (gpts[:, 0] - X[g_near]) * nx[g_near] + (gpts[:, 1] - Y[g_near]) * ny[g_near]
     _sg0 = g_near * paso
+    # curvatura con signo de la pista (> 0 = gira a la izquierda; antes se calculaba abajo, para la isla de las horquillas)
+    _tx = ny; _ty = -nx
+    _hd = np.unwrap(np.arctan2(_ty, _tx))
+    _kap = gaussian_filter1d(np.gradient(_hd) / paso, 2.0, mode='wrap')
+    # --- F1 (bloque 1.1): TIERRA TALLADA. Por MUESTRA de la tierra (s en TIERRA_TALLADA_S, fundido 30 m): lado ALTO = el lado
+    # donde el terreno natural (z_land, antes de las reglas de pista) es mas alto a TIERRA_LADO_SONDA m; si la diferencia es
+    # < 3 m, el interior de la curva (signo de la curvatura suavizada 10 m) y si no hay curva, 0. Se suaviza a lo largo de s
+    # (16 m) para que el lado no salte entre muestras. w_lado in [-1, 1] (+1 = el lado alto es el +1). La CAIDA del lado bajo
+    # solo donde el natural a 50 m de ese lado no sube (pie del macizo en la postal de la cima: ahi no se excava nada)
+    _s_all = np.arange(N) * paso
+    _w_st = (np.clip((_s_all - TIERRA_TALLADA_S[0]) / 30.0, 0.0, 1.0) * np.clip((TIERRA_TALLADA_S[1] - _s_all) / 30.0, 0.0, 1.0)
+             * _dirt_s)
+    _zl2 = z_land.reshape(nyg, nxg)
+
+    def _zl_en(off_lat):
+        return map_coordinates(_zl2, [(Y + ny * off_lat - gy0) / cell, (X + nx * off_lat - gx0) / cell], order=1, mode='nearest')
+    _zl_p = 0.5 * (_zl_en(Wd / 2.0 + TIERRA_LADO_SONDA) + _zl_en(Wd / 2.0 + TIERRA_LADO_SONDA + 20.0))
+    _zl_m = 0.5 * (_zl_en(-(Wd / 2.0 + TIERRA_LADO_SONDA)) + _zl_en(-(Wd / 2.0 + TIERRA_LADO_SONDA + 20.0)))
+    _dz_lado = _zl_p - _zl_m
+    _kap_s = gaussian_filter1d(_kap, 5.0, mode='wrap')
+    _lado_raw = np.where(np.abs(_dz_lado) >= 3.0, np.sign(_dz_lado), np.where(np.abs(_kap_s) > 1.0 / 80.0, np.sign(_kap_s), 0.0))
+    # (suavizado de 10 m: en un zigzag el lado alto cambia en CADA curva (cada 60-150 m) y el cambio debe caer en el apex,
+    # donde el interior de la curva es el lado alto de las dos ramas; con 40 m se apagaban legs enteros)
+    w_lado = np.clip(2.0 * gaussian_filter1d(_lado_raw * _w_st, 5.0, mode='wrap'), -1.0, 1.0) * _w_st
+    _zl_p50 = _zl_en(Wd / 2.0 + 50.0); _zl_m50 = _zl_en(-(Wd / 2.0 + 50.0))
+    _zl_bajo = np.where(w_lado >= 0.0, _zl_m50, _zl_p50)                       # natural a 50 m del lado BAJO
+    # altura del lomo por muestra = lo que SUBE el natural a 60-80 m en el lado alto (tope TIERRA_PARED_H): el lomo acerca
+    # la ladera a la pista (corte), nunca levanta un dique de 14 m sobre terreno llano (s 2250: 'levee' artificial)
+    _zl_alto = np.where(w_lado >= 0.0, _zl_p, _zl_m)
+    _h_lomo = np.clip(gaussian_filter1d(_zl_alto - Z, 5.0, mode='wrap'), 0.0, TIERRA_PARED_H)
+    _caida_ok = gaussian_filter1d(np.clip((Z + 6.0 - _zl_bajo) / 10.0, 0.0, 1.0), 4.0, mode='wrap')
+    # F1 r3: CAIDA LIBRE (ver cabecera, TIERRA_CAIDA_LIBRE_*): el punto de medida de la caida (25 m del borde, lado bajo) no
+    # puede caer en la zona de pared de OTRA rama (|ds| > TIERRA_OTRA_RAMA_DS) ni a < 12 m de su asfalto. Por muestra, suavizado
+    # 6 m a lo largo de s; entra en _caida_ok (vaguada, voto y w_out_c)
+    _sgb = -np.sign(w_lado)
+    _px25 = X + nx * _sgb * (Wd / 2.0 + 25.0); _py25 = Y + ny * _sgb * (Wd / 2.0 + 25.0)
+    _zl25 = map_coordinates(_zl2, [(_py25 - gy0) / cell, (_px25 - gx0) / cell], order=1, mode='nearest')
+    _dk25, _ik25 = tree_land.query(np.column_stack([_px25, _py25]), k=12)
+    _gk25 = idx_land[_ik25]
+    _ds25 = np.abs(_gk25 - np.arange(N)[:, None]); _ds25 = np.minimum(_ds25, N - _ds25) * paso
+    _otra25 = _ds25 > TIERRA_OTRA_RAMA_DS
+    _dedge25 = np.where(_otra25, _dk25 - Wd[_gk25] / 2.0, 1e9)
+    _lat25 = (_px25[:, None] - X[_gk25]) * nx[_gk25] + (_py25[:, None] - Y[_gk25]) * ny[_gk25]
+    _alto25 = np.sign(_lat25) * w_lado[_gk25] > 0.3
+    _pared25 = _alto25 & ((_zl25[:, None] >= Z[_gk25] + TIERRA_PARED_REAL) | (_h_lomo[_gk25] >= 7.5))
+    _bloq25 = (((_dedge25 <= TIERRA_CAIDA_LIBRE_D) & _pared25) | (_dedge25 <= TIERRA_CAIDA_LIBRE_ASF)).any(1) & (np.abs(w_lado) > 0.3)
+    _caida_libre = 1.0 - np.clip(gaussian_filter1d(_bloq25.astype(float), 2.0, mode='wrap') * 1.5, 0.0, 1.0)
+    checks['tierra_caida_bloqueada_muestras'] = int((_bloq25 & (_w_st > 0.5)).sum())
+    _caida_ok = _caida_ok * _caida_libre
+    # r3: junto a los apex de horquilla (R < 15 m, +- TIERRA_BLOQ_APEX) el lado bajo bloqueado conserva el cono de 1.15: la isla
+    # de la cima que mira la postal 56 no debe crecer (con 2.0 el horizonte de terreno subia de la fila 25 a la 18 del cuadro)
+    _horq_apex = maximum_filter1d((np.abs(_kap) > 1.0 / 15.0).astype(float), size=int(2 * TIERRA_BLOQ_APEX / paso) + 1, mode='wrap')
+    _bloq_pend = (1.0 - _caida_libre) * (1.0 - _horq_apex)
+    checks['tierra_tallada_muestras'] = int((np.abs(w_lado) > 0.5).sum())
+    checks['tierra_tallada_lado_mas1_pct'] = round(100.0 * float((w_lado[_w_st > 0.5] > 0.0).mean()), 1) if (_w_st > 0.5).any() else 0.0
+    # por CELDA (muestra mas cercana g_near): peso del lado alto (w_in) y del lado bajo (w_out, sin el factor 'otra rama', abajo)
+    _lsg = np.sign(_lat0)
+    # islas de horquilla: interior de las curvas cerradas (R < 25 m): sin vaguada y (r2) sin lomo minimo
+    _isla_t = (1.0 / np.maximum(np.abs(_kap[g_near]), 1e-6) < 25.0) & (np.sign(_lat0) == np.sign(_kap[g_near]))
+    w_in_c = np.clip(w_lado[g_near] * _lsg, 0.0, 1.0)
+    w_out_c = np.clip(-w_lado[g_near] * _lsg, 0.0, 1.0) * _caida_ok[g_near]
+    # desmonte C1 con pendiente por celda: TIERRA_PEND_INT (63 grados) en el lado alto de la tierra, 1.15 en el resto
+    # F1 r3: ... y tambien en el lado bajo cuya caida esta BLOQUEADA por la pared de otra rama (isla entre B y C de la cima:
+    # las dos caras de la isla son cortes; con 1.15 el techo de B recortaba la pared natural de C a +0..+7 a 25 m)
+    _w_bloq_c = np.clip(-w_lado[g_near] * _lsg, 0.0, 1.0) * _bloq_pend[g_near]
+    # (r3: a < TIERRA_BLOQ_APEX de un apex de horquilla tambien el lado alto se queda en 1.15: la isla de la cima no crece)
+    pend_c1 = 1.15 + (TIERRA_PEND_INT - 1.15) * np.maximum(w_in_c * (1.0 - _horq_apex[g_near]), _w_bloq_c)
+    techo = techo_desmonte_c1(z0, dedge0, pend=pend_c1)
+    # v1 (revision B8): en el lado +1 de s 320-402 (entre la pista y el pedestal del McLaren) el macizo dejaba una loma conica
+    # de +7.6 m: explanada a cota de pista (+1 m) hasta 30 m y despues al 25 % (el pedestal cubre lo que quede debajo)
     _cono = (_sg0 >= 320.0) & (_sg0 <= 402.0) & (_lat0 > 0.0) & (dedge0 < 45.0) & (dedge0 >= 6.0)
     techo = np.where(_cono, np.minimum(techo, z0 + 1.0 + np.maximum(0.0, dedge0 - 30.0) * 0.25), techo)
     # terraplen 0.55... salvo en la garganta del viaducto, donde la pista sale de
@@ -1307,7 +1654,49 @@ def construir(X, Y, Z, sec, Wd, nx, ny, paso, L, curvas, pit_pts, loews_centro,
     # ... y 400 % dentro del contorno del penon del casino (la rotonda esta en su borde O: el
     # terreno cae bajo la roca hasta el mar)
     s_fl = np.where(casino_zona & (r_cas < 1.05), np.maximum(s_fl, CASINO_PEND_INT), s_fl)
-    suelo = z0 - 0.6 - np.maximum(dedge0 - 6.0, 0.0) * s_fl
+    # F1 (bloque 1.1): en el lado bajo de la tierra el terraplen puede caer hasta TIERRA_SFL_EXT tras una berma llana de
+    # TIERRA_BERMA m (antes 6 m al 0.55); el acuerdo con el 0.55 del resto va con w_out_c
+    s_fl = np.maximum(s_fl, 0.55 + (TIERRA_SFL_EXT - 0.55) * w_out_c)
+    d_llano_fl = 6.0 + (TIERRA_BERMA - 6.0) * w_out_c
+    suelo = z0 - 0.6 - np.maximum(dedge0 - d_llano_fl, 0.0) * s_fl
+    # LADERA del lado alto (lomo: sube a TIERRA_PARED_PEND hasta +TIERRA_PARED_H, meseta de 14 m y vuelve al natural al 50 %)
+    # y CAIDA del lado bajo (vaguada: baja a TIERRA_CAIDA_PEND tras la berma hasta -TIERRA_CAIDA_H, 10 m de fondo y vuelve al
+    # 50 %): 'tiendas' CONTINUAS en la distancia al borde de CADA muestra; en el bucle de ramales se toma el maximo del
+    # levantamiento y del rebaje sobre TODAS las muestras a < R_REG (no solo la mas cercana: sin crestas finas ni escalones
+    # donde cambia la muestra mas cercana). Altura con ruido de 30 m (+-20 %): ni el lomo ni la vaguada son rectos
+    # (r2: 0.9-1.2, antes 0.8-1.2: con 0.8 el lomo de 10 m daba 7.5 m de pared y la caida -7.7: el KPI de 25 m se perdia por ruido)
+    _nh_tierra = 1.05 + 0.15 * ruido_valor(np.random.default_rng(seed + 97), nyg, nxg, cell, 30.0).ravel()
+    # F1 r2: serpenteo de la cresta del lomo (+- TIERRA_LOMO_SERP m, ruido de 50 m) y lomo minimo por muestra (ver cabecera)
+    _ns_tierra = TIERRA_LOMO_SUBIDA + TIERRA_LOMO_SERP * ruido_valor(np.random.default_rng(seed + 101), nyg, nxg, cell, 50.0).ravel()
+    _horq = maximum_filter1d((np.abs(_kap) > 1.0 / 15.0).astype(float), size=int(2 * TIERRA_SIN_MIN_APEX / paso) + 1, mode='wrap') > 0.5
+    _h_lomo_min = np.where(_horq, _h_lomo, _h_lomo + np.maximum(TIERRA_PARED_H_MIN - _h_lomo, 0.0) * np.clip((_h_lomo - 3.0) / 3.0, 0.0, 1.0))
+    _d2_out = TIERRA_BERMA + TIERRA_CAIDA_H / TIERRA_CAIDA_PEND + 10.0
+
+    def _tienda_in(d, h, L=TIERRA_LOMO_SUBIDA):
+        """F1 r2: LOMA redondeada: sube h en L m desde 4.5 m del borde (1-(1-u)^2.5: arranque empinado, cresta a pendiente 0),
+        cresta de TIERRA_LOMO_CRESTA m y bajada al 50 % con acuerdo parabolico de TIERRA_LOMO_T m. h y L pueden ser arrays."""
+        u = np.clip((d - 4.5) / L, 0.0, 1.0)
+        sube = h * (1.0 - (1.0 - u) ** 2.5)
+        x = np.maximum(d - (4.5 + L + TIERRA_LOMO_CRESTA), 0.0)
+        T = TIERRA_LOMO_T
+        return sube - 0.5 * np.where(x < T, x * x / (2.0 * T), x - 0.5 * T)
+
+    def _tienda_out(d, nh=1.0):
+        """F1 r2: VAGUADA redondeada: tras la berma baja a TIERRA_CAIDA_PEND con acuerdo parabolico de TIERRA_CAIDA_T m hasta
+        TIERRA_CAIDA_H x nh (fondo = minimo suave de TIERRA_CAIDA_K m) y vuelve al natural al 50 %."""
+        x = np.maximum(d - TIERRA_BERMA, 0.0)
+        T = TIERRA_CAIDA_T
+        q = TIERRA_CAIDA_PEND * np.where(x < T, x * x / (2.0 * T), x - 0.5 * T)
+        K = TIERRA_CAIDA_K
+        fondo = -K * np.logaddexp(-q / K, -(TIERRA_CAIDA_H * nh) / K)
+        return fondo - 0.5 * np.maximum(d - _d2_out, 0.0)
+    raise_max = np.zeros(ncel); lower_max = np.zeros(ncel); voto_in = np.zeros(ncel); voto_out = np.zeros(ncel)
+    raise_min = np.zeros(ncel)                # r2: levantamiento con el lomo minimo (se aplica donde no hay vaguada vecina)
+    raise_who = np.full(ncel, -1, dtype=int); lower_who = np.full(ncel, -1, dtype=int)   # r3: muestra que manda en cada celda (QA)
+    raise_core = np.zeros(ncel)               # r3: lomo dentro de su ZONA DE PARED (dedge <= TIERRA_LOMO_CORE): solo este apaga vaguadas
+    raise_dedge = np.full(ncel, 1e9)          # r3: distancia al borde de la muestra que manda en el lomo
+    lower_ceil = np.full(ncel, 1e9)           # r3: techo de la vaguada mas exigente (w_out > 0.5) en la celda
+    d_otro_edge = np.full(ncel, 1e9)          # distancia al borde del asfalto de OTRO ramal (se rellena en el bucle)
     near = np.where(d_land < R_REG)[0]
     n_dobles = 0
     for a in range(0, len(near), 10000):
@@ -1328,8 +1717,17 @@ def construir(X, Y, Z, sec, Wd, nx, ny, paso, L, curvas, pit_pts, loews_centro,
         # el techo de OTRO ramal sigue siendo el de v1: con el C1 la rama baja de una horquilla (cara 4-5 m mas baja) cortaba
         # el apoyo del borde de la rama alta (terreno 1.3-1.5 m bajo el borde interior en s 2346-2350)
         _w_own = np.clip((dedge0[sub][:, None] - 4.0) / 6.0, 0.0, 1.0)
-        ceil_j = (np.where(dedge < 6.0, zj - 0.5, zj + 0.4 + (dedge - 6.0) * 1.15) * (1.0 - _w_own)
-                  + techo_desmonte_c1(zj, dedge) * _w_own)
+        # F1 r3: el cono (techo) de cada muestra j es TIERRA_PEND_INT en su lado alto y en su lado bajo bloqueado (caida no
+        # libre), como el techo propio (pend_c1): la isla de la cima entre B y C queda acotada por el cono de B a 1.15 (49
+        # grados) y la pared natural de C (+13 a 25 m) se recortaba a +0..+5 en s 1880-1900
+        _pend_j = 1.15
+        if (_w_st > 0.0).any():
+            _lat_j = (gpts[sub, 0][:, None] - X[gj]) * nx[gj] + (gpts[sub, 1][:, None] - Y[gj]) * ny[gj]
+            _sg_j = np.sign(_lat_j)
+            _wl_j = w_lado[gj]
+            _pend_j = 1.15 + (TIERRA_PEND_INT - 1.15) * np.clip(np.maximum(_wl_j * _sg_j * (1.0 - _horq_apex[gj]), -_wl_j * _sg_j * _bloq_pend[gj]), 0.0, 1.0)
+        ceil_j = (np.where(dedge < 6.0, zj - 0.5, zj + 0.4 + (dedge - 6.0) * _pend_j) * (1.0 - _w_own)
+                  + techo_desmonte_c1(zj, dedge, pend=_pend_j) * _w_own)
         floor_j = zj - 0.6 - np.maximum(dedge - 6.0, 0.0) * s_fl[sub][:, None]
         _c_otro = np.where(otro, ceil_j, 1e9).min(1)
         # v2 (revision E2-07 (1)): a > 8 m del borde (de las dos ramas), donde OTRO ramal limita la celda, minimo SUAVE
@@ -1340,9 +1738,173 @@ def construir(X, Y, Z, sec, Wd, nx, ny, paso, L, curvas, pit_pts, loews_centro,
         _suave = (dedge0[sub] > 8.0) & (_c_otro < 1e8) & (np.where(otro, dedge, 1e9).min(1) > 8.0)
         techo[sub] = np.where(_suave, np.minimum(techo[sub], _sm), np.minimum(techo[sub], _c_otro))
         suelo[sub] = np.maximum(suelo[sub], np.where(otro, floor_j, -1e9).max(1))
+        _d_ot = np.where(otro, dedge, 1e9).min(1)
+        d_otro_edge[sub] = _d_ot
         n_dobles += int(((dedge0[sub] < 4.0) & (techo[sub] < z0[sub] - 0.8)).sum())
+        # F1 (bloque 1.1): TIERRA TALLADA. Para cada muestra j a < R_REG: si la celda esta en su lado ALTO, el lomo
+        # floor_in_j (nunca sobre el techo de ningun ramal: se acota abajo); si esta en su lado BAJO, la vaguada ceil_out_j
+        # (nunca bajo el suelo de ningun ramal). Peso de cada muestra: lado (w_lado, con el fundido en s), caida solo donde el
+        # natural exterior no sube (_caida_ok), y 0 a < TIERRA_OTRA_RAMA[0] m del borde de OTRA rama (islas de horquilla,
+        # espina entre ramas paralelas: ahi manda el terreno natural). Se guarda el MAXIMO levantamiento/rebaje por celda
+        if (_w_st > 0.0).any():
+            # (_lat_j, _sg_j, _wl_j: calculados arriba, antes de ceil_j)
+            _d_ot2 = np.where(valid & (dl > TIERRA_OTRA_RAMA_DS), dedge, 1e9).min(1)       # otra rama de verdad (no la propia curva)
+            _fac_j = np.where(dl <= TIERRA_OTRA_RAMA_DS, _d_ot2[:, None], dedge0[sub][:, None])
+            _fac_j = np.clip((_fac_j - TIERRA_OTRA_RAMA[0]) / (TIERRA_OTRA_RAMA[1] - TIERRA_OTRA_RAMA[0]), 0.0, 1.0) * valid
+            # solo las muestras que tienen la celda EN SU NORMAL (desfase a lo largo de la pista |lon| < TIERRA_LON_M): las
+            # muestras de una curva 60-90 m atras veian la espina entre las dos ramas paralelas como su 'lado bajo'
+            _lon_j = np.abs((gpts[sub, 0][:, None] - X[gj]) * ny[gj] - (gpts[sub, 1][:, None] - Y[gj]) * nx[gj])
+            _w_lon_j = np.clip((TIERRA_LON_M - _lon_j) / 8.0, 0.0, 1.0)
+            _fac_j = _fac_j * _w_lon_j
+            # F1 (bloque 1.1, v2): BANCO DE HORQUILLA. Si la otra rama mas cercana a la celda esta >= TIERRA_BANCO_DZ m MAS ALTA
+            # que la muestra j (rama baja de una horquilla o de dos ramas paralelas: C26 s 2300-2360 sobre 2380-2440), la isla
+            # entre las dos es una ladera que SUBE de la rama baja a la alta: el lomo de la rama baja no se apaga junto a la
+            # rama alta (sigue acotado por el techo/suelo de todos los ramales: el corredor y el hombro de la rama alta no
+            # cambian). La vaguada si se apaga (nunca se excava hacia la rama de abajo: _fac_j)
+            # rama 'plegada' cerca de la celda: muestras a > 40 m por la pista pero a < 80 % de esa distancia en linea recta
+            # (horquilla abierta de la C26: ramas a 55 m en recta por 72 m de pista; una subida recta o una curva de R 50 m
+            # no cuentan: > 90 %) y a < 45 m de la celda; la rama ALTA junto a la celda es la mas alta de esas o la propia
+            # muestra mas cercana (z0: celdas que ya estan mas cerca de la rama alta)
+            # ... y con rumbo OPUESTO al de la muestra mas cercana a la celda (producto de las normales < -0.3: > 107 grados; la
+            # propia curva C14 de s 1500-1620, con el mismo rumbo tras el giro, no es una rama plegada y no hace banco)
+            _g0s = g_near[sub][:, None]
+            _dot_j = nx[gj] * nx[_g0s] + ny[gj] * ny[_g0s]
+            _m_ot = valid & (dl > 40.0) & (dij < 0.8 * dl) & (dedge < 45.0) & (_dot_j < -0.3)
+            _z_ot_max = np.where(_m_ot, zj, -1e9).max(1)
+            # rama ALTA por par (celda, j): la plegada mas alta cerca de la celda o, si j misma es de rumbo opuesto a la muestra
+            # mas cercana (la celda ya esta mas cerca de la rama alta), esa muestra mas cercana (z0)
+            _z_hi_j = np.maximum(_z_ot_max[:, None], np.where(_dot_j < -0.3, z0[sub][:, None], -1e9))
+            # muestra de la rama ALTA (la plegada mas alta o la propia mas cercana) y lado de la celda y de cada muestra j
+            # respecto a ella: el banco solo sube las celdas que estan ENTRE la rama baja y la alta (mismo lado que j), nunca
+            # las del otro lado de la rama alta (el lomo de la rama baja cruzaba la rama alta y le tapaba su caida exterior)
+            _kh = np.where(_z_ot_max > z0[sub], gj[np.arange(len(sub)), np.argmax(np.where(_m_ot, zj, -1e9), axis=1)], g_near[sub])
+            _lat_c_h = (gpts[sub, 0] - X[_kh]) * nx[_kh] + (gpts[sub, 1] - Y[_kh]) * ny[_kh]
+            _lat_j_h = (X[gj] - X[_kh][:, None]) * nx[_kh][:, None] + (Y[gj] - Y[_kh][:, None]) * ny[_kh][:, None]
+            _mismo_lado_h = (np.sign(_lat_c_h)[:, None] == np.sign(_lat_j_h)) | (np.abs(_lat_j_h) < 1.0)
+            _banco_j = (_m_ot.any(1)[:, None] | (_dot_j < -0.3)) & (_z_hi_j > zj + TIERRA_BANCO_DZ) & _mismo_lado_h
+            _z_hi = _z_hi_j
+            _fac_in_j = np.where(_banco_j, valid * _w_lon_j, _fac_j)
+            _nh = _nh_tierra[sub][:, None]
+            # altura del lomo NATURAL (lo que sube el natural a 60-80 m) y, r2, con el LOMO MINIMO (TIERRA_PARED_H_MIN) donde hay
+            # ladera, salvo en las islas de horquilla (_isla_t) y junto a los apex (_horq). Se calculan los dos levantamientos: el
+            # minimo solo se aplica (tras el bucle) donde no mata una vaguada vecina, y solo cerca de la pista (cresta a < 35 m;
+            # a > 45 m la cresta baja a la altura natural: la cola del lomo es la de r1)
+            _h_nat = _h_lomo[gj] * _nh
+            _h_min = np.where(_isla_t[sub][:, None], _h_lomo[gj], _h_lomo_min[gj]) * _nh
+            # (en el banco la 'ladera' que mide _h_lomo a 60-80 m cae ya al otro lado de la rama alta: la altura del lomo es
+            # la de la rama alta sobre la baja, tope TIERRA_PARED_H)
+            _h_banco = np.minimum(_z_hi - zj, TIERRA_PARED_H) * _nh
+            _h_nat = np.where(_banco_j, np.maximum(_h_nat, _h_banco), _h_nat)
+            _h_min = np.where(_banco_j, np.maximum(_h_min, _h_banco), _h_min)
+            # lomo solo si hay ladera NATURAL. F1 r3: (3, 5) -> TIERRA_LOMO_H_NAT (6, 8): un lomo de 3-6 m no da pared (KPI >= 8)
+            # y su cola (hasta 70 m) mataba la vaguada de la rama de enfrente (s 2070-2100: lomo de 14 m del collado de
+            # s 1640-1660 sobre su lado bajo; 1660 +1)
+            _w_lad_j = np.clip((_h_nat - TIERRA_LOMO_H_NAT[0]) / (TIERRA_LOMO_H_NAT[1] - TIERRA_LOMO_H_NAT[0]), 0.0, 1.0)
+            _w_in_j = np.clip(_wl_j * _sg_j, 0.0, 1.0) * _fac_in_j * _w_lad_j
+            _w_out_j = np.clip(-_wl_j * _sg_j, 0.0, 1.0) * _caida_ok[gj] * _fac_j
+            # altura efectiva del lomo: el natural a 60-80 m (+ TIERRA_LOMO_EXTRA donde hay ladera), tope TIERRA_PARED_H
+            _h_e = np.minimum(_h_nat + TIERRA_LOMO_EXTRA * _w_lad_j, TIERRA_PARED_H)
+            _h_e2 = np.minimum(_h_min + TIERRA_LOMO_EXTRA * _w_lad_j, TIERRA_PARED_H)
+            _h_e2 = _h_e + (_h_e2 - _h_e) * np.clip((45.0 - dedge) / 10.0, 0.0, 1.0)
+            _L_j = _ns_tierra[sub][:, None]
+            _floor_in_j = zj - 0.5 + _tienda_in(dedge, _h_e, _L_j)
+            _floor_in_j2 = zj - 0.5 + _tienda_in(dedge, _h_e2, _L_j)
+            _ceil_out_j = zj - 0.6 - _tienda_out(dedge, _nh)
+            # el levantamiento/rebaje es una MODIFICACION del natural junto a la pista, no una cota absoluta: tope de
+            # TIERRA_PARED_H / TIERRA_CAIDA_H (x ruido) hasta 50 m del borde y 0 a 85/95 m (la cola de la tienda no
+            # levanta un valle ni rebaja una loma a 60-90 m de la muestra). r2: y 0 en el corredor (< 4.5 m del borde, fundido
+            # a 8 m): el corredor va de z0-0.6 (suelo) a z0-0.5 (techo) y el lomo/vaguada lo movia 0.10 m
+            # (la distancia es la de la celda al borde de asfalto MAS CERCANO, propio u otro ramal: el lomo de la rama de al lado
+            # (banco de la C26) levantaba 0.10 m el corredor de la rama baja a traves de su propio 'dedge' de 30 m)
+            _w_corr = np.clip((np.minimum(dedge0[sub], _d_ot)[:, None] - TIERRA_SIN_CORREDOR[0])
+                              / (TIERRA_SIN_CORREDOR[1] - TIERRA_SIN_CORREDOR[0]), 0.0, 1.0)
+            _w_lejos = np.clip((85.0 - dedge) / 35.0, 0.0, 1.0) * _w_corr
+            _cap_out = TIERRA_CAIDA_H * _nh * np.clip((95.0 - dedge) / 45.0, 0.0, 1.0) * _w_corr
+            _zl_s = z_land[sub][:, None]
+            _rt = _w_in_j * np.minimum(np.maximum(_floor_in_j - _zl_s, 0.0), _h_e * _w_lejos)
+            raise_max[sub] = _rt.max(1)
+            _am = _rt.argmax(1); _ar = np.arange(len(sub))
+            raise_who[sub] = np.where(raise_max[sub] > 0.0, gj[_ar, _am], -1)   # r3: muestra del lomo (QA)
+            raise_dedge[sub] = np.where(raise_max[sub] > 0.0, dedge[_ar, _am], 1e9)
+            # (y todo el lomo si la celda esta en un HUECO de < TIERRA_LOMO_GAP entre su rama y otra: isla de horquilla D/E, pares
+            # a < 60 m: ahi sigue 'gana el lomo' entero, sin hoyo en medio de la isla)
+            raise_core[sub] = (_rt * ((dedge <= TIERRA_LOMO_CORE) | (dedge + _d_ot2[:, None] < TIERRA_LOMO_GAP))).max(1)
+            lower_ceil[sub] = np.where(_w_out_j > 0.5, _ceil_out_j, 1e9).min(1)
+            raise_min[sub] = (_w_in_j * np.minimum(np.maximum(_floor_in_j2 - _zl_s, 0.0), _h_e2 * _w_lejos)).max(1)
+            _lt = _w_out_j * np.minimum(np.maximum(_zl_s - _ceil_out_j, 0.0), _cap_out)
+            lower_max[sub] = _lt.max(1)
+            lower_who[sub] = np.where(lower_max[sub] > 0.0, gj[np.arange(len(sub)), _lt.argmax(1)], -1)   # r3: muestra de la vaguada (QA)
+            # VOTO por proximidad (continuo) solo para apagar la vaguada donde una muestra MAS CERCANA ve la celda como su
+            # lado alto (la espina entre la subida y la bajada del lazo: las muestras del apex de la cima, 45 m al N, la
+            # veian como su lado bajo y la rebajaban 16 m); el lado alto cuenta aunque no haya ladera para el lomo
+            _kp = 1.0 / (dedge + 6.0) ** 2
+            voto_in[sub] = (np.clip(_wl_j * _sg_j, 0.0, 1.0) * _fac_j * _kp).sum(1); voto_out[sub] = (_w_out_j * _kp).sum(1)
     tierra = coastF < 0.5
     z_gen = np.where(tierra, np.minimum(np.maximum(z_land, suelo), techo), z_land)
+    # F1 (bloque 1.1): el terreno natural + lomo - vaguada, acotado por el suelo (terraplen de todos los ramales) y el techo
+    # (corredor/desmonte de todos los ramales): el corredor de la pista y el de las otras ramas no cambian
+    # Nada en el HINTERLAND de los sectores de terrazas: celdas en el lado del sector, cuya pista mas cercana es la del
+    # sector, a < 21*n + 30 m del borde (fundido 15 m): es el perfil de la QA de fosos (o_fin + 40) y la cara tras la ultima
+    # terraza (con la vaguada de la curva C13-C14 asomaban fosos de 4 m detras de pueblo_alto_ladera). fac_valle no sirve:
+    # apaga por distancia a las muestras del sector sin mirar el lado ni la pista mas cercana (dejaba a 0 la cresta de s 2200)
+    fac_sect = np.ones(ncel)
+    _AT_s = float(spec_urb.get('ancho_terraza', 21.0))
+    for sc in spec_urb.get('sectores', []):
+        _jj = idx_land[(s_land >= float(sc['s0'])) & (s_land <= float(sc['s1']))]
+        if len(_jj) == 0 or int(sc['n_terrazas']) < 1:
+            continue
+        _ds, _ks = cKDTree(np.column_stack([X[_jj], Y[_jj]])).query(gpts, distance_upper_bound=300.0)
+        _ok = np.isfinite(_ds); _gk = _jj[np.where(_ok, _ks, 0)]
+        _lado_c = np.where((gpts[:, 0] - X[_gk]) * nx[_gk] + (gpts[:, 1] - Y[_gk]) * ny[_gk] > 0, 1, -1)
+        _o_c = np.where(_ok, _ds, 1e9) - Wd[_gk] / 2.0
+        _zona = _ok & (_lado_c == int(sc['lado'])) & (d_land >= np.where(_ok, _ds, 0.0) - 2.0)
+        # (margen 45 m: el perfil de la QA de fosos llega a o_fin + 40 y con 30 m el lomo de s 1540-1600 asomaba a o_fin + 32-40
+        # tras pueblo_alto_ladera y dejaba 'agua atrapada' de 1.6 m en s 1494)
+        fac_sect = np.minimum(fac_sect, np.where(_zona, np.clip((_o_c - (_AT_s * int(sc['n_terrazas']) + 45.0)) / 15.0, 0.0, 1.0), 1.0))
+    # r2: ... ni en la BANDA de los perfiles de la QA de fosos (o_fin-3 .. o_fin+40 por la normal de CADA muestra del sector, en
+    # su lado; a < 3 m de esos puntos, fundido a 9 m). fac_sect no protege los puntos del perfil cuya pista mas cercana es la
+    # de una muestra de fuera del sector (la curva C13-C14 tras pueblo_alto_ladera: la cresta del lomo de s 1540-1600, ahora
+    # redondeada y mas corta, asomaba a o_fin+15-20 y dejaba 2.0 m de agua atrapada en s 1494)
+    _pts_b = []
+    for sc in spec_urb.get('sectores', []):
+        _nt = int(sc['n_terrazas'])
+        _jj = idx_land[(s_land >= float(sc['s0'])) & (s_land <= float(sc['s1']))]
+        if _nt < 1 or len(_jj) == 0:
+            continue
+        _offs = _AT_s * _nt + np.arange(-3.0, 40.01, 2.0)
+        _off2 = int(sc['lado']) * (Wd[_jj][:, None] / 2.0 + _offs[None, :])
+        _pts_b.append(np.column_stack([(X[_jj][:, None] + nx[_jj][:, None] * _off2).ravel(),
+                                       (Y[_jj][:, None] + ny[_jj][:, None] * _off2).ravel()]))
+    if _pts_b:
+        _d_b, _ = cKDTree(np.concatenate(_pts_b)).query(gpts, distance_upper_bound=12.0)
+        fac_sect = np.minimum(fac_sect, np.clip((np.where(np.isfinite(_d_b), _d_b, 1e9) - 3.0) / 6.0, 0.0, 1.0))
+    # ... ni vaguada en el interior de las curvas cerradas (R < 25 m: islas de horquilla, _isla_t de arriba; el lomo si,
+    # acotado por el techo de la otra rama)
+    raise_max = raise_max * fac_sect; raise_min = raise_min * fac_sect; lower_max = np.where(_isla_t, 0.0, lower_max * fac_sect)
+    # donde chocan el lomo de la rama de abajo y la vaguada de la de arriba (ramas a 35-50 m: s 1600/2200, 2100/2140) gana
+    # el LOMO (la de abajo esta tallada en la ladera: pared; la de arriba se queda con un hombro llano en vez de la
+    # caida; un voto por proximidad dejaba una zanja en V entre las dos)
+    _V = (voto_in - voto_out) / np.maximum(voto_in + voto_out, 1e-12)
+    # F1 r3: solo el lomo DENTRO de su zona de pared (raise_core) apaga la vaguada; la cola (raise_max - raise_core) no, y donde
+    # una rama de enfrente excava (lower_ceil), la cola se recorta al techo de esa vaguada con fundido de TIERRA_LOMO_COLA_T m
+    # a partir de TIERRA_LOMO_CORE (ver cabecera): la rama alta de un par a >= 60 m recupera su caida sin escalon
+    raise_core = raise_core * fac_sect
+    lower_max = lower_max * (1.0 - np.clip(raise_core / 3.0, 0.0, 1.0)) * np.clip(1.0 - 2.0 * np.maximum(_V, 0.0), 0.0, 1.0)
+    _t_cola = np.clip((raise_dedge - TIERRA_LOMO_CORE) / TIERRA_LOMO_COLA_T, 0.0, 1.0) * (lower_ceil < 1e8) * (lower_max > 0.0)
+    _raise_cap = np.maximum(lower_ceil - z_land, 0.0)
+    raise_max = raise_max * (1.0 - _t_cola) + np.minimum(raise_max, _raise_cap) * _t_cola
+    checks['tierra_tallada_celdas_cola_recortada'] = int((tierra & (_t_cola > 0.5) & (_raise_cap < raise_max + 0.5)).sum())
+    # r2: el LOMO MINIMO solo donde no hay vaguada (de otra rama) en la celda: el lomo natural de 1600-1620 subido a 10 m
+    # apagaba la caida de 1670-1690 (interior comun de la curva del collado)
+    _add_min = np.maximum(raise_min - raise_max, 0.0) * (1.0 - np.clip(lower_max / 2.0, 0.0, 1.0))
+    raise_max = raise_max + _add_min
+    checks['tierra_tallada_celdas_lomo_minimo'] = int((tierra & (_add_min > 0.5)).sum())
+    _z_tall = np.minimum(np.maximum(z_land + raise_max - lower_max, suelo), techo)
+    checks['tierra_tallada_celdas_ladera'] = int((tierra & (raise_max > 0.5)).sum())
+    checks['tierra_tallada_celdas_caida'] = int((tierra & (lower_max > 0.5)).sum())
+    checks['tierra_tallada_ladera_max_m'] = round(float(raise_max[tierra].max()), 1) if tierra.any() else 0.0
+    checks['tierra_tallada_caida_max_m'] = round(float(lower_max[tierra].max()), 1) if tierra.any() else 0.0
+    z_gen = np.where(tierra, _z_tall, z_land)
     dbg('techo', techo); dbg('suelo', suelo); dbg('z_gen', z_gen)
 
     # --- TERRAZAS DEL PUEBLO desde urbanismo_spec.json (RONDA 15b) ---
@@ -1392,6 +1954,9 @@ def construir(X, Y, Z, sec, Wd, nx, ny, paso, L, curvas, pit_pts, loews_centro,
     n_conf = 0
     suelo_terr = np.full(ncel, -1e9)          # piso de las terrazas (y su terraplen) para la caja del pit
     R_TERR = 180.0
+    # F1 (bloque 1.2): anchura de la berma tras la ultima terraza por celda (ruido de 60 m entre BERMA_TERRAZA[0] y [1])
+    _berma_c = BERMA_TERRAZA[0] + (BERMA_TERRAZA[1] - BERMA_TERRAZA[0]) * 0.5 * (
+        1.0 + ruido_valor(np.random.default_rng(seed + 71), nyg, nxg, cell, 60.0).ravel())
     sectores = [sc for sc in spec_urb.get('sectores', []) if int(sc['n_terrazas']) >= 1]
     for i_sc, sc in enumerate(sectores):
         s0, s1, lado, nt = float(sc['s0']), float(sc['s1']), int(sc['lado']), int(sc['n_terrazas'])
@@ -1457,8 +2022,15 @@ def construir(X, Y, Z, sec, Wd, nx, ny, paso, L, curvas, pit_pts, loews_centro,
         # (PEND_DESMONTE_COCHE, 63 grados: el macizo debe subir detras del McLaren)
         p_desm = 1.15 + (PEND_DESMONTE_COCHE - 1.15) * w_coche[sel]
         # v3 (revision C-02): en los sectores de pueblo, fuera del espolon del coche, la cara va en bancales (techo_tras_terraza)
-        w_tope = (1.0 - w_coche[sel]) * _w_mcl[sel] * (1.0 if str(sc['id']).startswith('pueblo') else 0.0)
-        techo_t = z_ult + 0.4 + techo_tras_terraza(o - o_fin - TM / 2, p_desm, w_tope)
+        # (r2: con _w_mcl_f1, +30 m de la huella del McLaren, para que la berma de F1 no mueva nada a < 25 m del coche)
+        w_tope = (1.0 - w_coche[sel]) * _w_mcl_f1[sel] * (1.0 if str(sc['id']).startswith('pueblo') else 0.0)
+        # F1 (bloque 1.2): berma de 15-25 m entre el patio y la cara (solo pueblo_*, fuera del espolon del coche y del
+        # McLaren: w_tope); bancales tambien en el espolon del coche si BANCOS_EN_COCHE (solo bajan <= 2*BANCO_A = 3.3 m)
+        berma_sel = _berma_c[sel] * w_tope
+        # (r2: en el espolon del coche con _w_mcl_f1, +30 m de la huella: el encaje del McLaren a < 25 m queda en 0.000)
+        w_banco_sel = ((1.0 if str(sc['id']).startswith('pueblo') else 0.0)
+                       * (_w_mcl_f1[sel] if BANCOS_EN_COCHE else _w_mcl[sel] * (1.0 - w_coche[sel])))
+        techo_t = z_ult + 0.4 + techo_tras_terraza(o - o_fin - TM / 2, p_desm, w_banco_sel, berma=berma_sel)
         suelo_t = z_ult - 0.6 - np.maximum(o - o_fin, 0.0) * s_fl[sel]     # 0.55 (hasta 3.0 en la garganta)
         # RONDA 15c: RELLENO del foso. Donde el terreno natural cerrado (84 m) vuelve a estar
         # a < 6 m bajo la ultima terraza, el suelo detras del patio no baja de la cota de la
@@ -1472,6 +2044,10 @@ def construir(X, Y, Z, sec, Wd, nx, ny, paso, L, curvas, pit_pts, loews_centro,
         fill_ok = (o >= o_fin) & (z_cl >= z_ult - 6.0) & (relleno > z_land[sel])
         z_use = np.where(fill_ok, z_land[sel] + (relleno - z_land[sel]) * w_fill, z_land[sel])
         n_foso_rell += int((fill_ok & (relleno - z_land[sel] > 1.5) & (w_s > 0.999)).sum())
+        # F1 (bloque 1.1): la base fuera de las bandas es el natural (+ relleno) MAS el lomo y MENOS la vaguada de la tierra
+        # tallada (raise_max/lower_max ya van a 0 en el hinterland de cada sector por fac_sect): a 180 m de pueblo_alto_mar
+        # (s 1500) la isla de la C26 se recalculaba desde z_land y perdia el banco de horquilla. La vaguada no toca el relleno
+        z_use = np.maximum(z_use, z_land[sel] + raise_max[sel]) - np.where(fill_ok, 0.0, lower_max[sel])
         # detras de la ultima terraza, donde el sector tiene varias ramas (la
         # tecnica dobla alrededor del espolon), la cara de desmonte/terraplen es
         # el minimo/maximo contra las OTRAS ramas del sector que tienen la celda
@@ -1491,7 +2067,8 @@ def construir(X, Y, Z, sec, Wd, nx, ny, paso, L, curvas, pit_pts, loews_centro,
             vxk = gpts[cj, 0][:, None] - X[gk]; vyk = gpts[cj, 1][:, None] - Y[gk]
             otra &= np.where(vxk * nx[gk] + vyk * ny[gk] > 0, 1, -1) == lado
             ok_ = np.where(valid, dk, 1e6) - Wd[gk] / 2
-            face_k = Z[gk] + hs[-1] + 0.4 + techo_tras_terraza(ok_ - o_fin - TM / 2, p_desm[lj][:, None], w_tope[lj][:, None])
+            face_k = Z[gk] + hs[-1] + 0.4 + techo_tras_terraza(ok_ - o_fin - TM / 2, p_desm[lj][:, None], w_banco_sel[lj][:, None],
+                                                                berma=berma_sel[lj][:, None])
             floor_k = Z[gk] + hs[-1] - 0.6 - np.maximum(ok_ - o_fin, 0.0) * s_fl[cj][:, None]
             techo_t[lj] = np.minimum(techo_t[lj], np.where(otra, face_k, 1e9).min(1))
             suelo_t[lj] = np.maximum(suelo_t[lj], np.where(otra, floor_k, -1e9).max(1))
@@ -1673,6 +2250,10 @@ def construir(X, Y, Z, sec, Wd, nx, ny, paso, L, curvas, pit_pts, loews_centro,
         _otra = (d_land < dpe - 10.0) & (_lc != _lp) & (_sg > 300.0) & (_sg < L - 300.0)
         checks['caja_pit_otra_calzada_celdas'] = int((_otra & (dpe < 260.0) & tierra).sum())
         caja = (dpe < 260.0) & tierra & ~_otra
+        # F1 (bloque 1.1): la isla de la horquilla C26 (banco de horquilla, a 125-190 m del extremo NE del pit lane) tiene como
+        # muestra mas cercana el apex (rumbo O), para la que el pit cae en su mismo lado: _otra no la exime y el techo de la caja
+        # (explanada 22 % + 115 %) la rebajaba 5 m. Las celdas con lomo o vaguada de la tierra tallada quedan fuera de la caja
+        caja &= (raise_max < 0.5) & (lower_max < 0.5)
         # v1 (revision J4/B10, probado): mas alla del extremo NO las dos rampas del 115 % (alejarse del pit y pasar su
         # extremo) se SUMABAN: pared de cantera del 241 % detras del hotel. Ahora una sola distancia (hypot) con pendiente
         # 1.15 -> 0.80 segun lo que se pasa del extremo; el extremo SE (entrada, junto al viaducto) queda igual que antes
@@ -1700,11 +2281,15 @@ def construir(X, Y, Z, sec, Wd, nx, ny, paso, L, curvas, pit_pts, loews_centro,
         techo_p = np.minimum(techo_p, pz[ip] - 0.6 + np.maximum(dpe - 6.0, 0.0) * 3.0)
         n_terr_pit = int((caja & terr_mask & (z_grid > techo_p + 0.3)).sum())
         pit_cut = caja & (techo_p < z_grid - 0.3)
+        dbg('caja_otra', _otra.astype(float)); dbg('caja_dpe', dpe); dbg('caja_s_no', s_no); dbg('caja_techo_p', np.where(caja, techo_p, 1e9))
         z_grid = np.where(caja, np.minimum(z_grid, techo_p), z_grid)
         # v3 (revision B10): la pared de la caja detras del hotel seguia al 137-149 % (ruido de 60 m, arranque parabolico y
         # coronacion suave de v2, sin limitador despues): limitador al 92 % (gradiente <= ~1.0) SOLO en la pared (caja, desde 40 m
         # del pit lane hasta el pie + 80 m, a > 12 m de cualquier asfalto, fuera de terrazas); explanada, muro del pit y corredor fijos
-        _mov_b = (caja & (dpe > 40.0) & (dpe < dpe0 + 80.0) & tierra & (dedge0 > 12.0) & ~terr_mask).reshape(nyg, nxg)
+        # (F1 bloque 1.1: tampoco en las celdas de la tierra tallada (lomo/vaguada): la isla de la C26 esta a 130-190 m del
+        # extremo NE del pit lane y el limitador al 92 % rebajaba 5 m el banco de horquilla; la pared tras el hotel no cambia)
+        _mov_b = (caja & (dpe > 40.0) & (dpe < dpe0 + 80.0) & tierra & (dedge0 > 12.0) & ~terr_mask
+                  & (raise_max < 0.5) & (lower_max < 0.5)).reshape(nyg, nxg)
         if _mov_b.any():
             _zb2, _reb_b = limitar_pendiente_mascara(z_grid.reshape(nyg, nxg), cell, 0.92, _mov_b)
             z_grid = _zb2.ravel()
@@ -1804,6 +2389,90 @@ def construir(X, Y, Z, sec, Wd, nx, ny, paso, L, curvas, pit_pts, loews_centro,
         checks['paseo_celdas_rebajadas'] += int((paseo & (z_grid > _zbm - 0.25 + 0.01)).sum())
         z_grid = np.where(paseo, np.minimum(z_grid, _zbm - 0.25), z_grid)
     checks['miradores'] = mir_ok
+    # --- F1 r4: CUPULA de la isla de la cima (ver cabecera CUPULA_*). Se IMPONE dentro de la isla (rellena y rebaja); fuera nada ---
+    _isla56 = np.zeros(ncel, bool)
+    _P56 = []; _ceil56 = None; _ceil_raw = None; _w56 = np.zeros(ncel); _wdome56 = np.zeros(ncel); _wroca56 = np.zeros(ncel)
+    if CUPULA_DS > 0.0 and _dirt_s.any():
+        _s56 = np.arange(N) * paso
+        _en56 = (_s56 >= TIERRA_S[0]) & (_s56 <= TIERRA_S[1])
+        _ia56 = int(np.where(_en56)[0][np.argmax(Z[_en56])])                  # apex = cota maxima de la tierra (s 1864)
+        _sa56 = _ia56 * paso
+        _j056 = max(0, int((_sa56 - CUPULA_DS) / paso)); _j156 = min(N - 1, int((_sa56 + CUPULA_DS) / paso))
+        _P56 = [(float(X[k]), float(Y[k])) for k in range(_j056, _j156 + 1)]
+        _isla56 = en_poligono(gpts[:, 0], gpts[:, 1], _P56) & tierra
+        # techo por celda en la isla dilatada 3 celdas (para suavizar con apoyo fuera de la isla)
+        _dil56 = binary_dilation(_isla56.reshape(nyg, nxg), iterations=3).ravel() & tierra
+        _ci = np.where(_dil56)[0]
+        _js = np.arange(max(0, _j056 - 3), min(N, _j156 + 4))
+        _dx = gpts[_ci, 0][:, None] - X[_js][None, :]; _dy = gpts[_ci, 1][:, None] - Y[_js][None, :]
+        _dist = np.hypot(_dx, _dy)
+        _dd = _dist - Wd[_js][None, :] / 2.0
+        _lon = np.abs(_dx * ny[_js][None, :] - _dy * nx[_js][None, :])
+        _baja = (_js < _ia56)[None, :]                                        # rama que sube a la cima (la baja): pared
+        _nB = 1.0 + CUPULA_RUIDO[0] * ruido_valor(np.random.default_rng(seed + 113), nyg, nxg, cell, 50.0).ravel()[_ci][:, None]
+        _nC = 1.0 + CUPULA_RUIDO[1] * ruido_valor(np.random.default_rng(seed + 127), nyg, nxg, cell, 50.0).ravel()[_ci][:, None]
+        _q = np.maximum(_dd - 4.5, 0.0)
+        _prof_b = CUPULA_BASE_B + CUPULA_PEND_B * _nB * np.where(_q < CUPULA_T_B, _q * _q / (2.0 * CUPULA_T_B), _q - 0.5 * CUPULA_T_B)
+        _hC = CUPULA_H_C * _nC; _LC = CUPULA_L_C * _nC
+        _u = np.clip(_q / _LC, 0.0, 1.0)
+        _prof_c = _hC * (1.0 - (1.0 - _u) ** CUPULA_P_C)                       # convexa (p 1.5): pendiente al pie p H/L, 0 en la cumbre
+        _vale = _lon < CUPULA_LON_M
+        _famB = np.where(_vale & _baja, Z[_js][None, :] - 0.5 + _prof_b, 1e9).min(1)
+        _famC = np.where(_vale & ~_baja, Z[_js][None, :] - 0.5 + _prof_c, 1e9).min(1)
+
+        def _smin(a_, b_, k_):
+            return np.minimum(a_, b_) - k_ * np.log1p(np.exp(-np.abs(a_ - b_) / k_))
+        _T = _smin(_famB, _famC, CUPULA_K_CRESTA)                              # cresta redondeada entre las dos familias
+        # coordenada a lo largo de la isla: m de s desde el apex (media de la muestra mas cercana de cada rama)
+        _sB = _js[np.argmin(np.where(_baja, _dist, 1e9), 1)] * paso
+        _sC = _js[np.argmin(np.where(~_baja, _dist, 1e9), 1)] * paso
+        _t56 = 0.5 * ((_sa56 - _sB) + (_sC - _sa56))
+        _zcap = Z[_ia56] + CUPULA_NARIZ_DZ + CUPULA_NARIZ_PEND * np.maximum(_t56 - (CUPULA_S_NARIZ - _sa56), 0.0)
+        _T = _smin(_T, _zcap, CUPULA_K_CRESTA)                                # nariz por debajo del ojo de la camara 56
+        # F1 r4b: LOMA SUR = terreno de r3 (ver cabecera CUPULA_SUR_T): a mas de CUPULA_SUR_T[1] m del apex (por la isla) el techo es el
+        # terreno de antes (pared de 63 grados de la rama baja con su roca, la de la toma 51; flanco de la rama alta), con transicion
+        # desde CUPULA_SUR_T[0]; solo lo acota la linea de vista de 56 (abajo)
+        # La loma sur la acota la LINEA DE VISTA de 56: su cresta no sube desde el ojo (apex + CUPULA_VIS_DZ) mas de CUPULA_VIS_GRADOS
+        # (<= 0: queda por debajo de la cumbre de la cupula y no asoma detras como un segundo pico ni como arista contra el cielo);
+        # smooth-min de radio CUPULA_K_VIS: la cresta recortada es redondeada
+        _tS = np.clip((_t56 - CUPULA_SUR_T[0]) / (CUPULA_SUR_T[1] - CUPULA_SUR_T[0]), 0.0, 1.0)
+        _wsur = _tS * _tS * (3.0 - 2.0 * _tS)
+        _dap = np.hypot(gpts[_ci, 0] - X[_ia56], gpts[_ci, 1] - Y[_ia56])
+        _zvis = Z[_ia56] + CUPULA_VIS_DZ + _dap * math.tan(math.radians(CUPULA_VIS_GRADOS))
+        _Tsur = _smin(z_grid[_ci], _zvis, CUPULA_K_VIS)
+        _T = np.where(_T < 1e8, _T + (_Tsur - _T) * _wsur, np.where(_wsur > 0.999, _Tsur, 1e9))
+        _ceil_raw = np.full(ncel, np.nan); _ceil_raw[_ci] = np.where(_T < 1e8, _T, np.nan)
+        _c2 = _ceil_raw.reshape(nyg, nxg)
+        _ok2 = np.isfinite(_c2)
+        _c2f = np.where(_ok2, _c2, 0.0)
+        _num = gaussian_filter(_c2f, CUPULA_SUAVE_M / cell); _den = gaussian_filter(_ok2.astype(float), CUPULA_SUAVE_M / cell)
+        _ceil56 = np.where(_den > 1e-3, _num / np.maximum(_den, 1e-3), np.nan).ravel()
+        # pesos: corredor (4.5 -> 6 m del borde, smoothstep) x fundido en el extremo sur de cada media rama x isla
+        _te = np.clip((dedge0 - CUPULA_D_MIN[0]) / (CUPULA_D_MIN[1] - CUPULA_D_MIN[0]), 0.0, 1.0)
+        _ws = np.zeros(ncel)
+        _fB = np.clip((_sB - (_sa56 - CUPULA_DS)) / CUPULA_FUNDIDO_S, 0.0, 1.0)
+        _fC = np.clip(((_sa56 + CUPULA_DS) - _sC) / CUPULA_FUNDIDO_S, 0.0, 1.0)
+        _ws[_ci] = (_fB * _fB * (3.0 - 2.0 * _fB)) * (_fC * _fC * (3.0 - 2.0 * _fC))
+        _w56 = (_te * _te * (3.0 - 2.0 * _te)) * _ws * _isla56 * np.isfinite(_ceil56)
+        _z56 = np.where(_w56 > 0.0, z_grid + (np.nan_to_num(_ceil56) - z_grid) * _w56, z_grid)
+        # r4b: peso de CUPULA propiamente dicha (sin la loma sur de r3): ahi no hay costillas; y peso SIN ROCA ('tierra' de corte
+        # tampoco) = cupula salvo el flanco de la rama baja con s <= CUPULA_ROCA_B_S (43 grados, mira al O: cara trasera para 56 y
+        # roca al fondo de la recta de 51); la nariz (s de la rama baja > CUPULA_ROCA_B_S[1], mira al N, a la camara 56) sin roca
+        _dB = np.where(_baja, _dd, 1e9).min(1); _dC = np.where(~_baja, _dd, 1e9).min(1)
+        _tL = np.clip(0.5 + (_dC - _dB) / CUPULA_LADO_M, 0.0, 1.0)
+        _tR = np.clip((CUPULA_ROCA_B_S[1] - _sB) / (CUPULA_ROCA_B_S[1] - CUPULA_ROCA_B_S[0]), 0.0, 1.0)
+        _wdome56[_ci] = 1.0 - _wsur
+        _wdome56 = _wdome56 * _w56
+        _wroca56[_ci] = (1.0 - _wsur) * (1.0 - (_tL * _tL * (3.0 - 2.0 * _tL)) * (_tR * _tR * (3.0 - 2.0 * _tR)))
+        _wroca56 = _wroca56 * _w56
+        checks['cupula'] = {'apex_s': int(_sa56), 'celdas_isla': int(_isla56.sum()), 'celdas_rebajadas': int((_z56 < z_grid - 0.05).sum()),
+                            'celdas_loma_sur_r3': int(((_w56 > 0.3) & (_wdome56 <= 0.3)).sum()), 'celdas_cupula': int((_wdome56 > 0.3).sum()),
+                            'celdas_sin_roca': int((_wroca56 > 0.3).sum()),
+                            'celdas_rellenadas': int((_z56 > z_grid + 0.05).sum()),
+                            'rebaje_max_m': round(float((z_grid - _z56).max()), 1), 'relleno_max_m': round(float((_z56 - z_grid).max()), 1),
+                            'cumbre_z_antes': round(float(z_grid[_isla56].max()), 1),
+                            'cumbre_z': round(float(_z56[_isla56].max()), 1), 'z_apex_pista': round(float(Z[_ia56]), 1)}
+        z_grid = _z56
     # v2 (revision B2-09/C2-11/E2-07 (3)/F2-01 (3)/A-r2-07): las caras de desmonte eran planos perfectos (pendiente constante
     # paralela a la pista: 'losa gris', 'corte recto'). COSTILLAS de erosion: ruido ridged de 24/12 m RESTADO (solo baja,
     # hasta 2 m) en las caras de corte real (terreno natural > 1-4 m por encima), a > 8 m del borde del asfalto (fundido en
@@ -1811,16 +2480,36 @@ def construir(X, Y, Z, sec, Wd, nx, ny, paso, L, curvas, pit_pts, loews_centro,
     # el corredor de la pista no cambia
     _pz0 = _pendiente(z_grid.reshape(nyg, nxg), cell).ravel()
     _rid_e = ruido_ridged(np.random.default_rng(seed + 41), nyg, nxg, cell, octavas=((24.0, 1.0), (12.0, 0.5))).ravel()
-    _we = (np.clip((dedge0 - 8.0) / 6.0, 0.0, 1.0) * np.clip((z_land - z_grid - 1.0) / 3.0, 0.0, 1.0)
+    # F1 r2: tambien en la CARA del lomo de la tierra tallada (relleno de > 2 m sobre el natural, solo en 'dirt' y a < 20 m del
+    # borde: la cresta, donde se mide el KPI de 25 m, no se toca): sin esto las dos caras del lomo eran planos perfectos
+    # ('piramide facetada' en la postal 56)
+    _we_fill = np.clip((z_grid - z_land - 2.0) / 3.0, 0.0, 1.0) * np.clip((20.0 - dedge0) / 5.0, 0.0, 1.0) * _dirt_s[g_near]
+    _we = (np.clip((dedge0 - 8.0) / 6.0, 0.0, 1.0) * np.maximum(np.clip((z_land - z_grid - 1.0) / 3.0, 0.0, 1.0), _we_fill)
            * np.clip((_pz0 - 0.5) / 0.3, 0.0, 1.0))
-    _no_e = terr_mask | mir_cut | _lungo | (d_loews < R_LOEWS_CONG[1] + 10.0) | (d_bri < 30.0) | ~tierra
+    # (F1 r4: ni en la CUPULA de la isla de la cima: no lleva costillas; en r3 las costillas ridged de 24/12 m hacian serpentear la
+    # frontera roca/hierba por el flanco y cada cruce daba un diente por cara de 4 m en la postal 56. r4b: la pared sur de la rama
+    # baja (la loma sur, CUPULA_SUR_T: la pared de la toma 51) SI las conserva, como en r3)
+    _no_e = terr_mask | mir_cut | _lungo | (d_loews < R_LOEWS_CONG[1] + 10.0) | (d_bri < 30.0) | ~tierra | (_wdome56 > 0.3)
     if pit_pts:
         _no_e |= caja & (dpe < dpe0 + 3.0)
     if el_casino is not None:
         _no_e |= r_cas < 1.1
     _we = np.where(_no_e, 0.0, _we)
     checks['costillas_celdas'] = int((_we * _rid_e > 0.25).sum())
-    z_grid = z_grid - 2.0 * _we * _rid_e
+    checks['costillas_relleno_celdas'] = int(((_we_fill > 0.5) & (_we * _rid_e > 0.25)).sum())   # r2: en las caras del lomo de la tierra
+    # F1 (bloque 1.2): tope 2 m -> COSTILLA_TOPE[1] (4 m) en las caras de corte de > 20 m (fundido hasta 35 m) con pendiente > 0.8;
+    # a < 60 m de una terraza, solo a > 10 m sobre el patio mas cercano (con 4 m al pie de la cara se abrian pozos de 2 m
+    # en la QA de fosos: agua atrapada > 1.5 m en pueblo_subida/alto_ladera)
+    _f_alt_e = np.ones(ncel)
+    if terr_mask.any():
+        _edt_t, _idx_t = distance_transform_edt(~terr_mask.reshape(nyg, nxg), return_indices=True)
+        _z_patio = z_grid.reshape(nyg, nxg)[_idx_t[0], _idx_t[1]].ravel()
+        _f_alt_e = np.where(_edt_t.ravel() * cell < 60.0, np.clip((z_grid - _z_patio - 10.0) / 8.0, 0.0, 1.0), 1.0)
+    # (y 2 m como antes en la huella del McLaren + 30 m (r2: _w_mcl_f1, fundido a 45): el encaje del coche no cambia ni 1 cm)
+    _amp_e = COSTILLA_TOPE[0] + (COSTILLA_TOPE[1] - COSTILLA_TOPE[0]) * (np.clip((z_land - z_grid - 20.0) / 15.0, 0.0, 1.0)
+                                                                        * np.clip((_pz0 - 0.8) / 0.2, 0.0, 1.0) * _f_alt_e * _w_mcl_f1)
+    checks['costillas_celdas_gt_2m'] = int((_amp_e * _we * _rid_e > 2.0).sum())
+    z_grid = z_grid - _amp_e * _we * _rid_e
     # v3 (revision H2 (3)/H3): la cara de la muralla del canal (y del lobulo SO) era un plano al 300 % con estrias regulares
     # de la rejilla: costillas ridged de 30/15 m RESTADAS (solo baja, hasta 4 m) en las caras de acantilado de tierra con
     # z > 8, a 28-120 m del viaducto, a > 25 m del asfalto y fuera de terrazas (+16 m), penon, Loews, mirador y pit
@@ -1920,9 +2609,7 @@ def construir(X, Y, Z, sec, Wd, nx, ny, paso, L, curvas, pit_pts, loews_centro,
     # techo de la rama que baja (min de los dos ramales; con el techo C1 aun mas bajo): queda 0.6-1.5 m bajo el borde del
     # asfalto (astilla gris, pliegue del arcen). Suelo = cota del borde interior - 0.6 a < 8 m del borde (nunca en la Loews;
     # la garantia de hierba de debajo baja lo que asome)
-    _tx = ny; _ty = -nx
-    _hd = np.unwrap(np.arctan2(_ty, _tx))
-    _kap = gaussian_filter1d(np.gradient(_hd) / paso, 2.0, mode='wrap')
+    # (_kap, la curvatura con signo, se calcula arriba, antes de las reglas de pista: F1 tierra tallada)
     _per = np.zeros(N) if peralte is None else peralte
     _sgi = np.sign(_kap[g_near])
     _isla = (tierra & (1.0 / np.maximum(np.abs(_kap[g_near]), 1e-6) < 15.0) & (np.sign(_lat0) == _sgi) & (dedge0 > 0.0)
@@ -2258,11 +2945,14 @@ def construir(X, Y, Z, sec, Wd, nx, ny, paso, L, curvas, pit_pts, loews_centro,
     # 'camuflaje'). Ahi la roca sale de la pendiente SUAVIZADA (2.5 celdas) > 1.0 + 0.1*ruido, con apertura 3x3 y sin manchas
     # de menos de 12 celdas: solo afloramientos grandes y continuos. Acantilados de costa y cumbres > 185 m, como en v1
     _acg = acantilado.reshape(nyg, nxg)
-    _nat_r = (gaussian_filter(pendiente, 2.5) > 1.0 + 0.1 * _nr) & ~_acg & ~_dsm
+    # F1 (bloque 2.2): umbral natural 1.0 +- 0.1 -> ROCA_UMBRAL_PEND +- ROCA_UMBRAL_RUIDO (34-39 grados; plan: roca a partir de
+    # 35-40 grados), suavizado ROCA_SIGMA_CELDAS, misma apertura 3x3 y tamano minimo ROCA_MIN_CELDAS (sin 'camuflaje')
+    _pend_s = gaussian_filter(pendiente, ROCA_SIGMA_M / cell)
+    _nat_r = (_pend_s > ROCA_UMBRAL_PEND + ROCA_UMBRAL_RUIDO * _nr) & ~_acg & ~_dsm
     _nat_r = binary_opening(_nat_r, structure=np.ones((3, 3), bool))
     _lab_r, _n_r = _label(_nat_r)
     if _n_r:
-        _tam_r = np.bincount(_lab_r.ravel()); _peq = _tam_r < 12; _peq[0] = False
+        _tam_r = np.bincount(_lab_r.ravel()); _peq = _tam_r < ROCA_MIN_CELDAS; _peq[0] = False
         _nat_r &= ~_peq[_lab_r]
     roca = ((_nat_r | ((pendiente > 0.85 + 0.1 * _nr) & _acg) | ((zg > 185.0) & (pendiente > 0.5))) & ~_dsm).astype(float)
     # v3 (revision H3): en la arista de los acantilados (pendiente > 1.5 a < 8 m) el limite hierba/roca colgaba en triangulos
@@ -2270,7 +2960,7 @@ def construir(X, Y, Z, sec, Wd, nx, ny, paso, L, curvas, pit_pts, loews_centro,
     _cerca_ar = binary_dilation(pendiente > 1.5, iterations=2)
     roca = np.clip((np.where(_cerca_ar, gaussian_filter(roca, 2.0), gaussian_filter(roca, 1.0)) - 0.2) / 0.4, 0.0, 1.0)
     _corte = (np.clip((z_land.reshape(nyg, nxg) - zg - 1.0) / 3.0, 0.0, 1.0)
-              * np.clip((pendiente - (0.75 + 0.1 * _nr)) / 0.3, 0.0, 1.0) * _dsm)
+              * np.clip((pendiente - (ROCA_CORTE_PEND + 0.1 * _nr)) / 0.3, 0.0, 1.0) * _dsm)
     roca = np.maximum(roca, np.clip(gaussian_filter(_corte, 1.5) * 1.25, 0.0, 1.0))
     # (la mascara v2, para dejar EXACTAMENTE como estaba el material de la rotonda Loews: a < R_LOEWS_INTACTA de su centro)
     _roca_v2 = (((pendiente > 0.85 + 0.1 * _nr) | ((zg > 185.0) & (pendiente > 0.5))) & ~_dsm).astype(float)
@@ -2294,9 +2984,65 @@ def construir(X, Y, Z, sec, Wd, nx, ny, paso, L, curvas, pit_pts, loews_centro,
             & (d_bri.reshape(nyg, nxg) < 60.0) & (d_loews.reshape(nyg, nxg) > R_LOEWS_CONG[1]))
     checks['garganta_escalon_roca_celdas'] = int(_g10.sum())
     roca[_g10] = 1.0
+    # F1 (bloque 2.2): PIE DE DERRUBIOS: banda de ROCA_PIE_M[0]..[1] m ladera ABAJO de cada afloramiento (celdas de tierra a
+    # < 10 m de roca > 0.5 que estan por debajo de esa roca y no son roca) a ROCA_PIE_VALOR en la mascara (y 'tierra' en las capas)
+    _r_alta = roca > 0.5
+    _n_pie = int(round(ROCA_PIE_M[1] / cell))
+    _zr = np.where(_r_alta, zg, -1e9)
+    _zr_max = maximum_filter(_zr, size=2 * _n_pie + 1)
+    _pie_d = ~_r_alta & ~_mar2 & (_zr_max > -1e8) & (zg < _zr_max - 1.0) & (roca < ROCA_PIE_VALOR) & ~_lungo.reshape(nyg, nxg)
+    checks['roca_pie_derrubios_celdas'] = int(_pie_d.sum())
+    roca = np.where(_pie_d, ROCA_PIE_VALOR, roca)
     _lo2 = (d_loews < R_LOEWS_INTACTA).reshape(nyg, nxg)
     roca = np.where(_lo2, _roca_v2, roca)
+    # F1 r4: la isla de la cima (cupula) no lleva roca: sin frontera de material sobre el flanco no hay dientes por cara (postal 56)
+    # (la isla con techo impuesto, sin el anillo de fundido del extremo sur; r4b: y sin la pared sur de la rama baja, que es la de r3
+    # con su roca: la ve la toma 51 a la derecha y desde 56 es cara trasera)
+    _isla56_2 = (_wroca56 > 0.3).reshape(nyg, nxg)
+    checks['cupula_roca_quitada_celdas'] = int((_isla56_2 & (roca > 0.49)).sum())
+    roca = np.where(_isla56_2, 0.0, roca)
     cumbres = _cumbres(zg, GX, GY, cell)
+    # F1 (bloque 1.6): CAPAS para la mascara por texel (R matorral, G hierba seca, B tierra, A roca), 0..1 y suma 1 por celda.
+    # roca = mascara_roca o pendiente suavizada > umbral; tierra = pie de derrubios, bermas de la tierra (< 8 m del borde en
+    # 'dirt'), caras de corte someras (cortes < umbral de roca) y la orilla (playa < 8 m, z < 3); hierba seca = llanos
+    # (pendiente < CAPAS_LLANO_PEND) a < CAPAS_HIERBA_D_PISTA de la pista y z < CAPAS_HIERBA_Z, terrazas del pueblo y la vega
+    # baja (z < 25); matorral = el resto (laderas, macizo, cumbres). Bordes con ruido de CAPAS_RUIDO_M (nunca por celda)
+    _nc2 = ruido_valor(np.random.default_rng(seed + 83), nyg, nxg, cell, CAPAS_RUIDO_M)
+    _nc3 = ruido_valor(np.random.default_rng(seed + 89), nyg, nxg, cell, 3.0 * CAPAS_RUIDO_M)
+    _d_pista = d_land.reshape(nyg, nxg); _dedge2 = dedge0.reshape(nyg, nxg)
+    # F1 r4: con CAPAS_PIE_FUERA_DE_A el PIE DE DERRUBIOS (mascara_roca = ROCA_PIE_VALOR 0.5) no entra en el canal A (r4b: apagado,
+    # ver la constante). Nunca roca en la cupula de la isla de la cima (_isla56_2)
+    _cap_roca = np.maximum(np.where((_pie_d & CAPAS_PIE_FUERA_DE_A) | _isla56_2, 0.0, roca),
+                           np.clip((_pend_s - (ROCA_UMBRAL_PEND + ROCA_UMBRAL_RUIDO * _nr)) / 0.12, 0.0, 1.0) * ~_mar2 * ~_isla56_2)
+    _cap_roca = np.clip(_cap_roca, 0.0, 1.0)
+    _dirt_c = _dirt_s[g_near].reshape(nyg, nxg)
+    _berma_t = _dirt_c & (_dedge2 < CAPAS_DIRT_BORDE_M) & ~_mar2
+    # F1 r2 (director r1, toma 36: la ladera del penon partida en dos tonos con frontera dura en la cresta): el corte somero (canal B)
+    # ya no es un booleano (_dsm & pendiente > 0.35) sino un peso continuo con ruido de 10-30 m en la pendiente (+-0.08) y en la
+    # profundidad del corte (umbral 0.5-2.5 m): la frontera dorado/tierra serpentea y se funde en 2-3 celdas
+    _nc4 = ruido_valor(np.random.default_rng(seed + 107), nyg, nxg, cell, 0.75 * CAPAS_RUIDO_M)
+    _prof_corte = (z_land.reshape(nyg, nxg) - zg)
+    _corte_suave = (np.clip((pendiente - (0.35 + 0.08 * _nc4)) / 0.15, 0.0, 1.0)
+                    * np.clip((_prof_corte - (1.5 + 1.0 * _nc4)) / 1.5, 0.0, 1.0) * np.clip((0.5 - _cap_roca) / 0.3, 0.0, 1.0)
+                    * ~_isla56_2)        # F1 r4: la cupula de la cima es hierba seca/matorral, no 'tierra' de corte
+    _playa = (~_mar2 & (_sdf.reshape(nyg, nxg) < 8.0) & (zg < 3.0))
+    _cap_tierra = np.clip(np.maximum.reduce([np.where(_pie_d, 0.85, 0.0), np.where(_berma_t, 0.9, 0.0),
+                                             0.6 * _corte_suave, np.where(_playa, 0.7, 0.0)])
+                          + 0.15 * _nc2, 0.0, 1.0) * (1.0 - _cap_roca)
+    _w_llano = np.clip((CAPAS_LLANO_PEND + 0.1 + 0.08 * _nc3 - _pend_s) / 0.2, 0.0, 1.0)
+    _w_cerca = np.clip((CAPAS_HIERBA_D_PISTA + 20.0 + 15.0 * _nc3 - _d_pista) / 40.0, 0.0, 1.0)
+    _w_bajo = np.clip((CAPAS_HIERBA_Z + 15.0 + 10.0 * _nc3 - zg) / 30.0, 0.0, 1.0)
+    _w_vega = np.clip((25.0 - zg) / 15.0, 0.0, 1.0) * _w_llano
+    _w_alto = np.clip((CAPAS_MATORRAL_Z - zg) / 30.0, 0.0, 1.0)
+    _cap_hierba = np.clip(np.maximum.reduce([_w_llano * _w_cerca * _w_bajo, _w_vega * 0.8,
+                                             terr_mask.reshape(nyg, nxg).astype(float)]) + 0.1 * _nc2, 0.0, 1.0)
+    _cap_hierba = _cap_hierba * _w_alto * (1.0 - _cap_roca) * (1.0 - _cap_tierra)
+    _cap_mat = np.clip(1.0 - _cap_roca - _cap_tierra - _cap_hierba, 0.0, 1.0)
+    _suma = np.maximum(_cap_roca + _cap_tierra + _cap_hierba + _cap_mat, 1e-6)
+    capas = {'matorral': (_cap_mat / _suma).ravel(), 'hierba_seca': (_cap_hierba / _suma).ravel(),
+             'tierra': (_cap_tierra / _suma).ravel(), 'roca': (_cap_roca / _suma).ravel()}
+    _tierra_c = (~_mar2 & (zg > 0.5))
+    checks['capas_media_pct'] = {k: round(100.0 * float(v.reshape(nyg, nxg)[_tierra_c].mean()), 1) for k, v in capas.items()}
 
     # --- verificaciones ---
     def z_en(xq, yq):
@@ -2306,6 +3052,21 @@ def construir(X, Y, Z, sec, Wd, nx, ny, paso, L, curvas, pit_pts, loews_centro,
     zm = z_en(X[li] - nx[li] * (Wd[li] / 2 + 25.0), Y[li] - ny[li] * (Wd[li] / 2 + 25.0))
     pared = (zp > Z[li] + 8.0) | (zm > Z[li] + 8.0)
     checks['pct_pista_con_pared_roca'] = round(100.0 * float(pared.mean()), 1)
+    # F1 (bloque 1.1/2.2): KPIs del tramo de tierra y de la roca por pendiente (los mide tambien _rev/medir_relieve.py)
+    _en_tierra = (s_land >= TIERRA_S[0]) & (s_land <= TIERRA_S[1])
+    zp50 = z_en(X[li] + nx[li] * (Wd[li] / 2 + 50.0), Y[li] + ny[li] * (Wd[li] / 2 + 50.0))
+    zm50 = z_en(X[li] - nx[li] * (Wd[li] / 2 + 50.0), Y[li] - ny[li] * (Wd[li] / 2 + 50.0))
+    _pyc25 = ((zp > Z[li] + 8.0) & (zm < Z[li] - 8.0)) | ((zm > Z[li] + 8.0) & (zp < Z[li] - 8.0))
+    _pyc50 = ((zp50 > Z[li] + 8.0) & (zm50 < Z[li] - 8.0)) | ((zm50 > Z[li] + 8.0) & (zp50 < Z[li] - 8.0))
+    if _en_tierra.any():
+        checks['pared_y_caida_25m_pct'] = round(100.0 * float(_pyc25[_en_tierra].mean()), 1)
+        checks['pared_y_caida_50m_pct'] = round(100.0 * float(_pyc50[_en_tierra].mean()), 1)
+        checks['pct_pista_con_pared_roca_tierra'] = round(100.0 * float(pared[_en_tierra].mean()), 1)
+        checks['caida_25m_pct_tierra'] = round(100.0 * float(((zp < Z[li] - 8.0) | (zm < Z[li] - 8.0))[_en_tierra].mean()), 1)
+    _t35 = _tierra_c & (pendiente > 0.70)
+    checks['celdas_35_roca_pct'] = round(100.0 * float((roca[_t35] > 0.49).mean()), 1) if _t35.any() else 0.0
+    checks['celdas_35_pct_tierra'] = round(100.0 * float(_t35.sum() / max(int(_tierra_c.sum()), 1)), 1)
+    checks['erosion_corredor_dz_max'] = 0.0          # la erosion hidraulica es F4 (erosion.py): hoy no mueve nada
     en_terr = np.zeros(len(li), bool)
     for sc in spec_urb.get('sectores', []):
         en_terr |= (s_land >= float(sc['s0']) - 10) & (s_land <= float(sc['s1']) + 10)
@@ -2403,6 +3164,28 @@ def construir(X, Y, Z, sec, Wd, nx, ny, paso, L, curvas, pit_pts, loews_centro,
           'fuera de los sectores de terrazas %.1f%%)'
           % (checks['pct_pista_con_pared_roca'], checks['pct_pared_lado_mas1'], checks['pct_pared_lado_menos1'],
              checks['pct_pared_fuera_terrazas']))
+    print('  F1 tierra tallada (s %.0f-%.0f): pared Y caida a 25 m %.1f%% (a 50 m %.1f%%), pared en algun lado %.1f%%, caida en algun '
+          'lado %.1f%%; muestras con lado alto definido %d (lado +1 en %.0f%%); celdas levantadas (ladera) %d (max %.1f m), '
+          'rebajadas (caida) %d (max %.1f m), lomo minimo %d celdas, costillas en la cara del lomo %d celdas | roca: %.1f%% de las '
+          'celdas de tierra > 35 grados (%.1f%% de la tierra) llevan roca; pie de derrubios %d celdas | capas (media %% en tierra): %s'
+          % (TIERRA_S[0], TIERRA_S[1], checks.get('pared_y_caida_25m_pct', 0.0), checks.get('pared_y_caida_50m_pct', 0.0),
+             checks.get('pct_pista_con_pared_roca_tierra', 0.0), checks.get('caida_25m_pct_tierra', 0.0),
+             checks['tierra_tallada_muestras'], checks['tierra_tallada_lado_mas1_pct'], checks['tierra_tallada_celdas_ladera'],
+             checks['tierra_tallada_ladera_max_m'], checks['tierra_tallada_celdas_caida'], checks['tierra_tallada_caida_max_m'],
+             checks.get('tierra_tallada_celdas_lomo_minimo', 0), checks.get('costillas_relleno_celdas', 0),
+             checks['celdas_35_roca_pct'], checks['celdas_35_pct_tierra'], checks['roca_pie_derrubios_celdas'],
+             checks['capas_media_pct']))
+    if checks.get('cupula'):
+        _cu = checks['cupula']
+        _pi56 = pendiente[_isla56_2 & (dedge0.reshape(nyg, nxg) > 6.0)]
+        print('  F1 r4 cupula de la cima (apex s %d, rasante %.1f): isla %d celdas, rebajadas %d (max %.1f m), rellenadas %d (max %.1f m), '
+              'cumbre %.1f -> %.1f m; pendiente en la isla max %.2f, > 30 grados %.0f%%, > 42 grados %.0f%%, > 45 grados %.0f%%; '
+              'roca quitada en la isla %d celdas | r4b: cupula %d celdas, loma sur = r3 %d, sin roca %d'
+              % (_cu['apex_s'], _cu['z_apex_pista'], _cu['celdas_isla'], _cu['celdas_rebajadas'], _cu['rebaje_max_m'], _cu['celdas_rellenadas'],
+                 _cu['relleno_max_m'], _cu['cumbre_z_antes'], _cu['cumbre_z'], float(_pi56.max()) if _pi56.size else 0.0,
+                 100.0 * float((_pi56 > 0.577).mean()) if _pi56.size else 0.0, 100.0 * float((_pi56 > 0.90).mean()) if _pi56.size else 0.0,
+                 100.0 * float((_pi56 > 1.0).mean()) if _pi56.size else 0.0, checks['cupula_roca_quitada_celdas'],
+                 _cu.get('celdas_cupula', 0), _cu.get('celdas_loma_sur_r3', 0), _cu.get('celdas_sin_roca', 0)))
     print('  pendiente max: %.2f (natural lejos de pista/costa: max %.2f en %s, p95 %.2f, %.0f%% entre 25 y 60%%, %.2f%% > 100%%; '
           'macizo z>40: mediana %.2f, %.0f%% en 60-100%%, %.2f%% > 100%%) | limitador: %d it, rebaje max %.1f m'
           % (checks['pendiente_max'], checks['pendiente_max_natural'], checks.get('pendiente_max_natural_xy'), checks['pendiente_p95_natural'],
@@ -2436,7 +3219,18 @@ def construir(X, Y, Z, sec, Wd, nx, ny, paso, L, curvas, pit_pts, loews_centro,
                        'acantilado': acantilado, 'desmonte': desmonte, 'obra': obra, 'techo': techo, 'suelo': suelo,
                        'costuras_dz': dz_map.ravel(), 'talud_ramas_dz': tal_map.ravel(), 'terrazas_k': terr_k, 'terrazas_sec': terr_sec,
                        'terrazas_rampa': terr_rampa, 'terrazas_mix': terr_mix, 'casino': checks.get('casino'),
-                       'casino_elipse': el_casino, 'zona_coche': zona_coche})
+                       'casino_elipse': el_casino, 'zona_coche': zona_coche,
+                       # F1: capas de la mascara por texel (preparar_geometria las escribe en geometria_3d.json), terreno
+                       # natural antes de las reglas de pista y pendiente final (QA y medir_relieve)
+                       'capas': capas, 'z_land': z_land, 'pendiente': pendiente.ravel(), 'umbrales_roca': umbrales_roca(),
+                       # F1 r4: poligono (x, y) de la isla de la cima (cupula) para 'mascara' (sin roca dura ahi) y medir_relieve
+                       'cupula_isla': _P56, 'cupula_mascara': _isla56, 'cupula_techo': _ceil56, 'cupula_techo_raw': _ceil_raw,
+                       'cupula_peso_domo': _wdome56, 'cupula_peso_sin_roca': _wroca56,
+                       'tierra_raise': raise_max, 'tierra_lower': lower_max, 'tierra_w_lado': w_lado, 'tierra_caida_ok': _caida_ok,
+                       'tierra_raise_who': raise_who, 'tierra_lower_who': lower_who, 'tierra_caida_libre': _caida_libre,
+                       'tierra_h_lomo': _h_lomo, 'tierra_h_lomo_min': _h_lomo_min, 'tierra_horq': _horq, 'tierra_add_min': _add_min,
+                       'fac_valle': fac_valle, 'fac_sect': fac_sect,
+                       'z_gen': z_gen})
     if qa_dir:
         try:
             qa_figuras(res, X, Y, Z, sec, Wd, nx, ny, paso, pit_pts, spec_urb, qa_dir)
@@ -2525,6 +3319,34 @@ def qa_figuras(res, X, Y, Z, sec, Wd, nx, ny, paso, pit_pts, spec_urb, qa_dir):
     plt.tight_layout()
     fig.savefig(os.path.join(qa_dir, 'terreno_hillshade.png'), dpi=110)
     plt.close(fig)
+    # --- F1 (bloque 1.6): capas de la mascara por texel (matorral oliva, hierba seca dorada, tierra ocre, roca gris calido) ---
+    capas = res['extras'].get('capas')
+    if capas is not None:
+        from matplotlib.colors import LightSource
+        from matplotlib.patches import Patch
+        cols_c = {'matorral': (0.33, 0.40, 0.20), 'hierba_seca': (0.80, 0.68, 0.36), 'tierra': (0.52, 0.38, 0.24), 'roca': (0.60, 0.57, 0.50)}
+        rgb_c = np.zeros((nyg, nxg, 3))
+        for k_, col_ in cols_c.items():
+            rgb_c += np.asarray(capas[k_]).reshape(nyg, nxg)[:, :, None] * np.array(col_)[None, None, :]
+        inten = LightSource(azdeg=315, altdeg=42).hillshade(np.where(mar, -2.0, zg), vert_exag=1.0, dx=cell, dy=cell)
+        rgb_c = np.clip(rgb_c * (0.45 + 0.75 * inten[:, :, None]), 0.0, 1.0)
+        rgb_c[mar] = [0.16, 0.36, 0.62]
+        fig, ax = plt.subplots(figsize=(13.0, 13.0 * (ext[3] - ext[2]) / (ext[1] - ext[0])))
+        ax.imshow(rgb_c, origin='lower', extent=ext, interpolation='nearest')
+        ax.contour(gx, gy, coastF, levels=[0.5], colors='#08306b', linewidths=1.0)
+        ax.plot(np.where(land, X, np.nan), np.where(land, Y, np.nan), 'k-', lw=1.4)
+        for s_m in range(0, int(len(X) * paso), 200):
+            i = int(s_m / paso) % len(X)
+            ax.text(X[i], Y[i], str(s_m), fontsize=5.5, color='#ffff99', ha='center', va='center')
+        med = res['extras'].get('checks', {}).get('capas_media_pct', {})
+        ax.legend(handles=[Patch(color=c_, label='%s (%.0f %%)' % (k_, med.get(k_, 0.0))) for k_, c_ in cols_c.items()],
+                  loc='lower left', fontsize=8)
+        ax.set_aspect('equal'); ax.tick_params(labelsize=7)
+        ax.set_title('Capas de la mascara por texel (extras[capas]): R matorral, G hierba seca, B tierra, A roca; umbral de roca %.2f +- %.2f'
+                     % (ROCA_UMBRAL_PEND, ROCA_UMBRAL_RUIDO), fontsize=9)
+        plt.tight_layout()
+        fig.savefig(os.path.join(qa_dir, 'terreno_capas.png'), dpi=110)
+        plt.close(fig)
     # --- zooms: pueblo subida, pit+bajada, mirador, casino ---
     zonas = [('pueblo subida (s 620-1120)', 620, 1120, 170), ('pueblo alto (s 1250-1560)', 1250, 1560, 170),
              ('pit lane + bajada (s 2380-2760)', 2380, 2760, 150),
@@ -2655,7 +3477,7 @@ def qa_figuras(res, X, Y, Z, sec, Wd, nx, ny, paso, pit_pts, spec_urb, qa_dir):
         fig.colorbar(im, ax=list(axs), shrink=0.5, label='escalon entre celdas vecinas de la misma terraza, descontada la rasante (m); x rojas: > 0.6')
         fig.savefig(os.path.join(qa_dir, 'terreno_costuras.png'), dpi=100)
         plt.close(fig)
-    print('  QA ->', os.path.join(qa_dir, 'terreno_hillshade.png'), 'terreno_perfil.png, terreno_secciones.png, terreno_zoom.png, terreno_costuras.png')
+    print('  QA ->', os.path.join(qa_dir, 'terreno_hillshade.png'), 'terreno_perfil.png, terreno_secciones.png, terreno_zoom.png, terreno_costuras.png, terreno_capas.png')
 
 
 if __name__ == '__main__':

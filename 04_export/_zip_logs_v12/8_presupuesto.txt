@@ -1,0 +1,26 @@
+kn5_presupuesto: E:/Escritorio/claude-pc/arnau-aseto-corsa/04_export/kn5/porto_corsa_opt.kn5 (2026-10-05 10:31:42)  base: 04_export/_v12_dev/respaldo_v11/informe_check_opt.json
+   triangulos: 4.94 de 6.00 M (82 %)
+   mallas (draw calls): 626 de 800 (78 %)
+   materiales: 493 de 520 (95 %)
+   bytes de texturas en el KN5: 41.80 de 80.00 MB (decimales, 1e6 bytes) (52 %)
+   bytes del KN5: 326.56 de 450.00 MB (decimales, 1e6 bytes) (73 %)
+   tris de vegetacion (MAT_VEG+MAT_OLI): 1.35 M (objetivo del plan <= 0.9 M)
+  tris por prefijo: DECO 2462693->2684118, 1WALL 1432836->1429106, 1GRASS 530530->616498, 1ROAD 87733->87733, 2GRASS 79116->79116, 1DIRT 19357->19937, 1PIT 15666->15666, 1KERB 2932->2932, AC 564->564, AGUA 4->4
+  tris por familia MAT_: MAT_VEG 1215372->1225968, MAT_CAMINO 903908->902544, MAT_terreno 612267->698233, MAT_CASAS 500932->500662, MAT_PPUEBLO 234346->234346, MAT_COCHE 220838->220838, MAT_HORIZ 0->210778, MAT_OLI 125516->123116, MAT_CARRERA 120860->118592, MAT_PIT 113002->113002, MAT_MCOCHE 103613->103613, MAT_PUENTES 87858->87858
+  bytes textura por familia: MAT_MCOCHE 814->8357128, MAT_PPUEBLO 1220537->7845973, MAT_CASAS 1648125->5561959, MAT_terreno 564335->5058450, MAT_CIVICO 1834810->3359629, MAT_MIRADOR 2037057->2038301, MAT_CASINO 1033066->1922269, MAT_VEG 3182->1751000, MAT_asfalto 194992->1367721, MAT_ITAL 988082->1349838, MAT_cesped 0->1289370, MAT_PUENTES 943532->946642
+  AVISO: tris por familia MAT_: familia NUEVA MAT_HORIZ = 210778
+  AVISO: mallas por familia MAT_: familia NUEVA MAT_HORIZ = 13
+  AVISO: materiales por familia MAT_: MAT_CASAS crece +68 % (19 -> 32)
+  AVISO: materiales por familia MAT_: familia NUEVA MAT_HORIZ = 14
+  AVISO: bytes de textura por familia MAT_: MAT_CASAS crece +237 % (1648125 -> 5561959)
+  AVISO: bytes de textura por familia MAT_: MAT_CASINO crece +86 % (1033066 -> 1922269)
+  AVISO: bytes de textura por familia MAT_: MAT_CIVICO crece +83 % (1834810 -> 3359629)
+  AVISO: bytes de textura por familia MAT_: MAT_LOEWS crece +192 % (215308 -> 628981)
+  AVISO: bytes de textura por familia MAT_: MAT_MCOCHE crece +1026574 % (814 -> 8357128)
+  AVISO: bytes de textura por familia MAT_: MAT_PPUEBLO crece +543 % (1220537 -> 7845973)
+  AVISO: bytes de textura por familia MAT_: MAT_VEG crece +54928 % (3182 -> 1751000)
+  AVISO: bytes de textura por familia MAT_: MAT_asfalto crece +601 % (194992 -> 1367721)
+  AVISO: bytes de textura por familia MAT_: familia NUEVA MAT_cesped = 1289370
+  AVISO: bytes de textura por familia MAT_: MAT_terreno crece +796 % (564335 -> 5058450)
+  -> 04_export/_zip_logs_v12/presupuesto_v12.json
+RESULTADO: OK dentro del presupuesto

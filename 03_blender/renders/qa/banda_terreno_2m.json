@@ -1,0 +1,81 @@
+{
+ "blend": "E:\\Escritorio\\claude-pc\\arnau-aseto-corsa\\03_blender\\porto_corsa.blend",
+ "vertices_antes": 266255,
+ "banda": {
+  "banda_m": 25.0,
+  "celdas": 14324,
+  "caras_banda": 28648,
+  "vertices_antes": 266255,
+  "vertices_despues": 311536,
+  "vertices_nuevos": 45281,
+  "tris_antes": 530448,
+  "tris_despues": 616392,
+  "canal_a_en_medios": true,
+  "atributos": [
+   "roca"
+  ]
+ },
+ "zonas": {
+  "nz_zona": 0.62,
+  "min_caras": 6,
+  "vertices": 311536,
+  "caras": 616392,
+  "vertices_en_zona": 21026,
+  "vertices_cambiados_0_49": 1530,
+  "global": {
+   "roca_antes": 55320,
+   "roca_despues": 53504,
+   "dientes_antes": 1672,
+   "dientes_despues": 1521,
+   "huecos_antes": 205,
+   "huecos_despues": 197
+  },
+  "zonas": {
+   "56_postal_cima_bahia": {
+    "caras_tierra": 15736,
+    "roca_antes": 2886,
+    "roca_despues": 1642,
+    "roca_talud": 467,
+    "dientes_antes": 205,
+    "dientes_despues": 118,
+    "dientes_despues_talud": 43,
+    "dientes_despues_anillo": 32,
+    "huecos_antes": 6,
+    "huecos_despues": 0,
+    "desacuerdo_objetivo": 156
+   },
+   "51_piloto_s1700": {
+    "caras_tierra": 23599,
+    "roca_antes": 2504,
+    "roca_despues": 1408,
+    "roca_talud": 351,
+    "dientes_antes": 187,
+    "dientes_despues": 66,
+    "dientes_despues_talud": 16,
+    "dientes_despues_anillo": 4,
+    "huecos_antes": 6,
+    "huecos_despues": 0,
+    "desacuerdo_objetivo": 123
+   },
+   "07_tierra_subida": {
+    "caras_tierra": 23371,
+    "roca_antes": 1304,
+    "roca_despues": 750,
+    "roca_talud": 366,
+    "dientes_antes": 109,
+    "dientes_despues": 48,
+    "dientes_despues_talud": 20,
+    "dientes_despues_anillo": 8,
+    "huecos_antes": 2,
+    "huecos_despues": 0,
+    "desacuerdo_objetivo": 179
+   }
+  }
+ },
+ "atributo_roca": {
+  "vertices": 311536,
+  "media": 0.1156,
+  "pct_gt_0_49": 10.4
+ },
+ "rutas_relativas": []
+}

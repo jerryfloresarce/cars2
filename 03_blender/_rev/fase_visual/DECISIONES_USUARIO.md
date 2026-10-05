@@ -28,5 +28,34 @@ Respuestas a las preguntas de la seccion 14 de `03_blender/FASE_VISUAL_PLAN.md`.
    **Torre en la roca del lazo: SI** (italiano_kit.build_torre_costera en una repisa alta, bloque 2.6).
 7. **Zips frecuentes: SI** (v1.2 tras F1, v1.3 tras F3, v1.4/v1.5 tras el export).
 
+NOTA DEL COORDINADOR (04/10 19:15, para el propietario 'terreno' de F1): la sesion se corto a las ~16:50 con tu
+trabajo a medias. terreno_montana.py YA tiene +353/-23 lineas tuyas (compila), assets/_geom_snapshot_terreno.json
+esta actualizado y en 03_blender/_rev/_tmp_terreno/ estan tus QA_DIR qa_v6..v9, sonda.py, sonda_lado.py y
+urbanismo_v12.json/.log (16:47). NO empieces de cero: lee `git diff 03_blender/terreno_montana.py`, retoma desde
+ahi, y te faltan (al menos) medir_relieve.py, los checks nuevos, PARCHES_F1_terreno.md y la verificacion final.
+Los otros 4 propietarios ya entregaron (sus parches estan en PARCHES_F1_*.md; mascara_terreno.py importa de
+terreno_montana las constantes de umbral de roca si existen: coordina nombres leyendo PARCHES_F1_mascara.md).
+
+## Paleta v2 (feedback del usuario sobre la carta de color, 04/10 ~19:30; valores sRGB del selector de Blender)
+
+"Buena direccion en verdes y azules." Cambios que MANDAN sobre paleta.json v1:
+- ROCAS mas calidas, sin gris azulado (el frio lo pone la sombra): caliza clara #D8CCB0, caliza media #B3A68A,
+  roca oscura #7F766A.
+- FACHADAS menos pastel, mas profundas y calidas; fuera el blanco grisaceo y el rosa bebe: azafran #E2A84A,
+  ocre naranja #D88A4C, siena #C46A43, rojo pompeyano #B04A3B, melocoton #E6A487, crema calido #EBDDBE.
+  Variacion aleatoria de +-5 % en tono y brillo POR CASA. Marcos de ventana y molduras en crema claro (estilo ligur).
+- TEJADOS: terracota mas anaranjada #BF6440.
+- ANADIR: cipres y pino oscuro #34503A; verdin de cupula #6FA391; contraventanas #3E6A48; acento de flores
+  (buganvilla) #C2407A solo en pequenas dosis; marmol del casino en crema #EEE4CF, no blanco puro.
+- CESPED verde vivo: solo en jardines y rotondas (ya decidido).
+- AGUA: si se usa el shader de agua de CSP, estos azules valen para el FONDO marino; el color final lo dan el
+  shader y el reflejo del cielo.
+- VALIDACION: la paleta aplicada al PUEBLO JUNTO AL PUERTO, con LUZ DE TARDE y desde la CAMARA DEL COCHE (no en
+  esferas). Y, si se puede, exportar esa zona a Assetto Corsa para comprobarla con Pure (-> mini-pista "F"
+  pueblo_puerto para el amigo, tras la regeneracion de F1).
+- 04/10 19:55, tras ver los pares antes/despues (renders/ab/paleta_v2): el usuario da el OK y pide bajar
+  crema_calido a #E6D4B0 (leia casi blanco con sol de tarde). PALETA v2 = DEFINITIVA (paleta.json). No se
+  vuelve a preguntar por colores salvo que el usuario lo pida.
+
 Sigue vigente: la cuesta del tramo de tierra NO se baja (13-16 %); el desnivel viene del terreno lateral.
 Sin logotipos de marcas reales. Video solo tras OK explicito del usuario sobre capturas.

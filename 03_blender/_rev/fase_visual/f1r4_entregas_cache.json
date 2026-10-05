@@ -1,0 +1,78 @@
+[
+ {
+  "k": "horizonte",
+  "r": {
+   "ok": true,
+   "parches": "PARCHES_F1_horizonte.md, seccion 'RONDA 4' (l.274+): ninguna linea de codigo nueva para el integrador. La llamada build_anillo_horizonte(root_col, terreno=T, seed=42) recoge sola la configuracion r4; esperar en integrar_escena.log 'horizonte: 23 objetos HORIZ_, 210778 tris, 14 materiales MAT_HORIZ_, 9 cordilleras + 10 lomas + 3 pueblos + 1 faro'. P-H6 / PETICIONES_04_EXPORT.md P6-horizonte: 22 -> ",
+   "resumen": "HECHO (propietario horizonte, F1 r4; acotacion 2 + director r3 n.6/n.9):\n1. Picos romos: tipo de pico nuevo 'lomo' (cresta roma: perfil convexo, 1-3 lomas anchas, casquete domo, sin corona dentada) dado de alta fuera de TIPOS (no cambia el sorteo de MONT_pico ni el acantilado del tunel). Cordilleras del anillo solo domo/lomo (sin cresta, piramide ni meseta: a 3-4.5 km eran triangulos de canto y losas), ensanche 1.5 -> 1.7. Lomas/islotes de tipo lomo y sin penasco-torre en la cima (leia como torre/bloque en 54/57/63/55); islote_alto 110-150 -> 110-140 (mismos sorteos y huella que r3). Mezcla de color NO tocada.\n2. Loma nueva HORIZ_loma.009 en horiz_az 200 (= la 'brujula 190-215'), 2650 m, 100 m de alto, radio 230, largo 600, con dimensiones fijas y construida la ultima (no mueve las 9 lomas aprobadas). Desde 57 rellena el hueco entre la loma ventana 208 y el lazo, desde 13 el hueco de la izquierda, desde 54 queda tras la pared del lazo (no resta mar abierto) y desde 63 fuera del cuadro.\n3. Metrica del director reconstruida e implementada (medir_horizonte.py campos dir_* + banda_director.py): ultimo px de cielo -> primer tramo de mar a <= 60 px por columna; calibrada sobre f1_r3/despues_ac: 54 41.2 (director 43.2), 57 25.6 (28.4), 13 14.7 (15.6), 58 5.9 (8.5).\nPRUEBAS: test del kit TEST_OK (23 objetos, 210 778 tris <= 250 k, 14 materiales, cobertura 98.5 %, 0 vertices en rejilla). Ensayo sobre COPIA de escena_candidata.blend (anillo r3 quitado -> 'antes'; + anillo r4 -> 'despue",
+   "pendiente": "1) Con la metrica del director (regla <= 60 px) la media 54/57/13/21/61 queda en 45.6 % (tomando su 100 % de 21), no 50: esa regla descarta toda silueta de mas de 60 px (cordilleras a 3-4.5 km, cumbres de islote) y 61 tiene 1 320 columnas de linea sobre el agua del puerto con islotes de 52-65 px; subir 54 exigiria poner silueta en su mar abierto, prohibido por la acotacion (>= 50 %). Con mi metrica A/B la media es 53.2 % y mar abierto 54/63 cumplen. Decision del coordinador: con que metrica se j",
+   "ficheros": [
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/assets/montanas_fondo_v2.py",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/assets/test_montanas_fondo_v2.py",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/fase_visual/PARCHES_F1_horizonte.md",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/_tmp_horizonte/medir_horizonte.py",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/_tmp_horizonte/banda_director.py",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/_tmp_horizonte/construir_horizonte_copia.py",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/_tmp_horizonte/r4/escena_horiz_r4.blend",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/_tmp_horizonte/r4/escena_sin_anillo_r4.blend",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/_tmp_horizonte/r4/ab/",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/_tmp_horizonte/r4/test_kit.log",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/_tmp_horizonte/r4/copia.log",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/assets/previews/montanas_v2_horizonte_planta.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/assets/previews/montanas_v2_horizonte_oblicua.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/assets/previews/montanas_v2_horizonte_piloto_O.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/assets/previews/montanas_v2_horizonte_piloto_S.png"
+   ]
+  }
+ },
+ {
+  "k": "mascara",
+  "r": {
+   "ok": true,
+   "parches": "PARCHES_F1_mascara.md, seccion 'Ronda 4' (R4.4), para el INTEGRADOR: A8 (obligatorio para la banda de 2 m) = cp _rev/_tmp_mascara/r4/banda_terreno_2m.py a _rev/banda_terreno_2m.py + 3 lineas en _rev/pipeline_escena.sh tras 'echo \"plot exit $?\"' (l.119) y antes de copiar_candidata (l.120): bash \"$COLA\" --python _rev/banda_terreno_2m.py > \"$LOGS/banda_terreno_2m.log\" ... (ultimo paso de Blender: a p",
+   "resumen": "HECHO (propietario mascara, F1 r4, acotacion 4 + cosmetico 10):\n- (a) ruido del atributo roca 0.08 -> 0.20: vivia en mascara_terreno.UMBRALES['ROCA_ATR_RUIDO'] (no en terreno_montana). En la via de capas el ruido de 10 m va en la FRONTERA del canal A (amp = 0.08 + 0.12*4c(1-c): 0.20 donde la capa vale 0.5, 0.08 en roca/hierba puras: no motea praderas); canal B con ruido propio 10-30 m (TIERRA_RUIDO 0.20) para el cosmetico 36. Mascara r3 -> r4: roca 27.81 -> 27.49 %, nz<0.7 roca 99.75 -> 99.77 / verde 0.08 -> 0.11 %, suma 100 %, AO =. Frontera por cara +1.3 % de aristas (serpentea), dientes 1179 -> 1226: el ruido rompe rectas, no quita dientes.\n- (c) nz < 0.62 en la cima de 56 y a < 150 m de 51/07: construir_pista.roca_zonas_nz() sobre el ATRIBUTO roca (criterio de color_ac copiado, 04_export intacto): objetivo = roca de hoy & nz < 0.62, limpieza de componentes/huecos < 6 caras, atributo {1, 0.5, 0} que lo reproduce (tiras del desmonte se conservan), fundido 12 m; zonas = loc de las camaras 56/51/07 de renders/ab/_base_antes/camaras.json (mascara_terreno.UMBRALES['ROCA_NZ_ZONAS']). Fuera de zonas el atributo sigue = canal A; la mascara por texel no cambia.\n- (b) banda a 2 m: construir_pista.subdividir_banda_terreno() (4 tris por tri, puntos medios sobre el plano del padre: superficie identica; rejilla nx*ny con sus indices, nuevos al final con banda_p0/p1; roca re-muestreada del canal A en los medios; UV nueva). Se aplica al FINAL del pipeline (_rev/banda_terreno_2m.py, parche",
+   "pendiente": "La sierra por cara NO desaparece fuera de las 3 zonas (36, 50, 21, 01) ni en crestas mas alla de la banda de 25 m: es P1 [W]; esto es la mitigacion interina y nada mas (cosmetico 36 'atenuado', no cerrado: su frontera de dos tonos en AC es roca/hierba por cara, el canal B vale 0.05 ahi). En las zonas quedan 29-67 dientes por zona a 4 m (8-20 son caras nz<0.50 = roca por talud, intocables desde el atributo; 4-30 en el anillo de fundido). La banda de 2 m solo llega a la candidata si el integrador ",
+   "ficheros": [
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/mascara_terreno.py",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/construir_pista.py",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/fase_visual/PARCHES_F1_mascara.md",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/_tmp_mascara/r4/banda_terreno_2m.py",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/_tmp_mascara/r4/aplicar_r4_a_copia.py",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/_tmp_mascara/r4/analisis_dientes.py",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/_tmp_mascara/r4/construir_pista_r4.log",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/_tmp_mascara/r4/aplicar_r4.log",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/_tmp_mascara/r4/escena_r4.blend",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/_tmp_mascara/r4/ab/AB_ac_56_postal_cima_bahia.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/_tmp_mascara/r4/ab/AB_ac_51_piloto_s1700.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/_tmp_mascara/r4/ab/AB_ac_07_tierra_subida.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/_tmp_mascara/r4/ab/AB_ac_36_roca_casino_general.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/_tmp_mascara/r4/ab/medidas_ac.json",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/_tmp_mascara/r4/tex/terreno_mask.png"
+   ]
+  }
+ },
+ {
+  "k": "materiales",
+  "r": {
+   "ok": true,
+   "parches": "PARCHES_F1_materiales.md, seccion 'RONDA 4' (## 15-19): 18.1 integrador (capturas_ab --modo-ac: luz del mundo gris de la misma luminancia via Light Path, la camara sigue viendo el cielo azul; codigo exacto, probado en memoria); 18.2 mascara (construir_pista: tile de detalle A del terreno en BOX/Object en vez de planar: las estrias oblicuas de 51/07); 18.3 coordinador (ratificar 18.1 por escrito; r",
+   "resumen": "HECHO (materiales, F1 r4; todo sobre copias de escena_candidata en _rev/_tmp_materiales/r4/, camaras congeladas, 07/36/49/51/55 normal y AC):\n1. (c) Reticula en modo normal: ATRIBUIDA con 2 variantes en memoria (pared=0 / sin_junta): las lineas oblicuas de 36 y las horizontales de 51/07 eran las JUNTAS del Wave Z (contornos rectos continuos sobre laderas planas); lo que queda sin junta (estrias oblicuas/verticales en 51/07) es el tile de detalle A del terreno proyectado en planta y estirado en la pared (mascara, parche 18.2). Celdas = juntas x estrias. Grupo NG_caliza_estratos v4 (misma interfaz, actualizar_grupo en sitio): juntas y cornisa en PARCHES (ruido 3D ~30 m, 0.15..1), ondulacion 40 m +-1.2 / 14 m +-0.5 / 6 m +-0.2, rampa nz con ruido 3D +-0.06 y mas ancha (0.92..0.55), fade 60 m -> 0.12. Resultado (hoja_r3_vs_r4_crops.png): en 36 desaparece la familia oblicua, en 51/07 las horizontales continuas; medias/metricas sin cambio (07 riqueza 2.50->2.49, 36 2.37->2.36, 51 2.72->2.70, pared_lisa 1.3->1.4 / 7.1->7.8 / 5.2->5.5, cesped 0.00, bandas =).\n2. (a) McLaren: la candidata llevaba caliza_d a 12 m (no 3 m): manchas de rock_06 cada ~95 px (saliencia baja frec. 0.075, la mayor de los 5 tiles). Tile derivado NUEVO texturas/caliza_grande_d.png (24 m: afloramiento 24 m + caliza_d girado 12 m + afloramiento 8 m + ruido espectral +-6 % + grano 0.7/0.26 m + piedras paso-alto de caliza_d a 24 m; saliencia 0.028; seamless; 2.4 MB), FAMILIAS caliza_grande 1/24 factor 0.5, montana_",
+   "pendiente": "(1) 18.1 (ambiente gris del proxy) es decision del coordinador: sin el, las cifras *_ac de saturacion del McLaren y de la roca NO se mueven (la causa no esta en el material; en el KN5 los colores ya son caliza media). (2) Las estrias oblicuas/verticales del tile planar del terreno en 51/07 son de mascara (18.2). (3) P1 [W] sigue igual. (4) pared_lisa de 49 depende del cuerpo del McLaren (99 % de la region): registrar en F2 que se mida sobre el talud. (5) Parche §2/10.5 de montana_mclaren (Rocas)",
+   "ficheros": [
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/assets/materiales_roca.py",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/assets/test_materiales_roca.py",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/assets/montana_coche_v2.py",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/aplicar_texturas.py",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/texturas/generar_texturas.py",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/texturas/recolorear_cc0.py",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/texturas/caliza_grande_d.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/texturas/mosaico_3x3_caliza_grande_d.png",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/texturas/medias.json",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/fase_visual/PARCHES_F1_materiales.md",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/_tmp_materiales/r4/ (preparar_r4.py, rehacer_mclaren.py, variante_ab.py, medir_hsv.py, escena_r4*.blend, antes*/, despues*/, diag_*/, despues_ac_amb_*/, crop_*.png, diag_*.png, hoja_r3_vs_r4_crops.png, medidas*.json, hsv_*.json, logs)",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/_tmp_materiales/test_materiales_roca_r4.log",
+    "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/assets/previews/materiales_roca_*.png"
+   ]
+  }
+ }
+]

@@ -18,11 +18,13 @@ PIT = G.get('pit_lane') or []
 
 T = G['terreno']
 _ter_m = bpy.data.objects.get('TERRENO')   # ronda 15: cota real = malla (explanadas del integrador)
-if _ter_m is not None and _ter_m.type == 'MESH' and len(_ter_m.data.vertices) == T['nx'] * T['ny']:
+# F1 r4 (PARCHES_F1_mascara.md R4.4 A9): '>=' y solo los nx*ny primeros: tras banda_terreno_2m.py (ultimo paso del pipeline)
+# el TERRENO lleva +45 k vertices de la banda de 2 m AL FINAL; la rejilla conserva sus indices j*nx+i
+if _ter_m is not None and _ter_m.type == 'MESH' and len(_ter_m.data.vertices) >= T['nx'] * T['ny']:
     _co = [0.0] * (3 * len(_ter_m.data.vertices))
     _ter_m.data.vertices.foreach_get('co', _co)
     T = dict(T)
-    T['z'] = _co[2::3]
+    T['z'] = _co[2::3][:T['nx'] * T['ny']]
 def z_terreno(x, y):
     fx = (x - T['x0']) / T['cell']
     fy = (y - T['y0']) / T['cell']

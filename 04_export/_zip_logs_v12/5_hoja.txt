@@ -1,0 +1,10 @@
+01_aerea_general           MAE  31.2  dV arriba -0.100 medio -0.096 abajo -0.088  dS abajo -0.163
+49_piloto_s300             MAE  37.6  dV arriba -0.181 medio -0.126 abajo -0.058  dS abajo -0.053
+50_piloto_s800             MAE  45.1  dV arriba -0.302 medio -0.092 abajo -0.090  dS abajo -0.018
+51_piloto_s1700            MAE  51.3  dV arriba -0.343 medio -0.092 abajo +0.045  dS abajo +0.044
+52_piloto_s2900            MAE  58.8  dV arriba -0.470 medio -0.188 abajo -0.072  dS abajo -0.041
+53_piloto_s3400            MAE  49.5  dV arriba -0.383 medio -0.105 abajo -0.073  dS abajo -0.041
+54_piloto_s4150            MAE  59.0  dV arriba -0.360 medio -0.201 abajo -0.231  dS abajo -0.240
+56_postal_cima_bahia       MAE  55.4  dV arriba -0.430 medio -0.141 abajo +0.055  dS abajo +0.051
+59_postal_recta_puerto     MAE  50.7  dV arriba -0.358 medio -0.227 abajo -0.051  dS abajo -0.052
+OK hoja -> E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/renders/ab/v12_como_ac\hoja_v12_como_ac.png (1458x3983, 9 tomas)

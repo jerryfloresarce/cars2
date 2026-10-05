@@ -19,6 +19,13 @@
 03_blender/porto_corsa_matstest.blend
 03_blender/porto_corsa_textest.blend
 
+# --- carpetas de trabajo de los agentes de la fase visual y del export (GB, regenerables) ---
+03_blender/_rev/_tmp_*/
+04_export/_v12_dev/
+04_export/_zip_logs_v12/*.blend
+04_export/ensayo_f/
+04_export/vista_kn5/
+03_blender/renders/ab/v12_como_ac/_texturas_kn5/
 # --- renders de revision de los ciclos de agentes (GB) y copias de trabajo: regenerables ---
 03_blender/_rev/r[0-9]/
 03_blender/_rev/logs_*/

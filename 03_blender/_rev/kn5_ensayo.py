@@ -157,15 +157,19 @@ def suelo(nombre, material, x0, x1, z0, z1, y=0.0, uv_m=None, cast=0, renderable
     return m.quad(P, UV, (0, 1, 0), abanico=abanico)
 
 
-def panel_vertical(nombre, material, xc, y0, y1, z, ancho, cast=1, abanico=True, normal_vert=None, giro_deg=0.0):
+def panel_vertical(nombre, material, xc, y0, y1, z, ancho, cast=1, abanico=True, normal_vert=None, giro_deg=0.0,
+                   hacia_atras=False):
     """Panel de pie centrado en (xc, z) mirando a -Z (hacia el coche, que arranca en z < 0 mirando a +Z).
-    UV: (0,0) arriba a la derecha del que lo mira desde el coche (= +X), u crece hacia -X, v = 0 arriba.
-    giro_deg: giro del panel sobre su eje vertical (para los planos en X del ksTree)."""
+    UV: (0,0) arriba a la izquierda del que lo mira desde el coche (= +X si AC es como Blender girado), u crece hacia
+    -X, v = 0 arriba. giro_deg: giro del panel sobre su eje vertical (planos en X del ksTree). hacia_atras: la cara
+    visible mira a +Z (de espaldas al coche: prueba de recorte de caras traseras)."""
     m = Malla(nombre, material, cast, 1)
     a = math.radians(giro_deg)
     dx, dz = math.cos(a) * ancho / 2, -math.sin(a) * ancho / 2    # semieje del panel en el plano XZ
-    nx, nz = math.sin(a), math.cos(a)                             # normal geometrica = -(giro de -Z)... se fija abajo
+    nx, nz = math.sin(a), math.cos(a)                             # (nx, 0, nz) es perpendicular al semieje
     normal = (-nx, 0.0, -nz) if math.cos(a) >= 0 else (nx, 0.0, nz)
+    if hacia_atras:
+        normal = tuple(-c for c in normal)
     P = [(xc + dx, y1, z + dz), (xc - dx, y1, z - dz), (xc - dx, y0, z - dz), (xc + dx, y0, z + dz)]
     UV = [(0, 0), (1, 0), (1, 1), (0, 1)]
     return m.quad(P, UV, normal, abanico=abanico, normal_vert=normal_vert)
@@ -605,7 +609,10 @@ def ensayo_a():
     e.deco.append(suelo('ENSAYO_a_suelo_multicapa', m, 12.0, 52.0, 5.0, 45.0, y=0.05, uv01=True, abanico=True))
     e.deco.append(panel_vertical('ENSAYO_a_panel_multicapa', m, 0.0, 0.0, 10.0, 60.0, 16.0))
     e.notas += ['samplers txDiffuse/txMask/txDetailR/G/B/A/txDetailNM [V] (overtake 126166, kn5-obj-converter); slots 0..6 [S]',
-                'props multR/G/B/A, detailNMMult, fresnelC/EXP/MaxLevel [V nombres, S valores]; magicMult [S]']
+                'props multR/G/B/A, detailNMMult, fresnelC/EXP/MaxLevel [V nombres, S valores]; magicMult [S]',
+                'esperado en la alfombra, visto desde el coche: lejos-izq R (oliva), lejos-der G (hierba seca), cerca-izq B (tierra),',
+                '  cerca-der A (caliza), disco de mezcla en el centro, rayas finas de tierra en el cuadrante R; 8 x 8 tiles con letra',
+                '  por cuadrante (mult 8). Si izq/der salen cambiados, el eje X de AC va al reves de lo supuesto (ver ensayo D)']
     return e
 
 
@@ -631,9 +638,10 @@ def ensayo_c():
     # dos paneles girados +-45 grados = 4 triangulos (2 por panel), normales de vertice (0, 1, 0) como LilSki/ksEditor
     for k, g in enumerate((45.0, -45.0)):
         e.deco.append(panel_vertical('ENSAYO_c_kstree_%d' % k, m, 0.0, 0.0, 14.0, 50.0, 12.0, cast=0, abanico=False,
-                                     normal_vert=(0.0, 1.0, 0.0), giro_deg=g))
+                                     normal_vert=(0.0, 1.0, 0.0), giro_deg=g, hacia_atras=(k == 1)))
     e.notas += ['ksTree [V nombre: AcTools.Render]; props de LilSki (0.4/0.25/0/1/0/0.5) [V foro]; normales (0,1,0) [S: sin ksEditor]',
-                'con el giro de 45 grados un panel se ve de frente y el otro de espaldas: dice si AC recorta las caras traseras']
+                'el panel 0 mira al coche y el panel 1 esta DE ESPALDAS (winding invertido): si en la foto solo se ve un plano de la X,',
+                '  AC recorta las caras traseras y el writer tendra que duplicar los planos de los arboles-pared']
     return e
 
 
@@ -856,6 +864,13 @@ def comprobar_contenido(e, kn5):
             mm = mallas['ENSAYO_c_kstree_%d' % k]
             if mm['frac_normales_arriba'] != 1.0:
                 f.append('ksTree_%d: normales no son (0,1,0)' % k)
+            # normal GEOMETRICA (winding) de cada triangulo del panel: panel 0 hacia -Z (al coche), panel 1 hacia +Z
+            m0 = [m for m in e.deco if m.nombre == mm['nombre']][0]
+            V = np.asarray(m0.V)[:, :3]
+            T = np.asarray(m0.I).reshape(-1, 3)
+            nz = np.cross(V[T[:, 1]] - V[T[:, 0]], V[T[:, 2]] - V[T[:, 0]])[:, 2]
+            if not (np.all(nz < 0) if k == 0 else np.all(nz > 0)):
+                f.append('ksTree_%d: winding con z %s (esperado %s)' % (k, nz.round(2).tolist(), '< 0' if k == 0 else '> 0'))
     if e.letra == 'd':
         t = texs['ensayo_d_uv_2048.png']
         if (t.get('ancho'), t.get('alto')) != (2048, 2048):

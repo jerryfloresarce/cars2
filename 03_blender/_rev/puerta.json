@@ -1,10 +1,10 @@
 {
  "ok": true,
- "fecha": "2026-10-04 15:18",
+ "fecha": "2026-10-05 09:42",
  "candidata": {
   "blend": "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/escena_candidata.blend",
-  "md5": "a6fb4195c32f20c41299b4b68cff46db",
-  "mtime": "2026-10-04 15:18"
+  "md5": "31c18b1bf77ba551eafa288d44b9275f",
+  "mtime": "2026-10-05 09:42"
  },
  "base": {
   "ruta": "E:\\Escritorio\\claude-pc\\arnau-aseto-corsa\\03_blender\\_rev\\linea_base.json",
@@ -15,14 +15,15 @@
   "urbanismo_informe": "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/urbanismo_informe_candidata.json",
   "asentar": "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/asentar_candidata.json",
   "nada_en_pista": "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/nada_en_pista_candidata.json",
-  "preparar_geometria.log": "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/logs_final\\preparar_geometria.log",
-  "urbanismo.log": "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/logs_final\\urbanismo.log",
-  "integrar_escena.log": "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/logs_final\\integrar_escena.log",
+  "preparar_geometria.log": "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/logs_f1_final\\preparar_geometria.log",
+  "urbanismo.log": "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/logs_f1_final\\urbanismo.log",
+  "integrar_escena.log": "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/logs_f1_final\\integrar_escena.log",
+  "nada_en_pista.log": "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/logs_f1_final\\nada_en_pista.log",
   "blend": "E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/_rev/escena_candidata.blend"
  },
  "motivos": [],
  "avisos": [
-  "terreno: costuras max 2.03 m (objetivo del plan < 0.6; hoy la base ya lo supera, se exige \"no peor\")"
+  "terreno: costuras max 2.03 m (objetivo del plan < 0.6 es del bloque 1; la puerta exige \"no peor que la base\")"
  ],
  "diff": {
   "urbanismo_plan_fallos": {
@@ -37,7 +38,7 @@
   },
   "revisar_urbanismo_fallos": {
    "base": 23,
-   "candidata": 23,
+   "candidata": 13,
    "regla": "<= base"
   },
   "revisar_urbanismo_por_tipo": {
@@ -57,13 +58,10 @@
    },
    "candidata": {
     "casa_muro": 1,
-    "arbol_calle": 1,
     "prop_pista": 1,
     "prop_pitlane": 1,
     "prop_camino": 1,
     "casa_flotante": 3,
-    "objeto_salto_grande": 8,
-    "bancal_mal_asentado": 1,
     "losa_hierba": 2,
     "plaza_muro": 1,
     "sendero_volado": 2,
@@ -83,17 +81,17 @@
   },
   "asentar.arboles_quitados": {
    "base": 3,
-   "candidata": 3,
+   "candidata": 1,
    "regla": "<= base"
   },
   "asentar.flotaban_mas_0_6": {
    "base": 28,
-   "candidata": 28,
+   "candidata": 25,
    "regla": "<= base"
   },
   "asentar.enterrados_mas_0_6": {
    "base": 57,
-   "candidata": 57,
+   "candidata": 46,
    "regla": "<= base"
   },
   "asentar.saltos": {
@@ -138,7 +136,7 @@
   },
   "asentar.bancales_mal": {
    "base": 1,
-   "candidata": 1,
+   "candidata": 0,
    "regla": "<= base"
   },
   "asentar.coches_quitados": {
@@ -199,22 +197,19 @@
   "urbanismo_plan_huecos_m": 515.0,
   "urbanismo_plan_terrazas_vacias": 0,
   "urbanismo_plan_casas_total_linea": 193,
-  "revisar_urbanismo_fallos": 23,
+  "revisar_urbanismo_fallos": 13,
   "revisar_urbanismo_por_tipo": {
    "casa_muro": 1,
-   "arbol_calle": 1,
    "prop_pista": 1,
    "prop_pitlane": 1,
    "prop_camino": 1,
    "casa_flotante": 3,
-   "objeto_salto_grande": 8,
-   "bancal_mal_asentado": 1,
    "losa_hierba": 2,
    "plaza_muro": 1,
    "sendero_volado": 2,
    "sendero_enterrado": 1
   },
-  "revisar_urbanismo_avisos": 10,
+  "revisar_urbanismo_avisos": 6,
   "revisar_urbanismo_n_casas_huella": 209,
   "nada_en_pista": 11,
   "nada_en_pista_tierra": 0,
@@ -232,9 +227,9 @@
    "CALLE_farola.024"
   ],
   "asentar": {
-   "arboles_quitados": 3,
-   "flotaban_mas_0_6": 28,
-   "enterrados_mas_0_6": 57,
+   "arboles_quitados": 1,
+   "flotaban_mas_0_6": 25,
+   "enterrados_mas_0_6": 46,
    "saltos": 0,
    "bajo_mar": 0,
    "sin_impacto": 0,
@@ -243,12 +238,12 @@
    "edificios_enterrados": 0,
    "edificios_sin_suelo": 0,
    "losas_con_aire": 0,
-   "bancales_mal": 1,
+   "bancales_mal": 0,
    "coches_quitados": 0,
    "dentro_de_muro_quitados": 0
   },
-  "asentar_movidos": 3036,
-  "asentar_candidatos": 3096,
+  "asentar_movidos": 3023,
+  "asentar_candidatos": 3091,
   "terreno_celdas_invaden_pista": 0,
   "terreno_celdas_invaden_viaducto": 0,
   "terreno_hierba_asfalto_antes": 253,
@@ -303,7 +298,15 @@
   "preparar_geometria_ok": true,
   "integrar_errores": "ninguno",
   "integrar_casas": 193,
-  "integrar_despeje_arboles_quitados": 139,
-  "integrar_despeje_props_quitados": 29
+  "integrar_despeje_arboles_quitados": 136,
+  "integrar_despeje_props_quitados": 35,
+  "frescura": {
+   "preparar_geometria_log_mtime": "2026-10-05 09:38",
+   "urbanismo_informe.json_fecha": "2026-10-05 09:42",
+   "asentar.json_fecha": "2026-10-05 09:41",
+   "nada_en_pista_log_n": 11,
+   "nada_en_pista_log_tierra": 0,
+   "nada_en_pista_log_mtime": "2026-10-05 09:41"
+  }
  }
 }

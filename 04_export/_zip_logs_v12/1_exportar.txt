@@ -1,0 +1,38 @@
+00:01.015  blend            | Read blend: "E:\Escritorio\claude-pc\arnau-aseto-corsa\04_export\_zip_src\escena_v12.blend"
+recorte: 0 caras de caminos/calles/muros secundarios dentro del asfalto borradas
+colision de edificios: 213 cajas 1WALL_
+garajes: PIT_boxes_edificio.001 -> 1PIT_boxes_suelo.001 + 1WALL_pit_boxes.001
+AC_PIT: 20 plazas dentro de los boxes
+rampa garajes: 39 tramos, largo fila 116 m, desnivel 0.23..0.49 m, pendiente 6..13 %
+BVH pit         1 objetos,     1464 triangulos [0.0s]
+fisica: pit lane libre: calzadas hundidas bajo la losa / cosidas a su borde {'1ROAD_camino_adoquin.034': [3, 0.022], '1ROAD_camino_asfalto.043': [13, 0.072], '1ROAD_camino_marcas.003': [3, 0.015]}; muros recortados del carril (caras, tapas) {'1WALL_camino_terraplen.001': [6, 8]}
+fisica: 0 mallas 1WALL_ cerradas al reves giradas []
+fisica: 2 mallas 1WALL_ cerradas con caras sueltas al reves recalculadas ['1WALL_pit_amortiguador', '1WALL_pit_amortiguador.001']
+fisica: 13 de 272 mallas 1WALL_ abiertas que se ven por detras desde la pista, a dos caras (+8960 caras; las mayores [('1WALL_camino_muro.121', 4136), ('1WALL_guardarrail_izq_subida', 932), ('1WALL_guardarrail_izq_4', 868), ('1WALL_guardarrail_der_mirador', 634), ('1WALL_pit_pasarela_cuerpo', 613), ('1WALL_guardarrail_der_a_5', 340), ('1WALL_guardarrail_izq_horquilla', 314), ('1WALL_carrera_tribuna_estructura', 277)]); 27 ya lo eran
+fisica: calzada subdividida a lo ancho (7 cortes): {'1ROAD_pista': [2094, 16752], '1DIRT_ladera': [506, 4048]} caras antes/despues
+fisica: terreno bajo el asfalto: 3 vertices de dentro bajados a plano-0.05 (max 0.00 m), 53 aristas partidas en el borde, 106 cortes de cara (de 30456 vertices junto a la pista)
+BVH pit         1 objetos,     1464 triangulos [0.0s]
+fisica: cuna pista-pit lane: 2GRASS_arcen_der subdividido en la cuna (+26848 caras), 25314 vertices a su rampa (max 1.83 m; 1830 del borde de la calzada a su cota), 591 secciones con cuna, tira invisible de 4720 caras
+fisica: pianos: 1205 vertices del borde interior y de los extremos a +0.012 m (sin escalon de 5 cm)
+fisica: chaflan_horquilla: sin apices colapsados en pendiente
+fisica: labio del tablero del viaducto fisico (copia invisible de 1402 caras de arriba de 20 mallas VIADUCTO_tramo_cuerpo*)
+BVH pit         1 objetos,     1464 triangulos [0.0s]
+BVH suelo     152 objetos,   795376 triangulos [0.4s]
+fisica: rampa de garajes en S: 285 secciones cada 0.5 m (t -128.0..14.0; garajes -117.0..3.0, zanja +8.5 / +8.5 m, fundido 2.5 m), largo 4.4..6.7 m, pendiente max 12 %, cambio de pendiente max 7.0 %/m
+BVH muros     872 objetos,  1385918 triangulos [0.7s]
+BVH suelo     156 objetos,   821882 triangulos [0.4s]
+BVH pit         1 objetos,     1464 triangulos [0.0s]
+fisica: 1WALL_cierre_izq: 5200 m de muro invisible (0 m omitidos: garajes / sin sitio), e mediana 1.30 m, 0 recortes por otro ramal [0s]
+fisica: 1WALL_cierre_der: 5076 m de muro invisible (123 m omitidos: garajes / sin sitio), e mediana 1.30 m, 0 recortes por otro ramal [0s]
+fisica: cierre interior de horquillas y curvas cerradas (1WALL_cierre_horquillas, a 2.5 m del borde): 14 zonas, 9 con muro, 502 m: [{'lado': -1, 'tipo': 'horquilla', 'giro': -128.0, 'pliegue_s': [572.0, 658.0], 's0': 590.0, 's1': 632.0, 'muro_m': 53.0, 's_muro': [580.0, 633.0], 'puntos_omitidos_por_otro_tramo': 0}, {'lado': 1, 'tipo': 'horquilla', 'giro': 93.0, 'pliegue_s': [1482.0, 1552.0], 's0': 1504.0, 's1': 1538.0, 'muro_m': 45.0, 's_muro': [1503.0, 1548.0], 'puntos_omitidos_por_otro_tramo': 0}, {'lado': -1, 'tipo': 'curva_cerrada', 'giro': -61.0, 's0': 1542.0, 's1': 1574.0, 'muro_m': 52.0, 's_muro': [1532.0, 1584.0], 'puntos_omitidos_por_otro_tramo': 0}, {'lado': 1, 'tipo': 'curva_cerrada', 'giro': 50.0, 's0': 1582.0, 's1': 1614.0, 'muro_m': 52.0, 's_muro': [1572.0, 1624.0], 'puntos_omitidos_por_otro_tramo': 0}, {'lado': -1, 'tipo': 'curva_cerrada', 'giro': -32.0, 's0': 1672.0, 's1': 1698.0, 'muro_m': 46.0, 's_muro': [1662.0, 1708.0], 'puntos_omitidos_por_otro_tramo': 0}, {'lado': -1, 'tipo': 'horquilla', 'giro': -157.0, 'pliegue_s': [1802.0, 1898.0], 's0': 1820.0, 's1': 1888.0, 'muro_m': 88.0, 's_muro': [1810.0, 1898.0], 'puntos_omitidos_por_otro_tramo': 0}, {'lado': 1, 'tipo': 'curva_cerrada', 'giro': 41.0, 's0': 2210.0, 's1': 2240.0, 'muro_m': 50.0, 's_muro': [2200.0, 2250.0], 'puntos_omitidos_por_otro_tramo': 0}, {'lado': -1, 'tipo': 'horquilla', 'giro': -96.0, 'pliegue_s': [2266.0, 2326.0], 's0': 2278.0, 's1': 2312.0, 'muro_m': 54.0, 's_muro': [2268.0, 2322.0], 'puntos_omitidos_por_otro_tramo': 0}, {'lado': 1, 'tipo': 'horquilla', 'giro': 120.0, 'pliegue_s': [2322.0, 2410.0], 's0': 2342.0, 's1': 2384.0, 'muro_m': 62.0, 's_muro': [2332.0, 2394.0], 'puntos_omitidos_por_otro_tramo': 0}, {'lado': 1, 'tipo': 'curva_cerrada', 'giro': 43.0, 's0': 3268.0, 's1': 3300.0, 'muro': 'no hace falta (cierre normal a <= 3.0 m)'}, {'lado': -1, 'tipo': 'horquilla', 'giro': -153.0, 'pliegue_s': [3336.0, 3414.0], 's0': 3334.0, 's1': 3410.0, 'muro': 'no hace falta (cierre normal a <= 3.0 m)'}, {'lado': -1, 'tipo': 'horquilla', 'giro': -123.0, 'pliegue_s': [3498.0, 3626.0], 's0': 3532.0, 's1': 3592.0, 'muro': 'no hace falta (cierre normal a <= 3.0 m)'}, {'lado': 1, 'tipo': 'curva_cerrada', 'giro': 32.0, 's0': 4790.0, 's1': 4816.0, 'muro': 'no hace falta (cierre normal a <= 3.0 m)'}, {'lado': -1, 'tipo': 'horquilla', 'giro': -106.0, 'pliegue_s': [4824.0, 4890.0], 's0': 4828.0, 's1': 4884.0, 'muro': 'no hace falta (cierre normal a <= 3.0 m)'}]
+BVH pit         1 objetos,     1464 triangulos [0.0s]
+BVH suelo     153 objetos,   809576 triangulos [0.4s]
+fisica: tapones del frente de boxes (muro invisible en L entre la pared del extremo y el cierre): [{'lado': -1, 't_pared': -117.1, 'u_cierre': 3.88}, {'lado': 1, 't_pared': 3.1, 'u_cierre': 3.7}]
+fisica: cierre_ac completo en 11s
+normales de suelo corregidas: 18591 caras
+Info: Saved as "porto_corsa_export.blend"
+OK blend de export v2 guardado; mallas: 4979
+FBX omitido (PORTO_FBX != 1): el modelo lo genera kn5_writer.py directamente en KN5
+Blender 5.1.2 (hash ec6e62d40fa9 built 2026-05-19 01:37:34)
+
+Blender quit

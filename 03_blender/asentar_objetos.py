@@ -157,7 +157,7 @@ ASENTAR_PREF = ('VEG_', 'OLI_', 'ITAL_', 'CALLE_', 'CARRERA_paca', 'CARRERA_vall
 # (ITAL_bancal: su cota la fija el integrador sobre la linea del muro; un rayo en el centro la
 # estropearia. Sus olivos se asientan como hijos sueltos y su desnivel va a 'bancales')
 ASENTAR_NO = ('CALLE_guirnalda', 'ITAL_ermita', 'YATE', 'LIB', 'CALLE_plaza', 'CALLE_plazoleta',
-              'CALLE_toldo_mercado', 'ITAL_bancal')
+              'CALLE_toldo_mercado', 'ITAL_bancal', 'HORIZ_')   # HORIZ_: F1 (7.1) anillo de horizonte fuera de la rejilla
 # --- arboles: 5 rayos (centro + anillo) y, si la ladera es imposible, moverlos o quitarlos ---
 ARBOL_PREF = ('VEG_', 'OLI_', 'ITAL_cipres', 'ITAL_olivo')
 ARBOL_NO = ('ITAL_cipreses',)
@@ -205,11 +205,13 @@ T = G['terreno']
 # ronda 15: el integrador talla EXPLANADAS en la malla TERRENO (tribunas, hotel, ayuntamiento,
 # plazuelas): la cota real es la de la malla, no la del JSON
 _ter_m = bpy.data.objects.get('TERRENO')
-if _ter_m is not None and _ter_m.type == 'MESH' and len(_ter_m.data.vertices) == T['nx'] * T['ny']:
+# F1 r4 (PARCHES_F1_mascara.md R4.4 A9): '>=' y solo los nx*ny primeros: tras banda_terreno_2m.py (ultimo paso del pipeline)
+# el TERRENO lleva +45 k vertices de la banda de 2 m AL FINAL; la rejilla conserva sus indices j*nx+i
+if _ter_m is not None and _ter_m.type == 'MESH' and len(_ter_m.data.vertices) >= T['nx'] * T['ny']:
     _co = [0.0] * (3 * len(_ter_m.data.vertices))
     _ter_m.data.vertices.foreach_get('co', _co)
     T = dict(T)
-    T['z'] = _co[2::3]
+    T['z'] = _co[2::3][:T['nx'] * T['ny']]
 KD_PISTA = KDTree(len(S))
 for _i, _q in enumerate(S):
     KD_PISTA.insert(Vector((_q['x'], _q['y'], 0.0)), _i)
@@ -841,7 +843,10 @@ SEND_TALUD = 0.6
 SEND_ANILLOS = (1.0, 2.0, 3.0)
 SEND_SUBIDA_MAX = 2.5      # relleno maximo de un nodo (se rellena hasta aqui aunque falte)
 SEND_SUBIDA_LIMITE = 4.0   # si falta mas que esto es una horquilla de ramas pegadas: esa condicion no rellena
-SEND_BAJADA_MAX = 2.5      # desmonte maximo de un nodo respecto a su cota de partida
+SEND_BAJADA_MAX = 4.0      # desmonte maximo de un nodo respecto a su cota de partida
+# (F1 r4, ACOTACIONES 3 'CAMINO_tierra.003': 2.5 -> 4.0. Con la ladera de F1 junto a la berma de pueblo_subida_ladera el nodo
+#  ladera arriba de (-272, 577) se quedaba en el tope -2.5 y 1 vertice de la cinta seguia con 0.24 m de hierba encima
+#  ('sendero_enterrado'); la bajada es 'lo justo' (solo el exceso de hierba de ese punto): el tope solo cambia esos nodos)
 SEND_APOYO = 0.45          # terraplen/muro/losa protegida a menos de esto bajo el borde: ya tiene apoyo
 
 

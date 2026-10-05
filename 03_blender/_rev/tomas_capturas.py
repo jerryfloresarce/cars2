@@ -24,13 +24,15 @@ import sys
 # nombre -> descripcion corta (se copia a camaras.json para el coordinador)
 TOMAS_NUEVAS = {
     '55_postal_tunel_salida': 'postal 1: piloto s 528 (dentro del tunel) mirando a s 610, lente 20: portal, talud, mar',
-    '56_postal_cima_bahia': 'postal 2: piloto s 1870 mirando al S (azimut con mas mar en 135-240 grados), lente 20',
+    '56_postal_cima_bahia': 'postal 2: piloto s 1870 mirando al S (azimut con mas mar en 135-240 grados), lente 20; hoy la tapa el '
+                            'macizo (ratificado por el coordinador 04/10: la camara NO se mueve, el bloque 1 la despeja con el "despeje de vista")',
     '57_postal_viaducto': 'postal 3: piloto s 3660 mirando a s 3760, lente 24: viaducto, lazo, mar',
     '58_postal_loews': 'postal 4: piloto s 3500 bajando, objetivo el centro de la Loews, lente 24',
     '59_postal_recta_puerto': 'postal 5: piloto s 60 mirando a s 140, lente 20: tribunas, puerto, McLaren',
     '59b_postal_recta_puerto_s5150': 'postal 5 variante: piloto s 5150 mirando 80 m adelante (s 30), lente 20',
     '60_puerto_llanta_cenital': 'cenital sobre el centro del puerto (PUERTO_dique / frame(60)+n*190) a 420 m, lente 35',
-    '61_orilla_piloto_s150': 'piloto s 150 girado 35 grados hacia el mar (lado del mar segun la rejilla), lente 24',
+    '61_orilla_piloto_s150': 'piloto s 150 girado 100 grados hacia el mar (lado del mar segun la rejilla), lente 24: dique y '
+                             'pantalanes tras la valla (con los 35 grados del esbozo el encuadre az 230-304 no contiene el dique, az 136-224)',
     '62_tribuna_piloto_s5100': 'piloto s 5100 girado 30 grados al lado +1 (izquierda): la grada del mar, lente 24',
     '63_horizonte_piloto_s2200': 'piloto en la cima de tierra (s 2200) mirando al mar (azimut con mas mar, 150-270), lente 20',
 }
@@ -450,7 +452,7 @@ def tomas_nuevas(G, bpy):
         p60 = fr(60)
         cx, cy = p60['x'] + p60['nx'] * 190, p60['y'] + p60['ny'] * 190
     tomas.append(('60_puerto_llanta_cenital', (cx, cy - 1.0, 420.0), (cx, cy, 0.0), 35))
-    tomas.append(('61_orilla_piloto_s150', *piloto_giro(150, 35, lado_mar(150), 24)))
+    tomas.append(('61_orilla_piloto_s150', *piloto_giro(150, 100, lado_mar(150), 24)))
     tomas.append(('62_tribuna_piloto_s5100', *piloto_giro(5100, 30, 1, 24)))
     tomas.append(('63_horizonte_piloto_s2200', *piloto_azimut(2200, 150, 270, 20)))
     return tomas

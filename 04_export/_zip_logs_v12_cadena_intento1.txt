@@ -1,0 +1,42 @@
+escena_rev.blend md5 31c18b1bf77ba551eafa288d44b9275f = el del cierre (ESCENA_MD5)
+2026-10-05 10:28:44 preparado desde 03_blender/_rev/escena_rev.blend (promovida)
+31c18b1bf77ba551eafa288d44b9275f *E:/Escritorio/claude-pc/arnau-aseto-corsa/04_export/_zip_src/escena_v12.blend
+24aff8fb7d5cd0a3b9810a8fa39978fc *E:/Escritorio/claude-pc/arnau-aseto-corsa/04_export/_zip_src/geometria_v12.json
+0f5eb96a15098e82741a080846589e61 *E:/Escritorio/claude-pc/arnau-aseto-corsa/04_export/_zip_src/texturas_v12/terreno_ao.png
+e529f19b525da4980a6f4dbc2470a02b *E:/Escritorio/claude-pc/arnau-aseto-corsa/04_export/_zip_src/texturas_v12/terreno_base.png
+3fa6290a8db95b80c782302cb00750c5 *E:/Escritorio/claude-pc/arnau-aseto-corsa/04_export/_zip_src/texturas_v12/terreno_mask.png
+escena: E:/Escritorio/claude-pc/arnau-aseto-corsa/04_export/_zip_src/escena_v12.blend (31c18b1b)  geometria: E:/Escritorio/claude-pc/arnau-aseto-corsa/04_export/_zip_src/geometria_v12.json  version 1.2  terreno detalle
+textura del terreno: E:/Escritorio/claude-pc/arnau-aseto-corsa/04_export/_zip_src/texturas_v12/terreno_base.png
+salidas: las de siempre (04_export/)
+
+===== [1/7] exportar_ac.py (cierre_ac)  (10:28:44)
+rampa garajes: 39 tramos, largo fila 116 m, desnivel 0.23..0.49 m, pendiente 6..13 %
+OK blend de export v2 guardado; mallas: 4979
+
+===== [2/7] kn5_writer_opt.py (color_ac, terreno detalle)  (10:29:02)
+terreno: modo detalle; UV planar {'x0': -932.9, 'y0': -907.8, 'Lx': 2068.0, 'Ly': 2060.0, 'fuente': 'GEOM geometria_v12.json', 'error_uv_m': 0.0, 'ajuste_uv': {'x0': -932.9, 'y0': -907.8, 'Lx': 2068.0, 'Ly': 2060.0}}
+AVISO: MAT_terreno pide ac_shader ksMultilayer_fresnel_nm: se ignora en v1.2 (multicapa pendiente de la foto del ensayo A); sale como ksPerPixelMultiMap
+texturas: 489 (41.8 MB, lado max 2048), materiales: 493, objetos: 4979 (AC 47, sueltos 2, fisica 1026, deco 3898) [10.5s]
+OK KN5 -> E:/Escritorio/claude-pc/arnau-aseto-corsa/04_export/kn5/porto_corsa_opt.kn5 (326.6 MB)
+
+===== [3/7] kn5_check.py (8 + 9 de shaders)  (10:29:22)
+   (1) OK    dummies AC_START/AC_PIT/AC_TIME/AC_HOTLAP con matriz y posiciones plausibles
+   (2) OK    mallas con prefijos 1ROAD_/1KERB_/1GRASS_/1WALL_
+   (3) OK    indices dentro de n_vertices y materialId dentro del rango de materiales
+   (4) OK    ninguna malla supera 65535 vertices
+   (5) OK    todas las texturas referenciadas por samplers existen en la tabla
+   (6) OK    bbox del circuito (mallas fisicas): Y (arriba) entre ~3 y ~150 m y plano XZ de ~1900 x 1800 m
+   (7) OK    normales de las mallas 1ROAD_ mayoritariamente hacia +Y (geometricas, ponderadas por area)
+   (8) OK    la lectura consume exactamente todos los bytes del fichero
+   (9) OK    shaders conocidos, samplers esperados por shader y texturas potencia de 2 <= 4096 (opcional)
+RESULTADO: OK
+
+===== [4/7] revisar_fisica_ac.py (puerta: 0 fallos)  (10:29:34)
+  terreno_hoyos_visibles                     [261, 0.65]
+PUERTA FISICA: OK (0 fallos)
+
+===== [5/7] kn5_vista.py (como AC sin CSP, leido del KN5)  (10:29:52)
+shaders en el KN5: ['ksPerPixel', 'ksPerPixelMultiMap']
+OK kn5_vista -> E:/Escritorio/claude-pc/arnau-aseto-corsa/03_blender/renders/ab/v12_como_ac (9 tomas, 22s)
+FALLO en el paso 5: mira 04_export/_zip_logs_v12/5_hoja.txt
+rc=1

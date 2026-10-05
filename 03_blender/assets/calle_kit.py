@@ -25,7 +25,9 @@ Piezas del kit:
 """
 
 import math
+import os
 import random
+import sys
 
 import bpy
 from mathutils import Vector
@@ -33,6 +35,13 @@ from mathutils import Vector
 PRE = 'CALLE'
 
 # ------------------------------------------------------------------ materiales
+# FASE VISUAL, paleta v2 (usuario 04/10): la terracota de las macetas y el acento de flores
+# (buganvilla #C2407A, "solo en pequenas dosis": las macetas de calle/balcon) salen de
+# 03_blender/paleta.json; el resto de colores del kit no cambia.
+_RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if _RAIZ not in sys.path:
+    sys.path.insert(0, _RAIZ)
+import paleta as _paleta  # noqa: E402
 
 # clave: (color, roughness, metallic, color_emision | None, fuerza_emision)
 _PALETA = {
@@ -44,11 +53,11 @@ _PALETA = {
     'band_blanco':  ((0.93, 0.91, 0.86), 0.55, 0.0, None, 0.0),
     'band_rojo':    ((0.78, 0.07, 0.05), 0.55, 0.0, None, 0.0),
     'verde_wgp':    ((0.04, 0.58, 0.18), 0.45, 0.0, None, 0.0),
-    'terracota':    ((0.72, 0.33, 0.16), 0.75, 0.0, None, 0.0),
+    'terracota':    (_paleta.rgb('terracota'), 0.75, 0.0, None, 0.0),       # paleta v2 #BF6440
     'tierra':       ((0.23, 0.15, 0.09), 0.95, 0.0, None, 0.0),
     'hojas':        ((0.10, 0.34, 0.09), 0.70, 0.0, None, 0.0),
     'flor_roja':    ((0.85, 0.05, 0.04), 0.50, 0.0, None, 0.0),
-    'flor_rosa':    ((0.93, 0.34, 0.48), 0.50, 0.0, None, 0.0),
+    'flor_rosa':    (_paleta.rgb('buganvilla'), 0.50, 0.0, None, 0.0),      # paleta v2: acento buganvilla
     'madera':       ((0.44, 0.27, 0.13), 0.70, 0.0, None, 0.0),
     'madera_clara': ((0.66, 0.48, 0.26), 0.70, 0.0, None, 0.0),
     'toldo_rojo':   ((0.80, 0.10, 0.07), 0.60, 0.0, None, 0.0),

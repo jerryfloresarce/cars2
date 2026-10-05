@@ -1,0 +1,142 @@
+{
+ "grupo": {
+  "entradas": [
+   "tono_base",
+   "tono_junta",
+   "periodo_m",
+   "bump",
+   "mojado",
+   "fase",
+   "contraste_bancos",
+   "grano",
+   "manchas",
+   "tono_pared",
+   "pared",
+   "ao_pared",
+   "fade_cerca_m",
+   "fade_lejos_m"
+  ],
+  "salidas": [
+   "Color",
+   "Normal",
+   "AO"
+  ],
+  "nodos": 84
+ },
+ "material_kit": {
+  "nodos_antes": 2,
+  "nodos_despues": 10,
+  "diffuse_color": [
+   0.5175,
+   0.4319,
+   0.2685
+  ]
+ },
+ "juntas_z_px": [
+  42,
+  124,
+  206,
+  287,
+  369
+ ],
+ "juntas": {
+  "n": 5,
+  "separacion_m_media": 3.02,
+  "separacion_m_min_max": [
+   2.99,
+   3.03
+  ]
+ },
+ "variacion_bandas": 0.151,
+ "medias": {
+  "repisa": [
+   0.6729,
+   0.5915,
+   0.4258
+  ],
+  "mitad": [
+   0.4975,
+   0.432,
+   0.3042
+  ],
+  "pared": [
+   0.3221,
+   0.2725,
+   0.1825
+  ]
+ },
+ "orientacion": {
+  "top_srgb": [
+   1.0,
+   1.0,
+   0.98
+  ],
+  "front_srgb": [
+   0.797,
+   0.259,
+   0.274
+  ],
+  "ratio_top": 0.505,
+  "ratio_front": 1.496
+ },
+ "roca_caras_mascara": {
+  "con_uv": 32,
+  "sin_uv": 32,
+  "cubo_vertical": 4
+ },
+ "v4": {
+  "tinte_caliza_d_05": [
+   1.0401,
+   0.9999,
+   0.8828
+  ],
+  "media_material": "#BEB08E",
+  "media_lineal": "#BBB096",
+  "S_media_material": 0.257,
+  "S_media_lineal": 0.199,
+  "caliza_grande": true
+ },
+ "lejos_region_px": [
+  365,
+  914,
+  305,
+  414
+ ],
+ "lejos": {
+  "std_con_fade": 0.0534,
+  "std_sin_fade": 0.0604,
+  "ratio": 0.885,
+  "frac_energia_kx_sin_fade": 0.32
+ },
+ "rasante": {
+  "spec_0": [
+   48,
+   0.168,
+   0.888,
+   "#E3DBBD"
+  ],
+  "spec_0_5": [
+   48,
+   0.138,
+   0.897,
+   "#E5DEC5"
+  ]
+ },
+ "pared_sol": [
+  46,
+  0.209,
+  0.755,
+  "#C1B798"
+ ],
+ "fallos": [],
+ "previews": [
+  "materiales_roca_pared.png",
+  "materiales_roca_detalle.png",
+  "materiales_roca_bancos.png",
+  "materiales_roca_orientacion.png",
+  "materiales_roca_lejos.png",
+  "materiales_roca_lejos_sin_fade.png",
+  "materiales_roca_rasante.png",
+  "materiales_roca_rasante_spec05.png"
+ ]
+}

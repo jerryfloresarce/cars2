@@ -24,6 +24,27 @@ variadas en la cordillera; cordal presente; ValueError con tipo desconocido;
 sin manchas de roca sueltas (< 12 caras) en los picos; el domo remata en
 casquete (normal.z media > 0.7 a 0.15 R del ápice); las lomas son TODO
 verdes (0 caras de roca en el pico) y la loma larga es una cresta >= 220 m.
+
+FASE VISUAL F1 (seccion 5, anillo de horizonte HORIZ_):
+  previews/montanas_v2_horizonte_planta.png    el anillo entero desde arriba
+                                               (abertura S/SO visible)
+  previews/montanas_v2_horizonte_oblicua.png   oblicua desde el S
+  previews/montanas_v2_horizonte_piloto_O.png  "piloto" a 40 m mirando al O
+                                               (como la toma 54): costa + pueblo
+  previews/montanas_v2_horizonte_piloto_S.png  "piloto" en la cima mirando al
+                                               SSO (como la 63): islotes + faro
+  blend/montanas_fondo_v2_horizonte.blend
+Comprueba: 4 + 5 cordilleras, 10 lomas (4 costa + 4 islotes + 2 'ventana': la
+de r3 en az 208 y la FIJA de r4 en az 200, 2650 m, 100 m de alto), 3
+pueblos, 1 faro; todo HORIZ_* sin padre; <= 250k tris en total; ningun vertice
+dentro de la rejilla del terreno (geometria_3d.json) ni bajo z = -8; ninguna
+cordillera con picos 'aguja' (r3) ni 'piramide'/'cresta' (r4: solo
+domo/lomo/meseta, picos romos; CFG_ANILLO r4 usa solo domo/lomo); cordilleras fuera de la abertura de 160
+grados y lomas de costa <= 13 grados dentro; islotes dentro; loma 'ventana'
+dentro y a >= 30 grados del centro de la abertura (r3); cobertura angular
+del arco de 200 grados >= 95 %; <= 16 materiales MAT_HORIZ_* con custom props
+ac_* y diffuse_color = Base Color = paleta mezclada con el cielo (recalculado
+desde paleta.json); fila cercana >= 60 % bosque, lejana >= 10 % cumbre.
 """
 
 import importlib.util
@@ -31,6 +52,7 @@ import json
 import math
 import os
 import sys
+import time
 import traceback
 
 import bpy
@@ -102,13 +124,13 @@ def mat_plano(nombre, color, rough=0.9):
     return m
 
 
-def suelo(sx, sy, color=(0.30, 0.47, 0.15), z=-0.02, centro=(0.0, 0.0)):
+def suelo(sx, sy, color=(0.30, 0.47, 0.15), z=-0.02, centro=(0.0, 0.0), nombre_mat="MAT_TEST_suelo"):
     me = bpy.data.meshes.new("TEST_suelo")
     cx, cy = centro
     me.from_pydata([(cx - sx, cy - sy, z), (cx + sx, cy - sy, z),
                     (cx + sx, cy + sy, z), (cx - sx, cy + sy, z)], [], [(0, 1, 2, 3)])
     me.update()
-    me.materials.append(mat_plano("MAT_TEST_suelo", color))
+    me.materials.append(mat_plano(nombre_mat, color))
     ob = bpy.data.objects.new("TEST_suelo", me)
     scene.collection.objects.link(ob)
     return ob
@@ -181,10 +203,10 @@ def luces(sol_dir=(-0.45, -0.62, -0.64)):
     scene.world = mundo
 
 
-def camara(pos, objetivo, lente=35.0):
+def camara(pos, objetivo, lente=35.0, clip=8000.0):
     cam_d = bpy.data.cameras.new("CAM")
     cam_d.lens = lente
-    cam_d.clip_end = 8000.0
+    cam_d.clip_end = clip
     cam = bpy.data.objects.new("CAM", cam_d)
     scene.collection.objects.link(cam)
     cam.location = Vector(pos)
@@ -577,6 +599,200 @@ caja((-130.0, 40.0, 0.0), 10.0)
 luces()
 camara((120.0, 300.0, 62.0), (-45.0, -45.0, 12.0), lente=35.0)
 render("montanas_v2_loma")
+
+# ---------------------------------------------------------------------------
+# 5) Anillo de horizonte (fase visual F1, bloque 7.1): HORIZ_*, MAT_HORIZ_*
+# ---------------------------------------------------------------------------
+LIM_ANILLO = 250000
+GEOM = os.path.normpath(os.path.join(BASE, os.pardir, "geometria_3d.json"))
+try:
+    _T = json.load(open(GEOM, encoding="utf-8"))["terreno"]
+    T = {k: _T[k] for k in ("x0", "y0", "cell", "nx", "ny")}
+    print("rejilla del terreno de", GEOM, T)
+except Exception as e:                       # sin geometria: la rejilla de la ronda 15
+    T = dict(x0=-932.9, y0=-907.8, cell=4.0, nx=517, ny=515)
+    print("sin geometria_3d.json (%s): rejilla fija %s" % (e, T))
+X0, Y0 = T["x0"], T["y0"]
+X1, Y1 = X0 + (T["nx"] - 1) * T["cell"], Y0 + (T["ny"] - 1) * T["cell"]
+CX, CY = (X0 + X1) * 0.5, (Y0 + Y1) * 0.5
+
+
+def dang(a, b):
+    """Distancia angular (grados, 0..180)."""
+    return abs((a - b + 180.0) % 360.0 - 180.0)
+
+
+limpiar()
+col = bpy.data.collections.new("HORIZONTE")
+scene.collection.children.link(col)
+t0 = time.time()
+anillo = mod.build_anillo_horizonte(col, terreno=T, seed=42)
+dt_anillo = time.time() - t0
+objs = anillo["objetos"]
+tris_anillo = anillo["tris"]
+resumen["tris"]["anillo_horizonte"] = tris_anillo
+resumen["anillo"] = {k: anillo[k] for k in ("tris", "materiales", "centro", "cielo", "abertura")}
+resumen["anillo"]["segundos"] = round(dt_anillo, 1)
+resumen["anillo"]["cordilleras"] = anillo["cordilleras"]
+resumen["anillo"]["lomas"] = anillo["lomas"]
+resumen["anillo"]["pueblos"] = anillo["pueblos"]
+resumen["anillo"]["faros"] = anillo["faros"]
+print("  anillo: %d objetos, %d tris, %d materiales, %.1f s, centro (%.0f, %.0f), cielo %s" %
+      (len(objs), tris_anillo, len(anillo["materiales"]), dt_anillo, *anillo["centro"],
+       tuple(round(c, 3) for c in anillo["cielo"])))
+ab = anillo["abertura"]
+c_mat = 90.0 - ab["centro_brujula"]
+semi_ab = ab["grados"] * 0.5
+print("  abertura: brujula %.1f (mat %.1f) +-%.1f -> anillo %.1f..%.1f (%.0f grados)" %
+      (ab["centro_brujula"], c_mat % 360.0, semi_ab, ab["anillo_ini"], ab["anillo_fin"], ab["arco"]))
+if tris_anillo > LIM_ANILLO:
+    fallo("anillo: %d tris > %d" % (tris_anillo, LIM_ANILLO))
+n_cord = len(anillo["cordilleras"]); n_lom = len(anillo["lomas"])
+if not (7 <= n_cord <= 9):
+    fallo("anillo: %d cordilleras (esperadas 7-9)" % n_cord)
+if not (6 <= n_lom <= 10):                   # F1 r3: 4 costa + 4 islotes + 1-2 'ventana' (director r2, menor 7)
+    fallo("anillo: %d lomas (esperadas 6-10)" % n_lom)
+# F1 r3 (director r2, cosmetico 10): sin picos de aguja en el horizonte (gendarmes alto/radio ~3.5 = agujas a 3-4.5 km)
+# F1 r4 (director r3, cosmetico 9): tampoco 'piramide' ni 'cresta' (triangulos de canto): solo domo / lomo / meseta
+for ob in objs:
+    if ob.name.startswith("HORIZ_cordillera"):
+        tipos_c = [t for t in str(ob.get("mont_tipos", "")).split(",") if t]
+        malos_t = sorted({t for t in tipos_c if t not in ("domo", "lomo", "meseta")})
+        if malos_t:
+            fallo("anillo: cordillera %s con picos de tipo %s (r4: solo domo/lomo/meseta)" % (ob.name, malos_t))
+        print("  %-22s tipos %s" % (ob.name, ob.get("mont_tipos")))
+# F1 r4: la loma FIJA de la acotacion 2 (az 200 = a_fin + 32.5, 2650 m, 120 m) existe y es la ultima del plan
+ventanas = [lo for lo in anillo["lomas"] if lo["clase"] == "ventana"]
+if len(ventanas) != 2:
+    fallo("anillo: %d lomas 'ventana' (esperadas 2: r3 az 208 + r4 az 200)" % len(ventanas))
+fijas = [lo for lo in ventanas if abs(lo["r"] - 2650.0) < 0.5 and abs(lo["alto"] - 100.0) < 0.5]
+if len(fijas) != 1 or abs(((fijas[0]["az"] - 200.0) + 180.0) % 360.0 - 180.0) > 0.5:
+    fallo("anillo: loma fija r4 (az 200, r 2650, alto 100) no encontrada: %s" % [(round(v["az"], 1), round(v["r"]), round(v["alto"])) for v in ventanas])
+elif anillo["lomas"][-1]["nombre"] != fijas[0]["nombre"]:
+    fallo("anillo: la loma fija r4 debe ser la ULTIMA del plan (no mover los sorteos de r3): %s" % fijas[0]["nombre"])
+if not (2 <= len(anillo["pueblos"]) <= 3):
+    fallo("anillo: %d pueblos (esperados 2-3)" % len(anillo["pueblos"]))
+if len(anillo["faros"]) != 1:
+    fallo("anillo: %d faros (esperado 1)" % len(anillo["faros"]))
+# objetos: nombre, sin padre, mallas, z, fuera de la rejilla, distancia al centro
+d_min_centro = 1e9
+for ob in objs:
+    if not ob.name.startswith("HORIZ_") or ob.type != "MESH" or ob.parent is not None:
+        fallo("anillo: objeto %s (%s, padre %s)" % (ob.name, ob.type, ob.parent))
+    mw = mod.matriz_mundo(ob)
+    zmin, zmax, dmin = 1e9, -1e9, 1e9
+    for v in ob.data.vertices:
+        w = mw @ v.co
+        zmin = min(zmin, w.z); zmax = max(zmax, w.z)
+        dmin = min(dmin, math.hypot(w.x - CX, w.y - CY))
+    d_min_centro = min(d_min_centro, dmin)
+    if zmin < Z_MIN_OK:
+        fallo("anillo/%s: zmin=%.2f < %.1f" % (ob.name, zmin, Z_MIN_OK))
+    print("  %-22s %-12s az=%6.1f r=%5.0f tris=%6d z=[%.1f, %.1f] d_centro_min=%.0f" %
+          (ob.name, ob.get("horiz_fila", "?"), ob.get("horiz_az", -1), ob.get("horiz_r", -1),
+           tris(ob), zmin, zmax, dmin))
+malos = mod._fuera_de_rejilla(objs, T)
+if malos:
+    fallo("anillo: vertices dentro de la rejilla del terreno: %s" % malos)
+if d_min_centro < math.hypot(X1 - X0, Y1 - Y0) * 0.5 + 200.0:
+    fallo("anillo: pieza a %.0f m del centro (< semidiagonal de la rejilla + 200)" % d_min_centro)
+resumen["anillo"]["d_min_centro"] = round(d_min_centro)
+# abertura: cordilleras fuera (todo su arco), lomas de costa <= 13 grados dentro, islotes dentro
+intervalos = []
+for c in anillo["cordilleras"]:
+    semi = math.degrees(0.5 * c["largo"] / c["r"])
+    if dang(c["az"], c_mat) - semi < semi_ab - 3.0:
+        fallo("anillo: cordillera %s (az %.1f +-%.1f) invade la abertura" % (c["nombre"], c["az"], semi))
+    intervalos.append((c["az"] - semi, c["az"] + semi))
+for lo in anillo["lomas"]:
+    d = dang(lo["az"], c_mat)
+    if lo["clase"] == "islote" and d > semi_ab - 15.0:
+        fallo("anillo: islote %s (az %.1f) fuera de la abertura" % (lo["nombre"], lo["az"]))
+    if lo["clase"] == "ventana":
+        # F1 r3: dentro de la abertura pero a >= 30 grados de su centro (63/56 siguen mirando a mar abierto)
+        if not (30.0 <= d <= semi_ab - 5.0):
+            fallo("anillo: loma ventana %s (az %.1f) a %.1f grados del centro de la abertura (debe estar en 30..%.0f)" %
+                  (lo["nombre"], lo["az"], d, semi_ab - 5.0))
+    elif lo["clase"] != "islote" and d < semi_ab - 13.0:
+        fallo("anillo: loma %s (az %.1f) entra %.1f grados en la abertura (> 13)" %
+              (lo["nombre"], lo["az"], semi_ab - d))
+    if lo["clase"] not in ("islote", "ventana"):
+        semi = math.degrees(0.5 * (lo["largo"] or 2 * lo["radio"]) / lo["r"])
+        intervalos.append((lo["az"] - semi, lo["az"] + semi))
+# cobertura angular del arco [anillo_ini, anillo_fin] por cordilleras + lomas (muestreo de 1 grado)
+a0 = ab["anillo_ini"]
+cubiertos = 0
+for k in range(int(ab["arco"])):
+    a = a0 + k + 0.5
+    if any(dang(a, (i0 + i1) * 0.5) <= (i1 - i0) * 0.5 for (i0, i1) in intervalos):
+        cubiertos += 1
+cobertura = cubiertos / max(int(ab["arco"]), 1)
+resumen["anillo"]["cobertura_arco"] = round(cobertura, 3)
+print("  cobertura angular del arco: %.1f %%" % (cobertura * 100.0))
+if cobertura < 0.95:
+    fallo("anillo: cobertura angular %.1f %% < 95 %%" % (cobertura * 100.0))
+# materiales: nombre, cantidad, props ac_*, diffuse = base color = paleta mezclada con el cielo
+mats = [bpy.data.materials[n] for n in anillo["materiales"]]
+if len(mats) > 16:
+    fallo("anillo: %d materiales MAT_HORIZ_* (> 16)" % len(mats))
+cielo = anillo["cielo"]
+for m in mats:
+    if not m.name.startswith("MAT_HORIZ_"):
+        fallo("anillo: material %s sin prefijo MAT_HORIZ_" % m.name)
+    for k in ("ac_shader", "ac_props", "ac_samplers", "ac_tex_max", "ac_alpha_test", "ac_raw"):
+        if k not in m.keys():
+            fallo("anillo: material %s sin custom prop %s" % (m.name, k))
+    bs = next((n for n in m.node_tree.nodes if n.type == "BSDF_PRINCIPLED"), None)
+    bc = tuple(bs.inputs["Base Color"].default_value[:3]) if bs else None
+    dc = tuple(m.diffuse_color[:3])
+    if bc is None or bs.inputs["Base Color"].is_linked or max(abs(a - b) for a, b in zip(bc, dc)) > 1e-4:
+        fallo("anillo: material %s: Base Color %s != diffuse_color %s (o enlazado)" % (m.name, bc, dc))
+    esperado = mod.mezcla_cielo(tuple(m["horiz_base_rgb"]), float(m["horiz_dist_m"]), cielo)
+    if max(abs(a - b) for a, b in zip(esperado, dc)) > 1e-4:
+        fallo("anillo: material %s: color %s != paleta mezclada %s" % (m.name, dc, esperado))
+    print("  %-32s diffuse=%s base=%s d=%.0f shader=%s" %
+          (m.name, tuple(round(c, 3) for c in dc), tuple(round(c, 3) for c in m["horiz_base_rgb"]),
+           m["horiz_dist_m"], m["ac_shader"]))
+# reparto bosque / cumbre por fila
+for fila, minimo, es_bosque in (("cerca", 0.60, True), ("lejos", 0.10, False)):
+    n_b = n_t = 0
+    for ob in objs:
+        if ob.get("horiz_fila") != fila:
+            continue
+        for p in ob.data.polygons:
+            n_t += 1
+            if "bosque" in ob.data.materials[p.material_index].name:
+                n_b += 1
+    frac = (n_b if es_bosque else n_t - n_b) / max(n_t, 1)
+    print("  fila %s: %.1f %% de caras de %s" % (fila, frac * 100.0, "bosque" if es_bosque else "cumbre"))
+    if frac < minimo:
+        fallo("anillo: fila %s con solo %.1f %% de %s (< %.0f %%)" %
+              (fila, frac * 100.0, "bosque" if es_bosque else "cumbre", minimo * 100.0))
+for pu in anillo["pueblos"]:
+    if pu["tris"] > 300:
+        fallo("anillo: pueblo %s con %d tris (> 300)" % (pu["nombre"], pu["tris"]))
+for fa in anillo["faros"]:
+    if fa["tris"] > 200 or fa["z"] < 30.0:
+        fallo("anillo: faro %s con %d tris o z=%.1f (debe estar en la cima del islote)" %
+              (fa["nombre"], fa["tris"], fa["z"]))
+# previews: mar + sol + cielo
+suelo(12000.0, 12000.0, color=(0.03, 0.18, 0.38), z=-0.02, centro=(CX, CY), nombre_mat="MAT_TEST_mar")
+caja((CX, CY, 0.0), 100.0)
+luces()
+camara((CX, CY - 1.0, 7000.0), (CX, CY, 0.0), lente=20.0, clip=20000.0)
+render("montanas_v2_horizonte_planta")
+camara((CX + 300.0, CY - 6500.0, 2600.0), (CX, CY + 800.0, 0.0), lente=24.0, clip=20000.0)
+render("montanas_v2_horizonte_oblicua")
+az54 = math.radians(190.0)
+camara((CX + 20.0, CY - 790.0, 40.0), (CX + 20.0 + math.cos(az54) * 100.0, CY - 790.0 + math.sin(az54) * 100.0, 30.0),
+       lente=24.0, clip=12000.0)
+render("montanas_v2_horizonte_piloto_O")
+az63 = math.radians(240.0)
+camara((CX - 20.0, CY + 180.0, 120.0), (CX - 20.0 + math.cos(az63) * 100.0, CY + 180.0 + math.sin(az63) * 100.0, 108.0),
+       lente=20.0, clip=12000.0)
+render("montanas_v2_horizonte_piloto_S")
+bpy.ops.wm.save_as_mainfile(filepath=os.path.join(BASE, "blend", "montanas_fondo_v2_horizonte.blend"))
+print("BLEND:", os.path.join(BASE, "blend", "montanas_fondo_v2_horizonte.blend"))
 
 # ---------------------------------------------------------------------------
 print("RESUMEN_JSON " + json.dumps(resumen))

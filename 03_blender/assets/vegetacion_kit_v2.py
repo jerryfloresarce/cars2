@@ -64,7 +64,9 @@ familia. Presupuesto: <= 1200 tris por árbol, <= 500 por arbusto.
 """
 
 import math
+import os
 import random
+import sys
 
 import bpy
 from mathutils import Vector
@@ -74,80 +76,109 @@ TAU = 2.0 * math.pi
 
 # ---------------------------------------------------------------------------
 # Paleta plana estilo Cars 2 (color lineal, roughness)
+# FASE VISUAL F1 (bloque 3 punto 1): las COPAS (pino, cipres, encina, olivo, adelfa, arbustos, palmera,
+# platano, colgante) salen de 03_blender/paleta.json: oliva_oscuro / salvia y sus variantes de luminancia
+# (paleta.variante) o mezclas entre colores de la paleta; antes eran verdes cesped (51_piloto_s1700).
+# Las rocas/caliza del kit tambien (caliza_ocre, caliza_gris_calido, caliza_sombra). Troncos no cambian.
+# PALETA v2 (usuario 04/10): cipreses y pinos oscuros (pino_a, pino_b) en cipres_pino_oscuro #34503A con la
+# misma variacion por instancia (tonos a/b + _luz); pino_c queda como variante oliva mas clara. BUGANVILLA
+# #C2407A solo como ACENTO: flores de la adelfa rosa (flor_rosa / flor_rosa_clara) y un 12 % de los arbustos
+# con flor (build_arbusto, sorteo propio por seed); el resto de flores no cambia.
 # ---------------------------------------------------------------------------
+_RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if _RAIZ not in sys.path:
+    sys.path.insert(0, _RAIZ)
+import paleta as _paleta  # noqa: E402
+
+
+def _v(nombre, lum=1.0):
+    return _paleta.variante(nombre, lum)
+
+
+def _mez(c1, c2, t):
+    """Mezcla lineal entre dos colores de la paleta (t = peso del segundo)."""
+    return tuple(a * (1.0 - t) + b * t for a, b in zip(c1, c2))
+
+
+_OLIVA = _paleta.rgb('oliva_oscuro')
+_SALVIA = _paleta.rgb('salvia')
+_SECA = _paleta.rgb('hierba_seca')
+_CIP = _paleta.rgb('cipres_pino_oscuro')       # paleta v2: cipres y pino oscuro #34503A
+_BUGANVILLA = _paleta.rgb('buganvilla')        # paleta v2: acento de flores #C2407A (pequenas dosis)
 _PALETA = {
     # --- v1 (se mantienen) ---
     "tronco_palmera": ((0.38, 0.24, 0.11), 0.90),
-    "palma":          ((0.07, 0.42, 0.10), 0.75),
-    "palma_clara":    ((0.15, 0.55, 0.15), 0.75),
+    "palma":          (_mez(_v('oliva_oscuro', 1.25), _SALVIA, 0.35), 0.75),
+    "palma_clara":    (_mez(_v('oliva_oscuro', 1.5), _v('salvia', 1.15), 0.5), 0.75),
     "coco":           ((0.45, 0.28, 0.10), 0.85),
-    "cipres":         ((0.043, 0.20, 0.065), 0.80),
+    "cipres":         (_CIP, 0.80),
     "tronco":         ((0.30, 0.17, 0.08), 0.90),
-    "pino":           ((0.10, 0.35, 0.09), 0.80),
-    "adelfa_hoja":    ((0.10, 0.32, 0.10), 0.80),
-    "flor_rosa":      ((0.92, 0.28, 0.50), 0.60),
-    "flor_rosa_clara": ((0.97, 0.55, 0.68), 0.60),
+    "pino":           (_CIP, 0.80),
+    "adelfa_hoja":    (_mez(_OLIVA, _SALVIA, 0.3), 0.80),
+    "flor_rosa":      (_BUGANVILLA, 0.60),                        # adelfa rosa -> buganvilla (acento)
+    "flor_rosa_clara": (_v('buganvilla', 1.6), 0.60),
+    "buganvilla":     (_BUGANVILLA, 0.60),                        # acento del 12 % de los arbustos con flor
     "flor_roja":      ((0.80, 0.06, 0.08), 0.60),
-    "piedra":         ((0.63, 0.53, 0.35), 0.90),
-    "tierra":         ((0.28, 0.19, 0.11), 1.00),
-    "roca":           ((0.48, 0.39, 0.24), 0.95),
-    "caliza_clara":   ((0.72, 0.58, 0.34), 0.95),
-    "caliza_ocre":    ((0.55, 0.40, 0.20), 0.95),
-    "caliza_gris":    ((0.56, 0.50, 0.38), 0.95),
-    "colgante":       ((0.13, 0.38, 0.12), 0.80),
-    # --- v2: pinos (tres tonos + claro) ---
-    "pino_a":         ((0.10, 0.35, 0.09), 0.80),
-    "pino_a_luz":     ((0.17, 0.45, 0.13), 0.80),
-    "pino_b":         ((0.08, 0.30, 0.13), 0.80),
-    "pino_b_luz":     ((0.13, 0.40, 0.17), 0.80),
-    "pino_c":         ((0.14, 0.36, 0.06), 0.80),
-    "pino_c_luz":     ((0.22, 0.47, 0.09), 0.80),
-    "pino_joven":     ((0.18, 0.48, 0.12), 0.80),
-    "pino_joven_luz": ((0.27, 0.58, 0.16), 0.80),
-    # --- v2: cipreses ---
-    "cipres_luz":     ((0.075, 0.27, 0.09), 0.80),
-    "cipres_b":       ((0.06, 0.22, 0.11), 0.80),
-    "cipres_b_luz":   ((0.10, 0.30, 0.14), 0.80),
-    # --- v2: palmeras ---
-    "palma_wash":     ((0.12, 0.46, 0.14), 0.75),
-    "palma_wash_clara": ((0.20, 0.56, 0.18), 0.75),
-    "palma_seca":     ((0.50, 0.38, 0.18), 0.95),
-    "palma_abanico":  ((0.10, 0.40, 0.17), 0.75),
-    "palma_abanico_clara": ((0.19, 0.52, 0.21), 0.75),
+    "piedra":         (_v('caliza_ocre', 1.25), 0.90),
+    "tierra":         (_v('tierra', 0.55), 1.00),
+    "roca":           (_paleta.rgb('caliza_ocre'), 0.95),
+    "caliza_clara":   (_v('caliza_ocre', 1.2), 0.95),
+    "caliza_ocre":    (_paleta.rgb('caliza_ocre'), 0.95),
+    "caliza_gris":    (_paleta.rgb('caliza_gris_calido'), 0.95),
+    "colgante":       (_mez(_OLIVA, _SALVIA, 0.4), 0.80),
+    # --- v2: pinos (tres tonos + claro): paleta v2 pino oscuro (a, b) y una variante oliva (c) ---
+    "pino_a":         (_CIP, 0.80),                                                     # pino oscuro #34503A
+    "pino_a_luz":     (_v('cipres_pino_oscuro', 1.45), 0.80),
+    "pino_b":         (_mez(_CIP, _paleta.rgb('mar_profundo'), 0.08), 0.80),            # un punto mas azulado
+    "pino_b_luz":     (_mez(_v('cipres_pino_oscuro', 1.4), _paleta.rgb('mar_profundo'), 0.08), 0.80),
+    "pino_c":         (_mez(_CIP, _OLIVA, 0.45), 0.80),                                 # un punto mas oliva/dorado
+    "pino_c_luz":     (_mez(_v('cipres_pino_oscuro', 1.4), _v('oliva_oscuro', 1.2), 0.45), 0.80),
+    "pino_joven":     (_mez(_v('oliva_oscuro', 1.2), _SALVIA, 0.45), 0.80),
+    "pino_joven_luz": (_mez(_v('oliva_oscuro', 1.4), _v('salvia', 1.15), 0.5), 0.80),
+    # --- v2: cipreses (paleta v2 cipres_pino_oscuro; _luz = +35..45 % de luminancia) ---
+    "cipres_luz":     (_v('cipres_pino_oscuro', 1.4), 0.80),
+    "cipres_b":       (_v('cipres_pino_oscuro', 0.9), 0.80),   # F1 cierre (decision 14): paleta pura (antes mezcla con mar_profundo #335144)
+    "cipres_b_luz":   (_mez(_v('cipres_pino_oscuro', 1.45), _paleta.rgb('mar_profundo'), 0.06), 0.80),
+    # --- v2: palmeras (algo mas verdes que el pino: salvia + oliva) ---
+    "palma_wash":     (_mez(_v('oliva_oscuro', 1.3), _SALVIA, 0.4), 0.75),
+    "palma_wash_clara": (_mez(_v('oliva_oscuro', 1.5), _v('salvia', 1.2), 0.5), 0.75),
+    "palma_seca":     (_v('hierba_seca', 0.9), 0.95),
+    "palma_abanico":  (_mez(_v('oliva_oscuro', 1.2), _SALVIA, 0.35), 0.75),
+    "palma_abanico_clara": (_mez(_v('oliva_oscuro', 1.45), _v('salvia', 1.1), 0.45), 0.75),
     "datil":          ((0.78, 0.40, 0.10), 0.70),
     "tronco_wash":    ((0.44, 0.34, 0.22), 0.90),
     "tronco_abanico": ((0.32, 0.21, 0.11), 0.95),
     # --- v2: adelfas ---
-    "adelfa_hoja_b":  ((0.13, 0.36, 0.14), 0.80),
+    "adelfa_hoja_b":  (_mez(_OLIVA, _SALVIA, 0.45), 0.80),
     "flor_blanca":    ((0.95, 0.93, 0.85), 0.60),
     "flor_crema":     ((0.98, 0.90, 0.70), 0.60),
     "flor_roja_clara": ((0.92, 0.22, 0.20), 0.60),
-    # --- v2: olivo ---
+    # --- v2: olivo (salvia) ---
     "tronco_olivo":   ((0.36, 0.28, 0.18), 0.95),
-    "olivo_salvia":   ((0.19, 0.33, 0.15), 0.80),
-    "olivo_plata":    ((0.29, 0.42, 0.25), 0.80),
-    # --- v2: encina ---
+    "olivo_salvia":   (_v('salvia', 0.85), 0.80),
+    "olivo_plata":    (_v('salvia', 1.15), 0.80),
+    # --- v2: encina (oliva oscuro, algo mas apagado) ---
     "tronco_encina":  ((0.22, 0.15, 0.09), 0.95),
-    "encina":         ((0.07, 0.24, 0.08), 0.80),
-    "encina_luz":     ((0.11, 0.31, 0.11), 0.80),
-    "encina_b":       ((0.09, 0.26, 0.10), 0.80),
-    "encina_b_luz":   ((0.14, 0.34, 0.13), 0.80),
-    # --- v2: plátano ---
+    "encina":         (_v('oliva_oscuro', 0.8), 0.80),
+    "encina_luz":     (_v('oliva_oscuro', 1.05), 0.80),
+    "encina_b":       (_mez(_v('oliva_oscuro', 0.85), _SALVIA, 0.15), 0.80),
+    "encina_b_luz":   (_mez(_v('oliva_oscuro', 1.1), _SALVIA, 0.2), 0.80),
+    # --- v2: plátano (el mas claro: salvia dorada) ---
     "tronco_platano": ((0.36, 0.33, 0.25), 0.90),
     "tronco_platano_claro": ((0.56, 0.54, 0.42), 0.90),
-    "platano":        ((0.28, 0.55, 0.16), 0.75),
-    "platano_luz":    ((0.40, 0.66, 0.22), 0.75),
-    "platano_b":      ((0.24, 0.50, 0.20), 0.75),
-    "platano_b_luz":  ((0.36, 0.62, 0.26), 0.75),
-    # --- v2: arbustos ---
-    "romero":         ((0.19, 0.31, 0.19), 0.85),
-    "romero_luz":     ((0.27, 0.40, 0.26), 0.85),
+    "platano":        (_mez(_SALVIA, _SECA, 0.2), 0.75),
+    "platano_luz":    (_mez(_v('salvia', 1.25), _SECA, 0.25), 0.75),
+    "platano_b":      (_mez(_v('salvia', 0.9), _OLIVA, 0.3), 0.75),
+    "platano_b_luz":  (_mez(_v('salvia', 1.15), _OLIVA, 0.2), 0.75),
+    # --- v2: arbustos (salvia y oliva) ---
+    "romero":         (_mez(_v('oliva_oscuro', 1.1), _SALVIA, 0.4), 0.85),
+    "romero_luz":     (_mez(_v('oliva_oscuro', 1.3), _v('salvia', 1.1), 0.5), 0.85),
     "flor_romero":    ((0.60, 0.70, 0.92), 0.60),
-    "lavanda":        ((0.38, 0.48, 0.35), 0.85),
-    "lavanda_luz":    ((0.48, 0.58, 0.44), 0.85),
+    "lavanda":        (_mez(_v('salvia', 1.1), _paleta.rgb('caliza_gris_calido'), 0.25), 0.85),
+    "lavanda_luz":    (_mez(_v('salvia', 1.3), _paleta.rgb('caliza_gris_calido'), 0.25), 0.85),
     "flor_lavanda":   ((0.45, 0.25, 0.72), 0.60),
-    "retama":         ((0.30, 0.48, 0.16), 0.85),
-    "retama_luz":     ((0.40, 0.58, 0.20), 0.85),
+    "retama":         (_SALVIA, 0.85),   # F1 cierre (decision 14): salvia de paleta (antes mezcla salvia/hierba_seca #A5A77F)
+    "retama_luz":     (_mez(_v('salvia', 1.2), _SECA, 0.35), 0.85),
     "flor_amarilla":  ((0.96, 0.80, 0.08), 0.55),
 }
 
@@ -931,6 +962,10 @@ def build_arbusto(parent_collection, tam=1.5, seed=0, variante=None):
             # un barril), flores amarillas grandes y abundantes
         h, mats, flor, nfl, esc_fl, r_fl = 0.85, ("retama", "retama_luz"), "flor_amarilla", 16, (1, 1, 1), (0.06, 0.08)
         nb_r, rr, dd, ez_max, cz = (6, 7), (0.30, 0.42), (0.30, 0.65), 1.2, (0.75, 0.95)
+    # paleta v2: un 12 % de los arbustos con flor llevan buganvilla (acento, pequenas dosis);
+    # sorteo con generador propio por seed: la geometria del arbusto no cambia
+    if random.Random(7919 * seed + 67).random() < 0.12:
+        flor = "buganvilla"
     m0, m1 = _mat(mats[0]), _mat(mats[1])
     R = tam / 2.0
     nb = rng.randint(*nb_r)

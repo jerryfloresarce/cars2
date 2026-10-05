@@ -9,6 +9,7 @@ import math
 import os
 import random
 import sys
+import zlib
 
 import bpy
 from mathutils import Vector
@@ -27,7 +28,18 @@ N = G['n']
 paso = G['paso_m']
 L = G['largo_m']
 CURVAS = {c['n']: c for c in G['curvas']}
-rnd = random.Random(42)
+# fase visual F1 r4 (ACOTACIONES_COORDINADOR_F1.md 3, director_f1_r3.md 1): RNG DETERMINISTA POR ZONA. Antes habia UNA
+# secuencia global (Random(42)) que recorrian todas las zonas en orden: un arbol mas o menos en zona_tierra (porque el
+# terreno de F1 cambia un sitio) desplazaba los sorteos de TODAS las zonas siguientes (palmeras de la recta, olivos del
+# lazo...) y la puerta media sorteos en vez de cambios (11 de 27 fallos de revisar_urbanismo en terreno identico). Ahora
+# safe() resiembra `rnd` (y el modulo random) al entrar en cada zona con semilla = crc32('<SEMILLA_GLOBAL>:<nombre de la
+# zona>') & 0x7fffffff (zlib: estable entre procesos; hash() de Python no lo es): lo que pase en una zona ya no mueve las demas.
+SEMILLA_GLOBAL = 42
+rnd = random.Random(SEMILLA_GLOBAL)
+
+
+def _semilla_zona(nombre):
+    return zlib.crc32(('%d:%s' % (SEMILLA_GLOBAL, nombre)).encode('utf-8')) & 0x7fffffff
 
 # --- modulos ---
 # versiones v2 de los modulos (ronda 10): solo se usan las APROBADAS tras revisar
@@ -87,6 +99,15 @@ def _mat_simple(nombre, rgba, rough=0.9):
         bs.inputs['Roughness'].default_value = rough
     return m
 
+# F1 r4 (ACOTACIONES 3, director_f1_r3.md 1: OLI_olivo.160, VEG_cipres.282, VEG_pino.186... 'objeto_salto_grande'): los
+# arboles se plantan a la cota del terreno de ESE momento y despues las zonas siguientes tallan el TERRENO debajo (banqueta
+# de los senderos, plazuelas, explanadas): las 11 'dudosas' de asentar en r3 estaban plantadas a z_terreno - 0.15 de
+# preparar_geometria y el terreno final quedo 2-8 m mas arriba o abajo. clone() apunta (objeto, x, y, z, z_terreno) de las
+# raices VEG_/OLI_ y reasentar_tras_tallas() (antes de despeje_final) les suma lo que se ha movido el terreno bajo ellas.
+REASENTAR_PREF = ('VEG_', 'OLI_')
+_SUELO_REG = []
+
+
 def clone(root, loc, rot_z=0.0, scale=1.0, pitch=0.0):
     mapping = {}
     for ob in hierarchy(root):
@@ -98,6 +119,10 @@ def clone(root, loc, rot_z=0.0, scale=1.0, pitch=0.0):
             nb.parent = mapping[ob.parent]
     nr = mapping[root]
     nr.location = Vector(loc)
+    if nr.name.startswith(REASENTAR_PREF):
+        # F1 r4: se apunta la cota del terreno bajo el arbol al plantarlo (ver reasentar_tras_tallas)
+        _SUELO_REG.append((nr, float(nr.location.x), float(nr.location.y), float(nr.location.z),
+                           z_terreno(nr.location.x, nr.location.y)))
     nr.rotation_euler = (0, pitch, rot_z)
     if scale != 1.0:
         nr.scale = (scale, scale, scale)
@@ -239,6 +264,12 @@ def log(msg):
 
 errores = []
 def safe(nombre, fn):
+    # F1 r4 (ACOTACIONES 3): cada zona arranca con su propia semilla (ver SEMILLA_GLOBAL): sus sorteos no dependen de cuantos
+    # numeros hayan gastado las zonas anteriores. 'rnd' es el MISMO objeto que reciben urbanismo_escena y los kits (se resiembra
+    # en sitio); el modulo random tambien, por si un kit lo usara sin instancia propia.
+    sem = _semilla_zona(nombre)
+    rnd.seed(sem)
+    random.seed(sem)
     try:
         fn()
         log('OK ' + nombre)
@@ -308,6 +339,8 @@ def build_library():
     lib['hotel'] = cv.build_hotel(LIB)
     lib['ayuntamiento'] = cv.build_ayuntamiento(LIB)
     lib['campanile'] = cv.build_campanile(LIB)
+log('RNG determinista por zona (F1 r4): semilla = crc32("%d:<zona>") & 0x7fffffff; p. ej. zona_montana %d, zona_tierra %d'
+    % (SEMILLA_GLOBAL, _semilla_zona('zona_montana'), _semilla_zona('zona_tierra')))
 safe('biblioteca', build_library)
 
 # ============ META / PUERTO ============
@@ -894,11 +927,12 @@ def zona_torres_pit():
     log('pit: %d torres de control sobre explanada (%d con pedestal)' % (len(PIT_INFO.get('torres', [])), n_p))
 safe('torres_pit', zona_torres_pit)
 
-def tallar_circulo(cx, cy, r, zb, desmonte=1.0, alcance=18.0):
+def tallar_circulo(cx, cy, r, zb, desmonte=1.0, alcance=18.0, probar=False):
     """Explanada circular a la cota zb (desmonte 1:1 alrededor): plazuelas al pie de la ladera.
     v1 integrador (G9): mas alla de `alcance` el talud sigue (1:2) hasta 2.5*alcance para cerrar contra la
     ladera; si aun asi el ultimo anillo exige cortar mas de 0.3 m (ladera de > 100 %), NO se talla nada y
-    devuelve -1 (el que llama descarta la plazuela): antes quedaba un escalon vertical de 10-13 m."""
+    devuelve -1 (el que llama descarta la plazuela): antes quedaba un escalon vertical de 10-13 m.
+    F1 r4: probar=True solo dice si se puede (-1 / n de celdas) sin tocar el terreno (zona_edicolas prueba variantes)."""
     ter = bpy.data.objects.get('TERRENO')
     ext = 2.5 * alcance
     i0 = max(0, int((cx - r - ext - T['x0']) / T['cell'])); i1 = min(T['nx'] - 1, int((cx + r + ext - T['x0']) / T['cell']) + 1)
@@ -930,6 +964,8 @@ def tallar_circulo(cx, cy, r, zb, desmonte=1.0, alcance=18.0):
                 cambios.append((k, z, z_new))
     if peor_borde > 0.3:
         return -1
+    if probar:
+        return len(cambios)
     for (k, z, z_new) in cambios:
         _poner_celda(ter, k, z, z_new)
     return len(cambios)
@@ -1264,7 +1300,9 @@ def zona_edicolas():
         return False
     n_ = 0
     n_muro_av = 0
+    n_alt = 0
     hechos = []
+    casas_raiz = [o for o in root_col.objects if o.parent is None and o.name.startswith('CASAS_')]
     for (x, y, z, dx, dy) in puntos:
         if any(math.hypot(x - a, y - b) < 14.0 for (a, b) in hechos):
             continue
@@ -1282,12 +1320,30 @@ def zona_edicolas():
             elegida = (4.5, x + dx * 3.7, y + dy * 3.7)
             log('edicolas: AVISO plazuela en (%.0f, %.0f) con un muro cruzando (sin variante libre)' % (x, y))
         r, cx_, cy_ = elegida
+        # F1 r4 (ACOTACIONES 3, 'muro perdido de URB_travesias_0_1'): antes solo se probaba la PRIMERA variante sin muro y,
+        # si no se podia tallar (ultimo anillo de tallar_circulo a 45 m: la ladera de F1 sube 2-5 m por encima del talud
+        # 1:2), el extremo se quedaba sin plazuela -> 'camino_sin_destino' en (-488, 505) (en la base la variante 4.5/0
+        # pasaba por 0.26 m). Ahora, si la elegida falla, se prueban las demas (sin muro) y dos de r 3.2 m, en seco.
+        def _sitio_ok(r_, cx__, cy__):
+            return (not _bajo_roca(cx__, cy__, z)
+                    and not any(math.hypot(cx__ - o.location.x, cy__ - o.location.y) < r_ + 4.0 for o in casas_raiz)
+                    and pendiente_terreno(cx__, cy__) <= 0.8 and tallar_circulo(cx__, cy__, r_, z, probar=True) >= 0)
+        if not _sitio_ok(r, cx_, cy_):
+            for (r_v, sh_v) in variantes + [(3.2, 0.0), (3.2, 1.5)]:
+                cxv, cyv = x + dx * (r_v - 0.8 + sh_v), y + dy * (r_v - 0.8 + sh_v)
+                if _muro_en_disco(cxv, cyv, r_v, z) or not _sitio_ok(r_v, cxv, cyv):
+                    continue
+                r, cx_, cy_ = r_v, cxv, cyv
+                n_alt += 1
+                log('edicolas: plazuela de (%.0f, %.0f) con la variante r %.1f m / +%.1f m (la primera no se podia tallar)' % (x, y, r_v, sh_v))
+                break
         if _bajo_roca(cx_, cy_, z):
             continue          # nunca bajo un saliente de roca (el morro del McLaren)
-        if any(math.hypot(cx_ - o.location.x, cy_ - o.location.y) < r + 4.0 for o in root_col.objects
-               if o.parent is None and o.name.startswith('CASAS_')):
+        if any(math.hypot(cx_ - o.location.x, cy_ - o.location.y) < r + 4.0 for o in casas_raiz):
+            log('edicolas: sin plazuela en (%.0f, %.0f): casa a < r + 4 m' % (x, y))
             continue
         if pendiente_terreno(cx_, cy_) > 0.8 or tallar_circulo(cx_, cy_, r, z) < 0:
+            log('edicolas: sin plazuela en (%.0f, %.0f): ladera (pendiente %.2f) o talud que no cierra' % (x, y, pendiente_terreno(cx_, cy_)))
             continue          # v1 (G9): ladera demasiado fuerte para tallar la plazuela sin dejar un escalon
         circ = [(r * math.cos(2 * math.pi * k / 18), r * math.sin(2 * math.pi * k / 18)) for k in range(18)]
         # v2 integrador (C2-12): sin hierba por encima de la losa (garantia sobre la malla real) y canto VARIABLE
@@ -1317,7 +1373,8 @@ def zona_edicolas():
         n_ += 1
     if bpy.data.objects.get('TERRENO') is not None:
         bpy.data.objects['TERRENO'].data.update()
-    log('edicolas: %d plazuelas con capillita al final de calles/salidas sin destino (%d con muro cruzando)' % (n_, n_muro_av))
+    log('edicolas: %d plazuelas con capillita al final de calles/salidas sin destino (%d con muro cruzando, %d con variante '
+        'alternativa F1 r4)' % (n_, n_muro_av, n_alt))
 
 PUERTO_INFO = {}
 def zona_puerto():
@@ -1697,14 +1754,20 @@ def _d_borde_cualquiera(x, y):
                 best = min(best, math.hypot(x - S[_i]['x'], y - S[_i]['y']) - S[_i]['w'] / 2.0)
     return best
 
-def _sitio_lejos_pista(s_m, side, off, d_min=12.0):
+def _sitio_lejos_pista(s_m, side, off, d_min=12.0, pend_max=None):
     """v2 integrador (E2-05): sitio a `off` m del borde que este a >= d_min del borde de TODOS los tramos (en los
     lazos de tierra otro tramo vuelve a pasar cerca: VEG_roca.004 quedaba a 4.3 m de la trazada de s 1898). Prueba
-    off+8, off+16 y luego el otro lado. -> (p, side) o None."""
+    off+8, off+16 y luego el otro lado. -> (p, side) o None.
+    fase visual F1 r2 (PARCHES_F1_terreno.md r2.3-A): con pend_max, el sitio ademas debe tener pendiente_terreno <= pend_max
+    (el lado alto de la tierra tallada es una pared de 40-63 grados a 4.5-25 m del borde: asentar movia 2-4 m ladera abajo
+    o quitaba por 'ladera imposible' lo plantado ahi; 9 de los 43 arboles de zona_tierra en r1). Si no hay sitio, None."""
     for sd_ in (side, -side):
         for o_ in (off, off + 8.0, off + 16.0):
             (p, _) = pos_side(s_m, sd_, o_)
-            if _d_borde_cualquiera(p[0], p[1]) >= d_min:
+            # F1 r3 (PARCHES_F1_terreno.md r3.3-A 2): ademas del filtro a 10 m, el anillo de 1.2 m de asentar.apoyo_arbol
+            # (pendiente_terreno d=0.6 > 1.25 = 'ladera imposible'): un muro de terraza de 6 m da 0.6 a 10 m y 1.6+ a 1.2 m
+            if _d_borde_cualquiera(p[0], p[1]) >= d_min and (pend_max is None or (pendiente_terreno(p[0], p[1]) <= pend_max
+                                                                                and pendiente_terreno(p[0], p[1], d=0.6) <= 1.25)):
                 return p, sd_
     return None
 
@@ -1715,7 +1778,9 @@ def zona_tierra():
     while s_m < 2370:
         tipo = ('pino', 'cipres', 'pino2')[k % 3]
         side = 1 if k % 2 else -1
-        res_ = _sitio_lejos_pista(s_m, side, 15 + (k % 3) * 6)
+        # fase visual F1 r2 (PARCHES_F1_terreno.md r2.3-A): el arbol va al primer sitio con pendiente <= 0.62 (el mismo
+        # umbral que las laderas de zona_montana) probando los dos lados y 3 offsets; si no hay, no se planta
+        res_ = _sitio_lejos_pista(s_m, side, 15 + (k % 3) * 6, pend_max=0.62)
         if res_ is not None:
             clone(lib[tipo], res_[0], rnd.uniform(0, 6.28))
         else:
@@ -1725,7 +1790,7 @@ def zona_tierra():
     # v3 integrador (E6): las filas continuas de pacas sobre los terraplenes y las pacas de las curvas 15-25 van en
     # pacas_tierra(), DESPUES de los senderos y de las camaras: la banqueta del sendero CIMA rebajaba la ladera de
     # s 1706-1734 (+1) cuando las filas ya estaban decididas con el terreno de antes (caida de 2.4-16 m sin barrera)
-    log('tierra: %d arboles sin sitio a >= 12 m de la pista' % n_fuera)
+    log('tierra: %d arboles sin sitio a >= 12 m de la pista con pendiente <= 0.62 (F1 r2: no se planta en la pared)' % n_fuera)
     # v1 integrador (N1 de E): la curva 26 es la horquilla mas cerrada (R 6.3 m) al final de la bajada del
     # 16.5 %: fila CONTINUA de pacas en su exterior (signo de la curvatura) de s_c-20 a s_c+20, a 2.5 m del
     # borde. Se llaman CARRERA_paca_tierra: exportar_ac las hace 1WALL_ (frenan al que se pasa de frenada)
@@ -1748,12 +1813,16 @@ def zona_tierra():
                 ds_ += 0.5
             s_m += ds_
         log('tierra: %d pacas continuas en el exterior de la curva 26 (lado %+d)' % (n_p26, outside))
-    # rocas de cima; v2 integrador (E2-05): a >= 12 m del borde de CUALQUIER tramo (el lazo vuelve a pasar cerca)
+    # rocas de cima; v2 integrador (E2-05): a >= 12 m del borde de CUALQUIER tramo (el lazo vuelve a pasar cerca).
+    # F1 r2 (r2.3-A, mismo filtro): tampoco en la pared (VEG_roca.006 caia en pendiente > 0.62 y asentar la movia)
+    n_roca = 0
     for k in range(10):
         s_m = 1700 + k * 68
-        res_ = _sitio_lejos_pista(s_m, 1 if k % 2 else -1, 26 + (k % 4) * 5)
+        res_ = _sitio_lejos_pista(s_m, 1 if k % 2 else -1, 26 + (k % 4) * 5, pend_max=0.62)
         if res_ is not None:
             clone(lib['roca' if k % 3 else 'roca2'], res_[0], rnd.uniform(0, 6.28))
+            n_roca += 1
+    log('tierra: %d de 10 rocas de cima con sitio (>= 12 m de la pista, pendiente <= 0.62)' % n_roca)
 safe('zona_tierra', zona_tierra)
 
 # ============ RECTA RAPIDA Y VALLAS ============
@@ -2111,6 +2180,11 @@ def zona_casino():
         d2 = min((x - S[i]['x'])**2 + (y - S[i]['y'])**2 for i in range(0, N, 6))
         if d2 < 11**2:
             continue
+        # F1 r4 (tras la regeneracion r4, puerta 'arboles_quitados' 4 > 3): los jardines no miraban la pendiente y con la
+        # semilla por zona 3 de los 26 cayeron en los cantiles del penon (pendiente 2.7-3.5 a 5 m: VEG_adelfa.004/.013,
+        # VEG_palmera.011 'ladera imposible' en asentar). Mismo filtro que zona_montana (PARCHES_F1_terreno.md r3.3-A 2).
+        if pendiente_terreno(x, y) > 0.62 or pendiente_terreno(x, y, d=0.6) > 1.25:
+            continue
         tipo = ('adelfa', 'palmera', 'cipres', 'adelfa', 'palmera2')[puestos % 5]
         if M.get('olivos') and puestos % 3 == 0:
             tipo = 'olivo' if 'olivo' in lib else tipo
@@ -2263,8 +2337,8 @@ def zona_montana():
             t = t_base if rnd.random() < 0.7 else tipos[rnd.randint(0, len(tipos) - 1)]
             if not _libre(xa, ya):   # nada de arboles saliendo de rocas
                 continue
-            if pendiente_terreno(xa, ya) > 0.62:   # ni plantados en paredes de roca
-                continue
+            if pendiente_terreno(xa, ya) > 0.62 or pendiente_terreno(xa, ya, d=0.6) > 1.25:   # ni plantados en paredes de roca
+                continue   # F1 r3 (PARCHES_F1_terreno.md r3.3-A 2): d=0.6 = el anillo de 1.2 m de asentar ('ladera imposible')
             clone(lib[t], (xa, ya, za - 0.15), rnd.uniform(0, 6.28),
                   scale=rnd.uniform(0.75, 1.4))
             puestos += 1
@@ -2310,8 +2384,8 @@ def zona_montana():
             t = t_base if rnd.random() < 0.7 else tipos[rnd.randint(0, len(tipos) - 1)]
             if not _libre(xa, ya):   # nada de arboles saliendo de rocas
                 continue
-            if pendiente_terreno(xa, ya) > 0.62:   # ni plantados en paredes de roca
-                continue
+            if pendiente_terreno(xa, ya) > 0.62 or pendiente_terreno(xa, ya, d=0.6) > 1.25:   # ni plantados en paredes de roca
+                continue   # F1 r3 (PARCHES_F1_terreno.md r3.3-A 2): d=0.6 = el anillo de 1.2 m de asentar ('ladera imposible')
             clone(lib[t], (xa, ya, za - 0.15), rnd.uniform(0, 6.28),
                   scale=rnd.uniform(0.75, 1.4))
             puestos += 1
@@ -2483,6 +2557,23 @@ def zona_acueducto():
 safe('zona_acueducto', zona_acueducto)
 
 # ============ MONTANAS DE FONDO ============
+def zona_horizonte(mf):
+    """Fase visual F1 (bloque 7.1): anillo de horizonte HORIZ_ (cordilleras lejanas en dos planos a 3.2/4.5 km, lomas de
+    costa e islotes a 2.4-2.8 km, pueblecitos-silueta y faro) fuera de la rejilla del terreno, abierto 160 grados al S/SO.
+    Materiales MAT_HORIZ_* planos con la perspectiva atmosferica horneada (paleta.json mezclada con el color del
+    horizonte del world CIELO); mejorar_materiales.horizonte() la recalcula despues desde mat['horiz_color_base'].
+    Parche PARCHES_F1_horizonte.md P-H1."""
+    if not hasattr(mf, 'build_anillo_horizonte'):
+        log('horizonte: montanas_fondo_v2.build_anillo_horizonte no disponible: sin anillo')
+        return
+    res = mf.build_anillo_horizonte(root_col, terreno=T, seed=42)
+    ab = res['abertura']
+    log('horizonte: %d objetos HORIZ_, %d tris, %d materiales MAT_HORIZ_, %d cordilleras + %d lomas + %d pueblos + %d faro; '
+        'anillo %.1f..%.1f grados (abertura %.0f grados centrada en brujula %.1f); cielo %s'
+        % (len(res['objetos']), res['tris'], len(res['materiales']),
+           len(res['cordilleras']), len(res['lomas']), len(res['pueblos']), len(res['faros']),
+           ab['anillo_ini'], ab['anillo_fin'], ab['grados'], ab['centro_brujula'], tuple(round(c, 3) for c in res['cielo'])))
+
 def zona_montanas_fondo():
     """Cordilleras completas: el circuito sube y baja entre montanas altas."""
     if not M.get('montanas_fondo'):
@@ -2490,8 +2581,10 @@ def zona_montanas_fondo():
     mf = M['montanas_fondo']
     if G.get('cumbres'):
         # RONDA 15: el terreno YA es un macizo con cumbres (terreno_montana.py): fuera las
-        # cordilleras postizas y los penascos-cilindro de las cimas
+        # cordilleras postizas y los penascos-cilindro de las cimas.
+        # FASE VISUAL F1 (7.1): en su lugar, el ANILLO DE HORIZONTE lejano (fuera de la rejilla)
         log('montanas de fondo: el macizo va en el terreno (%d cumbres), sin cordilleras ni penascos' % len(G['cumbres']))
+        zona_horizonte(mf)
         return
     x1 = T['x0'] + T['nx'] * T['cell']
     y1 = T['y0'] + T['ny'] * T['cell']
@@ -4957,7 +5050,9 @@ def _contexto_senderos():
             return False
         hit, loc, nrm, i_, ob_, mt_ = bpy.context.scene.ray_cast(dg, Vector((x, y, 600.0)), Vector((0, 0, -1)), distance=900.0)
         return bool(hit and ob_ is not None and ob_.name.startswith(('MONT', 'PENON', 'TUNEL', 'MRUEDA', 'MCOCHE', 'PPUEBLO')))
-    return {'d_casa': d_casa, 'd_calle': d_calle, 'bajo_roca': bajo_roca}
+    # F1 r3 (PARCHES_F1_terreno.md r3.3-A 3): fuentes de plazoleta (misma lista que despeje_final) para _prohibido_sendero
+    fuentes = [(o.location.x, o.location.y) for o in root_col.objects if o.parent is None and o.name.startswith('ITAL_fuente')]
+    return {'d_casa': d_casa, 'd_calle': d_calle, 'bajo_roca': bajo_roca, 'fuentes': fuentes}
 
 def _d_pista_borde(x, y, anillo=1):
     """Distancia al borde del asfalto con la rejilla de 30 m de muestras (anillo 1: exacta hasta 30 m;
@@ -4997,6 +5092,10 @@ def _prohibido_sendero(ctx, ini, meta, otras):
         if cerca_ini:
             return False
         if ctx['d_casa'](x, y) < 5.0 or ctx['d_calle'](x, y) < 4.0:
+            return True
+        # F1 r3 (PARCHES_F1_terreno.md r3.3-A 3): fuentes de plazoleta prohibidas para el A* (el sendero CIMA entraba 0.7 m en
+        # ITAL_fuente.005 = prop_camino); el arranque (cerca_ini 16 m) sigue exento
+        if any(math.hypot(fx_ - x, fy_ - y) < 6.0 for (fx_, fy_) in ctx.get('fuentes', ())):
             return True
         if pendiente_terreno(x, y) > 1.0:
             return True
@@ -5102,7 +5201,7 @@ def _construir_sendero(texto, pts3, meta, zb, ctx, ik, seed=0):
     ANCHO = 4.0
     # v3 integrador (N4 de s 1345): el sendero arranca en la salida del plan, DENTRO de la losa del fondo de saco
     # (cinta de tierra y losa a la misma cota: z-fighting y una cuna dentada sobre la losa): se recorta su arranque
-    # mientras la CINTA (eje a < ANCHO/2 + 0.8) pise la plaza y arranca en su borde + 0.3 m, en radial
+    # mientras la CINTA (eje a < ANCHO/2 + 0.8) pise la plaza y arranca en su borde + 1.0 m (F1 r4; antes 0.3), en radial
     pol_ini = [pol for pol in PLAZAS_POLY if len(pol) >= 3 and min(math.hypot(a_[0] - pts3[0][0], a_[1] - pts3[0][1]) for a_ in pol) < 30.0]
     def _en_pol(x_, y_):
         for pol in pol_ini:
@@ -5121,7 +5220,7 @@ def _construir_sendero(texto, pts3, meta, zb, ctx, ik, seed=0):
         k0_ += 1
     if k0_:
         # la cinta (con su borde de piedras, ~ANCHO/2 + 0.6) ya no pisa la plaza; el nuevo primer punto va en el BORDE
-        # de la plaza (+0.3 m) en el punto mas cercano al primero que queda: el primer tramo sale en radial (los
+        # de la plaza (+1.0 m) en el punto mas cercano al primero que queda: el primer tramo sale en radial (los
         # extremos de la cinta quedan fuera del disco)
         x1_, y1_, z1_ = pts3[k0_]
         mejor_e = None
@@ -5136,9 +5235,13 @@ def _construir_sendero(texto, pts3, meta, zb, ctx, ik, seed=0):
                 if mejor_e is None or d_ < mejor_e[0]:
                     mejor_e = (d_, px_, py_)
         pts3 = pts3[k0_:]
-        if mejor_e is not None and mejor_e[0] > 0.6:
+        # F1 r4 (ACOTACIONES 3, director_f1_r3.md 1): el primer punto a 1.0 m del borde (antes 0.3): con 0.3 la cinta
+        # (semiancho 2 m) entraba 0.7 m en ITAL_fuente.005 de la plazoleta de pueblo_alto_ladera_salida0 ('prop_camino';
+        # el arranque esta exento de la prohibicion de fuentes del A*, cerca_ini 16 m). La cinta sigue pisando 1 m la losa.
+        RECORTE_ARRANQUE_M = 1.0
+        if mejor_e is not None and mejor_e[0] > RECORTE_ARRANQUE_M + 0.3:
             ux_, uy_ = (x1_ - mejor_e[1]) / mejor_e[0], (y1_ - mejor_e[2]) / mejor_e[0]
-            pts3 = [(mejor_e[1] + ux_ * 0.3, mejor_e[2] + uy_ * 0.3, z1_)] + pts3
+            pts3 = [(mejor_e[1] + ux_ * RECORTE_ARRANQUE_M, mejor_e[2] + uy_ * RECORTE_ARRANQUE_M, z1_)] + pts3
         log('caminos: sendero %s recortado %d puntos en su arranque (la cinta pisaba la plaza de la salida)' % (texto, k0_))
     tramo = []
     for p_ in pts3:
@@ -5205,7 +5308,7 @@ def _construir_sendero(texto, pts3, meta, zb, ctx, ik, seed=0):
             _, ox, oy, rot, esq = mejor
             e_ = clone(ik.build_ermita(LIB, seed=seed % 7), (ox, oy, zb + 0.05), rot)
             e_.name = 'ITAL_ermita'
-            explanar(e_, margen=2.0, desmonte=1.2, roca=False)
+            explanar(e_, margen=4.5, desmonte=1.2, roca=False)   # F1 r3 (terreno r3.3-A 1): margen >= cell + 0.5 cubre las esquinas
             z_min_e = min(z_terreno(a_, b_) for (a_, b_) in esq)
             if z_min_e < zb - 0.3:
                 _zocalo_global(e_, z_min_e - 0.5)
@@ -6529,6 +6632,53 @@ def enriquecer_vegetacion():
         tocados += 1
     log('vegetacion variada: %d materiales' % tocados)
 safe('enriquecer_vegetacion', enriquecer_vegetacion)
+
+# ============ F1 r4: RE-ASENTAR LOS ARBOLES TRAS LAS TALLAS DEL TERRENO ============
+def reasentar_tras_tallas():
+    """F1 r4 (ACOTACIONES_COORDINADOR_F1.md 3; director_f1_r3.md 1: OLI_olivo.160 dz -2.40, VEG_cipres.282 +2.15, VEG_pino.186
+    -2.22, y las palmeras/pinos de s 88-144 +3..+8 m = 'objeto_salto_grande' de revisar_urbanismo). Cada raiz VEG_/OLI_ que
+    clone() planto SOBRE el terreno (|z - z_terreno| <= 0.6 al plantarla) y que nadie ha movido despues sube o baja lo mismo
+    que el terreno bajo ella desde entonces (banquetas de los senderos, plazuelas, explanadas, rampas). Nunca dentro de una
+    plaza/plazoleta/fondo de saco (ahi el arbol esta en la LOSA, no en el terreno) ni las VEG_plazoleta. Solo |dz| >= 0.3 m:
+    lo fino lo hace asentar_objetos con rayos."""
+    cajas = []
+    for pol in PLAZAS_POLY:
+        if len(pol) >= 3:
+            xs_, ys_ = [p_[0] for p_ in pol], [p_[1] for p_ in pol]
+            cajas.append((min(xs_) - 1.0, max(xs_) + 1.0, min(ys_) - 1.0, max(ys_) + 1.0, pol))
+
+    def en_losa(x_, y_):
+        return any(a_ <= x_ <= b_ and c_ <= y_ <= d_ and _dentro_poly(x_, y_, pol) for (a_, b_, c_, d_, pol) in cajas)
+    n_reg = n_mov = n_losa = n_otro = 0
+    dzs = []
+    for (ob, x0, y0, z0, zt0) in _SUELO_REG:
+        try:
+            nm = ob.name
+            loc = ob.location
+            par = ob.parent
+        except ReferenceError:
+            continue          # quitado por otra zona
+        if par is not None or not nm.startswith(REASENTAR_PREF) or nm.startswith('VEG_plazoleta'):
+            continue
+        n_reg += 1
+        if abs(loc.x - x0) > 0.01 or abs(loc.y - y0) > 0.01 or abs(loc.z - z0) > 0.01 or abs(z0 - zt0) > 0.6:
+            n_otro += 1       # otro paso ya lo coloco, o no estaba sobre el terreno (roca, losa, calle, muelle)
+            continue
+        dz = z_terreno(x0, y0) - zt0
+        if abs(dz) < 0.3:
+            continue
+        if en_losa(x0, y0):
+            n_losa += 1
+            continue
+        loc.z = z0 + dz
+        n_mov += 1
+        dzs.append(dz)
+    dzs.sort(key=abs)
+    log('reasentar tras tallas: %d arboles VEG_/OLI_ plantados sobre el terreno; %d subidos/bajados con el terreno '
+        '(|dz| >= 0.3: mediana %.2f, max %.2f m; > 2 m: %d), %d en losa sin tocar, %d ya recolocados por otro paso'
+        % (n_reg, n_mov, abs(dzs[len(dzs) // 2]) if dzs else 0.0, abs(dzs[-1]) if dzs else 0.0,
+           sum(1 for d_ in dzs if abs(d_) > 2.0), n_losa, n_otro))
+safe('reasentar_tras_tallas', reasentar_tras_tallas)
 
 # ============ RONDA 15: DESPEJE FINAL (urbanismo sin cosas sin sentido) ============
 # Arboles y mobiliario colocados por zonas antiguas que no conocen el plan urbano: fuera

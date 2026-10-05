@@ -17,11 +17,13 @@ bpy.ops.wm.open_mainfile(filepath=BASE + r'\03_blender\porto_corsa.blend')
 
 T = G['terreno']
 _ter_m = bpy.data.objects.get('TERRENO')   # ronda 15: cota real = malla (explanadas del integrador)
-if _ter_m is not None and _ter_m.type == 'MESH' and len(_ter_m.data.vertices) == T['nx'] * T['ny']:
+# F1 r4 (PARCHES_F1_mascara.md R4.4 A9): '>=' y solo los nx*ny primeros: tras banda_terreno_2m.py (ultimo paso del pipeline)
+# el TERRENO lleva +45 k vertices de la banda de 2 m AL FINAL; la rejilla conserva sus indices j*nx+i
+if _ter_m is not None and _ter_m.type == 'MESH' and len(_ter_m.data.vertices) >= T['nx'] * T['ny']:
     _co = [0.0] * (3 * len(_ter_m.data.vertices))
     _ter_m.data.vertices.foreach_get('co', _co)
     T = dict(T)
-    T['z'] = _co[2::3]
+    T['z'] = _co[2::3][:T['nx'] * T['ny']]
 def z_terreno(x, y):
     fx = (x - T['x0']) / T['cell']
     fy = (y - T['y0']) / T['cell']
@@ -40,7 +42,7 @@ def z_terreno(x, y):
     return z00 + (z01 - z00) * ty + (z11 - z01) * tx
 
 # nombres que no se tocan (infraestructura de la escena o asentados a proposito)
-EXENTOS = ('PISTA', 'PIANOS', 'TERRENO', 'AGUA', 'ARCEN', 'PUENTE', 'LINEA', 'CAMINO', 'PPUEBLO', 'PENON_casa_roca', 'VEG_penon', 'ITAL', 'YATE', 'MONT_pena',
+EXENTOS = ('PISTA', 'PIANOS', 'TERRENO', 'AGUA', 'ARCEN', 'PUENTE', 'LINEA', 'CAMINO', 'PPUEBLO', 'PENON_casa_roca', 'VEG_penon', 'ITAL', 'YATE', 'MONT_', 'HORIZ_',   # F1 (7.1): anillo de horizonte con el pie a z -6 fuera de la rejilla
            'MARCA', 'MUROC', 'ARCO', 'PIT', 'DIRIGIBLE', 'VIADUCTO',
            'ACUEDUCTO', 'MONTANA', 'ACERA', 'BORDILLO', 'GUIRNALDA', 'RUEDA', 'TUNEL',
            'CALLE_guirnalda', 'SOL', 'CIELO', 'LIB', 'GUARDARRAIL', 'AGUA_fondo', 'MIRADOR', 'CAMARA_heli', 'CAMARA_tierra', 'CAMARA_peana', 'LOEWS',

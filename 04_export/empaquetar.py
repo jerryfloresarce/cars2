@@ -16,12 +16,19 @@ BASE = r'E:\Escritorio\claude-pc\arnau-aseto-corsa'
 # env GEOM: geometria de la escena congelada que se exporto (hacer_zip.sh), para que el mapa y la IA
 # coincidan con el kn5 aunque la escena viva ya haya cambiado
 G = json.load(open(os.environ.get('GEOM') or BASE + r'\03_blender\geometria_3d.json', encoding='utf-8'))
-PKG = BASE + r'\04_export\paquete'
+# v1.2 (hacer_zip.sh parametrizable): env ZIP_VERSION (version en ui_track.json), PKG (carpeta del paquete), KN5_DIR
+# (carpeta con porto_corsa_opt.kn5 + informe_check_opt.json), ZIP (zip de salida). Por defecto, las rutas de v1.1.
+VERSION = os.environ.get('ZIP_VERSION', '1.2')
+PKG = os.environ.get('PKG') or BASE + r'\04_export\paquete'
+ZIP_MAX_MB = 250.0              # tope del zip (FASE_VISUAL_PLAN.md secc. 0, decision 8 [U])
 TRACK = os.path.join(PKG, 'content', 'tracks', 'porto_corsa')
 S = G['muestras']
 N = G['n']
 L = G['largo_m']
 
+# v1.2: el paquete se rehace desde cero (antes podian quedar en paquete/ ficheros de una version anterior)
+if os.path.isdir(PKG):
+    shutil.rmtree(PKG)
 for sub in ('data', 'ui', 'ai'):
     os.makedirs(os.path.join(TRACK, sub), exist_ok=True)
 os.makedirs(os.path.join(PKG, 'FUENTES'), exist_ok=True)
@@ -192,7 +199,7 @@ ui = {
     'pitboxes': '20',
     'run': 'anticlockwise',
     'author': 'Arnau & Claude',
-    'version': '1.1',
+    'version': VERSION,
     'year': 2026,
 }
 with open(os.path.join(TRACK, 'ui', 'ui_track.json'), 'w', encoding='utf-8') as f:
@@ -234,7 +241,7 @@ print('fast_lane.ai:', len(pts_ai), 'puntos')
 # un fichero y SOLO si esta VALIDADO: su informe de kn5_check.py (informe_check[_opt].json) debe decir
 # RESULTADO OK, ser posterior al kn5 y coincidir en tamano. kn5/porto_corsa_b.kn5 nunca se empaqueta.
 import hashlib
-KN5_DIR = BASE + r'\04_export\kn5'
+KN5_DIR = os.environ.get('KN5_DIR') or BASE + r'\04_export\kn5'
 
 
 def kn5_validado(nombre_kn5, nombre_informe):
@@ -252,7 +259,8 @@ def kn5_validado(nombre_kn5, nombre_informe):
         return None, 'informe con RESULTADO %s' % d.get('resultado')
     if d.get('totales', {}).get('bytes_fichero') not in (None, os.path.getsize(ruta)):
         return None, 'el informe es de otro fichero (tamano distinto)'
-    return ruta, 'validado 8/8 por kn5_check.py (%s)' % nombre_informe
+    n_ok = sum(1 for c in d.get('comprobaciones', []) if c.get('ok'))
+    return ruta, 'validado %d/%d por kn5_check.py (%s)' % (n_ok, len(d.get('comprobaciones', [])), nombre_informe)
 
 
 kn5 = None
@@ -282,9 +290,17 @@ texdir = BASE + r'\03_blender\texturas'
 if os.path.isdir(texdir):
     dst = os.path.join(PKG, 'FUENTES', 'texturas')
     os.makedirs(dst, exist_ok=True)
+    # v1.2: solo las texturas de <= FUENTES_MAX_MB (las grandes son tiles CC0 recoloreados de 2-2.5 MB: 47 MB que el
+    # juego no usa y que llevaban el zip a 228 MB) + los mapas del terreno por texel (terreno_base/mask/ao)
+    tope = float(os.environ.get('FUENTES_MAX_MB', '1.2')) * 1e6
     for fn in os.listdir(texdir):
-        if fn.endswith('.png') and not fn.startswith('mosaico'):
-            shutil.copy2(os.path.join(texdir, fn), dst)
+        p = os.path.join(texdir, fn)
+        if fn.endswith('.png') and not fn.startswith('mosaico') and (
+                os.path.getsize(p) <= tope or fn.startswith('terreno_')):
+            congelada = os.path.join(os.path.dirname(os.environ.get('TERRENO_BASE', '')), fn)
+            if fn.startswith('terreno_') and os.environ.get('TERRENO_BASE') and os.path.exists(congelada):
+                p = congelada              # la copia congelada de hacer_zip.sh (la misma que lleva el KN5)
+            shutil.copy2(p, dst)
 
 # ---------- extension/ext_config.ini (Custom Shaders Patch) ----------
 # se copia TAL CUAL 04_export/extension/ext_config.ini (se puede editar a mano; color_ac solo lo genera si no
@@ -300,7 +316,7 @@ if os.path.exists(ins):
     shutil.copy2(ins, os.path.join(PKG, 'INSTRUCCIONES.md'))
 
 # ---------- zip ----------
-zpath = BASE + r'\04_export\porto_corsa_mod.zip'
+zpath = os.environ.get('ZIP') or BASE + r'\04_export\porto_corsa_mod.zip'
 if os.path.exists(zpath):
     os.remove(zpath)
 with zipfile.ZipFile(zpath, 'w', zipfile.ZIP_DEFLATED) as z:
@@ -309,4 +325,6 @@ with zipfile.ZipFile(zpath, 'w', zipfile.ZIP_DEFLATED) as z:
             full = os.path.join(root, fn)
             z.write(full, os.path.relpath(full, PKG))
 mb = os.path.getsize(zpath) / 1e6
-print('OK zip -> %s (%.1f MB)' % (zpath, mb))
+if mb > ZIP_MAX_MB:
+    print('AVISO: el zip pesa %.1f MB, mas que el tope de %.0f MB del plan' % (mb, ZIP_MAX_MB))
+print('OK zip -> %s (%.1f MB, version %s)' % (zpath, mb, VERSION))

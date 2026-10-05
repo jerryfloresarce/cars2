@@ -6,15 +6,33 @@
 import json
 import math
 import os
+import subprocess
+import sys
 
 import bpy
+import numpy as np
 from mathutils import Vector
 
 BASE = r'E:\Escritorio\claude-pc\arnau-aseto-corsa'
 G = json.load(open(os.environ.get('GEOM', BASE + r'\03_blender\geometria_3d.json'), encoding='utf-8'))
-OUT_BLEND = BASE + r'\03_blender\porto_corsa.blend'
-OUT_R = BASE + r'\03_blender\renders'
+# BLEND_OUT / RENDERS_OUT: solo para PRUEBAS sobre una copia (fase visual: nunca se guarda sobre porto_corsa.blend desde un agente)
+OUT_BLEND = os.environ.get('BLEND_OUT', BASE + r'\03_blender\porto_corsa.blend')
+OUT_R = os.environ.get('RENDERS_OUT', BASE + r'\03_blender\renders')
 os.makedirs(OUT_R, exist_ok=True)
+DIR_TEX = BASE + r'\03_blender\texturas'
+# MASCARA_DIR: solo para PRUEBAS sobre copia (fase visual F1 r2): carpeta con terreno_mask/base/ao.png de una geometria de ensayo
+# sin pisar texturas/ (que escribe mascara_terreno.py en el pipeline). Sin la variable = texturas/ (lo de siempre).
+DIR_MASCARA = os.environ.get('MASCARA_DIR', DIR_TEX)
+# fase visual (plan decision 0.5): paleta.json es la UNICA fuente de color; mascara_terreno.py (python del sistema) da los
+# umbrales de la mascara y el sol de la escena (aqui solo se leen sus constantes: sin scipy no ejecuta nada)
+if BASE + r'\03_blender' not in sys.path:
+    sys.path.insert(0, BASE + r'\03_blender')
+import paleta  # noqa: E402
+try:
+    import mascara_terreno as _mt  # noqa: E402
+except Exception as _e_mt:  # pragma: no cover
+    print('AVISO: mascara_terreno no importable (%s): constantes por defecto' % _e_mt)
+    _mt = None
 
 S = G['muestras']
 N = G['n']
@@ -83,160 +101,439 @@ def mat_con_ruido(nombre, c1, c2, escala, rough=0.95, bump=0.35):
 
 M_ASF = mat_con_ruido('MAT_asfalto', (0.105, 0.102, 0.108, 1), (0.075, 0.073, 0.080, 1),
                       140.0, rough=0.85, bump=0.25)
-M_TIE = mat_con_ruido('MAT_tierra', (0.60, 0.43, 0.24, 1), (0.48, 0.35, 0.19, 1),
-                      60.0, rough=1.0, bump=0.5)
+# fase visual: tierra de paleta.json (segundo tono = la misma al 80 % de luminancia, nada de literales)
+M_TIE = mat_con_ruido('MAT_tierra', paleta.rgba('tierra'), paleta.variante('tierra', 0.80) + (1.0,), 60.0, rough=1.0, bump=0.5)
 M_PUE = mat('MAT_puente_tablero', (0.09, 0.09, 0.10, 1), 0.85)
 M_PIE = mat('MAT_piedra', (0.78, 0.72, 0.60, 1), 0.9)
 M_KR = mat('MAT_piano_rojo', (0.75, 0.05, 0.05, 1), 0.6)
 M_KB = mat('MAT_piano_blanco', (0.9, 0.9, 0.9, 1), 0.6)
+# ======================================================================================================================
+# >>> MATERIAL TERRENO v2 (fase visual F1, FASE_VISUAL_PLAN.md 3.4-3.5). Bloque IMPORTABLE: solo define constantes y
+#     funciones y depende de bpy, math, os, np, G, BASE, DIR_TEX, DIR_MASCARA, paleta, _mt, mat y mat_con_ruido. Los A/B sobre una copia
+#     de la escena lo exec()utan sin regenerar (_rev/_tmp_mascara/aplicar_v2_a_copia.py). No mover el marcador '<<<'.
+TILES_TERRENO = {   # canal: (tile preferido en texturas/ (lo genera 'materiales'), tile en m, respaldo CC0 tal cual del manifest)
+    'R': ('matorral_d.png', 6.0, r'cc0\matorral\aerial_grass_rock_diff_1k.jpg'),
+    'G': ('hierba_seca_d.png', 3.0, r'cc0\hierba_seca\withered_grass_diff_1k.jpg'),
+    'B': ('tierra_d.png', 6.0, r'cc0\tierra\Ground105_1K-JPG_Color.jpg'),
+    'A': ('caliza_d.png', 3.0, r'cc0\roca_caliza\rock_06_diff_1k.jpg'),
+}
+NORMAL_TERRENO = ('caliza_n.png', r'cc0\roca_caliza\rock_06_nor_gl_1k.jpg', 3.0)   # txDetailNM (OpenGL, Y+ arriba)
+TILE_CESPED = ('cesped_d.png', 3.0, 'hierba_d.png')                              # MAT_cesped: solo jardines y rotondas
+FACTOR_DETALLE = 0.85          # color = base x (1 - f + f x detalle normalizado), como TEX_multiplicar de aplicar_texturas
+MASCARA_FICHEROS = (_mt.FICHEROS if _mt is not None
+                    else {'mask': 'terreno_mask.png', 'base': 'terreno_base.png', 'ao': 'terreno_ao.png'})
+
+
+def _ruta_tex(preferido, respaldo=None):
+    for f in (preferido, respaldo):
+        if f:
+            r = os.path.join(DIR_TEX, f)
+            if os.path.exists(r):
+                return r
+    return None
+
+
+def _imagen(ruta, no_color=False):
+    """Image con ruta ABSOLUTA y colorspace fijo (un datablock = un colorspace); reutiliza si ya esta cargada."""
+    espacio = 'Non-Color' if no_color else 'sRGB'
+    for img in bpy.data.images:
+        try:
+            if img.filepath and os.path.normcase(bpy.path.abspath(img.filepath)) == os.path.normcase(ruta) \
+                    and img.colorspace_settings.name == espacio:
+                return img
+        except Exception:
+            pass
+    img = bpy.data.images.load(ruta, check_existing=False)
+    img.filepath = ruta
+    img.colorspace_settings.name = espacio
+    if no_color:
+        img.name = os.path.splitext(os.path.basename(ruta))[0] + '_nc'
+    return img
+
+
+def _media_lineal(img):
+    """Media LINEAL por canal del tile (el nodo Image sale en lineal; el PNG/JPG es sRGB). ganancia = 1/media, como
+    TEX_ganancia: el tile solo aporta PATRON (media 1) y el color lo pone terreno_base.png (= paleta)."""
+    try:
+        n = len(img.pixels)
+        w, h = img.size
+        buf = np.empty(n, np.float32)
+        img.pixels.foreach_get(buf)
+        rgb = buf.reshape(h, w, -1)[::3, ::3, :3]
+        if img.colorspace_settings.name != 'Non-Color':
+            rgb = np.where(rgb <= 0.04045, rgb / 12.92, np.power((rgb + 0.055) / 1.055, 2.4))
+        m = rgb.reshape(-1, 3).mean(axis=0)
+        return tuple(float(max(v, 1e-3)) for v in m)
+    except Exception as e:
+        print('AVISO: media de %s no legible (%s): ganancia 1' % (img.name, e))
+        return (1.0, 1.0, 1.0)
+
+
+def _ac_props(m, shader='ksPerPixel', samplers=None, props=None, tex_max=None, raw=0, alpha_test=0):
+    """Plan decision 5: custom props ac_* en todo material nuevo; por defecto = lo que hace hoy kn5_writer_opt
+    (ksPerPixel, txDiffuse tintado a 512, SHADER_PROPS). Cuando abra 04_export (P3/P10) el writer las lee tal cual."""
+    m['ac_shader'] = shader
+    m['ac_samplers'] = dict(samplers or {})
+    m['ac_props'] = dict(props or {})
+    m['ac_tex_max'] = dict(tex_max or {})
+    m['ac_raw'] = int(raw)
+    m['ac_alpha_test'] = int(alpha_test)
+
+
+def _marcar_texturizado(nt, loc=(-2200, 900)):
+    """Marcador que respeta aplicar_texturas.py (idempotencia por nodo 'TEXTURIZADO'): no debe pisar este material."""
+    fr = nt.nodes.new('NodeFrame')
+    fr.name = 'TEXTURIZADO'
+    fr.label = 'TEXTURIZADO (construir_pista v2: aplicar_texturas no lo toca)'
+    fr.location = loc
+    return fr
+
+
+def _uv_planar(ob):
+    """UV planar del TERRENO: u = (x - x0) / (nx cell), v = (y - y0) / (ny cell) (la de mascara_terreno.py y del multicapa).
+    En TERRENO y en las mallas que comparten MAT_terreno (arcenes). El writer exporta uv_layers[0] tal cual."""
+    T_ = G['terreno']
+    me = ob.data
+    if me.uv_layers or len(me.loops) == 0:
+        return
+    uv = me.uv_layers.new(name='UVMap')
+    vi = np.empty(len(me.loops), np.int32)
+    me.loops.foreach_get('vertex_index', vi)
+    co = np.empty(len(me.vertices) * 3, np.float32)
+    me.vertices.foreach_get('co', co)
+    co = co.reshape(-1, 3)
+    Lx, Ly = T_['nx'] * T_['cell'], T_['ny'] * T_['cell']
+    u = (co[vi, 0] - T_['x0']) / Lx
+    v = (co[vi, 1] - T_['y0']) / Ly
+    arr = np.ascontiguousarray(np.c_[u, v], dtype=np.float32).ravel()
+    try:
+        uv.data.foreach_set('uv', arr)
+    except Exception:
+        uv.uv.foreach_set('vector', arr)
+
+
+def _mascara_ficheros():
+    """Rutas de terreno_mask/base/ao; si faltan, las genera con el python del sistema (mascara_terreno.py, ~5 s).
+    El pipeline debe llamar a mascara_terreno.py tras urbanismo.py (parche al integrador); esto es la red de seguridad."""
+    rutas = {k: os.path.join(DIR_MASCARA, MASCARA_FICHEROS[k]) for k in ('mask', 'base', 'ao')}
+    if not all(os.path.exists(r) for r in rutas.values()):
+        geom = os.environ.get('GEOM', BASE + r'\03_blender\geometria_3d.json')
+        urb = os.environ.get('URBANISMO', BASE + r'\03_blender\urbanismo.json')
+        print('AVISO: faltan PNG de la mascara del terreno en %s: se generan ahora con mascara_terreno.py (el pipeline deberia '
+              'haberlo hecho tras urbanismo.py)' % DIR_MASCARA)
+        try:
+            cp = subprocess.run(['python', os.path.join(BASE, '03_blender', 'mascara_terreno.py'), '--geom', geom, '--urb', urb,
+                                 '--out', DIR_MASCARA, '--qa', os.path.join(BASE, '03_blender', 'renders', 'qa')],
+                                capture_output=True, text=True, timeout=900)
+            print((cp.stdout or '')[-600:])
+            if cp.returncode:
+                print('mascara_terreno.py fallo (%d): %s' % (cp.returncode, (cp.stderr or '')[-600:]))
+        except Exception as e:
+            print('mascara_terreno.py no se pudo lanzar: %s' % e)
+    return {k: (r if os.path.exists(r) else None) for k, r in rutas.items()}
+
+
+def _canal_a_en_vertices(ob, ruta_mask):
+    """Canal A (roca) de terreno_mask.png muestreado BILINEALMENTE en cada vertice de ob con la UV planar de mundo
+    (u = (x - x0) / Lx, v = (y - y0) / Ly; en el buffer de Blender la fila 0 es v = 0 = y minimo, como en el nodo Image).
+    Devuelve np.float32 (n_vertices,) o None si la imagen no se puede leer."""
+    try:
+        img = _imagen(ruta_mask, no_color=True)
+        w, h = img.size
+        n = len(img.pixels)
+        if not (w and h and n == w * h * 4):
+            return None
+        buf = np.empty(n, np.float32)
+        img.pixels.foreach_get(buf)
+        A = buf.reshape(h, w, 4)[:, :, 3]
+    except Exception as e:
+        print('AVISO: canal A de %s no legible (%s)' % (ruta_mask, e))
+        return None
+    me = ob.data
+    co = np.empty(len(me.vertices) * 3, np.float32)
+    me.vertices.foreach_get('co', co)
+    co = co.reshape(-1, 3).astype(np.float64)
+    M = np.array(ob.matrix_world, np.float64)
+    xyw = co @ M[:3, :3].T + M[:3, 3]
+    return _canal_a_en_xy(A, xyw)
+
+
+def _canal_a_en_xy(A, xyw):
+    """Canal A (array (h, w), fila 0 = y minimo) muestreado bilinealmente en puntos de MUNDO xyw (n, >= 2) con la UV planar."""
+    h, w = A.shape
+    T_ = G['terreno']
+    Lx, Ly = T_['nx'] * T_['cell'], T_['ny'] * T_['cell']
+    u = (xyw[:, 0] - T_['x0']) / Lx
+    v = (xyw[:, 1] - T_['y0']) / Ly
+    fx = np.clip(u * w - 0.5, 0.0, w - 1.0)
+    fy = np.clip(v * h - 0.5, 0.0, h - 1.0)
+    ix = np.floor(fx).astype(np.int64)
+    iy = np.floor(fy).astype(np.int64)
+    ix1 = np.minimum(ix + 1, w - 1)
+    iy1 = np.minimum(iy + 1, h - 1)
+    tx = (fx - ix).astype(np.float32)
+    ty = (fy - iy).astype(np.float32)
+    a = (A[iy, ix] * (1 - tx) * (1 - ty) + A[iy, ix1] * tx * (1 - ty) + A[iy1, ix] * (1 - tx) * ty + A[iy1, ix1] * tx * ty)
+    return np.clip(a, 0.0, 1.0).astype(np.float32)
+
+
+def roca_atributo_terreno(ob, mascara_roca=None):
+    """Atributo FLOAT POINT 'roca' del TERRENO = canal A de terreno_mask.png en cada vertice (fase visual F1 r3, director_f1_r2.md
+    problema 8): la mascara por texel es la UNICA verdad del material, tambien para quien NO la lee. Si el PNG no se puede leer,
+    G['mascara_roca'] (v1, como hasta r2).
+    Quien lo lee: 04_export/color_ac.separar_roca_terreno (writer de hoy, kn5_writer_opt l.753, y capturas_ab --modo-ac): cara de
+    roca si nz < 0.50 o (media del atributo en sus vertices > 0.49 y nz < 0.82). Con mascara_roca (v1) la pared del desmonte del
+    63 % de la toma 07 (16, 354) salia en AC como un CUADRADO gris de 8 m (solo los 4 triangulos con nz 0.46-0.47; el atributo
+    ahi vale 0) mientras la mascara pintaba de roca los 28 m de la pared. Con el canal A la clasificacion por cara de AC sigue la
+    mascara (borde de ruido de 10-30 m, resolucion de cara 4 m): coincidencia con el criterio P1 'A > 0.5 en el centro de la cara
+    o nz < 0.35' 96.6 % (antes 95.0 %), y el pie de derrubios (mascara_roca = 0.5, que NO es roca: PETICIONES P1) deja de ser
+    roca en AC. En Blender el nodo 'Math.002'/'ROCA_mascara' = max(canal A, atributo con ruido y sin llano, talud) no cambia de
+    contrato; integrar_escena._poner_celda sigue subiendo el atributo en los cortes > 2 m. Devuelve (origen, valores) o (None, None)."""
+    me = ob.data
+    n = len(me.vertices)
+    fich = _mascara_ficheros()
+    vals, origen = None, None
+    if fich.get('mask'):
+        vals = _canal_a_en_vertices(ob, fich['mask'])
+        if vals is not None and len(vals) == n:
+            origen = 'canal A de ' + fich['mask']
+        else:
+            vals = None
+    if vals is None and mascara_roca and len(mascara_roca) == n:
+        vals = np.asarray(mascara_roca, np.float32)
+        origen = 'mascara_roca de geometria_3d.json (v1: sin PNG legible de la mascara)'
+    if vals is None and mascara_roca and len(mascara_roca) < n and _padres_banda(ob) is not None:
+        # r4: TERRENO ya subdividido en la banda (puntos medios al final): v1 en la rejilla, media de los padres en los medios
+        p0, p1 = _padres_banda(ob)
+        mr = np.asarray(mascara_roca, np.float32)
+        vals = np.zeros(n, np.float32)
+        vals[:len(mr)] = mr
+        medio = p0 >= 0
+        vals[medio] = 0.5 * (vals[p0[medio]] + vals[p1[medio]])
+        origen = 'mascara_roca de geometria_3d.json (v1, interpolada en la banda de 2 m)'
+    if vals is None:
+        return None, None
+    at = me.attributes.get('roca')
+    if at is None:
+        at = me.attributes.new('roca', 'FLOAT', 'POINT')
+    at.data.foreach_set('value', np.ascontiguousarray(vals, dtype=np.float32))
+    return origen, vals
+
+
+def _nodo_math(nodes, links, op, a, b=None, nombre=None, c=None):
+    n_ = nodes.new('ShaderNodeMath')
+    n_.operation = op
+    if nombre:
+        n_.name = nombre
+    for k, v in ((0, a), (1, b), (2, c)):
+        if v is None:
+            continue
+        if hasattr(v, 'is_linked'):
+            links.new(v, n_.inputs[k])
+        else:
+            n_.inputs[k].default_value = float(v)
+    return n_
+
+
+def _nodo_vec(nodes, links, op, a, b=None, nombre=None, escala=None, c=None):
+    n_ = nodes.new('ShaderNodeVectorMath')
+    n_.operation = op
+    if nombre:
+        n_.name = nombre
+    for k, v in ((0, a), (1, b), (2, c)):
+        if v is None:
+            continue
+        if hasattr(v, 'is_linked'):
+            links.new(v, n_.inputs[k])
+        else:
+            n_.inputs[k].default_value = tuple(v)
+    if escala is not None:
+        if hasattr(escala, 'is_linked'):
+            links.new(escala, n_.inputs['Scale'])
+        else:
+            n_.inputs['Scale'].default_value = float(escala)
+    return n_
+
+
+def _enganche_materiales_roca(nt, wA):
+    """Bloque 2.1: cuando exista assets/materiales_roca.ng_caliza_estratos() (grupo con salidas Color/Normal en coordenadas
+    de MUNDO) la capa de roca lo usa como color y normal. Interfaz esperada en PARCHES_F1_mascara.md. None = caliza propia."""
+    try:
+        if BASE + r'\03_blender\assets' not in sys.path:
+            sys.path.insert(0, BASE + r'\03_blender\assets')
+        import materiales_roca  # noqa: F401
+    except Exception:
+        return None
+    if not hasattr(materiales_roca, 'ng_caliza_estratos'):
+        return None
+    try:
+        if hasattr(materiales_roca, 'crear_nodos'):
+            grp = materiales_roca.crear_nodos(nt, loc=(-900, -1500), nombre_nodo='ROCA_grupo_caliza')[0]
+        else:
+            grp = nt.nodes.new('ShaderNodeGroup')
+            grp.node_tree = materiales_roca.ng_caliza_estratos()
+            grp.name = 'ROCA_grupo_caliza'
+            for nombre, val in (('tono_base', paleta.rgba('caliza_ocre')), ('tono_junta', paleta.rgba('caliza_sombra'))):
+                if nombre in grp.inputs:
+                    grp.inputs[nombre].default_value = val
+        grp.label = 'caliza compartida (materiales_roca)'
+        if 'Color' in grp.outputs:
+            print('MAT_terreno: capa de roca con materiales_roca.ng_caliza_estratos')
+            return grp
+    except Exception as e:
+        print('materiales_roca: enganche fallo (%s): caliza procedural propia' % e)
+    return None
+
+
 def mat_terreno():
+    """MAT_terreno v2 (fase visual, bloque 3.5): mascara por TEXEL en vez de rampa por altura + atributo por vertice.
+    - UV planar por posicion de mundo (Geometry.Position -> u = (x - x0) / Lx, v = (y - y0) / Ly): identica a la UV real del
+      TERRENO; funciona en cualquier cara con este material (arcenes, falda del McLaren) aunque no tenga capa UV.
+    - terreno_mask.png (RGBA 2048, Non-Color): pesos R matorral / G hierba seca / B tierra / A roca (mascara_terreno.py).
+    - 4 tiles de detalle (UV x Lx/tile_m) normalizados a media 1 (ganancia 1/media): solo PATRON; el color (= paleta.json)
+      y la AO vienen en terreno_base.png (txDiffuse del multicapa). color = base x (1 - f + f x sum(peso_k x detalle_k)).
+    - ROCA: peso final = max(canal A, atributo 'roca' con ruido y sin llano, talud por normal real) = nodo 'Math.002' con
+      etiqueta 'ROCA_mascara' (CONTRATO: lo leen _rev/color_ac/render_ac.py, los revisores, aplicar_texturas y color_ac).
+      Los dos ultimos siguen porque el integrador sube el atributo en cortes > 2 m DESPUES de calcular la mascara. Sobre la
+      roca, el tono de estratos/grano/meteorizacion de v1 (o assets/materiales_roca cuando exista) y bump + normal de caliza.
+    - El writer de hoy (ksPerPixel): diffuse_color = hierba_seca (zona dominante junto a la pista) y la PRIMERA Image sRGB
+      enlazada es el tile de hierba seca; 'TEX_mapping' (sin enlazar, 1/3 m) da la escala a --modo-ac y a las mallas sin UV.
+    - Custom props ac_*: ksMultilayer_fresnel_nm vanilla (nunca _nm4 en el KN5) con txDiffuse/txMask/txDetailR..A/txDetailNM.
+    - Marcador TEXTURIZADO: aplicar_texturas.aplicar_terreno() no lo pisa."""
     m = bpy.data.materials.get('MAT_terreno')
     if m:
         return m
     m = bpy.data.materials.new('MAT_terreno')
     m.use_nodes = True
     nt = m.node_tree
-    bsdf = nt.nodes.get('Principled BSDF')
-    bsdf.inputs['Roughness'].default_value = 1.0
-    geo = nt.nodes.new('ShaderNodeNewGeometry')
-    sep = nt.nodes.new('ShaderNodeSeparateXYZ')
-    mapr = nt.nodes.new('ShaderNodeMapRange')
-    ramp = nt.nodes.new('ShaderNodeValToRGB')
-    nt.links.new(geo.outputs['Position'], sep.inputs['Vector'])
-    nt.links.new(sep.outputs['Z'], mapr.inputs['Value'])
-    mapr.inputs['From Min'].default_value = -4.0
-    mapr.inputs['From Max'].default_value = 170.0
-    e = ramp.color_ramp.elements
-    e[0].position = 0.0; e[0].color = (0.40, 0.48, 0.34, 1)     # fondo marino
-    e[1].position = 0.023; e[1].color = (0.72, 0.66, 0.48, 1)   # arena (z~0)
-    for pos, col in [(0.042, (0.22, 0.40, 0.13, 1)),            # hierba baja
-                     (0.50, (0.20, 0.33, 0.12, 1)),             # monte
-                     (0.97, (0.30, 0.33, 0.20, 1))]:            # cumbres
-        el = ramp.color_ramp.elements.new(pos)
-        el.color = col
-    nt.links.new(mapr.outputs['Result'], ramp.inputs['Fac'])
-    # parches naturales de pradera (variacion a gran escala, ~200 m)
-    texm = nt.nodes.new('ShaderNodeTexCoord')
-    noim = nt.nodes.new('ShaderNodeTexNoise')
-    noim.inputs['Scale'].default_value = 0.005
-    noim.inputs['Detail'].default_value = 5.0
-    rampm = nt.nodes.new('ShaderNodeValToRGB')
-    em = rampm.color_ramp.elements
-    em[0].position = 0.3; em[0].color = (0.78, 0.85, 0.70, 1)
-    em[1].position = 0.7; em[1].color = (1.15, 1.10, 0.95, 1)
-    mixm = nt.nodes.new('ShaderNodeMix')
-    mixm.data_type = 'RGBA'
-    mixm.blend_type = 'MULTIPLY'
-    mixm.inputs['Factor'].default_value = 1.0
-    nt.links.new(texm.outputs['Object'], noim.inputs['Vector'])
-    nt.links.new(noim.outputs['Fac'], rampm.inputs['Fac'])
-    nt.links.new(ramp.outputs['Color'], mixm.inputs[6])
-    nt.links.new(rampm.outputs['Color'], mixm.inputs[7])
-    # ROCA en las pendientes fuertes (taludes, acantilados de la costa)
-    sepn = nt.nodes.new('ShaderNodeSeparateXYZ')
-    nt.links.new(geo.outputs['Normal'], sepn.inputs['Vector'])
-    talud = nt.nodes.new('ShaderNodeMapRange')
-    talud.clamp = True
-    talud.interpolation_type = 'SMOOTHSTEP'
-    talud.inputs['From Min'].default_value = 0.40
-    talud.inputs['From Max'].default_value = 0.58   # ronda 14: solo paredes de > 55 grados son roca; las laderas fuertes siguen verdes
-    talud.inputs['To Min'].default_value = 1.0
-    talud.inputs['To Max'].default_value = 0.0
-    # borde irregular: a la Z de la normal se le suma un ruido de +-0.08
-    nzt = nt.nodes.new('ShaderNodeTexNoise')
-    nzt.inputs['Scale'].default_value = 0.03
-    nzt.inputs['Detail'].default_value = 3.0
-    nt.links.new(texm.outputs['Object'], nzt.inputs['Vector'])
-    esc = nt.nodes.new('ShaderNodeMath')
-    esc.operation = 'MULTIPLY_ADD'
-    esc.inputs[1].default_value = 0.16
-    esc.inputs[2].default_value = -0.08
-    nt.links.new(nzt.outputs['Fac'], esc.inputs[0])
-    suma = nt.nodes.new('ShaderNodeMath')
-    suma.operation = 'ADD'
-    nt.links.new(sepn.outputs['Z'], suma.inputs[0])
-    nt.links.new(esc.outputs['Value'], suma.inputs[1])
-    nt.links.new(suma.outputs['Value'], talud.inputs['Value'])
-    mixr = nt.nodes.new('ShaderNodeMix')
-    mixr.data_type = 'RGBA'
-    mixr.blend_type = 'MIX'
-    # RONDA 15: ademas de la pendiente, la mascara de roca del macizo (atributo 'roca',
-    # umbral nitido 0.45-0.52 como sugiere terreno_montana.py)
-    atr = nt.nodes.new('ShaderNodeAttribute')
-    atr.attribute_name = 'roca'
-    umb = nt.nodes.new('ShaderNodeMapRange')
-    umb.clamp = True
-    umb.interpolation_type = 'SMOOTHSTEP'
-    umb.inputs['From Min'].default_value = 0.45
-    umb.inputs['From Max'].default_value = 0.52
-    nt.links.new(atr.outputs['Fac'], umb.inputs['Value'])
-    mx_r = nt.nodes.new('ShaderNodeMath')
-    mx_r.operation = 'MAXIMUM'
-    nt.links.new(talud.outputs['Result'], mx_r.inputs[0])
-    nt.links.new(umb.outputs['Result'], mx_r.inputs[1])
-    nt.links.new(mx_r.outputs['Value'], mixr.inputs['Factor'])
-    nt.links.new(mixm.outputs[2], mixr.inputs[6])
-    mixr.inputs[7].default_value = (0.25, 0.23, 0.19, 1)   # lineal: gris caliza medio en pantalla
-    nt.links.new(mixr.outputs[2], bsdf.inputs['Base Color'])
-    m.diffuse_color = (0.32, 0.45, 0.2, 1)
-    _roca_terreno(nt, bsdf, geo, sepn, texm, suma, talud, atr, umb, mx_r, mixr)
-    return m
-
-def _roca_terreno(nt, bsdf, geo, sepn, texm, suma, talud, atr, umb, mx_r, mixr):
-    """v2 pista (E2-11/C2-13): la roca del terreno se leia como NIEBLA gris (queja 7 del usuario,
-    'montana borrosa'): color plano sin textura, mascara blanda (normales suaves en triangulos de
-    4 m y atributo desenfocado) y la hierba de aplicar_texturas pintada encima (TEX_llano 0.60-0.78).
-    (1) Bordes nitidos e irregulares: talud 0.50-0.56 (antes 0.40-0.58, +-0.04 de ruido de ~2.5 m)
-        y atributo 0.47-0.51 (antes 0.45-0.52, +-0.33 de ruido de ~2.5 y ~11 m): borde natural, no
-        el contorno poligonal de la rejilla de 4 m.
-    (2) En lo llano manda la hierba aunque el atributo diga roca (umb x (1 - smoothstep(nz,0.78,0.86))).
-    (3) Caliza calida (tono de los penones, MAT_PPUEBLO_roca) con manchas suaves de ~20 m, juntas de
-        estrato finas y onduladas cada ~2.6 m (oscuras y talladas con bump), meteorizacion de ~7 m y
-        grano de ~2 m; llega a mixr.inputs[7] (la rama de roca).
-    (4) La roca es un BSDF PROPIO mezclado por la mascara (Mix Shader): aplicar_texturas multiplica
-        la hierba sobre el Base Color del PRIMER Principled (el de la hierba), asi que ya no puede
-        velar la roca. El primer Principled, su Base Color y diffuse_color no cambian (kn5 igual).
-    Todos los nodos nuevos se crean DESPUES de mx_r: 'Math.002' sigue siendo la mascara de roca
-    (max(talud, atributo)) que usan los revisores y aplicar_texturas."""
     nodes, links = nt.nodes, nt.links
-    mx_r.label = 'ROCA_mascara'
-    talud.inputs['From Min'].default_value = 0.50
-    talud.inputs['From Max'].default_value = 0.56
-    umb.inputs['From Min'].default_value = 0.47
-    umb.inputs['From Max'].default_value = 0.51
-    # ruido fino (~2.5 m) y grueso (~11 m) para que el limite no siga las aristas de la rejilla
+    bsdf = nodes.get('Principled BSDF')
+    bsdf.inputs['Roughness'].default_value = 1.0
+    T_ = G['terreno']
+    Lx, Ly = T_['nx'] * T_['cell'], T_['ny'] * T_['cell']
+    fich = _mascara_ficheros()
+    # --- coordenadas: UV planar por posicion de mundo + Object para los ruidos procedurales (como v1) ---
+    geo = nodes.new('ShaderNodeNewGeometry')
+    geo.name = 'TERRENO_geometria'
+    geo.location = (-2200, 0)
+    uv01 = _nodo_vec(nodes, links, 'MULTIPLY_ADD', geo.outputs['Position'], (1.0 / Lx, 1.0 / Ly, 0.0), 'TERRENO_uv_planar',
+                     c=(-T_['x0'] / Lx, -T_['y0'] / Ly, 0.0))
+    uv01.location = (-2000, 0)
+    texm = nodes.new('ShaderNodeTexCoord')
+    texm.name = 'TERRENO_texcoord'
+    texm.location = (-2200, -600)
+    # --- tiles de detalle: G PRIMERO (la primera Image sRGB enlazada es lo que exporta hoy el writer y pinta --modo-ac) ---
+    det, samplers, props, tex_max = {}, {}, {}, {}
+    for k_, k in enumerate(('G', 'R', 'B', 'A')):
+        pref, tile_m, resp = TILES_TERRENO[k]
+        ruta = _ruta_tex(pref, resp)
+        if ruta is None:
+            print('AVISO: sin tile para el canal %s (%s ni %s): sin detalle en ese canal' % (k, pref, resp))
+            continue
+        img = _imagen(ruta)
+        # cambio del INTEGRADOR en fichero de 'mascara' por cierre de F1 (ACOTACIONES 11, PARCHES_F1_materiales.md 18.2): el
+        # detalle A (roca) en BOX/Object y no en planta: en planta se estiraba 1/cos(pendiente) = 2-3x en las paredes (estrias
+        # de 51/07). Es lo que ya hacen el writer y el proxy AC con TEX_mapping. R/G/B (< 40 grados) siguen en planta.
+        if k == 'A':
+            esc = _nodo_vec(nodes, links, 'SCALE', texm.outputs['Object'], nombre='TERRENO_obj_A', escala=1.0 / tile_m)
+        else:
+            esc = _nodo_vec(nodes, links, 'SCALE', uv01.outputs['Vector'], nombre='TERRENO_uv_' + k, escala=Lx / tile_m)
+        esc.location = (-1800, 300 - 260 * k_)
+        tx = nodes.new('ShaderNodeTexImage')
+        tx.name = 'TEX_detalle_' + k
+        tx.label = 'detalle %s: %s (%g m)' % (k, os.path.basename(ruta), tile_m)
+        tx.image = img
+        tx.extension = 'REPEAT'
+        tx.interpolation = 'Linear'
+        tx.projection = 'BOX' if k == 'A' else 'FLAT'
+        tx.projection_blend = 0.3 if k == 'A' else 0.0
+        tx.location = (-1600, 300 - 260 * k_)
+        links.new(esc.outputs['Vector'], tx.inputs['Vector'])
+        gan = _nodo_vec(nodes, links, 'MULTIPLY', tx.outputs['Color'], tuple(1.0 / c for c in _media_lineal(img)),
+                        'TERRENO_ganancia_' + k)
+        gan.location = (-1300, 300 - 260 * k_)
+        det[k] = gan.outputs['Vector']
+        samplers['txDetail' + k] = ruta
+        props['mult' + k] = round(Lx / tile_m, 2)
+        tex_max['txDetail' + k] = 1024
+    # 'TEX_mapping' sin enlazar: escala Object para el writer en mallas SIN UV y para capturas_ab --modo-ac (tile de 3 m)
+    mp = nodes.new('ShaderNodeMapping')
+    mp.name = 'TEX_mapping'
+    mp.label = 'solo writer / modo AC (sin UV): Object x 1/3 m'
+    mp.inputs['Scale'].default_value = (1.0 / TILES_TERRENO['G'][1],) * 3
+    mp.location = (-1800, -800)
+    # --- mascara por texel y base ---
+    if fich['mask']:
+        mk = nodes.new('ShaderNodeTexImage')
+        mk.name = 'TERRENO_mascara'
+        mk.label = 'terreno_mask.png (RGBA: R matorral, G hierba seca, B tierra, A roca)'
+        mk.image = _imagen(fich['mask'], no_color=True)
+        mk.extension = 'EXTEND'
+        mk.interpolation = 'Cubic'
+        mk.location = (-1600, 800)
+        links.new(uv01.outputs['Vector'], mk.inputs['Vector'])
+        sepm = nodes.new('ShaderNodeSeparateColor')
+        sepm.name = 'TERRENO_mascara_RGB'
+        sepm.location = (-1300, 800)
+        links.new(mk.outputs['Color'], sepm.inputs['Color'])
+        pes = {'R': sepm.outputs['Red'], 'G': sepm.outputs['Green'], 'B': sepm.outputs['Blue'], 'A': mk.outputs['Alpha']}
+    else:
+        print('AVISO: MAT_terreno sin terreno_mask.png: todo hierba seca salvo la roca por atributo/pendiente')
+        pes = {'R': 0.0, 'G': 1.0, 'B': 0.0, 'A': 0.0}
+    if fich['base']:
+        bs = nodes.new('ShaderNodeTexImage')
+        bs.name = 'TERRENO_base'
+        bs.label = 'terreno_base.png (paleta x parches x AO: txDiffuse)'
+        bs.image = _imagen(fich['base'])
+        bs.extension = 'EXTEND'
+        bs.interpolation = 'Cubic'
+        bs.location = (-1600, 1100)
+        links.new(uv01.outputs['Vector'], bs.inputs['Vector'])
+        base_out = bs.outputs['Color']
+    else:
+        base_out = None
+    # --- ROCA: talud por normal real + atributo 'roca' (v1, con ruido y sin llano) + canal A -> 'Math.002' / 'ROCA_mascara' ---
+    sepn = nodes.new('ShaderNodeSeparateXYZ')
+    sepn.name = 'ROCA_normal_xyz'
+    sepn.location = (-2000, -300)
+    links.new(geo.outputs['Normal'], sepn.inputs['Vector'])
     nf = nodes.new('ShaderNodeTexNoise')
     nf.name = 'ROCA_ruido_borde'
-    nf.inputs['Scale'].default_value = 0.4
+    nf.inputs['Scale'].default_value = 0.4       # ~2.5 m
     nf.inputs['Detail'].default_value = 3.0
+    nf.location = (-2000, -600)
     links.new(texm.outputs['Object'], nf.inputs['Vector'])
     ng_ = nodes.new('ShaderNodeTexNoise')
     ng_.name = 'ROCA_ruido_borde_grueso'
-    ng_.inputs['Scale'].default_value = 0.09
+    ng_.inputs['Scale'].default_value = 0.09     # ~11 m
     ng_.inputs['Detail'].default_value = 2.0
+    ng_.location = (-2000, -850)
     links.new(texm.outputs['Object'], ng_.inputs['Vector'])
-    def _madd(entrada, k, c, nombre):
-        n_ = nodes.new('ShaderNodeMath')
-        n_.name = nombre
-        n_.operation = 'MULTIPLY_ADD'
-        n_.inputs[1].default_value = k
-        n_.inputs[2].default_value = c
-        links.new(entrada, n_.inputs[0])
-        return n_
-    def _suma(a, b, nombre, op='ADD'):
-        n_ = nodes.new('ShaderNodeMath')
-        n_.name = nombre
-        n_.operation = op
-        links.new(a, n_.inputs[0])
-        links.new(b, n_.inputs[1])
-        return n_
-    r_t = _madd(nf.outputs['Fac'], 0.08, -0.04, 'ROCA_ruido_talud')         # +-0.04 sobre nz
-    s_t = _suma(suma.outputs['Value'], r_t.outputs['Value'], 'ROCA_nz_ruido')
+    r_t = _nodo_math(nodes, links, 'MULTIPLY_ADD', nf.outputs['Fac'], 0.08, 'ROCA_ruido_talud', c=-0.04)
+    s_t = _nodo_math(nodes, links, 'ADD', sepn.outputs['Z'], r_t.outputs['Value'], 'ROCA_nz_ruido')
+    talud = nodes.new('ShaderNodeMapRange')
+    talud.name = 'ROCA_talud'
+    talud.clamp = True
+    talud.interpolation_type = 'SMOOTHSTEP'
+    talud.inputs['From Min'].default_value = 0.50
+    talud.inputs['From Max'].default_value = 0.56
+    talud.inputs['To Min'].default_value = 1.0
+    talud.inputs['To Max'].default_value = 0.0
     links.new(s_t.outputs['Value'], talud.inputs['Value'])
-    r_a = _madd(nf.outputs['Fac'], 0.30, -0.15, 'ROCA_ruido_atributo')     # +-0.15 fino ...
-    r_g = _madd(ng_.outputs['Fac'], 0.36, -0.18, 'ROCA_ruido_atributo_grueso')   # ... +-0.18 grueso
-    r_ag = _suma(r_a.outputs['Value'], r_g.outputs['Value'], 'ROCA_ruido_atributo_total')
-    s_a = _suma(atr.outputs['Fac'], r_ag.outputs['Value'], 'ROCA_atributo_ruido')
+    atr = nodes.new('ShaderNodeAttribute')
+    atr.name = 'ROCA_atributo'
+    atr.attribute_name = 'roca'
+    atr.location = (-2000, -1100)
+    r_a = _nodo_math(nodes, links, 'MULTIPLY_ADD', nf.outputs['Fac'], 0.30, 'ROCA_ruido_atributo', c=-0.15)
+    r_g = _nodo_math(nodes, links, 'MULTIPLY_ADD', ng_.outputs['Fac'], 0.36, 'ROCA_ruido_atributo_grueso', c=-0.18)
+    r_ag = _nodo_math(nodes, links, 'ADD', r_a.outputs['Value'], r_g.outputs['Value'], 'ROCA_ruido_atributo_total')
+    s_a = _nodo_math(nodes, links, 'ADD', atr.outputs['Fac'], r_ag.outputs['Value'], 'ROCA_atributo_ruido')
+    umb = nodes.new('ShaderNodeMapRange')
+    umb.name = 'ROCA_umbral_atributo'
+    umb.clamp = True
+    umb.interpolation_type = 'SMOOTHSTEP'
+    umb.inputs['From Min'].default_value = 0.47
+    umb.inputs['From Max'].default_value = 0.51
     links.new(s_a.outputs['Value'], umb.inputs['Value'])
     llano = nodes.new('ShaderNodeMapRange')
     llano.name = 'ROCA_llano_hierba'
@@ -247,22 +544,160 @@ def _roca_terreno(nt, bsdf, geo, sepn, texm, suma, talud, atr, umb, mx_r, mixr):
     llano.inputs['To Min'].default_value = 1.0
     llano.inputs['To Max'].default_value = 0.0
     links.new(sepn.outputs['Z'], llano.inputs['Value'])
-    u_l = _suma(umb.outputs['Result'], llano.outputs['Result'], 'ROCA_atributo_sin_llano', 'MULTIPLY')
-    links.new(u_l.outputs['Value'], mx_r.inputs[1])
-    # caliza: manchas grandes + estratos + grano
-    n1 = nodes.new('ShaderNodeTexNoise')
-    n1.name = 'ROCA_ruido_manchas'
-    n1.inputs['Scale'].default_value = 0.045
-    n1.inputs['Detail'].default_value = 6.0
-    n1.inputs['Roughness'].default_value = 0.6
-    links.new(texm.outputs['Object'], n1.inputs['Vector'])
-    rr = nodes.new('ShaderNodeValToRGB')
-    rr.name = 'ROCA_rampa'
-    er = rr.color_ramp.elements
-    er[0].position = 0.30; er[0].color = (0.30, 0.235, 0.15, 1)     # caliza en sombra (calida)
-    er[1].position = 0.72; er[1].color = (0.46, 0.37, 0.245, 1)     # caliza clara (tono de los penones)
-    links.new(n1.outputs['Fac'], rr.inputs['Fac'])
-    # estratos: JUNTAS finas y oscuras cada ~2.6 m (ondas con distorsion: no bandas regulares de cebra)
+    u_l = _nodo_math(nodes, links, 'MULTIPLY', umb.outputs['Result'], llano.outputs['Result'], 'ROCA_atributo_sin_llano')
+    tex_a = _nodo_math(nodes, links, 'MAXIMUM', pes['A'], u_l.outputs['Value'], 'ROCA_mascara_texel')
+    mx_r = _nodo_math(nodes, links, 'MAXIMUM', talud.outputs['Result'], tex_a.outputs['Value'], 'Math.002')
+    mx_r.label = 'ROCA_mascara'
+    mx_r.location = (-900, -300)
+    if mx_r.name != 'Math.002':
+        print('AVISO: el nodo de la mascara de roca no se llama Math.002 (%s): revisar los lectores' % mx_r.name)
+    wA = mx_r.outputs['Value']
+    # --- pesos: R, G, B reparten (1 - roca); A = roca ---
+    resto = _nodo_math(nodes, links, 'SUBTRACT', 1.0, wA, 'TERRENO_resto')
+    s_rg = _nodo_math(nodes, links, 'ADD', pes['R'], pes['G'], 'TERRENO_suma_RG')
+    s_rgb = _nodo_math(nodes, links, 'ADD', s_rg.outputs['Value'], pes['B'], 'TERRENO_suma_RGB')
+    s_rgb = _nodo_math(nodes, links, 'MAXIMUM', s_rgb.outputs['Value'], 1e-4, 'TERRENO_suma_RGB_min')
+    norm = _nodo_math(nodes, links, 'DIVIDE', resto.outputs['Value'], s_rgb.outputs['Value'], 'TERRENO_norma')
+    pesos = {}
+    for k in ('R', 'G', 'B'):
+        pesos[k] = _nodo_math(nodes, links, 'MULTIPLY', pes[k], norm.outputs['Value'], 'TERRENO_peso_' + k).outputs['Value']
+    pesos['A'] = wA
+    # --- mezcla de detalle por canal y color = base x detalle ---
+    mezcla = None
+    for k in ('G', 'R', 'B', 'A'):
+        if k not in det:
+            continue
+        pk = _nodo_vec(nodes, links, 'SCALE', det[k], nombre='TERRENO_detalle_' + k, escala=pesos[k])
+        mezcla = pk if mezcla is None else _nodo_vec(nodes, links, 'ADD', mezcla.outputs['Vector'], pk.outputs['Vector'],
+                                                       'TERRENO_detalle_suma_' + k)
+    if base_out is None:
+        # sin terreno_base.png: color plano por canal (paleta) ponderado
+        cols = {'R': paleta.rgb('oliva_oscuro'), 'G': paleta.rgb('hierba_seca'), 'B': paleta.rgb('tierra'), 'A': paleta.rgb('caliza_ocre')}
+        acc = None
+        for k in ('G', 'R', 'B', 'A'):
+            ck = _nodo_vec(nodes, links, 'SCALE', cols[k], nombre='TERRENO_color_' + k, escala=pesos[k])
+            acc = ck if acc is None else _nodo_vec(nodes, links, 'ADD', acc.outputs['Vector'], ck.outputs['Vector'], 'TERRENO_color_suma_' + k)
+        base_out = acc.outputs['Vector']
+    if mezcla is not None:
+        f = FACTOR_DETALLE
+        detf = _nodo_vec(nodes, links, 'MULTIPLY_ADD', mezcla.outputs['Vector'], (f, f, f), 'TERRENO_detalle', c=(1 - f, 1 - f, 1 - f))
+        color = nodes.new('ShaderNodeMix')
+        color.name = 'TERRENO_color'
+        color.data_type = 'RGBA'
+        color.blend_type = 'MULTIPLY'
+        color.inputs['Factor'].default_value = 1.0
+        links.new(base_out, color.inputs[6])
+        links.new(detf.outputs['Vector'], color.inputs[7])
+        color.location = (-300, 300)
+        color_out = color.outputs[2]
+    else:
+        color_out = base_out
+    # --- normal de caliza (txDetailNM del multicapa): el sampler se registra siempre; en Blender solo se usa sin el grupo ---
+    ruta_n = _ruta_tex(NORMAL_TERRENO[0], NORMAL_TERRENO[1])
+    if ruta_n:
+        samplers['txDetailNM'] = ruta_n
+        props['detailNMMult'] = round(Lx / NORMAL_TERRENO[2], 2)
+        tex_max['txDetailNM'] = 1024
+    # --- capa de roca: tono procedural (estratos/grano/meteorizacion de v1 o materiales_roca) + relieve, solo donde wA ---
+    grp = _enganche_materiales_roca(nt, wA)
+    if grp is not None:
+        col_grp = grp.outputs['Color']
+        if 'A' in det:
+            # el grupo da el tono (estratos, bancos, juntas); el tile caliza_d da el grano fino, como en AC (txDetailA)
+            f = FACTOR_DETALLE
+            detA = _nodo_vec(nodes, links, 'MULTIPLY_ADD', det['A'], (f, f, f), 'ROCA_detalle_A', c=(1 - f, 1 - f, 1 - f))
+            mulg = nodes.new('ShaderNodeMix')
+            mulg.name = 'ROCA_color_grupo_detalle'
+            mulg.data_type = 'RGBA'
+            mulg.blend_type = 'MULTIPLY'
+            mulg.inputs['Factor'].default_value = 1.0
+            links.new(col_grp, mulg.inputs[6])
+            links.new(detA.outputs['Vector'], mulg.inputs[7])
+            col_grp = mulg.outputs[2]
+        mixc = nodes.new('ShaderNodeMix')
+        mixc.name = 'ROCA_color_grupo'
+        mixc.data_type = 'RGBA'
+        mixc.blend_type = 'MIX'
+        links.new(wA, mixc.inputs['Factor'])
+        links.new(color_out, mixc.inputs[6])
+        links.new(col_grp, mixc.inputs[7])
+        color_out = mixc.outputs[2]
+        if 'Normal' in grp.outputs:
+            mixn = nodes.new('ShaderNodeMix')
+            mixn.name = 'ROCA_normal_grupo'
+            mixn.data_type = 'VECTOR'
+            links.new(wA, mixn.inputs['Factor'])
+            links.new(geo.outputs['Normal'], mixn.inputs[4])
+            links.new(grp.outputs['Normal'], mixn.inputs[5])
+            nrm = _nodo_vec(nodes, links, 'NORMALIZE', mixn.outputs[1], nombre='ROCA_normal_final')
+            links.new(nrm.outputs['Vector'], bsdf.inputs['Normal'])
+    else:
+        tono, altura = _roca_terreno(nt, texm)
+        tono_w = nodes.new('ShaderNodeMix')
+        tono_w.name = 'ROCA_tono_pesado'
+        tono_w.data_type = 'RGBA'
+        tono_w.blend_type = 'MIX'
+        tono_w.inputs[6].default_value = (1.0, 1.0, 1.0, 1.0)
+        links.new(wA, tono_w.inputs['Factor'])
+        links.new(tono, tono_w.inputs[7])
+        mixc = nodes.new('ShaderNodeMix')
+        mixc.name = 'ROCA_color'
+        mixc.data_type = 'RGBA'
+        mixc.blend_type = 'MULTIPLY'
+        mixc.inputs['Factor'].default_value = 1.0
+        links.new(color_out, mixc.inputs[6])
+        links.new(tono_w.outputs[2], mixc.inputs[7])
+        mixc.location = (-100, 300)
+        color_out = mixc.outputs[2]
+        # relieve: normal de caliza (CC0 / caliza_n.png, OpenGL) x roca + bump de juntas
+        nrm_in = None
+        if ruta_n:
+            esc_n = _nodo_vec(nodes, links, 'SCALE', uv01.outputs['Vector'], nombre='TERRENO_uv_NM', escala=Lx / NORMAL_TERRENO[2])
+            txn = nodes.new('ShaderNodeTexImage')
+            txn.name = 'TEX_detalle_NM'
+            txn.image = _imagen(ruta_n, no_color=True)
+            txn.extension = 'REPEAT'
+            txn.location = (-1600, -1300)
+            links.new(esc_n.outputs['Vector'], txn.inputs['Vector'])
+            nm = nodes.new('ShaderNodeNormalMap')
+            nm.name = 'ROCA_normal_map'
+            nm.space = 'WORLD'       # sin tangentes fiables en una UV planar: la normal de un suelo en espacio de mundo
+            links.new(txn.outputs['Color'], nm.inputs['Color'])
+            fuerza = _nodo_math(nodes, links, 'MULTIPLY', wA, 0.6, 'ROCA_normal_fuerza')
+            links.new(fuerza.outputs['Value'], nm.inputs['Strength'])
+            nrm_in = nm.outputs['Normal']
+        alt_w = _nodo_math(nodes, links, 'MULTIPLY', altura, wA, 'ROCA_altura_pesada')
+        bmp = nodes.new('ShaderNodeBump')
+        bmp.name = 'ROCA_bump'
+        bmp.inputs['Strength'].default_value = 0.40
+        if 'Distance' in bmp.inputs:
+            bmp.inputs['Distance'].default_value = 0.5
+        links.new(alt_w.outputs['Value'], bmp.inputs['Height'])
+        if nrm_in is not None:
+            links.new(nrm_in, bmp.inputs['Normal'])
+        links.new(bmp.outputs['Normal'], bsdf.inputs['Normal'])
+    links.new(color_out, bsdf.inputs['Base Color'])
+    # --- lo que lee el writer de hoy y las props del multicapa (P3/P10) ---
+    m.diffuse_color = paleta.rgba('hierba_seca')
+    samplers = dict({'txDiffuse': fich['base'] or '', 'txMask': fich['mask'] or ''}, **samplers)
+    props.update({'fresnelC': 0.02, 'fresnelEXP': 3.0, 'fresnelMaxLevel': 0.1, 'ksAmbient': 0.45, 'ksDiffuse': 0.55,
+                  'ksSpecular': 0.08, 'ksSpecularEXP': 10.0, 'ksEmissive': 0.0, 'ksAlphaRef': 0.0, 'magicMult': 1.0})
+    tex_max.update({'txMask': 2048, 'txDiffuse': 2048})
+    _ac_props(m, 'ksMultilayer_fresnel_nm', samplers, props, tex_max, raw=1)
+    m['ac_ao'] = fich['ao'] or ''
+    _marcar_texturizado(nt)
+    print('MAT_terreno v2: mascara %s, base %s, tiles %s, normal %s' % (
+        os.path.basename(fich['mask'] or '-'), os.path.basename(fich['base'] or '-'),
+        {k: os.path.basename(v) for k, v in samplers.items() if k.startswith('txDetail') and k != 'txDetailNM'},
+        os.path.basename(samplers.get('txDetailNM', '-'))))
+    return m
+
+
+def _roca_terreno(nt, texm):
+    """Tono y relieve de la caliza del terreno (v2 pista E2-11/C2-13, conservado en v2 del material): juntas de estrato finas
+    y onduladas cada ~2.6 m (Wave BANDS en Z), grano de ~2 m y meteorizacion de ~7 m. El COLOR base de la roca ya no sale de
+    aqui (ROCA_rampa): lo pone terreno_base.png (caliza_ocre / caliza_gris_calido de paleta.json). Devuelve (tono RGBA, altura)."""
+    nodes, links = nt.nodes, nt.links
     wv = nodes.new('ShaderNodeTexWave')
     wv.name = 'ROCA_estratos'
     wv.wave_type = 'BANDS'
@@ -273,6 +708,7 @@ def _roca_terreno(nt, bsdf, geo, sepn, texm, suma, talud, atr, umb, mx_r, mixr):
     wv.inputs['Detail Scale'].default_value = 0.5
     if 'Detail Roughness' in wv.inputs:
         wv.inputs['Detail Roughness'].default_value = 0.6
+    wv.location = (-2000, -1500)
     links.new(texm.outputs['Object'], wv.inputs['Vector'])
     ne = nodes.new('ShaderNodeMapRange')
     ne.name = 'ROCA_estratos_tono'
@@ -287,6 +723,7 @@ def _roca_terreno(nt, bsdf, geo, sepn, texm, suma, talud, atr, umb, mx_r, mixr):
     n2.inputs['Scale'].default_value = 0.5
     n2.inputs['Detail'].default_value = 8.0
     n2.inputs['Roughness'].default_value = 0.65
+    n2.location = (-2000, -1800)
     links.new(texm.outputs['Object'], n2.inputs['Vector'])
     ng = nodes.new('ShaderNodeMapRange')
     ng.name = 'ROCA_grano_tono'
@@ -296,11 +733,11 @@ def _roca_terreno(nt, bsdf, geo, sepn, texm, suma, talud, atr, umb, mx_r, mixr):
     ng.inputs['To Min'].default_value = 0.90
     ng.inputs['To Max'].default_value = 1.05
     links.new(n2.outputs['Fac'], ng.inputs['Value'])
-    # manchas de meteorizacion (~7 m): zonas algo mas oscuras, nada de bandas regulares
     n3 = nodes.new('ShaderNodeTexNoise')
     n3.name = 'ROCA_ruido_meteo'
     n3.inputs['Scale'].default_value = 0.15
     n3.inputs['Detail'].default_value = 4.0
+    n3.location = (-2000, -2100)
     links.new(texm.outputs['Object'], n3.inputs['Vector'])
     nm3 = nodes.new('ShaderNodeMapRange')
     nm3.name = 'ROCA_meteo_tono'
@@ -310,42 +747,465 @@ def _roca_terreno(nt, bsdf, geo, sepn, texm, suma, talud, atr, umb, mx_r, mixr):
     nm3.inputs['To Min'].default_value = 0.86
     nm3.inputs['To Max'].default_value = 1.0
     links.new(n3.outputs['Fac'], nm3.inputs['Value'])
-    tono0 = _suma(ne.outputs['Result'], ng.outputs['Result'], 'ROCA_tono_a', 'MULTIPLY')
-    tono = _suma(tono0.outputs['Value'], nm3.outputs['Result'], 'ROCA_tono', 'MULTIPLY')
-    mc = nodes.new('ShaderNodeMix')
-    mc.name = 'ROCA_color'
-    mc.data_type = 'RGBA'
-    mc.blend_type = 'MULTIPLY'
-    mc.inputs['Factor'].default_value = 1.0
-    links.new(rr.outputs['Color'], mc.inputs[6])
-    links.new(tono.outputs['Value'], mc.inputs[7])
-    links.new(mc.outputs[2], mixr.inputs[7])
-    # relieve de la roca: juntas talladas (surco) + grano
-    alt = _madd(ne.outputs['Result'], 1.5, 0.0, 'ROCA_altura_juntas')
-    alt = _suma(alt.outputs['Value'], n2.outputs['Fac'], 'ROCA_altura')
-    bmp = nodes.new('ShaderNodeBump')
-    bmp.name = 'ROCA_bump'
-    bmp.inputs['Strength'].default_value = 0.40
-    if 'Distance' in bmp.inputs:
-        bmp.inputs['Distance'].default_value = 0.5
-    links.new(alt.outputs['Value'], bmp.inputs['Height'])
-    # BSDF propio de la roca (su color = salida de mixr: la rama de roca sin el velo de hierba)
-    br = nodes.new('ShaderNodeBsdfPrincipled')
-    br.name = 'ROCA_bsdf'
-    br.inputs['Roughness'].default_value = 0.92
-    links.new(mixr.outputs[2], br.inputs['Base Color'])
-    links.new(bmp.outputs['Normal'], br.inputs['Normal'])
-    out = next((n_ for n_ in nodes if n_.type == 'OUTPUT_MATERIAL'), None)
-    if out is not None:
-        ms = nodes.new('ShaderNodeMixShader')
-        ms.name = 'ROCA_mezcla'
-        links.new(mx_r.outputs['Value'], ms.inputs[0])          # factor (0 = hierba, 1 = roca)
-        links.new(bsdf.outputs['BSDF'], ms.inputs[1])
-        links.new(br.outputs['BSDF'], ms.inputs[2])
-        links.new(ms.outputs['Shader'], out.inputs['Surface'])
+    tono0 = _nodo_math(nodes, links, 'MULTIPLY', ne.outputs['Result'], ng.outputs['Result'], 'ROCA_tono_a')
+    tono = _nodo_math(nodes, links, 'MULTIPLY', tono0.outputs['Value'], nm3.outputs['Result'], 'ROCA_tono')
+    rgb = nodes.new('ShaderNodeCombineColor')
+    rgb.name = 'ROCA_tono_rgb'
+    for k in ('Red', 'Green', 'Blue'):
+        links.new(tono.outputs['Value'], rgb.inputs[k])
+    alt = _nodo_math(nodes, links, 'MULTIPLY_ADD', ne.outputs['Result'], 1.5, 'ROCA_altura_juntas', c=0.0)
+    alt = _nodo_math(nodes, links, 'ADD', alt.outputs['Value'], n2.outputs['Fac'], 'ROCA_altura')
+    return rgb.outputs['Color'], alt.outputs['Value']
+
+
+def mat_cesped():
+    """MAT_cesped (plan 3.5): cesped SOLO en jardines y rotondas (parterre Loews, jardines del casino, plazoletas/patios,
+    rotonda de la palmera); paleta cesped_jardin, tile de 3 m (cesped_d.png de 'materiales'; mientras, hierba_d.png).
+    Cadena TEX_mapping / TEX_ganancia / TEX_multiplicar = contrato del writer (tile tintado). Es el UNICO material que
+    listara GrassFX (ac_grassfx, bloque 9). Se crea con fake user: lo asignan integrar_escena / kits (parche)."""
+    m = bpy.data.materials.get('MAT_cesped')
+    if m:
+        return m
+    m = bpy.data.materials.new('MAT_cesped')
+    m.use_nodes = True
+    m.use_fake_user = True
+    nt = m.node_tree
+    nodes, links = nt.nodes, nt.links
+    bsdf = nodes.get('Principled BSDF')
+    bsdf.inputs['Roughness'].default_value = 0.95
+    col = paleta.rgba('cesped_jardin')
+    bsdf.inputs['Base Color'].default_value = col
+    m.diffuse_color = col
+    ruta = _ruta_tex(TILE_CESPED[0], TILE_CESPED[2])
+    samplers = {}
+    if ruta:
+        img = _imagen(ruta)
+        tco = nodes.new('ShaderNodeTexCoord')
+        tco.location = (-1000, 0)
+        mp = nodes.new('ShaderNodeMapping')
+        mp.name = 'TEX_mapping'
+        mp.inputs['Scale'].default_value = (1.0 / TILE_CESPED[1],) * 3
+        mp.location = (-800, 0)
+        links.new(tco.outputs['Object'], mp.inputs['Vector'])
+        tx = nodes.new('ShaderNodeTexImage')
+        tx.name = 'TEX_cesped'
+        tx.image = img
+        tx.extension = 'REPEAT'
+        tx.projection = 'FLAT'
+        tx.location = (-600, 0)
+        links.new(mp.outputs['Vector'], tx.inputs['Vector'])
+        g = 1.0 / float(np.mean(_media_lineal(img)))
+        gan = nodes.new('ShaderNodeMix')
+        gan.name = 'TEX_ganancia'
+        gan.data_type = 'RGBA'
+        gan.blend_type = 'MULTIPLY'
+        gan.clamp_result = False
+        gan.inputs['Factor'].default_value = 1.0
+        gan.inputs[7].default_value = (g, g, g, 1.0)
+        gan.location = (-300, 0)
+        links.new(tx.outputs['Color'], gan.inputs[6])
+        mul = nodes.new('ShaderNodeMix')
+        mul.name = 'TEX_multiplicar'
+        mul.data_type = 'RGBA'
+        mul.blend_type = 'MULTIPLY'
+        mul.inputs['Factor'].default_value = FACTOR_DETALLE
+        mul.inputs[6].default_value = col
+        mul.location = (-100, 0)
+        links.new(gan.outputs[2], mul.inputs[7])
+        links.new(mul.outputs[2], bsdf.inputs['Base Color'])
+        samplers['txDiffuse'] = ruta
+    _ac_props(m, 'ksPerPixel', samplers, {'ksAmbient': 0.45, 'ksDiffuse': 0.55, 'ksSpecular': 0.15, 'ksSpecularEXP': 24.0,
+                                           'ksEmissive': 0.0, 'ksAlphaRef': 0.0}, {'txDiffuse': 1024})
+    m['ac_grassfx'] = 1
+    _marcar_texturizado(nt, (-1200, 400))
+    return m
+
+
+def mat_fondo_marino():
+    """AGUA_fondo (plan 3.5): material propio en vez de MAT_terreno. Arena apagada mezclada con mar_orilla (paleta); el
+    degradado de batimetria turquesa -> profundo es del bloque 6."""
+    # F1 cierre (decision 14): los dos tonos son colores de paleta.json (antes c1 = mezcla 0.55 arena + 0.45 mar_orilla,
+    # #C2DECF, fuera de paleta): c1 (= diffuse_color, lo que lee el writer) = mar_orilla; c2 = arena al 65 % (paleta.variante)
+    c1 = paleta.rgba('mar_orilla')
+    c2 = paleta.variante('arena', 0.65) + (1.0,)
+    m = mat_con_ruido('MAT_fondo_marino', c1, c2, 0.004, rough=0.95, bump=0.15)
+    _ac_props(m, 'ksPerPixel', {}, {'ksAmbient': 0.45, 'ksDiffuse': 0.55, 'ksSpecular': 0.15, 'ksSpecularEXP': 24.0,
+                                     'ksEmissive': 0.0, 'ksAlphaRef': 0.0}, {'txDiffuse': 512})
+    return m
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# F1 r4 (ACOTACIONES_COORDINADOR_F1.md 4, director_f1_r3.md n.º 3): mitigacion interina de la 'roca por cara de 4 m con borde
+# en sierra' del modo AC (= lo que lee el writer de hoy: 04_export/color_ac.separar_roca_terreno; P1 [W] la quita de verdad):
+#   (1) roca_zonas_nz(): en la cima de la postal 56 y en las laderas a < 150 m de las camaras 51 y 07 (mascara_terreno.UMBRALES
+#       ['ROCA_NZ_ZONAS'], loc de renders/ab/_base_antes/camaras.json) la roca POR CARA exige nz < ROCA_NZ_ZONA (0.62, 52 grados)
+#       en vez del nz < 0.82 general y se limpian los triangulos aislados / huecos (< ROCA_ZONA_MIN_CARAS caras): el atributo
+#       'roca' del TERRENO pasa a ser, dentro de la zona, la fraccion de caras de roca incidentes en cada vertice (f_v), que el
+#       criterio de color_ac (media de los 3 vertices > 0.49) reproduce sin dientes. Fuera de las zonas el atributo sigue
+#       siendo el canal A de la mascara (R3.2); la mascara por texel (modo normal, P1) NO cambia.
+#   (2) subdividir_banda_terreno(): triangulos del TERRENO a 2 m (4 por triangulo, puntos medios SOBRE el plano del padre: la
+#       superficie no cambia, la clasificacion por cara de AC pasa a 2 m) en la banda de BANDA_2M_M (20 m) junto al asfalto.
+#       Se llama al FINAL del pipeline (_rev/banda_terreno_2m.py, parche r4 de PARCHES_F1_mascara.md), nunca aqui: hasta
+#       entonces el TERRENO es la rejilla nx*ny que integrar_escena / asentar_objetos / revisar_* editan y leen por j*nx+i
+#       (plan 15.7: cell unico). Los vertices nuevos van al FINAL (los nx*ny primeros no cambian de indice) con los atributos
+#       INT 'banda_p0'/'banda_p1' (sus dos padres; -1 en la rejilla) para poder re-sincronizarlos si hiciera falta.
+# Los umbrales viven en mascara_terreno.UMBRALES (un solo sitio); el nz general de 'terreno' (terreno_montana.umbrales_roca()
+# -> geometria_3d.json['extras']['umbrales_roca']['nz'], 0.804) solo se imprime como referencia.
+_UMB_R4 = dict(_mt.UMBRALES) if _mt is not None and hasattr(_mt, 'UMBRALES') else {}
+ROCA_NZ_ZONA = float(_UMB_R4.get('ROCA_NZ_ZONA', 0.62))
+ROCA_ZONA_MIN_CARAS = int(_UMB_R4.get('ROCA_ZONA_MIN_CARAS', 6))
+ROCA_ZONA_FUNDIDO_M = float(_UMB_R4.get('ROCA_ZONA_FUNDIDO_M', 30.0))
+ROCA_NZ_ZONAS = dict(_UMB_R4.get('ROCA_NZ_ZONAS', {'56_postal_cima_bahia': (47.972, 567.543, 150.0),
+                                                    '51_piloto_s1700': (15.023, 426.256, 150.0),
+                                                    '07_tierra_subida': (-12.016, 294.887, 150.0)}))
+BANDA_2M_M = float(_UMB_R4.get('BANDA_2M_M', 20.0))
+# criterio de 04_export/color_ac.separar_roca_terreno COPIADO (solo lectura; 04_export no se toca): cara de roca de MAT_terreno
+# si nz < ROCA_NZ o (media del atributo 'roca' de sus vertices > ROCA_ATR y nz < ROCA_NZ_LLANO)
+AC_ROCA_NZ, AC_ROCA_ATR, AC_ROCA_NZ_LLANO = 0.50, 0.49, 0.82
+
+
+def _malla_np(ob):
+    """(V mundo (n, 3), tri (nf, 3), material_index (nf,), nz de cara (nf,)) de una malla TRIANGULADA; None si no lo esta."""
+    me = ob.data
+    n, nf = len(me.vertices), len(me.polygons)
+    co = np.empty(n * 3, np.float32)
+    me.vertices.foreach_get('co', co)
+    M = np.array(ob.matrix_world, np.float64)
+    V = co.reshape(-1, 3).astype(np.float64) @ M[:3, :3].T + M[:3, 3]
+    if nf == 0:
+        return V, np.zeros((0, 3), np.int64), np.zeros(0, np.int32), np.zeros(0)
+    lt = np.empty(nf, np.int32)
+    me.polygons.foreach_get('loop_total', lt)
+    if not (lt == 3).all():
+        return None
+    ls = np.empty(nf, np.int32)
+    me.polygons.foreach_get('loop_start', ls)
+    lv = np.empty(len(me.loops), np.int32)
+    me.loops.foreach_get('vertex_index', lv)
+    tri = lv[np.c_[ls, ls + 1, ls + 2]].astype(np.int64)
+    pm = np.empty(nf, np.int32)
+    me.polygons.foreach_get('material_index', pm)
+    nrm = np.cross(V[tri[:, 1]] - V[tri[:, 0]], V[tri[:, 2]] - V[tri[:, 0]])
+    nz = nrm[:, 2] / np.maximum(np.linalg.norm(nrm, axis=1), 1e-12)
+    return V, tri, pm, nz
+
+
+def _peso_zonas(xy):
+    """Peso 0..1 de ROCA_NZ_ZONAS en puntos (n, >= 2): 1 dentro, fundido smoothstep en los ultimos ROCA_ZONA_FUNDIDO_M m."""
+    wz = np.zeros(len(xy), np.float64)
+    for (cx, cy, r) in ROCA_NZ_ZONAS.values():
+        t = np.clip((float(r) - np.hypot(xy[:, 0] - cx, xy[:, 1] - cy)) / max(ROCA_ZONA_FUNDIDO_M, 1e-6), 0.0, 1.0)
+        wz = np.maximum(wz, t * t * (3.0 - 2.0 * t))
+    return wz
+
+
+def _vecinas_por_arista(tri):
+    """Pares (f0, f1) de triangulos que comparten una arista."""
+    nf = len(tri)
+    e = np.concatenate([tri[:, [0, 1]], tri[:, [1, 2]], tri[:, [2, 0]]]).astype(np.int64)
+    e.sort(axis=1)
+    f = np.tile(np.arange(nf, dtype=np.int64), 3)
+    key = e[:, 0] * (int(tri.max()) + 1) + e[:, 1]
+    o = np.argsort(key, kind='stable')
+    key, f = key[o], f[o]
+    igual = key[1:] == key[:-1]
+    return np.c_[f[:-1][igual], f[1:][igual]]
+
+
+def _componentes(nf, pares, sel):
+    """Etiqueta (indice minimo) de la componente conexa por aristas de cada cara con sel True; -1 fuera de sel."""
+    lab = np.where(sel, np.arange(nf, dtype=np.int64), -1)
+    p = pares[sel[pares[:, 0]] & sel[pares[:, 1]]]
+    idx = np.flatnonzero(sel)
+    if len(p) == 0 or len(idx) == 0:
+        return lab
+    for _ in range(500):
+        prev = lab.copy()
+        m = np.minimum(lab[p[:, 0]], lab[p[:, 1]])
+        np.minimum.at(lab, p[:, 0], m)
+        np.minimum.at(lab, p[:, 1], m)
+        lab[idx] = lab[lab[idx]]          # salto de puntero (lab >= 0 en sel)
+        lab[idx] = lab[lab[idx]]
+        if np.array_equal(lab, prev):
+            break
+    return lab
+
+
+def _padres_banda(ob):
+    """(p0, p1) int (n,) de los atributos 'banda_p0'/'banda_p1' (-1 en la rejilla) o None si el TERRENO no esta subdividido."""
+    me = ob.data
+    a0, a1 = me.attributes.get('banda_p0'), me.attributes.get('banda_p1')
+    if a0 is None or a1 is None or len(a0.data) != len(me.vertices):
+        return None
+    p0 = np.empty(len(me.vertices), np.int32)
+    p1 = np.empty(len(me.vertices), np.int32)
+    a0.data.foreach_get('value', p0)
+    a1.data.foreach_get('value', p1)
+    return p0, p1
+
+
+def roca_zonas_nz(ob, atributo='roca'):
+    """Aplica (1): dentro de ROCA_NZ_ZONAS, roca por cara solo con nz < ROCA_NZ_ZONA y sin triangulos aislados ni huecos de menos
+    de ROCA_ZONA_MIN_CARAS caras; el atributo se funde con el de fuera por el peso de zona. Devuelve dict con cifras (None si no
+    hay atributo o la malla no es de triangulos). Idempotente a efectos practicos (segunda pasada: cambios ~0)."""
+    me = ob.data
+    at = me.attributes.get(atributo)
+    if at is None or not ROCA_NZ_ZONAS or at.domain != 'POINT' or at.data_type != 'FLOAT':
+        return None
+    datos = _malla_np(ob)
+    if datos is None:
+        print('AVISO roca_zonas_nz: %s no es una malla de triangulos: sin cambios' % ob.name)
+        return None
+    V, tri, pm, nz = datos
+    n, nf = len(V), len(tri)
+    a_v = np.empty(n, np.float32)
+    at.data.foreach_get('value', a_v)
+    a_v = a_v.astype(np.float64)
+    es_ter = np.isin(pm, [k for k, m in enumerate(me.materials) if m is not None and m.name == 'MAT_terreno'])
+    cf = V[tri].mean(axis=1)
+    wz_f = _peso_zonas(cf)
+    wz_v = _peso_zonas(V)
+    en_zona = wz_f > 0.0
+    pares = _vecinas_por_arista(tri)
+
+    def clasificar(av):
+        af = av[tri].mean(axis=1)
+        return es_ter & ((nz < AC_ROCA_NZ) | ((af > AC_ROCA_ATR) & (nz < AC_ROCA_NZ_LLANO)))
+
+    def dientes(rf):
+        nrv = np.zeros(nf, np.int64)
+        np.add.at(nrv, pares[:, 0], rf[pares[:, 1]].astype(np.int64))
+        np.add.at(nrv, pares[:, 1], rf[pares[:, 0]].astype(np.int64))
+        return (rf & (nrv <= 1)), ((~rf) & es_ter & (nrv >= 3))
+
+    r0 = clasificar(a_v)
+    # objetivo: fuera de zona lo de hoy; dentro, ademas nz < ROCA_NZ_ZONA (las caras con nz < 0.50 son roca pase lo que pase)
+    obj = r0 & (~en_zona | (nz < ROCA_NZ_ZONA))
+    for _ in range(2):
+        lab = _componentes(nf, pares, obj)
+        tam = np.bincount(lab[lab >= 0], minlength=nf)
+        en_z = np.bincount(lab[lab >= 0], weights=en_zona[lab >= 0], minlength=nf)
+        l_ = np.maximum(lab, 0)
+        peq = (lab >= 0) & (tam[l_] < ROCA_ZONA_MIN_CARAS) & (en_z[l_] >= tam[l_] - 0.5) & (nz >= AC_ROCA_NZ)
+        obj = obj & ~peq
+        lab = _componentes(nf, pares, (~obj) & es_ter)
+        tam = np.bincount(lab[lab >= 0], minlength=nf)
+        en_z = np.bincount(lab[lab >= 0], weights=en_zona[lab >= 0], minlength=nf)
+        l_ = np.maximum(lab, 0)
+        hueco = (lab >= 0) & (tam[l_] < ROCA_ZONA_MIN_CARAS) & (en_z[l_] >= tam[l_] - 0.5)
+        obj = obj | hueco
+    # valores por vertice que reproducen 'obj' con el criterio de color_ac (media de los 3 vertices > 0.49): 1 si TODAS sus
+    # caras incidentes son roca, 0 si ninguna, 0.5 si mezcla (las tiras de 1 cara de ancho, p. ej. el desmonte, se conservan:
+    # (0.5, 0.5, 0.5) = 0.5 > 0.49). Las caras de hierba con los 3 vertices en la frontera saldrian roca (0.5): se baja a 0.45
+    # cualquier vertice suyo cuyas caras de roca incidentes tengan todas un vertice interior (1.0), que es lo normal.
+    cnt = np.zeros(n)
+    np.add.at(cnt, tri.ravel(), 1.0)
+    rs = np.zeros(n)
+    np.add.at(rs, tri.ravel(), np.repeat(obj.astype(np.float64), 3))
+    t_v = np.where(rs >= cnt - 0.5, 1.0, np.where(rs > 0.0, 0.5, 0.0))
+    t_v = np.where(cnt > 0, t_v, 0.0)
+    r1 = clasificar(t_v)
+    over = r1 & ~obj & (wz_f > 0.999)
+    if over.any():
+        tiene_int = (t_v[tri] >= 0.999).any(axis=1)
+        mal_v = np.zeros(n, bool)
+        np.logical_or.at(mal_v, tri[obj & ~tiene_int].ravel(), True)
+        cand = np.unique(tri[over].ravel())
+        cand = cand[(~mal_v[cand]) & (t_v[cand] == 0.5)]
+        t_v[cand] = 0.45
+    a_new = a_v * (1.0 - wz_v) + t_v * wz_v
+    at.data.foreach_set('value', np.ascontiguousarray(a_new, dtype=np.float32))
+    r1 = clasificar(a_new)
+    d0, h0 = dientes(r0)
+    d1, h1 = dientes(r1)
+    talud = nz < AC_ROCA_NZ                       # roca por talud (color_ac): no depende del atributo
+    out = {'nz_zona': ROCA_NZ_ZONA, 'min_caras': ROCA_ZONA_MIN_CARAS, 'vertices': int(n), 'caras': int(nf),
+           'vertices_en_zona': int((wz_v > 0).sum()), 'vertices_cambiados_0_49': int(((a_v > AC_ROCA_ATR) != (a_new > AC_ROCA_ATR)).sum()),
+           'global': {'roca_antes': int(r0.sum()), 'roca_despues': int(r1.sum()), 'dientes_antes': int(d0.sum()), 'dientes_despues': int(d1.sum()),
+                      'huecos_antes': int(h0.sum()), 'huecos_despues': int(h1.sum())}, 'zonas': {}}
+    for nombre, (cx, cy, r) in ROCA_NZ_ZONAS.items():
+        sel = np.hypot(cf[:, 0] - cx, cf[:, 1] - cy) < float(r)
+        out['zonas'][nombre] = {'caras_tierra': int((sel & es_ter).sum()), 'roca_antes': int((sel & r0).sum()), 'roca_despues': int((sel & r1).sum()),
+                                'roca_talud': int((sel & talud & es_ter).sum()),
+                                'dientes_antes': int((sel & d0).sum()), 'dientes_despues': int((sel & d1).sum()),
+                                'dientes_despues_talud': int((sel & d1 & talud).sum()),
+                                'dientes_despues_anillo': int((sel & d1 & (wz_f > 0.0) & (wz_f < 0.999)).sum()),
+                                'huecos_antes': int((sel & h0).sum()), 'huecos_despues': int((sel & h1).sum()),
+                                'desacuerdo_objetivo': int((sel & (r1 != obj)).sum())}
+    return out
+
+
+def _banda_celdas(T_, S_, banda_m):
+    """Celdas (ny-1, nx-1) con el centro a d_borde en [-cell, banda_m] del asfalto (d_borde = d al eje de la muestra mas cercana
+    - w/2) y sin mar en ninguna esquina. Sin scipy: minimo por bloques alrededor de cada muestra (2600 x ~15x15 celdas)."""
+    nx_, ny_, c_ = int(T_['nx']), int(T_['ny']), float(T_['cell'])
+    x0_, y0_ = float(T_['x0']), float(T_['y0'])
+    d = np.full((ny_ - 1, nx_ - 1), np.inf)
+    for q in S_:
+        r = 0.5 * float(q['w']) + banda_m + 1.5 * c_
+        i0 = max(0, int((q['x'] - r - x0_) / c_ - 0.5)); i1 = min(nx_ - 2, int((q['x'] + r - x0_) / c_ + 0.5))
+        j0 = max(0, int((q['y'] - r - y0_) / c_ - 0.5)); j1 = min(ny_ - 2, int((q['y'] + r - y0_) / c_ + 0.5))
+        if i1 < i0 or j1 < j0:
+            continue
+        cx = x0_ + (np.arange(i0, i1 + 1) + 0.5) * c_
+        cy = y0_ + (np.arange(j0, j1 + 1) + 0.5) * c_
+        dd = np.hypot(cx[None, :] - q['x'], cy[:, None] - q['y']) - 0.5 * float(q['w'])
+        np.minimum(d[j0:j1 + 1, i0:i1 + 1], dd, out=d[j0:j1 + 1, i0:i1 + 1])
+    mar = np.asarray(T_.get('mar') or np.zeros(nx_ * ny_), np.float32).reshape(ny_, nx_) > 0.5
+    mar_c = mar[:-1, :-1] | mar[1:, :-1] | mar[1:, 1:] | mar[:-1, 1:]
+    return (d >= -c_) & (d <= banda_m) & ~mar_c
+
+
+def estimar_banda_terreno(T_=None, S_=None, banda_m=None):
+    """Recuento previo (sin tocar la malla): celdas de la banda y vertices que anadiria subdividir_banda_terreno."""
+    T_ = T_ or G['terreno']; S_ = S_ or G['muestras']
+    banda_m = BANDA_2M_M if banda_m is None else float(banda_m)
+    cel = _banda_celdas(T_, S_, banda_m)
+    nx_ = int(T_['nx'])
+    jj, ii = np.nonzero(cel)
+    a = jj * nx_ + ii
+    lados = np.concatenate([np.c_[a, a + 1], np.c_[a + 1, a + nx_ + 1], np.c_[a + nx_, a + nx_ + 1], np.c_[a, a + nx_]])
+    n_lados = len(np.unique(lados[:, 0] * (nx_ * int(T_['ny']) + 1) + lados[:, 1]))
+    return {'banda_m': banda_m, 'celdas': int(cel.sum()), 'vertices_nuevos': int(cel.sum()) + n_lados, 'tris_nuevos': 6 * int(cel.sum())}
+
+
+def subdividir_banda_terreno(ob, banda_m=None, T_=None, S_=None):
+    """Aplica (2) sobre el TERRENO (malla de triangulos con la rejilla nx*ny en los primeros vertices). Devuelve dict con cifras;
+    None si ya estaba subdividido (idempotente) o no procede. Reconstruye el datablock de malla (vertices originales + puntos
+    medios al final; 4 tris por tri de la banda; material por cara heredado; atributos FLOAT POINT interpolados, 'roca' ademas
+    re-muestreado del canal A en el punto medio (max con la interpolacion: no se pierden las subidas de integrar_escena);
+    'banda_p0'/'banda_p1' INT POINT; UV planar nueva; smooth)."""
+    T_ = T_ or G['terreno']; S_ = S_ or G['muestras']
+    banda_m = BANDA_2M_M if banda_m is None else float(banda_m)
+    me = ob.data
+    if _padres_banda(ob) is not None or 'banda_2m' in ob:
+        print('banda 2 m: %s ya subdividido (%s): sin cambios' % (ob.name, dict(ob.get('banda_2m', {}))))
+        return None
+    nx_, ny_ = int(T_['nx']), int(T_['ny'])
+    datos = _malla_np(ob)
+    if datos is None or len(me.vertices) < nx_ * ny_:
+        print('AVISO banda 2 m: %s no es la rejilla triangulada del terreno: sin cambios' % ob.name)
+        return None
+    V, tri, pm, nz = datos
+    n0, nf0 = len(V), len(tri)
+    co = np.empty(n0 * 3, np.float32)
+    me.vertices.foreach_get('co', co)
+    co = co.reshape(-1, 3).astype(np.float64)                      # LOCAL (la UV y el canal A usan mundo: matrix_world)
+    cel = _banda_celdas(T_, S_, banda_m)
+    cf = V[tri].mean(axis=1)
+    ci = np.clip(np.floor((cf[:, 0] - float(T_['x0'])) / float(T_['cell'])).astype(np.int64), 0, nx_ - 2)
+    cj = np.clip(np.floor((cf[:, 1] - float(T_['y0'])) / float(T_['cell'])).astype(np.int64), 0, ny_ - 2)
+    en_banda = cel[cj, ci]
+    fb = np.flatnonzero(en_banda)
+    if len(fb) == 0:
+        print('banda 2 m: ninguna cara en la banda: sin cambios')
+        return None
+    # puntos medios unicos de las aristas de los triangulos de la banda
+    tb = tri[fb]
+    e = np.concatenate([tb[:, [0, 1]], tb[:, [1, 2]], tb[:, [0, 2]]])
+    e.sort(axis=1)
+    key = e[:, 0] * (n0 + 1) + e[:, 1]
+    ukey, inv = np.unique(key, return_inverse=True)
+    p0 = (ukey // (n0 + 1)).astype(np.int64)
+    p1 = (ukey % (n0 + 1)).astype(np.int64)
+    n_m = len(ukey)
+    m_ab, m_bc, m_ac = (n0 + inv[:len(fb)], n0 + inv[len(fb):2 * len(fb)], n0 + inv[2 * len(fb):])
+    a_, b_, c_ = tb[:, 0], tb[:, 1], tb[:, 2]
+    sub = np.concatenate([np.c_[a_, m_ab, m_ac], np.c_[m_ab, b_, m_bc], np.c_[m_ac, m_bc, c_], np.c_[m_ab, m_bc, m_ac]])
+    sub_pm = np.tile(pm[fb], 4)
+    keep = np.flatnonzero(~en_banda)
+    tri_new = np.vstack([tri[keep], sub])
+    pm_new = np.concatenate([pm[keep], sub_pm])
+    co_new = np.vstack([co, 0.5 * (co[p0] + co[p1])])
+    # atributos FLOAT POINT: media de los padres; 'roca': max(media, canal A en el punto medio)
+    attrs = {}
+    for at in list(me.attributes):
+        if at.domain == 'POINT' and at.data_type == 'FLOAT' and len(at.data) == n0 and not at.name.startswith('.'):
+            v = np.empty(n0, np.float32)
+            at.data.foreach_get('value', v)
+            attrs[at.name] = np.concatenate([v, 0.5 * (v[p0] + v[p1])]).astype(np.float32)
+    canal_a_ok = False
+    if 'roca' in attrs:
+        fich = _mascara_ficheros()
+        if fich.get('mask'):
+            try:
+                img = _imagen(fich['mask'], no_color=True)
+                w_, h_ = img.size
+                buf = np.empty(len(img.pixels), np.float32)
+                img.pixels.foreach_get(buf)
+                A = buf.reshape(h_, w_, 4)[:, :, 3]
+                M = np.array(ob.matrix_world, np.float64)
+                xyw = co_new[n0:] @ M[:3, :3].T + M[:3, 3]
+                a_m = _canal_a_en_xy(A, xyw)
+                attrs['roca'][n0:] = np.maximum(attrs['roca'][n0:], a_m)
+                canal_a_ok = True
+            except Exception as e_:
+                print('AVISO banda 2 m: canal A no legible en los puntos medios (%s): atributo interpolado' % e_)
+    mats = [m for m in me.materials]
+    nombre_me = me.name
+    me.name = nombre_me + '_rejilla'
+    me2 = bpy.data.meshes.new(nombre_me)
+    me2.from_pydata([tuple(v) for v in co_new], [], [tuple(int(k) for k in t) for t in tri_new])
+    me2.update()
+    for m in mats:
+        me2.materials.append(m)
+    me2.polygons.foreach_set('material_index', np.ascontiguousarray(pm_new, dtype=np.int32))
+    for nombre, v in attrs.items():
+        at2 = me2.attributes.new(nombre, 'FLOAT', 'POINT')
+        at2.data.foreach_set('value', np.ascontiguousarray(v, dtype=np.float32))
+    pad0 = np.concatenate([np.full(n0, -1, np.int32), p0.astype(np.int32)])
+    pad1 = np.concatenate([np.full(n0, -1, np.int32), p1.astype(np.int32)])
+    for nombre, v in (('banda_p0', pad0), ('banda_p1', pad1)):
+        at2 = me2.attributes.new(nombre, 'INT', 'POINT')
+        at2.data.foreach_set('value', np.ascontiguousarray(v, dtype=np.int32))
+    for k in me.keys():
+        try:
+            me2[k] = me[k]
+        except Exception:
+            pass
+    ob.data = me2
+    me2.shade_smooth()
+    _uv_planar(ob)
+    if me.users == 0:
+        bpy.data.meshes.remove(me)
+    out = {'banda_m': banda_m, 'celdas': int(cel.sum()), 'caras_banda': int(len(fb)), 'vertices_antes': int(n0), 'vertices_despues': int(len(co_new)),
+           'vertices_nuevos': int(n_m), 'tris_antes': int(nf0), 'tris_despues': int(len(tri_new)), 'canal_a_en_medios': canal_a_ok,
+           'atributos': sorted(attrs)}
+    ob['banda_2m'] = {k: v for k, v in out.items() if not isinstance(v, list)}
+    return out
+
+
+def sincronizar_banda_terreno(ob):
+    """Re-coloca los puntos medios de la banda (co = media de los dos padres) y su atributo 'roca' (max con la media de los padres)
+    tras mover vertices de la rejilla. No la usa el pipeline (la banda se hace al final); queda por si algun paso posterior
+    moviera la rejilla. Devuelve el numero de puntos medios o None."""
+    pad = _padres_banda(ob)
+    if pad is None:
+        return None
+    p0, p1 = pad
+    me = ob.data
+    n = len(me.vertices)
+    co = np.empty(n * 3, np.float32)
+    me.vertices.foreach_get('co', co)
+    co = co.reshape(-1, 3)
+    medio = p0 >= 0
+    co[medio] = 0.5 * (co[p0[medio]] + co[p1[medio]])
+    me.vertices.foreach_set('co', np.ascontiguousarray(co).ravel())
+    at = me.attributes.get('roca')
+    if at is not None and len(at.data) == n:
+        v = np.empty(n, np.float32)
+        at.data.foreach_get('value', v)
+        v[medio] = np.maximum(v[medio], 0.5 * (v[p0[medio]] + v[p1[medio]]))
+        at.data.foreach_set('value', np.ascontiguousarray(v))
+    me.update()
+    return int(medio.sum())
+# <<< MATERIAL TERRENO v2
+# ======================================================================================================================
 
 M_TER = mat_terreno()
 M_FONDO = M_TER
+M_CESPED = mat_cesped()
+M_FONDO_MAR = mat_fondo_marino()
 M_AGUA = mat('MAT_agua', (0.05, 0.42, 0.55, 1), 0.15)
 M_LINEA = mat('MAT_linea_salida', (0.95, 0.95, 0.95, 1), 0.5)
 
@@ -804,8 +1664,8 @@ else:
 _guardarrail(2998.0, 3156.0, -1, 'GUARDARRAIL_DER_mirador')
 
 # --- aceras con bordillo en los tramos urbanos ---
-M_ACERA = mat('MAT_acera_piedra', (0.34, 0.31, 0.27, 1), 0.95)   # gris piedra: en blanco puro se clipaba
-M_BORDILLO = mat('MAT_bordillo_piedra', (0.40, 0.37, 0.33, 1), 0.9)
+M_ACERA = mat('MAT_acera_piedra', paleta.rgba('caliza_gris_calido'), 0.95)   # fase visual: paleta (antes gris piedra literal)
+M_BORDILLO = mat('MAT_bordillo_piedra', paleta.variante('caliza_gris_calido', 1.15) + (1.0,), 0.9)
 # v1 pista (D11): el tramo alto empieza en el primer enlace/casa (s 1284), no en el prado de 1260
 TRAMOS_URBANOS = [(620, 1100), (1284, 1560), (2480, 2760), (4560, 4930)]
 # RONDA 15: en los sectores de terrazas del plan urbano (urbanismo_spec.json) junto a la
@@ -1166,7 +2026,7 @@ def _en_pretil(idx, sgn):
     return _pretil_de(idx, sgn) is not None
 
 # --- arcenes de hierba (tapan la union pista-terreno), salvo en puentes ---
-M_ARCEN = mat('MAT_arcen', (0.21, 0.37, 0.125, 1), 1.0)
+M_ARCEN = mat('MAT_arcen', paleta.rgba('hierba_seca'), 1.0)     # fase visual: hierba seca (antes verde cesped); los arcenes van con M_TER
 _TA = G['terreno']
 def _zt_arcen(x, y):
     fx = (x - _TA['x0']) / _TA['cell']
@@ -1249,6 +2109,7 @@ for sgn in (1, -1):
         arc = new_mesh_obj('ARCEN_%s' % ('IZQ' if sgn > 0 else 'DER'),
                            av_, af_, [M_TER], [0] * len(af_))  # mismo material que el terreno: union invisible
         arc.data.shade_smooth()
+        _uv_planar(arc)      # fase visual: misma UV planar que el TERRENO (mascara por texel continua en el arcen)
 
 def _orientar_arriba(vs, fs):
     """Da la vuelta a todas las caras si la normal media apunta hacia abajo."""
@@ -1282,7 +2143,7 @@ def _pretil(s0, s1, sgn, off0, grueso, alto, nombre, pie=None):
         fs = [tuple(reversed(f_)) for f_ in fs]
     new_mesh_obj(nombre, vs, fs, [M_MUROC], [0] * len(fs))
 
-M_MUROC = mat('MAT_muro_contencion_piedra', (0.63, 0.58, 0.47, 1), 0.95)
+M_MUROC = mat('MAT_muro_contencion_piedra', paleta.rgba('caliza_ocre'), 0.95)   # fase visual: paleta (antes literal)
 for (_a, _b, _l, _o, _nom, _pie) in PRETILES:
     _pretil(_a, _b, _l, _o, PRETIL_GRUESO, PRETIL_ALTO, _nom, pie=_pie)   # MUROC -> 1WALL en el kn5
 
@@ -1413,6 +2274,7 @@ if PITD:
             hf += [(o, o + 1, o + 4, o + 3), (o + 1, o + 2, o + 5, o + 4)]
         hp = new_mesh_obj('ARCEN_PIT_%s' % nombre_, hv, _orientar_arriba(hv, hf), [M_TER], [0] * len(hf))
         hp.data.shade_smooth()
+        _uv_planar(hp)
     print('pit lane construido: %d filas x %d, cuna en %d filas, peso>0 en %d filas'
           % (len(PITD), NL_PIT, len(_gore), sum(1 for d in PITD if d['peso'] > 0.0)))
 
@@ -1466,12 +2328,49 @@ for j in range(ny_ - 1):
         tfm.extend((0, 0))
 terreno = new_mesh_obj('TERRENO', tv, tf, [M_TER, M_FONDO], tfm)
 terreno.data.shade_smooth()
-# RONDA 15: mascara de roca del macizo (terreno_montana.py: pendiente > 50 % o cota alta)
-# como atributo por vertice 'roca'; el material la mezcla con la pendiente real
-if G.get('mascara_roca') and len(G['mascara_roca']) == len(tv):
-    _at = terreno.data.attributes.new('roca', 'FLOAT', 'POINT')
-    _at.data.foreach_set('value', [float(v) for v in G['mascara_roca']])
-    print('terreno: atributo roca (media %.2f) en %d vertices' % (sum(G['mascara_roca']) / len(tv), len(tv)))
+# fase visual (plan 3.5): UV planar REAL en el TERRENO, u = (x - x0) / (nx cell), v = (y - y0) / (ny cell): es la UV de
+# txMask / txDiffuse del multicapa y la que exporta el writer tal cual (uv_layers[0]). El material la recalcula por
+# posicion de mundo (vale tambien para caras sin UV que lleven MAT_terreno, p. ej. la falda del McLaren en integrar).
+_uv_planar(terreno)
+print('terreno: UV planar %s (%d loops)' % (terreno.data.uv_layers[0].name if terreno.data.uv_layers else 'NO', len(terreno.data.loops)))
+# RONDA 15: mascara de roca del macizo como atributo por vertice 'roca'; el material la mezcla con la pendiente real.
+# Fase visual F1 r3 (director_f1_r2.md problema 8): el atributo es el canal A de texturas/terreno_mask.png en cada vertice
+# (respaldo: G['mascara_roca']); es lo que lee color_ac.separar_roca_terreno (writer de hoy y --modo-ac), ver roca_atributo_terreno.
+_orig_roca, _vals_roca = roca_atributo_terreno(terreno, G.get('mascara_roca'))
+if _vals_roca is None:
+    print('terreno: SIN atributo roca (ni mascara legible ni mascara_roca en el JSON)')
+else:
+    _tierra_v = np.asarray(T.get('mar') or [0] * len(tv), np.float32) < 0.5
+    _msg = 'terreno: atributo roca = %s en %d vertices (media %.3f; > 0.49 en el %.1f %% de los vertices de tierra' % (
+        _orig_roca, len(tv), float(_vals_roca.mean()), 100.0 * float((_vals_roca[_tierra_v] > 0.49).mean()))
+    if G.get('mascara_roca') and len(G['mascara_roca']) == len(tv):
+        _mr_v = np.asarray(G['mascara_roca'], np.float32)
+        _msg += '; mascara_roca v1 > 0.49: %.1f %%, difieren en el %.2f %%' % (
+            100.0 * float((_mr_v[_tierra_v] > 0.49).mean()),
+            100.0 * float(((_mr_v[_tierra_v] > 0.49) != (_vals_roca[_tierra_v] > 0.49)).mean()))
+    print(_msg + ')')
+    # F1 r4 (acotacion 4): roca por cara del modo AC sin dientes en la cima de 56 y a < 150 m de 51/07 (ver roca_zonas_nz)
+    _z4 = roca_zonas_nz(terreno)
+    if _z4:
+        _nz_terreno = ((G.get('extras') or {}).get('umbrales_roca') or {}).get('nz') if isinstance(G.get('extras'), dict) else None
+        print('terreno: zonas nz < %.2f (fuera: nz < 0.82 de color_ac; umbral de terreno_montana nz %s) en %d vertices: caras de roca AC '
+              '%d -> %d, dientes %d -> %d, huecos %d -> %d; vertices que cambian de clase (0.49): %d'
+              % (_z4['nz_zona'], _nz_terreno, _z4['vertices_en_zona'], _z4['global']['roca_antes'], _z4['global']['roca_despues'],
+                 _z4['global']['dientes_antes'], _z4['global']['dientes_despues'], _z4['global']['huecos_antes'],
+                 _z4['global']['huecos_despues'], _z4['vertices_cambiados_0_49']))
+        for _nm, _zz in _z4['zonas'].items():
+            print('   zona %-22s caras tierra %5d | roca %4d -> %4d | dientes %3d -> %3d | huecos %2d -> %2d | desacuerdo con el objetivo %d'
+                  % (_nm, _zz['caras_tierra'], _zz['roca_antes'], _zz['roca_despues'], _zz['dientes_antes'], _zz['dientes_despues'],
+                     _zz['huecos_antes'], _zz['huecos_despues'], _zz['desacuerdo_objetivo']))
+        _vr = np.empty(len(terreno.data.vertices), np.float32)
+        terreno.data.attributes['roca'].data.foreach_get('value', _vr)
+        print('terreno: atributo roca tras las zonas: %d vertices, media %.3f, > 0.49 en el %.1f %% de los vertices de tierra'
+              % (len(_vr), float(_vr.mean()), 100.0 * float((_vr[_tierra_v] > 0.49).mean())))
+    # F1 r4 (acotacion 4): la banda de 2 m se hace al FINAL del pipeline (_rev/banda_terreno_2m.py); aqui solo el recuento previo
+    _b4 = estimar_banda_terreno()
+    print('terreno: banda de %.0f m junto al asfalto: %d celdas -> +%d vertices (%d -> %d) y +%d tris al final del pipeline '
+          '(subdividir_banda_terreno; TERRENO_BANDA_2M=1 la aplica ya aqui, solo pruebas)'
+          % (_b4['banda_m'], _b4['celdas'], _b4['vertices_nuevos'], len(tv), len(tv) + _b4['vertices_nuevos'], _b4['tris_nuevos']))
 
 # --- mar ---
 ext = 9000.0  # el mar llega al horizonte tambien en las tomas aereas
@@ -1482,7 +2381,9 @@ av = [(T['x0'] - ext, T['y0'] - ext, 0.0),
 agua = new_mesh_obj('AGUA', av, [(0, 1, 2, 3)], [M_AGUA], [0])
 # fondo marino bajo TODO el mar (el agua es translucida: sin fondo se veia el
 # borde recto del terreno como un rectangulo claro en el agua)
-new_mesh_obj('AGUA_fondo', [(x_, y_, -4.05) for (x_, y_, z_) in av], [(0, 1, 2, 3)], [M_TER], [0])
+# fase visual (plan 3.5): material PROPIO MAT_fondo_marino (paleta arena / mar_orilla); ya no comparte MAT_terreno.
+# El degradado real de batimetria (turquesa -> azul profundo) es del bloque 6 (agua).
+new_mesh_obj('AGUA_fondo', [(x_, y_, -4.05) for (x_, y_, z_) in av], [(0, 1, 2, 3)], [M_FONDO_MAR], [0])
 M_AGUA.blend_method = 'BLEND'
 bsdf = M_AGUA.node_tree.nodes.get('Principled BSDF')
 bsdf.inputs['Alpha'].default_value = 0.84
@@ -1513,7 +2414,7 @@ ntw.links.new(nzo.outputs['Fac'], bmpw.inputs['Height'])
 ntw.links.new(bmpw.outputs['Normal'], bsdf.inputs['Normal'])
 
 # --- muros de contencion de piedra donde la pista queda en alto ---
-M_MUROC = mat('MAT_muro_contencion_piedra', (0.63, 0.58, 0.47, 1), 0.95)
+M_MUROC = mat('MAT_muro_contencion_piedra', paleta.rgba('caliza_ocre'), 0.95)   # fase visual: paleta (antes literal)
 
 def z_terreno_b(x, y):
     fx = (x - T['x0']) / T['cell']
@@ -1569,8 +2470,13 @@ sun_data.energy = 4.6
 sun_data.color = (1.0, 0.96, 0.88)
 sun_data.angle = math.radians(3.0)
 sun = bpy.data.objects.new('SOL', sun_data)
-sun.rotation_euler = (math.radians(34), 0, math.radians(-140))
+# fase visual (plan 3.6): sol mas bajo (rotacion X 34 -> 42 grados = elevacion 56 -> 48) y azimut rasante a la ladera del
+# tramo de tierra (rz -140 -> -119: sol desde 151 grados, la cuesta abajo media de la tierra mira a 241 grados). La misma
+# direccion la usa el hillshade de terreno_ao.png: UNA constante, mascara_terreno.SOL.
+_ROT_SOL = tuple(_mt.SOL['rot_blender_deg']) if _mt is not None else (42.0, 0.0, -119.0)
+sun.rotation_euler = tuple(math.radians(v) for v in _ROT_SOL)
 col.objects.link(sun)
+print('sol: energia %.1f, rotacion (%.0f, %.0f, %.0f) grados' % (sun_data.energy, *_ROT_SOL))
 # el mapa es enorme: sin esto EEVEE agota el buffer de sombras ('Shadow buffer full')
 # y deja recuadros oscuros (teselas de sombra rotas) sobre el mar
 for _attr, _val in (('shadow_maximum_resolution', 0.12), ('shadow_filter_radius', 1.5)):
@@ -1607,15 +2513,21 @@ bg.inputs[1].default_value = 1.0
 bpy.context.scene.world = world
 
 # --- calidad de render (AO y transformacion de vista saturada) ---
+# view_transform Standard y exposicion 0.12 NO cambian (referencia de color_ac y de capturas_ab). NO hay niebla de mundo.
+# AO: en Blender 5.1 no existe use_gtao/gtao_distance (nunca se aplicaron: setattr fallaba en silencio); el AO de EEVEE es
+# use_fast_gi + fast_gi_distance, y fast_gi_distance = 0 significa SIN LIMITE (es lo que renderizaban la carta de color y
+# el 'antes' congelado). Se deja explicito: poner 20 m RECORTARIA el AO respecto a hoy.
 sc0 = bpy.context.scene
 sc0.view_settings.view_transform = 'Standard'
 sc0.view_settings.exposure = 0.12
-for attr, val in [('use_gtao', True), ('gtao_distance', 12.0),
-                  ('use_shadows', True)]:
+for attr, val in [('use_fast_gi', True), ('fast_gi_distance', 0.0), ('use_shadows', True),
+                  ('use_gtao', True), ('gtao_distance', 20.0)]:
     try:
         setattr(sc0.eevee, attr, val)
     except Exception:
         pass
+print('eevee: use_fast_gi %s, fast_gi_distance %s (0 = sin limite), use_shadows %s' % (
+    getattr(sc0.eevee, 'use_fast_gi', '?'), getattr(sc0.eevee, 'fast_gi_distance', '?'), getattr(sc0.eevee, 'use_shadows', '?')))
 
 # --- camaras ---
 def add_cam(name, loc, target, lens=35):
@@ -1658,5 +2570,36 @@ for cam, spec in zip(cam_objs, cams):
     bpy.ops.render.render(write_still=True)
     print('render:', spec[0])
 
-bpy.ops.wm.save_as_mainfile(filepath=OUT_BLEND)
+# fase visual F1 r2 (director_f1_r1.md 1, propietario mascara): este script arranca con --factory-startup (fichero SIN nombre)
+# y save_as_mainfile() lleva relative_remap=True por defecto: al guardar por primera vez convertia TODAS las rutas de imagen a
+# '//texturas\...' aunque _imagen() las cargue absolutas; la copia _rev/escena_candidata.blend (otra carpeta) no las resolvia y
+# el terreno/arcenes/roca salian MAGENTA en modo normal. relative_remap=False deja las rutas ABSOLUTAS (como las tenia
+# escena_antes_visual.blend; integrar_escena/aplicar_texturas guardan sobre el mismo fichero y no remapean). Se comprueba
+# antes (red: cualquier '//' se hace absoluta respecto a 03_blender/) y despues de guardar; si quedara alguna, exit 1.
+# F1 r4: SOLO pruebas sobre copia (BLEND_OUT): TERRENO_BANDA_2M=1 subdivide ya la banda de 2 m (en el pipeline lo hace
+# _rev/banda_terreno_2m.py al final, cuando integrar/asentar/revisar_* ya no necesitan la rejilla nx*ny)
+if os.environ.get('TERRENO_BANDA_2M') == '1' and os.environ.get('BLEND_OUT'):
+    _ter4 = bpy.data.objects.get('TERRENO')
+    _s4 = subdividir_banda_terreno(_ter4) if _ter4 is not None else None
+    if _s4:
+        print('terreno: banda 2 m aplicada (pruebas): celdas %d, vertices %d -> %d (+%d), tris %d -> %d, canal A en los medios %s'
+              % (_s4['celdas'], _s4['vertices_antes'], _s4['vertices_despues'], _s4['vertices_nuevos'], _s4['tris_antes'],
+                 _s4['tris_despues'], _s4['canal_a_en_medios']))
+        _z4b = roca_zonas_nz(_ter4)
+        if _z4b:
+            print('terreno: zonas tras la banda: caras de roca AC %d -> %d, dientes %d -> %d' % (
+                _z4b['global']['roca_antes'], _z4b['global']['roca_despues'], _z4b['global']['dientes_antes'], _z4b['global']['dientes_despues']))
+_rel = [im.name for im in bpy.data.images if (im.filepath or '').startswith('//')]
+if _rel:
+    print('AVISO: %d imagenes con ruta relativa antes de guardar (se hacen absolutas): %s' % (len(_rel), _rel[:8]))
+    for im in bpy.data.images:
+        if (im.filepath or '').startswith('//'):
+            im.filepath = os.path.normpath(os.path.join(BASE, '03_blender', im.filepath[2:]))
+bpy.ops.wm.save_as_mainfile(filepath=OUT_BLEND, relative_remap=False)
+_rel = [im.name for im in bpy.data.images if (im.filepath or '').startswith('//')]
+_abs = sum(1 for im in bpy.data.images if im.filepath and not im.filepath.startswith('//'))
+print('rutas de imagen tras guardar: %d absolutas, %d relativas%s' % (_abs, len(_rel), (' ' + str(_rel[:8])) if _rel else ''))
+if _rel:
+    print('ERROR: quedan imagenes con ruta relativa (//): la escena saldria MAGENTA fuera de 03_blender/ (director_f1_r1.md 1)')
+    sys.exit(1)
 print('OK blend ->', OUT_BLEND)

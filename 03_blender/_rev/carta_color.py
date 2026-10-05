@@ -3,9 +3,9 @@
 
     bash 03_blender/_rev/blender_cola.sh --python 03_blender/_rev/carta_color.py [-- salida.png [ancho alto]]
 
-Escena minima desde cero (no abre ninguna escena del proyecto, no guarda nada): 12 esferas rotuladas con los 12 colores de
-03_blender/paleta.json (Base Color = rgb lineal, que es lo que lee el writer) + 10 cubos de fachada (5 tonos ACTUALES de
-casas_kit_v2.PALETA_FACHADA y 5 PROPUESTOS), con la MISMA luz y transformacion de vista que las capturas del circuito
+Escena minima desde cero (no abre ninguna escena del proyecto, no guarda nada): una esfera rotulada por color de
+03_blender/paleta.json (filas de 6; 18 en la v2; Base Color = rgb lineal, que es lo que lee el writer) + cubos de fachada
+(los 5 tonos v0 de la escena_rev de hoy y los 6 de 'fachadas_propuesta' v2), con la MISMA luz y transformacion de vista que las capturas del circuito
 (construir_pista.py l.1566-1618 / renderizar_capturas.py: sol 4.6 W (1, 0.96, 0.88) a 34 grados y azimut -140, cielo en
 gradiente, view_transform Standard, exposicion 0.12, GTAO 12 m, EEVEE). Salida por defecto:
 03_blender/renders/qa/carta_color.png (1600 x 900). El usuario valida la paleta con esta imagen (plan, pregunta 15).
@@ -81,20 +81,22 @@ bpy.context.object.name = 'CARTA_suelo'
 # -- filas: 2 x 6 esferas de la paleta, 1 x 5 fachadas actuales, 1 x 5 fachadas propuesta
 PASO = 2.0
 R = 0.5
-FILA = 2.7
+FILA = 3.0
 nombres = paleta.nombres()
-filas = [('PALETA 1/2', nombres[:6]), ('PALETA 2/2', nombres[6:])]
+POR_FILA = 6
+n_pal = (len(nombres) + POR_FILA - 1) // POR_FILA
+filas = [('PALETA %d/%d' % (i + 1, n_pal), nombres[i * POR_FILA:(i + 1) * POR_FILA]) for i in range(n_pal)]
 P = paleta.cargar()
 act = [k for k in P['fachadas_actual'] if not k.startswith('_')]
 pro = [k for k in P['fachadas_propuesta'] if not k.startswith('_')]
-filas.append(('FACHADAS HOY (casas_kit_v2)', ['fachada_actual_' + k for k in act]))
-filas.append(('FACHADAS PROPUESTA', ['fachada_' + k for k in pro]))
-y0 = 1.5 * FILA
+filas.append(('FACHADAS HOY (v0)', ['fachada_actual_' + k for k in act]))     # lo que pinta escena_rev
+filas.append(('FACHADAS v%s' % P['version'], ['fachada_' + k for k in pro]))  # casas_kit_v2.PALETA_FACHADA
+y0 = (len(filas) - 1) / 2.0 * FILA
 for fi, (titulo, lista) in enumerate(filas):
     y = y0 - fi * FILA
     n = len(lista)
-    x_ini = -(6 - 1) * PASO / 2                      # las 4 filas alineadas a la izquierda (6 columnas como maximo)
-    texto('CARTA_titulo_%d' % fi, titulo, (x_ini - 0.85, y - 0.35, 0.02), 0.2, M_BLANCO, rot_x=math.radians(50))
+    x_ini = -(6 - 1) * PASO / 2 + 0.8                # las 4 filas alineadas a la izquierda (6 columnas como maximo)
+    texto('CARTA_titulo_%d' % fi, titulo, (x_ini - 0.85, y - 0.3, 0.02), 0.19, M_BLANCO, rot_x=math.radians(50))
     bpy.data.objects['CARTA_titulo_%d' % fi].data.align_x = 'RIGHT'     # a la izquierda de la fila, sin tapar nada
     for i, nombre in enumerate(lista):
         x = x_ini + i * PASO
@@ -116,7 +118,12 @@ sun_data.energy = 4.6
 sun_data.color = (1.0, 0.96, 0.88)
 sun_data.angle = math.radians(3.0)
 sun = bpy.data.objects.new('SOL', sun_data)
-sun.rotation_euler = (math.radians(34), 0, math.radians(-140))
+# fase visual F1 (PARCHES_F1_mascara.md A4): el MISMO sol que la escena (construir_pista lee mascara_terreno.SOL)
+try:
+    import mascara_terreno
+    sun.rotation_euler = tuple(math.radians(v) for v in mascara_terreno.SOL['rot_blender_deg'])   # (42, 0, -119)
+except Exception:
+    sun.rotation_euler = (math.radians(34), 0, math.radians(-140))
 col.objects.link(sun)
 for _attr, _val in (('shadow_maximum_resolution', 0.005), ('shadow_filter_radius', 1.5)):
     try:
@@ -167,8 +174,9 @@ sc.render.film_transparent = False
 cd = bpy.data.cameras.new('CAM')
 cd.lens = 40
 cam = bpy.data.objects.new('CAM', cd)
-cam.location = Vector((0.0, -13.5, 13.0))
-tgt = Vector((0.0, 0.3, 0.0))
+extra = max(0, len(filas) - 4)                      # la v1 tenia 4 filas: con mas filas la camara se aleja y mira mas abajo
+cam.location = Vector((0.0, -15.0 - 4.2 * extra, 14.5 + 3.4 * extra))
+tgt = Vector((0.0, 0.2 - 0.9 * extra, 0.0))
 cam.rotation_euler = (tgt - cam.location).to_track_quat('-Z', 'Y').to_euler()
 col.objects.link(cam)
 sc.camera = cam

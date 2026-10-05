@@ -507,6 +507,19 @@ z_grid = _res_t['z_grid']
 es_mar = _res_t['es_mar']  # para el material del terreno
 _cumbres = _res_t['extras']['cumbres']
 _mascara_roca = _res_t['extras']['mascara_roca']
+# fase visual F1 (bloque 1.6, propietario terreno): capas de la mascara por texel (R matorral, G hierba seca, B tierra,
+# A roca; nx*ny floats 0..1, suma 1 por celda) para mascara_terreno.py, + umbrales de roca (un solo sitio) y KPIs del
+# relieve. 2 decimales: +5.3 MB en geometria_3d.json (4.1 -> ~9.5 MB); mascara_terreno los lee con np.array.
+# (PARCHES_F1_terreno.md A1, aplicado por el integrador)
+_capas = _res_t['extras'].get('capas') or {}
+_checks_t = _res_t['extras'].get('checks') or {}
+_extras_out = {
+    'capas': {k: [round(float(v), 2) for v in np.asarray(arr).ravel()] for k, arr in _capas.items()},
+    'umbrales_roca': _res_t['extras'].get('umbrales_roca'),
+    'checks_f1': {k: _checks_t.get(k) for k in ('pared_y_caida_25m_pct', 'pared_y_caida_50m_pct', 'pct_pista_con_pared_roca',
+                                                 'pct_pista_con_pared_roca_tierra', 'celdas_35_roca_pct', 'capas_media_pct',
+                                                 'roca_pie_derrubios_celdas', 'erosion_corredor_dz_max', 'coche_120m_pct_ge_90')},
+}
 print(f'terreno: {nxg}x{nyg} celdas de {cell} m | mar: {100*es_mar.mean():.0f}%')
 
 out = {
@@ -539,6 +552,7 @@ out = {
     # RONDA 15: cumbres (x, y, z) y mascara de roca por celda (0..1) para el material
     'cumbres': [[round(float(c[0]), 1), round(float(c[1]), 1), round(float(c[2]), 1)] for c in _cumbres],
     'mascara_roca': [round(float(v), 2) for v in _mascara_roca],
+    'extras': _extras_out,     # F1: capas de la mascara (bloque 1.6), umbrales de roca y KPIs (ver PARCHES_F1_terreno.md A1)
     'nivel_mar': 0.0,
 }
 json.dump(out, open(OUT, 'w', encoding='utf-8'))

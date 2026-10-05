@@ -1,0 +1,130 @@
+00:00.906  blend            | Read blend: "E:\Escritorio\claude-pc\arnau-aseto-corsa\04_export\porto_corsa_export.blend"
+BVH muros     876 objetos,  1429106 triangulos [0.8s]
+BVH suelo     156 objetos,   821882 triangulos [0.4s]
+BVH pista       2 objetos,    41600 triangulos [0.0s]
+BVH visual    191 objetos,   428654 triangulos [0.3s]
+BVH pit         1 objetos,     1464 triangulos [0.0s]
+BVH mur_vis   872 objetos,  1385918 triangulos [0.7s]
+BVH mur_inv     4 objetos,    43188 triangulos [0.0s]
+BVH terreno     1 objetos,   616498 triangulos [0.3s]
+BVH todo     1129 objetos,  2554530 triangulos [1.4s]
+barreras: 0 huecos (0 > 2 m, 0 m) | falsas {} | muros en asfalto 0 | espaldas {'CALLE_plazoleta': 1.2} [8s]
+superficie pista: {'escalon': 0, 'pendiente': 0} (sin kerb {'escalon': 0, 'pendiente': 0}), huecos 0, ajenas {} [8s]
+superficie pit_eje            1 lineas: {'escalon': 0, 'pendiente': 0} (en pit/pista/cuna {'escalon': 0, 'pendiente': 0}), huecos 0, bajo muro 0
+superficie pit_transversal   92 lineas: {'escalon': 176, 'pendiente': 166} (en pit/pista/cuna {'escalon': 0, 'pendiente': 0}), huecos 120, bajo muro 121
+superficie pit_longitudinal  28 lineas: {'escalon': 29, 'pendiente': 113} (en pit/pista/cuna {'escalon': 0, 'pendiente': 0}), huecos 228, bajo muro 419
+superficie garajes           20 lineas: {'escalon': 0, 'pendiente': 0} (en pit/pista/cuna {'escalon': 0, 'pendiente': 0}), huecos 0, bajo muro 93
+superficie pit_carriles      14 lineas: {'escalon': 0, 'pendiente': 0} (en pit/pista/cuna {'escalon': 0, 'pendiente': 0}), huecos 0, bajo muro 0
+pit rejilla: 24762 puntos, fallos {} | muros a lo largo del pit {} | visibles ante el cierre 0 {} | hoyos de terreno visibles [261, 0.65] [10s]
+BVH suelo_vis 1209 objetos,  2693736 triangulos [1.5s]
+garajes: rodadas 0 fallos (peor 0.000 m), rejilla 0 | invisibles > 3 cm sobre lo visible 0 | borde fino del pit [0, 0.0] (kerb 0) | caidas en la escapatoria 0 [] [13s]
+atajos: 41600 coches, 0 atajos [] | 0 escapes [] | info: 3 cuerdas sin ganar un coche, 5 por el pit lane [16s]
+RESUMEN {
+ "huecos_barrera": 0,
+ "huecos_barrera_mayor_2m": 0,
+ "m_sin_barrera": 0,
+ "d_barrera_mediana_izq_der": [
+  1.3,
+  0.36
+ ],
+ "barreras_falsas": 0,
+ "barreras_falsas_por_nombre": {},
+ "barreras_falsas_por_rayo_m": {},
+ "muros_en_asfalto_muestras": 0,
+ "muros_en_asfalto_max_m": 0.0,
+ "caras_espaldas_m": {
+  "CALLE_plazoleta": 1.2
+ },
+ "pista_escalones_pendientes": {
+  "escalon": 0,
+  "pendiente": 0
+ },
+ "pista_escalones_pendientes_sin_kerb": {
+  "escalon": 0,
+  "pendiente": 0
+ },
+ "pista_huecos_suelo": 0,
+ "pista_ajenas_m": {},
+ "pit_escalones_pendientes": {
+  "escalon": 205,
+  "pendiente": 279
+ },
+ "pit_fallos_en_pit_pista_cuna": {
+  "escalon": 0,
+  "pendiente": 0
+ },
+ "pit_fallos_por_linea": {
+  "pit_eje": {
+   "escalon": 0,
+   "pendiente": 0
+  },
+  "pit_carriles": {
+   "escalon": 0,
+   "pendiente": 0
+  },
+  "pit_transversal": {
+   "escalon": 0,
+   "pendiente": 0
+  },
+  "pit_longitudinal": {
+   "escalon": 0,
+   "pendiente": 0
+  },
+  "garajes": {
+   "escalon": 0,
+   "pendiente": 0
+  }
+ },
+ "pit_por_linea": {
+  "pit_eje": {
+   "escalon": 0,
+   "pendiente": 0
+  },
+  "pit_carriles": {
+   "escalon": 0,
+   "pendiente": 0
+  },
+  "pit_transversal": {
+   "escalon": 176,
+   "pendiente": 166
+  },
+  "pit_longitudinal": {
+   "escalon": 29,
+   "pendiente": 113
+  },
+  "garajes": {
+   "escalon": 0,
+   "pendiente": 0
+  }
+ },
+ "pit_huecos_suelo": 348,
+ "invisibles": 4,
+ "pit_rejilla_fallos": {},
+ "pit_rejilla_n_fallos": 0,
+ "pit_muros_largo": {},
+ "visuales_ante_cierre": {},
+ "visuales_ante_cierre_n": 0,
+ "terreno_hoyos_visibles": [
+  261,
+  0.65
+ ],
+ "garajes_rodadas_fallos": 0,
+ "garajes_rodadas_peor_m": 0.0,
+ "garajes_rejilla_fallos": 0,
+ "invisibles_sobre_visible_3cm": 0,
+ "borde_fino_pit_fallos": [
+  0,
+  0.0
+ ],
+ "caidas_escapatoria": 0,
+ "atajos": 0,
+ "escapes": 0,
+ "atajos_info_cuerdas_pit": [
+  3,
+  5
+ ]
+}
+OK informe -> E:/Escritorio/claude-pc/arnau-aseto-corsa/04_export/informe_fisica_final.json [16s]
+Blender 5.1.2 (hash ec6e62d40fa9 built 2026-05-19 01:37:34)
+
+Blender quit

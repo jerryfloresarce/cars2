@@ -4,10 +4,31 @@ Mod fan sin ánimo de lucro del circuito de Porto Corsa de Cars 2.
 5,2 km · 50 curvas · sección de TIERRA real · rotonda Loews · viaducto y rocas-pueblo ·
 20 boxes con tribuna · coche-fósil gigante con túnel · yates VIP.
 
+## Novedades de la versión 1.2 ("paleta y fondo")
+- **Colores del Mediterráneo**: las casas llevan ahora la paleta de la Riviera (azafrán, ocre, siena, rojo
+  pompeyano, crema), tejados de terracota anaranjada, cúpulas de verdín y contraventanas verdes. El césped
+  verde vivo solo queda en jardines y rotondas.
+- **El monte por zonas**: la ladera ya no es un verde liso. Tiene matorral, hierba seca dorada, tierra y
+  roca caliza donde la pendiente es fuerte, con los bordes suaves y sombreado en las hondonadas. De cerca
+  lleva grano, para que no parezca plástico.
+- **Horizonte**: hay montes y lomas lejanas detrás del circuito, así que el mar ya no acaba en el vacío.
+- **Tierra tallada**: en la subida de tierra hay pared de roca a un lado y caída al otro, y la cima es
+  una loma redonda.
+- La física sigue las mismas reglas que en la 1.1 (vallas y barreras sólidas, muros invisibles para no
+  salirse ni atajar, boxes sin saltos), recalculada para el terreno nuevo: 0 fallos en todas las pruebas.
+  En la subida de tierra algunos muros invisibles quedan un poco más cerca o más lejos que antes.
+- **Con Custom Shaders Patch (CSP) se ve mejor** (luz, sombras y colores más ricos). Sin CSP también
+  funciona, pero si lo tienes, actívalo en Content Manager.
+- Aparte va **`ensayo_f_pueblo.zip`**: una pista de prueba muy pequeña con solo el pueblo de la subida, para
+  comprobar los colores de las fachadas con el filtro Pure (las instrucciones van en su `LEEME.txt`).
+  Se instala igual que el circuito y se puede borrar después.
+- Si con esta versión el **suelo del monte** se viera negro, a cuadros o muy raro, avísanos con una captura:
+  tenemos preparada una variante más sencilla del terreno.
+
 ## Qué hay en este zip
 - `content/tracks/porto_corsa/` → la carpeta del circuito COMPLETA, con el modelo
   `porto_corsa.kn5` ya generado (no hace falta ksEditor), config, mapa, UI e IA.
-- `FUENTES/texturas/` → las texturas sueltas, por si alguien quiere retocar.
+- `FUENTES/texturas/` → algunas texturas sueltas (las pequeñas y los mapas del terreno), por si alguien quiere retocar.
 - Este archivo.
 
 ## INSTALAR (1 minuto)
@@ -59,7 +80,7 @@ Para una IA fina (10 minutos):
   las horquillas de tierra (y de las curvas más cerradas), para que no se pueda
   salir del circuito ni atajar por la hierba de un tramo a otro. Si chocas contra "nada" en la hierba, es uno
   de esos muros: vuelve a la pista.
-- **Se ve todo muy blanco / lavado** → en esta versión (1.1) los colores y el
+- **Se ve todo muy blanco / lavado** → desde la versión 1.1 los colores y el
   brillo de todos los materiales están recalibrados para Assetto Corsa (antes el
   circuito salía casi blanco). Pruébalo primero con los ajustes de gráficos y de
   tiempo POR DEFECTO (sin tocar brillo, saturación ni filtros): si bajaste cosas

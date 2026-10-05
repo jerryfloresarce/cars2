@@ -7,9 +7,9 @@
 # Se NIEGA (exit 3) si: hay un export en marcha, falta puerta.json o dice ok: false, el md5 de la candidata no es el que
 #   juzgo la puerta (candidata regenerada despues de juzgar), o falta algun fichero de la candidata.
 # EXPORT EN MARCHA = existe 03_blender/_rev/cola/zip.lock  O  hay un proceso con "hacer_zip.sh" en su linea de ordenes
-#   (Get-CimInstance Win32_Process; sin powershell, ps -ef). zip.lock no lo crea nadie hoy: el equipo del zip puede crearlo
-#   al empezar hacer_zip.sh (`date > 03_blender/_rev/cola/zip.lock`) y borrarlo al acabar; mientras tanto vale la deteccion
-#   del proceso. Mientras promueve, este script deja 03_blender/_rev/cola/promocion.lock (por si hacer_zip.sh quiere esperar).
+#   (Get-CimInstance Win32_Process; sin powershell, ps -ef). Desde el 04/10 (remate del bloque 0) hacer_zip.sh crea zip.lock
+#   al empezar (`date > ...`) y lo borra al terminar (trap EXIT, tambien si falla un paso); la deteccion del proceso queda
+#   como segundo seguro. Mientras promueve, este script deja 03_blender/_rev/cola/promocion.lock (por si hacer_zip.sh quiere esperar).
 # Hace: candidata -> escena_rev.blend + geometria_rev.json + urbanismo_rev.json (+ urbanismo_informe_rev.json, asentar_rev.json,
 #   nada_en_pista_rev.json), guarda promociones/escena_vN.blend + puerta_vN.json (N incremental) y anota
 #   fecha | vN | md5 | bloque | hoja | nota | avisos de la puerta en _rev/PROMOCIONES.md. hacer_zip.sh NO se toca.
@@ -44,6 +44,10 @@ fi
 for f in "$CAND" "$REV/geometria_candidata.json" "$REV/urbanismo_candidata.json"; do
   [ -f "$f" ] || negar "falta $f (ejecutar primero pipeline_escena.sh)"
 done
+
+# 2b. fase visual F1 r2 (PARCHES_F1_mascara.md A7): ninguna Image con ruta relativa '//' (magenta fuera de 03_blender/; director_f1_r1.md 1)
+BPY="C:/Program Files/Blender Foundation/Blender 5.1/5.1/python/bin/python.exe"
+[ -f "$BPY" ] && { "$BPY" "$D/_rev/comprobar_rutas_blend.py" "$CAND" | tail -6; [ "${PIPESTATUS[0]}" = "1" ] && negar "la candidata lleva rutas de imagen relativas (ver arriba): saldria magenta fuera de 03_blender/"; }
 
 # 3. puerta ok y sobre ESTA candidata
 [ -f "$PUERTA" ] || negar "falta $PUERTA (ejecutar python 03_blender/_rev/puerta_calidad.py)"

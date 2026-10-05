@@ -34,7 +34,7 @@ SEC = [q['sec'] for q in S]
 PERMITIDOS = ('PISTA', 'PIANOS', 'MARCA', 'LINEA', 'ARCEN', 'ACERA', 'BORDILLO', 'TERRENO', 'PIT_LANE', 'AGUA',
               'VIADUCTO', 'PUENTE', 'TUNEL_', 'MCOCHE', 'CARRERA_portico', 'PIT_pasarela', 'CALLE_guirnalda',
               'GUARDARRAIL', 'MUROC', '1WALL_cierre', 'cierre', 'PENON_puente_roca', 'LOEWS', 'AC_', 'CAP_', 'REV_',
-              'CARRERA_parrilla', 'CAMINO_enlace')
+              'CARRERA_parrilla', 'CAMINO_enlace', 'HORIZ_')   # HORIZ_: F1 (7.1) anillo de horizonte a >= 2185 m del centro
 lib = bpy.data.collections.get('LIB')
 en_lib = set(o.name for o in lib.all_objects) if lib else set()
 dg = bpy.context.evaluated_depsgraph_get()

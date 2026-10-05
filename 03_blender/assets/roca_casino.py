@@ -71,10 +71,12 @@ casas_kit_v2.build_casa (pivote en el centro de la fachada, fachada +Y local:
 rot_z = atan2(fy, fx) - pi/2). El trazado (clase _Penon hasta el apilado) no usa bpy: se
 puede probar con el python del sistema.
 """
+import importlib.util
 import json
 import math
 import os
 import random
+import sys
 
 try:
     import bpy
@@ -95,11 +97,21 @@ TAU = 2.0 * math.pi
 _ultimo = None
 
 # ----------------------------------------------------------------- materiales
+# FASE VISUAL F1 (bloque 3.1 / 2.1): la caliza sale de 03_blender/paleta.json con los MISMOS valores que
+# roca_lazo (antes MAT_PPUEBLO_roca tenia dos valores segun que kit se construyera primero) y los 4 materiales
+# de roca llevan el grupo compartido NG_caliza_estratos (assets/materiales_roca.aplicar_a).
+# Paleta v2 (usuario 04/10): caliza_ocre = caliza CLARA #D8CCB0, caliza_gris_calido = MEDIA #B3A68A (repisa),
+# caliza_sombra = roca OSCURA #7F766A; sin gris azulado (las claves no cambian, cambian los valores en paleta.json).
+_RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if _RAIZ not in sys.path:
+    sys.path.insert(0, _RAIZ)
+import paleta as _paleta  # noqa: E402
+
 _PALETA = {
-    'MAT_PPUEBLO_roca':        ((0.55, 0.47, 0.36), 0.95, 0.0),
-    'MAT_PPUEBLO_roca_clara':  ((0.63, 0.56, 0.44), 0.95, 0.0),
-    'MAT_PPUEBLO_roca_oscura': ((0.46, 0.39, 0.30), 0.96, 0.0),
-    'MAT_PPUEBLO_repisa':      ((0.49, 0.43, 0.33), 0.95, 0.0),
+    'MAT_PPUEBLO_roca':        (_paleta.rgb('caliza_ocre'), 0.95, 0.0),
+    'MAT_PPUEBLO_roca_clara':  (_paleta.variante('caliza_ocre', 1.15), 0.95, 0.0),
+    'MAT_PPUEBLO_roca_oscura': (_paleta.rgb('caliza_sombra'), 0.96, 0.0),
+    'MAT_PPUEBLO_repisa':      (_paleta.rgb('caliza_gris_calido'), 0.95, 0.0),
     'MAT_PPUEBLO_carretera':   ((0.19, 0.19, 0.20), 0.90, 0.0),
     'MAT_PPUEBLO_borde':       ((0.86, 0.83, 0.74), 0.70, 0.0),
     'MAT_PPUEBLO_muro':        ((0.75, 0.67, 0.51), 0.85, 0.0),
@@ -120,12 +132,33 @@ _CLAVE = {
     'muelle': 'MAT_PENON_muelle', 'bolardo': 'MAT_PENON_bolardo',
 }
 _ROCAS = ('roca', 'roca_clara', 'roca_oscura')
+_CLAVES_CALIZA = ('roca', 'roca_clara', 'roca_oscura', 'repisa')
+
+
+def _materiales_roca():
+    """assets/materiales_roca (grupo de caliza compartido) o None si no se puede importar."""
+    if 'materiales_roca' in sys.modules:
+        return sys.modules['materiales_roca']
+    try:
+        ruta = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'materiales_roca.py')
+        spec = importlib.util.spec_from_file_location('materiales_roca', ruta)
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules['materiales_roca'] = mod
+        spec.loader.exec_module(mod)
+        return mod
+    except Exception as e:  # noqa
+        print('roca_casino: AVISO materiales_roca no disponible (%s): roca de color plano' % e)
+        return None
 
 
 def _mat(clave):
     nombre = _CLAVE[clave]
     m = bpy.data.materials.get(nombre)
     if m is not None:
+        if clave in _CLAVES_CALIZA:
+            mr = _materiales_roca()
+            if mr is not None and not mr.tiene_caliza(m):
+                mr.aplicar_a(m, tono_base=_PALETA[nombre][0])
         return m
     color, rough, metal = _PALETA[nombre]
     m = bpy.data.materials.new(nombre)
@@ -142,6 +175,11 @@ def _mat(clave):
             except KeyError:
                 pass
     m.diffuse_color = (color[0], color[1], color[2], 1.0)
+    if clave in _CLAVES_CALIZA:
+        mr = _materiales_roca()
+        if mr is not None:
+            # caliza compartida con estratos en coordenadas de mundo (misma que roca_lazo y el terreno)
+            mr.aplicar_a(m, tono_base=color, contraste_bancos=0.0 if clave == 'roca_oscura' else 0.12)
     return m
 
 

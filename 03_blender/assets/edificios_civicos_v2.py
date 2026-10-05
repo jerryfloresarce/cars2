@@ -54,28 +54,40 @@ fachada principal mirando a +Y.
 """
 
 import math
+import os
+import sys
 
 import bpy
 import bmesh
 from mathutils import Vector
 
 # ---------------------------------------------------------------------------
-# Paleta (nombre de material -> (color sRGB, roughness, metallic))
+# Paleta (nombre de material -> (color sRGB | nombre de paleta.json, roughness, metallic))
 # ---------------------------------------------------------------------------
 # Colores definidos en sRGB (como se ven); se linealizan al crear el material.
+# FASE VISUAL, paleta v2 (usuario 04/10): los tonos compartidos con el resto del
+# pueblo se leen de 03_blender/paleta.json por NOMBRE (rgb lineal directo):
+# molduras/cornisas crema (marco_ventana_crema), piedra = caliza media, teja =
+# terracota, persianas = contraventanas, "blanco" = marmol crema (no blanco puro)
+# y el cobre del campanile = verdin_cupula. Los demas literales sRGB no cambian.
 # Las entradas v2 van AL FINAL para no mover los indices de la v1.
+_RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if _RAIZ not in sys.path:
+    sys.path.insert(0, _RAIZ)
+import paleta as _paleta  # noqa: E402
+
 _PALETTE = (
-    ("MAT_CIVICO_crema",      (0.930, 0.860, 0.680), 0.80, 0.0),
-    ("MAT_CIVICO_piedra",     (0.760, 0.680, 0.530), 0.85, 0.0),
-    ("MAT_CIVICO_teja",       (0.660, 0.250, 0.110), 0.75, 0.0),
+    ("MAT_CIVICO_crema",      'marco_ventana_crema', 0.80, 0.0),
+    ("MAT_CIVICO_piedra",     'caliza_gris_calido', 0.85, 0.0),
+    ("MAT_CIVICO_teja",       'terracota', 0.75, 0.0),
     ("MAT_CIVICO_ventana",    (0.110, 0.150, 0.180), 0.25, 0.0),
-    ("MAT_CIVICO_persiana",   (0.160, 0.400, 0.190), 0.60, 0.0),
+    ("MAT_CIVICO_persiana",   'contraventanas', 0.60, 0.0),
     ("MAT_CIVICO_oro",        (0.930, 0.660, 0.160), 0.35, 0.85),
-    ("MAT_CIVICO_blanco",     (0.955, 0.940, 0.880), 0.70, 0.0),
+    ("MAT_CIVICO_blanco",     'marmol_casino', 0.70, 0.0),
     ("MAT_AYTO_fachada",      (0.890, 0.430, 0.230), 0.80, 0.0),
     ("MAT_AYTO_reloj",        (0.975, 0.950, 0.850), 0.45, 0.0),
     ("MAT_CAMPANILE_piedra",  (0.900, 0.700, 0.400), 0.85, 0.0),
-    ("MAT_CAMPANILE_cobre",   (0.150, 0.520, 0.410), 0.55, 0.2),
+    ("MAT_CAMPANILE_cobre",   'verdin_cupula', 0.55, 0.2),
     ("MAT_HOTEL_fachada",     (0.965, 0.870, 0.620), 0.80, 0.0),
     ("MAT_HOTEL_mansarda",    (0.220, 0.290, 0.380), 0.65, 0.1),
     ("MAT_HOTEL_toldo",       (0.840, 0.100, 0.070), 0.70, 0.0),
@@ -106,7 +118,10 @@ def _get_materials():
     for name, color, rough, metal in _PALETTE:
         mat = bpy.data.materials.get(name)
         if mat is None:
-            lin = tuple(_srgb_to_linear(c) for c in color)
+            if isinstance(color, str):                      # nombre de paleta.json (ya lineal)
+                lin = tuple(_paleta.rgb(color))
+            else:
+                lin = tuple(_srgb_to_linear(c) for c in color)
             mat = bpy.data.materials.new(name)
             mat.use_nodes = True
             bsdf = None

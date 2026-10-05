@@ -68,35 +68,86 @@ Unidades: metros. Materiales: Principled BSDF de color plano, reutilizados
 MAT_CASAS_terraza).
 """
 
+import colorsys
 import math
+import os
 import random
+import sys
 
 import bpy
 
 # ---------------------------------------------------------------------------
 # Paleta (Cars 2: saturado y limpio). Definida en sRGB y convertida a lineal
 # para que el render conserve la saturacion de la pelicula.
+# FASE VISUAL F1 (bloque 3 punto 1): fachadas y tejas salen de 03_blender/paleta.json
+# (UNICA fuente de color). PALETA v2 (usuario 04/10): PALETA_FACHADA = los 6 tonos de
+# 'fachadas_propuesta' (azafran, ocre_naranja, siena, rojo_pompeyano, melocoton,
+# crema_calido; 'fachadas_actual_compatibles' queda vacio), sorteo uniforme por casa
+# + VARIACION +-5 % en tono y brillo POR CASA ('fachadas_variacion'): 3 variantes
+# precalculadas por tono (-5 / 0 / +5) = 18 materiales MAT_CASAS_fachada_<tono>[_osc|_cla]
+# (en vez de un material por casa: 420 casas dispararian el recuento de materiales y
+# el writer exporta un material por color). La variante se elige con un generador
+# propio por seed (random.Random(seed * 7919 + 29)): la geometria de cada casa no cambia.
+# Marcos, recercados, bandas y cornisas (M["piedra"]) en marco_ventana_crema; las
+# contraventanas (M["persiana"]) en 'contraventanas'; la teja en 'terracota'.
 # ---------------------------------------------------------------------------
+_RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if _RAIZ not in sys.path:
+    sys.path.insert(0, _RAIZ)
+import paleta as _paleta  # noqa: E402
 
 
 def _srgb(r, g, b):
-    """sRGB 0-1 -> lineal (aprox gamma 2.2)."""
+    """sRGB 0-1 -> lineal (aprox gamma 2.2). Solo para los colores secundarios que no estan en la paleta."""
     return tuple(c ** 2.2 for c in (r, g, b))
 
 
-PALETA_FACHADA = {
-    "ocre": _srgb(0.85, 0.56, 0.18),
-    "salmon": _srgb(0.91, 0.48, 0.35),
-    "amarillo": _srgb(0.95, 0.76, 0.22),
-    "crema": _srgb(0.94, 0.83, 0.55),
-    "rosa": _srgb(0.90, 0.49, 0.46),
-}
+def _paleta_fachada():
+    P = _paleta.cargar()
+    d = {}
+    for k in P.get('fachadas_propuesta', {}):
+        if not k.startswith('_'):
+            d[k] = _paleta.rgb('fachada_' + k)
+    for k in P.get('fachadas_actual_compatibles', {}).get('claves', []):
+        d[k] = _paleta.rgb('fachada_actual_' + k)
+    return d
 
-COL_TEJA = _srgb(0.67, 0.27, 0.14)
-COL_PERSIANA = _srgb(0.24, 0.45, 0.22)
-# piedra algo mas calida y menos blanca que en la v1: en la pelicula el
-# recercado apenas destaca sobre el estuco
-COL_PIEDRA = _srgb(0.91, 0.85, 0.72)
+
+PALETA_FACHADA = _paleta_fachada()
+# color lineal -> clave: para que build_manzana (que pasa color=PALETA_FACHADA[k]) tambien
+# reciba la variacion por casa y el nombre de material de la paleta (no custom_xxxxxx)
+_FACHADA_POR_COLOR = {tuple(round(c, 6) for c in v): k for k, v in PALETA_FACHADA.items()}
+
+# variacion por casa (paleta.json 'fachadas_variacion'): tono +-5 grados HSV, brillo +-5 %
+_VARIACION = _paleta.cargar().get('fachadas_variacion', {})
+VAR_TONO_GRADOS = float(_VARIACION.get('tono_grados', 5.0))
+VAR_BRILLO = float(_VARIACION.get('brillo', 0.05))
+VARIANTES_FACHADA = (("osc", -1), ("", 0), ("cla", 1))      # (sufijo del material, paso)
+
+
+def _variar_fachada(color, paso):
+    """Variante de un tono de fachada (color lineal): paso -1 = -5 % de brillo y -5 grados de
+    tono (mas oscura y rojiza), +1 = +5 % y +5 grados (mas clara y amarilla), 0 = el tono tal
+    cual. El giro de tono y el brillo se aplican en sRGB/HSV (perceptual) y se vuelve a lineal."""
+    if paso == 0:
+        return tuple(color)
+    r, g, b = (_paleta.lin_a_srgb(c) for c in color)
+    h, s, v = colorsys.rgb_to_hsv(r, g, b)
+    h = (h + paso * VAR_TONO_GRADOS / 360.0) % 1.0
+    v = min(1.0, v * (1.0 + paso * VAR_BRILLO))
+    return tuple(_paleta.srgb_a_lin(c) for c in colorsys.hsv_to_rgb(h, s, v))
+
+
+def variante_por_seed(seed):
+    """(sufijo, paso) de la variante de fachada de una casa: generador propio, no toca `rng`."""
+    return random.Random(seed * 7919 + 29).choice(VARIANTES_FACHADA)
+
+
+COL_TEJA = _paleta.rgb('terracota')
+COL_PERSIANA = _paleta.rgb('contraventanas')         # paleta v2 (usuario): #3E6A48
+# marcos de ventana, recercados, bandas, cornisas y zocalo: crema claro estilo ligur
+# (paleta v2 marco_ventana_crema #F1E9D6; el kit usa un solo material "piedra" para todo)
+COL_PIEDRA = _paleta.rgb('marco_ventana_crema')
 COL_FORJA = (0.02, 0.02, 0.025)
 COL_VIDRIO = _srgb(0.22, 0.34, 0.38)
 COL_MADERA = _srgb(0.42, 0.24, 0.11)
@@ -167,9 +218,10 @@ def _get_mat(nombre, color, rough=0.85, metallic=0.0):
     return mat
 
 
-def _materiales(color_key, color):
+def _materiales(color_key, color, variante=""):
+    nombre = "MAT_CASAS_fachada_" + color_key + ("_" + variante if variante else "")
     return {
-        "estuco": _get_mat("MAT_CASAS_fachada_" + color_key, color, rough=0.9),
+        "estuco": _get_mat(nombre, color, rough=0.9),
         "piedra": _get_mat("MAT_CASAS_piedra", COL_PIEDRA, rough=0.9),
         "teja": _get_mat("MAT_CASAS_teja", COL_TEJA, rough=0.85),
         "madera": _get_mat("MAT_CASAS_madera", COL_MADERA, rough=0.7),
@@ -1001,18 +1053,27 @@ def build_casa(parent_collection, plantas=4, ancho=10.0, fondo=12.0,
         color_key = rng.choice(list(PALETA_FACHADA.keys()))
         color = PALETA_FACHADA[color_key]
     else:
-        color_key = "custom_%02x%02x%02x" % tuple(
-            min(255, max(0, int(c * 255))) for c in color)
+        color_key = _FACHADA_POR_COLOR.get(tuple(round(c, 6) for c in color))
+        if color_key is None:
+            color_key = "custom_%02x%02x%02x" % tuple(
+                min(255, max(0, int(c * 255))) for c in color)
     if tejado == "auto":
         tejado = "dosaguas" if rng.random() < 0.72 else "plano"
     estado = rng.getstate()     # a partir de aqui, misma secuencia que la v1
+
+    # paleta v2: variacion +-5 % de tono y brillo por casa, solo para tonos de la paleta
+    # (un color custom se respeta tal cual); generador propio: la secuencia de `rng` no cambia
+    variante = ""
+    if color_key in PALETA_FACHADA:
+        variante, paso = variante_por_seed(seed)
+        color = _variar_fachada(PALETA_FACHADA[color_key], paso)
 
     laterales = tuple(params.get("laterales", (True, True)))
     exp_i, exp_d = bool(laterales[0]), bool(laterales[1])
     aud = params.get("auditoria")
     lod = int(params.get("lod", 0) or 0)
 
-    M = _materiales(color_key, color)
+    M = _materiales(color_key, color, variante)
     plantas = max(1, int(plantas))
     ancho = max(3.0, float(ancho))
     fondo = max(3.0, float(fondo))

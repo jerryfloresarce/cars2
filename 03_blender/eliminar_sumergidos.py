@@ -27,6 +27,8 @@ for ob in list(bpy.context.scene.collection.objects):
             continue
     except ReferenceError:
         continue  # ya borrado como hijo de un root anterior
+    if ob.name.startswith(('HORIZ_', 'MONT_')):
+        continue  # fase visual F1 (7.1): anillo de horizonte con el pie hundido a z -6 a proposito (bajo el mar)
     if not any(ob.name.startswith(p) for p in PREFIJOS) or ob.name.startswith('VEG_penon'):
         continue
     if any(k in ob.name.lower() for k in EXENTOS_QA):

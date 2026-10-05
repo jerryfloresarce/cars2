@@ -48,7 +48,9 @@ excluidos del estuco.
 """
 
 import math
+import os
 import random
+import sys
 
 import bpy
 import bmesh
@@ -56,15 +58,25 @@ import bmesh
 PREFIX = "CASINO"
 
 # ---------------------------------------------------------------- materiales
+# FASE VISUAL, paleta v2 (usuario 04/10): los colores nobles salen de 03_blender/paleta.json
+# (UNICA fuente de color): marmol crema del casino (marmol_casino, no blanco puro), molduras
+# en crema claro (marco_ventana_crema), zocalo/explanada en caliza media, tejados en la
+# terracota de la paleta y cupulas + linternas en verdin de cobre (verdin_cupula): con
+# patina=True (defecto) los casquetes de build_cupula y la cupula de la torre llevan
+# "cupula" (antes "tejado" terracota). Dorados, vidrios, reloj, rojo y luz no cambian.
+_RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if _RAIZ not in sys.path:
+    sys.path.insert(0, _RAIZ)
+import paleta as _paleta  # noqa: E402
 
 _COLORS = {
     # clave:        (color lineal,            metal, rugosidad)
-    "fachada":      ((0.78, 0.50, 0.215), 0.0, 0.70),   # crema calido / ocre claro
-    "molduras":     ((0.86, 0.72, 0.50), 0.0, 0.65),    # marfil: pilastras, frisos
-    "piedra":       ((0.47, 0.405, 0.31), 0.0, 0.85),   # zocalo y explanada
+    "fachada":      (_paleta.rgb('marmol_casino'), 0.0, 0.70),         # marmol crema #EEE4CF
+    "molduras":     (_paleta.rgb('marco_ventana_crema'), 0.0, 0.65),   # crema claro: pilastras, frisos
+    "piedra":       (_paleta.rgb('caliza_gris_calido'), 0.0, 0.85),    # zocalo y explanada (caliza media)
     "dorado":       ((0.91, 0.575, 0.10), 0.55, 0.35),
-    "tejado":       ((0.78, 0.235, 0.05), 0.0, 0.75),   # terracota naranja
-    "cupula":       ((0.175, 0.50, 0.415), 0.0, 0.5),   # patina (solo linternas)
+    "tejado":       (_paleta.rgb('terracota'), 0.0, 0.75),             # terracota #BF6440
+    "cupula":       (_paleta.rgb('verdin_cupula'), 0.0, 0.5),          # verdin de cobre #6FA391 (cupulas y linternas)
     "vidrio":       ((0.045, 0.10, 0.15), 0.4, 0.12),
     "vidrio_hueco": ((0.035, 0.04, 0.055), 0.0, 0.9),   # huecos de campanario
     "reloj":        ((0.95, 0.93, 0.84), 0.0, 0.5),
@@ -581,7 +593,8 @@ def build_cupula(parent_collection, radius=7.0, location=(0.0, 0.0, 0.0),
                    proud=radius * 0.03)
     dome = _MB(True)
     dome.add_lathe(prof + [(0.0, dh + radius * 1.13)], seg)
-    dome.make(base + "_casquete", "tejado", parent_collection, root)
+    # paleta v2: casquete en verdin de cobre (patina) salvo que se pida terracota
+    dome.make(base + "_casquete", "cupula" if patina else "tejado", parent_collection, root)
 
     if lantern:
         lmold, ldark, lcap = _MB(), _MB(), _MB(True)
@@ -715,7 +728,7 @@ def build_torre(parent_collection, location=(21.2, 3.0, 0.0), name_suffix="",
     _lantern(mold, gold, dark, lcap, gold_s, 40.25, 1.02, 2.6)
 
     _make_all(mbs, base, parent_collection, root)
-    dome.make(base + "_cupula", "tejado", parent_collection, root)
+    dome.make(base + "_cupula", "cupula" if patina else "tejado", parent_collection, root)   # paleta v2: verdin
     lcap.make(base + "_cupulin", "cupula" if patina else "tejado",
               parent_collection, root)
     gold_s.make(base + "_dorado_liso", "dorado", parent_collection, root)

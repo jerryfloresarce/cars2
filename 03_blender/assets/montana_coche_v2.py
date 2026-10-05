@@ -78,11 +78,36 @@ import importlib.util
 import math
 import os
 import random
+import sys
 
 import bpy
 import bmesh
 from mathutils import Vector
 from mathutils.bvhtree import BVHTree
+
+# FASE VISUAL F1 (bloque 3.1 / 2.1): la caliza del McLaren sale de 03_blender/paleta.json y _mat_piedra enchufa
+# el grupo compartido NG_caliza_estratos (assets/materiales_roca) en vez del moteado de ruido (respaldo si falta).
+# Paleta v2 (usuario 04/10): caliza_ocre = caliza CLARA #D8CCB0, caliza_sombra = roca OSCURA #7F766A, sin gris
+# azulado (mismas claves; los valores cambian en paleta.json). El hueso sigue siendo un literal (no es caliza).
+_RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if _RAIZ not in sys.path:
+    sys.path.insert(0, _RAIZ)
+import paleta as _paleta  # noqa: E402
+
+
+def _materiales_roca():
+    if 'materiales_roca' in sys.modules:
+        return sys.modules['materiales_roca']
+    try:
+        ruta = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'materiales_roca.py')
+        spec = importlib.util.spec_from_file_location('materiales_roca', ruta)
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules['materiales_roca'] = mod
+        spec.loader.exec_module(mod)
+        return mod
+    except Exception as e:  # noqa
+        print('montana_coche_v2: AVISO materiales_roca no disponible (%s): caliza moteada de siempre' % e)
+        return None
 
 
 # ------------------------------------------------ helpers de montana_rueda --
@@ -126,12 +151,20 @@ _RING_U0 = _MR._RING_U0
 
 # índices de material (mismo orden en TODAS las piezas: el boolean los copia)
 _M_CAL, _M_CLARA, _M_OSC, _M_HUECO, _M_HUESO, _M_CRISTAL = 0, 1, 2, 3, 4, 5
+# F1 r3/r4: tile de caliza del coche (aplicar_texturas.FAMILIAS['caliza_grande'] usa los mismos valores para MAT_MCOCHE_caliza*).
+# r4 (director r3 n.4): con caliza_d a 12 m el tile seguia repetido a la vista en 49 (AC): tile DERIVADO caliza_grande_d.png
+# (texturas/generar_texturas.caliza_grande: dos escalas + ruido de baja frecuencia, contraste 60 %), 24 m y factor 0.3
+TILE_CALIZA_M = 24.0
+FACTOR_CALIZA = 0.5
+IMAGEN_CALIZA = 'caliza_grande_d.png'      # si falta, materiales_roca.aplicar_a cae a caliza_d.png
 
 
-def _mat_piedra(name, color, color2, rough, escala, spec=0.25):
-    """Principled BSDF de color plano con MOTEADO procedural (Noise Texture
-    en coordenadas de objeto -> mezcla suave entre `color` y `color2`).
-    Sin imágenes. Reutiliza el material si ya existe."""
+def _mat_piedra(name, color, color2, rough, escala, spec=0.25, caliza=True):
+    """Principled BSDF de piedra. F1: con `caliza` (defecto) enchufa el grupo compartido NG_caliza_estratos
+    (assets/materiales_roca.aplicar_a: estratos en coordenadas de MUNDO x caliza_d.png, diffuse_color = media;
+    `color2` pasa a ser el tono de los bancos alternos via contraste). Si materiales_roca no esta disponible
+    (o caliza=False: hueso, hierba) queda el MOTEADO procedural de siempre (Noise en coordenadas de objeto
+    -> mezcla suave entre `color` y `color2`). Reutiliza el material si ya existe."""
     m = bpy.data.materials.get(name)
     if m is not None:
         return m
@@ -139,6 +172,16 @@ def _mat_piedra(name, color, color2, rough, escala, spec=0.25):
     nt = m.node_tree
     if nt is None:
         return m
+    if caliza:
+        mr = _materiales_roca()
+        if mr is not None:
+            lum = lambda c: 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]  # noqa: E731
+            contr = min(0.3, max(0.0, abs(lum(color2) - lum(color)) / max(lum(color), 1e-4) * 0.5))
+            # F1 r3/r4 (director r2 n.6 / r3 n.4): el coche mide ~80 m: el tile de 6 m (y el de 12 m) se repetia a la vista
+            # en 49 (AC); tile derivado IMAGEN_CALIZA (24 m, dos escalas, bajo contraste) con factor FACTOR_CALIZA (0.3)
+            mr.aplicar_a(m, tono_base=color, contraste_bancos=contr, bump=0.35, imagen=IMAGEN_CALIZA, tile_m=TILE_CALIZA_M,
+                         factor=FACTOR_CALIZA)
+            return m
     bsdf = next((n for n in nt.nodes if n.type == "BSDF_PRINCIPLED"), None)
     if bsdf is None:
         return m
@@ -159,19 +202,20 @@ def _mat_piedra(name, color, color2, rough, escala, spec=0.25):
 
 
 def _mats_roca():
-    """Caliza CÁLIDA (ocre-crema, no gris frío) moteada; hueco casi negro
-    pardo; hueso claro (buje, radios, aros, marcos); cristal azulado oscuro
-    mate."""
+    """Caliza CÁLIDA de la paleta (caliza_ocre; antes crema 0.60/0.49/0.33 = 'plástico crema' de 02/32),
+    con el grupo de estratos compartido; hueco casi negro pardo; hueso (buje, radios, aros, marcos)
+    0.80 -> 0.58 de luminancia (F1: deja de deslumbrar); cristal azulado oscuro mate.
+    Nombres SIN cambiar (indices fijos 0-5; integrar._paredes_de_roca elige por subcadenas roca/caliza)."""
+    ocre = _paleta.rgb('caliza_ocre')
     return (
-        _mat_piedra("MAT_MCOCHE_caliza", (0.600, 0.490, 0.330),
-                    (0.740, 0.650, 0.490), 0.95, 0.045),
-        _mat_piedra("MAT_MCOCHE_caliza_clara", (0.740, 0.660, 0.500),
-                    (0.840, 0.770, 0.610), 0.95, 0.06),
-        _mat_piedra("MAT_MCOCHE_caliza_oscura", (0.400, 0.310, 0.200),
-                    (0.490, 0.400, 0.280), 0.95, 0.06),
+        _mat_piedra("MAT_MCOCHE_caliza", ocre, _paleta.variante('caliza_ocre', 1.12), 0.95, 0.045),
+        _mat_piedra("MAT_MCOCHE_caliza_clara", _paleta.variante('caliza_ocre', 1.15),
+                    _paleta.variante('caliza_ocre', 1.25), 0.95, 0.06),
+        _mat_piedra("MAT_MCOCHE_caliza_oscura", _paleta.rgb('caliza_sombra'),
+                    _paleta.variante('caliza_sombra', 1.15), 0.95, 0.06),
         _mat("MAT_MCOCHE_hueco", (0.085, 0.065, 0.045), 0.97, 0.10),
-        _mat_piedra("MAT_MCOCHE_hueso", (0.800, 0.750, 0.620),
-                    (0.870, 0.830, 0.700), 0.90, 0.12, 0.20),
+        _mat_piedra("MAT_MCOCHE_hueso", tuple(c * 0.58 / 0.80 for c in (0.800, 0.750, 0.620)),
+                    tuple(c * 0.58 / 0.80 for c in (0.870, 0.830, 0.700)), 0.90, 0.12, 0.20, caliza=False),
         _mat("MAT_MCOCHE_cristal", (0.085, 0.125, 0.185), 0.72, 0.35),
     )
 

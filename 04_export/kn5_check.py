@@ -34,7 +34,8 @@ DISCREPANCIAS con la hoja del encargo (las referencias coinciden entre si):
      y paran. Tras la raiz no debe quedar ningun byte.
 
 Uso:
-  python kn5_check.py [ruta.kn5] [salida.json] [--json salida.json] [--wait-min 40] [--no-wait] [--quiet]
+  python kn5_check.py [ruta.kn5] [salida.json] [--json salida.json] [--wait-min 40] [--no-wait] [--quiet] [--shaders]
+  --shaders (v1.2): anade la comprobacion 9 (shaders/samplers conocidos, texturas potencia de 2 <= 4096)
 Codigos de salida: 0 todas las comprobaciones OK, 1 alguna FALLO, 2 kn5 no disponible, 3 error de lectura.
 """
 from __future__ import annotations
@@ -571,6 +572,61 @@ def comprobar(info: dict, acc: dict) -> list[dict]:
     return checks
 
 
+# (9) OPCIONAL (--shaders; v1.2, P5 de 03_blender/_rev/fase_visual/PETICIONES_04_EXPORT.md): shader conocido y samplers
+# esperados por shader, texturas potencia de 2 y <= 4096, nada de shaders de CSP (_nm4) en el KN5. No forma parte de las 8
+# de siempre (kn5_check_selftest.py exige exactamente 8): solo se anade con la opcion. Nombres VERIFICADOS en kn5_refs/:
+# AcTools.Render/Kn5SpecificForwardDark/Materials/MaterialsProviderDark.cs (lista de shaders) y Kn5MaterialDarkMaps.cs
+# (txNormal, txMaps, txDetail), material_writer.py del exportador de Blender (slots), y para el multicapa los del ensayo A
+# (web_multilayer_vao_erosion.md 1.3). requeridos, opcionales.
+SHADERS_CONOCIDOS = {
+    'ksPerPixel': ({'txDiffuse'}, set()),
+    'ksPerPixelAT': ({'txDiffuse'}, set()),
+    'ksPerPixelAT_NS': ({'txDiffuse'}, set()),
+    'ksTree': ({'txDiffuse'}, set()),
+    'ksPerPixelNM': ({'txDiffuse', 'txNormal'}, set()),
+    'ksPerPixelMultiMap': ({'txDiffuse', 'txNormal', 'txMaps'}, {'txDetail'}),
+    'ksPerPixelMultiMap_NMDetail': ({'txDiffuse', 'txNormal', 'txMaps'}, {'txDetail', 'txNormalDetail'}),
+    'ksMultilayer_fresnel_nm': ({'txDiffuse', 'txMask', 'txDetailR', 'txDetailG', 'txDetailB', 'txDetailA'},
+                                {'txDetailNM'}),
+}
+
+
+def comprobar_shaders(info: dict) -> dict:
+    """Comprobacion 9 (opcional, --shaders): ver SHADERS_CONOCIDOS."""
+    tex = {t['nombre']: t for t in info['texturas']}
+    desconocidos, samplers_mal, detalle_mal, tex_mal, por_shader = [], [], [], [], {}
+    for mt in info['materiales']:
+        sh = mt['shader']
+        por_shader[sh] = por_shader.get(sh, 0) + 1
+        if sh not in SHADERS_CONOCIDOS or 'nm4' in sh.lower():
+            desconocidos.append(f"{mt['nombre']}: {sh}")
+            continue
+        req, opc = SHADERS_CONOCIDOS[sh]
+        nombres = {s['nombre'] for s in mt['samplers']}
+        if not req <= nombres or not nombres <= (req | opc):
+            samplers_mal.append(f"{mt['nombre']} ({sh}): {sorted(nombres)} (requeridos {sorted(req)}, opcionales {sorted(opc)})")
+        props = {p['nombre']: p['valor'] for p in mt['props']}
+        if sh.startswith('ksPerPixelMultiMap') and props.get('useDetail', 0) > 0 and 'txDetail' not in nombres:
+            detalle_mal.append(f"{mt['nombre']}: useDetail = {props.get('useDetail')} sin txDetail")
+        for s in mt['samplers']:
+            t = tex.get(s['textura'])
+            if t is None or 'ancho' not in t:
+                continue
+            w, h = t['ancho'], t['alto']
+            if w > 4096 or h > 4096 or w & (w - 1) or h & (h - 1):
+                tex_mal.append(f"{s['textura']} {w}x{h}")
+    ok = not (desconocidos or samplers_mal or detalle_mal or tex_mal)
+    det = [f'materiales por shader: {por_shader}']
+    for etq, lst in (('shader desconocido o de CSP', desconocidos), ('samplers inesperados', samplers_mal),
+                     ('detalle sin textura', detalle_mal), ('textura no potencia de 2 o > 4096', sorted(set(tex_mal)))):
+        if lst:
+            det.append(f'{etq} ({len(lst)}): ' + '; '.join(lst[:10]))
+    return {'num': 9, 'nombre': 'shaders conocidos, samplers esperados por shader y texturas potencia de 2 <= 4096 (opcional)',
+            'ok': ok, 'detalle': ' | '.join(det),
+            'cifras': {'por_shader': por_shader, 'desconocidos': desconocidos, 'samplers_mal': samplers_mal,
+                       'texturas_mal': sorted(set(tex_mal))}}
+
+
 REFERENCIA = ('kn5-converter (RaduMC/Chipicao, C#, Program.cs readKN5/readNodes) como lector principal; cruzado con '
               'actools Kn5Basic.cs::Kn5Reader + Kn5Writer.cs (gro-ove, Content Manager), kn5-obj-converter (MarvinSt, '
               'Python) y con el escritor del addon blender-assetto-corsa-tools (jwl-7). Magia 6 bytes "sc6969" + int32 version.')
@@ -643,9 +699,11 @@ def _arbol_compacto(n: dict) -> dict:
     return c
 
 
-def informe_desde_bytes(data: bytes, ruta: str) -> dict:
+def informe_desde_bytes(data: bytes, ruta: str, shaders: bool = False) -> dict:
     info = leer_kn5(data)
     checks = comprobar(info, info['_acc'])
+    if shaders:                       # comprobacion 9 opcional (--shaders)
+        checks.append(comprobar_shaders(info))
     acc = info['_acc']
     tex_bytes = sum(t['tamano'] for t in info['texturas'])
     informe = {
@@ -797,6 +855,7 @@ def main(argv: list[str]) -> int:
     if '--no-wait' in argv:
         wait_min = 0.0
     quiet = '--quiet' in argv
+    shaders = '--shaders' in argv
     t0 = time.time()
     if not esperar_fichero(ruta, wait_min):
         print('kn5 no disponible:', ruta)
@@ -805,7 +864,7 @@ def main(argv: list[str]) -> int:
         with open(ruta, 'rb') as fh:
             data = fh.read()
         try:
-            inf = informe_desde_bytes(data, ruta)
+            inf = informe_desde_bytes(data, ruta, shaders)
             break
         except KN5Error as e:
             restante = wait_min * 60 - (time.time() - t0)

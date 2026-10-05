@@ -5,20 +5,30 @@
     "srgb_hex = el mismo color en sRGB 8 bits (para texturas PIL y para hablar con el usuario),",
     "familia_ac = familia de 04_export/color_ac.py FAMILIAS (ks* y techo de textura en AC), uso = donde se aplica.",
     "REGLA DEL PLAN: diffuse_color o Base Color SIN ENLAZAR = la media lineal que se quiere ver; es lo unico que lee",
-    "04_export/kn5_writer_opt.py (analizar_material l.215-258). Lo procedural (rampas, mix, atributos) es solo preview.",
-    "Se consume con 03_blender/paleta.py: cargar(), rgb(nombre), rgba(nombre), srgb(nombre), srgb_hex(nombre), familia_ac(nombre).",
-    "Pendiente de validar por el usuario con renders/qa/carta_color.png (pregunta 15 del plan). Version 1: valores de partida",
-    "del plan A, con tres ajustes propios: terracota mas tierra y menos salmon, tierra algo mas oscura, mar_profundo mas oscuro."
+    "04_export/kn5_writer_opt.py (analizar_material l.221-266, comprobado 04/10 tarde). Lo procedural (rampas, mix, atributos) es solo preview.",
+    "Se consume con 03_blender/paleta.py: cargar(), rgb(nombre), rgba(nombre), srgb(nombre), srgb_hex(nombre), familia_ac(nombre), variante(nombre, lum).",
+    "VERSION 2 (04/10/2026 ~19:30): valores del USUARIO tras ver la carta de color v1 (sRGB del selector de Blender, convertidos aqui",
+    "a lineal con la curva sRGB exacta; se guardan ambos). 'Buena direccion en verdes y azules'; cambian: ROCAS mas calidas sin gris",
+    "azulado (caliza_ocre = clara #D8CCB0, caliza_gris_calido = media #B3A68A, caliza_sombra = oscura #7F766A; el frio lo pone la",
+    "sombra), TEJAS terracota mas anaranjada #BF6440, FACHADAS menos pastel y mas profundas (6 tonos nuevos en fachadas_propuesta;",
+    "fuera el blanco grisaceo y el rosa bebe: blanco_roto / rosa_antico retirados y fachadas_actual_compatibles vacio), y se ANADEN",
+    "cipres_pino_oscuro, verdin_cupula, contraventanas, buganvilla (acento, pequenas dosis), marmol_casino y marco_ventana_crema.",
+    "Las CLAVES de la v1 se conservan (los consumidores las usan); 'alias' da nombres nuevos para las tres calizas.",
+    "NOTA DEL AGUA (usuario): si se usa el shader de agua de CSP, mar_orilla / mar_profundo valen para el FONDO marino; el color",
+    "final del agua lo dan el shader y el reflejo del cielo. CESPED verde vivo (cesped_jardin): solo jardines y rotondas.",
+    "Validacion pedida: la paleta aplicada al pueblo junto al puerto con luz de tarde desde la camara del coche (no en esferas):",
+    "renders/ab/paleta_v2/. Carta de registro: renders/qa/carta_color.png."
   ],
-  "version": 1,
+  "version": 2,
   "fecha": "2026-10-04",
+  "origen": "usuario 04/10 ~19:30 (feedback sobre renders/qa/carta_color.png v1; valores sRGB del selector de Blender)",
   "espacio": "rgb lineal (Blender) / srgb_hex 8 bits",
   "colores": {
     "oliva_oscuro": {
       "rgb": [0.16, 0.20, 0.08],
       "srgb_hex": "#6F7C50",
       "familia_ac": "vegetacion",
-      "uso": "matorral y pinar: copas de pino, encina y arbustos (vegetacion_kit_v3), canal R (matorral) de la mascara del terreno, tile matorral_d.png"
+      "uso": "matorral y encinas: copas de encina y arbustos (vegetacion_kit), canal R (matorral) de la mascara del terreno, tile matorral_d.png; los pinos y cipreses pasan a cipres_pino_oscuro en la v2"
     },
     "salvia": {
       "rgb": [0.30, 0.36, 0.22],
@@ -33,28 +43,28 @@
       "uso": "hierba dorada de verano: diffuse_color de MAT_terreno (zona dominante junto a la pista), MAT_arcen, canal G de la mascara, tile hierba_seca_d.png"
     },
     "caliza_ocre": {
-      "rgb": [0.46, 0.37, 0.24],
-      "srgb_hex": "#B5A486",
+      "rgb": [0.6867, 0.6038, 0.4342],
+      "srgb_hex": "#D8CCB0",
       "familia_ac": "roca",
-      "uso": "caliza calida al sol: roca del terreno (ROCA_rampa), kits roca_lazo / roca_casino / penon_cara / montana_mclaren / montanas_fondo_v2, canal A (roca) de la mascara, tile piedra_d.png"
+      "uso": "CALIZA CLARA (alias caliza_clara; v2 usuario, antes #B5A486): caliza calida al sol: roca del terreno, kits roca_lazo / roca_casino / penon_cara / montana_mclaren / montanas_fondo_v2, canal A (roca) de la mascara, tiles caliza_d / piedra_d / piedra_seca_d / afloramiento_d"
     },
     "caliza_gris_calido": {
-      "rgb": [0.34, 0.31, 0.26],
-      "srgb_hex": "#9E978B",
+      "rgb": [0.4508, 0.3813, 0.2542],
+      "srgb_hex": "#B3A68A",
       "familia_ac": "roca",
-      "uso": "caliza en semisombra y estratos: mixr.inputs[7] del terreno, muros de contencion, acera y bordillo de piedra, escolleras"
+      "uso": "CALIZA MEDIA (alias caliza_media; v2 usuario, antes #9E978B gris azulado): caliza en semisombra y estratos: mixr.inputs[7] del terreno, repisas, muros de contencion, acera y bordillo de piedra, escolleras, acantilados lejanos"
     },
     "caliza_sombra": {
-      "rgb": [0.25, 0.20, 0.14],
-      "srgb_hex": "#897C69",
+      "rgb": [0.2122, 0.1812, 0.1441],
+      "srgb_hex": "#7F766A",
       "familia_ac": "roca",
-      "uso": "juntas, grietas, huecos del McLaren y pie de los acantilados (AO pintada en el diffuse de las rocas)"
+      "uso": "ROCA OSCURA (alias roca_oscura; v2 usuario, antes #897C69): juntas, grietas, huecos del McLaren, roca bajo el agua y pie de los acantilados (AO pintada en el diffuse de las rocas)"
     },
     "terracota": {
-      "rgb": [0.45, 0.145, 0.072],
-      "srgb_hex": "#B36A4C",
+      "rgb": [0.521, 0.1274, 0.0513],
+      "srgb_hex": "#BF6440",
       "familia_ac": "edificio",
-      "uso": "tejas (COL_TEJA de casas_kit_v2 y tile teja_d.png), macetas, adoquin rojizo del pueblo"
+      "uso": "tejas (COL_TEJA de casas_kit_v2, MAT_CIVICO_teja, MAT_CASINO_tejado y tile teja_d.png), macetas de calle_kit, adoquin rojizo del pueblo; v2 usuario: mas anaranjada que la v1 (#B36A4C)"
     },
     "cesped_jardin": {
       "rgb": [0.22, 0.42, 0.12],
@@ -78,17 +88,59 @@
       "rgb": [0.25, 0.75, 0.72],
       "srgb_hex": "#89E1DD",
       "familia_ac": "agua",
-      "uso": "mar turquesa de la orilla (gradiente de batimetria, bloque 6): color del agua a < 15 m de profundidad"
+      "uso": "mar turquesa de la orilla (gradiente de batimetria, bloque 6): color del agua a < 15 m de profundidad; con el agua de CSP es el color del FONDO marino somero"
     },
     "mar_profundo": {
       "rgb": [0.006, 0.11, 0.30],
       "srgb_hex": "#125D95",
       "familia_ac": "agua",
-      "uso": "mar adentro y fondo del gradiente de batimetria; horizonte marino del anillo de fondo"
+      "uso": "mar adentro y fondo del gradiente de batimetria; horizonte marino del anillo de fondo; con el agua de CSP es el FONDO profundo (el color final lo dan el shader y el reflejo del cielo)"
+    },
+    "cipres_pino_oscuro": {
+      "rgb": [0.0343, 0.0802, 0.0423],
+      "srgb_hex": "#34503A",
+      "familia_ac": "vegetacion",
+      "uso": "NUEVO v2 (usuario): copas de cipres y de pino oscuro (vegetacion_kit_v2 cipres*, pino_a/pino_b y sus _luz por paleta.variante); la variacion por instancia se mantiene"
+    },
+    "verdin_cupula": {
+      "rgb": [0.159, 0.3663, 0.2831],
+      "srgb_hex": "#6FA391",
+      "familia_ac": "edificio",
+      "uso": "NUEVO v2 (usuario): verdin de cobre de las cupulas y linternas del casino (casino_v2 'cupula') y chapitel del campanile (MAT_CAMPANILE_cobre)"
+    },
+    "contraventanas": {
+      "rgb": [0.0482, 0.1441, 0.0648],
+      "srgb_hex": "#3E6A48",
+      "familia_ac": "pintado",
+      "uso": "NUEVO v2 (usuario): contraventanas / persianas de madera pintada (casas_kit_v2 COL_PERSIANA, MAT_CIVICO_persiana)"
+    },
+    "buganvilla": {
+      "rgb": [0.5395, 0.0513, 0.1946],
+      "srgb_hex": "#C2407A",
+      "familia_ac": "vegetacion",
+      "uso": "NUEVO v2 (usuario): ACENTO en pequenas dosis: flores de las macetas de calle (calle_kit flor_rosa), flores de la adelfa rosa y un 12 % de los arbustos con flor de jardines (vegetacion_kit_v2); nunca en masas"
+    },
+    "marmol_casino": {
+      "rgb": [0.855, 0.7758, 0.624],
+      "srgb_hex": "#EEE4CF",
+      "familia_ac": "edificio",
+      "uso": "NUEVO v2 (usuario): marmol crema del casino (casino_v2 'fachada'), no blanco puro; tambien MAT_CIVICO_blanco (balaustradas, hotel) y los pueblos del anillo de horizonte"
+    },
+    "marco_ventana_crema": {
+      "rgb": [0.8796, 0.8148, 0.6724],
+      "srgb_hex": "#F1E9D6",
+      "familia_ac": "edificio",
+      "uso": "NUEVO v2: crema claro de marcos de ventana, recercados, bandas, cornisas y molduras (estilo ligur): casas_kit_v2 COL_PIEDRA, casino_v2 'molduras', MAT_CIVICO_crema. Valor elegido mas claro y menos saturado que crema_calido #E6D4B0 para que lea como marco sobre la fachada crema"
     }
   },
+  "alias": {
+    "_doc": "Nombres alternativos (v2) que paleta.py resuelve a la misma entrada: el usuario habla de caliza clara / media / roca oscura.",
+    "caliza_clara": "caliza_ocre",
+    "caliza_media": "caliza_gris_calido",
+    "roca_oscura": "caliza_sombra"
+  },
   "fachadas_actual": {
-    "_doc": "Lo que pinta HOY casas_kit_v2.PALETA_FACHADA (l.87): sRGB de entrada y lineal real (gamma 2.2 de _srgb). Solo para la carta de color; no se consume.",
+    "_doc": "Lo que pinta la escena_rev de HOY (v0 de casas_kit_v2.PALETA_FACHADA, l.87 antes de F1): sRGB de entrada y lineal real (gamma 2.2 de _srgb). Solo para la carta de color (fila 'FACHADAS HOY') y el mapa de re-tintado de la validacion; no se consume.",
     "ocre":     {"srgb_in": [0.85, 0.56, 0.18], "rgb": [0.6994, 0.2793, 0.0230], "srgb_hex": "#DA902A"},
     "salmon":   {"srgb_in": [0.91, 0.48, 0.35], "rgb": [0.8126, 0.1989, 0.0993], "srgb_hex": "#E97B59"},
     "amarillo": {"srgb_in": [0.95, 0.76, 0.22], "rgb": [0.8933, 0.5468, 0.0358], "srgb_hex": "#F3C335"},
@@ -96,11 +148,27 @@
     "rosa":     {"srgb_in": [0.90, 0.49, 0.46], "rgb": [0.7931, 0.2082, 0.1812], "srgb_hex": "#E67E76"}
   },
   "fachadas_propuesta": {
-    "_doc": "Propuesta Riviera (Portofino / Cars 2) para casas_kit_v2.PALETA_FACHADA en el bloque 3: menos saturacion y menos naranja que la actual, estuco envejecido. rgb lineal exacto (sRGB -> lineal). Pendiente de validar en la carta.",
-    "ocre_portofino":   {"rgb": [0.6739, 0.2957, 0.0509], "srgb_hex": "#D69440", "familia_ac": "edificio", "uso": "fachada ocre dorado, la mas frecuente"},
-    "rosa_antico":      {"rgb": [0.7106, 0.2633, 0.1873], "srgb_hex": "#DB8C78", "familia_ac": "edificio", "uso": "fachada rosa antiguo (sustituye a salmon y rosa)"},
-    "amarillo_napoles": {"rgb": [0.8900, 0.6038, 0.1473], "srgb_hex": "#F2CC6B", "familia_ac": "edificio", "uso": "fachada amarillo napoles (sustituye a amarillo)"},
-    "rojo_pompeya":     {"rgb": [0.4770, 0.0890, 0.0470], "srgb_hex": "#B8543D", "familia_ac": "edificio", "uso": "fachada roja oscura, una de cada ocho casas; campanile"},
-    "blanco_roto":      {"rgb": [0.8481, 0.7678, 0.6038], "srgb_hex": "#EDE3CC", "familia_ac": "edificio", "uso": "fachada blanco roto (sustituye a crema), recercados y edificios civicos"}
+    "_doc": "v2 (usuario 04/10): los 6 tonos de fachada EN USO por casas_kit_v2.PALETA_FACHADA (sorteo uniforme por casa + variacion de fachadas_variacion). Menos pastel, mas profundos y calidos; sin blanco grisaceo ni rosa bebe (retirados blanco_roto, rosa_antico, ocre_portofino, amarillo_napoles, rojo_pompeya de la v1). rgb lineal exacto (sRGB -> lineal).",
+    "azafran":        {"rgb": [0.7605, 0.3916, 0.0685], "srgb_hex": "#E2A84A", "familia_ac": "edificio", "uso": "fachada azafran (amarillo profundo)"},
+    "ocre_naranja":   {"rgb": [0.6867, 0.2542, 0.0723], "srgb_hex": "#D88A4C", "familia_ac": "edificio", "uso": "fachada ocre naranja"},
+    "siena":          {"rgb": [0.5520, 0.1441, 0.0561], "srgb_hex": "#C46A43", "familia_ac": "edificio", "uso": "fachada siena tostada"},
+    "rojo_pompeyano": {"rgb": [0.4342, 0.0685, 0.0437], "srgb_hex": "#B04A3B", "familia_ac": "edificio", "uso": "fachada rojo pompeyano (la mas oscura)"},
+    "melocoton":      {"rgb": [0.7913, 0.3712, 0.2423], "srgb_hex": "#E6A487", "familia_ac": "edificio", "uso": "fachada melocoton (sustituye a salmon y rosa)"},
+    "crema_calido":   {"rgb": [0.7913, 0.6584, 0.4342], "srgb_hex": "#E6D4B0", "familia_ac": "edificio", "uso": "fachada crema calido (la mas clara; sustituye a crema y blanco_roto; bajado de #EBDDBE a #E6D4B0 por el usuario 04/10 19:55: con sol de tarde leia casi blanco)"}
+  },
+  "fachadas_actual_compatibles": {
+    "_doc": "v2: VACIO. En la v1 (F1 materiales) se mantenian salmon/crema/amarillo de fachadas_actual junto a la propuesta; el usuario quiere solo los 6 tonos nuevos. casas_kit_v2 sigue leyendo esta lista (si un dia se repueblan, vuelven a entrar).",
+    "claves": []
+  },
+  "fachadas_variacion": {
+    "_doc": "v2 (usuario): variacion aleatoria de +-5 % en tono y brillo POR CASA. casas_kit_v2 la aplica como 3 variantes precalculadas por tono (-5 / 0 / +5) = 18 materiales MAT_CASAS_fachada_<tono>[_osc|_cla], elegidas con un generador propio por seed de casa (no altera la geometria). tono_grados = giro de matiz HSV en grados (-5 = mas rojizo, +5 = mas amarillo), brillo = factor de V en sRGB (0.95 / 1.05).",
+    "tono_grados": 5.0,
+    "brillo": 0.05
+  },
+  "tintes_texturas": {
+    "_doc": "F1 materiales: tintes para texturas/recolorear_cc0.py y generar_texturas.py que NO son colores de la carta (no entran en paleta.nombres() ni en la carta de color). rgb lineal; 'neutro' = gris sin tinte (la textura solo aporta patron: el tono lo pone el material, estuco y asfalto). Los demas tiles toman su tinte de 'colores' (ver recolorear_cc0.MAPA).",
+    "estuco": {"rgb": [0.80, 0.80, 0.80], "srgb_hex": "#E5E5E5", "neutro": true, "uso": "estuco_d.png: casi blanco neutro, se multiplica sobre el color de cada fachada"},
+    "asfalto": {"rgb": [0.18, 0.178, 0.185], "srgb_hex": "#767576", "neutro": true, "uso": "asfalto_d.png: gris medio apenas frio (como el PIL actual, media 0.46 sRGB)"},
+    "adoquin": {"rgb": [0.40, 0.32, 0.24], "srgb_hex": "#A99685", "uso": "adoquin_d.png: piedra calida con algo de terracota (adoquin rojizo del pueblo)"}
   }
 }

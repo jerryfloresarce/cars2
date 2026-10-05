@@ -1,0 +1,5 @@
+fast_lane.ai: 650 puntos
+candidato porto_corsa_opt.kn5  -> validado 9/9 por kn5_check.py (informe_check_opt.json)
+kn5 incluido: E:/Escritorio/claude-pc/arnau-aseto-corsa/04_export/paquete\content\tracks\porto_corsa\porto_corsa.kn5 <- porto_corsa_opt.kn5  326556077 bytes  md5 cb604373e64bb85c8941eaa75d6dbc4d
+ext_config.ini (CSP) -> E:/Escritorio/claude-pc/arnau-aseto-corsa/04_export/paquete\content\tracks\porto_corsa\extension\ext_config.ini
+OK zip -> E:/Escritorio/claude-pc/arnau-aseto-corsa/04_export/porto_corsa_mod.zip (190.1 MB, version 1.2)

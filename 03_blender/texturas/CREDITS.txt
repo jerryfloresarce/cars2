@@ -1,0 +1,34 @@
+Texturas de 03_blender/texturas/ derivadas de CC0 (Poly Haven, ambientCG) - mod Porto Corsa (Cars 2) para Assetto Corsa
+================================================================================================================
+Generadas por texturas/recolorear_cc0.py el 2026-10-04: luminancia del albedo CC0 + tinte de 03_blender/paleta.json
+(croma del original conservada al +-15 %%), 1024 px, seamless comprobado (mosaico_3x3_*.png).
+Licencia de los originales: Creative Commons CC0 1.0 Universal (dominio publico; no exige atribucion, se da igualmente).
+Originales 1K JPG y manifest con sha256: texturas/cc0/ (CREDITS.txt, LICENSE_CC0.txt, manifest.json).
+Las demas texturas de esta carpeta (las que no aparecen abajo) son sintesis propia (generar_texturas.py, PIL/numpy).
+
+  salida                  <- id CC0                sitio       autor(es)  pagina  (licencia)
+  acantilado_d.png       <- marble_cliff_02        Poly Haven  Amal Kumar  https://polyhaven.com/a/marble_cliff_02  (CC0 1.0)
+  acantilado_d.png       <- marble_cliff_02        Poly Haven  Amal Kumar  https://polyhaven.com/a/marble_cliff_02  (CC0 1.0)
+  adoquin_d.png          <- PavingStones150        ambientCG   ambientCG (Lennart Demes)  https://ambientcg.com/view?id=PavingStones150  (CC0 1.0)
+  afloramiento_d.png     <- rock_face_03           Poly Haven  Dario Barresi, Rico Cilliers  https://polyhaven.com/a/rock_face_03  (CC0 1.0)
+  afloramiento_d.png     <- rock_face_03           Poly Haven  Dario Barresi, Rico Cilliers  https://polyhaven.com/a/rock_face_03  (CC0 1.0)
+  asfalto_d.png          <- asphalt_track          Poly Haven  Dimitrios Savva  https://polyhaven.com/a/asphalt_track  (CC0 1.0)
+  caliza_d.png           <- rock_06                Poly Haven  Rob Tuytel  https://polyhaven.com/a/rock_06  (CC0 1.0)
+  caliza_d.png           <- rock_06                Poly Haven  Rob Tuytel  https://polyhaven.com/a/rock_06  (CC0 1.0)
+  caliza_n.png           <- rock_06                Poly Haven  Rob Tuytel  https://polyhaven.com/a/rock_06  (CC0 1.0, normal OpenGL sin cambios)
+  escollera_d.png        <- rocks_ground_06        Poly Haven  Rob Tuytel  https://polyhaven.com/a/rocks_ground_06  (CC0 1.0)
+  escollera_d.png        <- rocks_ground_06        Poly Haven  Rob Tuytel  https://polyhaven.com/a/rocks_ground_06  (CC0 1.0)
+  estuco_d.png           <- white_stucco           Poly Haven  Amal Kumar  https://polyhaven.com/a/white_stucco  (CC0 1.0)
+  fondo_marino_d.png     <- aerial_sand            Poly Haven  Rob Tuytel  https://polyhaven.com/a/aerial_sand  (CC0 1.0)
+  hierba_seca_d.png      <- withered_grass         Poly Haven  Charlotte Baglioni  https://polyhaven.com/a/withered_grass  (CC0 1.0)
+  hierba_seca_n.png      <- withered_grass         Poly Haven  Charlotte Baglioni  https://polyhaven.com/a/withered_grass  (CC0 1.0, normal OpenGL sin cambios)
+  matorral_d.png         <- aerial_grass_rock      Poly Haven  Rob Tuytel  https://polyhaven.com/a/aerial_grass_rock  (CC0 1.0)
+  matorral_n.png         <- aerial_grass_rock      Poly Haven  Rob Tuytel  https://polyhaven.com/a/aerial_grass_rock  (CC0 1.0, normal OpenGL sin cambios)
+  piedra_seca_d.png      <- rock_wall_10           Poly Haven  Amal Kumar  https://polyhaven.com/a/rock_wall_10  (CC0 1.0)
+  piedra_seca_d.png      <- rock_wall_10           Poly Haven  Amal Kumar  https://polyhaven.com/a/rock_wall_10  (CC0 1.0)
+  pista_tierra_d.png     <- gravel_road            Poly Haven  Amal Kumar  https://polyhaven.com/a/gravel_road  (CC0 1.0)
+  salida                  <- id CC0                sitio       autor(es)  pagina  (licencia)
+  teja_d.png             <- clay_roof_tiles_03     Poly Haven  Amal Kumar  https://polyhaven.com/a/clay_roof_tiles_03  (CC0 1.0)
+  teja_d.png             <- clay_roof_tiles_03     Poly Haven  Amal Kumar  https://polyhaven.com/a/clay_roof_tiles_03  (CC0 1.0)
+  tierra_d.png           <- Ground105              ambientCG   ambientCG (Lennart Demes)  https://ambientcg.com/view?id=Ground105  (CC0 1.0)
+  tierra_n.png           <- Ground105              ambientCG   ambientCG (Lennart Demes)  https://ambientcg.com/view?id=Ground105  (CC0 1.0, normal OpenGL sin cambios)
